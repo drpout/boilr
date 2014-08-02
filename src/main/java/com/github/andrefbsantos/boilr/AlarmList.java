@@ -1,10 +1,11 @@
 package com.github.andrefbsantos.boilr;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class AlarmList extends ActionBarActivity {
+public class AlarmList extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
