@@ -8,13 +8,61 @@
 	<packaging>apk</packaging>
 	<description>Android application which triggers an alarm when price of a cryptocurrency changes or reaches target value on a given exchange.</description>
 	<inceptionYear>2014</inceptionYear>
+	
+	<scm>
+		<url>https://github.com/andrefbsantos/boilr</url>
+		<connection>scm:git:https://github.com/andrefbsantos/boilr.git</connection>
+		<developerConnection>scm:git:https://github.com/andrefbsantos/boilr.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
 
 	<properties>
 		<!-- use UTF-8 for everything -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
+		<libdynticker.version>0</libdynticker.version>
+		<libpricealarm.version>0</libpricealarm.version>
 	</properties>
+	
+	<developers>
+		<developer>
+			<name>André Santos</name>
+			<email>andrefilipebrazsantos@gmail.com</email>
+		</developer>
+		<developer>
+			<name>David Ludovino</name>
+			<email>david.ludovino@gmail.com</email>
+		</developer>
+	</developers>
+	
+	<licenses>
+		<license>
+			<name>GPL v3</name>
+			<url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/andrefbsantos/boilr/issues</url>
+	</issueManagement>
+
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Temporary repository for manual upload to Github releases</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
+		</repository>
+	</distributionManagement>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jabylon-plugins</id>
+			<url>http://jabylon.org/maven</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<dependencies>
 		<dependency>
@@ -22,6 +70,16 @@
 			<artifactId>android</artifactId>
 			<version>4.1.1.4</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.andrefbsantos.libdynticker</groupId>
+			<artifactId>libdynticker</artifactId>
+			<version>${libdynticker.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.andrefbsantos.libpricealarm</groupId>
+			<artifactId>libpricealarm</artifactId>
+			<version>${libpricealarm.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -47,6 +105,125 @@
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>wagon-maven-plugin</artifactId>
+				<version>1.0-beta-5</version>
+				<executions>
+					<execution>
+						<id>get-libdynticker</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>download-single</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com</url>
+							<fromFile>andrefbsantos/libdynticker/releases/download/${libdynticker.version}/libdynticker-${libdynticker.version}.jar</fromFile>
+							<toDir>${project.build.directory}/lib</toDir>
+						</configuration>
+					</execution>
+					<execution>
+						<id>get-libpricealarm</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>download-single</goal>
+						</goals>
+						<configuration>
+							<url>https://github.com</url>
+							<fromFile>andrefbsantos/libpricealarm/releases/download/${libpricealarm.version}/libpricealarm-${libpricealarm.version}.jar</fromFile>
+							<toDir>${project.build.directory}/lib</toDir>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.1</version>
+				<executions>
+					<execution>
+						<id>install-libdynticker</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<groupId>com.github.andrefbsantos.libdynticker</groupId>
+							<artifactId>libdynticker</artifactId>
+							<version>${libdynticker.version}</version>
+							<packaging>jar</packaging>
+							<file>${project.build.directory}/lib/libdynticker-${libdynticker.version}.jar</file>
+						</configuration>
+					</execution>
+					<execution>
+						<id>install-libpricealarm</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<groupId>com.github.andrefbsantos.libpricealarm</groupId>
+							<artifactId>libpricealarm</artifactId>
+							<version>${libpricealarm.version}</version>
+							<packaging>jar</packaging>
+							<file>${project.build.directory}/lib/libpricealarm-${libpricealarm.version}.jar</file>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>copy-pom</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target name="copy and rename pom">
+								<copy file="pom.xml"
+									tofile="${project.build.directory}/${project.artifactId}-${project.version}.pom" />
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>de.jutzig</groupId>
+				<artifactId>github-release-plugin</artifactId>
+				<version>1.0.3</version>
+				<executions>
+					<execution>
+						<id>github-upload-apk</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>release</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<releaseName>${project.version}</releaseName>
+							<tag>${project.version}</tag>
+							<artifact>${project.build.directory}/${project.artifactId}-${project.version}.apk</artifact>
+						</configuration>
+					</execution>
+					<execution>
+						<id>github-upload-pom</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>release</goal>
+						</goals>
+						<inherited>false</inherited>
+						<configuration>
+							<releaseName>${project.version}</releaseName>
+							<tag>${project.version}</tag>
+							<artifact>${project.build.directory}/${project.artifactId}-${project.version}.pom</artifact>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
