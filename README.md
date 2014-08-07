@@ -9,5 +9,5 @@ To create alarms Boilr uses [libpricealarm](https://github.com/andrefbsantos/lib
 
 
 Building
----------------------
-You need to fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted) and to get the Android SDK for Android 3.0 (API 11). Then you can run `mvn package` to build an APK which can be deployed to a device or emulator.
+--------
+You need to fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted) and to get the Android SDK for Android 3.0 (API 11). Then run `mvn validate` once to make Maven aware of the plugins we use to download and install dependencies which are not in Maven repositories. For then on you can run `mvn package` to build an APK which can be deployed to a device or emulator.
