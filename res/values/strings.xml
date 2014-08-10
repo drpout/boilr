@@ -3,4 +3,5 @@
     <string name="app_name">Boilr</string>
     <string name="action_search">Search</string>
     <string name="alarm_settings">Alarm Settings</string>
+    <string name="add_alarm">Add Alarm</string>
 </resources>
