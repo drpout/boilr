@@ -1,13 +1,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.github.andrefbsantos.boilr.AlarmList" >
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:context="com.github.andrefbsantos.boilr.AlarmList" >
 
-    <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_action_search"
-        android:showAsAction="ifRoom"
-        android:title="@string/action_search"
-        android:actionViewClass="android.widget.SearchView"/>
+	<item
+		android:id="@+id/action_search"
+		android:actionViewClass="android.widget.SearchView"
+		android:icon="@drawable/ic_action_search"
+		android:showAsAction="ifRoom"
+		android:title="@string/action_search"/>
+	
+	<item
+	    android:id="@+id/action_settings"
+	    android:icon="@drawable/ic_action_settings"
+		android:title="@string/action_settings"
+		android:showAsAction="never" />
+	
+	<item
+	    android:id="@+id/action_about"
+	    android:icon="@drawable/ic_action_about"
+		android:title="@string/action_about"
+		android:showAsAction="never" />
 
 </menu>

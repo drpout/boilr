@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+ 	<PreferenceCategory
+ 	    android:key="pref_key_alerts"
+		android:title="@string/pref_title_alerts">
+		<ListPreference
+			android:key="pref_key_default_alert_type"
+			android:title="@string/pref_title_default_alert_type"
+			android:dialogTitle="@string/pref_title_default_alert_type"
+			android:entries="@array/pref_entries_alert_type"
+			android:entryValues="@array/pref_values_alert_type"
+			android:defaultValue="@string/pref_default_alert_type" />
+		<RingtonePreference
+			android:key="pref_key_default_alert_sound"
+			android:title="@string/pref_title_default_alert_sound"
+			android:ringtoneType="alarm"
+			android:defaultValue="content://settings/system/alarm_alert"
+			android:showDefault="false"
+			android:showSilent="false" />
+		<CheckBoxPreference
+		    android:key="pref_key_vibrate_default"
+			android:title="@string/pref_title_vibrate_default"
+			android:defaultValue="true" />
+	</PreferenceCategory>
+ 	<PreferenceCategory
+ 	    android:key="pref_key_appearance"
+		android:title="@string/pref_title_appearance">
+		<ListPreference
+			android:key="pref_key_theme"
+			android:title="@string/pref_title_theme"
+			android:dialogTitle="@string/pref_title_theme"
+			android:entries="@array/pref_entries_theme"
+			android:entryValues="@array/pref_values_theme"
+			android:defaultValue="@string/pref_default_theme" />
+	</PreferenceCategory>
+	<PreferenceCategory
+ 	    android:key="pref_key_network_usage"
+		android:title="@string/pref_title_network_usage">
+		<SwitchPreference
+		    android:key="pref_key_mobile_data"
+			android:title="@string/pref_title_mobile_data"
+			android:defaultValue="false" />
+		<EditTextPreference
+		    android:key="pref_key_default_update_interval_hit"
+			android:title="@string/pref_title_default_update_interval_hit"
+			android:dialogTitle="@string/pref_title_default_update_interval_hit"
+			android:dialogMessage="@string/pref_summary_default_update_interval_hit"
+			android:defaultValue="10" />
+		<EditTextPreference
+		    android:key="pref_key_default_update_interval_var"
+			android:title="@string/pref_title_default_update_interval_var"
+			android:dialogTitle="@string/pref_title_default_update_interval_var"
+			android:dialogMessage="@string/pref_summary_default_update_interval_var"
+			android:defaultValue="1440" />
+		<ListPreference
+			android:key="pref_key_check_pairs_interval"
+			android:title="@string/pref_title_check_pairs_interval"
+			android:dialogTitle="@string/pref_title_check_pairs_interval"
+			android:entries="@array/pref_entries_check_pairs_interval"
+			android:entryValues="@array/pref_values_check_pairs_interval"
+			android:defaultValue="@string/pref_default_check_pairs_interval" />
+	</PreferenceCategory>
+</PreferenceScreen>
