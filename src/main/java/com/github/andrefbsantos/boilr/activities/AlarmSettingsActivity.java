@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.boilr;
+package com.github.andrefbsantos.boilr.activities;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;

@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.boilr;
+package com.github.andrefbsantos.boilr.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
+import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
 
 public class AlarmListActivity extends Activity {
