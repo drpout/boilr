@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.github.andrefbsantos.boilr.activities.R;
+import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.libpricealarm.Alarm;
 import com.github.andrefbsantos.libpricealarm.PriceHitAlarm;
 import com.github.andrefbsantos.libpricealarm.PriceVarAlarm;

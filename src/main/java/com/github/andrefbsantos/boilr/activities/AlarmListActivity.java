@@ -1,5 +1,6 @@
 package com.github.andrefbsantos.boilr.activities;
 
+// <<<<<<< HEAD
 import java.io.IOException;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,8 +16,10 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.adaptar.AlarmListAdapter;
 import com.github.andrefbsantos.boilr.database.DBManager;
+import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
 import com.github.andrefbsantos.libpricealarm.Alarm;
 import com.github.andrefbsantos.libpricealarm.UpperBoundSmallerThanLowerBoundException;
 
@@ -28,11 +32,28 @@ public class AlarmListActivity extends ListActivity {
 	private List<Alarm> alarms;
 	private int alarmID = 1;
 
+	// =======
+	// import android.app.Activity;
+	// import android.content.Intent;
+	// import android.os.Bundle;
+	// import android.preference.PreferenceManager;
+	// import android.view.Menu;
+	// import android.view.MenuItem;
+	// import android.widget.SearchView;
+	//
+	// import com.github.andrefbsantos.boilr.R;
+	// import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
+	//
+	// public class AlarmListActivity extends Activity {
+	// >>>>>>> 76f20563d20748b753fcebce645e8dd0b6c3a723
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// <<<<<<< HEAD
 
 		setContentView(R.layout.alarm_list);
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		actionBar = getActionBar();
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
@@ -48,6 +69,10 @@ public class AlarmListActivity extends ListActivity {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		// =======
+		// setContentView(R.layout.alarm_list);
+		// PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		// >>>>>>> 76f20563d20748b753fcebce645e8dd0b6c3a723
 	}
 
 	@Override
@@ -60,14 +85,24 @@ public class AlarmListActivity extends ListActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		// <<<<<<< HEAD
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_search) {
-			return true;
+		switch (item.getItemId()) {
+			case R.id.action_search:
+				// openSearch();
+				return true;
+			case R.id.action_settings:
+				Intent intent = new Intent(this, SettingsActivity.class);
+				startActivity(intent);
+				return true;
+			case R.id.action_about:
+				(new AboutDialogFragment()).show(getFragmentManager(), "about");
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
@@ -89,5 +124,23 @@ public class AlarmListActivity extends ListActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		// TODO
+		// =======
+		// // Handle presses on the action bar items
+		// switch (item.getItemId()) {
+		// case R.id.action_search:
+		// // openSearch();
+		// return true;
+		// case R.id.action_settings:
+		// Intent intent = new Intent(this, SettingsActivity.class);
+		// startActivity(intent);
+		// return true;
+		// case R.id.action_about:
+		// (new AboutDialogFragment()).show(getFragmentManager(), "about");
+		// return true;
+		// default:
+		// return super.onOptionsItemSelected(item);
+		// }
+		//
+		// >>>>>>> 76f20563d20748b753fcebce645e8dd0b6c3a723
 	}
 }

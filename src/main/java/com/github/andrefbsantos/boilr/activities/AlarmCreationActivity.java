@@ -3,6 +3,8 @@ package com.github.andrefbsantos.boilr.activities;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.github.andrefbsantos.boilr.R;
+
 public class AlarmCreationActivity extends Activity {
 
 	public AlarmCreationActivity() {

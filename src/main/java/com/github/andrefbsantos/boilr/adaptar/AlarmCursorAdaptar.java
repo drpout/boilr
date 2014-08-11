@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ResourceCursorAdapter;
 import android.widget.TextView;
 
-import com.github.andrefbsantos.boilr.activities.R;
+import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.database.Serializer;
 import com.github.andrefbsantos.libpricealarm.Alarm;
 

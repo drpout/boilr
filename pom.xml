@@ -205,7 +205,7 @@
 				<executions>
 					<execution>
 						<id>copy-pom</id>
-						<phase>package</phase>
+						<phase>deploy</phase>
 						<goals>
 							<goal>run</goal>
 						</goals>
