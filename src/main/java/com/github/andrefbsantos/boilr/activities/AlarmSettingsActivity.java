@@ -3,6 +3,7 @@ package com.github.andrefbsantos.boilr.activities;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
+import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.libpricealarm.Alarm;
 import com.github.andrefbsantos.libpricealarm.PriceHitAlarm;
 import com.github.andrefbsantos.libpricealarm.PriceVarAlarm;

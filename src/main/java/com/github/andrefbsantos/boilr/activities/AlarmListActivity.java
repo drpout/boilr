@@ -1,6 +1,5 @@
 package com.github.andrefbsantos.boilr.activities;
 
-// <<<<<<< HEAD
 import java.io.IOException;
 import java.util.List;
 
@@ -32,25 +31,9 @@ public class AlarmListActivity extends ListActivity {
 	private List<Alarm> alarms;
 	private int alarmID = 1;
 
-	// =======
-	// import android.app.Activity;
-	// import android.content.Intent;
-	// import android.os.Bundle;
-	// import android.preference.PreferenceManager;
-	// import android.view.Menu;
-	// import android.view.MenuItem;
-	// import android.widget.SearchView;
-	//
-	// import com.github.andrefbsantos.boilr.R;
-	// import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
-	//
-	// public class AlarmListActivity extends Activity {
-	// >>>>>>> 76f20563d20748b753fcebce645e8dd0b6c3a723
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// <<<<<<< HEAD
 
 		setContentView(R.layout.alarm_list);
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
@@ -69,10 +52,6 @@ public class AlarmListActivity extends ListActivity {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		// =======
-		// setContentView(R.layout.alarm_list);
-		// PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-		// >>>>>>> 76f20563d20748b753fcebce645e8dd0b6c3a723
 	}
 
 	@Override
@@ -85,7 +64,6 @@ public class AlarmListActivity extends ListActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// <<<<<<< HEAD
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
@@ -123,24 +101,5 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// TODO
-		// =======
-		// // Handle presses on the action bar items
-		// switch (item.getItemId()) {
-		// case R.id.action_search:
-		// // openSearch();
-		// return true;
-		// case R.id.action_settings:
-		// Intent intent = new Intent(this, SettingsActivity.class);
-		// startActivity(intent);
-		// return true;
-		// case R.id.action_about:
-		// (new AboutDialogFragment()).show(getFragmentManager(), "about");
-		// return true;
-		// default:
-		// return super.onOptionsItemSelected(item);
-		// }
-		//
-		// >>>>>>> 76f20563d20748b753fcebce645e8dd0b6c3a723
 	}
 }
