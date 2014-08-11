@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.boilr.adaptar;
+package com.github.andrefbsantos.boilr.adapter;
 
 import java.io.IOException;
 
@@ -12,9 +12,9 @@ import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.database.Serializer;
 import com.github.andrefbsantos.libpricealarm.Alarm;
 
-public class AlarmCursorAdaptar extends ResourceCursorAdapter {
+public class AlarmCursorAdapter extends ResourceCursorAdapter {
 
-	public AlarmCursorAdaptar(Context context, int layout, Cursor c) {
+	public AlarmCursorAdapter(Context context, int layout, Cursor c) {
 		super(context, layout, c, ResourceCursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER);
 	}
 

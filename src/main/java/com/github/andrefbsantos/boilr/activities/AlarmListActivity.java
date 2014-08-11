@@ -3,7 +3,6 @@ package com.github.andrefbsantos.boilr.activities;
 import java.io.IOException;
 import java.util.List;
 
-import android.app.ActionBar;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +15,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.github.andrefbsantos.boilr.R;
-import com.github.andrefbsantos.boilr.adaptar.AlarmListAdapter;
+import com.github.andrefbsantos.boilr.adapter.AlarmListAdapter;
 import com.github.andrefbsantos.boilr.database.DBManager;
 import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
 import com.github.andrefbsantos.libpricealarm.Alarm;
@@ -24,7 +23,6 @@ import com.github.andrefbsantos.libpricealarm.UpperBoundSmallerThanLowerBoundExc
 
 public class AlarmListActivity extends ListActivity {
 
-	private ActionBar actionBar;
 	private DBManager dbManager;
 	private BaseAdapter adapter;
 
@@ -37,8 +35,6 @@ public class AlarmListActivity extends ListActivity {
 
 		setContentView(R.layout.alarm_list);
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-		actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
 
 		try {
 			dbManager = new DBManager(this);

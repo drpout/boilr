@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.boilr.adaptar;
+package com.github.andrefbsantos.boilr.adapter;
 
 import java.util.List;
 
