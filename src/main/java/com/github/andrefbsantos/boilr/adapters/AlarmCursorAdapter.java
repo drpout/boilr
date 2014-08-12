@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.boilr.adapter;
+package com.github.andrefbsantos.boilr.adapters;
 
 import java.io.IOException;
 

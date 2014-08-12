@@ -66,7 +66,7 @@ public class SettingsFragment extends PreferenceFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Load the preferences from an XML resource
-		addPreferencesFromResource(R.xml.preferences);
+		addPreferencesFromResource(R.xml.app_settings);
 		// Set summaries to be the current value for the selected preference
 		ListPreference listPref;
 		for (String key : listPrefs) {
