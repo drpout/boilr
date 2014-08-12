@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.github.andrefbsantos.boilr.R;
-import com.github.andrefbsantos.boilr.adapter.AlarmListAdapter;
+import com.github.andrefbsantos.boilr.adapters.AlarmListAdapter;
 import com.github.andrefbsantos.boilr.database.DBManager;
 import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
 import com.github.andrefbsantos.libpricealarm.Alarm;
@@ -34,7 +34,7 @@ public class AlarmListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.alarm_list);
-		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
 
 		try {
 			dbManager = new DBManager(this);
