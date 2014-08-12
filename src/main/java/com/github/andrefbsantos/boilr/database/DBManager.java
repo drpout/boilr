@@ -39,10 +39,9 @@ public class DBManager {
 
 		List<Alarm> alarms = new ArrayList<Alarm>();
 		try {
-			alarms.add(new PriceHitAlarm(1, new BitstampExchange(), new Pair("BTC", "USD"), new Timer(), 1000000, new DummyNotify(), 600, 580));
-
-			alarms.add(new PriceHitAlarm(2, new BTCChinaExchange(), new Pair("BTC", "USD"), new Timer(), 1000000, new DummyNotify(), 600, 580));
-			alarms.add(new PriceHitAlarm(3, new HuobiExchange(), new Pair("BTC", "CNY"), new Timer(), 1000000, new DummyNotify(), 600, 580));
+			alarms.add(new PriceHitAlarm(1, new BitstampExchange(10000), new Pair("BTC", "USD"), new Timer(), 1000000, new DummyNotify(), 600, 580));
+			alarms.add(new PriceHitAlarm(2, new BTCChinaExchange(10000), new Pair("BTC", "USD"), new Timer(), 1000000, new DummyNotify(), 600, 580));
+			alarms.add(new PriceHitAlarm(3, new HuobiExchange(10000), new Pair("BTC", "CNY"), new Timer(), 1000000, new DummyNotify(), 600, 580));
 		} catch (UpperBoundSmallerThanLowerBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,6 +68,8 @@ public class DBManager {
 			do {
 				Alarm alarm = (Alarm) Serializer.deserializeObject(cursor.getBlob(cursor
 						.getColumnIndex("bytes")));
+				// TODO get Exchange from map
+				// alarm.setExchange(exchangeMap.get(alarm.getExchangeCode());)
 				alarms.add(alarm);
 			} while (cursor.moveToNext());
 		}

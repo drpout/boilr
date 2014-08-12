@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!-- <<<<<<< HEAD -->
-<!--     <string name="app_name">Boilr</string> -->
-<!--     <string name="action_search">Search</string> -->
-<!--     <string name="alarm_settings">Alarm Settings</string> -->
-<!--     <string name="add_alarm">Add Alarm</string> -->
-<!-- ======= -->
 	<string name="app_name">Boilr</string>
 	<string name="action_search">Search</string>
 	<string name="action_settings">Settings</string>

@@ -27,8 +27,6 @@ public class AlarmListActivity extends ListActivity {
 	private BaseAdapter adapter;
 
 	private List<Alarm> alarms;
-	private int alarmID = 1;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,7 +52,7 @@ public class AlarmListActivity extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.alarm_list, menu);
-		SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		menu.findItem(R.id.action_search).getActionView();
 		return super.onCreateOptionsMenu(menu);
 	}
 

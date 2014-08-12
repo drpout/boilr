@@ -38,8 +38,7 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
 			TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
 			exchange.setText(alarm.getExchange().getClass().getSimpleName());
 
-			TextView lastCheck = (TextView) rowView.findViewById(R.id.last_check);
-			// lastCheck.setText(alarm.get)
+			rowView.findViewById(R.id.last_check);
 
 			TextView lastValue = (TextView) rowView.findViewById(R.id.last_value);
 			lastValue.setText("" + alarm.getLastValue());
