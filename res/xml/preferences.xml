@@ -16,7 +16,7 @@
 			android:ringtoneType="alarm"
 			android:defaultValue="content://settings/system/alarm_alert"
 			android:showDefault="false"
-			android:showSilent="false" />
+			android:showSilent="true" />
 		<CheckBoxPreference
 		    android:key="pref_key_vibrate_default"
 			android:title="@string/pref_title_vibrate_default"

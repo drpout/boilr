@@ -1,14 +1,14 @@
 package com.github.andrefbsantos.boilr.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 
 import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.libpricealarm.Alarm;
 import com.github.andrefbsantos.libpricealarm.PriceHitAlarm;
 import com.github.andrefbsantos.libpricealarm.PriceVarAlarm;
 
-public class AlarmSettingsActivity extends PreferenceActivity {
+public class AlarmSettingsActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle bundle) {
