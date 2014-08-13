@@ -7,10 +7,11 @@
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="11" />
-
-<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-<!-- <uses-permission android:name="android.permission.INTERNET" />  -->
     
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -21,7 +22,7 @@
 		    android:name=".services.UpdateLastValueService" />
 		
 		<service
-		    android:name=".services.StorageService" />
+		    android:name=".services.StorageAndControlService" />
         
         <activity
             android:name=".activities.AlarmListActivity"

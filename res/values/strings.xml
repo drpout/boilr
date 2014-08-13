@@ -64,11 +64,11 @@
 		<item>Monthly</item>
 	</string-array>
 	<string-array name="pref_values_check_pairs_interval">
-		<item>1</item>
-		<item>2</item>
-		<item>7</item>
-		<item>14</item>
-		<item>30</item>
+		<item>86400000</item> <!-- 24 hours * 60 minutes * 60 seconds * 1000 milis -->
+		<item>172800000</item>
+		<item>604800000</item>
+		<item>1209600000</item>
+		<item>2592000000</item>
 	</string-array>
 	<string name="pref_default_check_pairs_interval">7</string>
 </resources>

@@ -1,4 +1,4 @@
-package services;
+package com.github.andrefbsantos.boilr.services;
 
 import android.app.Service;
 import android.content.Intent;

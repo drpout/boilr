@@ -1,4 +1,4 @@
-package domain;
+package com.github.andrefbsantos.boilr.domain;
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import com.github.andrefbsantos.libpricealarm.Alarm;
 
 public class AlarmWrapper implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 687991492884005033L;
 	private Alarm alarm;
 	/*
 	 * A null on the following fields means the default

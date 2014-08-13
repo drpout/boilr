@@ -16,15 +16,15 @@ import android.preference.RingtonePreference;
 import com.github.andrefbsantos.boilr.R;
 
 public class SettingsFragment extends PreferenceFragment implements
-		OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
+OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	private static final String PREF_KEY_DEFAULT_ALERT_TYPE = "pref_key_default_alert_type";
 	public static final String PREF_KEY_DEFAULT_ALERT_SOUND = "pref_key_default_alert_sound";
 	private static final String PREF_KEY_THEME = "pref_key_theme";
 	private static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT = "pref_key_default_update_interval_hit";
 	private static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR = "pref_key_default_update_interval_var";
-	private static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
+	public static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,
-			PREF_KEY_CHECK_PAIRS_INTERVAL };
+		PREF_KEY_CHECK_PAIRS_INTERVAL };
 	private static final double MINUTES_IN_DAY = 1440; // 60*24
 
 	/**
@@ -36,7 +36,7 @@ public class SettingsFragment extends PreferenceFragment implements
 	 * @return String with nicely formatted double
 	 */
 	public static String cleanDoubleToString(double d) {
-		if (d == (int) d) {
+		if(d == (int) d) {
 			return String.format("%d", (int) d);
 		} else {
 			return String.format("%.2f", d);
@@ -47,7 +47,7 @@ public class SettingsFragment extends PreferenceFragment implements
 		int min = Integer.parseInt(minutesString);
 		double days = min / MINUTES_IN_DAY;
 		String result = minutesString + " min (" + cleanDoubleToString(days);
-		if (days == 1.0) {
+		if(days == 1.0) {
 			result += " day)";
 		} else {
 			result += " days)";
@@ -91,7 +91,7 @@ public class SettingsFragment extends PreferenceFragment implements
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		// Set summaries to be the current value for the selected preference
 		Preference pref = findPreference(key);
-		if (key.equals(PREF_KEY_DEFAULT_ALERT_TYPE)) {
+		if(key.equals(PREF_KEY_DEFAULT_ALERT_TYPE)) {
 			ListPreference alertTypePref = (ListPreference) pref;
 			alertTypePref.setSummary(alertTypePref.getEntry());
 			// Change selectable ringtones according to the alert type
@@ -101,12 +101,12 @@ public class SettingsFragment extends PreferenceFragment implements
 			String defaultRingtone = RingtoneManager.getDefaultUri(ringtoneType).toString();
 			sharedPreferences.edit().putString(PREF_KEY_DEFAULT_ALERT_SOUND, defaultRingtone).apply();
 			alertSoundPref.setSummary(ringtoneUriToName(defaultRingtone));
-		} else if (key.equals(PREF_KEY_THEME) || key.equals(PREF_KEY_CHECK_PAIRS_INTERVAL)) {
+		} else if(key.equals(PREF_KEY_THEME) || key.equals(PREF_KEY_CHECK_PAIRS_INTERVAL)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
-		} else if (key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT)) {
+		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT)) {
 			pref.setSummary(sharedPreferences.getString(key, "") + " s");
-		} else if (key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR)) {
+		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR)) {
 			pref.setSummary(buildMinToDaysSummary(sharedPreferences.getString(key, "")));
 		}
 	}
