@@ -11,19 +11,21 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.github.andrefbsantos.boilr.R;
+import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
 import com.github.andrefbsantos.libpricealarm.Alarm;
 import com.github.andrefbsantos.libpricealarm.PriceHitAlarm;
 import com.github.andrefbsantos.libpricealarm.PriceVarAlarm;
 
-public class AlarmListAdapter extends ArrayAdapter<Alarm> {
+public class AlarmListAdapter extends ArrayAdapter<AlarmWrapper> {
 
 	private Context context;
-	private List<Alarm> alarms;
+	private List<AlarmWrapper> alarms;
 
-	public AlarmListAdapter(Context context, int textViewResourceId, List<Alarm> alarms) {
-		super(context, textViewResourceId, alarms);
+	public AlarmListAdapter(Context context, int textViewResourceId,
+			List<AlarmWrapper> collection) {
+		super(context, textViewResourceId, collection);
 		this.context = context;
-		this.alarms = alarms;
+		alarms = collection;
 	}
 
 	@Override
@@ -31,8 +33,7 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		Alarm alarm = alarms.get(position);
-
+		Alarm alarm = alarms.get(position).getAlarm();
 		View rowView = null;
 
 		if (alarm instanceof PriceHitAlarm) {

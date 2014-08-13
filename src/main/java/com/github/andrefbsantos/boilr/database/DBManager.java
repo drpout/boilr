@@ -1,19 +1,15 @@
 package com.github.andrefbsantos.boilr.database;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.github.andrefbsantos.boilr.notification.DummyNotify;
-import com.github.andrefbsantos.libdynticker.bitstamp.BitstampExchange;
-import com.github.andrefbsantos.libdynticker.core.Pair;
+import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
 import com.github.andrefbsantos.libpricealarm.Alarm;
-import com.github.andrefbsantos.libpricealarm.PriceHitAlarm;
 import com.github.andrefbsantos.libpricealarm.UpperBoundSmallerThanLowerBoundException;
 
 public class DBManager {
@@ -30,54 +26,58 @@ public class DBManager {
 	// public DBManager(Context context, String name, CursorFactory factory, int version)
 	public DBManager(Context context) throws UpperBoundSmallerThanLowerBoundException, IOException {
 		db = (new DatabaseHelper(context, name, null, version, tableName)).getWritableDatabase();
-		populateDB();
+		// populateDB();
 	}
 
 	// Only for development proposes
-	private void populateDB() {
-		List<Alarm> alarms = new ArrayList<Alarm>();
-		try {
-			Alarm alarm = new PriceHitAlarm(1, new BitstampExchange(10000000), new Pair("BTC", "USD"), 100000, new DummyNotify(), 500, 400);
-			alarms.add(alarm);
-			alarm = new PriceHitAlarm(2, new BitstampExchange(10000000), new Pair("BTC", "USD"), 100000, new DummyNotify(), 500, 400);
-			alarms.add(alarm);
+	// private void populateDB() {
+	// List<Alarm> alarms = new ArrayList<Alarm>();
+	// try {
+	// Alarm alarm = new PriceHitAlarm(1, new BitstampExchange(10000000), new Pair("BTC", "USD"),
+	// 100000, new DummyNotify(), 500, 400);
+	// alarms.add(alarm);
+	// alarm = new PriceHitAlarm(2, new BitstampExchange(10000000), new Pair("BTC", "USD"), 100000,
+	// new DummyNotify(), 500, 400);
+	// alarms.add(alarm);
+	//
+	// // alarms.add(new PriceHitAlarm(2, new BTCChinaExchange(10000), new Pair("BTC", "USD"),
+	// // new Timer(), 1000000, new DummyNotify(), 600, 580));
+	// // alarms.add(new PriceHitAlarm(3, new HuobiExchange(10000), new Pair("BTC", "CNY"), new
+	// // Timer(), 1000000, new DummyNotify(), 600, 580));
+	// } catch (UpperBoundSmallerThanLowerBoundException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// for (Alarm alarm : alarms) {
+	// byte[] bytes;
+	// try {
+	// bytes = Serializer.serializeObject(alarm);
+	// ContentValues contentValues = new ContentValues();
+	// contentValues.put("bytes", bytes);
+	// db.insert(DBManager.tableName, null, contentValues);
+	// } catch (IOException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// }
+	// }
+	// }
 
-			// alarms.add(new PriceHitAlarm(2, new BTCChinaExchange(10000), new Pair("BTC", "USD"),
-			// new Timer(), 1000000, new DummyNotify(), 600, 580));
-			// alarms.add(new PriceHitAlarm(3, new HuobiExchange(10000), new Pair("BTC", "CNY"), new
-			// Timer(), 1000000, new DummyNotify(), 600, 580));
-		} catch (UpperBoundSmallerThanLowerBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		for (Alarm alarm : alarms) {
-			byte[] bytes;
-			try {
-				bytes = Serializer.serializeObject(alarm);
-				ContentValues contentValues = new ContentValues();
-				contentValues.put("bytes", bytes);
-				db.insert(DBManager.tableName, null, contentValues);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
-
-	public List<Alarm> getAlarms() throws ClassNotFoundException, IOException {
+	public Map<Integer, AlarmWrapper> getAlarms() throws ClassNotFoundException, IOException {
 		// Retrieve alarms from DB
 		Cursor cursor = db.rawQuery("SELECT _id, bytes FROM " + DBManager.tableName + ";", null);
-		List<Alarm> alarms = new ArrayList<Alarm>();
+		Map<Integer, AlarmWrapper> alarmsMap = new HashMap<Integer, AlarmWrapper>();
 		if (cursor.moveToFirst()) {
 			do {
+				int id = cursor.getInt(cursor.getColumnIndex("_id"));
 				Alarm alarm = (Alarm) Serializer.deserializeObject(cursor.getBlob(cursor
 						.getColumnIndex("bytes")));
+				AlarmWrapper alarmWrapper = new AlarmWrapper(alarm);
 				// TODO get Exchange from map
 				// alarm.setExchange(exchangeMap.get(alarm.getExchangeCode());)
-				alarms.add(alarm);
+				alarmsMap.put(id, alarmWrapper);
 			} while (cursor.moveToNext());
 		}
-		return alarms;
+		return alarmsMap;
 	}
 
 	// public void storeObject(Object object) throws UpperBoundSmallerThanLowerBoundException,

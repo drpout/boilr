@@ -1,8 +1,10 @@
 package com.github.andrefbsantos.boilr.services;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.app.AlarmManager;
@@ -15,9 +17,11 @@ import android.os.Binder;
 import android.os.IBinder;
 
 import com.github.andrefbsantos.boilr.R;
+import com.github.andrefbsantos.boilr.database.DBManager;
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
 import com.github.andrefbsantos.boilr.views.fragments.SettingsFragment;
 import com.github.andrefbsantos.libdynticker.core.Exchange;
+import com.github.andrefbsantos.libpricealarm.UpperBoundSmallerThanLowerBoundException;
 
 public class StorageAndControlService extends Service {
 
@@ -26,9 +30,10 @@ public class StorageAndControlService extends Service {
 	private long prevAlarmID = 0;
 	private final IBinder binder = new StorageAndControlServiceBinder();
 	AlarmManager alarmManager;
+	private DBManager db;
 
 	public class StorageAndControlServiceBinder extends Binder {
-		StorageAndControlService getService() {
+		public StorageAndControlService getService() {
 			// Return this instance of StorageService so clients can call public methods
 			return StorageAndControlService.this;
 		}
@@ -40,6 +45,21 @@ public class StorageAndControlService extends Service {
 		exchangesMap = new HashMap<String, Exchange>();
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 		// TODO Retrieve alarms and prevAlarmID for DB
+
+		try {
+			db = new DBManager(this);
+			alarmsMap = db.getAlarms();
+		} catch (UpperBoundSmallerThanLowerBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
@@ -55,12 +75,12 @@ public class StorageAndControlService extends Service {
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
 	InstantiationException, IllegalAccessException, IllegalArgumentException,
 	InvocationTargetException, SecurityException {
-		if(exchangesMap.containsKey(classname))
+		if (exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
-		else {
+		} else {
 			@SuppressWarnings("unchecked")
 			Class<? extends Exchange> c = (Class<? extends Exchange>) Class.forName(classname);
-			SharedPreferences sharedPreferences = this.getSharedPreferences(getResources().getResourceEntryName(R.xml.app_settings), Context.MODE_PRIVATE);
+			SharedPreferences sharedPreferences = getSharedPreferences(getResources().getResourceEntryName(R.xml.app_settings), Context.MODE_PRIVATE);
 			long pairInterval = Long.parseLong(sharedPreferences.getString(SettingsFragment.PREF_KEY_CHECK_PAIRS_INTERVAL, ""));
 			Exchange exchange = (Exchange) c.getDeclaredConstructors()[0].newInstance(pairInterval);
 			exchangesMap.put(classname, exchange);
@@ -68,8 +88,8 @@ public class StorageAndControlService extends Service {
 		}
 	}
 
-	public Collection<AlarmWrapper> getAlarms() {
-		return alarmsMap.values();
+	public List<AlarmWrapper> getAlarms() {
+		return new ArrayList<AlarmWrapper>(alarmsMap.values());
 	}
 
 	public long generateAlarmID() {

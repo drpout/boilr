@@ -1,12 +1,14 @@
 package com.github.andrefbsantos.boilr.activities;
 
-import java.io.IOException;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.StrictMode;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -18,44 +20,45 @@ import android.widget.ToggleButton;
 
 import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.adapters.AlarmListAdapter;
-import com.github.andrefbsantos.boilr.database.DBManager;
+import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
+import com.github.andrefbsantos.boilr.services.StorageAndControlService;
+import com.github.andrefbsantos.boilr.services.StorageAndControlService.StorageAndControlServiceBinder;
 import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
 import com.github.andrefbsantos.libpricealarm.Alarm;
-import com.github.andrefbsantos.libpricealarm.UpperBoundSmallerThanLowerBoundException;
 
 public class AlarmListActivity extends ListActivity {
 
-	private DBManager dbManager;
 	private BaseAdapter adapter;
-	private GestureDetector gestureDetector;
-	View.OnTouchListener gestureListener;
 
-	private List<Alarm> alarms;
+	private StorageAndControlService mService;
+	private boolean mBound;
+
+	/** Defines callbacks for service binding, passed to bindService() */
+	private ServiceConnection mConnection = new ServiceConnection() {
+
+		@Override
+		public void onServiceConnected(ComponentName className, IBinder binder) {
+			mService = ((StorageAndControlServiceBinder) binder).getService();
+			mBound = true;
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName className) {
+			mBound = false;
+		}
+	};
+
+	private GestureDetector gestureDetector;
+	private View.OnTouchListener gestureListener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.alarm_list);
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
 
-		try {
-			dbManager = new DBManager(this);
-			alarms = dbManager.getAlarms();
-			adapter = new AlarmListAdapter(this, R.layout.price_hit_alarm_row, alarms);
-			setListAdapter(adapter);
-		} catch (UpperBoundSmallerThanLowerBoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-
-		if (android.os.Build.VERSION.SDK_INT > 9) {
-			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-			StrictMode.setThreadPolicy(policy);
-		}
+		adapter = new AlarmListAdapter(this, R.layout.price_hit_alarm_row, getAlarms());
+		setListAdapter(adapter);
 	}
 
 	@Override
@@ -90,9 +93,17 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		// Handle list clicks. Pass corresponding alarm to populate the detailed view.
+
+		AlarmWrapper alarm = null;
+		for (AlarmWrapper alarmWapper : getAlarms()) {
+			if (alarmWapper.getAlarm().getId() == id) {
+				alarm = alarmWapper;
+				break;
+			}
+		}
+
 		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
-		Alarm alarm = alarms.get(position);
-		alarmSettingsIntent.putExtra("alarm", alarm);
+		alarmSettingsIntent.putExtra("alarmWrapper", alarm);
 		startActivity(alarmSettingsIntent);
 	}
 
@@ -103,12 +114,17 @@ public class AlarmListActivity extends ListActivity {
 	}
 
 	public void onToggleClicked(View view) {
-
 		boolean on = ((ToggleButton) view).isChecked();
-		int position = (Integer) view.getTag();
-		Alarm alarm = alarms.get(position);
+		int id = (Integer) view.getTag();
 
-		System.out.println("Toggling");
+		Alarm alarm = null;
+		for (AlarmWrapper alarmWapper : getAlarms()) {
+			if (alarmWapper.getAlarm().getId() == id) {
+				alarm = alarmWapper.getAlarm();
+				break;
+			}
+		}
+
 		if (on) {
 			// Enable alarm
 			alarm.turnOn();
@@ -124,4 +140,16 @@ public class AlarmListActivity extends ListActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 	}
+
+	private List<AlarmWrapper> getAlarms() {
+		List<AlarmWrapper> alarmList = null;
+		Intent serviceIntent = new Intent(this, StorageAndControlServiceBinder.class);
+		bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
+		if (mBound) {
+			alarmList = mService.getAlarms();
+			unbindService(mConnection);
+		}
+		return alarmList;
+	}
+
 }
