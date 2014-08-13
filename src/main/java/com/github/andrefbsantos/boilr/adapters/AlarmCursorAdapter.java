@@ -21,10 +21,8 @@ public class AlarmCursorAdapter extends ResourceCursorAdapter {
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
 		try {
-			System.out.println("BINDING");
 			byte[] blob = cursor.getBlob(cursor.getColumnIndex("bytes"));
 			Alarm object = (Alarm) Serializer.deserializeObject(blob);
-			System.out.println(object.getPair());
 			TextView pair = (TextView) view.findViewById(R.id.pair);
 			pair.setText(object.getPair().toString());
 		} catch (IOException e) {

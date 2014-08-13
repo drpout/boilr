@@ -6,13 +6,14 @@ import java.util.List;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.SearchView;
+import android.widget.ToggleButton;
 
 import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.adapters.AlarmListAdapter;
@@ -27,6 +28,7 @@ public class AlarmListActivity extends ListActivity {
 	private BaseAdapter adapter;
 
 	private List<Alarm> alarms;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,6 +47,11 @@ public class AlarmListActivity extends ListActivity {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}
+
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+			StrictMode.setThreadPolicy(policy);
 		}
 	}
 
@@ -90,6 +97,24 @@ public class AlarmListActivity extends ListActivity {
 		// Handle click on Add Button. Launch activity to create a new alarm.
 		Intent alarmCreationIntent = new Intent(this, AlarmCreationActivity.class);
 		startActivity(alarmCreationIntent);
+	}
+
+	public void onToggleClicked(View view) {
+
+		boolean on = ((ToggleButton) view).isChecked();
+		int position = (Integer) view.getTag();
+		Alarm alarm = alarms.get(position);
+
+		System.out.println("Toggling");
+		if (on) {
+			// Enable alarm
+			alarm.turnOn();
+		} else {
+			// Disable alarm
+			alarm.turnOff();
+		}
+		// refresh list
+		// adapter.notifyDataSetChanged();
 	}
 
 	@Override
