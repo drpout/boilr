@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,8 @@ public class AlarmListActivity extends ListActivity {
 
 	private DBManager dbManager;
 	private BaseAdapter adapter;
+	private GestureDetector gestureDetector;
+	View.OnTouchListener gestureListener;
 
 	private List<Alarm> alarms;
 

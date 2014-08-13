@@ -15,8 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onToggleClicked"
-            android:textOff="Off"
-            android:textOn="On" />
+            android:textOff="OFF"
+            android:textOn="ON" />
     </LinearLayout>
 
     <LinearLayout

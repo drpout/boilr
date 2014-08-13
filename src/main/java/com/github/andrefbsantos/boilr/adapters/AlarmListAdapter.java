@@ -51,13 +51,15 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
 			rowView = inflater.inflate(R.layout.price_var_alarm_row, viewGroup, false);
 			PriceVarAlarm priceVarAlarm = (PriceVarAlarm) alarm;
 
-			rowView.findViewById(R.id.interval);
+			TextView period = (TextView) rowView.findViewById(R.id.period);
+			period.setText("" + priceVarAlarm.getPeriod());
 
-			rowView.findViewById(R.id.variance);
+			TextView variance = (TextView) rowView.findViewById(R.id.variance);
+
 			if (priceVarAlarm.isPercent()) {
-
+				variance.setText("" + priceVarAlarm.getPercent());
 			} else {
-
+				variance.setText("" + priceVarAlarm.getVariation());
 			}
 
 		}

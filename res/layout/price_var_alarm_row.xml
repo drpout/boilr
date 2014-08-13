@@ -15,8 +15,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onToggleClicked"
-            android:textOff="Off"
-            android:textOn="On" />
+            android:textOff="OFF"
+            android:textOn="ON" />
     </LinearLayout>
 f
     <LinearLayout
@@ -70,7 +70,7 @@ f
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/interval"
+            android:id="@+id/period"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium" />
