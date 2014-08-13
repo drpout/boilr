@@ -25,7 +25,7 @@ public class StorageAndControlService extends Service {
 	private Map<String, Exchange> exchangesMap;
 	private long prevAlarmID = 0;
 	private final IBinder binder = new StorageAndControlServiceBinder();
-	AlarmManager alarmManager;
+	private AlarmManager alarmManager;
 
 	public class StorageAndControlServiceBinder extends Binder {
 		StorageAndControlService getService() {
@@ -72,12 +72,17 @@ public class StorageAndControlService extends Service {
 		return alarmsMap.values();
 	}
 
+	public AlarmWrapper getAlarm(int alarmID) {
+		return alarmsMap.get(alarmID);
+	}
+
 	public long generateAlarmID() {
 		return ++prevAlarmID;
 	}
 
 	public void startAlarm(AlarmWrapper wrapper) {
 		Intent intent = new Intent(this, UpdateLastValueService.class);
+		intent.putExtra("alarmID", wrapper.getAlarm().getId());
 		PendingIntent pendingIntent = PendingIntent.getService(this, wrapper.getAlarm().getId(), intent, 0);
 		alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, wrapper.getAlarm().getPeriod(), wrapper.getAlarm().getPeriod(), pendingIntent);
 	}
@@ -94,5 +99,14 @@ public class StorageAndControlService extends Service {
 		Intent intent = new Intent(this, UpdateLastValueService.class);
 		PendingIntent pendingIntent = PendingIntent.getService(this, alarmID, intent, 0);
 		alarmManager.cancel(pendingIntent);
+	}
+
+	public void addAlarm(AlarmWrapper wrapper) {
+		alarmsMap.put(wrapper.getAlarm().getId(), wrapper);
+		// TODO Insert into DB.
+	}
+
+	public void replaceAlarm(AlarmWrapper wrapper) {
+		// TODO Replace the given alarm (use the ID) in the DB.
 	}
 }

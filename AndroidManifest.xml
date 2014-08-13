@@ -23,6 +23,15 @@
 		
 		<service
 		    android:name=".services.StorageAndControlService" />
+		
+		<receiver
+		    android:name=".receivers.BootCompletedBroadcastReceiver"
+		    android:enabled="true"
+		    android:exported="false">
+			<intent-filter>
+				<action android:name="android.intent.action.BOOT_COMPLETED"/>
+			</intent-filter>
+		</receiver>
         
         <activity
             android:name=".activities.AlarmListActivity"
