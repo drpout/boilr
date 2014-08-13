@@ -75,6 +75,12 @@
 			<groupId>com.github.andrefbsantos.libdynticker</groupId>
 			<artifactId>libdynticker</artifactId>
 			<version>${libdynticker.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>dom4j</artifactId>
+					<groupId>dom4j</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.github.andrefbsantos.libpricealarm</groupId>

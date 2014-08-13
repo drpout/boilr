@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.libpricealarm.Alarm;
@@ -32,35 +33,52 @@ public class AlarmListAdapter extends ArrayAdapter<Alarm> {
 
 		Alarm alarm = alarms.get(position);
 
+		View rowView = null;
+
 		if (alarm instanceof PriceHitAlarm) {
-			View rowView = inflater.inflate(R.layout.price_hit_alarm_row, viewGroup, false);
 
-			TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
-			exchange.setText(alarm.getExchange().getClass().getSimpleName());
-
-			TextView lastCheck = (TextView) rowView.findViewById(R.id.last_check);
-			// lastCheck.setText(alarm.get)
-
-			TextView lastValue = (TextView) rowView.findViewById(R.id.last_value);
-			lastValue.setText("" + alarm.getLastValue());
-
-			TextView pair = (TextView) rowView.findViewById(R.id.pair);
-			pair.setText(alarm.getPair().toString());
+			rowView = inflater.inflate(R.layout.price_hit_alarm_row, viewGroup, false);
+			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
 
 			TextView upperBound = (TextView) rowView.findViewById(R.id.upper_bound);
-			upperBound.setText("" + ((PriceHitAlarm) alarm).getLowerBound());
+			upperBound.setText("" + priceHitAlarm.getUpperBound());
 
 			TextView lowerBound = (TextView) rowView.findViewById(R.id.lower_bound);
-			lowerBound.setText("" + ((PriceHitAlarm) alarm).getLowerBound());
-
-			return rowView;
+			lowerBound.setText("" + priceHitAlarm.getLowerBound());
 
 		} else if (alarm instanceof PriceVarAlarm) {
-			View rowView = inflater.inflate(R.layout.price_var_alarm_row, viewGroup, false);
-			TextView pair = (TextView) rowView.findViewById(R.id.pair);
-			pair.setText(alarms.get(position).getPair().toString());
-			return rowView;
+
+			rowView = inflater.inflate(R.layout.price_var_alarm_row, viewGroup, false);
+			PriceVarAlarm priceVarAlarm = (PriceVarAlarm) alarm;
+
+			rowView.findViewById(R.id.interval);
+
+			rowView.findViewById(R.id.variance);
+			if (priceVarAlarm.isPercent()) {
+
+			} else {
+
+			}
+
 		}
-		return null;
+
+		// hidden tag to identify the row where the button was clicked
+		ToggleButton toggleButton = (ToggleButton) rowView.findViewById(R.id.toggle_button);
+		toggleButton.setTag(position);
+
+		TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
+		exchange.setText("Bitstamp");
+
+		TextView lastCheck = (TextView) rowView.findViewById(R.id.last_check);
+		lastCheck.setText("" + 123);
+
+		TextView pair = (TextView) rowView.findViewById(R.id.pair);
+		pair.setText(alarm.getPair().toString());
+
+		TextView lastValue = (TextView) rowView.findViewById(R.id.last_value);
+		lastValue.setText("" + 123);
+
+		return rowView;
+
 	}
 }
