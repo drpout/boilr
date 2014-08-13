@@ -6,6 +6,8 @@
 	<string name="action_about">About</string>
 	<string name="alarm_settings">Alarm Settings</string>
 	<string name="add_alarm">Add Alarm</string>
+	<string name="on">ON</string>
+	<string name="off">OFF</string>
 	<string name="boilr_settings">Boilr Settings</string>
 	
 	<string name="about_title">About Boilr</string>
