@@ -3,7 +3,6 @@ package com.github.andrefbsantos.boilr.database;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -39,10 +38,9 @@ public class DBManager {
 
 		List<Alarm> alarms = new ArrayList<Alarm>();
 		try {
-			alarms.add(new PriceHitAlarm(1, new BitstampExchange(), new Pair("BTC", "USD"), new Timer(), 1000000, new DummyNotify(), 600, 580));
-
-			alarms.add(new PriceHitAlarm(2, new BTCChinaExchange(), new Pair("BTC", "USD"), new Timer(), 1000000, new DummyNotify(), 600, 580));
-			alarms.add(new PriceHitAlarm(3, new HuobiExchange(), new Pair("BTC", "CNY"), new Timer(), 1000000, new DummyNotify(), 600, 580));
+			alarms.add(new PriceHitAlarm(1, new BitstampExchange(10000), new Pair("BTC", "USD"), 1000000, new DummyNotify(), 600, 580));
+			alarms.add(new PriceHitAlarm(2, new BTCChinaExchange(10000), new Pair("BTC", "USD"), 1000000, new DummyNotify(), 600, 580));
+			alarms.add(new PriceHitAlarm(3, new HuobiExchange(10000), new Pair("BTC", "CNY"), 1000000, new DummyNotify(), 600, 580));
 		} catch (UpperBoundSmallerThanLowerBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,7 +63,7 @@ public class DBManager {
 		// Retrieve alarms from DB
 		Cursor cursor = db.rawQuery("SELECT _id, bytes FROM " + DBManager.tableName + ";", null);
 		List<Alarm> alarms = new ArrayList<Alarm>();
-		if (cursor.moveToFirst()) {
+		if(cursor.moveToFirst()) {
 			do {
 				Alarm alarm = (Alarm) Serializer.deserializeObject(cursor.getBlob(cursor
 						.getColumnIndex("bytes")));
