@@ -33,7 +33,7 @@ public class UpdateLastValueService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
 		if(alarmID != Integer.MIN_VALUE) {
-			Intent serviceIntent = new Intent(this, StorageAndControlServiceBinder.class);
+			Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 			bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
 			if(mBound) {
 				AlarmWrapper wrapper = mService.getAlarm(alarmID);
