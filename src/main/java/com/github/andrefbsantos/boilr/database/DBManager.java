@@ -4,88 +4,116 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
-import com.github.andrefbsantos.libpricealarm.Alarm;
-import com.github.andrefbsantos.libpricealarm.UpperBoundSmallerThanLowerBoundException;
 
 public class DBManager {
 
-	// public SQLiteDatabase DB;
-	// public static Context currentContext;
+	public static final String DATABASE_NAME = "boilr";
+	public static final int VERSION = '1';
+	public static final String TABLE_NAME = "alarms";
+	public static final String BYTES = "bytes";
+	public static final String _ID = "_id";
+	private static final String MAX = "max";
 
-	public String path;
-	private SQLiteDatabase db;
-	public static final String name = "boilr";
-	public static final int version = '1';
-	public static final String tableName = "alarms";
+	private DatabaseHelper databaseHelper;
 
 	// public DBManager(Context context, String name, CursorFactory factory, int version)
-	public DBManager(Context context) throws UpperBoundSmallerThanLowerBoundException, IOException {
-		db = (new DatabaseHelper(context, name, null, version, tableName)).getWritableDatabase();
-		// populateDB();
+	public DBManager(Context context) {
+		databaseHelper = new DatabaseHelper(context, DBManager.DATABASE_NAME, null, DBManager.VERSION, DBManager.TABLE_NAME);
 	}
 
-	// Only for development proposes
-	// private void populateDB() {
-	// List<Alarm> alarms = new ArrayList<Alarm>();
-	// try {
-	// Alarm alarm = new PriceHitAlarm(1, new BitstampExchange(10000000), new Pair("BTC", "USD"),
-	// 100000, new DummyNotify(), 500, 400);
-	// alarms.add(alarm);
-	// alarm = new PriceHitAlarm(2, new BitstampExchange(10000000), new Pair("BTC", "USD"), 100000,
-	// new DummyNotify(), 500, 400);
-	// alarms.add(alarm);
-	//
-	// // alarms.add(new PriceHitAlarm(2, new BTCChinaExchange(10000), new Pair("BTC", "USD"),
-	// // new Timer(), 1000000, new DummyNotify(), 600, 580));
-	// // alarms.add(new PriceHitAlarm(3, new HuobiExchange(10000), new Pair("BTC", "CNY"), new
-	// // Timer(), 1000000, new DummyNotify(), 600, 580));
-	// } catch (UpperBoundSmallerThanLowerBoundException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// for (Alarm alarm : alarms) {
-	// byte[] bytes;
-	// try {
-	// bytes = Serializer.serializeObject(alarm);
-	// ContentValues contentValues = new ContentValues();
-	// contentValues.put("bytes", bytes);
-	// db.insert(DBManager.tableName, null, contentValues);
-	// } catch (IOException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
-	// }
-
+	@SuppressLint("UseSparseArrays")
 	public Map<Integer, AlarmWrapper> getAlarms() throws ClassNotFoundException, IOException {
-		// Retrieve alarms from DB
-		Cursor cursor = db.rawQuery("SELECT _id, bytes FROM " + DBManager.tableName + ";", null);
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+		String sql = "SELECT " + _ID + "," + BYTES + " FROM " + DBManager.TABLE_NAME + ";";
+		Cursor cursor = db.rawQuery(sql, null);
+
 		Map<Integer, AlarmWrapper> alarmsMap = new HashMap<Integer, AlarmWrapper>();
-		if (cursor.moveToFirst()) {
+
+		if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
 			do {
-				int id = cursor.getInt(cursor.getColumnIndex("_id"));
-				Alarm alarm = (Alarm) Serializer.deserializeObject(cursor.getBlob(cursor
-						.getColumnIndex("bytes")));
-				AlarmWrapper alarmWrapper = new AlarmWrapper(alarm);
-				// TODO get Exchange from map
-				// alarm.setExchange(exchangeMap.get(alarm.getExchangeCode());)
-				alarmsMap.put(id, alarmWrapper);
+				int id = cursor.getInt(cursor.getColumnIndex(_ID));
+				AlarmWrapper wrapper = (AlarmWrapper) Serializer.deserializeObject(cursor.getBlob(cursor
+						.getColumnIndex(BYTES)));
+				alarmsMap.put(id, wrapper);
 			} while (cursor.moveToNext());
 		}
+
+		db.close();
+
 		return alarmsMap;
 	}
 
-	// public void storeObject(Object object) throws UpperBoundSmallerThanLowerBoundException,
-	// IOException {
-	// // TODO
-	// }
-
 	public void clean() {
-		db.execSQL("DELETE FROM " + DBManager.tableName + " ;");
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		db.execSQL("DELETE FROM " + DBManager.TABLE_NAME + " ;");
+		db.close();
+	}
+
+	public void dropTable() {
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		db.execSQL("DROP TABLE " + DBManager.TABLE_NAME + " ;");
+		db.close();
+	}
+
+	public void storeAlarm(AlarmWrapper wrapper) throws IOException {
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		byte[] bytes = Serializer.serializeObject(wrapper);
+		ContentValues contentValues = new ContentValues();
+		contentValues.put(_ID, wrapper.getAlarm().getId());
+		contentValues.put(BYTES, bytes);
+		// Alarm's id is primary key, therefore it shouldn't be necessary to check for duplicates.
+		db.insert(DBManager.TABLE_NAME, null, contentValues);
+		db.close();
+	}
+
+	public void updateAlarm(AlarmWrapper wrapper) throws IOException {
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		byte[] bytes = Serializer.serializeObject(wrapper);
+
+		ContentValues values = new ContentValues();
+		values.put(_ID, wrapper.getAlarm().getId());
+		values.put(BYTES, bytes);
+
+		// Update where works like a template, (( age=? && name=? ), { 25, Andre })
+		// becomes age=25 && name=Andre
+		String whereClause = _ID + " = ? "; // template
+		String[] whereArgs = new String[] { String.valueOf(wrapper.getAlarm().getId()) }; // values
+		db.update(TABLE_NAME, values, whereClause, whereArgs);
+		db.close();
+	}
+
+	public int getNextID() {
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		String sql = "SELECT MAX( " + _ID + " ) as " + MAX + " FROM " + DBManager.TABLE_NAME + ";";
+		Cursor cursor = db.rawQuery(sql, null);
+		int id = 0;
+		if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
+			int columnIndex = cursor.getColumnIndex(MAX);
+			id = cursor.getInt(columnIndex);
+		}
+		db.close();
+		return id;
+	}
+
+	public void deleteAlarm(AlarmWrapper wrapper) {
+		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		// String sql = "DELETE FROM " + TABLE_NAME + " WHERE " + _ID + "=" +
+		// wrapper.getAlarm().getId();
+		// db.rawQuery(sql, null);
+		ContentValues values = new ContentValues();
+		values.put(_ID, wrapper.getAlarm().getId());
+		String whereClause = _ID + " = ? "; // template
+		String[] whereArgs = new String[] { String.valueOf(wrapper.getAlarm().getId()) }; // values
+		db.update(TABLE_NAME, values, whereClause, whereArgs);
+		db.delete(TABLE_NAME, whereClause, whereArgs);
+		db.close();
 	}
 }

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -19,8 +20,13 @@ import android.os.IBinder;
 import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.database.DBManager;
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
+import com.github.andrefbsantos.boilr.notification.DummyNotify;
 import com.github.andrefbsantos.boilr.views.fragments.SettingsFragment;
+import com.github.andrefbsantos.libdynticker.bitstamp.BitstampExchange;
 import com.github.andrefbsantos.libdynticker.core.Exchange;
+import com.github.andrefbsantos.libdynticker.core.Pair;
+import com.github.andrefbsantos.libpricealarm.Alarm;
+import com.github.andrefbsantos.libpricealarm.PriceHitAlarm;
 import com.github.andrefbsantos.libpricealarm.UpperBoundSmallerThanLowerBoundException;
 
 public class StorageAndControlService extends Service {
@@ -39,27 +45,47 @@ public class StorageAndControlService extends Service {
 		}
 	}
 
+	@SuppressLint("UseSparseArrays")
 	@Override
 	public void onCreate() {
 		alarmsMap = new HashMap<Integer, AlarmWrapper>();
 		exchangesMap = new HashMap<String, Exchange>();
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-		// TODO Retrieve alarms and prevAlarmID for DB
 
 		try {
 			db = new DBManager(this);
+			prevAlarmID = db.getNextID();
 			alarmsMap = db.getAlarms();
-		} catch (UpperBoundSmallerThanLowerBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+			// Set Exchange and start alarm
+			for (AlarmWrapper wrapper : alarmsMap.values()) {
+				wrapper.getAlarm().setExchange(getExchange(wrapper.getAlarm().getExchangeCode()));
+				if (wrapper.getAlarm().isOn()) {
+					this.startAlarm(wrapper);
+				}
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -70,6 +96,7 @@ public class StorageAndControlService extends Service {
 	@Override
 	public IBinder onBind(Intent intent) {
 		return binder;
+		// return new LocalBinder<StorageAndControlService>(this);
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
@@ -121,12 +148,39 @@ public class StorageAndControlService extends Service {
 		alarmManager.cancel(pendingIntent);
 	}
 
-	public void addAlarm(AlarmWrapper wrapper) {
+	public void addAlarm(AlarmWrapper wrapper) throws IOException {
 		alarmsMap.put(wrapper.getAlarm().getId(), wrapper);
 		// TODO Insert into DB.
+		db.storeAlarm(wrapper);
 	}
 
-	public void replaceAlarm(AlarmWrapper wrapper) {
+	public void replaceAlarm(AlarmWrapper wrapper) throws IOException {
 		// TODO Replace the given alarm (use the ID) in the DB.
+		db.updateAlarm(wrapper);
+	}
+
+	public void deleteAlarm(AlarmWrapper wrapper) throws IOException {
+		// TODO Replace the given alarm (use the ID) in the DB.
+		db.deleteAlarm(wrapper);
+	}
+
+	// Only used to place Alarms on DB
+	private void populateDB() {
+		System.out.println("testing");
+		try {
+			Alarm alarm = new PriceHitAlarm((int) generateAlarmID(), new BitstampExchange(10000000), new
+					Pair("BTC",
+							"USD"), 1000000, new DummyNotify(), 10000, 500);
+			AlarmWrapper wrapper = new AlarmWrapper(alarm);
+			addAlarm(wrapper);
+			((PriceHitAlarm) wrapper.getAlarm()).setLowerBound(200);
+			replaceAlarm(wrapper);
+		} catch (UpperBoundSmallerThanLowerBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

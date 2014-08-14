@@ -37,8 +37,9 @@ public class UpdateLastValueService extends Service {
 			bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
 			if(mBound) {
 				AlarmWrapper wrapper = mService.getAlarm(alarmID);
-				if(!wrapper.getAlarm().run())
+				if(!wrapper.getAlarm().run()) {
 					mService.stopAlarm(alarmID);
+				}
 				unbindService(mConnection);
 			}
 		}

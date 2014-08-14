@@ -24,7 +24,6 @@ import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
 import com.github.andrefbsantos.boilr.services.StorageAndControlService;
 import com.github.andrefbsantos.boilr.services.StorageAndControlService.StorageAndControlServiceBinder;
 import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
-import com.github.andrefbsantos.libpricealarm.Alarm;
 
 public class AlarmListActivity extends ListActivity {
 
@@ -40,6 +39,16 @@ public class AlarmListActivity extends ListActivity {
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mService = ((StorageAndControlServiceBinder) binder).getService();
 			mBound = true;
+
+			List<AlarmWrapper> list = null;
+			System.out.println("asdasd");
+			if (mBound) {
+				list = mService.getAlarms();
+				unbindService(mConnection);
+			}
+
+			adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, list);
+			setListAdapter(adapter);
 		}
 
 		@Override
@@ -57,8 +66,8 @@ public class AlarmListActivity extends ListActivity {
 		setContentView(R.layout.alarm_list);
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
 
-		adapter = new AlarmListAdapter(this, R.layout.price_hit_alarm_row, getAlarms());
-		setListAdapter(adapter);
+		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
+		bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override
@@ -91,16 +100,13 @@ public class AlarmListActivity extends ListActivity {
 	}
 
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	protected void onListItemClick(ListView l, View v, int position, long layout) {
 		// Handle list clicks. Pass corresponding alarm to populate the detailed view.
 
+		int id = (Integer) v.getTag();
+
+		// Find AlarmWrapper
 		AlarmWrapper alarm = null;
-		for (AlarmWrapper alarmWapper : getAlarms()) {
-			if (alarmWapper.getAlarm().getId() == id) {
-				alarm = alarmWapper;
-				break;
-			}
-		}
 
 		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
 		alarmSettingsIntent.putExtra("alarmWrapper", alarm);
@@ -117,39 +123,13 @@ public class AlarmListActivity extends ListActivity {
 		boolean on = ((ToggleButton) view).isChecked();
 		int id = (Integer) view.getTag();
 
-		Alarm alarm = null;
-		for (AlarmWrapper alarmWapper : getAlarms()) {
-			if (alarmWapper.getAlarm().getId() == id) {
-				alarm = alarmWapper.getAlarm();
-				break;
-			}
-		}
+		// Find Alarm, and change its state
 
-		if (on) {
-			// Enable alarm
-			alarm.turnOn();
-		} else {
-			// Disable alarm
-			alarm.turnOff();
-		}
-		// refresh list
-		// adapter.notifyDataSetChanged();
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 	}
-
-	private List<AlarmWrapper> getAlarms() {
-		List<AlarmWrapper> alarmList = null;
-		Intent serviceIntent = new Intent(this, StorageAndControlServiceBinder.class);
-		bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
-		if (mBound) {
-			alarmList = mService.getAlarms();
-			unbindService(mConnection);
-		}
-		return alarmList;
-	}
-
 }
