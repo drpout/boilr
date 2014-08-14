@@ -68,6 +68,7 @@ public class AlarmListAdapter extends ArrayAdapter<AlarmWrapper> {
 		// hidden tag to identify the row where the button was clicked
 		ToggleButton toggleButton = (ToggleButton) rowView.findViewById(R.id.toggle_button);
 		toggleButton.setTag(position);
+		toggleButton.setChecked(alarm.isOn());
 
 		TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
 		exchange.setText("Bitstamp");

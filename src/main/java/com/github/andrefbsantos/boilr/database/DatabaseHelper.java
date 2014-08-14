@@ -13,17 +13,20 @@ import android.database.sqlite.SQLiteOpenHelper;
  *
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
-	private String tablename;
+	private String tableName;
 
 	public DatabaseHelper(Context context, String name, CursorFactory factory, int version,
 			String tableName) {
 		super(context, name, factory, version);
-		tablename = tableName;
+		this.tableName = tableName;
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String createDB = "CREATE TABLE IF NOT EXISTS " + tablename + " ( _id INTEGER PRIMARY KEY AUTOINCREMENT, bytes BLOB) ;";
+		String dropDB = "DROP TABLE IF EXISTS " + tableName + ";";
+		db.execSQL(dropDB);
+		String createDB = "CREATE TABLE IF NOT EXISTS " + tableName + " ( " + DBManager._ID + " INTEGER PRIMARY KEY, " + DBManager.BYTES + " BLOB) ;";
+		System.out.println(createDB);
 		db.execSQL(createDB);
 	}
 
