@@ -14,9 +14,10 @@ import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ToggleButton;
+import aunused.ToggleAlarmServiceConnection;
 
 import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.adapters.AlarmListAdapter;
@@ -27,13 +28,37 @@ import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
 
 public class AlarmListActivity extends ListActivity {
 
-	private BaseAdapter adapter;
+	private ArrayAdapter<AlarmWrapper> adapter;
 
 	private StorageAndControlService mService;
 	private boolean mBound;
 
 	/** Defines callbacks for service binding, passed to bindService() */
-	private ServiceConnection mConnection = new ServiceConnection() {
+	private ServiceConnection getAllAlarmsConnection = new ServiceConnection() {
+
+		@Override
+		public void onServiceConnected(ComponentName className, IBinder binder) {
+			mService = ((StorageAndControlServiceBinder) binder).getService();
+			mBound = true;
+
+			List<AlarmWrapper> list = null;
+			if (mBound) {
+				list = mService.getAlarms();
+				// unbindService(conn)
+				unbindService(getAllAlarmsConnection);
+			}
+
+			adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, list);
+			setListAdapter(adapter);
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName className) {
+			mBound = false;
+		}
+	};
+
+	private ServiceConnection getAlarmConnection = new ServiceConnection() {
 
 		@Override
 		public void onServiceConnected(ComponentName className, IBinder binder) {
@@ -44,7 +69,7 @@ public class AlarmListActivity extends ListActivity {
 			System.out.println("asdasd");
 			if (mBound) {
 				list = mService.getAlarms();
-				unbindService(mConnection);
+				unbindService(getAllAlarmsConnection);
 			}
 
 			adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, list);
@@ -67,7 +92,7 @@ public class AlarmListActivity extends ListActivity {
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
 
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
-		bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
+		bindService(serviceIntent, getAllAlarmsConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override
@@ -102,15 +127,13 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long layout) {
 		// Handle list clicks. Pass corresponding alarm to populate the detailed view.
-
-		int id = (Integer) v.getTag();
-
-		// Find AlarmWrapper
-		AlarmWrapper alarm = null;
+		int id = (Integer) v.findViewById(R.id.toggle_button).getTag();
 
 		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
-		alarmSettingsIntent.putExtra("alarmWrapper", alarm);
+		alarmSettingsIntent.putExtra("id", id);
 		startActivity(alarmSettingsIntent);
+		System.out.println("DONE");
+
 	}
 
 	public void onAddAlarmClicked(View v) {
@@ -121,11 +144,40 @@ public class AlarmListActivity extends ListActivity {
 
 	public void onToggleClicked(View view) {
 		boolean on = ((ToggleButton) view).isChecked();
+
 		int id = (Integer) view.getTag();
 
 		// Find Alarm, and change its state
 
-		adapter.notifyDataSetChanged();
+		ToggleAlarmServiceConnection toggleAlarmServiceConnection = new ToggleAlarmServiceConnection(adapter, id);
+
+		// ServiceConnection changeAlarmStateConnection = new ServiceConnection() {
+		//
+		// @Override
+		// public void onServiceConnected(ComponentName className, IBinder binder) {
+		// mService = ((StorageAndControlServiceBinder) binder).getService();
+		// mBound = true;
+		//
+		// List<AlarmWrapper> list = null;
+		// System.out.println("asdasd");
+		// if (mBound) {
+		// list = mService.getAlarms();
+		// unbindService(changeAlarmStateConnection);
+		// }
+		//
+		// adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row,
+		// list);
+		// setListAdapter(adapter);
+		// }
+		//
+		// @Override
+		// public void onServiceDisconnected(ComponentName className) {
+		// mBound = false;
+		// }
+		// };
+
+		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
+		bindService(serviceIntent, toggleAlarmServiceConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override

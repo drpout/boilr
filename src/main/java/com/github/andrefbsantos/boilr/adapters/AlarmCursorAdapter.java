@@ -12,6 +12,7 @@ import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.database.Serializer;
 import com.github.andrefbsantos.libpricealarm.Alarm;
 
+@Deprecated
 public class AlarmCursorAdapter extends ResourceCursorAdapter {
 
 	public AlarmCursorAdapter(Context context, int layout, Cursor c) {

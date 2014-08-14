@@ -23,10 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String dropDB = "DROP TABLE IF EXISTS " + tableName + ";";
-		db.execSQL(dropDB);
 		String createDB = "CREATE TABLE IF NOT EXISTS " + tableName + " ( " + DBManager._ID + " INTEGER PRIMARY KEY, " + DBManager.BYTES + " BLOB) ;";
-		System.out.println(createDB);
 		db.execSQL(createDB);
 	}
 

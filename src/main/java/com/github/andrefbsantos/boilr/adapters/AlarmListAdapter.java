@@ -42,10 +42,10 @@ public class AlarmListAdapter extends ArrayAdapter<AlarmWrapper> {
 			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
 
 			TextView upperBound = (TextView) rowView.findViewById(R.id.upper_bound);
-			upperBound.setText("" + priceHitAlarm.getUpperBound());
+			upperBound.setText(String.valueOf(priceHitAlarm.getUpperBound()));
 
 			TextView lowerBound = (TextView) rowView.findViewById(R.id.lower_bound);
-			lowerBound.setText("" + priceHitAlarm.getLowerBound());
+			lowerBound.setText(String.valueOf(priceHitAlarm.getLowerBound()));
 
 		} else if (alarm instanceof PriceVarAlarm) {
 
@@ -53,34 +53,34 @@ public class AlarmListAdapter extends ArrayAdapter<AlarmWrapper> {
 			PriceVarAlarm priceVarAlarm = (PriceVarAlarm) alarm;
 
 			TextView period = (TextView) rowView.findViewById(R.id.period);
-			period.setText("" + priceVarAlarm.getPeriod());
+			period.setText(String.valueOf(priceVarAlarm.getPeriod()));
 
 			TextView variance = (TextView) rowView.findViewById(R.id.variance);
 
 			if (priceVarAlarm.isPercent()) {
-				variance.setText("" + priceVarAlarm.getPercent());
+				variance.setText(String.valueOf(priceVarAlarm.getPercent()));
 			} else {
-				variance.setText("" + priceVarAlarm.getVariation());
+				variance.setText(String.valueOf(priceVarAlarm.getVariation()));
 			}
 
 		}
 
 		// hidden tag to identify the row where the button was clicked
 		ToggleButton toggleButton = (ToggleButton) rowView.findViewById(R.id.toggle_button);
-		toggleButton.setTag(position);
+		toggleButton.setTag(alarm.getId());
 		toggleButton.setChecked(alarm.isOn());
 
 		TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
-		exchange.setText("Bitstamp");
+		exchange.setText(alarm.getExchange().getName());
 
 		TextView lastCheck = (TextView) rowView.findViewById(R.id.last_check);
-		lastCheck.setText("" + 123);
+		// lastCheck.setText(String.valueOf(alarm.getLastUpdateTimestamp()));
 
 		TextView pair = (TextView) rowView.findViewById(R.id.pair);
 		pair.setText(alarm.getPair().toString());
 
 		TextView lastValue = (TextView) rowView.findViewById(R.id.last_value);
-		lastValue.setText("" + 123);
+		// lastValue.setText(String.valueOf(alarm.getLastValue()));
 
 		return rowView;
 

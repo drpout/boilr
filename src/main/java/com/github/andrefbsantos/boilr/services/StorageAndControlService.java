@@ -21,8 +21,9 @@ import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.database.DBManager;
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
 import com.github.andrefbsantos.boilr.notification.DummyNotify;
-import com.github.andrefbsantos.boilr.views.fragments.SettingsFragment;
 import com.github.andrefbsantos.libdynticker.bitstamp.BitstampExchange;
+import com.github.andrefbsantos.libdynticker.btcchina.BTCChinaExchange;
+import com.github.andrefbsantos.libdynticker.btce.BTCEExchange;
 import com.github.andrefbsantos.libdynticker.core.Exchange;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 import com.github.andrefbsantos.libpricealarm.Alarm;
@@ -48,6 +49,8 @@ public class StorageAndControlService extends Service {
 	@SuppressLint("UseSparseArrays")
 	@Override
 	public void onCreate() {
+		super.onCreate();
+		System.out.println("CREATING " + this.getClass().getSimpleName());
 		alarmsMap = new HashMap<Integer, AlarmWrapper>();
 		exchangesMap = new HashMap<String, Exchange>();
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -55,8 +58,11 @@ public class StorageAndControlService extends Service {
 		try {
 			db = new DBManager(this);
 			prevAlarmID = db.getNextID();
+			System.out.println(prevAlarmID);
+			if (prevAlarmID == 0) {
+				populateDB();
+			}
 			alarmsMap = db.getAlarms();
-
 			// Set Exchange and start alarm
 			for (AlarmWrapper wrapper : alarmsMap.values()) {
 				wrapper.getAlarm().setExchange(getExchange(wrapper.getAlarm().getExchangeCode()));
@@ -100,15 +106,21 @@ public class StorageAndControlService extends Service {
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-			InstantiationException, IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, SecurityException {
+	InstantiationException, IllegalAccessException, IllegalArgumentException,
+	InvocationTargetException, SecurityException {
 		if (exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {
 			@SuppressWarnings("unchecked")
 			Class<? extends Exchange> c = (Class<? extends Exchange>) Class.forName(classname);
 			SharedPreferences sharedPreferences = getSharedPreferences(getResources().getResourceEntryName(R.xml.app_settings), Context.MODE_PRIVATE);
-			long pairInterval = Long.parseLong(sharedPreferences.getString(SettingsFragment.PREF_KEY_CHECK_PAIRS_INTERVAL, ""));
+
+			// TODO Remove this
+			// long pairInterval =
+			// Long.parseLong(sharedPreferences.getString(SettingsFragment.PREF_KEY_CHECK_PAIRS_INTERVAL,
+			// ""));
+			long pairInterval = 100000000;
+
 			Exchange exchange = (Exchange) c.getDeclaredConstructors()[0].newInstance(pairInterval);
 			exchangesMap.put(classname, exchange);
 			return exchange;
@@ -166,13 +178,26 @@ public class StorageAndControlService extends Service {
 
 	// Only used to place Alarms on DB
 	private void populateDB() {
-		System.out.println("testing");
+		System.out.println("Populating DB");
 		try {
 			Alarm alarm = new PriceHitAlarm((int) generateAlarmID(), new BitstampExchange(10000000), new
 					Pair("BTC",
-							"USD"), 1000000, new DummyNotify(), 10000, 500);
+							"USD"), 1000000, new DummyNotify(), 10000, 300);
 			AlarmWrapper wrapper = new AlarmWrapper(alarm);
 			addAlarm(wrapper);
+
+			alarm = new PriceHitAlarm((int) generateAlarmID(), new BTCEExchange(10000000), new
+					Pair("BTC",
+							"EUR"), 1000000, new DummyNotify(), 800, 100);
+			wrapper = new AlarmWrapper(alarm);
+			addAlarm(wrapper);
+
+			alarm = new PriceHitAlarm((int) generateAlarmID(), new BTCChinaExchange(10000000), new
+					Pair("BTC",
+							"CNY"), 1000000, new DummyNotify(), 10000, 500);
+			wrapper = new AlarmWrapper(alarm);
+			addAlarm(wrapper);
+
 			((PriceHitAlarm) wrapper.getAlarm()).setLowerBound(200);
 			replaceAlarm(wrapper);
 		} catch (UpperBoundSmallerThanLowerBoundException e) {
