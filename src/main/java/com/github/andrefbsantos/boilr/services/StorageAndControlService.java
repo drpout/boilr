@@ -159,7 +159,7 @@ public class StorageAndControlService extends Service {
 		db.updateAlarm(wrapper);
 	}
 
-	public void DeleteAlarm(AlarmWrapper wrapper) throws IOException {
+	public void deleteAlarm(AlarmWrapper wrapper) throws IOException {
 		// TODO Replace the given alarm (use the ID) in the DB.
 		db.deleteAlarm(wrapper);
 	}
