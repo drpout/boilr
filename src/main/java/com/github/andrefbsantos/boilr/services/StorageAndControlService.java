@@ -13,7 +13,6 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Binder;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 
@@ -35,16 +34,16 @@ public class StorageAndControlService extends Service {
 	private Map<Integer, AlarmWrapper> alarmsMap;
 	private Map<String, Exchange> exchangesMap;
 	private long prevAlarmID = 0;
-	private final IBinder binder = new StorageAndControlServiceBinder();
+	// private final IBinder binder = new StorageAndControlServiceBinder();
 	private AlarmManager alarmManager;
 	private DBManager db;
 
-	public class StorageAndControlServiceBinder extends Binder {
-		public StorageAndControlService getService() {
-			// Return this instance of StorageService so clients can call public methods
-			return StorageAndControlService.this;
-		}
-	}
+	// public class StorageAndControlServiceBinder extends Binder {
+	// public StorageAndControlService getService() {
+	// // Return this instance of StorageService so clients can call public methods
+	// return StorageAndControlService.this;
+	// }
+	// }
 
 	@SuppressLint("UseSparseArrays")
 	@Override
@@ -167,6 +166,11 @@ public class StorageAndControlService extends Service {
 
 	public void deleteAlarm(AlarmWrapper wrapper) throws IOException {
 		db.deleteAlarm(wrapper);
+		alarmsMap.remove(wrapper.getAlarm().getId());
+	}
+
+	public void deleteAlarm(int id) throws IOException {
+		deleteAlarm(alarmsMap.get(id));
 	}
 
 	// Only used to place Alarms on DB

@@ -10,7 +10,6 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +28,7 @@ public class AlarmListActivity extends ListActivity {
 	private int id;
 
 	private ArrayAdapter<AlarmWrapper> adapter;
-	private GestureDetector gestureDetector;
+	private MyGestureDetector gestureDetector = new MyGestureDetector();
 	private View.OnTouchListener gestureListener;
 
 	private StorageAndControlService mService;
@@ -75,7 +74,6 @@ public class AlarmListActivity extends ListActivity {
 						break;
 					}
 				}
-
 				// adapter.clear();
 				// adapter.addAll(list);
 				adapter.notifyDataSetChanged();
@@ -94,6 +92,8 @@ public class AlarmListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.alarm_list);
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
+
+		getListView().setOnTouchListener(new OnSwipeTouchListener(this));
 
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 		startService(serviceIntent);
@@ -133,9 +133,10 @@ public class AlarmListActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long layout) {
 		// Handle list clicks. Pass corresponding alarm to populate the detailed view.
 		int id = (Integer) v.findViewById(R.id.toggle_button).getTag();
-		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
-		alarmSettingsIntent.putExtra("id", id);
-		startActivity(alarmSettingsIntent);
+		System.out.println("ListView click " + id);
+		// Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
+		// alarmSettingsIntent.putExtra("id", id);
+		// startActivity(alarmSettingsIntent);
 	}
 
 	public void onAddAlarmClicked(View v) {

@@ -8,7 +8,6 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
-import com.github.andrefbsantos.boilr.services.StorageAndControlService.StorageAndControlServiceBinder;
 
 public class UpdateLastValueService extends Service {
 
@@ -19,7 +18,7 @@ public class UpdateLastValueService extends Service {
 
 		@Override
 		public void onServiceConnected(ComponentName className, IBinder binder) {
-			mService = ((StorageAndControlServiceBinder) binder).getService();
+			mService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
 		}
 
@@ -32,12 +31,12 @@ public class UpdateLastValueService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
-		if(alarmID != Integer.MIN_VALUE) {
+		if (alarmID != Integer.MIN_VALUE) {
 			Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 			bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
-			if(mBound) {
+			if (mBound) {
 				AlarmWrapper wrapper = mService.getAlarm(alarmID);
-				if(!wrapper.getAlarm().run()) {
+				if (!wrapper.getAlarm().run()) {
 					mService.stopAlarm(alarmID);
 				}
 				unbindService(mConnection);
