@@ -32,12 +32,12 @@ public class UpdateLastValueService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
-		if (alarmID != Integer.MIN_VALUE) {
-			Intent serviceIntent = new Intent(this, StorageAndControlServiceBinder.class);
+		if(alarmID != Integer.MIN_VALUE) {
+			Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 			bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
-			if (mBound) {
+			if(mBound) {
 				AlarmWrapper wrapper = mService.getAlarm(alarmID);
-				if (!wrapper.getAlarm().run()) {
+				if(!wrapper.getAlarm().run()) {
 					mService.stopAlarm(alarmID);
 				}
 				unbindService(mConnection);
