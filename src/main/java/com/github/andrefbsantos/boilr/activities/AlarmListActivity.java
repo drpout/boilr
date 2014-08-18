@@ -16,40 +16,40 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ToggleButton;
-import aunused.ToggleAlarmServiceConnection;
 
 import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.adapters.AlarmListAdapter;
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
+import com.github.andrefbsantos.boilr.services.LocalBinder;
 import com.github.andrefbsantos.boilr.services.StorageAndControlService;
-import com.github.andrefbsantos.boilr.services.StorageAndControlService.StorageAndControlServiceBinder;
 import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
 
 public class AlarmListActivity extends ListActivity {
 
+	private int id;
+
 	private ArrayAdapter<AlarmWrapper> adapter;
+	private GestureDetector gestureDetector;
+	private View.OnTouchListener gestureListener;
 
 	private StorageAndControlService mService;
 	private boolean mBound;
 
-	/** Defines callbacks for service binding, passed to bindService() */
-	private ServiceConnection getAllAlarmsConnection = new ServiceConnection() {
+	private ServiceConnection getAllAlarmsServiceConnection = new ServiceConnection() {
 
 		@Override
 		public void onServiceConnected(ComponentName className, IBinder binder) {
-			mService = ((StorageAndControlServiceBinder) binder).getService();
+			mService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
 
-			List<AlarmWrapper> list = null;
+			// Callback action performed after the service has been bound
 			if (mBound) {
-				list = mService.getAlarms();
-				// unbindService(conn)
-				unbindService(getAllAlarmsConnection);
+				System.out.println("It's Bound");
+				List<AlarmWrapper> list = mService.getAlarms();
+				adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, list);
+				setListAdapter(adapter);
+				unbindService(getAllAlarmsServiceConnection);
 			}
-
-			adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, list);
-			setListAdapter(adapter);
 		}
 
 		@Override
@@ -58,22 +58,29 @@ public class AlarmListActivity extends ListActivity {
 		}
 	};
 
-	private ServiceConnection getAlarmConnection = new ServiceConnection() {
+	private ServiceConnection toggleAlarmServiceConnection = new ServiceConnection() {
 
 		@Override
 		public void onServiceConnected(ComponentName className, IBinder binder) {
-			mService = ((StorageAndControlServiceBinder) binder).getService();
+			mService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
 
-			List<AlarmWrapper> list = null;
-			System.out.println("asdasd");
 			if (mBound) {
-				list = mService.getAlarms();
-				unbindService(getAllAlarmsConnection);
-			}
+				List<AlarmWrapper> list = mService.getAlarms();
+				System.out.println("ID=" + id);
 
-			adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, list);
-			setListAdapter(adapter);
+				for (AlarmWrapper wrapper : list) {
+					if (wrapper.getAlarm().getId() == id) {
+						wrapper.getAlarm().toggle();
+						break;
+					}
+				}
+
+				// adapter.clear();
+				// adapter.addAll(list);
+				adapter.notifyDataSetChanged();
+				unbindService(toggleAlarmServiceConnection);
+			}
 		}
 
 		@Override
@@ -81,9 +88,6 @@ public class AlarmListActivity extends ListActivity {
 			mBound = false;
 		}
 	};
-
-	private GestureDetector gestureDetector;
-	private View.OnTouchListener gestureListener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +96,8 @@ public class AlarmListActivity extends ListActivity {
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
 
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
-		bindService(serviceIntent, getAllAlarmsConnection, Context.BIND_AUTO_CREATE);
+		startService(serviceIntent);
+		bindService(serviceIntent, getAllAlarmsServiceConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override
@@ -128,12 +133,9 @@ public class AlarmListActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long layout) {
 		// Handle list clicks. Pass corresponding alarm to populate the detailed view.
 		int id = (Integer) v.findViewById(R.id.toggle_button).getTag();
-
 		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
 		alarmSettingsIntent.putExtra("id", id);
 		startActivity(alarmSettingsIntent);
-		System.out.println("DONE");
-
 	}
 
 	public void onAddAlarmClicked(View v) {
@@ -143,39 +145,7 @@ public class AlarmListActivity extends ListActivity {
 	}
 
 	public void onToggleClicked(View view) {
-		boolean on = ((ToggleButton) view).isChecked();
-
-		int id = (Integer) view.getTag();
-
-		// Find Alarm, and change its state
-
-		ToggleAlarmServiceConnection toggleAlarmServiceConnection = new ToggleAlarmServiceConnection(adapter, id);
-
-		// ServiceConnection changeAlarmStateConnection = new ServiceConnection() {
-		//
-		// @Override
-		// public void onServiceConnected(ComponentName className, IBinder binder) {
-		// mService = ((StorageAndControlServiceBinder) binder).getService();
-		// mBound = true;
-		//
-		// List<AlarmWrapper> list = null;
-		// System.out.println("asdasd");
-		// if (mBound) {
-		// list = mService.getAlarms();
-		// unbindService(changeAlarmStateConnection);
-		// }
-		//
-		// adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row,
-		// list);
-		// setListAdapter(adapter);
-		// }
-		//
-		// @Override
-		// public void onServiceDisconnected(ComponentName className) {
-		// mBound = false;
-		// }
-		// };
-
+		id = (Integer) view.getTag();
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 		bindService(serviceIntent, toggleAlarmServiceConnection, Context.BIND_AUTO_CREATE);
 	}
@@ -183,5 +153,19 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		mService = null;
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		// if (mBound) {
+		// System.out.println("Bounded");
+		// List<AlarmWrapper> list = mService.getAlarms();
+		// adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row,
+		// list);
+		// setListAdapter(adapter);
+		// unbindService(mConnection);
+		// }
 	}
 }

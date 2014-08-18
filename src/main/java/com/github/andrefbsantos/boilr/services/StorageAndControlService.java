@@ -11,16 +11,16 @@ import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 
-import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.database.DBManager;
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
 import com.github.andrefbsantos.boilr.notification.DummyNotify;
+import com.github.andrefbsantos.boilr.views.fragments.SettingsFragment;
 import com.github.andrefbsantos.libdynticker.bitstamp.BitstampExchange;
 import com.github.andrefbsantos.libdynticker.btcchina.BTCChinaExchange;
 import com.github.andrefbsantos.libdynticker.btce.BTCEExchange;
@@ -58,11 +58,10 @@ public class StorageAndControlService extends Service {
 		try {
 			db = new DBManager(this);
 			prevAlarmID = db.getNextID();
-			System.out.println(prevAlarmID);
+			alarmsMap = db.getAlarms();
 			if (prevAlarmID == 0) {
 				populateDB();
 			}
-			alarmsMap = db.getAlarms();
 			// Set Exchange and start alarm
 			for (AlarmWrapper wrapper : alarmsMap.values()) {
 				wrapper.getAlarm().setExchange(getExchange(wrapper.getAlarm().getExchangeCode()));
@@ -101,8 +100,8 @@ public class StorageAndControlService extends Service {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		return binder;
-		// return new LocalBinder<StorageAndControlService>(this);
+		// return binder;
+		return new LocalBinder<StorageAndControlService>(this);
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
@@ -113,14 +112,11 @@ public class StorageAndControlService extends Service {
 		} else {
 			@SuppressWarnings("unchecked")
 			Class<? extends Exchange> c = (Class<? extends Exchange>) Class.forName(classname);
-			SharedPreferences sharedPreferences = getSharedPreferences(getResources().getResourceEntryName(R.xml.app_settings), Context.MODE_PRIVATE);
-
-			// TODO Remove this
-			// long pairInterval =
-			// Long.parseLong(sharedPreferences.getString(SettingsFragment.PREF_KEY_CHECK_PAIRS_INTERVAL,
-			// ""));
-			long pairInterval = 100000000;
-
+			// SharedPreferences sharedPreferences =
+			// getSharedPreferences(getResources().getResourceEntryName(R.xml.app_settings),
+			// Context.MODE_PRIVATE);
+			SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+			long pairInterval = Long.parseLong(sharedPreferences.getString(SettingsFragment.PREF_KEY_CHECK_PAIRS_INTERVAL, ""));
 			Exchange exchange = (Exchange) c.getDeclaredConstructors()[0].newInstance(pairInterval);
 			exchangesMap.put(classname, exchange);
 			return exchange;
@@ -162,17 +158,14 @@ public class StorageAndControlService extends Service {
 
 	public void addAlarm(AlarmWrapper wrapper) throws IOException {
 		alarmsMap.put(wrapper.getAlarm().getId(), wrapper);
-		// TODO Insert into DB.
 		db.storeAlarm(wrapper);
 	}
 
 	public void replaceAlarm(AlarmWrapper wrapper) throws IOException {
-		// TODO Replace the given alarm (use the ID) in the DB.
 		db.updateAlarm(wrapper);
 	}
 
 	public void deleteAlarm(AlarmWrapper wrapper) throws IOException {
-		// TODO Replace the given alarm (use the ID) in the DB.
 		db.deleteAlarm(wrapper);
 	}
 
@@ -201,10 +194,8 @@ public class StorageAndControlService extends Service {
 			((PriceHitAlarm) wrapper.getAlarm()).setLowerBound(200);
 			replaceAlarm(wrapper);
 		} catch (UpperBoundSmallerThanLowerBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
