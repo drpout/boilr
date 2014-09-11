@@ -16,6 +16,7 @@ public class UpdateLastValueService extends Service {
 	/** Defines callbacks for service binding, passed to bindService() */
 	private ServiceConnection mConnection = new ServiceConnection() {
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mService = ((LocalBinder<StorageAndControlService>) binder).getService();

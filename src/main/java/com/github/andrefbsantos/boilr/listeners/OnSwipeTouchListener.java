@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.boilr.activities;
+package com.github.andrefbsantos.boilr.listeners;
 
 import java.io.IOException;
 import java.util.List;

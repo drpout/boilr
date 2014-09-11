@@ -10,6 +10,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.ListView;
 import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.adapters.AlarmListAdapter;
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
+import com.github.andrefbsantos.boilr.listeners.OnSwipeTouchListener;
 import com.github.andrefbsantos.boilr.services.LocalBinder;
 import com.github.andrefbsantos.boilr.services.StorageAndControlService;
 import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
@@ -26,11 +28,9 @@ import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
 public class AlarmListActivity extends ListActivity {
 
 	private int id;
+	private final static String tag = "AlarmListActivity";
 
 	private ArrayAdapter<AlarmWrapper> adapter;
-	private MyGestureDetector gestureDetector = new MyGestureDetector();
-	private View.OnTouchListener gestureListener;
-
 	private StorageAndControlService mService;
 	private boolean mBound;
 
@@ -42,8 +42,8 @@ public class AlarmListActivity extends ListActivity {
 			mBound = true;
 
 			// Callback action performed after the service has been bound
-			if (mBound) {
-				System.out.println("It's Bound");
+			if(mBound) {
+				Log.d(tag, "It's Bound");
 				List<AlarmWrapper> list = mService.getAlarms();
 				adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, list);
 				setListAdapter(adapter);
@@ -64,12 +64,12 @@ public class AlarmListActivity extends ListActivity {
 			mService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
 
-			if (mBound) {
+			if(mBound) {
 				List<AlarmWrapper> list = mService.getAlarms();
-				System.out.println("ID=" + id);
+				Log.d(tag, "ID=" + id);
 
 				for (AlarmWrapper wrapper : list) {
-					if (wrapper.getAlarm().getId() == id) {
+					if(wrapper.getAlarm().getId() == id) {
 						wrapper.getAlarm().toggle();
 						break;
 					}
@@ -133,7 +133,7 @@ public class AlarmListActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long layout) {
 		// Handle list clicks. Pass corresponding alarm to populate the detailed view.
 		int id = (Integer) v.findViewById(R.id.toggle_button).getTag();
-		System.out.println("ListView click " + id);
+		Log.d(tag, "ListView click " + id);
 		// Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
 		// alarmSettingsIntent.putExtra("id", id);
 		// startActivity(alarmSettingsIntent);

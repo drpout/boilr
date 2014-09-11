@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.github.andrefbsantos.boilr.database.DBManager;
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
@@ -31,19 +32,12 @@ import com.github.andrefbsantos.libpricealarm.UpperBoundSmallerThanLowerBoundExc
 
 public class StorageAndControlService extends Service {
 
+	private static final String tag = "StorageAndControlService";
 	private Map<Integer, AlarmWrapper> alarmsMap;
 	private Map<String, Exchange> exchangesMap;
 	private long prevAlarmID = 0;
-	// private final IBinder binder = new StorageAndControlServiceBinder();
 	private AlarmManager alarmManager;
 	private DBManager db;
-
-	// public class StorageAndControlServiceBinder extends Binder {
-	// public StorageAndControlService getService() {
-	// // Return this instance of StorageService so clients can call public methods
-	// return StorageAndControlService.this;
-	// }
-	// }
 
 	@SuppressLint("UseSparseArrays")
 	@Override
@@ -58,36 +52,17 @@ public class StorageAndControlService extends Service {
 			db = new DBManager(this);
 			prevAlarmID = db.getNextID();
 			alarmsMap = db.getAlarms();
-			if (prevAlarmID == 0) {
+			if(prevAlarmID == 0) {
 				populateDB();
 			}
 			// Set Exchange and start alarm
 			for (AlarmWrapper wrapper : alarmsMap.values()) {
 				wrapper.getAlarm().setExchange(getExchange(wrapper.getAlarm().getExchangeCode()));
-				if (wrapper.getAlarm().isOn()) {
+				if(wrapper.getAlarm().isOn()) {
 					this.startAlarm(wrapper);
 				}
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -99,14 +74,13 @@ public class StorageAndControlService extends Service {
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		// return binder;
 		return new LocalBinder<StorageAndControlService>(this);
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-	InstantiationException, IllegalAccessException, IllegalArgumentException,
-	InvocationTargetException, SecurityException {
-		if (exchangesMap.containsKey(classname)) {
+			InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException, SecurityException {
+		if(exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {
 			@SuppressWarnings("unchecked")
@@ -175,23 +149,17 @@ public class StorageAndControlService extends Service {
 
 	// Only used to place Alarms on DB
 	private void populateDB() {
-		System.out.println("Populating DB");
+		Log.d(tag, "Populating DB");
 		try {
-			Alarm alarm = new PriceHitAlarm((int) generateAlarmID(), new BitstampExchange(10000000), new
-					Pair("BTC",
-							"USD"), 1000000, new DummyNotify(), 10000, 300);
+			Alarm alarm = new PriceHitAlarm((int) generateAlarmID(), new BitstampExchange(10000000), new Pair("BTC", "USD"), 1000000, new DummyNotify(), 10000, 300);
 			AlarmWrapper wrapper = new AlarmWrapper(alarm);
 			addAlarm(wrapper);
 
-			alarm = new PriceHitAlarm((int) generateAlarmID(), new BTCEExchange(10000000), new
-					Pair("BTC",
-							"EUR"), 1000000, new DummyNotify(), 800, 100);
+			alarm = new PriceHitAlarm((int) generateAlarmID(), new BTCEExchange(10000000), new Pair("BTC", "EUR"), 1000000, new DummyNotify(), 800, 100);
 			wrapper = new AlarmWrapper(alarm);
 			addAlarm(wrapper);
 
-			alarm = new PriceHitAlarm((int) generateAlarmID(), new BTCChinaExchange(10000000), new
-					Pair("BTC",
-							"CNY"), 1000000, new DummyNotify(), 10000, 500);
+			alarm = new PriceHitAlarm((int) generateAlarmID(), new BTCChinaExchange(10000000), new Pair("BTC", "CNY"), 1000000, new DummyNotify(), 10000, 500);
 			wrapper = new AlarmWrapper(alarm);
 			addAlarm(wrapper);
 
