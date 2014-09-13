@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
 
 public class UpdateLastValueService extends Service {
 
+	private final static String tag = "UpdateLastValueService";
 	private StorageAndControlService mService;
 	private boolean mBound;
 	/** Defines callbacks for service binding, passed to bindService() */
@@ -36,10 +38,9 @@ public class UpdateLastValueService extends Service {
 			Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 			bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
 			if (mBound) {
+				Log.d(tag, "Bound to StorageAndControlService.");
 				AlarmWrapper wrapper = mService.getAlarm(alarmID);
-				if (!wrapper.getAlarm().run()) {
-					mService.stopAlarm(alarmID);
-				}
+				wrapper.getAlarm().run();
 				unbindService(mConnection);
 			}
 		}
