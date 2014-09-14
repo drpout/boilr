@@ -50,7 +50,7 @@ public class AlarmWrapper implements Serializable {
 		this.alertSound = alertSound;
 	}
 
-	public Boolean getVibrate() {
+	public Boolean isVibrate() {
 		return vibrate;
 	}
 

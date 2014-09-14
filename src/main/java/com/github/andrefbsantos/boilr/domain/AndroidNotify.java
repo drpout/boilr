@@ -2,7 +2,7 @@ package com.github.andrefbsantos.boilr.domain;
 
 import android.content.Context;
 
-import com.github.andrefbsantos.boilr.services.NotifyService;
+import com.github.andrefbsantos.boilr.services.NotificationService;
 import com.github.andrefbsantos.libpricealarm.Notify;
 
 public class AndroidNotify implements Notify {
@@ -16,7 +16,7 @@ public class AndroidNotify implements Notify {
 
 	@Override
 	public boolean trigger(int alarmID) {
-		NotifyService.startNotify(context, alarmID);
+		NotificationService.startNotify(context, alarmID);
 		return false;
 	}
 }

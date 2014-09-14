@@ -10,7 +10,6 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,13 +22,12 @@ import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
 import com.github.andrefbsantos.boilr.listeners.OnSwipeTouchListener;
 import com.github.andrefbsantos.boilr.services.LocalBinder;
 import com.github.andrefbsantos.boilr.services.StorageAndControlService;
+import com.github.andrefbsantos.boilr.utils.Log;
 import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;
 
 public class AlarmListActivity extends ListActivity {
 
 	private int id;
-	private final static String tag = "AlarmListActivity";
-
 	private ArrayAdapter<AlarmWrapper> adapter;
 	private StorageAndControlService mService;
 	private boolean mBound;
@@ -43,7 +41,7 @@ public class AlarmListActivity extends ListActivity {
 
 			// Callback action performed after the service has been bound
 			if(mBound) {
-				Log.d(tag, "It's Bound");
+				Log.d("AlarmListActivity bound to StorageAndControlService.");
 				List<AlarmWrapper> list = mService.getAlarms();
 				adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, list);
 				setListAdapter(adapter);
@@ -66,7 +64,7 @@ public class AlarmListActivity extends ListActivity {
 
 			if(mBound) {
 				List<AlarmWrapper> list = mService.getAlarms();
-				Log.d(tag, "ID=" + id);
+				Log.d("ID=" + id);
 
 				for (AlarmWrapper wrapper : list) {
 					if(wrapper.getAlarm().getId() == id) {
@@ -133,7 +131,7 @@ public class AlarmListActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long layout) {
 		// Handle list clicks. Pass corresponding alarm to populate the detailed view.
 		int id = (Integer) v.findViewById(R.id.toggle_button).getTag();
-		Log.d(tag, "ListView click " + id);
+		Log.d("ListView click " + id);
 		// Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
 		// alarmSettingsIntent.putExtra("id", id);
 		// startActivity(alarmSettingsIntent);
@@ -160,13 +158,5 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	public void onStart() {
 		super.onStart();
-		// if (mBound) {
-		// System.out.println("Bounded");
-		// List<AlarmWrapper> list = mService.getAlarms();
-		// adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row,
-		// list);
-		// setListAdapter(adapter);
-		// unbindService(mConnection);
-		// }
 	}
 }

@@ -71,4 +71,8 @@
 		<item>2592000000</item>
 	</string-array>
 	<string name="pref_default_check_pairs_interval">7</string>
+	
+	<string name="alarm_fired">Boilr Alarm Fired</string>
+	<string name="turn_off">Turn Off</string>
+	<string name="keep_monitoring">Keep Monitoring</string>
 </resources>
