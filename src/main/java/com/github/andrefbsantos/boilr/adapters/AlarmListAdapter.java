@@ -3,6 +3,7 @@ package com.github.andrefbsantos.boilr.adapters;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,6 +70,13 @@ public class AlarmListAdapter extends ArrayAdapter<AlarmWrapper> {
 		ToggleButton toggleButton = (ToggleButton) rowView.findViewById(R.id.toggle_button);
 		toggleButton.setTag(alarm.getId());
 		toggleButton.setChecked(alarm.isOn());
+		
+		//Turn grey when alarm is turned off
+		if(alarm.isOn()){
+				rowView.setBackgroundColor(Color.TRANSPARENT);
+		}else{
+			rowView.setBackgroundColor(Color.GRAY);
+		}
 
 		TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
 		exchange.setText(alarm.getExchange().getName());

@@ -28,8 +28,8 @@ public class AlarmListActivity extends ListActivity {
 	private int id;
 
 	private ArrayAdapter<AlarmWrapper> adapter;
-	private MyGestureDetector gestureDetector = new MyGestureDetector();
-	private View.OnTouchListener gestureListener;
+//	private MyGestureDetector gestureDetector = new MyGestureDetector();
+//	private View.OnTouchListener gestureListener;
 
 	private StorageAndControlService mService;
 	private boolean mBound;

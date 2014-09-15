@@ -71,4 +71,15 @@
 		<item>2592000000</item>
 	</string-array>
 	<string name="pref_default_check_pairs_interval">7</string>
+	
+	<string name="alarm_types_title">Alarm Types</string>
+	<string-array name="alarm_types_entries">
+	    <item>Price Hit</item>
+	    <item>Price Variation</item>
+	</string-array>
+	<string-array name="alarm_types_values">
+	    <item>Price Hit</item>
+	    <item>Price Variation</item>
+	</string-array>
+	<string name="alarm_types_default">1</string>
 </resources>
