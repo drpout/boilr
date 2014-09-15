@@ -13,6 +13,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 
@@ -29,6 +30,8 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 import com.github.andrefbsantos.libpricealarm.Alarm;
 import com.github.andrefbsantos.libpricealarm.PriceHitAlarm;
 
+import com.github.andrefbsantos.libpricealarm.PriceVarAlarm;
+
 public class StorageAndControlService extends Service {
 
 	private Map<Integer, AlarmWrapper> alarmsMap;
@@ -37,6 +40,46 @@ public class StorageAndControlService extends Service {
 	private AlarmManager alarmManager;
 	private DBManager db;
 	private AndroidNotify notify;
+	// Private action used to update last value from the Exchange.
+	private static final String UPDATE_LAST_VALUE = "UPDATE_LAST_VALUE";
+
+	private class UpdateLastValueTask extends AsyncTask<Alarm, Void, Void> {
+		@Override
+		protected Void doInBackground(Alarm... alarms) {
+			if(alarms.length == 1)
+				alarms[0].run();
+			return null;
+		}
+	}
+
+	private class PopupalteDBTask extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected Void doInBackground(Void... arg) {
+			Log.d("Populating DB.");
+			try {
+				Alarm alarm = new PriceHitAlarm(generateAlarmID(), new BitstampExchange(10000000), new Pair("BTC", "USD"), 60000, notify, 476, 475);
+				AlarmWrapper wrapper = new AlarmWrapper(alarm);
+				addAlarm(wrapper);
+				startAlarm(wrapper);
+
+				alarm = new PriceHitAlarm(generateAlarmID(), new BTCEExchange(10000000), new Pair("BTC", "EUR"), 60000, notify, 374, 373);
+				wrapper = new AlarmWrapper(alarm);
+				addAlarm(wrapper);
+				startAlarm(wrapper);
+
+				alarm = new PriceVarAlarm(generateAlarmID(), new BTCChinaExchange(10000000), new Pair("BTC", "CNY"), 60000, notify, 0.03f);
+				wrapper = new AlarmWrapper(alarm);
+				addAlarm(wrapper);
+				startAlarm(wrapper);
+
+			} catch(Exception e) {
+				Log.e("Caught exception while populating DB.", e);
+			}
+			return null;
+		}
+
+
+	}
 
 	@SuppressLint("UseSparseArrays")
 	@Override
@@ -52,10 +95,11 @@ public class StorageAndControlService extends Service {
 			prevAlarmID = db.getNextID();
 			alarmsMap = db.getAlarms();
 			if(prevAlarmID == 0) {
-				populateDB();
+				new PopupalteDBTask().execute();
+				return;
 			}
 			// Set Exchange and start alarm
-			for (AlarmWrapper wrapper : alarmsMap.values()) {
+			for(AlarmWrapper wrapper : alarmsMap.values()) {
 				wrapper.getAlarm().setExchange(getExchange(wrapper.getAlarm().getExchangeCode()));
 				if(wrapper.getAlarm().isOn()) {
 					this.startAlarm(wrapper);
@@ -68,6 +112,14 @@ public class StorageAndControlService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		if(UPDATE_LAST_VALUE.equals(intent.getAction())) {
+			int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
+			if(alarmID != Integer.MIN_VALUE) {
+				Alarm alarm = getAlarm(alarmID).getAlarm();
+				new UpdateLastValueTask().execute(alarm);
+				Log.d("Last value for alarm " + alarmID + " " + alarm.getLastValue());
+			}
+		}
 		return START_STICKY;
 	}
 
@@ -77,8 +129,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-	InstantiationException, IllegalAccessException, IllegalArgumentException,
-	InvocationTargetException, SecurityException {
+			InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException, SecurityException {
 		if(exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {
@@ -105,7 +157,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void startAlarm(AlarmWrapper wrapper) {
-		Intent intent = new Intent(this, UpdateLastValueService.class);
+		Intent intent = new Intent(this, StorageAndControlService.class);
+		intent.setAction(UPDATE_LAST_VALUE);
 		intent.putExtra("alarmID", wrapper.getAlarm().getId());
 		PendingIntent pendingIntent = PendingIntent.getService(this, wrapper.getAlarm().getId(), intent, 0);
 		alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, wrapper.getAlarm().getPeriod(), wrapper.getAlarm().getPeriod(), pendingIntent);
@@ -120,7 +173,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void stopAlarm(int alarmID) {
-		Intent intent = new Intent(this, UpdateLastValueService.class);
+		Intent intent = new Intent(this, StorageAndControlService.class);
+		intent.setAction(UPDATE_LAST_VALUE);
 		PendingIntent pendingIntent = PendingIntent.getService(this, alarmID, intent, 0);
 		alarmManager.cancel(pendingIntent);
 	}
@@ -145,31 +199,5 @@ public class StorageAndControlService extends Service {
 
 	public AndroidNotify getNotify() {
 		return notify;
-	}
-
-	// Only used to place Alarms on DB
-	private void populateDB() {
-		Log.d("Populating DB.");
-		try {
-			Alarm alarm = new PriceHitAlarm(generateAlarmID(), new BitstampExchange(10000000), new Pair("BTC", "USD"), 60000, notify, 10000, 300);
-			AlarmWrapper wrapper = new AlarmWrapper(alarm);
-			addAlarm(wrapper);
-			startAlarm(wrapper);
-
-			alarm = new PriceHitAlarm(generateAlarmID(), new BTCEExchange(10000000), new Pair("BTC", "EUR"), 60000, notify, 800, 100);
-			wrapper = new AlarmWrapper(alarm);
-			addAlarm(wrapper);
-			startAlarm(wrapper);
-
-			alarm = new PriceHitAlarm(generateAlarmID(), new BTCChinaExchange(10000000), new Pair("BTC", "CNY"), 60000, notify, 10000, 500);
-			wrapper = new AlarmWrapper(alarm);
-			addAlarm(wrapper);
-			startAlarm(wrapper);
-
-			((PriceHitAlarm) wrapper.getAlarm()).setLowerBound(200);
-			replaceAlarm(wrapper);
-		} catch (Exception e) {
-			Log.e("Caught exception while populating DB.", e);
-		}
 	}
 }

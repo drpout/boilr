@@ -1,4 +1,8 @@
+
 package com.github.andrefbsantos.boilr.services;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Service;
 import android.content.ComponentName;
@@ -17,13 +21,15 @@ import com.github.andrefbsantos.boilr.utils.Notifications;
 public class NotificationService extends Service {
 
 	// Private action used to start a notification with this service.
-	public static final String START_NOTIFY_ACTION = "START_NOTIFY";
+	private static final String START_NOTIFY_ACTION = "START_NOTIFY";
 	// Private action used to stop a notification with this service.
-	public static final String STOP_NOTIFY_ACTION = "STOP_NOTIFY";
+	private static final String STOP_NOTIFY_ACTION = "STOP_NOTIFY";
 
 	private AlarmWrapper mCurrentAlarm = null;
+	private TelephonyManager mTelephonyManager;
 	private StorageAndControlService mService;
 	private boolean mBound;
+	private List<Integer> mPendingAlarms = new ArrayList<Integer>();
 	/** Defines callbacks for service binding, passed to bindService() */
 	private ServiceConnection mConnection = new ServiceConnection() {
 
@@ -32,6 +38,9 @@ public class NotificationService extends Service {
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
+			Log.d("NotificationService bound to StorageAndControlService.");
+			for(int alarmID : mPendingAlarms)
+				startNotify(alarmID);
 		}
 
 		@Override
@@ -39,8 +48,6 @@ public class NotificationService extends Service {
 			mBound = false;
 		}
 	};
-
-	private TelephonyManager mTelephonyManager;
 
 	/**
 	 * Utility method to help start a notification properly.
@@ -70,32 +77,31 @@ public class NotificationService extends Service {
 	}
 
 	@Override
+	public void onCreate() {
+		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
+		bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
+		mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+	}
+
+	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		int alarmID;
-		if(START_NOTIFY_ACTION.equals(intent.getAction())) {
-			alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
-			if(alarmID != Integer.MIN_VALUE) {
-				Intent serviceIntent = new Intent(this, StorageAndControlService.class);
-				bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
-				if(mBound) {
-					Log.d("NotificationService bound to StorageAndControlService.");
-					AlarmWrapper alarm = mService.getAlarm(alarmID);
-					if(mCurrentAlarm == null) {
-						mCurrentAlarm = alarm;
-						startFullscreenNotify(mCurrentAlarm);
-					} else
-						Notifications.showLowPriorityNotification(this, alarm);
-				}
-			}
-		} else if(STOP_NOTIFY_ACTION.equals(intent.getAction())) {
-			alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
-			if(alarmID != Integer.MIN_VALUE) {
+		String action = intent.getAction();
+		int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
+		if(alarmID == Integer.MIN_VALUE)
+			stopSelf();
+		else {
+			if(START_NOTIFY_ACTION.equals(action)) {
+				if(mBound)
+					startNotify(alarmID);
+				else
+					mPendingAlarms.add(alarmID);
+			} else if(STOP_NOTIFY_ACTION.equals(action)) {
 				boolean keepMonitoring = intent.getBooleanExtra("keepMonitoring", false);
 				if(!keepMonitoring)
 					if(mBound)
 						mService.stopAlarm(alarmID);
+				stopSelf();
 			}
-			stopSelf();
 		}
 		return START_NOT_STICKY;
 	}
@@ -113,12 +119,17 @@ public class NotificationService extends Service {
 		unbindService(mConnection);
 	}
 
-	private void startFullscreenNotify(AlarmWrapper currentAlarm) {
-		AlarmAlertWakeLock.acquireCpuWakeLock(this);
-		Notifications.showAlarmNotification(this, currentAlarm);
-		int callState = mTelephonyManager.getCallState();
-		boolean inCall = callState != TelephonyManager.CALL_STATE_IDLE;
-		NotificationKlaxon.start(this, currentAlarm, inCall);
+	private void startNotify(int alarmID) {
+		AlarmWrapper alarm = mService.getAlarm(alarmID);
+		if(mCurrentAlarm == null) {
+			mCurrentAlarm = alarm;
+			AlarmAlertWakeLock.acquireCpuWakeLock(this);
+			Notifications.showAlarmNotification(this, mCurrentAlarm);
+			int callState = mTelephonyManager.getCallState();
+			boolean inCall = callState != TelephonyManager.CALL_STATE_IDLE;
+			NotificationKlaxon.start(this, mCurrentAlarm, inCall);
+		} else
+			Notifications.showLowPriorityNotification(NotificationService.this, alarm);
 	}
 
 	@Override
