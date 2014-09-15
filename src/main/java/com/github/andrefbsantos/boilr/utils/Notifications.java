@@ -18,25 +18,30 @@ import com.github.andrefbsantos.libpricealarm.PriceVarAlarm;
 /* Based on Android DeskClock AlarmNotifications. */
 public final class Notifications {
 
-	public static void showLowPriorityNotification(Context context, AlarmWrapper alarmWrapper) {
-		Alarm alarm = alarmWrapper.getAlarm();
-		int alarmID = alarm.getId();
-		Log.v("Displaying low priority notification for alarm instance: " + alarmID);
-		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-		String firingReason = getFiringReason(alarm);
+	private static Notification.Builder setCommonNotificationProps(Context context, int alarmID,
+			String firingReason) {
 		Notification.Builder notification = new Notification.Builder(context)
-		.setContentTitle("Boilr alarm")
+		.setContentTitle(context.getString(R.string.boilr_alarm))
 		.setContentText(firingReason)
 		.setSmallIcon(R.drawable.ic_action_alarms)
-		.setOngoing(false)
-		.setAutoCancel(false)
-		.setPriority(Notification.PRIORITY_DEFAULT);
+		.setAutoCancel(false);
 
 		Intent viewAlarmsIntent = new Intent(context, AlarmListActivity.class);
 		viewAlarmsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		notification.setContentIntent(PendingIntent.getActivity(context, alarmID, viewAlarmsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+		return notification;
+	}
 
+	public static void showLowPriorityNotification(Context context, AlarmWrapper alarmWrapper) {
+		Alarm alarm = alarmWrapper.getAlarm();
+		int alarmID = alarm.getId();
+		Log.v("Displaying low priority notification for alarm instance: " + alarmID);
+		String firingReason = getFiringReason(alarm);
+		Notification.Builder notification = setCommonNotificationProps(context, alarmID, firingReason);
+		notification
+		.setOngoing(false)
+		.setPriority(Notification.PRIORITY_DEFAULT);
+		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.notify(alarmID, notification.build());
 	}
 
@@ -44,20 +49,15 @@ public final class Notifications {
 		Alarm alarm = alarmWrapper.getAlarm();
 		int alarmID = alarm.getId();
 		Log.v("Displaying alarm notification for alarm instance: " + alarmID);
-		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
 		// Close dialogs and window shade, so this will display
 		context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
-
 		String firingReason = getFiringReason(alarm);
-		Notification.Builder notification = new Notification.Builder(context)
-		.setContentTitle("Boilr alarm")
-		.setContentText(firingReason)
-		.setSmallIcon(R.drawable.ic_action_alarms)
+		Notification.Builder notification = setCommonNotificationProps(context, alarmID, firingReason);
+		notification
 		.setOngoing(true)
-		.setAutoCancel(false)
 		.setDefaults(Notification.DEFAULT_LIGHTS)
-		.setWhen(0);
+		.setWhen(0)
+		.setPriority(Notification.PRIORITY_MAX);
 
 		// Setup fullscreen intent
 		Intent fullScreenIntent = new Intent(context, NotificationActivity.class);
@@ -66,8 +66,8 @@ public final class Notifications {
 		fullScreenIntent.putExtra("canKeepMonitoring", canKeepMonitoring(alarm));
 		fullScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
 		notification.setFullScreenIntent(PendingIntent.getActivity(context, alarmID, fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT), true);
-		notification.setPriority(Notification.PRIORITY_MAX);
 
+		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.notify(alarmID, notification.build());
 	}
 

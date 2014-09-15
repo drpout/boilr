@@ -101,6 +101,12 @@
 					</sdk>
 					<deleteConflictingFiles>true</deleteConflictingFiles>
 					<undeployBeforeDeploy>true</undeployBeforeDeploy>
+					<dex>
+						<optimize>false</optimize>
+					</dex>
+					<dexIncremental>true</dexIncremental>
+					<dexPreDex>true</dexPreDex>
+					<release>false</release>
 				</configuration>
 				<extensions>true</extensions>
 			</plugin>

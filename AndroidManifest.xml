@@ -23,13 +23,10 @@
         android:theme="@android:style/Theme.Holo" >
         
 		<service
-		    android:name=".services.UpdateLastValueService" />
-		
-		<service
 		    android:name=".services.StorageAndControlService" />
 		
 		<service
-		    android:name=".services.NotifyService" />
+		    android:name=".services.NotificationService" />
 		
 		<receiver
 		    android:name=".receivers.BootCompletedBroadcastReceiver"
@@ -68,7 +65,7 @@
         
         <activity
             android:name=".activities.NotificationActivity"
-            android:label="@string/alarm_fired" />
+            android:label="@string/boilr_alarm" />
         
     </application>
 </manifest>
