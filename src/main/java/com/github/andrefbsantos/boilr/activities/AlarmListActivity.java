@@ -19,6 +19,7 @@ import android.widget.ListView;
 import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.adapters.AlarmListAdapter;
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
+import com.github.andrefbsantos.boilr.listeners.OnSwipeTouchListener;
 import com.github.andrefbsantos.boilr.services.LocalBinder;
 import com.github.andrefbsantos.boilr.services.StorageAndControlService;
 import com.github.andrefbsantos.boilr.views.fragments.AboutDialogFragment;

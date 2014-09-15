@@ -16,15 +16,16 @@ import android.preference.RingtonePreference;
 import com.github.andrefbsantos.boilr.R;
 
 public class SettingsFragment extends PreferenceFragment implements
-OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
+		OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	private static final String PREF_KEY_DEFAULT_ALERT_TYPE = "pref_key_default_alert_type";
 	public static final String PREF_KEY_DEFAULT_ALERT_SOUND = "pref_key_default_alert_sound";
 	private static final String PREF_KEY_THEME = "pref_key_theme";
 	private static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT = "pref_key_default_update_interval_hit";
 	private static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR = "pref_key_default_update_interval_var";
 	public static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
+	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,
-		PREF_KEY_CHECK_PAIRS_INTERVAL };
+			PREF_KEY_CHECK_PAIRS_INTERVAL };
 	private static final double MINUTES_IN_DAY = 1440; // 60*24
 
 	/**

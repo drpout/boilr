@@ -8,6 +8,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
+import com.github.andrefbsantos.boilr.utils.Log;
 
 public class UpdateLastValueService extends Service {
 
@@ -16,6 +17,7 @@ public class UpdateLastValueService extends Service {
 	/** Defines callbacks for service binding, passed to bindService() */
 	private ServiceConnection mConnection = new ServiceConnection() {
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mService = ((LocalBinder<StorageAndControlService>) binder).getService();
@@ -29,18 +31,23 @@ public class UpdateLastValueService extends Service {
 	};
 
 	@Override
+	public void onCreate() {
+		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
+		bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
+		Log.d("Creating UpdateLastValueService.");
+	}
+
+	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
-		if (alarmID != Integer.MIN_VALUE) {
-			Intent serviceIntent = new Intent(this, StorageAndControlService.class);
-			bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
-			if (mBound) {
+		if(alarmID != Integer.MIN_VALUE) {
+			Log.d("UpdateLastValueService running for alarm " + alarmID);
+			if(mBound) {
+				Log.d("UpdateLastValueService bound to StorageAndControlService.");
 				AlarmWrapper wrapper = mService.getAlarm(alarmID);
-				if (!wrapper.getAlarm().run()) {
-					mService.stopAlarm(alarmID);
-				}
-				unbindService(mConnection);
-			}
+				wrapper.getAlarm().run();
+			} else
+				Log.d("UpdateLastValueService NOT bound to StorageAndControlService.");
 		}
 		stopSelf();
 		return START_NOT_STICKY;
@@ -49,6 +56,12 @@ public class UpdateLastValueService extends Service {
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unbindService(mConnection);
 	}
 
 }

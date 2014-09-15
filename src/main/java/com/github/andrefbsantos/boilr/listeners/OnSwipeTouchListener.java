@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.boilr.activities;
+package com.github.andrefbsantos.boilr.listeners;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
 import com.github.andrefbsantos.boilr.services.LocalBinder;
 import com.github.andrefbsantos.boilr.services.StorageAndControlService;
+import com.github.andrefbsantos.boilr.utils.Log;
 
 public class OnSwipeTouchListener implements OnTouchListener {
 
@@ -46,7 +47,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 				mBound = true;
 
 				// Callback action performed after the service has been bound
-				if (mBound) {
+				if(mBound) {
 					try {
 						mService.deleteAlarm(id);
 
@@ -57,8 +58,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 						listAdapter.notifyDataSetChanged();
 
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						Log.e("Exception caught while deleting alarm.", e);
 					} finally {
 						ctx.unbindService(deleteAlarmsServiceConnection);
 					}
@@ -87,13 +87,13 @@ public class OnSwipeTouchListener implements OnTouchListener {
 			try {
 				float diffY = e2.getY() - e1.getY();
 				float diffX = e2.getX() - e1.getX();
-				if (Math.abs(diffX) > Math.abs(diffY)) {
-					if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+				if(Math.abs(diffX) > Math.abs(diffY)) {
+					if(Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
 						int pointToPosition = ((ListActivity) ctx).getListView().pointToPosition((int) e1.getX(), (int) e1.getY());
 
 						id = ((AlarmWrapper) ((ListActivity) ctx).getListAdapter().getItem(pointToPosition)).getAlarm().getId();
 
-						System.out.println(" delete position " + pointToPosition + " " + id);
+						Log.d("Delete position " + pointToPosition + " " + id);
 
 						Intent serviceIntent = new Intent(ctx, StorageAndControlService.class);
 						ctx.startService(serviceIntent);
@@ -115,7 +115,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 				// }
 				// }
 				else {
-					System.out.println("just a click");
+					Log.d("Just a click.");
 				}
 				result = true;
 			} catch (Exception exception) {

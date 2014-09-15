@@ -1,15 +1,7 @@
 package com.github.andrefbsantos.boilr.activities;
 
-import com.github.andrefbsantos.boilr.R;
 import com.github.andrefbsantos.boilr.domain.AlarmWrapper;
-import com.github.andrefbsantos.boilr.fragments.GenericAlarmSettingsFragment;
-import com.github.andrefbsantos.boilr.fragments.PriceHitAlarmSettingsFragment;
-import com.github.andrefbsantos.boilr.fragments.PriceVarAlarmSettingsFragment;
-import com.github.andrefbsantos.libpricealarm.PriceHitAlarm;
-import com.github.andrefbsantos.libpricealarm.PriceVarAlarm;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
