@@ -64,7 +64,7 @@ public class StorageAndControlService extends Service {
 					try {
 						alarms[0].run();
 						Log.d("Last value for alarm " + alarms[0].getId() + " " + alarms[0].getLastValue());
-					} catch(IOException e) {
+					} catch (IOException e) {
 						Log.e("Could not retrieve last value for alarm " + alarms[0].getId(), e);
 					}
 				}
@@ -93,7 +93,7 @@ public class StorageAndControlService extends Service {
 					addAlarm(alarm);
 					startAlarm(alarm);
 				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				Log.e("Caught exception while populating DB.", e);
 			}
 			return null;
@@ -105,6 +105,12 @@ public class StorageAndControlService extends Service {
 	public void onCreate() {
 		super.onCreate();
 		Log.d("Creating StorageAndControlService.");
+		// Register BroadcastReceiver to track connection changes.
+		IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+		registerReceiver(networkReceiver, filter);
+		updateConnectedFlags();
+		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+		allowMobileData = sharedPrefs.getBoolean(SettingsFragment.PREF_KEY_MOBILE_DATA, false);
 		alarmsMap = new HashMap<Integer, Alarm>();
 		exchangesMap = new HashMap<String, Exchange>();
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -114,24 +120,18 @@ public class StorageAndControlService extends Service {
 			alarmsMap = db.getAlarms();
 			if(prevAlarmID == 0) {
 				new PopupalteDBTask().execute();
-				return;
-			}
-			// Set Exchange and start alarm
-			for(Alarm alarm : alarmsMap.values()) {
-				alarm.setExchange(getExchange(alarm.getExchangeCode()));
-				if(alarm.isOn()) {
-					this.startAlarm(alarm);
+			} else {
+				// Set Exchange and start alarm
+				for (Alarm alarm : alarmsMap.values()) {
+					alarm.setExchange(getExchange(alarm.getExchangeCode()));
+					if(alarm.isOn()) {
+						this.startAlarm(alarm);
+					}
 				}
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			Log.e("Caught exception while recovering alarms from DB.", e);
 		}
-		// Register BroadcastReceiver to track connection changes.
-		IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-		registerReceiver(networkReceiver, filter);
-		updateConnectedFlags();
-		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-		allowMobileData = sharedPrefs.getBoolean(SettingsFragment.PREF_KEY_MOBILE_DATA, false);
 	}
 
 	@Override
@@ -232,7 +232,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private boolean anyActiveAlarm() {
-		for(Alarm alarm : alarmsMap.values())
+		for (Alarm alarm : alarmsMap.values())
 			if(alarm.isOn())
 				return true;
 		return false;
