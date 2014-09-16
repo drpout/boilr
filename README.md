@@ -1,7 +1,7 @@
 Boilr
 ==================
 
-Android application which triggers an alarm when price of a cryptocurrency changes or reaches target value on a given exchange.
+Android application which triggers an alarm when price of a cryptocurrency or bullion changes or reaches target value on a given exchange.
 
 Boilr uses [libdynticker](https://github.com/andrefbsantos/libdynticker) to get data from the exchanges. Therefore, it supports all the exchanges available on libdynticker with all their traded pairs.
 
