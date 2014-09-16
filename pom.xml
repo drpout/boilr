@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.github.andrefbsantos.boilr</groupId>
+	<groupId>mobi.boilr.boilr</groupId>
 	<artifactId>boilr</artifactId>
 	<version>0</version>
 	<packaging>apk</packaging>
@@ -72,7 +72,7 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.github.andrefbsantos.libdynticker</groupId>
+			<groupId>mobi.boilr.libdynticker</groupId>
 			<artifactId>libdynticker</artifactId>
 			<version>${libdynticker.version}</version>
 			<exclusions>
@@ -80,10 +80,18 @@
 					<artifactId>dom4j</artifactId>
 					<groupId>dom4j</groupId>
 				</exclusion>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.javassist</groupId>
+            		<artifactId>javassist</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>com.github.andrefbsantos.libpricealarm</groupId>
+			<groupId>mobi.boilr.libpricealarm</groupId>
 			<artifactId>libpricealarm</artifactId>
 			<version>${libpricealarm.version}</version>
 		</dependency>
@@ -104,7 +112,7 @@
 					<dex>
 						<optimize>false</optimize>
 					</dex>
-					<dexIncremental>true</dexIncremental>
+					<dexIncremental>false</dexIncremental>
 					<dexPreDex>true</dexPreDex>
 					<release>false</release>
 				</configuration>
@@ -185,7 +193,7 @@
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<groupId>com.github.andrefbsantos.libdynticker</groupId>
+							<groupId>mobi.boilr.libdynticker</groupId>
 							<artifactId>libdynticker</artifactId>
 							<version>${libdynticker.version}</version>
 							<packaging>jar</packaging>
@@ -200,7 +208,7 @@
 							<goal>install-file</goal>
 						</goals>
 						<configuration>
-							<groupId>com.github.andrefbsantos.libpricealarm</groupId>
+							<groupId>mobi.boilr.libpricealarm</groupId>
 							<artifactId>libpricealarm</artifactId>
 							<version>${libpricealarm.version}</version>
 							<packaging>jar</packaging>
