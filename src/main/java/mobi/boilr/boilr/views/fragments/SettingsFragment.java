@@ -1,5 +1,7 @@
 package mobi.boilr.boilr.views.fragments;
 
+import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.services.StorageAndControlService;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -13,8 +15,6 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import android.preference.RingtonePreference;
 
-import mobi.boilr.boilr.R;
-
 public class SettingsFragment extends PreferenceFragment implements
 		OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	private static final String PREF_KEY_DEFAULT_ALERT_TYPE = "pref_key_default_alert_type";
@@ -24,6 +24,7 @@ public class SettingsFragment extends PreferenceFragment implements
 	private static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR = "pref_key_default_update_interval_var";
 	public static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
 	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
+	public static final String PREF_KEY_MOBILE_DATA = "pref_key_mobile_data";
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,
 			PREF_KEY_CHECK_PAIRS_INTERVAL };
 	private static final double MINUTES_IN_DAY = 1440; // 60*24
@@ -70,7 +71,7 @@ public class SettingsFragment extends PreferenceFragment implements
 		addPreferencesFromResource(R.xml.app_settings);
 		// Set summaries to be the current value for the selected preference
 		ListPreference listPref;
-		for (String key : listPrefs) {
+		for(String key : listPrefs) {
 			listPref = (ListPreference) findPreference(key);
 			listPref.setSummary(listPref.getEntry());
 		}
@@ -109,6 +110,8 @@ public class SettingsFragment extends PreferenceFragment implements
 			pref.setSummary(sharedPreferences.getString(key, "") + " s");
 		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR)) {
 			pref.setSummary(buildMinToDaysSummary(sharedPreferences.getString(key, "")));
+		} else if(key.equals(PREF_KEY_MOBILE_DATA)) {
+			StorageAndControlService.allowMobileData = sharedPreferences.getBoolean(key, false);
 		}
 	}
 
