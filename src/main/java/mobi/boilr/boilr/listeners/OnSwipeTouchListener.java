@@ -1,8 +1,11 @@
 package mobi.boilr.boilr.listeners;
 
-import java.io.IOException;
 import java.util.List;
 
+import mobi.boilr.boilr.services.LocalBinder;
+import mobi.boilr.boilr.services.StorageAndControlService;
+import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.libpricealarm.Alarm;
 import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,11 +18,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.ArrayAdapter;
-
-import mobi.boilr.boilr.services.LocalBinder;
-import mobi.boilr.boilr.services.StorageAndControlService;
-import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.libpricealarm.Alarm;
 
 public class OnSwipeTouchListener implements OnTouchListener {
 
@@ -34,13 +32,13 @@ public class OnSwipeTouchListener implements OnTouchListener {
 		private static final int SWIPE_THRESHOLD = 100;
 		private static final int SWIPE_VELOCITY_THRESHOLD = 100;
 		private Context ctx;
-		private int pointToPosition;
 
 		private StorageAndControlService mService;
 		private boolean mBound;
 
 		private ServiceConnection deleteAlarmsServiceConnection = new ServiceConnection() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void onServiceConnected(ComponentName className, IBinder binder) {
 				mService = ((LocalBinder<StorageAndControlService>) binder).getService();
@@ -48,19 +46,12 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
 				// Callback action performed after the service has been bound
 				if(mBound) {
-					try {
-						mService.deleteAlarm(id);
-						ArrayAdapter<Alarm> listAdapter = ((ArrayAdapter<Alarm>) ((ListActivity) ctx).getListAdapter());
-						List<Alarm> alarms = mService.getAlarms();
-						listAdapter.clear();
-						listAdapter.addAll(alarms);
-						listAdapter.notifyDataSetChanged();
-
-					} catch(IOException e) {
-						Log.e("Exception caught while deleting alarm.", e);
-					} finally {
-						ctx.unbindService(deleteAlarmsServiceConnection);
-					}
+					mService.deleteAlarm(id);
+					ArrayAdapter<Alarm> listAdapter = ((ArrayAdapter<Alarm>) ((ListActivity) ctx).getListAdapter());
+					List<Alarm> alarms = mService.getAlarms();
+					listAdapter.clear();
+					listAdapter.addAll(alarms);
+					listAdapter.notifyDataSetChanged();
 				}
 			}
 
@@ -97,23 +88,9 @@ public class OnSwipeTouchListener implements OnTouchListener {
 						Intent serviceIntent = new Intent(ctx, StorageAndControlService.class);
 						ctx.startService(serviceIntent);
 						ctx.bindService(serviceIntent, deleteAlarmsServiceConnection, Context.BIND_AUTO_CREATE);
-						// if (diffX > 0) {
-						// onSwipeRight();
-						// } else {
-						// onSwipeLeft();
-						// }
 					}
 					result = true;
-				}
-				// else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) >
-				// SWIPE_VELOCITY_THRESHOLD) {
-				// if (diffY > 0) {
-				// onSwipeBottom();
-				// } else {
-				// onSwipeTop();
-				// }
-				// }
-				else {
+				} else {
 					Log.d("Just a click.");
 				}
 				result = true;

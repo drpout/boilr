@@ -8,6 +8,7 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Notify;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
+import android.app.Notification;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -83,35 +84,14 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 		Log.d("exchange " + ((ListPreference) findPreference(PREF_KEY_EXCHANGE)).getEntry());
 		Log.d("pair " + ((ListPreference) findPreference(PREF_KEY_PAIR)).getEntry());
 		Log.d("alertType " + ((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getEntry());
-		Log.d("alertSound " + ((RingtonePreference)findPreference(PREF_KEY_ALARM_ALERT_SOUND)).getRingtoneType());
-		Log.d("vibrate " + ((CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE)).getTitle());
+		Log.d("alertSound " + ((RingtonePreference)findPreference(PREF_KEY_ALARM_ALERT_SOUND)).getTitle());
+		Log.d("vibrate " + ((CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE)).isChecked());
 		Log.d("Hit Refresh " + ((EditTextPreference) findPreference(PREF_KEY_ALARM_UPDATE_INTERVAL_HIT)).getText());
 
-		//CharSequence alertType2 = ((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getEntry();
-		//CharSequence alertType =  alertType2.equals(-1) ? null : alertType2;
-		//				Exchange exchange = ((ListPreference) findPreference(PREF_KEY_EXCHANGE)).getEntry();
-		//				Pair pair;
-		//				long period;
-//		Notify notify = new AndroidNotify(
-//				this.getActivity().getApplicationContext(), 
-//				((ListPreference)findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getEntry(), 
-//				((RingtonePreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).ge,
-//				defaultVibrateDefinition ? null : ((CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE)).isChecked());
-//
-//		Boolean vibrate;
-//		Context context;
-//		Integer alertType;
-//		String alertSound;
-//		new AndroidNotify(context, alertType, alertSound, vibrate)
-		//				double upperBound;
-		//				double lowerBound;
-		//
-		//				if(mBound){
-		//					int id;
-		//					new PriceHitAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
-		//				}
-
-
+//		Integer alertType = ((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getEntry() != null ?  Integer.parseInt((String) ((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getEntry()) : null; 
+//		String alertSound = (String) (((RingtonePreference)findPreference(PREF_KEY_ALARM_ALERT_SOUND)).getTitle() != null ? ((RingtonePreference)findPreference(PREF_KEY_ALARM_ALERT_SOUND)).getTitle() : null) ;
+//		Boolean vibrate = defaultVibrateDefinition ? null : ((CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE)).isChecked(); 
+//		AndroidNotify notify =  new AndroidNotify(this.getActivity().getApplicationContext(), alertType, alertSound, vibrate);
 	}
 }
 

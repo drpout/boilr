@@ -24,7 +24,7 @@ public class NotificationKlaxon {
 	private static MediaPlayer sMediaPlayer = null;
 	private static boolean sStarted = false;
 
-	public static void stop(Context context) {
+	public static void stop(final Context context) {
 		Log.v("NotificationKlaxon stopped.");
 		if(sStarted) {
 			// Stop audio playing
@@ -40,24 +40,19 @@ public class NotificationKlaxon {
 		}
 	}
 
-	public static void start(final Context context, Alarm alarm,
-			boolean inTelephoneCall) {
+	public static void start(final Context context, Alarm alarm) {
 		Log.v("NotificationKlaxon started.");
+
 		AndroidNotify notify = (AndroidNotify) alarm.getNotify();
 		// Make sure we are stop before starting
 		stop(context);
-
-		Uri alertSoundUri;
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-		if(inTelephoneCall) {
-			alertSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-		} else {
-			String alertSound = notify.getAlertSound();
-			if(alertSound != null)
-				alertSoundUri = Uri.parse(alertSound);
-			else
-				alertSoundUri = Uri.parse(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""));
-		}
+		String alertSound = notify.getAlertSound();
+		Uri alertSoundUri;
+		if(alertSound != null)
+			alertSoundUri = Uri.parse(alertSound);
+		else
+			alertSoundUri = Uri.parse(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""));
 
 		sMediaPlayer = new MediaPlayer();
 		sMediaPlayer.setOnErrorListener(new OnErrorListener() {
@@ -99,8 +94,13 @@ public class NotificationKlaxon {
 		sStarted = true;
 	}
 
+	public static void ringSingleNotification(final Context context) {
+		Uri alertSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+		RingtoneManager.getRingtone(context, alertSoundUri).play();
+	}
+
 	// Do the common stuff when starting the alarm.
-	private static void startAlarm(Context context, MediaPlayer player) throws IOException {
+	private static void startAlarm(final Context context, MediaPlayer player) throws IOException {
 		AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		// do not play alarms if stream volume is 0 (typically because ringer mode is silent).
 		if(audioManager.getStreamVolume(AudioManager.STREAM_ALARM) != 0) {

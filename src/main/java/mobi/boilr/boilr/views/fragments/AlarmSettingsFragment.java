@@ -60,7 +60,7 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment{
 					CharSequence[] sequence = new CharSequence[pairs.size()] ;
 
 					for(int i = 0 ; i<pairs.size(); i++){
-						sequence[i] = pairs.get(i).getCoin() + "\\"+pairs.get(i).getExchange();
+						sequence[i] = pairs.get(i).getCoin() + "/"+pairs.get(i).getExchange();
 					}
 					ListPreference pairListPreference = (ListPreference) findPreference(PREF_KEY_PAIR);
 					pairListPreference.setEntries(sequence);
@@ -129,7 +129,7 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment{
 				CharSequence[] sequence = new CharSequence[pairs.size()] ;
 
 				for(int i = 0 ; i<pairs.size(); i++){
-					sequence[i] = pairs.get(i).getCoin() + "\\"+pairs.get(i).getExchange();
+					sequence[i] = pairs.get(i).getCoin() + "/"+pairs.get(i).getExchange();
 				}
 
 				pairListPreference.setEntries(sequence);
@@ -181,7 +181,7 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment{
 
 		RingtonePreference alertSoundPref = (RingtonePreference) findPreference(PREF_KEY_ALARM_ALERT_SOUND);
 		ListPreference alertTypePref = (ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE);
-		alertSoundPref.setRingtoneType(-1);
+		alertSoundPref.setTitle(null);;
 		alertSoundPref.setSummary(SettingsFragment.ringtoneUriToName(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""),getActivity()));
 		alertSoundPref.setOnPreferenceChangeListener(listener);
 

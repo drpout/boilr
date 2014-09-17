@@ -11,6 +11,7 @@ import mobi.boilr.boilr.database.DBManager;
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
 import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libdynticker.bitstamp.BitstampExchange;
 import mobi.boilr.libdynticker.btcchina.BTCChinaExchange;
@@ -65,12 +66,14 @@ public class StorageAndControlService extends Service {
 					try {
 						alarms[0].run();
 						Log.d("Last value for alarm " + alarms[0].getId() + " " + alarms[0].getLastValue());
-					} catch (IOException e) {
+					} catch(IOException e) {
 						Log.e("Could not retrieve last value for alarm " + alarms[0].getId(), e);
 					}
 				}
-			} else
-				Log.d("No connection available to retrieve last value for alarm " + alarms[0].getId());
+				Notifications.clearNoInternetNotification(StorageAndControlService.this);
+			} else {
+				Notifications.showNoInternetNotification(StorageAndControlService.this);
+			}
 			AlarmAlertWakeLock.releaseCpuLock();
 			return null;
 		}
@@ -90,11 +93,11 @@ public class StorageAndControlService extends Service {
 				startAlarm(alarm);
 
 				if(hasNetworkConnection()) {
-					alarm = new PriceVarAlarm(generateAlarmID(), new BTCChinaExchange(10000000), new Pair("BTC", "CNY"), 60000, new AndroidNotify(StorageAndControlService.this), 0.03f);
+					alarm = new PriceVarAlarm(generateAlarmID(), new BTCChinaExchange(10000000), new Pair("BTC", "CNY"), 60000, new AndroidNotify(StorageAndControlService.this), 0.01f);
 					addAlarm(alarm);
 					startAlarm(alarm);
 				}
-			} catch (Exception e) {
+			} catch(Exception e) {
 				Log.e("Caught exception while populating DB.", e);
 			}
 			return null;
@@ -135,24 +138,25 @@ public class StorageAndControlService extends Service {
 			prevAlarmID = db.getNextID();
 			alarmsMap = db.getAlarms();
 			if(prevAlarmID == 0) {
-				//new PopupalteDBTask().execute();
+				new PopupalteDBTask().execute();
 			} else {
 				// Set Exchange and start alarm
-				for (Alarm alarm : alarmsMap.values()) {
+				for(Alarm alarm : alarmsMap.values()) {
 					alarm.setExchange(getExchange(alarm.getExchangeCode()));
 					if(alarm.isOn()) {
 						this.startAlarm(alarm);
 					}
 				}
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			Log.e("Caught exception while recovering alarms from DB.", e);
 		}
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		if(UPDATE_LAST_VALUE.equals(intent.getAction())) {
+		String action = intent.getAction();
+		if(action != null && UPDATE_LAST_VALUE.equals(action)) {
 			int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
 			if(alarmID != Integer.MIN_VALUE) {
 				Alarm alarm = getAlarm(alarmID);
@@ -209,6 +213,7 @@ public class StorageAndControlService extends Service {
 		PendingIntent pendingIntent = PendingIntent.getService(this, alarm.getId(), intent, 0);
 		alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, alarm.getPeriod(), alarm.getPeriod(), pendingIntent);
 		alarm.turnOn();
+		replaceAlarm(alarm);
 	}
 
 	public void startAlarm(int alarmID) {
@@ -224,31 +229,41 @@ public class StorageAndControlService extends Service {
 		intent.setAction(UPDATE_LAST_VALUE);
 		PendingIntent pendingIntent = PendingIntent.getService(this, alarmID, intent, 0);
 		alarmManager.cancel(pendingIntent);
-		alarmsMap.get(alarmID).turnOff();
+		Alarm alarm = alarmsMap.get(alarmID);
+		alarm.turnOff();
+		replaceAlarm(alarm);
 		if(!anyActiveAlarm())
 			stopSelf();
 	}
 
-	public void addAlarm(Alarm alarm) throws IOException {
+	public void addAlarm(Alarm alarm) {
 		alarmsMap.put(alarm.getId(), alarm);
-		db.storeAlarm(alarm);
+		try {
+			db.storeAlarm(alarm);
+		} catch(IOException e) {
+			Log.e("Could not add alarm " + alarm.getId() + " to the DB.", e);
+		}
 	}
 
-	public void replaceAlarm(Alarm alarm) throws IOException {
-		db.updateAlarm(alarm);
+	public void replaceAlarm(Alarm alarm) {
+		try {
+			db.updateAlarm(alarm);
+		} catch(IOException e) {
+			Log.e("Could not update alarm " + alarm.getId() + " in the DB.", e);
+		}
 	}
 
-	public void deleteAlarm(Alarm alarm) throws IOException {
+	public void deleteAlarm(Alarm alarm) {
 		db.deleteAlarm(alarm);
 		alarmsMap.remove(alarm.getId());
 	}
 
-	public void deleteAlarm(int id) throws IOException {
+	public void deleteAlarm(int id) {
 		deleteAlarm(alarmsMap.get(id));
 	}
 
 	private boolean anyActiveAlarm() {
-		for (Alarm alarm : alarmsMap.values())
+		for(Alarm alarm : alarmsMap.values())
 			if(alarm.isOn())
 				return true;
 		return false;
