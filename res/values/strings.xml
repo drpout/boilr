@@ -75,4 +75,7 @@
 	<string name="boilr_alarm">Boilr Alarm</string>
 	<string name="turn_off">Turn Off</string>
 	<string name="keep_monitoring">Keep Monitoring</string>
+	
+	<string name="no_internet">Boilr has no internet</string>
+	<string name="no_updates">Your alarms cannot be updated.</string>
 </resources>

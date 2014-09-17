@@ -121,12 +121,30 @@ public class NotificationService extends Service {
 		Alarm alarm = mService.getAlarm(alarmID);
 		if(mCurrentAlarm == null) {
 			mCurrentAlarm = alarm;
-			Notifications.showAlarmNotification(this, mCurrentAlarm);
 			int callState = mTelephonyManager.getCallState();
 			boolean inCall = callState != TelephonyManager.CALL_STATE_IDLE;
-			NotificationKlaxon.start(this, mCurrentAlarm, inCall);
+			if(inCall) {
+				/*
+				 * Place a notification for this alarm in the drawer and
+				 * keep the alarm on so it can fire again later.
+				 */
+				Log.d("Showing in call notification for alarm " + alarmID + ".");
+				Notifications.showLowPriorityNotification(this, alarm);
+				NotificationKlaxon.ringSingleNotification(this);
+				stopSelf();
+			} else {
+				Log.d("Showing fullscreen notification for alarm " + alarmID + ".");
+				Notifications.showAlarmNotification(this, mCurrentAlarm);
+				NotificationKlaxon.start(this, mCurrentAlarm);
+			}
 		} else {
-			Notifications.showLowPriorityNotification(NotificationService.this, alarm);
+			/*
+			 * A full screen notification is already being displayed.
+			 * Place a notification for this alarm in the drawer and
+			 * keep the alarm on so it can fire again later.
+			 */
+			Log.d("Showing low priority notification for alarm " + alarmID + ".");
+			Notifications.showLowPriorityNotification(this, alarm);
 			AlarmAlertWakeLock.releaseCpuLock();
 		}
 	}

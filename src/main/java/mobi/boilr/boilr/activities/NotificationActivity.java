@@ -1,15 +1,15 @@
 package mobi.boilr.boilr.activities;
 
+import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.services.NotificationService;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.services.NotificationService;
 
 /**
  * Alarm activity that pops up a visible indicator when the alarm goes off.
@@ -35,7 +35,10 @@ public class NotificationActivity extends Activity {
 		view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 		((TextView) view.findViewById(R.id.firing_reason)).setText(firingReason);
 		if(!canKeepMonitoring) {
-			view.findViewById(R.id.keep_monitoring).setVisibility(View.GONE);
+			view.findViewById(R.id.keep_monitoring_wrapper).setVisibility(View.GONE);
+			view.findViewById(R.id.turn_off_wrapper).setLayoutParams(
+					new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+							LinearLayout.LayoutParams.WRAP_CONTENT, 2f));
 		}
 		setContentView(view);
 	}
