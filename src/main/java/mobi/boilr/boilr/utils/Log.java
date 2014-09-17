@@ -29,8 +29,8 @@ public class Log {
 		android.util.Log.e(LOGTAG, logMe);
 	}
 
-	public static void e(String logMe, Exception ex) {
-		android.util.Log.e(LOGTAG, logMe, ex);
+	public static void e(String logMe, Exception e) {
+		android.util.Log.e(LOGTAG, logMe, e);
 	}
 
 	public static void w(String logMe) {

@@ -1,5 +1,6 @@
 package mobi.boilr.boilr.activities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.ListActivity;
@@ -15,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.adapters.AlarmListAdapter;
 import mobi.boilr.boilr.listeners.OnSwipeTouchListener;
@@ -29,51 +29,24 @@ public class AlarmListActivity extends ListActivity {
 
 	private int id;
 	private ArrayAdapter<Alarm> adapter;
-	private StorageAndControlService mService;
+	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
-
-	private ServiceConnection getAllAlarmsServiceConnection = new ServiceConnection() {
+	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
 
 		@Override
 		public void onServiceConnected(ComponentName className, IBinder binder) {
-			mService = ((LocalBinder<StorageAndControlService>) binder).getService();
+			mStorageAndControlService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
 
 			// Callback action performed after the service has been bound
 			if(mBound) {
 				Log.d("AlarmListActivity bound to StorageAndControlService.");
-				List<Alarm> list = mService.getAlarms();
-				adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, list);
-				setListAdapter(adapter);
-				unbindService(getAllAlarmsServiceConnection);
-			}
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName className) {
-			mBound = false;
-		}
-	};
-
-	private ServiceConnection toggleAlarmServiceConnection = new ServiceConnection() {
-
-		@Override
-		public void onServiceConnected(ComponentName className, IBinder binder) {
-			mService = ((LocalBinder<StorageAndControlService>) binder).getService();
-			mBound = true;
-
-			if(mBound) {
-				List<Alarm> list = mService.getAlarms();
-				Log.d("ID=" + id);
-
-				for(Alarm alarm : list) {
-					if(alarm.getId() == id) {
-						alarm.toggle();
-						break;
-					}
-				}
+				List<Alarm> list = mStorageAndControlService.getAlarms();
+				adapter.addAll(list);
 				adapter.notifyDataSetChanged();
-				unbindService(toggleAlarmServiceConnection);
+				//adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, list);
+				//setListAdapter(adapter);
+				//	unbindService(getAllAlarmsServiceConnection);
 			}
 		}
 
@@ -90,10 +63,12 @@ public class AlarmListActivity extends ListActivity {
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
 
 		getListView().setOnTouchListener(new OnSwipeTouchListener(this));
+		adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, new ArrayList<Alarm>());
+		setListAdapter(adapter);
 
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 		startService(serviceIntent);
-		bindService(serviceIntent, getAllAlarmsServiceConnection, Context.BIND_AUTO_CREATE);
+		bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override
@@ -142,19 +117,38 @@ public class AlarmListActivity extends ListActivity {
 	}
 
 	public void onToggleClicked(View view) {
-		id = (Integer) view.getTag();
-		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
-		bindService(serviceIntent, toggleAlarmServiceConnection, Context.BIND_AUTO_CREATE);
+		int id = (Integer) view.getTag();
+
+		Log.d("Toggle Alarm "+id);
+		for(int i=0 ; i<adapter.getCount();i++){
+			Alarm item = adapter.getItem(i);
+			Log.d(id+" = "+item.getId()+" is On?"+item.isOn());
+		}
+
+		if(mStorageAndControlService.getAlarm(id).isOn()){
+			Log.d("Turning Off");
+			mStorageAndControlService.stopAlarm(id);
+		}else{
+			mStorageAndControlService.startAlarm(id);
+			Log.d("Turning On");
+		}
+		adapter.notifyDataSetChanged();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		mService = null;
+		mStorageAndControlService = null;
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
+	}
+
+	@Override
+	public void onResume(){
+		super.onResume();
+		adapter.notifyDataSetChanged();
 	}
 }

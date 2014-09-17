@@ -2,12 +2,14 @@ package mobi.boilr.boilr.views.fragments;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Log;
-
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceManager;
+import android.preference.RingtonePreference;
 
 public class AlarmSettingsFragment extends PreferenceFragment{
 
@@ -35,10 +37,15 @@ public class AlarmSettingsFragment extends PreferenceFragment{
 				//TODO
 			}else if(preference.getKey().equals(PREF_KEY_TYPE)){
 				if(newValue.equals(PREF_VALUE_PRICE_VAR)){
+					Log.d("Var");
 					getActivity().getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceVarAlarmSettingsFragment()).commit();
 				}else if(newValue.equals(PREF_VALUE_PRICE_HIT)){
+					Log.d("Hit");
 					getActivity().getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmSettingsFragment()).commit();
 				}
+				summary = ((ListPreference) preference).getEntry();
+			}else{
+				Log.d("No behavior for " + preference.getKey());
 			}
 			preference.setSummary(summary);
 			return false;	
@@ -62,19 +69,28 @@ public class AlarmSettingsFragment extends PreferenceFragment{
 		pref.setOnPreferenceChangeListener(new OnSettingsPreferenceChangeListener());
 
 
-		pref = findPreference(PREF_KEY_PAIR);
+		pref = findPreference(PREF_KEY_TYPE);
 		pref.setOnPreferenceChangeListener(new OnSettingsPreferenceChangeListener());
-		
-		
-		//SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
-//		SharedPreferences sharedPreferences = 	PreferenceManager.getDefaultSharedPreferences(this.getActivity());
-//		
-//		RingtonePreference alertSoundPref = (RingtonePreference) findPreference(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND);
-//		ListPreference alertTypePref = (ListPreference) findPreference(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE);
-//		
-//		alertSoundPref.setRingtoneType(Integer.parseInt(alertTypePref.getValue()));
-//		alertSoundPref.setSummary(ringtoneUriToName(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, "")));
-		
-		
+
+		ListPreference listPref;
+		listPref = (ListPreference) findPreference(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE);
+		listPref.setSummary(listPref.getEntry());
+		listPref.setOnPreferenceChangeListener(new OnSettingsPreferenceChangeListener());
+
+		SharedPreferences sharedPreferences = 	PreferenceManager.getDefaultSharedPreferences(this.getActivity());
+		RingtonePreference alertSoundPref = (RingtonePreference) findPreference(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND);
+		ListPreference alertTypePref = (ListPreference) findPreference(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE);
+		alertSoundPref.setRingtoneType(Integer.parseInt(alertTypePref.getValue()));
+		alertSoundPref.setSummary(SettingsFragment.ringtoneUriToName(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""),getActivity()));
+		alertSoundPref.setOnPreferenceChangeListener(new OnSettingsPreferenceChangeListener());
+
+		pref = findPreference(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT);
+		pref.setSummary(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, "") + " s");
+		pref.setOnPreferenceChangeListener(new OnSettingsPreferenceChangeListener());
+		pref = findPreference(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR);
+		pref.setSummary(SettingsFragment.buildMinToDaysSummary(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR, "")));
+		pref.setOnPreferenceChangeListener(new OnSettingsPreferenceChangeListener());
+
+
 	}
 }

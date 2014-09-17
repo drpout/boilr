@@ -42,8 +42,13 @@ public class StorageAndControlService extends Service {
 	private class UpdateLastValueTask extends AsyncTask<Alarm, Void, Void> {
 		@Override
 		protected Void doInBackground(Alarm... alarms) {
-			if(alarms.length == 1)
-				alarms[0].run();
+			if(alarms.length == 1){
+				try {
+					alarms[0].run();
+				} catch (IOException e) {
+					Log.e("Could not retrieve last value for alarm " + alarms[0].getId(), e);
+				}
+			}
 			return null;
 		}
 	}
