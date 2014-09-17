@@ -33,6 +33,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.IBinder;
+import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 
 public class StorageAndControlService extends Service {
@@ -59,15 +60,6 @@ public class StorageAndControlService extends Service {
 	private class UpdateLastValueTask extends AsyncTask<Alarm, Void, Void> {
 		@Override
 		protected Void doInBackground(Alarm... alarms) {
-			//<<<<<<< HEAD
-			//			if(alarms.length == 1){
-			//				try {
-			//					alarms[0].run();
-			//				} catch (IOException e) {
-			//					Log.e("Could not retrieve last value for alarm " + alarms[0].getId(), e);
-			//				}
-			//			}
-			//=======
 			if(hasNetworkConnection()) {
 				if(alarms.length == 1) {
 					try {
@@ -80,7 +72,6 @@ public class StorageAndControlService extends Service {
 			} else
 				Log.d("No connection available to retrieve last value for alarm " + alarms[0].getId());
 			AlarmAlertWakeLock.releaseCpuLock();
-			//>>>>>>> 3e3c4ae4bec1a32971f5006194869f120ae6e495
 			return null;
 		}
 	}
@@ -111,6 +102,20 @@ public class StorageAndControlService extends Service {
 
 	}
 
+
+
+	private class GetPairsTask extends AsyncTask<String, Void , List<Pair>> {
+		@Override
+		protected List<Pair> doInBackground(String... exchangeCode) {
+			try {
+				return getExchange(exchangeCode[0]).getPairs();					
+			} catch (Exception e) {
+				Log.e("Can't get pairs for " + exchangeCode[0], e);
+			}
+			return null;
+		}
+	}
+
 	@SuppressLint("UseSparseArrays")
 	@Override
 	public void onCreate() {
@@ -130,7 +135,7 @@ public class StorageAndControlService extends Service {
 			prevAlarmID = db.getNextID();
 			alarmsMap = db.getAlarms();
 			if(prevAlarmID == 0) {
-				new PopupalteDBTask().execute();
+				//new PopupalteDBTask().execute();
 			} else {
 				// Set Exchange and start alarm
 				for (Alarm alarm : alarmsMap.values()) {
@@ -267,5 +272,14 @@ public class StorageAndControlService extends Service {
 
 	private static boolean hasNetworkConnection() {
 		return wifiConnected || (mobileConnected && allowMobileData);
+	}
+
+	public List<Pair> getPairs(String exchangeCode ) {
+		try {
+			return (List<Pair>) new GetPairsTask().execute(exchangeCode).get();
+		} catch (Exception e) {
+			Log.e("Get Pairs",e);
+		}
+		return null;
 	}
 }

@@ -44,9 +44,6 @@ public class AlarmListActivity extends ListActivity {
 				List<Alarm> list = mStorageAndControlService.getAlarms();
 				adapter.addAll(list);
 				adapter.notifyDataSetChanged();
-				//adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, list);
-				//setListAdapter(adapter);
-				//	unbindService(getAllAlarmsServiceConnection);
 			}
 		}
 

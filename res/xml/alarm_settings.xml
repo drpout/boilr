@@ -35,12 +35,12 @@
             android:dialogTitle="@string/pref_title_default_alert_type"
             android:entries="@array/pref_entries_alert_type"
             android:entryValues="@array/pref_values_alert_type"
-            android:key="pref_key_default_alert_type"
+            android:key="pref_key_alarm_alert_type"
             android:title="@string/pref_title_default_alert_type" />
 
         <RingtonePreference
             android:defaultValue="content://settings/system/alarm_alert"
-            android:key="pref_key_default_alert_sound"
+            android:key="pref_key_alarm_alert_sound"
             android:ringtoneType="alarm"
             android:showDefault="false"
             android:showSilent="true"
@@ -48,7 +48,7 @@
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="pref_key_vibrate_default"
+            android:key="pref_key_alarm_vibrate"
             android:title="@string/pref_title_vibrate_default" />
     </PreferenceCategory>
 
@@ -56,18 +56,13 @@
         android:defaultValue="10"
         android:dialogMessage="@string/pref_summary_default_update_interval_hit"
         android:dialogTitle="@string/pref_title_default_update_interval_hit"
-        android:key="pref_key_default_update_interval_hit"
+        android:key="pref_key_alarm_update_interval_hit"
         android:title="@string/pref_title_default_update_interval_hit" />
     <EditTextPreference
         android:defaultValue="1440"
         android:dialogMessage="@string/pref_summary_default_update_interval_var"
         android:dialogTitle="@string/pref_title_default_update_interval_var"
-        android:key="pref_key_default_update_interval_var"
+        android:key="pref_key_alarm_update_interval_var"
         android:title="@string/pref_title_default_update_interval_var" />
-
-    <Preference
-        android:key="button"
-        android:summary="This will act like a button"
-        android:title="Acts like a button" />
 
 </PreferenceScreen>

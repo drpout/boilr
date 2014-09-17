@@ -1,18 +1,27 @@
 package mobi.boilr.boilr.activities;
 
+import java.util.List;
+
 import mobi.boilr.boilr.views.fragments.PriceHitAlarmSettingsFragment;
 import mobi.boilr.boilr.views.fragments.PriceVarAlarmSettingsFragment;
-
 import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.services.LocalBinder;
+import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Log;
-
+import mobi.boilr.libpricealarm.Alarm;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.ComponentName;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class AlarmCreationActivity extends Activity {
 
@@ -22,25 +31,16 @@ public class AlarmCreationActivity extends Activity {
 		getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmSettingsFragment()).commit();
 	}
 
-	//	@Override
-	//	public boolean onPreferenceChange(Preference preference, Object newValue) {
-	//		Log.d("aaaaa");
-	//		if(preference.getKey().equals(R.string.pref_exchange_title)){
-	//			Log.d("title");
-	//		}else if(1==2){
-	//			
-	//		}
-	//		preference.setSummary((String) newValue);
-	//		return false;
-	//	}
-
-	//	public void changeAlarmType(String type){
-	//		FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-	//		if(type.equals(PRICE_HIT) ){
-	//			fragmentTransaction.add(R.id.specific_alarm_creation, new PriceHitAlarmSettingsFragment());
-	//		}else if(type.equals(PRICE_VAR)){
-	//			fragmentTransaction.add(R.id.specific_alarm_creation, new PriceVarAlarmSettingsFragment());
-	//		}
-	//		fragmentTransaction.commit();
-	//	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.alarm_creation, menu);
+		menu.findItem(R.id.action_send_now).getActionView();
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    return false;
+	}
 }
