@@ -9,7 +9,7 @@ import android.os.PowerManager;
  */
 public class AlarmAlertWakeLock {
 
-	private static PowerManager.WakeLock sCpuWakeLock;
+	private static PowerManager.WakeLock sCpuWakeLock = null;
 
 	public static PowerManager.WakeLock createPartialWakeLock(Context context) {
 		PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
@@ -17,16 +17,12 @@ public class AlarmAlertWakeLock {
 	}
 
 	public static void acquireCpuWakeLock(Context context) {
-		if (sCpuWakeLock != null)
-			return;
-		sCpuWakeLock = createPartialWakeLock(context);
+		if(sCpuWakeLock == null)
+			sCpuWakeLock = createPartialWakeLock(context);
 		sCpuWakeLock.acquire();
 	}
 
 	public static void releaseCpuLock() {
-		if (sCpuWakeLock != null) {
-			sCpuWakeLock.release();
-			sCpuWakeLock = null;
-		}
+		sCpuWakeLock.release();
 	}
 }

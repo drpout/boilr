@@ -1,6 +1,7 @@
 package mobi.boilr.boilr.views.fragments;
 
 import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.services.StorageAndControlService;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -24,6 +25,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR = "pref_key_default_update_interval_var";
 	public static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
 	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
+	public static final String PREF_KEY_MOBILE_DATA = "pref_key_mobile_data";
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,
 		PREF_KEY_CHECK_PAIRS_INTERVAL };
 	private static final double MINUTES_IN_DAY = 1440; // 60*24
@@ -56,14 +58,6 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		return result;
 	}
 
-	private String ringtoneUriToName(String stringUri) {
-		Uri uri = Uri.parse(stringUri);
-		Context context = getActivity().getApplicationContext();
-		Ringtone ringtone = RingtoneManager.getRingtone(context, uri);
-		return ringtone.getTitle(context);
-	}
-
-	//Used on Alarm Creation
 	public static String ringtoneUriToName(String stringUri, Activity activity) {
 		Uri uri = Uri.parse(stringUri);
 		Context context = activity.getApplicationContext();
@@ -79,7 +73,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		addPreferencesFromResource(R.xml.app_settings);
 		// Set summaries to be the current value for the selected preference
 		ListPreference listPref;
-		for (String key : listPrefs) {
+		for(String key : listPrefs) {
 			listPref = (ListPreference) findPreference(key);
 			listPref.setSummary(listPref.getEntry());
 		}
@@ -88,7 +82,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		RingtonePreference alertSoundPref = (RingtonePreference) findPreference(PREF_KEY_DEFAULT_ALERT_SOUND);
 		ListPreference alertTypePref = (ListPreference) findPreference(PREF_KEY_DEFAULT_ALERT_TYPE);
 		alertSoundPref.setRingtoneType(Integer.parseInt(alertTypePref.getValue()));
-		alertSoundPref.setSummary(ringtoneUriToName(sharedPreferences.getString(PREF_KEY_DEFAULT_ALERT_SOUND, "")));
+		alertSoundPref.setSummary(SettingsFragment.ringtoneUriToName(sharedPreferences.getString(PREF_KEY_DEFAULT_ALERT_SOUND, ""), getActivity()));
 
 		Preference pref;
 		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT);
@@ -110,7 +104,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 			alertSoundPref.setRingtoneType(ringtoneType);
 			String defaultRingtone = RingtoneManager.getDefaultUri(ringtoneType).toString();
 			sharedPreferences.edit().putString(PREF_KEY_DEFAULT_ALERT_SOUND, defaultRingtone).apply();
-			alertSoundPref.setSummary(ringtoneUriToName(defaultRingtone));
+			alertSoundPref.setSummary(SettingsFragment.ringtoneUriToName(defaultRingtone,getActivity()));
 		} else if(key.equals(PREF_KEY_THEME) || key.equals(PREF_KEY_CHECK_PAIRS_INTERVAL)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
@@ -118,6 +112,8 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 			pref.setSummary(sharedPreferences.getString(key, "") + " s");
 		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR)) {
 			pref.setSummary(buildMinToDaysSummary(sharedPreferences.getString(key, "")));
+		} else if(key.equals(PREF_KEY_MOBILE_DATA)) {
+			StorageAndControlService.allowMobileData = sharedPreferences.getBoolean(key, false);
 		}
 	}
 
@@ -127,7 +123,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	 */
 	@Override
 	public boolean onPreferenceChange(Preference pref, Object newValue) {
-		pref.setSummary(ringtoneUriToName((String) newValue));
+		pref.setSummary(SettingsFragment.ringtoneUriToName((String) newValue, getActivity()));
 		return true;
 	}
 }

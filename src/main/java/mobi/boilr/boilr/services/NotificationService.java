@@ -3,6 +3,11 @@ package mobi.boilr.boilr.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
+import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.NotificationKlaxon;
+import mobi.boilr.boilr.utils.Notifications;
+import mobi.boilr.libpricealarm.Alarm;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
@@ -10,12 +15,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.telephony.TelephonyManager;
-
-import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
-import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.boilr.utils.NotificationKlaxon;
-import mobi.boilr.boilr.utils.Notifications;
-import mobi.boilr.libpricealarm.Alarm;
 
 public class NotificationService extends Service {
 
@@ -122,13 +121,14 @@ public class NotificationService extends Service {
 		Alarm alarm = mService.getAlarm(alarmID);
 		if(mCurrentAlarm == null) {
 			mCurrentAlarm = alarm;
-			AlarmAlertWakeLock.acquireCpuWakeLock(this);
 			Notifications.showAlarmNotification(this, mCurrentAlarm);
 			int callState = mTelephonyManager.getCallState();
 			boolean inCall = callState != TelephonyManager.CALL_STATE_IDLE;
 			NotificationKlaxon.start(this, mCurrentAlarm, inCall);
-		} else
+		} else {
 			Notifications.showLowPriorityNotification(NotificationService.this, alarm);
+			AlarmAlertWakeLock.releaseCpuLock();
+		}
 	}
 
 	@Override
