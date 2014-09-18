@@ -1,7 +1,6 @@
 package mobi.boilr.boilr.listeners;
 
-import java.util.List;
-
+import mobi.boilr.boilr.adapters.AlarmListAdapter;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Log;
@@ -17,7 +16,6 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.ArrayAdapter;
 
 public class OnSwipeTouchListener implements OnTouchListener {
 
@@ -31,39 +29,26 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
 		private static final int SWIPE_THRESHOLD = 100;
 		private static final int SWIPE_VELOCITY_THRESHOLD = 100;
-		private Context ctx;
-
+		private Context context;
 		private StorageAndControlService mService;
-		private boolean mBound;
-
 		private ServiceConnection deleteAlarmsServiceConnection = new ServiceConnection() {
 
 			@SuppressWarnings("unchecked")
 			@Override
+			// Callback action performed after the service has been bound
 			public void onServiceConnected(ComponentName className, IBinder binder) {
 				mService = ((LocalBinder<StorageAndControlService>) binder).getService();
-				mBound = true;
-
-				// Callback action performed after the service has been bound
-				if(mBound) {
-					mService.deleteAlarm(id);
-					ArrayAdapter<Alarm> listAdapter = ((ArrayAdapter<Alarm>) ((ListActivity) ctx).getListAdapter());
-					List<Alarm> alarms = mService.getAlarms();
-					listAdapter.clear();
-					listAdapter.addAll(alarms);
-					listAdapter.notifyDataSetChanged();
-				}
+				mService.deleteAlarm(alarm);
 			}
 
 			@Override
 			public void onServiceDisconnected(ComponentName className) {
-				mBound = false;
 			}
 		};
-		private int id;
+		private Alarm alarm;
 
 		public GestureListener(Context ctx) {
-			this.ctx = ctx;
+			this.context = ctx;
 		}
 
 		@Override
@@ -79,15 +64,13 @@ public class OnSwipeTouchListener implements OnTouchListener {
 				float diffX = e2.getX() - e1.getX();
 				if(Math.abs(diffX) > Math.abs(diffY)) {
 					if(Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-						int pointToPosition = ((ListActivity) ctx).getListView().pointToPosition((int) e1.getX(), (int) e1.getY());
-
-						id = ((Alarm) ((ListActivity) ctx).getListAdapter().getItem(pointToPosition)).getId();
-
-						Log.d("Delete position " + pointToPosition + " " + id);
-
-						Intent serviceIntent = new Intent(ctx, StorageAndControlService.class);
-						ctx.startService(serviceIntent);
-						ctx.bindService(serviceIntent, deleteAlarmsServiceConnection, Context.BIND_AUTO_CREATE);
+						int pointToPosition = ((ListActivity) context).getListView().pointToPosition((int) e1.getX(), (int) e1.getY());
+						AlarmListAdapter adapter = (AlarmListAdapter) ((ListActivity) context).getListAdapter();
+						adapter.remove(pointToPosition);
+						alarm = adapter.getItem(pointToPosition);
+						Log.d("Delete position " + pointToPosition + " with alarm " + alarm.getId());
+						Intent serviceIntent = new Intent(context, StorageAndControlService.class);
+						context.bindService(serviceIntent, deleteAlarmsServiceConnection, Context.BIND_AUTO_CREATE);
 					}
 					result = true;
 				} else {
