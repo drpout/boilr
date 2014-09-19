@@ -18,19 +18,14 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 
 public class OnSwipeTouchListener implements OnTouchListener {
-
-	private final GestureDetector gestureDetector;
-
-	public OnSwipeTouchListener(Context ctx) {
-		gestureDetector = new GestureDetector(ctx, new GestureListener(ctx));
-	}
-
 	private final class GestureListener extends SimpleOnGestureListener {
 
 		private static final int SWIPE_THRESHOLD = 100;
 		private static final int SWIPE_VELOCITY_THRESHOLD = 100;
 		private Context context;
 		private StorageAndControlService mService;
+		boolean mBound = false;
+
 		private ServiceConnection deleteAlarmsServiceConnection = new ServiceConnection() {
 
 			@SuppressWarnings("unchecked")
@@ -38,6 +33,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 			// Callback action performed after the service has been bound
 			public void onServiceConnected(ComponentName className, IBinder binder) {
 				mService = ((LocalBinder<StorageAndControlService>) binder).getService();
+				mBound = true;
 				mService.deleteAlarm(alarm);
 			}
 
@@ -66,22 +62,32 @@ public class OnSwipeTouchListener implements OnTouchListener {
 					if(Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
 						int pointToPosition = ((ListActivity) context).getListView().pointToPosition((int) e1.getX(), (int) e1.getY());
 						AlarmListAdapter adapter = (AlarmListAdapter) ((ListActivity) context).getListAdapter();
-						adapter.remove(pointToPosition);
 						alarm = adapter.getItem(pointToPosition);
+						adapter.remove(pointToPosition);
 						Log.d("Delete position " + pointToPosition + " with alarm " + alarm.getId());
-						Intent serviceIntent = new Intent(context, StorageAndControlService.class);
-						context.bindService(serviceIntent, deleteAlarmsServiceConnection, Context.BIND_AUTO_CREATE);
+						if(mBound){
+							mService.deleteAlarm(alarm);
+						}else{
+							Intent serviceIntent = new Intent(context, StorageAndControlService.class);
+							context.bindService(serviceIntent, deleteAlarmsServiceConnection, Context.BIND_AUTO_CREATE);
+						}
 					}
 					result = true;
 				} else {
 					Log.d("Just a click.");
 				}
 				result = true;
-			} catch(Exception exception) {
-				exception.printStackTrace();
+			} catch(Exception e) {
+				Log.e("Error on SwipeListener",e);
 			}
 			return result;
 		}
+	}
+
+	private final GestureDetector gestureDetector;
+
+	public OnSwipeTouchListener(Context ctx) {
+		gestureDetector = new GestureDetector(ctx, new GestureListener(ctx));
 	}
 
 	@Override

@@ -164,6 +164,6 @@ public class AlarmListActivity extends ListActivity {
 		if(mBound){
 			adapter.addAll(mStorageAndControlService.getAlarms());
 			}
-		adapter.notifyDataSetChanged();
+	//	adapter.notifyDataSetChanged();
 	}
 }

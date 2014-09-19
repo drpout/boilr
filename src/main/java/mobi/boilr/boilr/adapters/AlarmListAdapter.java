@@ -73,15 +73,15 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 
 		}
 
-		// hidden tag to identify the row where the button was clicked
 		ToggleButton toggleButton = (ToggleButton) rowView.findViewById(R.id.toggle_button);
+		// hidden tag to identify the alarm
 		toggleButton.setTag(alarm.getId());
 		toggleButton.setChecked(alarm.isOn());
 
 		if(alarm.isOn()) {
-			rowView.setBackgroundColor(Color.DKGRAY);
-		} else {
 			rowView.setBackgroundColor(Color.TRANSPARENT);
+		} else {
+			rowView.setBackgroundColor(Color.DKGRAY);
 		}
 
 		TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
