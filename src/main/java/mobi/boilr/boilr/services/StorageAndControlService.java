@@ -189,7 +189,7 @@ public class StorageAndControlService extends Service {
 			prevAlarmID = db.getNextID();
 			alarmsMap = db.getAlarms();
 			if(prevAlarmID == 0) {
-				//new PopupalteDBTask().execute();
+				new PopupalteDBTask().execute();
 			} else {
 				// Set Exchange and start alarm
 				for(Alarm alarm : alarmsMap.values()) {
@@ -290,7 +290,6 @@ public class StorageAndControlService extends Service {
 	public void addAlarm(Alarm alarm) throws IOException {
 		alarmsMap.put(alarm.getId(), alarm);
 		db.storeAlarm(alarm);
-		startAlarm(alarm);
 	}
 
 	public void replaceAlarm(Alarm alarm) {
@@ -352,6 +351,7 @@ public class StorageAndControlService extends Service {
 		//Var alarms always check last value to build variation
 		PriceVarAlarm priceVarAlarm = ((new addPercentageAlarm()).execute(new PercentageAlarmParameter(id,exchange,pair,period,notify,percent))).get();
 		addAlarm(priceVarAlarm);
+		this.startAlarm(priceVarAlarm);
 	}
 
 	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
@@ -359,11 +359,13 @@ public class StorageAndControlService extends Service {
 		//Var alarms always check last value to build variation
 		PriceVarAlarm priceVarAlarm = ((new addVariationAlarm()).execute(new VariationAlarmParameter(id,exchange,pair,period,notify,variation))).get();
 		addAlarm(priceVarAlarm);
+		this.startAlarm(priceVarAlarm);
 	}
 
 	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
 			double upperBound, double lowerBound) throws UpperBoundSmallerThanLowerBoundException, IOException {
 		PriceHitAlarm priceHitAlarm = new PriceHitAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
 		addAlarm(priceHitAlarm);
+		this.startAlarm(priceHitAlarm);
 	}
 }

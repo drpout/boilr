@@ -15,13 +15,6 @@
             android:dialogTitle="@string/pref_pair_dialog_title"
             android:key="pair"
             android:title="@string/pref_pair_title" />
-        <ListPreference
-            android:defaultValue="@string/pref_type_default"
-            android:dialogTitle="@string/pref_type_dialog_title"
-            android:entries="@array/pref_type_entries"
-            android:entryValues="@array/pref_type_entries_values"
-            android:key="type"
-            android:title="@string/pref_type_title" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="specific"
@@ -37,7 +30,7 @@
             android:entryValues="@array/pref_values_alert_type"
             android:key="pref_key_alarm_alert_type"
             android:title="@string/pref_title_alarm_alert_type" />
- 
+
         <RingtonePreference
             android:defaultValue="content://settings/system/alarm_alert"
             android:key="pref_key_alarm_alert_sound"
@@ -45,11 +38,11 @@
             android:showDefault="false"
             android:showSilent="true"
             android:title="@string/pref_title_alarm_alert_sound" />
- 
+
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="pref_key_alarm_vibrate"
             android:title="@string/pref_title_alarm_vibrate" />
     </PreferenceCategory>
-    
+
 </PreferenceScreen>

@@ -3,6 +3,14 @@ package mobi.boilr.boilr.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.adapters.AlarmListAdapter;
+import mobi.boilr.boilr.listeners.OnSwipeTouchListener;
+import mobi.boilr.boilr.services.LocalBinder;
+import mobi.boilr.boilr.services.StorageAndControlService;
+import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
+import mobi.boilr.libpricealarm.Alarm;
 import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -14,23 +22,16 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.adapters.AlarmListAdapter;
-import mobi.boilr.boilr.listeners.OnSwipeTouchListener;
-import mobi.boilr.boilr.services.LocalBinder;
-import mobi.boilr.boilr.services.StorageAndControlService;
-import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
-import mobi.boilr.libpricealarm.Alarm;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 
 public class AlarmListActivity extends ListActivity {
 
-	private int id;
-	private ArrayAdapter<Alarm> adapter;
+	private AlarmListAdapter adapter;
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
+	private SearchView searchView;
 	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
 
 		@Override
@@ -43,7 +44,6 @@ public class AlarmListActivity extends ListActivity {
 				Log.d("AlarmListActivity bound to StorageAndControlService.");
 				List<Alarm> list = mStorageAndControlService.getAlarms();
 				adapter.addAll(list);
-				adapter.notifyDataSetChanged();
 			}
 		}
 
@@ -53,6 +53,20 @@ public class AlarmListActivity extends ListActivity {
 		}
 	};
 
+	private OnQueryTextListener queryListener = new OnQueryTextListener() {
+		@Override
+		public boolean onQueryTextSubmit(String query) {
+			return true;
+		}
+
+		@Override
+		public boolean onQueryTextChange(String newText) {
+			adapter.getFilter().filter(newText);
+			return true;
+		}
+
+	};
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -60,7 +74,7 @@ public class AlarmListActivity extends ListActivity {
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
 
 		getListView().setOnTouchListener(new OnSwipeTouchListener(this));
-		adapter = new AlarmListAdapter(AlarmListActivity.this, R.layout.price_hit_alarm_row, new ArrayList<Alarm>());
+		adapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<Alarm>());
 		setListAdapter(adapter);
 
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
@@ -72,7 +86,8 @@ public class AlarmListActivity extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.alarm_list, menu);
-		menu.findItem(R.id.action_search).getActionView();
+		searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		searchView.setOnQueryTextListener(queryListener);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -100,41 +115,41 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long layout) {
 		// Handle list clicks. Pass corresponding alarm to populate the detailed view.
-		int id = (Integer) v.findViewById(R.id.toggle_button).getTag();
+		Integer id = (Integer) v.findViewById(R.id.toggle_button).getTag();
 		Log.d("ListView click " + id);
-		// Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
-		// alarmSettingsIntent.putExtra("id", id);
-		// startActivity(alarmSettingsIntent);
+		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
+		//Bundle bundle = new Bundle();
+		//bundle.putInt("id", id);
+		//alarmSettingsIntent.putExtras(bundle);
+		alarmSettingsIntent.putExtra("id", id);
+		startActivity(alarmSettingsIntent);
 	}
 
 	public void onAddAlarmClicked(View v) {
 		// Handle click on Add Button. Launch activity to create a new alarm.
 		Intent alarmCreationIntent = new Intent(this, AlarmCreationActivity.class);
 		startActivity(alarmCreationIntent);
+		adapter.notifyDataSetChanged();
 	}
 
 	public void onToggleClicked(View view) {
 		int id = (Integer) view.getTag();
-
-		Log.d("Toggle Alarm "+id);
-		for(int i=0 ; i<adapter.getCount();i++){
-			Alarm item = adapter.getItem(i);
-			Log.d(id+" = "+item.getId()+" is On?"+item.isOn());
+		if(mBound) {
+			if(mStorageAndControlService.getAlarm(id).isOn()){
+				Log.d("Turning off alarm " + id);
+				mStorageAndControlService.stopAlarm(id);
+			}else{
+				mStorageAndControlService.startAlarm(id);
+				Log.d("Turning on alarm " + id);
+			}
+			adapter.notifyDataSetChanged();
 		}
-
-		if(mStorageAndControlService.getAlarm(id).isOn()){
-			Log.d("Turning Off");
-			mStorageAndControlService.stopAlarm(id);
-		}else{
-			mStorageAndControlService.startAlarm(id);
-			Log.d("Turning On");
-		}
-		adapter.notifyDataSetChanged();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		unbindService(mStorageAndControlServiceConnection);
 	}
 
 	@Override
@@ -145,6 +160,10 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	public void onResume(){
 		super.onResume();
+		adapter.clear();
+		if(mBound){
+			adapter.addAll(mStorageAndControlService.getAlarms());
+			}
 		adapter.notifyDataSetChanged();
 	}
 }

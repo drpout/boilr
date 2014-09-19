@@ -5,25 +5,25 @@
     android:orientation="horizontal" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_width="50dp"
+        android:layout_height="fill_parent"
+        android:layout_margin="1dp"
         android:orientation="vertical" >
 
         <ToggleButton
-            android:focusable="false"
             android:id="@+id/toggle_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:focusable="false"
             android:onClick="onToggleClicked"
             android:textOff="@string/off"
             android:textOn="@string/on" />
     </LinearLayout>
-f
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_margin="1dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="vertical" >
 
         <TextView
@@ -40,9 +40,9 @@ f
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+       android:layout_margin="1dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="vertical" >
 
         <TextView
@@ -59,9 +59,9 @@ f
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+       android:layout_margin="1dp"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:orientation="vertical" >
 
         <TextView

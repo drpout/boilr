@@ -2,8 +2,8 @@ package mobi.boilr.boilr.activities;
 
 import java.util.List;
 
-import mobi.boilr.boilr.views.fragments.PriceHitAlarmSettingsFragment;
-import mobi.boilr.boilr.views.fragments.PriceVarAlarmSettingsFragment;
+import mobi.boilr.boilr.views.fragments.PriceHitAlarmCreationFragment;
+import mobi.boilr.boilr.views.fragments.PriceVarAlarmCreationFragment;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
@@ -28,7 +28,7 @@ public class AlarmCreationActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmSettingsFragment()).commit();
+		getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmCreationFragment()).commit();
 	}
 
 	@Override

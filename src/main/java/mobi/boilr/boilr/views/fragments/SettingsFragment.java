@@ -28,7 +28,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	public static final String PREF_KEY_MOBILE_DATA = "pref_key_mobile_data";
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,
 		PREF_KEY_CHECK_PAIRS_INTERVAL };
-	private static final double MINUTES_IN_DAY = 1440; // 60*24
+	public static final double MINUTES_IN_DAY = 1440; // 60*24
 
 	/**
 	 * Converts a double to a String removing places after the decimal point
