@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Boilr</string>
     <string name="action_search">Search</string>
     <string name="action_settings">Settings</string>
@@ -75,8 +76,8 @@
     </string-array>
 
     <string name="pref_default_check_pairs_interval">7</string>
-    <string name="pref_type_title">Alarm Types</string>
-    <string name="pref_type_dialog_title">Types</string>
+    <string name="pref_type_title">Alarm Type</string>
+    <string name="pref_type_dialog_title">Alarm Types</string>
 
     <string-array name="pref_type_entries">
         <item>Price Hit</item>
@@ -136,14 +137,17 @@
     <string name="pref_pair_title">Pair</string>
     <string name="pref_pair_dialog_title">Pairs</string>
     <string name="action_send_now">Save</string>
+    <string name="pref_title_alarm_alert_type">Alert Type</string>
+    <string name="pref_title_alarm_alert_sound">Sound</string>
+    <string name="pref_title_alarm_vibrate">Vibrate</string>
 
-    <string-array name="pref_pair_entries"></string-array>
-    <string-array name="pref_pair_entries_values"></string-array>
+    <!-- <string-array name="pref_pair_entries"></string-array> -->
+    <!-- <string-array name="pref_pair_entries_values"></string-array> -->
 
     <string name="boilr_alarm">Boilr Alarm</string>
     <string name="turn_off">Turn Off</string>
     <string name="keep_monitoring">Keep Monitoring</string>
-	
-	<string name="no_internet">Boilr has no internet</string>
-	<string name="no_updates">Your alarms cannot be updated.</string>
+    <string name="no_internet">Boilr has no internet</string>
+    <string name="no_updates">Your alarms cannot be updated.</string>
+
 </resources>

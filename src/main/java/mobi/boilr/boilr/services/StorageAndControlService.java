@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import mobi.boilr.boilr.database.DBManager;
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Notifications;
+import mobi.boilr.boilr.utils.PercentageAlarmParameter;
+import mobi.boilr.boilr.utils.VariationAlarmParameter;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libdynticker.bitstamp.BitstampExchange;
 import mobi.boilr.libdynticker.btcchina.BTCChinaExchange;
@@ -19,8 +22,10 @@ import mobi.boilr.libdynticker.btce.BTCEExchange;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
+import mobi.boilr.libpricealarm.Notify;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
 import mobi.boilr.libpricealarm.PriceVarAlarm;
+import mobi.boilr.libpricealarm.UpperBoundSmallerThanLowerBoundException;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -119,6 +124,52 @@ public class StorageAndControlService extends Service {
 		}
 	}
 
+	private class addPercentageAlarm extends AsyncTask<PercentageAlarmParameter,Void,PriceVarAlarm>{
+
+		private Exception e;
+
+		@Override
+		protected PriceVarAlarm doInBackground(PercentageAlarmParameter... arg0) {
+			if(arg0.length == 1 ){
+				int id = arg0[0].getId();
+				Exchange exchange = arg0[0].getExchange();
+				Pair pair = arg0[0].getPair();
+				long period = arg0[0].getPeriod();
+				Notify notify = arg0[0].getNotify();
+				float percent = arg0[0].getPercent();
+				try {
+					return new PriceVarAlarm(id, exchange, pair, period, notify, percent);
+				} catch (Exception e) {
+					this.e = e;
+					Log.e("AssyncTask AddPercentageAlarm failed",e);
+				}
+			}
+			return null;
+		}
+	}
+
+	private class addVariationAlarm extends AsyncTask<VariationAlarmParameter,Void,PriceVarAlarm>{
+
+		@Override
+		protected PriceVarAlarm doInBackground(VariationAlarmParameter... arg0) {
+			if(arg0.length == 1 ){
+				int id = arg0[0].getId();
+				Exchange exchange = arg0[0].getExchange();
+				Pair pair = arg0[0].getPair();
+				long period = arg0[0].getPeriod();
+				Notify notify = arg0[0].getNotify();
+				double variation = arg0[0].getVariation();
+				try {
+					return new PriceVarAlarm(id, exchange, pair, period, notify, variation);
+				} catch (Exception e) {
+					Log.e("AssyncTask AddVariationAlarm failed",e);
+				}
+			}
+			return null;
+		}
+
+	}
+
 	@SuppressLint("UseSparseArrays")
 	@Override
 	public void onCreate() {
@@ -138,7 +189,7 @@ public class StorageAndControlService extends Service {
 			prevAlarmID = db.getNextID();
 			alarmsMap = db.getAlarms();
 			if(prevAlarmID == 0) {
-				new PopupalteDBTask().execute();
+				//new PopupalteDBTask().execute();
 			} else {
 				// Set Exchange and start alarm
 				for(Alarm alarm : alarmsMap.values()) {
@@ -236,13 +287,10 @@ public class StorageAndControlService extends Service {
 			stopSelf();
 	}
 
-	public void addAlarm(Alarm alarm) {
+	public void addAlarm(Alarm alarm) throws IOException {
 		alarmsMap.put(alarm.getId(), alarm);
-		try {
-			db.storeAlarm(alarm);
-		} catch(IOException e) {
-			Log.e("Could not add alarm " + alarm.getId() + " to the DB.", e);
-		}
+		db.storeAlarm(alarm);
+		startAlarm(alarm);
 	}
 
 	public void replaceAlarm(Alarm alarm) {
@@ -296,5 +344,26 @@ public class StorageAndControlService extends Service {
 			Log.e("Get Pairs",e);
 		}
 		return null;
+	}
+
+
+	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
+			float percent) throws InterruptedException, ExecutionException, IOException  {
+		//Var alarms always check last value to build variation
+		PriceVarAlarm priceVarAlarm = ((new addPercentageAlarm()).execute(new PercentageAlarmParameter(id,exchange,pair,period,notify,percent))).get();
+		addAlarm(priceVarAlarm);
+	}
+
+	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
+			double variation) throws InterruptedException, ExecutionException, IOException {
+		//Var alarms always check last value to build variation
+		PriceVarAlarm priceVarAlarm = ((new addVariationAlarm()).execute(new VariationAlarmParameter(id,exchange,pair,period,notify,variation))).get();
+		addAlarm(priceVarAlarm);
+	}
+
+	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
+			double upperBound, double lowerBound) throws UpperBoundSmallerThanLowerBoundException, IOException {
+		PriceHitAlarm priceHitAlarm = new PriceHitAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
+		addAlarm(priceHitAlarm);
 	}
 }

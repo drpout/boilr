@@ -135,7 +135,6 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		mStorageAndControlService = null;
 	}
 
 	@Override
