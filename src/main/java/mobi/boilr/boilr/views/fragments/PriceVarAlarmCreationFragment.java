@@ -1,6 +1,5 @@
 package mobi.boilr.boilr.views.fragments;
 
-
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
@@ -22,36 +21,36 @@ public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
 	private static final String PREF_KEY_ALARM_VAR_TYPE_VARIATION = "pref_key_alarm_var_type_variation";
 	private static final String PREF_KEY_ALARM_VAR_VALUE = "pref_key_alarm_var_value";
 
-
-	private class OnPriceVarSettingsPreferenceChangeListener extends OnAlarmSettingsPreferenceChangeListener{
-
-
+	private class OnPriceVarSettingsPreferenceChangeListener extends
+	OnAlarmSettingsPreferenceChangeListener {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
 
-			if(key.equals(PREF_KEY_ALARM_VAR_TYPE)){
+			if(key.equals(PREF_KEY_ALARM_VAR_TYPE)) {
 				ListPreference listPreference = (ListPreference) preference;
 				listPreference.setSummary(listPreference.getEntries()[listPreference.findIndexOfValue((String) newValue)]);
-			}else if(key.equals(PREF_KEY_ALARM_VAR_VALUE)){
+			} else if(key.equals(PREF_KEY_ALARM_VAR_VALUE)) {
 				preference.setSummary((CharSequence) newValue);
-			}else if(preference.getKey().equals(PREF_KEY_ALARM_VAR_UPDATE_INTERVAL)) {
-				preference.setSummary(SettingsFragment.buildMinToDaysSummary((String)newValue));
-			}else{
+			} else if(preference.getKey().equals(PREF_KEY_ALARM_VAR_UPDATE_INTERVAL)) {
+				preference.setSummary(SettingsFragment.buildMinToDaysSummary((String) newValue));
+			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
 			return true;
 		}
 
-
 	}
 
 	OnAlarmSettingsPreferenceChangeListener listener = new OnPriceVarSettingsPreferenceChangeListener();
 
+	public PriceVarAlarmCreationFragment(int exchangeIndex, int pairIndex) {
+		super(exchangeIndex, pairIndex);
+	}
 
 	@Override
-	public void onCreate(Bundle bundle){
+	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 
 		Preference preference = findPreference(PREF_KEY_TYPE);
@@ -60,8 +59,8 @@ public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
 		PreferenceCategory category = (PreferenceCategory) findPreference("specific");
 		category.setTitle("Price Var");
 
-		String [] entries = {"Variation","Percentage"};
-		String [] values = {PREF_KEY_ALARM_VAR_TYPE_VARIATION,PREF_KEY_ALARM_VAR_TYPE_PERCENTAGE};
+		String[] entries = { "Variation", "Percentage" };
+		String[] values = { PREF_KEY_ALARM_VAR_TYPE_VARIATION, PREF_KEY_ALARM_VAR_TYPE_PERCENTAGE };
 		ListPreference listPreference = new ListPreference(getActivity());
 		listPreference.setTitle("Variation type");
 		listPreference.setEntries(entries);
@@ -72,7 +71,6 @@ public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
 		listPreference.setOnPreferenceChangeListener(listener);
 		category.addPreference(listPreference);
 
-
 		EditTextPreference editTextPreference = new EditTextPreference(getActivity());
 		editTextPreference.setKey(PREF_KEY_ALARM_VAR_VALUE);
 		editTextPreference.setTitle("Variation");
@@ -81,7 +79,6 @@ public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
 		editTextPreference.setSummary("0");
 		editTextPreference.setOnPreferenceChangeListener(listener);
 		category.addPreference(editTextPreference);
-
 
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
 
@@ -99,61 +96,59 @@ public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
 
 	@Override
 	protected void makeAlarm() {
-		
-		SharedPreferences sharedPreferences = 	PreferenceManager.getDefaultSharedPreferences(this.getActivity());
+
+		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
 		Log.d("exchange " + ((ListPreference) findPreference(PREF_KEY_EXCHANGE)).getValue());
 		Log.d("pair " + pairs.get(Integer.parseInt(((ListPreference) findPreference(PREF_KEY_PAIR)).getValue())));
 		Log.d("alertType " + ((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getValue());
 		Log.d("alertSound " + sharedPreferences.getString(PREF_KEY_ALARM_ALERT_SOUND, null));
 		Log.d("vibrate " + ((CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE)).isChecked());
-		
-		Integer alertType = ((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getValue() != null ?  Integer.parseInt((String) ((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getValue()) : null; 
-		String alertSound ;
-		if(sharedPreferences.getString(PREF_KEY_ALARM_ALERT_SOUND,"").equals(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""))){
+
+		Integer alertType = ((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getValue() != null ? Integer.parseInt(((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getValue()) : null;
+		String alertSound;
+		if(sharedPreferences.getString(PREF_KEY_ALARM_ALERT_SOUND, "").equals(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""))) {
 			alertSound = null;
-		}else{
+		} else {
 			alertSound = sharedPreferences.getString(PREF_KEY_ALARM_ALERT_SOUND, "");
 		}
 
-		Boolean vibrate = defaultVibrateDefinition ? null : ((CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE)).isChecked(); 
+		Boolean vibrate = defaultVibrateDefinition ? null : ((CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE)).isChecked();
 
-		Log.d(alertType + " " + alertSound + " "+ vibrate );
+		Log.d(alertType + " " + alertSound + " " + vibrate);
 
 		AndroidNotify notify;
-		if(alertType == null && alertSound==null && vibrate == null){
+		if(alertType == null && alertSound == null && vibrate == null) {
 			notify = new AndroidNotify(getActivity());
-		}else{
-			notify =  new AndroidNotify(this.getActivity().getApplicationContext(), alertType, alertSound, vibrate);
+		} else {
+			notify = new AndroidNotify(this.getActivity().getApplicationContext(), alertType, alertSound, vibrate);
 		}
 
 		int id = mStorageAndControlService.generateAlarmID();
 
 		try {
-			Exchange exchange = mStorageAndControlService.getExchange((String) ((ListPreference) findPreference(PREF_KEY_EXCHANGE)).getValue());
-			int pairPosition = Integer.parseInt((String) ((ListPreference) findPreference(PREF_KEY_PAIR)).getValue());
+			Exchange exchange = mStorageAndControlService.getExchange(((ListPreference) findPreference(PREF_KEY_EXCHANGE)).getValue());
+			int pairPosition = Integer.parseInt(((ListPreference) findPreference(PREF_KEY_PAIR)).getValue());
 			Pair pair = pairs.get(pairPosition);
 
 			long period = Long.parseLong(
 					((EditTextPreference) findPreference(PREF_KEY_ALARM_VAR_UPDATE_INTERVAL)).getText() != null ?
 							((EditTextPreference) findPreference(PREF_KEY_ALARM_VAR_UPDATE_INTERVAL)).getText() :
 								sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR, ""));
-			
-			if(((ListPreference) findPreference(PREF_KEY_ALARM_VAR_TYPE)).getValue().equals(PREF_KEY_ALARM_VAR_TYPE_PERCENTAGE)){
+
+			if(((ListPreference) findPreference(PREF_KEY_ALARM_VAR_TYPE)).getValue().equals(PREF_KEY_ALARM_VAR_TYPE_PERCENTAGE)) {
 				float percent = Float.parseFloat(((EditTextPreference) findPreference(PREF_KEY_ALARM_VAR_VALUE)).getText());
-				Log.d("Percent " +percent);
+				Log.d("Percent " + percent);
 				mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, percent);
-			}else if(((ListPreference) findPreference(PREF_KEY_ALARM_VAR_TYPE)).getValue().equals(PREF_KEY_ALARM_VAR_TYPE_VARIATION)){
+			} else if(((ListPreference) findPreference(PREF_KEY_ALARM_VAR_TYPE)).getValue().equals(PREF_KEY_ALARM_VAR_TYPE_VARIATION)) {
 				double variation = Double.parseDouble(((EditTextPreference) findPreference(PREF_KEY_ALARM_VAR_VALUE)).getText());
 				Log.d("Variation " + variation);
 				mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, variation);
-			}else{
+			} else {
 				Log.d("not found " + ((ListPreference) findPreference(PREF_KEY_ALARM_VAR_TYPE)).getEntry() + " " + ((ListPreference) findPreference(PREF_KEY_ALARM_VAR_TYPE)).getValue());
 			}
 		} catch (Exception e) {
 			Log.e("Failed to create Alarm", e);
 			Toast.makeText(this.getActivity(), "Failed to create alarm", Toast.LENGTH_SHORT).show();
 		}
-
-		Toast.makeText(this.getActivity(), "Alarm created", Toast.LENGTH_SHORT).show();
 	}
 }

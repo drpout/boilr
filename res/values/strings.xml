@@ -94,44 +94,44 @@
     <string name="pref_exchange_dialog_title">Exchanges</string>
 
     <string-array name="pref_exchange_entries_values">
-        <item>mobi.boilr.libdynticker.bitstamp.BitstampExchange</item>
-        <item>mobi.boilr.libdynticker.kraken.KrakenExchange</item>
-        <item>mobi.boilr.libdynticker.cavirtex.CavirtexExchange</item>
-        <item>mobi.boilr.libdynticker.poloniex.PoloniexExchange</item>
         <item>mobi.boilr.libdynticker.allcoin.AllcoinExchange</item>
-        <item>mobi.boilr.libdynticker.hitbtc.HitBTCExchange</item>
-        <item>mobi.boilr.libdynticker.okcoin.OKCoinExchange</item>
-        <item>mobi.boilr.libdynticker.cryptsy.CryptsyExchange</item>
-        <item>mobi.boilr.libdynticker.houbi.HuobiExchange</item>
-        <item>mobi.boilr.libdynticker.mintpal.MintPalExchange</item>
-        <item>mobi.boilr.libdynticker.bter.BTERExchange</item>
-        <item>mobi.boilr.libdynticker.bittrex.BittrexExchange</item>
-        <item>mobi.boilr.libdynticker.vos.VoSExchange</item>
         <item>mobi.boilr.libdynticker.bleutrade.BleuTradeExchange</item>
-        <item>mobi.boilr.libdynticker.localbitcoins.LocalBitcoins</item>
-        <item>mobi.boilr.libdynticker.btcchina.BTCChinaExchange</item>
         <item>mobi.boilr.libdynticker.bitcoinde.Bitcoinde</item>
+        <item>mobi.boilr.libdynticker.bitstamp.BitstampExchange</item>
+        <item>mobi.boilr.libdynticker.bittrex.BittrexExchange</item>
+        <item>mobi.boilr.libdynticker.btcchina.BTCChinaExchange</item>
         <item>mobi.boilr.libdynticker.btce.BTCEExchange</item>
+        <item>mobi.boilr.libdynticker.bter.BTERExchange</item>
+        <item>mobi.boilr.libdynticker.cavirtex.CavirtexExchange</item>
+        <item>mobi.boilr.libdynticker.cryptsy.CryptsyExchange</item>
+        <item>mobi.boilr.libdynticker.hitbtc.HitBTCExchange</item>
+        <item>mobi.boilr.libdynticker.houbi.HuobiExchange</item>
+        <item>mobi.boilr.libdynticker.kraken.KrakenExchange</item>
+        <item>mobi.boilr.libdynticker.localbitcoins.LocalBitcoins</item>
+        <item>mobi.boilr.libdynticker.mintpal.MintPalExchange</item>
+        <item>mobi.boilr.libdynticker.okcoin.OKCoinExchange</item>
+        <item>mobi.boilr.libdynticker.poloniex.PoloniexExchange</item>
+        <item>mobi.boilr.libdynticker.vos.VoSExchange</item>
     </string-array>
     <string-array name="pref_exchange_entries">
-        <item>Bitstamp</item>
-        <item>Kraken</item>
-        <item>Cavirtex</item>
-        <item>Poloniex</item>
         <item>Allcoin</item>
-        <item>HitBTC</item>
-        <item>OKCoin</item>
-        <item>Cryptsy</item>
-        <item>Huobi</item>
-        <item>MintPal</item>
-        <item>BTER</item>
-        <item>Bittrex</item>
-        <item>VoS</item>
         <item>BleuTrade</item>
-        <item>LocalBitcoins</item>
+        <item>Bitcoin.de</item>
+        <item>Bitstamp</item>
+        <item>Bittrex</item>
         <item>BTCChina</item>
-        <item>Bitcoinde</item>
-        <item>BTCE</item>
+        <item>BTC-E</item>
+        <item>BTER</item>
+        <item>Cavirtex</item>
+        <item>Cryptsy</item>
+        <item>HitBTC</item>
+        <item>Huobi</item>
+        <item>Kraken</item>
+        <item>LocalBitcoins</item>
+        <item>MintPal</item>
+        <item>OKCoin</item>
+        <item>Poloniex</item>
+        <item>VoS</item>
     </string-array>
 
     <string name="pref_pair_title">Pair</string>
