@@ -301,7 +301,6 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void deleteAlarm(Alarm alarm) {
-		Log.d("deleting " + alarm.getId());
 		db.deleteAlarm(alarm);
 		alarmsMap.remove(alarm.getId());
 	}
