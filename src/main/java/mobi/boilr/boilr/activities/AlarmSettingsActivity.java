@@ -16,11 +16,10 @@ import android.os.IBinder;
 import android.preference.PreferenceActivity;
 
 public class AlarmSettingsActivity extends PreferenceActivity {
-	
-	
+
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
-	
+
 	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
 
 		@Override
@@ -30,12 +29,12 @@ public class AlarmSettingsActivity extends PreferenceActivity {
 
 			// Callback action performed after the service has been bound
 			if(mBound) {
-				
+
 				Alarm alarm = mStorageAndControlService.getAlarm(id);
-				
-				if(alarm instanceof PriceHitAlarm){
+
+				if(alarm instanceof PriceHitAlarm) {
 					getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmSettingsFragment(alarm)).commit();
-				}else if(alarm instanceof PriceVarAlarm){
+				} else if(alarm instanceof PriceVarAlarm) {
 					getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceVarAlarmSettingsFragment(alarm)).commit();
 				}
 			}
@@ -52,13 +51,12 @@ public class AlarmSettingsActivity extends PreferenceActivity {
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		Bundle bund = getIntent().getExtras();
-		 id = bund.getInt("id");
-		
+		id = bund.getInt("id");
+
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
-		startService(serviceIntent);
-		bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);		
+		bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();

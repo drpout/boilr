@@ -1,36 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-
     <PreferenceCategory
-        android:key="generic"
-        android:title="@string/pref_title_alerts" >
+        android:key="pref_key_generic"
+        android:title="@string/pref_title_generic" >
         <ListPreference
             android:defaultValue="@string/pref_exchange_default"
-            android:dialogTitle="@string/pref_exchange_dialog_title"
             android:entries="@array/pref_exchange_entries"
             android:entryValues="@array/pref_exchange_entries_values"
-            android:key="exchange"
+            android:key="pref_key_exchange"
             android:title="@string/pref_exchange_title" />
         <ListPreference
-            android:dialogTitle="@string/pref_pair_dialog_title"
-            android:key="pair"
+            android:key="pref_key_pair"
             android:title="@string/pref_pair_title" />
+        <ListPreference
+            android:defaultValue="@string/pref_type_default"
+            android:entries="@array/pref_type_entries"
+            android:entryValues="@array/pref_type_entries_values"
+            android:key="pref_key_type"
+            android:title="@string/pref_type_title" />
     </PreferenceCategory>
     <PreferenceCategory
-        android:key="specific"
-        android:title="Specific" >
+        android:key="pref_key_specific"
+        android:title="pref_title_specific"
+        android:orderingFromXml="false" >
+        <EditTextPreference
+		    android:key="pref_key_update_interval"
+			android:title="@string/pref_title_update_interval"
+			android:inputType="number"
+			android:defaultValue=""
+			android:order="2" />
     </PreferenceCategory>
     <PreferenceCategory
-        android:key="alert"
+        android:key="pref_key_alerts"
         android:title="@string/pref_title_alerts" >
         <ListPreference
             android:defaultValue="@string/pref_default_alert_type"
-            android:dialogTitle="@string/pref_title_alarm_alert_type"
             android:entries="@array/pref_entries_alert_type"
             android:entryValues="@array/pref_values_alert_type"
             android:key="pref_key_alarm_alert_type"
             android:title="@string/pref_title_alarm_alert_type" />
-
         <RingtonePreference
             android:defaultValue="content://settings/system/alarm_alert"
             android:key="pref_key_alarm_alert_sound"
@@ -38,11 +46,9 @@
             android:showDefault="false"
             android:showSilent="true"
             android:title="@string/pref_title_alarm_alert_sound" />
-
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="pref_key_alarm_vibrate"
             android:title="@string/pref_title_alarm_vibrate" />
     </PreferenceCategory>
-
 </PreferenceScreen>

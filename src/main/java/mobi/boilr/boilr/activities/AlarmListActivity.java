@@ -96,7 +96,7 @@ public class AlarmListActivity extends ListActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		switch(item.getItemId()) {
+		switch (item.getItemId()) {
 			case R.id.action_search:
 				// openSearch();
 				return true;
@@ -118,9 +118,9 @@ public class AlarmListActivity extends ListActivity {
 		Integer id = (Integer) v.findViewById(R.id.toggle_button).getTag();
 		Log.d("ListView click " + id);
 		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
-		//Bundle bundle = new Bundle();
-		//bundle.putInt("id", id);
-		//alarmSettingsIntent.putExtras(bundle);
+		// Bundle bundle = new Bundle();
+		// bundle.putInt("id", id);
+		// alarmSettingsIntent.putExtras(bundle);
 		alarmSettingsIntent.putExtra("id", id);
 		startActivity(alarmSettingsIntent);
 	}
@@ -135,10 +135,10 @@ public class AlarmListActivity extends ListActivity {
 	public void onToggleClicked(View view) {
 		int id = (Integer) view.getTag();
 		if(mBound) {
-			if(mStorageAndControlService.getAlarm(id).isOn()){
+			if(mStorageAndControlService.getAlarm(id).isOn()) {
 				Log.d("Turning off alarm " + id);
 				mStorageAndControlService.stopAlarm(id);
-			}else{
+			} else {
 				mStorageAndControlService.startAlarm(id);
 				Log.d("Turning on alarm " + id);
 			}
@@ -158,12 +158,12 @@ public class AlarmListActivity extends ListActivity {
 	}
 
 	@Override
-	public void onResume(){
+	public void onResume() {
 		super.onResume();
 		adapter.clear();
-		if(mBound){
+		if(mBound) {
 			adapter.addAll(mStorageAndControlService.getAlarms());
-			}
-	//	adapter.notifyDataSetChanged();
+		}
+		// adapter.notifyDataSetChanged();
 	}
 }

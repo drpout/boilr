@@ -1,4 +1,3 @@
-
 package mobi.boilr.boilr.utils;
 
 import mobi.boilr.boilr.R;
@@ -24,12 +23,12 @@ public final class Notifications {
 	private static Notification.Builder setCommonNotificationProps(Context context, int alarmID,
 			String firingReason) {
 		Notification.Builder notification = new Notification.Builder(context)
-		.setContentTitle(context.getString(R.string.boilr_alarm))
-		.setContentText(firingReason)
-		.setSmallIcon(R.drawable.ic_action_alarms)
-		.setLights(0xFFFF0000, 333, 333) // Blink in red ~3 times per second.
-		.setOngoing(false)
-		.setAutoCancel(true);
+				.setContentTitle(context.getString(R.string.boilr_alarm))
+				.setContentText(firingReason)
+				.setSmallIcon(R.drawable.ic_action_alarms)
+				.setLights(0xFFFF0000, 333, 333) // Blink in red ~3 times per second.
+				.setOngoing(false)
+				.setAutoCancel(true);
 
 		Intent viewAlarmsIntent = new Intent(context, AlarmListActivity.class);
 		viewAlarmsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -80,14 +79,14 @@ public final class Notifications {
 			Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
 			changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			noInternetNotification = new Notification.Builder(context)
-			.setContentTitle(context.getString(R.string.no_internet))
-			.setContentText(context.getString(R.string.no_updates))
-			.setSmallIcon(R.drawable.ic_action_warning)
-			.setOngoing(false)
-			.setAutoCancel(true)
-			.setPriority(Notification.PRIORITY_DEFAULT)
-			.setWhen(0)
-			.setContentIntent(PendingIntent.getActivity(context, noInternetNotificationID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+					.setContentTitle(context.getString(R.string.no_internet))
+					.setContentText(context.getString(R.string.no_updates))
+					.setSmallIcon(R.drawable.ic_action_warning)
+					.setOngoing(false)
+					.setAutoCancel(true)
+					.setPriority(Notification.PRIORITY_DEFAULT)
+					.setWhen(0)
+					.setContentIntent(PendingIntent.getActivity(context, noInternetNotificationID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 		}
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(noInternetNotificationID);
@@ -119,7 +118,6 @@ public final class Notifications {
 	}
 
 	public static void clearNoInternetNotification(Context context) {
-		Log.d("Clearing noInternetNotification.");
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(noInternetNotificationID);
 	}

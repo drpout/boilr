@@ -6,7 +6,6 @@
 		<ListPreference
 			android:key="pref_key_default_alert_type"
 			android:title="@string/pref_title_default_alert_type"
-			android:dialogTitle="@string/pref_title_default_alert_type"
 			android:entries="@array/pref_entries_alert_type"
 			android:entryValues="@array/pref_values_alert_type"
 			android:defaultValue="@string/pref_default_alert_type" />
@@ -28,7 +27,6 @@
 		<ListPreference
 			android:key="pref_key_theme"
 			android:title="@string/pref_title_theme"
-			android:dialogTitle="@string/pref_title_theme"
 			android:entries="@array/pref_entries_theme"
 			android:entryValues="@array/pref_values_theme"
 			android:defaultValue="@string/pref_default_theme" />
@@ -43,19 +41,18 @@
 		<EditTextPreference
 		    android:key="pref_key_default_update_interval_hit"
 			android:title="@string/pref_title_default_update_interval_hit"
-			android:dialogTitle="@string/pref_title_default_update_interval_hit"
 			android:dialogMessage="@string/pref_summary_default_update_interval_hit"
-			android:defaultValue="10" />
+			android:inputType="number"
+			android:defaultValue="30" />
 		<EditTextPreference
 		    android:key="pref_key_default_update_interval_var"
 			android:title="@string/pref_title_default_update_interval_var"
-			android:dialogTitle="@string/pref_title_default_update_interval_var"
 			android:dialogMessage="@string/pref_summary_default_update_interval_var"
+			android:inputType="number"
 			android:defaultValue="1440" />
 		<ListPreference
 			android:key="pref_key_check_pairs_interval"
 			android:title="@string/pref_title_check_pairs_interval"
-			android:dialogTitle="@string/pref_title_check_pairs_interval"
 			android:entries="@array/pref_entries_check_pairs_interval"
 			android:entryValues="@array/pref_values_check_pairs_interval"
 			android:defaultValue="@string/pref_default_check_pairs_interval" />
