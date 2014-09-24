@@ -124,8 +124,6 @@ public class StorageAndControlService extends Service {
 	private class addPercentageAlarm extends
 			AsyncTask<PercentageAlarmParameter, Void, PriceVarAlarm> {
 
-		private Exception e;
-
 		@Override
 		protected PriceVarAlarm doInBackground(PercentageAlarmParameter... arg0) {
 			if(arg0.length == 1) {
@@ -138,7 +136,6 @@ public class StorageAndControlService extends Service {
 				try {
 					return new PriceVarAlarm(id, exchange, pair, period, notify, percent);
 				} catch (Exception e) {
-					this.e = e;
 					Log.e("AssyncTask AddPercentageAlarm failed", e);
 				}
 			}

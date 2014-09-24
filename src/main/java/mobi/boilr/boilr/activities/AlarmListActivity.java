@@ -118,9 +118,6 @@ public class AlarmListActivity extends ListActivity {
 		Integer id = (Integer) v.findViewById(R.id.toggle_button).getTag();
 		Log.d("ListView click " + id);
 		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
-		// Bundle bundle = new Bundle();
-		// bundle.putInt("id", id);
-		// alarmSettingsIntent.putExtras(bundle);
 		alarmSettingsIntent.putExtra("id", id);
 		startActivity(alarmSettingsIntent);
 	}
@@ -160,10 +157,10 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		adapter.clear();
 		if(mBound) {
+			adapter.clear();
 			adapter.addAll(mStorageAndControlService.getAlarms());
 		}
-		// adapter.notifyDataSetChanged();
+		adapter.notifyDataSetChanged();
 	}
 }

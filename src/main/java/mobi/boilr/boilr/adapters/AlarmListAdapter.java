@@ -60,13 +60,15 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 			PriceVarAlarm priceVarAlarm = (PriceVarAlarm) alarm;
 
 			TextView periodTextView = (TextView) rowView.findViewById(R.id.period);
-			double days = priceVarAlarm.getPeriod() / SettingsFragment.MINUTES_IN_DAY;
+			//Period comes in milliseconds, 60000 number of milliseconds in a minute
+			double days = priceVarAlarm.getPeriod()/(SettingsFragment.MINUTES_IN_DAY * 60000);
 			String result = SettingsFragment.cleanDoubleToString(days) + "d";
 			periodTextView.setText(result );
 
 			TextView variance = (TextView) rowView.findViewById(R.id.variance);
 			if(priceVarAlarm.isPercent()) {
-				variance.setText(String.valueOf(SettingsFragment.cleanDoubleToString(priceVarAlarm.getPercent() * 100))+ "%");
+				variance.setText(String.valueOf(SettingsFragment.cleanDoubleToString(priceVarAlarm
+						.getPercent())) + "%");
 			} else {
 				variance.setText(String.valueOf(SettingsFragment.cleanDoubleToString(priceVarAlarm.getVariation())));
 			}

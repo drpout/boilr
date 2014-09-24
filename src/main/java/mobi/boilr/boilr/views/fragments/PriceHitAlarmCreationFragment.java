@@ -17,8 +17,8 @@ import android.preference.PreferenceManager;
 import android.text.InputType;
 
 public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
-	private static final String PREF_KEY_UPPER_VALUE = "pref_key_upper_value";
-	private static final String PREF_KEY_LOWER_VALUE = "pref_key_lower_value";
+	public static final String PREF_KEY_UPPER_VALUE = "pref_key_upper_value";
+	public static final String PREF_KEY_LOWER_VALUE = "pref_key_lower_value";
 
 	private class OnPriceHitSettingsPreferenceChangeListener extends
 	OnAlarmSettingsPreferenceChangeListener {
@@ -92,7 +92,7 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 		String updateInterval = ((EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL)).getText();
 		// Time is in seconds, convert to milliseconds
 		long period = 1000 * Long.parseLong(updateInterval != null ? updateInterval :
-				sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, ""));
+			sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, ""));
 		String upperBoundString = ((EditTextPreference) findPreference(PREF_KEY_UPPER_VALUE)).getText();
 		double upperBound;
 		if(upperBoundString == null || upperBoundString.equals(""))

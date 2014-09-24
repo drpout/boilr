@@ -2,6 +2,7 @@ package mobi.boilr.boilr.activities;
 
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
+import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.views.fragments.PriceHitAlarmSettingsFragment;
 import mobi.boilr.boilr.views.fragments.PriceVarAlarmSettingsFragment;
 import mobi.boilr.libpricealarm.Alarm;
@@ -20,7 +21,14 @@ public class AlarmSettingsActivity extends PreferenceActivity {
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
 
-	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
+	private GetAlarmServiceConnection mStorageAndControlServiceConnection;
+
+	private class GetAlarmServiceConnection implements ServiceConnection {
+		private Integer id;
+
+		public GetAlarmServiceConnection(Integer id) {
+			this.id = id;
+		}
 
 		@Override
 		public void onServiceConnected(ComponentName className, IBinder binder) {
@@ -31,6 +39,9 @@ public class AlarmSettingsActivity extends PreferenceActivity {
 			if(mBound) {
 
 				Alarm alarm = mStorageAndControlService.getAlarm(id);
+
+				Log.d(""+alarm.getExchange());
+				Log.d(alarm.getExchange().getName());
 
 				if(alarm instanceof PriceHitAlarm) {
 					getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmSettingsFragment(alarm)).commit();
@@ -45,15 +56,15 @@ public class AlarmSettingsActivity extends PreferenceActivity {
 			mBound = false;
 		}
 	};
-	private Integer id;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		Bundle bund = getIntent().getExtras();
-		id = bund.getInt("id");
+		Integer id = bund.getInt("id");
 
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
+		mStorageAndControlServiceConnection = new GetAlarmServiceConnection(id);
 		bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
 	}
 

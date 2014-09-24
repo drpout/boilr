@@ -1,30 +1,19 @@
 package mobi.boilr.boilr.views.fragments;
 
 
+import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmSettingsActivity;
-import mobi.boilr.boilr.domain.AndroidNotify;
-import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.libdynticker.core.Exchange;
-import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceVarAlarm;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
-import android.preference.PreferenceManager;
-import android.widget.Toast;
+import android.text.InputType;
 
 public class PriceVarAlarmSettingsFragment extends AlarmSettingsFragment {
-
-	private static final String PREF_KEY_ALARM_VAR_UPDATE_INTERVAL = "pref_key_alarm_var_update_interval";
-	private static final String PREF_KEY_ALARM_VAR_TYPE = "pref_key_alarm_var_type";
-	private static final String PREF_KEY_ALARM_VAR_TYPE_PERCENTAGE = "pref_key_alarm_type_percentage";
-	private static final String PREF_KEY_ALARM_VAR_TYPE_VARIATION = "pref_key_alarm_var_type_variation";
-	private static final String PREF_KEY_ALARM_VAR_VALUE = "pref_key_alarm_var_value";
 
 	private class OnPriceVarSettingsPreferenceChangeListener extends OnAlarmSettingsPreferenceChangeListener{
 
@@ -32,26 +21,34 @@ public class PriceVarAlarmSettingsFragment extends AlarmSettingsFragment {
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
 			PriceVarAlarm priceVarAlarm = (PriceVarAlarm) alarm;
-			if(key.equals(PREF_KEY_ALARM_VAR_TYPE)){
-				ListPreference listPreference = (ListPreference) preference;
-				listPreference.setSummary(listPreference.getEntries()[listPreference.findIndexOfValue((String) newValue)]);
-				listPreference.setValue((String) newValue);
-			}else if(key.equals(PREF_KEY_ALARM_VAR_VALUE)){
-				preference.setSummary((CharSequence) newValue);
-				Log.d(((ListPreference) findPreference(PREF_KEY_ALARM_VAR_TYPE)).getValue());
-				if(((ListPreference) findPreference(PREF_KEY_ALARM_VAR_TYPE)).getValue().equals(PREF_KEY_ALARM_VAR_TYPE_VARIATION)){
-					priceVarAlarm.setVariation(Double.parseDouble((String) newValue));
-					priceVarAlarm.setPercent(0);
+
+			if(key.equals(PriceVarAlarmCreationFragment.PREF_KEY_VAR_IN_PERCENTAGE)){
+				if((Boolean)newValue){
+					priceVarAlarm.setPercent((float) priceVarAlarm.getVariation());
+					findPreference(PriceVarAlarmCreationFragment.PREF_KEY_VAR_VALUE).setSummary(priceVarAlarm.getPercent() + "%");
 				}else{
-					priceVarAlarm.setPercent(Float.parseFloat((String) newValue));
+					priceVarAlarm.setVariation(priceVarAlarm.getPercent());
+					priceVarAlarm.setPercent(0);
+					findPreference(PriceVarAlarmCreationFragment.PREF_KEY_VAR_VALUE)
+					.setSummary(priceVarAlarm.getVariation() + " " + alarm.getPair()
+							.getExchange());
 				}
-			}else if(preference.getKey().equals(PREF_KEY_ALARM_VAR_UPDATE_INTERVAL)) {
+			}else if(key.equals(PriceVarAlarmCreationFragment.PREF_KEY_VAR_VALUE)){
+				if(priceVarAlarm.isPercent()){
+					priceVarAlarm.setPercent(Float.parseFloat((String) newValue));
+					preference.setSummary(newValue + "%");
+				}else{
+					priceVarAlarm.setVariation(Double.parseDouble((String) newValue));
+					preference.setSummary(newValue + " " + alarm.getPair().getExchange());
+				}
+			}else if(key.equals(AlarmCreationFragment.PREF_KEY_UPDATE_INTERVAL)) {
 				preference.setSummary(SettingsFragment.buildMinToDaysSummary((String)newValue));
-				priceVarAlarm.setPeriod(Long.parseLong((String) newValue));
+				priceVarAlarm.setPeriod(Long.parseLong((String) newValue) * 60000);
 			}else{
 				return super.onPreferenceChange(preference, newValue);
 			}
-			((AlarmSettingsActivity) getActivity()).getStorageAndControlService().replaceAlarm(priceVarAlarm);
+			((AlarmSettingsActivity) enclosingActivity).getStorageAndControlService()
+			.replaceAlarm(priceVarAlarm);
 			return true;
 		}
 	}
@@ -67,48 +64,49 @@ public class PriceVarAlarmSettingsFragment extends AlarmSettingsFragment {
 	public void onCreate(Bundle bundle){
 		super.onCreate(bundle);
 
-		PreferenceCategory category = (PreferenceCategory) findPreference("specific");
-		category.setTitle("Price Var");
+		PriceVarAlarm priceVarAlarm = (PriceVarAlarm) alarm;
 
-		String [] entries = {"Variation","Percentage"};
-		String [] values = {PREF_KEY_ALARM_VAR_TYPE_VARIATION,PREF_KEY_ALARM_VAR_TYPE_PERCENTAGE};
-		ListPreference listPreference = new ListPreference(getActivity());
-		listPreference.setTitle("Variation type");
-		listPreference.setEntries(entries);
-		listPreference.setEntryValues(values);
+		ListPreference alarmTypePref = (ListPreference) findPreference(AlarmCreationFragment.PREF_KEY_TYPE);
+		alarmTypePref.setValueIndex(1);
+		alarmTypePref.setSummary(alarmTypePref.getEntry());
 
-		listPreference.setKey(PREF_KEY_ALARM_VAR_TYPE);
-		listPreference.setOnPreferenceChangeListener(listener);
-		category.addPreference(listPreference);
+		PreferenceCategory category = (PreferenceCategory) findPreference(AlarmCreationFragment.PREF_KEY_SPECIFIC);
+		category.setTitle(alarmTypePref.getEntry());
 
-		EditTextPreference editTextPreference = new EditTextPreference(getActivity());
-		editTextPreference.setKey(PREF_KEY_ALARM_VAR_VALUE);
-		editTextPreference.setTitle("Variation");
-		editTextPreference.setDialogMessage("Insert a variation");
+		CheckBoxPreference checkBoxPref = new CheckBoxPreference(enclosingActivity);
+		checkBoxPref.setTitle(R.string.pref_title_var_in_percentage);
+		checkBoxPref.setKey(PriceVarAlarmCreationFragment.PREF_KEY_VAR_IN_PERCENTAGE);
+		checkBoxPref.setDefaultValue(priceVarAlarm.isPercent());
+		checkBoxPref.setOnPreferenceChangeListener(listener);
+		checkBoxPref.setOrder(0);
+		category.addPreference(checkBoxPref);
+		checkBoxPref.setChecked(priceVarAlarm.isPercent());
 
-		editTextPreference.setOnPreferenceChangeListener(listener);
-		category.addPreference(editTextPreference);
+		EditTextPreference edit = new EditTextPreference(enclosingActivity);
+		edit.setKey(PriceVarAlarmCreationFragment.PREF_KEY_VAR_VALUE);
+		edit.setTitle(R.string.pref_title_var_value);
+		edit.setDialogTitle(R.string.pref_title_var_value);
+		edit.setOnPreferenceChangeListener(listener);
+		edit.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+		edit.setOrder(1);
 
-		PriceVarAlarm priceVaralarm = (PriceVarAlarm) alarm;
-		if(priceVaralarm.isPercent()){
-			listPreference.setSummary("Percentage");
-			listPreference.setValueIndex(1);
-			editTextPreference.setSummary(String.valueOf(priceVaralarm.getPercent()));
+		if(priceVarAlarm.isPercent()){
+			edit.setDefaultValue(priceVarAlarm.getPercent());
+			edit.setText(SettingsFragment.cleanDoubleToString(priceVarAlarm.getPercent()));
+			edit.setSummary(SettingsFragment.cleanDoubleToString(priceVarAlarm.getPercent()) + "%");
 		}else{
-			listPreference.setSummary("Variation");
-			listPreference.setValueIndex(0);
-			editTextPreference.setSummary(String.valueOf(priceVaralarm.getVariation()));
+			edit.setDefaultValue(priceVarAlarm.getVariation());
+			edit.setText(SettingsFragment.cleanDoubleToString(priceVarAlarm.getVariation()));
+			edit.setSummary(SettingsFragment.cleanDoubleToString(priceVarAlarm.getVariation()) + " " + alarm
+					.getPair().getExchange());
 		}
 
-		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getActivity());
-		editTextPreference = new EditTextPreference(getActivity());
-		editTextPreference.setKey(PREF_KEY_ALARM_VAR_UPDATE_INTERVAL);
-		editTextPreference.setTitle("Variation Update Interval");
-		editTextPreference.setDialogMessage("Insert an Interval");
-		editTextPreference.setDefaultValue(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR, ""));
-		editTextPreference.setSummary(SettingsFragment.buildMinToDaysSummary(String.valueOf(priceVaralarm.getPeriod())));
-		editTextPreference.setOnPreferenceChangeListener(listener);
-		category = (PreferenceCategory) findPreference("alert");
-		category.addPreference(editTextPreference);
+		category.addPreference(edit);
+
+		edit = (EditTextPreference) findPreference(AlarmCreationFragment.PREF_KEY_UPDATE_INTERVAL);
+		edit.setDialogMessage(R.string.pref_summary_update_interval_var);
+		edit.setSummary(SettingsFragment.buildMinToDaysSummary(String.valueOf(priceVarAlarm.getPeriod()/60000)));
+		edit.setOnPreferenceChangeListener(listener);
+		edit.setText(String.valueOf(priceVarAlarm.getPeriod()/60000));
 	}
 }

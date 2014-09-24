@@ -19,8 +19,8 @@ import android.preference.PreferenceManager;
 import android.text.InputType;
 
 public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
-	private static final String PREF_KEY_VAR_IN_PERCENTAGE = "pref_key_var_in_percentage";
-	private static final String PREF_KEY_VAR_VALUE = "pref_key_var_value";
+	public static final String PREF_KEY_VAR_IN_PERCENTAGE = "pref_key_var_in_percentage";
+	public static final String PREF_KEY_VAR_VALUE = "pref_key_var_value";
 
 	private boolean isPercentage = false;
 
