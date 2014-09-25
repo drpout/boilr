@@ -51,46 +51,50 @@
     <string name="pref_title_network_usage">Network usage</string>
     <string name="pref_title_mobile_data">Mobile data</string>
     <string name="pref_title_default_update_interval_hit">Hit alarm default update interval</string>
-    <string name="pref_summary_default_update_interval_hit">In seconds. Defines how often a hit alarm gets data from the exchange. You can set another interval for a particular alarm on its settings.</string>
-    <string name="pref_title_default_update_interval_var">Variance alarm default update interval</string>
-    <string name="pref_summary_default_update_interval_var">In minutes. Defines the time span taken into account for the variation calculation. You can set another interval for a particular alarm on its settings.</string>
+    <string name="pref_summary_default_update_interval_hit">In seconds. Defines how often a price hit alarm gets data from the exchange. You can set another interval for a particular alarm on its settings.</string>
+    <string name="pref_title_default_update_interval_change">Change alarm default time frame</string>
+    <string name="pref_summary_default_update_interval_change">In minutes. Defines the default time frame for price change alarms. You can set another time frame for a particular alarm on its settings.</string>
     <string name="pref_title_check_pairs_interval">Check for new pairs</string>
     <string-array name="pref_entries_check_pairs_interval">
+        <item>Hourly</item>
+        <item>Twice a day</item>
         <item>Daily</item>
         <item>Every other day</item>
         <item>Weekly</item>
         <item>Fortnightly</item>
-        <item>Monthly</item>
     </string-array>
     <string-array name="pref_values_check_pairs_interval">
+        <item>3600000</item>
+        <item>43200000</item>
         <item>86400000</item> <!-- 24 hours * 60 minutes * 60 seconds * 1000 milis -->
         <item>172800000</item>
         <item>604800000</item>
         <item>1209600000</item>
-        <item>2592000000</item>
     </string-array>
     <string name="pref_default_check_pairs_interval">604800000</string>
     
     <string name="pref_type_title">Alarm type</string>
     <string-array name="pref_type_entries">
         <item>Price hit</item>
-        <item>Price variation</item>
+        <item>Price change</item>
     </string-array>
     <string-array name="pref_type_entries_values">
         <item>price_hit</item>
-        <item>price_var</item>
+        <item>price_change</item>
     </string-array>
     <string name="pref_type_default">price_hit</string>
     <string name="pref_exchange_title">Exchange</string>
     <string-array name="pref_exchange_entries">
         <item>Allcoin</item>
-        <item>BleuTrade</item>
         <item>Bitcoin.de</item>
         <item>Bitstamp</item>
         <item>Bittrex</item>
+        <item>BleuTrade</item>
+        <item>BTC38</item>
         <item>BTCChina</item>
         <item>BTC-E</item>
         <item>BTER</item>
+        <item>BullionVault</item>        
         <item>Cavirtex</item>
         <item>Cryptsy</item>
         <item>HitBTC</item>
@@ -104,13 +108,15 @@
     </string-array>
     <string-array name="pref_exchange_entries_values">
         <item>mobi.boilr.libdynticker.allcoin.AllcoinExchange</item>
-        <item>mobi.boilr.libdynticker.bleutrade.BleuTradeExchange</item>
         <item>mobi.boilr.libdynticker.bitcoinde.Bitcoinde</item>
         <item>mobi.boilr.libdynticker.bitstamp.BitstampExchange</item>
         <item>mobi.boilr.libdynticker.bittrex.BittrexExchange</item>
+        <item>mobi.boilr.libdynticker.bleutrade.BleuTradeExchange</item>
+        <item>mobi.boilr.libdynticker.btc38.BTC38Exchange</item>
         <item>mobi.boilr.libdynticker.btcchina.BTCChinaExchange</item>
         <item>mobi.boilr.libdynticker.btce.BTCEExchange</item>
         <item>mobi.boilr.libdynticker.bter.BTERExchange</item>
+        <item>mobi.boilr.libdynticker.bullionvault.BullionVaultExchange</item>
         <item>mobi.boilr.libdynticker.cavirtex.CavirtexExchange</item>
         <item>mobi.boilr.libdynticker.cryptsy.CryptsyExchange</item>
         <item>mobi.boilr.libdynticker.hitbtc.HitBTCExchange</item>
@@ -132,11 +138,12 @@
     <string name="pref_title_specific">Specific</string>
     <string name="pref_title_upper_bound">Upper bound</string>
     <string name="pref_title_lower_bound">Lower bound</string>
-    <string name="pref_title_var_in_percentage">Variation in percentage</string>
-    <string name="pref_title_var_value">Variation</string>
+    <string name="pref_title_change_in_percentage">Change in percentage</string>
+    <string name="pref_title_change_value">Change</string>
     <string name="pref_title_update_interval">Update interval</string>
+    <string name="pref_title_time_frame">Time frame</string>
     <string name="pref_summary_update_interval_hit">In seconds. Defines how often the hit alarm gets data from the exchange.</string>
-    <string name="pref_summary_update_interval_var">In minutes. Defines the time span taken into account for the variation calculation.</string>
+    <string name="pref_summary_update_interval_change">In minutes. Defines the time frame for the price change alarm.</string>
     
     <string name="boilr_alarm">Boilr Alarm</string>
     <string name="turn_off">Turn off</string>

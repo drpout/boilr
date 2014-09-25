@@ -11,10 +11,10 @@ import java.util.concurrent.ExecutionException;
 import mobi.boilr.boilr.database.DBManager;
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
+import mobi.boilr.boilr.utils.ChangeAlarmParameter;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.PercentageAlarmParameter;
-import mobi.boilr.boilr.utils.VariationAlarmParameter;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libdynticker.bitstamp.BitstampExchange;
 import mobi.boilr.libdynticker.btcchina.BTCChinaExchange;
@@ -23,8 +23,8 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.Notify;
+import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
-import mobi.boilr.libpricealarm.PriceVarAlarm;
 import mobi.boilr.libpricealarm.UpperBoundSmallerThanLowerBoundException;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -97,7 +97,7 @@ public class StorageAndControlService extends Service {
 				startAlarm(alarm);
 
 				if(hasNetworkConnection()) {
-					alarm = new PriceVarAlarm(generateAlarmID(), new BTCChinaExchange(10000000), new Pair("BTC", "CNY"), 60000, new AndroidNotify(StorageAndControlService.this), 0.01f);
+					alarm = new PriceChangeAlarm(generateAlarmID(), new BTCChinaExchange(10000000), new Pair("BTC", "CNY"), 60000, new AndroidNotify(StorageAndControlService.this), 0.01f);
 					addAlarm(alarm);
 					startAlarm(alarm);
 				}
@@ -121,11 +121,11 @@ public class StorageAndControlService extends Service {
 		}
 	}
 
-	private class addPercentageAlarm extends
-			AsyncTask<PercentageAlarmParameter, Void, PriceVarAlarm> {
+	private class AddPercentageAlarm extends
+	AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
 
 		@Override
-		protected PriceVarAlarm doInBackground(PercentageAlarmParameter... arg0) {
+		protected PriceChangeAlarm doInBackground(PercentageAlarmParameter... arg0) {
 			if(arg0.length == 1) {
 				int id = arg0[0].getId();
 				Exchange exchange = arg0[0].getExchange();
@@ -134,7 +134,7 @@ public class StorageAndControlService extends Service {
 				Notify notify = arg0[0].getNotify();
 				float percent = arg0[0].getPercent();
 				try {
-					return new PriceVarAlarm(id, exchange, pair, period, notify, percent);
+					return new PriceChangeAlarm(id, exchange, pair, period, notify, percent);
 				} catch (Exception e) {
 					Log.e("AssyncTask AddPercentageAlarm failed", e);
 				}
@@ -143,21 +143,21 @@ public class StorageAndControlService extends Service {
 		}
 	}
 
-	private class addVariationAlarm extends AsyncTask<VariationAlarmParameter, Void, PriceVarAlarm> {
+	private class AddChangeAlarm extends AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
 
 		@Override
-		protected PriceVarAlarm doInBackground(VariationAlarmParameter... arg0) {
+		protected PriceChangeAlarm doInBackground(ChangeAlarmParameter... arg0) {
 			if(arg0.length == 1) {
 				int id = arg0[0].getId();
 				Exchange exchange = arg0[0].getExchange();
 				Pair pair = arg0[0].getPair();
 				long period = arg0[0].getPeriod();
 				Notify notify = arg0[0].getNotify();
-				double variation = arg0[0].getVariation();
+				double change = arg0[0].getChange();
 				try {
-					return new PriceVarAlarm(id, exchange, pair, period, notify, variation);
+					return new PriceChangeAlarm(id, exchange, pair, period, notify, change);
 				} catch (Exception e) {
-					Log.e("AssyncTask AddVariationAlarm failed", e);
+					Log.e("AssyncTask AddChangeAlarm failed.", e);
 				}
 			}
 			return null;
@@ -226,8 +226,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-			InstantiationException, IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, SecurityException {
+	InstantiationException, IllegalAccessException, IllegalArgumentException,
+	InvocationTargetException, SecurityException {
 		if(exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {
@@ -342,18 +342,18 @@ public class StorageAndControlService extends Service {
 
 	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
 			float percent) throws InterruptedException, ExecutionException, IOException {
-		// Var alarms always check last value to build variation
-		PriceVarAlarm priceVarAlarm = ((new addPercentageAlarm()).execute(new PercentageAlarmParameter(id, exchange, pair, period, notify, percent))).get();
-		addAlarm(priceVarAlarm);
-		this.startAlarm(priceVarAlarm);
+		// Change alarms always check last value to build the change
+		PriceChangeAlarm priceChangeAlarm = ((new AddPercentageAlarm()).execute(new PercentageAlarmParameter(id, exchange, pair, period, notify, percent))).get();
+		addAlarm(priceChangeAlarm);
+		this.startAlarm(priceChangeAlarm);
 	}
 
 	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
-			double variation) throws InterruptedException, ExecutionException, IOException {
-		// Var alarms always check last value to build variation
-		PriceVarAlarm priceVarAlarm = ((new addVariationAlarm()).execute(new VariationAlarmParameter(id, exchange, pair, period, notify, variation))).get();
-		addAlarm(priceVarAlarm);
-		this.startAlarm(priceVarAlarm);
+			double change) throws InterruptedException, ExecutionException, IOException {
+		// Change alarms always check last value to build the change
+		PriceChangeAlarm priceChangeAlarm = ((new AddChangeAlarm()).execute(new ChangeAlarmParameter(id, exchange, pair, period, notify, change))).get();
+		addAlarm(priceChangeAlarm);
+		this.startAlarm(priceChangeAlarm);
 	}
 
 	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,

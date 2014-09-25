@@ -45,9 +45,9 @@
 			android:inputType="number"
 			android:defaultValue="30" />
 		<EditTextPreference
-		    android:key="pref_key_default_update_interval_var"
-			android:title="@string/pref_title_default_update_interval_var"
-			android:dialogMessage="@string/pref_summary_default_update_interval_var"
+		    android:key="pref_key_default_update_interval_change"
+			android:title="@string/pref_title_default_update_interval_change"
+			android:dialogMessage="@string/pref_summary_default_update_interval_change"
 			android:inputType="number"
 			android:defaultValue="1440" />
 		<ListPreference

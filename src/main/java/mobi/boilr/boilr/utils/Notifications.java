@@ -4,10 +4,11 @@ import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.activities.NotificationActivity;
 import mobi.boilr.boilr.activities.SettingsActivity;
+import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
+import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
-import mobi.boilr.libpricealarm.PriceVarAlarm;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -23,12 +24,12 @@ public final class Notifications {
 	private static Notification.Builder setCommonNotificationProps(Context context, int alarmID,
 			String firingReason) {
 		Notification.Builder notification = new Notification.Builder(context)
-				.setContentTitle(context.getString(R.string.boilr_alarm))
-				.setContentText(firingReason)
-				.setSmallIcon(R.drawable.ic_action_alarms)
-				.setLights(0xFFFF0000, 333, 333) // Blink in red ~3 times per second.
-				.setOngoing(false)
-				.setAutoCancel(true);
+		.setContentTitle(context.getString(R.string.boilr_alarm))
+		.setContentText(firingReason)
+		.setSmallIcon(R.drawable.ic_action_alarms)
+		.setLights(0xFFFF0000, 333, 333) // Blink in red ~3 times per second.
+		.setOngoing(false)
+		.setAutoCancel(true);
 
 		Intent viewAlarmsIntent = new Intent(context, AlarmListActivity.class);
 		viewAlarmsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -68,7 +69,7 @@ public final class Notifications {
 	}
 
 	public static boolean canKeepMonitoring(Alarm alarm) {
-		if(alarm instanceof PriceVarAlarm)
+		if(alarm instanceof PriceChangeAlarm)
 			return true;
 		else
 			return false;
@@ -79,14 +80,14 @@ public final class Notifications {
 			Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
 			changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			noInternetNotification = new Notification.Builder(context)
-					.setContentTitle(context.getString(R.string.no_internet))
-					.setContentText(context.getString(R.string.no_updates))
-					.setSmallIcon(R.drawable.ic_action_warning)
-					.setOngoing(false)
-					.setAutoCancel(true)
-					.setPriority(Notification.PRIORITY_DEFAULT)
-					.setWhen(0)
-					.setContentIntent(PendingIntent.getActivity(context, noInternetNotificationID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+			.setContentTitle(context.getString(R.string.no_internet))
+			.setContentText(context.getString(R.string.no_updates))
+			.setSmallIcon(R.drawable.ic_action_warning)
+			.setOngoing(false)
+			.setAutoCancel(true)
+			.setPriority(Notification.PRIORITY_DEFAULT)
+			.setWhen(0)
+			.setContentIntent(PendingIntent.getActivity(context, noInternetNotificationID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 		}
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(noInternetNotificationID);
@@ -98,14 +99,14 @@ public final class Notifications {
 		if(alarm instanceof PriceHitAlarm) {
 			return pair.getCoin() + " @ " + alarm.getLastValue() + " " + pair.getExchange() +
 					"\nin " + alarm.getExchange().getName();
-		} else if(alarm instanceof PriceVarAlarm) {
-			PriceVarAlarm varAlarm = (PriceVarAlarm) alarm;
-			String reason = pair.getCoin() + "/" + pair.getExchange() + " had\n";
-			if(varAlarm.isPercent())
-				reason += varAlarm.getPercent() + "%";
+		} else if(alarm instanceof PriceChangeAlarm) {
+			PriceChangeAlarm changeAlarm = (PriceChangeAlarm) alarm;
+			String reason = pair.getCoin() + "/" + pair.getExchange() + " had\n" + SettingsFragment.cleanDoubleToString(changeAlarm.getLastChange());
+			if(changeAlarm.isPercent())
+				reason += "%";
 			else
-				reason += varAlarm.getVariation() + " " + pair.getExchange();
-			reason += " variation\nin " + alarm.getExchange().getName();
+				reason += " " + pair.getExchange();
+			reason += " change\nin " + alarm.getExchange().getName();
 			return reason;
 		}
 		return "Could not retrieve firing reason.";

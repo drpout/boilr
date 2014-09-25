@@ -4,10 +4,10 @@ import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.views.fragments.PriceHitAlarmSettingsFragment;
-import mobi.boilr.boilr.views.fragments.PriceVarAlarmSettingsFragment;
+import mobi.boilr.boilr.views.fragments.PriceChangeAlarmSettingsFragment;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
-import mobi.boilr.libpricealarm.PriceVarAlarm;
+import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -45,8 +45,8 @@ public class AlarmSettingsActivity extends PreferenceActivity {
 
 				if(alarm instanceof PriceHitAlarm) {
 					getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmSettingsFragment(alarm)).commit();
-				} else if(alarm instanceof PriceVarAlarm) {
-					getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceVarAlarmSettingsFragment(alarm)).commit();
+				} else if(alarm instanceof PriceChangeAlarm) {
+					getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceChangeAlarmSettingsFragment(alarm)).commit();
 				}
 			}
 		}

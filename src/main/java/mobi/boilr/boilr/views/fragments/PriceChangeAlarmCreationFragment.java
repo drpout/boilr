@@ -5,7 +5,6 @@ import java.util.concurrent.ExecutionException;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.domain.AndroidNotify;
-import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import android.content.SharedPreferences;
@@ -18,24 +17,24 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 import android.text.InputType;
 
-public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
-	public static final String PREF_KEY_VAR_IN_PERCENTAGE = "pref_key_var_in_percentage";
-	public static final String PREF_KEY_VAR_VALUE = "pref_key_var_value";
+public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
+	public static final String PREF_KEY_CHANGE_IN_PERCENTAGE = "pref_key_change_in_percentage";
+	public static final String PREF_KEY_CHANGE_VALUE = "pref_key_change_value";
 
 	private boolean isPercentage = false;
 
-	private class OnPriceVarSettingsPreferenceChangeListener extends
+	private class OnPriceChangeSettingsPreferenceChangeListener extends
 			OnAlarmSettingsPreferenceChangeListener {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
-			if(key.equals(PREF_KEY_VAR_IN_PERCENTAGE)) {
+			if(key.equals(PREF_KEY_CHANGE_IN_PERCENTAGE)) {
 				isPercentage = (Boolean) newValue;
-				EditTextPreference edit = (EditTextPreference) findPreference(PREF_KEY_VAR_VALUE);
-				edit.setSummary(getVarValueSummary(edit.getText()));
-			} else if(key.equals(PREF_KEY_VAR_VALUE)) {
-				preference.setSummary(getVarValueSummary((String) newValue));
+				EditTextPreference edit = (EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE);
+				edit.setSummary(getChangeValueSummary(edit.getText()));
+			} else if(key.equals(PREF_KEY_CHANGE_VALUE)) {
+				preference.setSummary(getChangeValueSummary((String) newValue));
 			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
 				preference.setSummary(SettingsFragment.buildMinToDaysSummary((String) newValue));
 			} else {
@@ -44,7 +43,7 @@ public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
 			return true;
 		}
 
-		private String getVarValueSummary(String value) {
+		private String getChangeValueSummary(String value) {
 			if(isPercentage)
 				return value + "%";
 			else
@@ -53,9 +52,9 @@ public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
 
 	}
 
-	OnAlarmSettingsPreferenceChangeListener listener = new OnPriceVarSettingsPreferenceChangeListener();
+	OnAlarmSettingsPreferenceChangeListener listener = new OnPriceChangeSettingsPreferenceChangeListener();
 
-	public PriceVarAlarmCreationFragment(int exchangeIndex, int pairIndex) {
+	public PriceChangeAlarmCreationFragment(int exchangeIndex, int pairIndex) {
 		super(exchangeIndex, pairIndex);
 	}
 
@@ -70,8 +69,8 @@ public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
 		category.setTitle(alarmTypePref.getEntry());
 
 		CheckBoxPreference checkBoxPref = new CheckBoxPreference(enclosingActivity);
-		checkBoxPref.setTitle(R.string.pref_title_var_in_percentage);
-		checkBoxPref.setKey(PREF_KEY_VAR_IN_PERCENTAGE);
+		checkBoxPref.setTitle(R.string.pref_title_change_in_percentage);
+		checkBoxPref.setKey(PREF_KEY_CHANGE_IN_PERCENTAGE);
 		checkBoxPref.setDefaultValue(isPercentage);
 		checkBoxPref.setOnPreferenceChangeListener(listener);
 		checkBoxPref.setOrder(0);
@@ -79,9 +78,9 @@ public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
 		checkBoxPref.setChecked(isPercentage);
 
 		EditTextPreference edit = new EditTextPreference(enclosingActivity);
-		edit.setKey(PREF_KEY_VAR_VALUE);
-		edit.setTitle(R.string.pref_title_var_value);
-		edit.setDialogTitle(R.string.pref_title_var_value);
+		edit.setKey(PREF_KEY_CHANGE_VALUE);
+		edit.setTitle(R.string.pref_title_change_value);
+		edit.setDialogTitle(R.string.pref_title_change_value);
 		edit.setDefaultValue(null);
 		edit.setOnPreferenceChangeListener(listener);
 		edit.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -92,8 +91,9 @@ public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
 
 		edit = (EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL);
-		edit.setDialogMessage(R.string.pref_summary_update_interval_var);
-		edit.setSummary(SettingsFragment.buildMinToDaysSummary(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR, "")));
+		edit.setTitle(R.string.pref_title_time_frame);
+		edit.setDialogMessage(R.string.pref_summary_update_interval_change);
+		edit.setSummary(SettingsFragment.buildMinToDaysSummary(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
 		edit.setOnPreferenceChangeListener(listener);
 		edit.setText(null);
 	}
@@ -105,20 +105,18 @@ public class PriceVarAlarmCreationFragment extends AlarmCreationFragment {
 		String updateInterval = ((EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL)).getText();
 		// Time is in minutes, convert to milliseconds
 		long period = 60000 * Long.parseLong(updateInterval != null ? updateInterval :
-			sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR, ""));
-		String varValueString = ((EditTextPreference) findPreference(PREF_KEY_VAR_VALUE)).getText();
-		double variation;
-		if(varValueString == null || varValueString.equals(""))
-			variation = Double.POSITIVE_INFINITY;
+			sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""));
+		String changeValueString = ((EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE)).getText();
+		double change;
+		if(changeValueString == null || changeValueString.equals(""))
+			change = Double.POSITIVE_INFINITY;
 		else
-			variation = Double.parseDouble(varValueString);
+			change = Double.parseDouble(changeValueString);
 		if(isPercentage) {
-			float percent = (float) variation;
-			Log.d("Percent " + percent);
+			float percent = (float) change;
 			mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, percent);
 		} else {
-			Log.d("Variation " + variation);
-			mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, variation);
+			mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, change);
 		}
 	}
 }

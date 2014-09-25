@@ -1,6 +1,5 @@
 package mobi.boilr.boilr.adapters;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -8,8 +7,8 @@ import java.util.List;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libpricealarm.Alarm;
+import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
-import mobi.boilr.libpricealarm.PriceVarAlarm;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -43,36 +42,27 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		View rowView = null;
 
 		if(alarm instanceof PriceHitAlarm) {
-
 			rowView = mInflater.inflate(R.layout.price_hit_alarm_row, parent, false);
 			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
 
 			TextView upperBound = (TextView) rowView.findViewById(R.id.upper_bound);
 			upperBound.setText(String.valueOf(SettingsFragment.cleanDoubleToString(priceHitAlarm.getUpperBound())));
 
-
 			TextView lowerBound = (TextView) rowView.findViewById(R.id.lower_bound);
 			lowerBound.setText(String.valueOf(SettingsFragment.cleanDoubleToString(priceHitAlarm.getLowerBound())));
-
-		} else if(alarm instanceof PriceVarAlarm) {
-
-			rowView = mInflater.inflate(R.layout.price_var_alarm_row, parent, false);
-			PriceVarAlarm priceVarAlarm = (PriceVarAlarm) alarm;
+		} else if(alarm instanceof PriceChangeAlarm) {
+			rowView = mInflater.inflate(R.layout.price_change_alarm_row, parent, false);
+			PriceChangeAlarm priceChangeAlarm = (PriceChangeAlarm) alarm;
 
 			TextView periodTextView = (TextView) rowView.findViewById(R.id.period);
-			//Period comes in milliseconds, 60000 number of milliseconds in a minute
-			double days = priceVarAlarm.getPeriod()/(SettingsFragment.MINUTES_IN_DAY * 60000);
-			String result = SettingsFragment.cleanDoubleToString(days) + "d";
-			periodTextView.setText(result );
+			periodTextView.setText(formatMilis(priceChangeAlarm.getPeriod()));
 
-			TextView variance = (TextView) rowView.findViewById(R.id.variance);
-			if(priceVarAlarm.isPercent()) {
-				variance.setText(String.valueOf(SettingsFragment.cleanDoubleToString(priceVarAlarm
-						.getPercent())) + "%");
+			TextView change = (TextView) rowView.findViewById(R.id.change);
+			if(priceChangeAlarm.isPercent()) {
+				change.setText(SettingsFragment.cleanDoubleToString(priceChangeAlarm.getPercent()) + "%");
 			} else {
-				variance.setText(String.valueOf(SettingsFragment.cleanDoubleToString(priceVarAlarm.getVariation())));
+				change.setText(SettingsFragment.cleanDoubleToString(priceChangeAlarm.getChange()) + " " + alarm.getPair().getExchange());
 			}
-
 		}
 
 		ToggleButton toggleButton = (ToggleButton) rowView.findViewById(R.id.toggle_button);
@@ -91,7 +81,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 
 		TextView lastCheck = (TextView) rowView.findViewById(R.id.last_check);
 		if(alarm.getLastUpdateTimestamp() != null) {
-			lastCheck.setText(formatTimeDifference(alarm.getLastUpdateTimestamp(), new Timestamp(System.currentTimeMillis())));
+			lastCheck.setText(formatMilis(System.currentTimeMillis() - alarm.getLastUpdateTimestamp().getTime()));
 		}
 
 		TextView pair = (TextView) rowView.findViewById(R.id.pair);
@@ -103,24 +93,26 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		return rowView;
 	}
 
-	public String formatTimeDifference(Timestamp start, Timestamp now) {
-		long difference = now.getTime() - start.getTime();
-		String diff;
+	private static long MILIS_IN_MINUTE = 60000; // 60 * 1000
+	private static long MILIS_IN_HOUR = 3600000; // 60 * 60 * 1000
+	private static long MILIS_IN_DAY = 86400000; // 24 * 60 * 60 * 1000
 
-		// 60s*1000
-		if(difference < 60*1000) {
-			// Seconds
-			diff = difference/1000 + "s";
-		} else if(difference < 60 * 60 * 1000) {
-			// Minutes
-			diff = (difference / (60*1000)) + "m";
-		} else if(difference < 60 * 60 * 24 * 1000) {
-			// Hours
-			diff = (difference / (60 * 60 * 1000)) + "h";
+	public static String formatMilis(long milis) {
+		String formated;
+		if(milis < MILIS_IN_MINUTE) {
+			// seconds
+			formated = milis / 1000 + "s";
+		} else if(milis < MILIS_IN_HOUR) {
+			// minutes
+			formated = (milis / MILIS_IN_MINUTE) + "m";
+		} else if(milis < MILIS_IN_DAY) {
+			// hours
+			formated = (milis / MILIS_IN_HOUR) + "h";
 		} else {
-			diff = (difference / (60 * 60 * 24 * 1000)) + "d";
+			// days
+			formated = (milis / MILIS_IN_DAY) + "d";
 		}
-		return diff;
+		return formated;
 	}
 
 	private class AlarmFilter extends Filter {
@@ -129,20 +121,20 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults results = new FilterResults();
 			if(mOriginalAlarms == null) {
-				synchronized(mLock) {
+				synchronized (mLock) {
 					mOriginalAlarms = new ArrayList<Alarm>(mAlarms);
 				}
 			}
 			if(constraint == null || constraint.length() == 0) {
 				ArrayList<Alarm> list;
-				synchronized(mLock) {
+				synchronized (mLock) {
 					list = new ArrayList<Alarm>(mOriginalAlarms);
 				}
 				results.values = list;
 				results.count = list.size();
 			} else {
 				List<Alarm> originalList;
-				synchronized(mLock) {
+				synchronized (mLock) {
 					originalList = new ArrayList<Alarm>(mOriginalAlarms);
 				}
 				String[] filterStrings = constraint.toString().toLowerCase().split("\\s+");
@@ -151,10 +143,10 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 				Alarm filterableAlarm;
 				boolean containsAllFilters;
 				int count = originalList.size();
-				for(int i = 0; i < count; i++) {
+				for (int i = 0; i < count; i++) {
 					containsAllFilters = true;
 					filterableAlarm = originalList.get(i);
-					for(int j = 0; j < filtersCount; j++) {
+					for (int j = 0; j < filtersCount; j++) {
 						if(!filterableAlarm.toString().toLowerCase().contains(filterStrings[j])) {
 							containsAllFilters = false;
 							break;
@@ -183,7 +175,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void add(Alarm alarm) {
-		synchronized(mLock) {
+		synchronized (mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.add(alarm);
 			} else {
@@ -194,7 +186,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void addAll(Collection<? extends Alarm> collection) {
-		synchronized(mLock) {
+		synchronized (mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.addAll(collection);
 			} else {
@@ -205,7 +197,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void remove(Alarm alarm) {
-		synchronized(mLock) {
+		synchronized (mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.remove(alarm);
 			} else {
@@ -216,7 +208,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void remove(int position) {
-		synchronized(mLock) {
+		synchronized (mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.remove(position);
 			} else {
@@ -227,7 +219,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void clear() {
-		synchronized(mLock) {
+		synchronized (mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.clear();
 			} else {

@@ -24,7 +24,6 @@ import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -40,7 +39,7 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 	protected static final String PREF_KEY_SPECIFIC = "pref_key_specific";
 	protected static final String PREF_KEY_ALERTS = "pref_key_alerts";
 	protected static final String PREF_VALUE_PRICE_HIT = "price_hit";
-	protected static final String PREF_VALUE_PRICE_VAR = "price_var";
+	protected static final String PREF_VALUE_PRICE_CHANGE = "price_change";
 	protected static final String PREF_KEY_EXCHANGE = "pref_key_exchange";
 	protected static final String PREF_KEY_TYPE = "pref_key_type";
 	protected static final String PREF_KEY_PAIR = "pref_key_pair";
@@ -83,8 +82,8 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 				pairIndex = Integer.parseInt((String) newValue);
 				preference.setSummary(pairs.get(pairIndex).toString());
 			} else if(key.equals(PREF_KEY_TYPE)) {
-				if(newValue.equals(PREF_VALUE_PRICE_VAR)) {
-					enclosingActivity.getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceVarAlarmCreationFragment(exchangeIndex, pairIndex)).commit();
+				if(newValue.equals(PREF_VALUE_PRICE_CHANGE)) {
+					enclosingActivity.getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceChangeAlarmCreationFragment(exchangeIndex, pairIndex)).commit();
 				} else if(newValue.equals(PREF_VALUE_PRICE_HIT)) {
 					enclosingActivity.getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmCreationFragment(exchangeIndex, pairIndex)).commit();
 				}
@@ -220,13 +219,6 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 
 	private void createAlarmAndReturn() {
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
-
-		Log.d("exchange " + ((ListPreference) findPreference(PREF_KEY_EXCHANGE)).getValue());
-		Log.d("pair " + pairs.get(Integer.parseInt(((ListPreference) findPreference(PREF_KEY_PAIR)).getValue())));
-		Log.d("alertType " + ((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getValue());
-		Log.d("alertSound " + sharedPreferences.getString(PREF_KEY_ALARM_ALERT_SOUND, null));
-		Log.d("vibrate " + ((CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE)).isChecked());
-		Log.d("update interval " + ((EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL)).getText());
 
 		Integer alertType = ((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getValue() != null ? Integer.parseInt(((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getValue()) : null;
 		String alertSound;

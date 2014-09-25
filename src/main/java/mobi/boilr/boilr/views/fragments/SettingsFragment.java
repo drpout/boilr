@@ -22,7 +22,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	public static final String PREF_KEY_DEFAULT_ALERT_SOUND = "pref_key_default_alert_sound";
 	public static final String PREF_KEY_THEME = "pref_key_theme";
 	static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT = "pref_key_default_update_interval_hit";
-	static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR = "pref_key_default_update_interval_var";
+	static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE = "pref_key_default_update_interval_change";
 	public static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
 	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
 	public static final String PREF_KEY_MOBILE_DATA = "pref_key_mobile_data";
@@ -87,8 +87,8 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		Preference pref;
 		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT);
 		pref.setSummary(sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, "") + " s");
-		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR);
-		pref.setSummary(buildMinToDaysSummary(sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR, "")));
+		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE);
+		pref.setSummary(buildMinToDaysSummary(sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
 	}
 
 	@Override
@@ -110,7 +110,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 			listPref.setSummary(listPref.getEntry());
 		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT)) {
 			pref.setSummary(sharedPreferences.getString(key, "") + " s");
-		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_VAR)) {
+		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE)) {
 			pref.setSummary(buildMinToDaysSummary(sharedPreferences.getString(key, "")));
 		} else if(key.equals(PREF_KEY_MOBILE_DATA)) {
 			StorageAndControlService.allowMobileData = sharedPreferences.getBoolean(key, false);
