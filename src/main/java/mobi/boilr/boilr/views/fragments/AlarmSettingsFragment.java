@@ -20,6 +20,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
+import android.widget.Toast;
 
 public abstract class AlarmSettingsFragment extends PreferenceFragment {
 
@@ -34,26 +35,33 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			Log.d(preference.getKey() + " " + newValue);
-			if (preference.getKey().equals(AlarmCreationFragment.PREF_KEY_EXCHANGE)) {
+			if(preference.getKey().equals(AlarmCreationFragment.PREF_KEY_EXCHANGE)) {
 				ListPreference listPreference = (ListPreference) preference;
-				listPreference.setSummary((listPreference).getEntries()[(listPreference).findIndexOfValue((String) newValue)]);
-				if (((AlarmSettingsActivity) enclosingActivity).isBound()) {
-					pairs = ((AlarmSettingsActivity) enclosingActivity)
-							.getStorageAndControlService().getPairs((String) newValue);
-					CharSequence[] sequence = new CharSequence[pairs.size()];
-					CharSequence[] ids = new CharSequence[pairs.size()];
+				listPreference.setSummary(listPreference.getEntries()[listPreference.findIndexOfValue((String) newValue)]);
+				if(((AlarmSettingsActivity) enclosingActivity).isBound()) {
+					try {
+						pairs = ((AlarmSettingsActivity) enclosingActivity).getStorageAndControlService().getPairs((String) newValue);
+						if(pairs == null)
+							throw new Exception("Pairs is null.");
+						CharSequence[] sequence = new CharSequence[pairs.size()];
+						CharSequence[] ids = new CharSequence[pairs.size()];
 
-					for (int i = 0; i < pairs.size(); i++) {
-						sequence[i] = pairs.get(i).getCoin() + "/" + pairs.get(i).getExchange();
-						ids[i] = String.valueOf(i);
+						for (int i = 0; i < pairs.size(); i++) {
+							sequence[i] = pairs.get(i).getCoin() + "/" + pairs.get(i).getExchange();
+							ids[i] = String.valueOf(i);
+						}
+						ListPreference pairListPreference = (ListPreference) findPreference(AlarmCreationFragment.PREF_KEY_PAIR);
+						pairListPreference.setEntries(sequence);
+						pairListPreference.setEntryValues(ids);
+						pairListPreference.setDefaultValue(ids[0]);
+						pairListPreference.setSummary(sequence[0]);
+						pairListPreference.setValueIndex(0);
+						alarm.setPair(pairs.get(0));
+					} catch (Exception e) {
+						String message = "Could not retrieve pairs for " + listPreference.getEntries()[listPreference.findIndexOfValue((String) newValue)] + ".";
+						Toast.makeText(enclosingActivity, message, Toast.LENGTH_LONG).show();
+						Log.e(message, e);
 					}
-					ListPreference pairListPreference = (ListPreference) findPreference(AlarmCreationFragment.PREF_KEY_PAIR);
-					pairListPreference.setEntries(sequence);
-					pairListPreference.setEntryValues(ids);
-					pairListPreference.setDefaultValue(ids[0]);
-					pairListPreference.setSummary(sequence[0]);
-					pairListPreference.setValueIndex(0);
-					alarm.setPair(pairs.get(0));
 				} else {
 					Log.d("Not Bound");
 				}
@@ -63,11 +71,11 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 				} catch (Exception e) {
 					Log.e("Cannot change Exchange", e);
 				}
-			} else if (preference.getKey().equals(AlarmCreationFragment.PREF_KEY_PAIR)) {
+			} else if(preference.getKey().equals(AlarmCreationFragment.PREF_KEY_PAIR)) {
 				Pair pair = pairs.get(Integer.parseInt((String) newValue));
 				preference.setSummary(pair.getCoin() + "/" + pair.getExchange());
 				alarm.setPair(pair);
-			} else if (preference.getKey().equals(AlarmCreationFragment.PREF_KEY_ALARM_ALERT_TYPE)) {
+			} else if(preference.getKey().equals(AlarmCreationFragment.PREF_KEY_ALARM_ALERT_TYPE)) {
 				ListPreference alertTypePref = (ListPreference) preference;
 				alertTypePref.setSummary(alertTypePref.getEntries()[alertTypePref.findIndexOfValue((String) newValue)]);
 
@@ -80,19 +88,19 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 						.ringtoneUriToName(defaultRingtone, enclosingActivity));
 				((AndroidNotify) alarm.getNotify()).setAlertType((Integer.parseInt((String) newValue)));
 				((AndroidNotify) alarm.getNotify()).setAlertSound(defaultRingtone);
-			} else if (preference.getKey().equals(AlarmCreationFragment.PREF_KEY_ALARM_ALERT_SOUND)) {
+			} else if(preference.getKey().equals(AlarmCreationFragment.PREF_KEY_ALARM_ALERT_SOUND)) {
 				RingtonePreference alertSoundPref = (RingtonePreference) preference;
 				alertSoundPref.setSummary(SettingsFragment
 						.ringtoneUriToName((String) newValue, enclosingActivity));
 				((AndroidNotify) alarm.getNotify()).setAlertSound((String) newValue);
-			} else if (preference.getKey().equals(AlarmCreationFragment.PREF_KEY_ALARM_VIBRATE)) {
+			} else if(preference.getKey().equals(AlarmCreationFragment.PREF_KEY_ALARM_VIBRATE)) {
 				((AndroidNotify) alarm.getNotify()).setVibrate((Boolean) newValue);
 			} else {
 				Log.d("No behavior for " + preference.getKey());
 			}
 
 			((AlarmSettingsActivity) enclosingActivity).getStorageAndControlService()
-			.replaceAlarm(alarm);
+					.replaceAlarm(alarm);
 
 			return true;
 		}
@@ -117,19 +125,25 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 		listPref.setOnPreferenceChangeListener(listener);
 
 		ListPreference pairListPreference = (ListPreference) findPreference(AlarmCreationFragment.PREF_KEY_PAIR);
-		pairs = ((AlarmSettingsActivity) enclosingActivity).getStorageAndControlService()
-				.getPairs(alarm.getExchangeCode());
-		CharSequence[] sequence = new CharSequence[pairs.size()];
-		CharSequence[] ids = new CharSequence[pairs.size()];
-
-		for (int i = 0; i < pairs.size(); i++) {
-			sequence[i] = pairs.get(i).getCoin() + "/" + pairs.get(i).getExchange();
-			ids[i] = String.valueOf(i);
+		try {
+			pairs = ((AlarmSettingsActivity) enclosingActivity).getStorageAndControlService()
+					.getPairs(alarm.getExchangeCode());
+			if(pairs == null)
+				throw new Exception("Pairs is null.");
+			CharSequence[] sequence = new CharSequence[pairs.size()];
+			CharSequence[] ids = new CharSequence[pairs.size()];
+			for (int i = 0; i < pairs.size(); i++) {
+				sequence[i] = pairs.get(i).getCoin() + "/" + pairs.get(i).getExchange();
+				ids[i] = String.valueOf(i);
+			}
+			pairListPreference.setEntries(sequence);
+			pairListPreference.setEntryValues(ids);
+			pairListPreference.setSummary(alarm.getPair().getCoin() + "/" + alarm.getPair().getExchange());
+		} catch (Exception e) {
+			String message = "Could not retrieve pairs for " + alarm.getExchange().getName() + ".";
+			Toast.makeText(enclosingActivity, message, Toast.LENGTH_LONG).show();
+			Log.e(message, e);
 		}
-
-		pairListPreference.setEntries(sequence);
-		pairListPreference.setEntryValues(ids);
-		pairListPreference.setSummary(alarm.getPair().getCoin() + "/" + alarm.getPair().getExchange());
 		pairListPreference.setOnPreferenceChangeListener(listener);
 
 		SharedPreferences sharedPreferences = PreferenceManager
@@ -150,8 +164,8 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 		RingtonePreference alertSoundPref = (RingtonePreference) findPreference(AlarmCreationFragment.PREF_KEY_ALARM_ALERT_SOUND);
 		if(alertSound == null) {
 			alertSoundPref
-			.setSummary(SettingsFragment.ringtoneUriToName(sharedPreferences
-					.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""), enclosingActivity));
+					.setSummary(SettingsFragment.ringtoneUriToName(sharedPreferences
+							.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""), enclosingActivity));
 		} else {
 			alertSoundPref.setSummary(SettingsFragment
 					.ringtoneUriToName(alertSound, enclosingActivity));

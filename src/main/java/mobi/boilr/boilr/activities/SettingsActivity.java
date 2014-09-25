@@ -1,11 +1,9 @@
 package mobi.boilr.boilr.activities;
 
+import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.preference.RingtonePreference;
-import android.view.Menu;
-import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.views.fragments.SettingsFragment;
 
 public class SettingsActivity extends Activity {
 	SettingsFragment settingsFragment;
@@ -34,13 +32,5 @@ public class SettingsActivity extends Activity {
 	protected void onPause() {
 		super.onPause();
 		settingsFragment.getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(settingsFragment);
-	}
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.alarm_list, menu);
-		menu.findItem(R.id.action_search).getActionView();
-		return super.onCreateOptionsMenu(menu);
 	}
 }

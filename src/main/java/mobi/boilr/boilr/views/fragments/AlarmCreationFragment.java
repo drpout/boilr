@@ -47,7 +47,7 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 	protected static final String PREF_KEY_ALARM_ALERT_TYPE = "pref_key_alarm_alert_type";
 	protected static final String PREF_KEY_ALARM_VIBRATE = "pref_key_alarm_vibrate";
 	protected static final String PREF_KEY_UPDATE_INTERVAL = "pref_key_update_interval";
-	private int exchangeIndex = 0;
+	protected int exchangeIndex = 0;
 	protected int pairIndex = 0;
 	protected Activity enclosingActivity;
 
@@ -58,29 +58,21 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
 			if(key.equals(PREF_KEY_EXCHANGE)) {
-				ListPreference listPreference = (ListPreference) preference;
-				exchangeIndex = (listPreference).findIndexOfValue((String) newValue);
-				listPreference.setSummary((listPreference).getEntries()[exchangeIndex]);
+				ListPreference listPref = (ListPreference) preference;
+				exchangeIndex = listPref.findIndexOfValue((String) newValue);
+				String exchangeName = (String) listPref.getEntries()[exchangeIndex];
+				listPref.setSummary(exchangeName);
 				if(mBound) {
-					pairs = mStorageAndControlService.getPairs((String) newValue);
-					CharSequence[] sequence = new CharSequence[pairs.size()];
-					CharSequence[] ids = new CharSequence[pairs.size()];
-					for (int i = 0; i < pairs.size(); i++) {
-						sequence[i] = pairs.get(i).getCoin() + "/" + pairs.get(i).getExchange();
-						ids[i] = String.valueOf(i);
-					}
-					ListPreference pairListPreference = (ListPreference) findPreference(PREF_KEY_PAIR);
-					pairListPreference.setEntries(sequence);
-					pairListPreference.setEntryValues(ids);
-					pairListPreference.setDefaultValue(ids[0]);
-					pairListPreference.setSummary(sequence[0]);
-					pairListPreference.setValueIndex(0);
+					ListPreference pairListPref = (ListPreference) findPreference(PREF_KEY_PAIR);
+					pairIndex = 0;
+					updatePairsList(pairListPref, (String) newValue, exchangeName, pairIndex);
 				} else {
-					Log.d("Not Bound");
+					Log.d("AlarmCreationFragment not bound to StorageAndControlService.");
 				}
 			} else if(key.equals(PREF_KEY_PAIR)) {
 				pairIndex = Integer.parseInt((String) newValue);
 				preference.setSummary(pairs.get(pairIndex).toString());
+				updateDependentOnPair();
 			} else if(key.equals(PREF_KEY_TYPE)) {
 				if(newValue.equals(PREF_VALUE_PRICE_CHANGE)) {
 					enclosingActivity.getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceChangeAlarmCreationFragment(exchangeIndex, pairIndex)).commit();
@@ -115,12 +107,14 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 	private class StorageAndControlServiceConnection implements ServiceConnection {
 
 		private CharSequence exchangeCode;
-		private ListPreference pairListPreference;
+		private CharSequence exchangeName;
+		private ListPreference pairListPref;
 
 		public StorageAndControlServiceConnection(CharSequence exchangeCode,
-				ListPreference pairListPreference) {
+				CharSequence exchangeName, ListPreference pairListPref) {
 			this.exchangeCode = exchangeCode;
-			this.pairListPreference = pairListPreference;
+			this.exchangeName = exchangeName;
+			this.pairListPref = pairListPref;
 
 		}
 
@@ -129,19 +123,7 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 			mStorageAndControlService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
 			// Callback action performed after the service has been bound
-			if(mBound) {
-				pairs = mStorageAndControlService.getPairs((String) exchangeCode);
-				CharSequence[] sequence = new CharSequence[pairs.size()];
-				CharSequence[] ids = new CharSequence[pairs.size()];
-				for (int i = 0; i < pairs.size(); i++) {
-					sequence[i] = pairs.get(i).getCoin() + "/" + pairs.get(i).getExchange();
-					ids[i] = String.valueOf(i);
-				}
-				pairListPreference.setEntries(sequence);
-				pairListPreference.setEntryValues(ids);
-				pairListPreference.setSummary(sequence[pairIndex]);
-				pairListPreference.setValueIndex(pairIndex);
-			}
+			updatePairsList(pairListPref, exchangeCode.toString(), exchangeName.toString(), pairIndex);
 		}
 
 		@Override
@@ -167,14 +149,15 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 
 		ListPreference exchangeListPref = (ListPreference) findPreference(PREF_KEY_EXCHANGE);
 		CharSequence exchangeCode = exchangeListPref.getEntryValues()[exchangeIndex];
-		exchangeListPref.setSummary(exchangeListPref.getEntries()[exchangeIndex]);
+		CharSequence exchangeName = exchangeListPref.getEntries()[exchangeIndex];
+		exchangeListPref.setSummary(exchangeName);
 		exchangeListPref.setValueIndex(exchangeIndex);
 		exchangeListPref.setOnPreferenceChangeListener(listener);
 
 		ListPreference pairListPref = (ListPreference) findPreference(PREF_KEY_PAIR);
 		pairListPref.setOnPreferenceChangeListener(listener);
 		Intent serviceIntent = new Intent(enclosingActivity, StorageAndControlService.class);
-		mStorageAndControlServiceConnection = new StorageAndControlServiceConnection(exchangeCode, pairListPref);
+		mStorageAndControlServiceConnection = new StorageAndControlServiceConnection(exchangeCode, exchangeName, pairListPref);
 		enclosingActivity.bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
 		pairListPref.setOnPreferenceChangeListener(listener);
 
@@ -217,6 +200,36 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 		enclosingActivity.unbindService(mStorageAndControlServiceConnection);
 	}
 
+	private void updatePairsList(ListPreference pairListPref, String exchangeCode,
+			String exchangeName, int index) {
+		try {
+			pairs = mStorageAndControlService.getPairs(exchangeCode);
+			if(pairs == null)
+				throw new Exception("Pairs is null.");
+			CharSequence[] sequence = new CharSequence[pairs.size()];
+			CharSequence[] ids = new CharSequence[pairs.size()];
+			for (int i = 0; i < pairs.size(); i++) {
+				sequence[i] = pairs.get(i).getCoin() + "/" + pairs.get(i).getExchange();
+				ids[i] = String.valueOf(i);
+			}
+			pairListPref.setEnabled(true);
+			pairListPref.setEntries(sequence);
+			pairListPref.setEntryValues(ids);
+			pairListPref.setSummary(sequence[index]);
+			pairListPref.setValueIndex(index);
+			pairListPref.setDefaultValue(ids[index]);
+			updateDependentOnPair();
+		} catch (Exception e) {
+			String message = "Could not retrieve pairs for " + exchangeName + ".";
+			Toast.makeText(enclosingActivity, message, Toast.LENGTH_LONG).show();
+			Log.e(message, e);
+			pairListPref.setEntries(null);
+			pairListPref.setEntryValues(null);
+			pairListPref.setSummary(null);
+			pairListPref.setEnabled(false);
+		}
+	}
+
 	private void createAlarmAndReturn() {
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
 
@@ -250,4 +263,6 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 	protected abstract void makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotify notify)
 			throws UpperBoundSmallerThanLowerBoundException, IOException, InterruptedException,
 			ExecutionException;
+
+	protected abstract void updateDependentOnPair();
 }

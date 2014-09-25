@@ -1,15 +1,22 @@
 package mobi.boilr.boilr.views.fragments;
 
 import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
+import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.libdynticker.core.Exchange;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -29,6 +36,22 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,
 		PREF_KEY_CHECK_PAIRS_INTERVAL };
 	public static final double MINUTES_IN_DAY = 1440; // 60*24
+
+	private StorageAndControlService mStorageAndControlService;
+	private boolean mBound;
+	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
+
+		@Override
+		public void onServiceConnected(ComponentName className, IBinder binder) {
+			mStorageAndControlService = ((LocalBinder<StorageAndControlService>) binder).getService();
+			mBound = true;
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName className) {
+			mBound = false;
+		}
+	};
 
 	/**
 	 * Converts a double to a String removing places after the decimal point
@@ -65,15 +88,17 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		return ringtone.getTitle(context);
 	}
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Intent serviceIntent = new Intent(getActivity(), StorageAndControlService.class);
+		getActivity().bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
+
 		// Load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.app_settings);
 		// Set summaries to be the current value for the selected preference
 		ListPreference listPref;
-		for(String key : listPrefs) {
+		for (String key : listPrefs) {
 			listPref = (ListPreference) findPreference(key);
 			listPref.setSummary(listPref.getEntry());
 		}
@@ -92,7 +117,13 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	}
 
 	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+	public void onDestroy() {
+		super.onDestroy();
+		getActivity().unbindService(mStorageAndControlServiceConnection);
+	}
+
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPrefs, String key) {
 		// Set summaries to be the current value for the selected preference
 		Preference pref = findPreference(key);
 		if(key.equals(PREF_KEY_DEFAULT_ALERT_TYPE)) {
@@ -103,17 +134,28 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 			int ringtoneType = Integer.parseInt(alertTypePref.getValue());
 			alertSoundPref.setRingtoneType(ringtoneType);
 			String defaultRingtone = RingtoneManager.getDefaultUri(ringtoneType).toString();
-			sharedPreferences.edit().putString(PREF_KEY_DEFAULT_ALERT_SOUND, defaultRingtone).apply();
-			alertSoundPref.setSummary(SettingsFragment.ringtoneUriToName(defaultRingtone,getActivity()));
-		} else if(key.equals(PREF_KEY_THEME) || key.equals(PREF_KEY_CHECK_PAIRS_INTERVAL)) {
+			sharedPrefs.edit().putString(PREF_KEY_DEFAULT_ALERT_SOUND, defaultRingtone).apply();
+			alertSoundPref.setSummary(SettingsFragment.ringtoneUriToName(defaultRingtone, getActivity()));
+		} else if(key.equals(PREF_KEY_THEME)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
+		} else if(key.equals(PREF_KEY_CHECK_PAIRS_INTERVAL)) {
+			ListPreference listPref = (ListPreference) pref;
+			listPref.setSummary(listPref.getEntry());
+			if(mBound) {
+				long pairInterval = Long.parseLong(sharedPrefs.getString(PREF_KEY_CHECK_PAIRS_INTERVAL, ""));
+				for (Exchange e : mStorageAndControlService.getLoadedExchanges()) {
+					e.setExperiedPeriod(pairInterval);
+				}
+			} else {
+				Log.d("PreferenceFragment not bound to StorageAndControlService.");
+			}
 		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT)) {
-			pref.setSummary(sharedPreferences.getString(key, "") + " s");
+			pref.setSummary(sharedPrefs.getString(key, "") + " s");
 		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE)) {
-			pref.setSummary(buildMinToDaysSummary(sharedPreferences.getString(key, "")));
+			pref.setSummary(buildMinToDaysSummary(sharedPrefs.getString(key, "")));
 		} else if(key.equals(PREF_KEY_MOBILE_DATA)) {
-			StorageAndControlService.allowMobileData = sharedPreferences.getBoolean(key, false);
+			StorageAndControlService.allowMobileData = sharedPrefs.getBoolean(key, false);
 		}
 	}
 

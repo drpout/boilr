@@ -31,8 +31,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			String key = preference.getKey();
 			if(key.equals(PREF_KEY_CHANGE_IN_PERCENTAGE)) {
 				isPercentage = (Boolean) newValue;
-				EditTextPreference edit = (EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE);
-				edit.setSummary(getChangeValueSummary(edit.getText()));
+				updateChangeValueSummary();
 			} else if(key.equals(PREF_KEY_CHANGE_VALUE)) {
 				preference.setSummary(getChangeValueSummary((String) newValue));
 			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
@@ -42,20 +41,33 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			}
 			return true;
 		}
-
-		private String getChangeValueSummary(String value) {
-			if(isPercentage)
-				return value + "%";
-			else
-				return value + " " + pairs.get(pairIndex).getExchange();
-		}
-
 	}
 
 	OnAlarmSettingsPreferenceChangeListener listener = new OnPriceChangeSettingsPreferenceChangeListener();
 
 	public PriceChangeAlarmCreationFragment(int exchangeIndex, int pairIndex) {
 		super(exchangeIndex, pairIndex);
+	}
+
+	@Override
+	protected void updateDependentOnPair() {
+		if(!isPercentage)
+			updateChangeValueSummary();
+	}
+
+	private void updateChangeValueSummary() {
+		EditTextPreference edit = (EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE);
+		String text = edit.getText();
+		if(text != null && !text.equals("")) {
+			edit.setSummary(getChangeValueSummary(text));
+		}
+	}
+
+	private String getChangeValueSummary(String value) {
+		if(isPercentage)
+			return value + "%";
+		else
+			return value + " " + pairs.get(pairIndex).getExchange();
 	}
 
 	@Override
@@ -112,11 +124,15 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			change = Double.POSITIVE_INFINITY;
 		else
 			change = Double.parseDouble(changeValueString);
-		if(isPercentage) {
-			float percent = (float) change;
-			mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, percent);
+		if(mBound) {
+			if(isPercentage) {
+				float percent = (float) change;
+				mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, percent);
+			} else {
+				mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, change);
+			}
 		} else {
-			mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, change);
+			throw new IOException("PriceChangeAlarmCreationFragment not bound to StorageAndControlService.");
 		}
 	}
 }

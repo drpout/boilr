@@ -37,7 +37,7 @@ public class NotificationService extends Service {
 			mService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
 			Log.d("NotificationService bound to StorageAndControlService.");
-			for(int alarmID : mPendingAlarms)
+			for (int alarmID : mPendingAlarms)
 				startNotify(alarmID);
 		}
 

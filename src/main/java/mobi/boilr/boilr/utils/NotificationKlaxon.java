@@ -25,8 +25,8 @@ public class NotificationKlaxon {
 	private static boolean sStarted = false;
 
 	public static void stop(final Context context) {
-		Log.v("NotificationKlaxon stopped.");
 		if(sStarted) {
+			Log.v("NotificationKlaxon stopped.");
 			// Stop audio playing
 			if(sMediaPlayer != null) {
 				sMediaPlayer.stop();
@@ -67,7 +67,7 @@ public class NotificationKlaxon {
 		try {
 			sMediaPlayer.setDataSource(context, alertSoundUri);
 			startAlarm(context, sMediaPlayer);
-		} catch(Exception ex) {
+		} catch (Exception ex) {
 			Log.v("NotificationKlaxon using the fallback ringtone.");
 			// The alarmNoise may be on the sd card which could be busy right
 			// now. Use the fallback ringtone.
@@ -77,7 +77,7 @@ public class NotificationKlaxon {
 				alertSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 				sMediaPlayer.setDataSource(context, alertSoundUri);
 				startAlarm(context, sMediaPlayer);
-			} catch(Exception ex2) {
+			} catch (Exception ex2) {
 				// At this point we just don't play anything.
 				Log.e("NotificationKlaxon failed to play fallback ringtone.", ex2);
 			}

@@ -83,6 +83,22 @@ public class StorageAndControlService extends Service {
 		}
 	}
 
+	private class GetLastValueTask extends
+	AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
+		@Override
+		protected Double doInBackground(android.util.Pair<Exchange, Pair>... pairs) {
+			if(hasNetworkConnection() && pairs.length == 1) {
+				try {
+					return pairs[0].first.getLastValue(pairs[0].second);
+				} catch (IOException e) {
+					Log.e("Cannot get last value for " + pairs[0].first.getName() + " with pair " + pairs[0].second.toString(), e);
+				}
+			}
+			return null;
+		}
+
+	}
+
 	private class PopupalteDBTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected Void doInBackground(Void... arg) {
@@ -122,11 +138,10 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class AddPercentageAlarm extends
-	AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
-
+			AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(PercentageAlarmParameter... arg0) {
-			if(arg0.length == 1) {
+			if(hasNetworkConnection() && arg0.length == 1) {
 				int id = arg0[0].getId();
 				Exchange exchange = arg0[0].getExchange();
 				Pair pair = arg0[0].getPair();
@@ -144,10 +159,9 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class AddChangeAlarm extends AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
-
 		@Override
 		protected PriceChangeAlarm doInBackground(ChangeAlarmParameter... arg0) {
-			if(arg0.length == 1) {
+			if(hasNetworkConnection() && arg0.length == 1) {
 				int id = arg0[0].getId();
 				Exchange exchange = arg0[0].getExchange();
 				Pair pair = arg0[0].getPair();
@@ -162,7 +176,6 @@ public class StorageAndControlService extends Service {
 			}
 			return null;
 		}
-
 	}
 
 	@SuppressLint("UseSparseArrays")
@@ -226,8 +239,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-	InstantiationException, IllegalAccessException, IllegalArgumentException,
-	InvocationTargetException, SecurityException {
+			InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException, SecurityException {
 		if(exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {
@@ -238,6 +251,10 @@ public class StorageAndControlService extends Service {
 			exchangesMap.put(classname, exchange);
 			return exchange;
 		}
+	}
+
+	public List<Exchange> getLoadedExchanges() {
+		return new ArrayList<Exchange>(exchangesMap.values());
 	}
 
 	public List<Alarm> getAlarms() {
@@ -331,13 +348,8 @@ public class StorageAndControlService extends Service {
 		return wifiConnected || (mobileConnected && allowMobileData);
 	}
 
-	public List<Pair> getPairs(String exchangeCode) {
-		try {
-			return new GetPairsTask().execute(exchangeCode).get();
-		} catch (Exception e) {
-			Log.e("Get Pairs", e);
-		}
-		return null;
+	public List<Pair> getPairs(String exchangeCode) throws InterruptedException, ExecutionException {
+		return new GetPairsTask().execute(exchangeCode).get();
 	}
 
 	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
@@ -362,5 +374,10 @@ public class StorageAndControlService extends Service {
 		PriceHitAlarm priceHitAlarm = new PriceHitAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
 		addAlarm(priceHitAlarm);
 		this.startAlarm(priceHitAlarm);
+	}
+
+	@SuppressWarnings("unchecked")
+	public double getLastValue(Exchange e, Pair p) throws InterruptedException, ExecutionException {
+		return (new GetLastValueTask()).execute(new android.util.Pair<Exchange, Pair>(e, p)).get();
 	}
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.domain.AndroidNotify;
+import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.UpperBoundSmallerThanLowerBoundException;
@@ -41,6 +42,35 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 
 	public PriceHitAlarmCreationFragment(int exchangeIndex, int pairIndex) {
 		super(exchangeIndex, pairIndex);
+	}
+
+	@Override
+	protected void updateDependentOnPair() {
+		double lastValue = Double.POSITIVE_INFINITY;
+		if(mBound) {
+			ListPreference exchangePref = (ListPreference) findPreference(PREF_KEY_EXCHANGE);
+			Exchange e;
+			try {
+				e = mStorageAndControlService.getExchange(exchangePref.getEntryValues()[exchangeIndex].toString());
+				lastValue = mStorageAndControlService.getLastValue(e, pairs.get(pairIndex));
+			} catch (Exception e1) {
+				Log.e("Cannot get last value for " + exchangePref.getEntry() + " with pair " + pairs.get(pairIndex), e1);
+			}
+		} else {
+			Log.d("PriceHitAlarmCreationFragment not bound to StorageAndControlService.");
+		}
+		EditTextPreference[] edits = { (EditTextPreference) findPreference(PREF_KEY_UPPER_VALUE),
+				(EditTextPreference) findPreference(PREF_KEY_LOWER_VALUE) };
+		if(lastValue != Double.POSITIVE_INFINITY) {
+			for (EditTextPreference edit : edits)
+				edit.setText(String.valueOf(lastValue));
+		}
+		String text;
+		for (EditTextPreference edit : edits) {
+			text = edit.getText();
+			if(text != null && !text.equals(""))
+				edit.setSummary(text + " " + pairs.get(pairIndex).getExchange());
+		}
 	}
 
 	@Override
@@ -105,6 +135,10 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 			lowerBound = Double.NEGATIVE_INFINITY;
 		else
 			lowerBound = Double.parseDouble(lowerBoundString);
-		mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
+		if(mBound) {
+			mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
+		} else {
+			throw new IOException("PriceHitAlarmCreationFragment not bound to StorageAndControlService.");
+		}
 	}
 }
