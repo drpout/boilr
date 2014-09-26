@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.domain.AndroidNotify;
+import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
@@ -53,7 +54,7 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 			try {
 				e = mStorageAndControlService.getExchange(exchangePref.getEntryValues()[exchangeIndex].toString());
 				lastValue = mStorageAndControlService.getLastValue(e, pairs.get(pairIndex));
-			} catch (Exception e1) {
+			} catch(Exception e1) {
 				Log.e("Cannot get last value for " + exchangePref.getEntry() + " with pair " + pairs.get(pairIndex), e1);
 			}
 		} else {
@@ -62,11 +63,11 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 		EditTextPreference[] edits = { (EditTextPreference) findPreference(PREF_KEY_UPPER_VALUE),
 				(EditTextPreference) findPreference(PREF_KEY_LOWER_VALUE) };
 		if(lastValue != Double.POSITIVE_INFINITY) {
-			for (EditTextPreference edit : edits)
-				edit.setText(String.valueOf(lastValue));
+			for(EditTextPreference edit : edits)
+				edit.setText(Conversions.formatMaxDecimalPlaces(lastValue));
 		}
 		String text;
-		for (EditTextPreference edit : edits) {
+		for(EditTextPreference edit : edits) {
 			text = edit.getText();
 			if(text != null && !text.equals(""))
 				edit.setSummary(text + " " + pairs.get(pairIndex).getExchange());

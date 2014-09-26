@@ -2,6 +2,7 @@ package mobi.boilr.boilr.views.fragments;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmSettingsActivity;
+import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.text.InputType;
 public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 
 	private class OnPriceChangeSettingsPreferenceChangeListener extends
-			OnAlarmSettingsPreferenceChangeListener {
+	OnAlarmSettingsPreferenceChangeListener {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -30,8 +31,8 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 					priceChangeAlarm.setChange(priceChangeAlarm.getPercent());
 					priceChangeAlarm.setPercent(0);
 					findPreference(PriceChangeAlarmCreationFragment.PREF_KEY_CHANGE_VALUE)
-							.setSummary(priceChangeAlarm.getChange() + " " + alarm.getPair()
-									.getExchange());
+					.setSummary(priceChangeAlarm.getChange() + " " + alarm.getPair()
+							.getExchange());
 				}
 			} else if(key.equals(PriceChangeAlarmCreationFragment.PREF_KEY_CHANGE_VALUE)) {
 				if(priceChangeAlarm.isPercent()) {
@@ -42,13 +43,13 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 					preference.setSummary(newValue + " " + alarm.getPair().getExchange());
 				}
 			} else if(key.equals(AlarmCreationFragment.PREF_KEY_UPDATE_INTERVAL)) {
-				preference.setSummary(SettingsFragment.buildMinToDaysSummary((String) newValue));
+				preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue));
 				priceChangeAlarm.setPeriod(Long.parseLong((String) newValue) * 60000);
 			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
 			((AlarmSettingsActivity) enclosingActivity).getStorageAndControlService()
-					.replaceAlarm(priceChangeAlarm);
+			.replaceAlarm(priceChangeAlarm);
 			return true;
 		}
 	}
@@ -68,7 +69,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 		ListPreference alarmTypePref = (ListPreference) findPreference(AlarmCreationFragment.PREF_KEY_TYPE);
 		alarmTypePref.setValueIndex(1);
 		alarmTypePref.setSummary(alarmTypePref.getEntry());
-
+		alarmTypePref.setEnabled(false);
 		PreferenceCategory category = (PreferenceCategory) findPreference(AlarmCreationFragment.PREF_KEY_SPECIFIC);
 		category.setTitle(alarmTypePref.getEntry());
 
@@ -89,15 +90,17 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 		edit.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 		edit.setOrder(1);
 
+		String formated;
 		if(priceChangeAlarm.isPercent()) {
-			edit.setDefaultValue(priceChangeAlarm.getPercent());
-			edit.setText(SettingsFragment.cleanDoubleToString(priceChangeAlarm.getPercent()));
-			edit.setSummary(SettingsFragment.cleanDoubleToString(priceChangeAlarm.getPercent()) + "%");
+			formated = Conversions.formatMaxDecimalPlaces(priceChangeAlarm.getPercent());
+			edit.setDefaultValue(formated);
+			edit.setText(formated);
+			edit.setSummary(formated + "%");
 		} else {
-			edit.setDefaultValue(priceChangeAlarm.getChange());
-			edit.setText(SettingsFragment.cleanDoubleToString(priceChangeAlarm.getChange()));
-			edit.setSummary(SettingsFragment.cleanDoubleToString(priceChangeAlarm.getChange()) + " " + alarm
-					.getPair().getExchange());
+			formated = Conversions.formatMaxDecimalPlaces(priceChangeAlarm.getChange());
+			edit.setDefaultValue(formated);
+			edit.setText(formated);
+			edit.setSummary(formated + " " + alarm.getPair().getExchange());
 		}
 
 		category.addPreference(edit);
@@ -105,7 +108,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 		edit = (EditTextPreference) findPreference(AlarmCreationFragment.PREF_KEY_UPDATE_INTERVAL);
 		edit.setTitle(R.string.pref_title_time_frame);
 		edit.setDialogMessage(R.string.pref_summary_update_interval_change);
-		edit.setSummary(SettingsFragment.buildMinToDaysSummary(String.valueOf(priceChangeAlarm.getPeriod() / 60000)));
+		edit.setSummary(Conversions.buildMinToDaysSummary(String.valueOf(priceChangeAlarm.getPeriod() / 60000)));
 		edit.setOnPreferenceChangeListener(listener);
 		edit.setText(String.valueOf(priceChangeAlarm.getPeriod() / 60000));
 	}

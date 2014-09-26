@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.domain.AndroidNotify;
+import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import android.content.SharedPreferences;
@@ -35,7 +36,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			} else if(key.equals(PREF_KEY_CHANGE_VALUE)) {
 				preference.setSummary(getChangeValueSummary((String) newValue));
 			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
-				preference.setSummary(SettingsFragment.buildMinToDaysSummary((String) newValue));
+				preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue));
 			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
@@ -105,7 +106,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		edit = (EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL);
 		edit.setTitle(R.string.pref_title_time_frame);
 		edit.setDialogMessage(R.string.pref_summary_update_interval_change);
-		edit.setSummary(SettingsFragment.buildMinToDaysSummary(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
+		edit.setSummary(Conversions.buildMinToDaysSummary(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
 		edit.setOnPreferenceChangeListener(listener);
 		edit.setText(null);
 	}

@@ -10,6 +10,7 @@ import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
+import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
@@ -87,10 +88,10 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 				int ringtoneType = Integer.parseInt((String) newValue);
 				alertSoundPref.setRingtoneType(ringtoneType);
 				String defaultRingtone = RingtoneManager.getDefaultUri(ringtoneType).toString();
-				alertSoundPref.setSummary(SettingsFragment.ringtoneUriToName(defaultRingtone, enclosingActivity));
+				alertSoundPref.setSummary(Conversions.ringtoneUriToName(defaultRingtone, enclosingActivity));
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_SOUND)) {
 				RingtonePreference alertSoundPref = (RingtonePreference) preference;
-				alertSoundPref.setSummary(SettingsFragment.ringtoneUriToName((String) newValue, enclosingActivity));
+				alertSoundPref.setSummary(Conversions.ringtoneUriToName((String) newValue, enclosingActivity));
 			} else if(key.equals(PREF_KEY_ALARM_VIBRATE)) {
 				defaultVibrateDefinition = false;
 			} else {
@@ -172,7 +173,7 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 
 		RingtonePreference alertSoundPref = (RingtonePreference) findPreference(PREF_KEY_ALARM_ALERT_SOUND);
 		alertSoundPref.setDefaultValue(null);
-		alertSoundPref.setSummary(SettingsFragment.ringtoneUriToName(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""), enclosingActivity));
+		alertSoundPref.setSummary(Conversions.ringtoneUriToName(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""), enclosingActivity));
 		alertSoundPref.setOnPreferenceChangeListener(listener);
 
 		CheckBoxPreference vibratePref = (CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE);
