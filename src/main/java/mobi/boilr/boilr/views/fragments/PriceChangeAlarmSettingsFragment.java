@@ -1,8 +1,8 @@
 package mobi.boilr.boilr.views.fragments;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.activities.AlarmSettingsActivity;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import android.text.InputType;
 public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 
 	private class OnPriceChangeSettingsPreferenceChangeListener extends
-	OnAlarmSettingsPreferenceChangeListener {
+			OnAlarmSettingsPreferenceChangeListener {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -31,8 +31,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 					priceChangeAlarm.setChange(priceChangeAlarm.getPercent());
 					priceChangeAlarm.setPercent(0);
 					findPreference(PriceChangeAlarmCreationFragment.PREF_KEY_CHANGE_VALUE)
-					.setSummary(priceChangeAlarm.getChange() + " " + alarm.getPair()
-							.getExchange());
+							.setSummary(priceChangeAlarm.getChange() + " " + alarm.getPair().getExchange());
 				}
 			} else if(key.equals(PriceChangeAlarmCreationFragment.PREF_KEY_CHANGE_VALUE)) {
 				if(priceChangeAlarm.isPercent()) {
@@ -45,11 +44,19 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 			} else if(key.equals(AlarmCreationFragment.PREF_KEY_UPDATE_INTERVAL)) {
 				preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue));
 				priceChangeAlarm.setPeriod(Long.parseLong((String) newValue) * 60000);
+				if(enclosingActivity.isBound()) {
+					enclosingActivity.getStorageAndControlService().restartAlarm(priceChangeAlarm);
+				} else {
+					Log.d("AlarmSettingsActivity not bound to StorageAndControlService.");
+				}
 			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
-			((AlarmSettingsActivity) enclosingActivity).getStorageAndControlService()
-			.replaceAlarm(priceChangeAlarm);
+			if(enclosingActivity.isBound()) {
+				enclosingActivity.getStorageAndControlService().replaceAlarm(priceChangeAlarm);
+			} else {
+				Log.d("AlarmSettingsActivity not bound to StorageAndControlService.");
+			}
 			return true;
 		}
 	}

@@ -10,7 +10,6 @@ import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.os.Bundle;
@@ -27,7 +26,7 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 
 	protected List<Pair> pairs = new ArrayList<Pair>();
 	protected Alarm alarm;
-	protected Activity enclosingActivity;
+	protected AlarmSettingsActivity enclosingActivity;
 
 	protected OnAlarmSettingsPreferenceChangeListener listener = new OnAlarmSettingsPreferenceChangeListener();
 
@@ -39,9 +38,9 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 			if(preference.getKey().equals(AlarmCreationFragment.PREF_KEY_EXCHANGE)) {
 				ListPreference listPreference = (ListPreference) preference;
 				listPreference.setSummary(listPreference.getEntries()[listPreference.findIndexOfValue((String) newValue)]);
-				if(((AlarmSettingsActivity) enclosingActivity).isBound()) {
+				if(enclosingActivity.isBound()) {
 					try {
-						pairs = ((AlarmSettingsActivity) enclosingActivity).getStorageAndControlService().getPairs((String) newValue);
+						pairs = enclosingActivity.getStorageAndControlService().getPairs((String) newValue);
 						if(pairs == null)
 							throw new Exception("Pairs is null.");
 						CharSequence[] sequence = new CharSequence[pairs.size()];
@@ -64,10 +63,10 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 						Log.e(message, e);
 					}
 				} else {
-					Log.d("Not Bound");
+					Log.d("AlarmSettingsActivity not bound to StorageAndControlService.");
 				}
 				try {
-					alarm.setExchange(((AlarmSettingsActivity) enclosingActivity)
+					alarm.setExchange(enclosingActivity
 							.getStorageAndControlService().getExchange((String) newValue));
 				} catch(Exception e) {
 					Log.e("Cannot change Exchange", e);
@@ -85,8 +84,7 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 				int ringtoneType = Integer.parseInt((String) newValue);
 				alertSoundPref.setRingtoneType(ringtoneType);
 				String defaultRingtone = RingtoneManager.getDefaultUri(ringtoneType).toString();
-				alertSoundPref.setSummary(Conversions
-						.ringtoneUriToName(defaultRingtone, enclosingActivity));
+				alertSoundPref.setSummary(Conversions.ringtoneUriToName(defaultRingtone, enclosingActivity));
 				((AndroidNotify) alarm.getNotify()).setAlertType((Integer.parseInt((String) newValue)));
 				((AndroidNotify) alarm.getNotify()).setAlertSound(defaultRingtone);
 			} else if(preference.getKey().equals(AlarmCreationFragment.PREF_KEY_ALARM_ALERT_SOUND)) {
@@ -100,9 +98,7 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 				Log.d("No behavior for " + preference.getKey());
 			}
 
-			((AlarmSettingsActivity) enclosingActivity).getStorageAndControlService()
-			.replaceAlarm(alarm);
-
+			enclosingActivity.getStorageAndControlService().replaceAlarm(alarm);
 			return true;
 		}
 	}
@@ -115,7 +111,7 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 
-		enclosingActivity = getActivity();
+		enclosingActivity = (AlarmSettingsActivity) getActivity();
 
 		addPreferencesFromResource(R.xml.alarm_settings);
 
@@ -127,8 +123,7 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 
 		ListPreference pairListPreference = (ListPreference) findPreference(AlarmCreationFragment.PREF_KEY_PAIR);
 		try {
-			pairs = ((AlarmSettingsActivity) enclosingActivity).getStorageAndControlService()
-					.getPairs(alarm.getExchangeCode());
+			pairs = enclosingActivity.getStorageAndControlService().getPairs(alarm.getExchangeCode());
 			if(pairs == null)
 				throw new Exception("Pairs is null.");
 			CharSequence[] sequence = new CharSequence[pairs.size()];
@@ -163,12 +158,9 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 		String alertSound = ((AndroidNotify) alarm.getNotify()).getAlertSound();
 		RingtonePreference alertSoundPref = (RingtonePreference) findPreference(AlarmCreationFragment.PREF_KEY_ALARM_ALERT_SOUND);
 		if(alertSound == null) {
-			alertSoundPref
-			.setSummary(Conversions.ringtoneUriToName(sharedPreferences
-					.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""), enclosingActivity));
+			alertSoundPref.setSummary(Conversions.ringtoneUriToName(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""), enclosingActivity));
 		} else {
-			alertSoundPref.setSummary(Conversions
-					.ringtoneUriToName(alertSound, enclosingActivity));
+			alertSoundPref.setSummary(Conversions.ringtoneUriToName(alertSound, enclosingActivity));
 		}
 		alertSoundPref.setOnPreferenceChangeListener(listener);
 

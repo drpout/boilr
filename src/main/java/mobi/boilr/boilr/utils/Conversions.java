@@ -37,11 +37,11 @@ public class Conversions {
 	private static DecimalFormat twoPlacesFormatter = new DecimalFormat("#.##");
 
 	/**
-	 * Converts a double to a String leaving up to 2 decimal places
+	 * Converts a double to a String using up to 2 decimal places
 	 * but only when they are needed.
 	 *
 	 * @param d double to be converted
-	 * @return String with nicely formatted double
+	 * @return String with up to 2 decimal places
 	 */
 	public static String format2DecimalPlaces(double d) {
 		return twoPlacesFormatter.format(d);
@@ -53,6 +53,16 @@ public class Conversions {
 		maxPlacesFormater.setGroupingUsed(false);
 	}
 
+	/**
+	 * Converts a double to a String using up to 340 (the maximum)
+	 * decimal places but only when they are needed.
+	 *
+	 * Based on answer http://stackoverflow.com/a/25308216 by JBE
+	 * on Stack Overflow
+	 * 
+	 * @param d double to be converted
+	 * @return String with up to 340 decimal places
+	 */
 	public static String formatMaxDecimalPlaces(double d) {
 		return maxPlacesFormater.format(d);
 	}

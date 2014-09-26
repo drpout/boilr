@@ -1,7 +1,6 @@
 package mobi.boilr.boilr.views.fragments;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.activities.AlarmSettingsActivity;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libpricealarm.Alarm;
@@ -20,26 +19,30 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
-			Log.d(preference.getKey() + " " + newValue);
 			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
-			if(preference.getKey().equals(PriceHitAlarmCreationFragment.PREF_KEY_UPPER_VALUE)) {
-				preference
-						.setSummary(newValue + " " + alarm.getPair().getExchange());
+			String key = preference.getKey();
+			if(key.equals(PriceHitAlarmCreationFragment.PREF_KEY_UPPER_VALUE)) {
+				preference.setSummary(newValue + " " + alarm.getPair().getExchange());
 				priceHitAlarm.setUpperBound(Double.parseDouble((String) newValue));
-			} else if(preference.getKey()
-					.equals(PriceHitAlarmCreationFragment.PREF_KEY_LOWER_VALUE)) {
-				preference
-						.setSummary(newValue + " " + alarm.getPair().getExchange());
+			} else if(key.equals(PriceHitAlarmCreationFragment.PREF_KEY_LOWER_VALUE)) {
+				preference.setSummary(newValue + " " + alarm.getPair().getExchange());
 				priceHitAlarm.setLowerBound(Double.parseDouble((String) newValue));
-			} else if(preference.getKey()
-					.equals(PriceHitAlarmCreationFragment.PREF_KEY_UPDATE_INTERVAL)) {
+			} else if(key.equals(PriceHitAlarmCreationFragment.PREF_KEY_UPDATE_INTERVAL)) {
 				preference.setSummary(newValue + " s");
 				alarm.setPeriod(1000 * Long.parseLong((String) newValue));
+				if(enclosingActivity.isBound()) {
+					enclosingActivity.getStorageAndControlService().restartAlarm(priceHitAlarm);
+				} else {
+					Log.d("AlarmSettingsActivity not bound to StorageAndControlService.");
+				}
 			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
-			((AlarmSettingsActivity) enclosingActivity).getStorageAndControlService()
-					.replaceAlarm(priceHitAlarm);
+			if(enclosingActivity.isBound()) {
+				enclosingActivity.getStorageAndControlService().replaceAlarm(priceHitAlarm);
+			} else {
+				Log.d("AlarmSettingsActivity not bound to StorageAndControlService.");
+			}
 			return true;
 		}
 	}

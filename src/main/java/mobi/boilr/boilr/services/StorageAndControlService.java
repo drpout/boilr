@@ -85,7 +85,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class GetLastValueTask extends
-			AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
+	AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
 		@Override
 		protected Double doInBackground(android.util.Pair<Exchange, Pair>... pairs) {
 			if(hasNetworkConnection() && pairs.length == 1) {
@@ -139,7 +139,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class AddPercentageAlarm extends
-	AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
+			AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(PercentageAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
@@ -240,8 +240,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-	InstantiationException, IllegalAccessException, IllegalArgumentException,
-	InvocationTargetException, SecurityException {
+			InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException, SecurityException {
 		if(exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {
@@ -271,17 +271,25 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void startAlarm(Alarm alarm) {
+		addToAlarmManager(alarm);
+		alarm.turnOn();
+		replaceAlarm(alarm);
+	}
+
+	private void addToAlarmManager(Alarm alarm) {
 		Intent intent = new Intent(this, StorageAndControlService.class);
 		intent.setAction(UPDATE_LAST_VALUE);
 		intent.putExtra("alarmID", alarm.getId());
 		PendingIntent pendingIntent = PendingIntent.getService(this, alarm.getId(), intent, 0);
 		alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, alarm.getPeriod(), alarm.getPeriod(), pendingIntent);
-		alarm.turnOn();
-		replaceAlarm(alarm);
 	}
 
 	public void startAlarm(int alarmID) {
 		startAlarm(alarmsMap.get(alarmID));
+	}
+
+	public void restartAlarm(Alarm alarm) {
+		addToAlarmManager(alarm);
 	}
 
 	public void stopAlarm(Alarm alarm) {
