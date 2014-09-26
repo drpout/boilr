@@ -41,9 +41,9 @@ public class AlarmListActivity extends ListActivity {
 
 			// Callback action performed after the service has been bound
 			if(mBound) {
-				Log.d("AlarmListActivity bound to StorageAndControlService.");
-				List<Alarm> list = mStorageAndControlService.getAlarms();
-				adapter.addAll(list);
+				List<Alarm> alarms = mStorageAndControlService.getAlarms();
+				adapter.clear();
+				adapter.addAll(alarms);
 			}
 		}
 
@@ -74,6 +74,7 @@ public class AlarmListActivity extends ListActivity {
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
 
 		getListView().setOnTouchListener(new OnSwipeTouchListener(this));
+
 		adapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<Alarm>());
 		setListAdapter(adapter);
 
@@ -157,10 +158,14 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if(mBound) {
-			adapter.clear();
-			adapter.addAll(mStorageAndControlService.getAlarms());
-		}
 		adapter.notifyDataSetChanged();
+	}
+
+	public boolean ismBound() {
+		return mBound;
+	}
+
+	public StorageAndControlService getmStorageAndControlService() {
+		return mStorageAndControlService;
 	}
 }

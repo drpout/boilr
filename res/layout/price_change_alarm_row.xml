@@ -1,13 +1,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:baselineAligned="false"
     android:orientation="horizontal" >
 
     <LinearLayout
-        android:layout_width="50dp"
+        android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:layout_margin="1dp"
+        android:layout_weight="1"
         android:orientation="vertical" >
 
         <ToggleButton
@@ -21,9 +21,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="1dp"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
         android:orientation="vertical" >
 
         <TextView
@@ -40,9 +40,9 @@
     </LinearLayout>
 
     <LinearLayout
-       android:layout_margin="1dp"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="2"
         android:orientation="vertical" >
 
         <TextView
@@ -59,9 +59,9 @@
     </LinearLayout>
 
     <LinearLayout
-       android:layout_margin="1dp"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
         android:orientation="vertical" >
 
         <TextView

@@ -80,7 +80,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		exchange.setText(alarm.getExchange().getName());
 
 		TextView lastCheck = (TextView) rowView.findViewById(R.id.last_check);
-		if(alarm.getLastUpdateTimestamp() != null) {
+		if (alarm.getLastUpdateTimestamp() != null) {
 			lastCheck.setText(formatMilis(System.currentTimeMillis() - alarm.getLastUpdateTimestamp().getTime()));
 		}
 

@@ -1,5 +1,6 @@
 package mobi.boilr.boilr.listeners;
 
+import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.adapters.AlarmListAdapter;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
@@ -16,35 +17,38 @@ import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.BaseAdapter;
 
 public class OnSwipeTouchListener implements OnTouchListener {
+
 	private final class GestureListener extends SimpleOnGestureListener {
 
 		private static final int SWIPE_THRESHOLD = 100;
 		private static final int SWIPE_VELOCITY_THRESHOLD = 100;
-		private Context context;
-		private StorageAndControlService mService;
-		boolean mBound = false;
+		private AlarmListActivity enclosingActivity;
 
-		private ServiceConnection deleteAlarmsServiceConnection = new ServiceConnection() {
+		// private StorageAndControlService mService;
+		// boolean mBound = false;
 
-			@SuppressWarnings("unchecked")
-			@Override
-			// Callback action performed after the service has been bound
-			public void onServiceConnected(ComponentName className, IBinder binder) {
-				mService = ((LocalBinder<StorageAndControlService>) binder).getService();
-				mBound = true;
-				mService.deleteAlarm(alarm);
-			}
+		// private ServiceConnection deleteAlarmsServiceConnection = new ServiceConnection() {
+		//
+		// @SuppressWarnings("unchecked")
+		// @Override
+		// // Callback action performed after the service has been bound
+		// public void onServiceConnected(ComponentName className, IBinder binder) {
+		// mService = ((LocalBinder<StorageAndControlService>) binder).getService();
+		// mBound = true;
+		// mService.deleteAlarm(alarm);
+		// }
+		//
+		// @Override
+		// public void onServiceDisconnected(ComponentName className) {
+		// }
+		// };
+		// private Alarm alarm;
 
-			@Override
-			public void onServiceDisconnected(ComponentName className) {
-			}
-		};
-		private Alarm alarm;
-
-		public GestureListener(Context ctx) {
-			this.context = ctx;
+		public GestureListener(AlarmListActivity ctx) {
+			this.enclosingActivity = ctx;
 		}
 
 		@Override
@@ -60,16 +64,18 @@ public class OnSwipeTouchListener implements OnTouchListener {
 				float diffX = e2.getX() - e1.getX();
 				if(Math.abs(diffX) > Math.abs(diffY)) {
 					if(Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-						int pointToPosition = ((ListActivity) context).getListView().pointToPosition((int) e1.getX(), (int) e1.getY());
-						AlarmListAdapter adapter = (AlarmListAdapter) ((ListActivity) context).getListAdapter();
-						alarm = adapter.getItem(pointToPosition);
-						adapter.remove(pointToPosition);
-						Log.d("Delete position " + pointToPosition + " with alarm " + alarm.getId());
-						if(mBound){
-							mService.deleteAlarm(alarm);
+						int pointToPosition = ((ListActivity) enclosingActivity).getListView()
+								.pointToPosition((int) e1.getX(), (int) e1.getY());
+
+						AlarmListAdapter adapter = (AlarmListAdapter) enclosingActivity
+								.getListAdapter();
+						Alarm alarm = adapter.getItem(pointToPosition);
+
+						if (enclosingActivity.ismBound()) {
+							enclosingActivity.getmStorageAndControlService().deleteAlarm(alarm);
+							adapter.remove(pointToPosition);
 						}else{
-							Intent serviceIntent = new Intent(context, StorageAndControlService.class);
-							context.bindService(serviceIntent, deleteAlarmsServiceConnection, Context.BIND_AUTO_CREATE);
+							Log.d("Couldn't remove alarm " + alarm.getId());
 						}
 					}
 					result = true;
@@ -86,7 +92,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
 	private final GestureDetector gestureDetector;
 
-	public OnSwipeTouchListener(Context ctx) {
+	public OnSwipeTouchListener(AlarmListActivity ctx) {
 		gestureDetector = new GestureDetector(ctx, new GestureListener(ctx));
 	}
 
