@@ -21,14 +21,31 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_key_specific"
-        android:title="pref_title_specific"
-        android:orderingFromXml="false" >
+        android:title="pref_title_specific" >
+        <EditTextPreference
+		    android:key="pref_key_upper_value"
+			android:title="@string/pref_title_upper_bound"
+			android:inputType="numberDecimal"
+			android:defaultValue=""/>
+        <EditTextPreference
+		    android:key="pref_key_lower_value"
+			android:title="@string/pref_title_lower_bound"
+			android:inputType="numberDecimal"
+			android:defaultValue=""/>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pref_key_change_in_percentage"
+            android:title="@string/pref_title_change_in_percentage" />
+        <EditTextPreference
+		    android:key="pref_key_change_value"
+			android:title="@string/pref_title_change_value"
+			android:inputType="numberDecimal"
+			android:defaultValue=""/>
         <EditTextPreference
 		    android:key="pref_key_update_interval"
 			android:title="@string/pref_title_update_interval"
 			android:inputType="number"
-			android:defaultValue=""
-			android:order="2" />
+			android:defaultValue=""/>
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_key_alerts"
