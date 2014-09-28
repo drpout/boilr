@@ -116,10 +116,10 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long layout) {
 		// Handle list clicks. Pass corresponding alarm to populate the detailed view.
-		int id = (Integer) v.findViewById(R.id.toggle_button).getTag();
+		Integer id = (Integer) v.findViewById(R.id.toggle_button).getTag();
 		Log.d("ListView click " + id);
 		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
-		alarmSettingsIntent.putExtra("id", id);
+		alarmSettingsIntent.putExtra(AlarmSettingsActivity.ID, id);
 		startActivity(alarmSettingsIntent);
 	}
 

@@ -17,6 +17,7 @@ import android.preference.PreferenceActivity;
 
 public class AlarmSettingsActivity extends PreferenceActivity {
 
+	public static final String ID = "id";
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
 
@@ -50,8 +51,9 @@ public class AlarmSettingsActivity extends PreferenceActivity {
 
 	@Override
 	protected void onCreate(Bundle bundle) {
-		super.onCreate(bundle);
-		int id = bundle.getInt("id");
+		super.onCreate(bundle);		
+        Bundle bund = getIntent().getExtras();
+        Integer id = bund.getInt(ID);
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 		mStorageAndControlServiceConnection = new GetAlarmServiceConnection(id);
 		bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
