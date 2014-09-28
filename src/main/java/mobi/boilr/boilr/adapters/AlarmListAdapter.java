@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.views.fragments.SettingsFragment;
+import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
@@ -46,22 +46,22 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
 
 			TextView upperBound = (TextView) rowView.findViewById(R.id.upper_bound);
-			upperBound.setText(String.valueOf(SettingsFragment.cleanDoubleToString(priceHitAlarm.getUpperBound())));
+			upperBound.setText(Conversions.formatEngNotation(priceHitAlarm.getUpperBound()));
 
 			TextView lowerBound = (TextView) rowView.findViewById(R.id.lower_bound);
-			lowerBound.setText(String.valueOf(SettingsFragment.cleanDoubleToString(priceHitAlarm.getLowerBound())));
+			lowerBound.setText(Conversions.formatEngNotation(priceHitAlarm.getLowerBound()));
 		} else if(alarm instanceof PriceChangeAlarm) {
 			rowView = mInflater.inflate(R.layout.price_change_alarm_row, parent, false);
 			PriceChangeAlarm priceChangeAlarm = (PriceChangeAlarm) alarm;
 
 			TextView periodTextView = (TextView) rowView.findViewById(R.id.period);
-			periodTextView.setText(formatMilis(priceChangeAlarm.getPeriod()));
+			periodTextView.setText(Conversions.formatMilis(priceChangeAlarm.getPeriod()));
 
 			TextView change = (TextView) rowView.findViewById(R.id.change);
 			if(priceChangeAlarm.isPercent()) {
-				change.setText(SettingsFragment.cleanDoubleToString(priceChangeAlarm.getPercent()) + "%");
+				change.setText(Conversions.format2DecimalPlaces(priceChangeAlarm.getPercent()) + "%");
 			} else {
-				change.setText(SettingsFragment.cleanDoubleToString(priceChangeAlarm.getChange()) + " " + alarm.getPair().getExchange());
+				change.setText(Conversions.formatEngNotation(priceChangeAlarm.getChange()));
 			}
 		}
 
@@ -81,38 +81,16 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 
 		TextView lastCheck = (TextView) rowView.findViewById(R.id.last_check);
 		if (alarm.getLastUpdateTimestamp() != null) {
-			lastCheck.setText(formatMilis(System.currentTimeMillis() - alarm.getLastUpdateTimestamp().getTime()));
+			lastCheck.setText(Conversions.formatMilis(System.currentTimeMillis() - alarm.getLastUpdateTimestamp().getTime()));
 		}
 
 		TextView pair = (TextView) rowView.findViewById(R.id.pair);
 		pair.setText(alarm.getPair().toString());
 
 		TextView lastValue = (TextView) rowView.findViewById(R.id.last_value);
-		lastValue.setText(String.valueOf(SettingsFragment.cleanDoubleToString(alarm.getLastValue())));
+		lastValue.setText(Conversions.formatEngNotation(alarm.getLastValue()));
 
 		return rowView;
-	}
-
-	private static long MILIS_IN_MINUTE = 60000; // 60 * 1000
-	private static long MILIS_IN_HOUR = 3600000; // 60 * 60 * 1000
-	private static long MILIS_IN_DAY = 86400000; // 24 * 60 * 60 * 1000
-
-	public static String formatMilis(long milis) {
-		String formated;
-		if(milis < MILIS_IN_MINUTE) {
-			// seconds
-			formated = milis / 1000 + "s";
-		} else if(milis < MILIS_IN_HOUR) {
-			// minutes
-			formated = (milis / MILIS_IN_MINUTE) + "m";
-		} else if(milis < MILIS_IN_DAY) {
-			// hours
-			formated = (milis / MILIS_IN_HOUR) + "h";
-		} else {
-			// days
-			formated = (milis / MILIS_IN_DAY) + "d";
-		}
-		return formated;
 	}
 
 	private class AlarmFilter extends Filter {

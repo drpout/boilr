@@ -2,12 +2,11 @@ package mobi.boilr.boilr.activities;
 
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
-import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.boilr.views.fragments.PriceHitAlarmSettingsFragment;
 import mobi.boilr.boilr.views.fragments.PriceChangeAlarmSettingsFragment;
+import mobi.boilr.boilr.views.fragments.PriceHitAlarmSettingsFragment;
 import mobi.boilr.libpricealarm.Alarm;
-import mobi.boilr.libpricealarm.PriceHitAlarm;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
+import mobi.boilr.libpricealarm.PriceHitAlarm;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -24,9 +23,9 @@ public class AlarmSettingsActivity extends PreferenceActivity {
 	private GetAlarmServiceConnection mStorageAndControlServiceConnection;
 
 	private class GetAlarmServiceConnection implements ServiceConnection {
-		private Integer id;
+		private int id;
 
-		public GetAlarmServiceConnection(Integer id) {
+		public GetAlarmServiceConnection(int id) {
 			this.id = id;
 		}
 
@@ -34,20 +33,12 @@ public class AlarmSettingsActivity extends PreferenceActivity {
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mStorageAndControlService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
-
 			// Callback action performed after the service has been bound
-			if(mBound) {
-
-				Alarm alarm = mStorageAndControlService.getAlarm(id);
-
-				Log.d(""+alarm.getExchange());
-				Log.d(alarm.getExchange().getName());
-
-				if(alarm instanceof PriceHitAlarm) {
-					getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmSettingsFragment(alarm)).commit();
-				} else if(alarm instanceof PriceChangeAlarm) {
-					getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceChangeAlarmSettingsFragment(alarm)).commit();
-				}
+			Alarm alarm = mStorageAndControlService.getAlarm(id);
+			if(alarm instanceof PriceHitAlarm) {
+				getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmSettingsFragment(alarm)).commit();
+			} else if(alarm instanceof PriceChangeAlarm) {
+				getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceChangeAlarmSettingsFragment(alarm)).commit();
 			}
 		}
 
@@ -60,9 +51,7 @@ public class AlarmSettingsActivity extends PreferenceActivity {
 	@Override
 	protected void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		Bundle bund = getIntent().getExtras();
-		Integer id = bund.getInt("id");
-
+		int id = bundle.getInt("id");
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 		mStorageAndControlServiceConnection = new GetAlarmServiceConnection(id);
 		bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);

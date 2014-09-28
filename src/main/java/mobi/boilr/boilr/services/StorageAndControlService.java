@@ -12,6 +12,7 @@ import mobi.boilr.boilr.database.DBManager;
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
 import mobi.boilr.boilr.utils.ChangeAlarmParameter;
+import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.PercentageAlarmParameter;
@@ -69,8 +70,8 @@ public class StorageAndControlService extends Service {
 				if(alarms.length == 1) {
 					try {
 						alarms[0].run();
-						Log.d("Last value for alarm " + alarms[0].getId() + " " + alarms[0].getLastValue());
-					} catch (IOException e) {
+						Log.d("Last value for alarm " + alarms[0].getId() + " " + Conversions.formatMaxDecimalPlaces(alarms[0].getLastValue()));
+					} catch(IOException e) {
 						Log.e("Could not retrieve last value for alarm " + alarms[0].getId(), e);
 					}
 				}
@@ -90,7 +91,7 @@ public class StorageAndControlService extends Service {
 			if(hasNetworkConnection() && pairs.length == 1) {
 				try {
 					return pairs[0].first.getLastValue(pairs[0].second);
-				} catch (IOException e) {
+				} catch(IOException e) {
 					Log.e("Cannot get last value for " + pairs[0].first.getName() + " with pair " + pairs[0].second.toString(), e);
 				}
 			}
@@ -117,7 +118,7 @@ public class StorageAndControlService extends Service {
 					addAlarm(alarm);
 					startAlarm(alarm);
 				}
-			} catch (Exception e) {
+			} catch(Exception e) {
 				Log.e("Caught exception while populating DB.", e);
 			}
 			return null;
@@ -130,7 +131,7 @@ public class StorageAndControlService extends Service {
 		protected List<Pair> doInBackground(String... exchangeCode) {
 			try {
 				return getExchange(exchangeCode[0]).getPairs();
-			} catch (Exception e) {
+			} catch(Exception e) {
 				Log.e("Can't get pairs for " + exchangeCode[0], e);
 			}
 			return null;
@@ -150,7 +151,7 @@ public class StorageAndControlService extends Service {
 				float percent = arg0[0].getPercent();
 				try {
 					return new PriceChangeAlarm(id, exchange, pair, period, notify, percent);
-				} catch (Exception e) {
+				} catch(Exception e) {
 					Log.e("AssyncTask AddPercentageAlarm failed", e);
 				}
 			}
@@ -170,7 +171,7 @@ public class StorageAndControlService extends Service {
 				double change = arg0[0].getChange();
 				try {
 					return new PriceChangeAlarm(id, exchange, pair, period, notify, change);
-				} catch (Exception e) {
+				} catch(Exception e) {
 					Log.e("AssyncTask AddChangeAlarm failed.", e);
 				}
 			}
@@ -200,14 +201,14 @@ public class StorageAndControlService extends Service {
 				// new PopupalteDBTask().execute();
 			} else {
 				// Set Exchange and start alarm
-				for (Alarm alarm : alarmsMap.values()) {
+				for(Alarm alarm : alarmsMap.values()) {
 					alarm.setExchange(getExchange(alarm.getExchangeCode()));
 					if(alarm.isOn()) {
 						this.startAlarm(alarm);
 					}
 				}
 			}
-		} catch (Exception e) {
+		} catch(Exception e) {
 			Log.e("Caught exception while recovering alarms from DB.", e);
 		}
 	}
@@ -270,17 +271,25 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void startAlarm(Alarm alarm) {
+		addToAlarmManager(alarm);
+		alarm.turnOn();
+		replaceAlarm(alarm);
+	}
+
+	private void addToAlarmManager(Alarm alarm) {
 		Intent intent = new Intent(this, StorageAndControlService.class);
 		intent.setAction(UPDATE_LAST_VALUE);
 		intent.putExtra("alarmID", alarm.getId());
 		PendingIntent pendingIntent = PendingIntent.getService(this, alarm.getId(), intent, 0);
 		alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, alarm.getPeriod(), alarm.getPeriod(), pendingIntent);
-		alarm.turnOn();
-		replaceAlarm(alarm);
 	}
 
 	public void startAlarm(int alarmID) {
 		startAlarm(alarmsMap.get(alarmID));
+	}
+
+	public void restartAlarm(Alarm alarm) {
+		addToAlarmManager(alarm);
 	}
 
 	public void stopAlarm(Alarm alarm) {
@@ -307,7 +316,7 @@ public class StorageAndControlService extends Service {
 	public void replaceAlarm(Alarm alarm) {
 		try {
 			db.updateAlarm(alarm);
-		} catch (IOException e) {
+		} catch(IOException e) {
 			Log.e("Could not update alarm " + alarm.getId() + " in the DB.", e);
 		}
 	}
@@ -322,7 +331,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private boolean anyActiveAlarm() {
-		for (Alarm alarm : alarmsMap.values())
+		for(Alarm alarm : alarmsMap.values())
 			if(alarm.isOn())
 				return true;
 		return false;

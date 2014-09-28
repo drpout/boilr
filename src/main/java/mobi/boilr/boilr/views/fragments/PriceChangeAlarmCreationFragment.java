@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.domain.AndroidNotify;
+import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import android.content.SharedPreferences;
@@ -15,7 +16,6 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
-import android.text.InputType;
 
 public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 	public static final String PREF_KEY_CHANGE_IN_PERCENTAGE = "pref_key_change_in_percentage";
@@ -24,7 +24,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 	private boolean isPercentage = false;
 
 	private class OnPriceChangeSettingsPreferenceChangeListener extends
-			OnAlarmSettingsPreferenceChangeListener {
+	OnAlarmSettingsPreferenceChangeListener {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -35,7 +35,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			} else if(key.equals(PREF_KEY_CHANGE_VALUE)) {
 				preference.setSummary(getChangeValueSummary((String) newValue));
 			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
-				preference.setSummary(SettingsFragment.buildMinToDaysSummary((String) newValue));
+				preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue));
 			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
@@ -45,14 +45,11 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 
 	OnAlarmSettingsPreferenceChangeListener listener = new OnPriceChangeSettingsPreferenceChangeListener();
 
-	public PriceChangeAlarmCreationFragment(int exchangeIndex, int pairIndex) {
-		super(exchangeIndex, pairIndex);
-	}
-
 	@Override
 	protected void updateDependentOnPair() {
-		if(!isPercentage)
-			updateChangeValueSummary();
+		EditTextPreference edit = (EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE);
+		edit.setEnabled(true);
+		updateChangeValueSummary();
 	}
 
 	private void updateChangeValueSummary() {
@@ -71,43 +68,60 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 	}
 
 	@Override
-	public void onCreate(Bundle bundle) {
-		super.onCreate(bundle);
+	protected void disableDependentOnPair() {
+		EditTextPreference edit = (EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE);
+		edit.setEnabled(false);
+		edit.setSummary(null);
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
 		ListPreference alarmTypePref = (ListPreference) findPreference(PREF_KEY_TYPE);
-		alarmTypePref.setValueIndex(1);
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
+		PreferenceCategory specificCat = (PreferenceCategory) findPreference(PREF_KEY_SPECIFIC);
+		Preference pref;
+		String key;
+		for (int i = 0; i < specificCat.getPreferenceCount(); i++) {
+			pref = specificCat.getPreference(i);
+			key = pref.getKey();
+			if(!key.equals(PREF_KEY_CHANGE_IN_PERCENTAGE) && !key.equals(PREF_KEY_CHANGE_VALUE) && !key.equals(PREF_KEY_UPDATE_INTERVAL)) {
+				specificCat.removePreference(pref);
+				i--;
+			}
+		}
+		EditTextPreference changePref = (EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE);
+		EditTextPreference updateIntervalPref = (EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL);
+		EditTextPreference[] prefs = { changePref,
+				updateIntervalPref };
+		for (Preference p : prefs) {
+			p.setOnPreferenceChangeListener(listener);
+		}
+		CheckBoxPreference isPercentPref = (CheckBoxPreference) findPreference(PREF_KEY_CHANGE_IN_PERCENTAGE);
+		isPercentPref.setOnPreferenceChangeListener(listener);
+		isPercentage = isPercentPref.isChecked();
+		if(savedInstanceState == null) {
+			alarmTypePref.setValueIndex(1);
+
+			for (EditTextPreference p : prefs) {
+				p.setText(null);
+			}
+
+			updateIntervalPref.setDialogMessage(R.string.pref_summary_update_interval_change);
+			updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
+		} else {
+			// Change value pref summary will be updated by updateDependentOnPair()
+
+			String updateInterval = updateIntervalPref.getText();
+			if(updateInterval == null || updateInterval.equals("")) {
+				updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
+			} else {
+				updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(updateInterval));
+			}
+		}
+		specificCat.setTitle(alarmTypePref.getEntry());
 		alarmTypePref.setSummary(alarmTypePref.getEntry());
-		PreferenceCategory category = (PreferenceCategory) findPreference(PREF_KEY_SPECIFIC);
-		category.setTitle(alarmTypePref.getEntry());
-
-		CheckBoxPreference checkBoxPref = new CheckBoxPreference(enclosingActivity);
-		checkBoxPref.setTitle(R.string.pref_title_change_in_percentage);
-		checkBoxPref.setKey(PREF_KEY_CHANGE_IN_PERCENTAGE);
-		checkBoxPref.setDefaultValue(isPercentage);
-		checkBoxPref.setOnPreferenceChangeListener(listener);
-		checkBoxPref.setOrder(0);
-		category.addPreference(checkBoxPref);
-		checkBoxPref.setChecked(isPercentage);
-
-		EditTextPreference edit = new EditTextPreference(enclosingActivity);
-		edit.setKey(PREF_KEY_CHANGE_VALUE);
-		edit.setTitle(R.string.pref_title_change_value);
-		edit.setDialogTitle(R.string.pref_title_change_value);
-		edit.setDefaultValue(null);
-		edit.setOnPreferenceChangeListener(listener);
-		edit.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-		edit.setOrder(1);
-		category.addPreference(edit);
-		edit.setText(null);
-
-		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
-
-		edit = (EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL);
-		edit.setTitle(R.string.pref_title_time_frame);
-		edit.setDialogMessage(R.string.pref_summary_update_interval_change);
-		edit.setSummary(SettingsFragment.buildMinToDaysSummary(sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
-		edit.setOnPreferenceChangeListener(listener);
-		edit.setText(null);
 	}
 
 	@Override
@@ -117,7 +131,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		String updateInterval = ((EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL)).getText();
 		// Time is in minutes, convert to milliseconds
 		long period = 60000 * Long.parseLong(updateInterval != null ? updateInterval :
-			sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""));
+				sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""));
 		String changeValueString = ((EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE)).getText();
 		double change;
 		if(changeValueString == null || changeValueString.equals(""))
