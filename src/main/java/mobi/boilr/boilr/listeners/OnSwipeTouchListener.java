@@ -16,7 +16,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 	private static final double REMOVE_THRESHOLD = 0.5;
 	private static final long DURATION = 500;
 
-	private Integer pointToPosition = null;
+	private int pointToPosition = -1;
 	private float mDownX;
 	private int mSwipeSlop = -1;
 	private boolean mItemPressed = false;
@@ -32,18 +32,14 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
 	@Override
 	public boolean onTouch(final View view, MotionEvent event) {
-
-		pointToPosition = pointToPosition == null ? enclosingActivity.getListView()
+		pointToPosition = pointToPosition == -1 ? enclosingActivity.getListView()
 				.pointToPosition((int) event.getX(), (int) event.getY()) : pointToPosition;
-
 				View childView = mListView.getChildAt(pointToPosition);
-
 				// When no row is selected, do nothing
+				Log.d("Moving position " + pointToPosition);
 				if (childView == null) {
-					
 					return false;
 				}
-
 				if (mSwipeSlop < 0) {
 					mSwipeSlop = ViewConfiguration.get(enclosingActivity).getScaledTouchSlop();
 				}
@@ -130,7 +126,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 							return false;
 						}
 					}
-					pointToPosition = null;
+					pointToPosition = -1;
 					mItemPressed = false;
 					break;
 					default:
