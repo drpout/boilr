@@ -150,4 +150,8 @@
     <string name="keep_monitoring">Keep monitoring</string>
     <string name="no_internet">Boilr has no internet</string>
     <string name="no_updates">Your alarms cannot be updated.</string>
+    
+    <string name="couldnt_retrieve_pairs">Could not retrieve pairs for %1$s.</string>
+    <string name="failed_create_alarm">Failed to create alarm.</string>
+    <string name="check_connection">Please check your internet connection.</string>
 </resources>
