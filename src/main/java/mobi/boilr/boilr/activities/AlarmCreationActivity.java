@@ -12,7 +12,9 @@ public class AlarmCreationActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmCreationFragment(0, 0)).commit();
+		if(savedInstanceState == null) {
+			getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmCreationFragment()).commit();
+		}
 	}
 
 	@Override

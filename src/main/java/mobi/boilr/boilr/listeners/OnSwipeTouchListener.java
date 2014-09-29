@@ -1,97 +1,138 @@
 package mobi.boilr.boilr.listeners;
 
+import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.adapters.AlarmListAdapter;
-import mobi.boilr.boilr.services.LocalBinder;
-import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libpricealarm.Alarm;
-import android.app.ListActivity;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.ViewConfiguration;
+import android.widget.ListView;
 
 public class OnSwipeTouchListener implements OnTouchListener {
-	private final class GestureListener extends SimpleOnGestureListener {
+	private AlarmListActivity enclosingActivity;
+	private static final int SWIPE_DURATION = 250;
+	private static final double REMOVE_THRESHOLD = 0.5;
+	private static final long DURATION = 500;
 
-		private static final int SWIPE_THRESHOLD = 100;
-		private static final int SWIPE_VELOCITY_THRESHOLD = 100;
-		private Context context;
-		private StorageAndControlService mService;
-		boolean mBound = false;
+	private int pointToPosition = -1;
+	private float mDownX;
+	private int mSwipeSlop = -1;
+	private boolean mItemPressed = false;
+	private boolean mSwiping = false;
+	private ListView mListView;
 
-		private ServiceConnection deleteAlarmsServiceConnection = new ServiceConnection() {
 
-			@SuppressWarnings("unchecked")
-			@Override
-			// Callback action performed after the service has been bound
-			public void onServiceConnected(ComponentName className, IBinder binder) {
-				mService = ((LocalBinder<StorageAndControlService>) binder).getService();
-				mBound = true;
-				mService.deleteAlarm(alarm);
-			}
-
-			@Override
-			public void onServiceDisconnected(ComponentName className) {
-			}
-		};
-		private Alarm alarm;
-
-		public GestureListener(Context ctx) {
-			this.context = ctx;
-		}
-
-		@Override
-		public boolean onDown(MotionEvent e) {
-			return true;
-		}
-
-		@Override
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-			boolean result = false;
-			try {
-				float diffY = e2.getY() - e1.getY();
-				float diffX = e2.getX() - e1.getX();
-				if(Math.abs(diffX) > Math.abs(diffY)) {
-					if(Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-						int pointToPosition = ((ListActivity) context).getListView().pointToPosition((int) e1.getX(), (int) e1.getY());
-						AlarmListAdapter adapter = (AlarmListAdapter) ((ListActivity) context).getListAdapter();
-						alarm = adapter.getItem(pointToPosition);
-						adapter.remove(pointToPosition);
-						Log.d("Delete position " + pointToPosition + " with alarm " + alarm.getId());
-						if(mBound){
-							mService.deleteAlarm(alarm);
-						}else{
-							Intent serviceIntent = new Intent(context, StorageAndControlService.class);
-							context.bindService(serviceIntent, deleteAlarmsServiceConnection, Context.BIND_AUTO_CREATE);
-						}
-					}
-					result = true;
-				} else {
-					Log.d("Just a click.");
-				}
-				result = true;
-			} catch(Exception e) {
-				Log.e("Error on SwipeListener",e);
-			}
-			return result;
-		}
-	}
-
-	private final GestureDetector gestureDetector;
-
-	public OnSwipeTouchListener(Context ctx) {
-		gestureDetector = new GestureDetector(ctx, new GestureListener(ctx));
+	public OnSwipeTouchListener(AlarmListActivity ctx) {
+		enclosingActivity = ctx;
+		mListView = ctx.getListView();
+		// gestureDetector = new GestureDetector(ctx, new GestureListener(ctx));
 	}
 
 	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		return gestureDetector.onTouchEvent(event);
+	public boolean onTouch(final View view, MotionEvent event) {
+		pointToPosition = pointToPosition == -1 ? enclosingActivity.getListView()
+				.pointToPosition((int) event.getX(), (int) event.getY()) : pointToPosition;
+				View childView = mListView.getChildAt(pointToPosition);
+				// When no row is selected, do nothing
+				Log.d("Moving position " + pointToPosition);
+				if (childView == null) {
+					return false;
+				}
+				if (mSwipeSlop < 0) {
+					mSwipeSlop = ViewConfiguration.get(enclosingActivity).getScaledTouchSlop();
+				}
+
+				switch (event.getAction()) {
+					case MotionEvent.ACTION_DOWN:
+						if (mItemPressed) {
+							// Multi-item swipes not handled
+							return false;
+						}
+						mItemPressed = true;
+						mDownX = event.getX();
+						break;
+					case MotionEvent.ACTION_CANCEL:
+						childView.setAlpha(1);
+						childView.setTranslationX(0);
+						mItemPressed = false;
+						break;
+					case MotionEvent.ACTION_MOVE: {
+						float x = event.getX() + view.getTranslationX();
+						float deltaX = x - mDownX;
+						float deltaXAbs = Math.abs(deltaX);
+						if (!mSwiping) {
+							if (deltaXAbs > mSwipeSlop) {
+								mSwiping = true;
+								mListView.requestDisallowInterceptTouchEvent(true);
+								// mBackgroundContainer.showBackground(v.getTop(), v.getHeight());
+							}
+						}
+						if (mSwiping) {
+							childView.setTranslationX((x - mDownX));
+							// Set fade to be almost invisible when when threshold to remove is achieved.
+							childView.setAlpha(1 - deltaXAbs / view.getWidth());
+						}
+					}
+					break;
+					case MotionEvent.ACTION_UP: {
+						// User let go - figure out whether to animate the view out, or back into place
+						if (mSwiping) {
+							float x = event.getX() + view.getTranslationX();
+							float deltaX = x - mDownX;
+							float deltaXAbs = Math.abs(deltaX);
+							float fractionCovered;
+							float endX;
+							float endAlpha;
+							final boolean remove;
+							if (deltaXAbs > view.getWidth() * REMOVE_THRESHOLD) {
+								// Greater than a quarter of the width - animate it out
+								fractionCovered = deltaXAbs / childView.getWidth();
+								endX = deltaX < 0 ? -view.getWidth() : view.getWidth();
+								endAlpha = 0;
+								remove = true;
+							} else {
+								// Not far enough - animate it back
+								fractionCovered = 1 - (deltaXAbs / view.getWidth());
+								endX = 0;
+								endAlpha = 1;
+								remove = false;
+							}
+
+							long duration = (int) ((1 - fractionCovered) * SWIPE_DURATION);
+							mListView.setEnabled(false);
+
+							if (remove) {
+								AlarmListAdapter adapter = (AlarmListAdapter) enclosingActivity
+										.getListAdapter();
+								Alarm alarm = adapter.getItem(pointToPosition);
+								if (enclosingActivity.ismBound()) {
+									enclosingActivity.getmStorageAndControlService().deleteAlarm(alarm);
+									adapter.remove(pointToPosition);
+								} else {
+									Log.d("Couldn't remove alarm " + alarm.getId());
+								}
+								mSwiping = false;
+								mListView.setEnabled(true);
+							} else {
+								mSwiping = false;
+								mListView.setEnabled(true);
+								childView.setAlpha(1);
+								childView.setTranslationX(0);
+							}
+						} else {
+							// It's not a swipe, it most be a click, return false to signal it
+							return false;
+						}
+					}
+					pointToPosition = -1;
+					mItemPressed = false;
+					break;
+					default:
+						return false;
+				}
+
+				return true;
 	}
 }

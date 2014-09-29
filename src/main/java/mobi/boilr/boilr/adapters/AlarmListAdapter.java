@@ -80,7 +80,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		exchange.setText(alarm.getExchange().getName());
 
 		TextView lastCheck = (TextView) rowView.findViewById(R.id.last_check);
-		if(alarm.getLastUpdateTimestamp() != null) {
+		if (alarm.getLastUpdateTimestamp() != null) {
 			lastCheck.setText(Conversions.formatMilis(System.currentTimeMillis() - alarm.getLastUpdateTimestamp().getTime()));
 		}
 
@@ -99,20 +99,20 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults results = new FilterResults();
 			if(mOriginalAlarms == null) {
-				synchronized(mLock) {
+				synchronized (mLock) {
 					mOriginalAlarms = new ArrayList<Alarm>(mAlarms);
 				}
 			}
 			if(constraint == null || constraint.length() == 0) {
 				ArrayList<Alarm> list;
-				synchronized(mLock) {
+				synchronized (mLock) {
 					list = new ArrayList<Alarm>(mOriginalAlarms);
 				}
 				results.values = list;
 				results.count = list.size();
 			} else {
 				List<Alarm> originalList;
-				synchronized(mLock) {
+				synchronized (mLock) {
 					originalList = new ArrayList<Alarm>(mOriginalAlarms);
 				}
 				String[] filterStrings = constraint.toString().toLowerCase().split("\\s+");
@@ -121,10 +121,10 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 				Alarm filterableAlarm;
 				boolean containsAllFilters;
 				int count = originalList.size();
-				for(int i = 0; i < count; i++) {
+				for (int i = 0; i < count; i++) {
 					containsAllFilters = true;
 					filterableAlarm = originalList.get(i);
-					for(int j = 0; j < filtersCount; j++) {
+					for (int j = 0; j < filtersCount; j++) {
 						if(!filterableAlarm.toString().toLowerCase().contains(filterStrings[j])) {
 							containsAllFilters = false;
 							break;
@@ -153,7 +153,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void add(Alarm alarm) {
-		synchronized(mLock) {
+		synchronized (mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.add(alarm);
 			} else {
@@ -164,7 +164,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void addAll(Collection<? extends Alarm> collection) {
-		synchronized(mLock) {
+		synchronized (mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.addAll(collection);
 			} else {
@@ -175,7 +175,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void remove(Alarm alarm) {
-		synchronized(mLock) {
+		synchronized (mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.remove(alarm);
 			} else {
@@ -186,7 +186,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void remove(int position) {
-		synchronized(mLock) {
+		synchronized (mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.remove(position);
 			} else {
@@ -197,7 +197,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void clear() {
-		synchronized(mLock) {
+		synchronized (mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.clear();
 			} else {

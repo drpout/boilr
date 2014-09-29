@@ -92,7 +92,6 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 		edit.setSummary(formated + " " + alarm.getPair().getExchange());
 		category.addPreference(edit);
 		edit.setText(formated);
-
 		edit = (EditTextPreference) findPreference(PriceHitAlarmCreationFragment.PREF_KEY_UPDATE_INTERVAL);
 		edit.setDialogMessage(R.string.pref_summary_update_interval_hit);
 		edit.setSummary((priceHitAlarm.getPeriod() / 1000) + " s");
