@@ -98,7 +98,7 @@ public abstract class AlarmSettingsFragment extends PreferenceFragment {
 				Log.d("No behavior for " + preference.getKey());
 			}
 
-			enclosingActivity.getStorageAndControlService().replaceAlarm(alarm);
+			enclosingActivity.getStorageAndControlService().replaceAlarmDB(alarm);
 			return true;
 		}
 	}

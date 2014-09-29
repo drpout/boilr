@@ -155,7 +155,7 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 		else
 			lowerBound = Double.parseDouble(lowerBoundString);
 		if(mBound) {
-			mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
+			mStorageAndControlService.createAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
 		} else {
 			throw new IOException("PriceHitAlarmCreationFragment not bound to StorageAndControlService.");
 		}

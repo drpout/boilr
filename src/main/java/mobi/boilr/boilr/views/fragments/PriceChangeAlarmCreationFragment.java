@@ -141,9 +141,9 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		if(mBound) {
 			if(isPercentage) {
 				float percent = (float) change;
-				mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, percent);
+				mStorageAndControlService.createAlarm(id, exchange, pair, period, notify, percent);
 			} else {
-				mStorageAndControlService.addAlarm(id, exchange, pair, period, notify, change);
+				mStorageAndControlService.createAlarm(id, exchange, pair, period, notify, change);
 			}
 		} else {
 			throw new IOException("PriceChangeAlarmCreationFragment not bound to StorageAndControlService.");

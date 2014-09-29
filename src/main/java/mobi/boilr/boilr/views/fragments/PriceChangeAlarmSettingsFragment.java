@@ -53,7 +53,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 				return super.onPreferenceChange(preference, newValue);
 			}
 			if(enclosingActivity.isBound()) {
-				enclosingActivity.getStorageAndControlService().replaceAlarm(priceChangeAlarm);
+				enclosingActivity.getStorageAndControlService().replaceAlarmDB(priceChangeAlarm);
 			} else {
 				Log.d("AlarmSettingsActivity not bound to StorageAndControlService.");
 			}

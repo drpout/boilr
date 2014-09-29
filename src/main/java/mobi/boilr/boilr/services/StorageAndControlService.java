@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.database.DBManager;
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
@@ -85,7 +86,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class GetLastValueTask extends
-	AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
+			AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
 		@Override
 		protected Double doInBackground(android.util.Pair<Exchange, Pair>... pairs) {
 			if(hasNetworkConnection() && pairs.length == 1) {
@@ -138,8 +139,8 @@ public class StorageAndControlService extends Service {
 		}
 	}
 
-	private class AddPercentageAlarm extends
-			AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
+	private class AddPercentageAlarmTask extends
+	AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(PercentageAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
@@ -152,14 +153,15 @@ public class StorageAndControlService extends Service {
 				try {
 					return new PriceChangeAlarm(id, exchange, pair, period, notify, percent);
 				} catch(Exception e) {
-					Log.e("AssyncTask AddPercentageAlarm failed", e);
+					Log.e("AddPercentageAlarmTask failed", e);
 				}
 			}
 			return null;
 		}
 	}
 
-	private class AddChangeAlarm extends AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
+	private class AddChangeAlarmTask extends
+			AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(ChangeAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
@@ -172,7 +174,7 @@ public class StorageAndControlService extends Service {
 				try {
 					return new PriceChangeAlarm(id, exchange, pair, period, notify, change);
 				} catch(Exception e) {
-					Log.e("AssyncTask AddChangeAlarm failed.", e);
+					Log.e("AddChangeAlarmTask failed.", e);
 				}
 			}
 			return null;
@@ -215,13 +217,15 @@ public class StorageAndControlService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		String action = intent.getAction();
-		if(action != null && UPDATE_LAST_VALUE.equals(action)) {
-			int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
-			if(alarmID != Integer.MIN_VALUE) {
-				Alarm alarm = getAlarm(alarmID);
-				AlarmAlertWakeLock.acquireCpuWakeLock(this);
-				new UpdateLastValueTask().execute(alarm);
+		if(intent != null) {
+			String action = intent.getAction();
+			if(action != null && UPDATE_LAST_VALUE.equals(action)) {
+				int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
+				if(alarmID != Integer.MIN_VALUE) {
+					Alarm alarm = getAlarm(alarmID);
+					AlarmAlertWakeLock.acquireCpuWakeLock(this);
+					new UpdateLastValueTask().execute(alarm);
+				}
 			}
 		}
 		return START_STICKY;
@@ -240,8 +244,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-			InstantiationException, IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, SecurityException {
+	InstantiationException, IllegalAccessException, IllegalArgumentException,
+	InvocationTargetException, SecurityException {
 		if(exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {
@@ -273,7 +277,7 @@ public class StorageAndControlService extends Service {
 	public void startAlarm(Alarm alarm) {
 		addToAlarmManager(alarm);
 		alarm.turnOn();
-		replaceAlarm(alarm);
+		replaceAlarmDB(alarm);
 	}
 
 	private void addToAlarmManager(Alarm alarm) {
@@ -297,15 +301,19 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void stopAlarm(int alarmID) {
+		removeFromAlarmManager(alarmID);
+		Alarm alarm = alarmsMap.get(alarmID);
+		alarm.turnOff();
+		replaceAlarmDB(alarm);
+		if(!anyActiveAlarm())
+			stopSelf();
+	}
+
+	private void removeFromAlarmManager(int alarmID) {
 		Intent intent = new Intent(this, StorageAndControlService.class);
 		intent.setAction(UPDATE_LAST_VALUE);
 		PendingIntent pendingIntent = PendingIntent.getService(this, alarmID, intent, 0);
 		alarmManager.cancel(pendingIntent);
-		Alarm alarm = alarmsMap.get(alarmID);
-		alarm.turnOff();
-		replaceAlarm(alarm);
-		if(!anyActiveAlarm())
-			stopSelf();
 	}
 
 	public void addAlarm(Alarm alarm) throws IOException {
@@ -313,7 +321,7 @@ public class StorageAndControlService extends Service {
 		db.storeAlarm(alarm);
 	}
 
-	public void replaceAlarm(Alarm alarm) {
+	public void replaceAlarmDB(Alarm alarm) {
 		try {
 			db.updateAlarm(alarm);
 		} catch(IOException e) {
@@ -322,8 +330,11 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void deleteAlarm(Alarm alarm) {
+		removeFromAlarmManager(alarm.getId());
 		db.deleteAlarm(alarm);
 		alarmsMap.remove(alarm.getId());
+		if(!anyActiveAlarm())
+			stopSelf();
 	}
 
 	public void deleteAlarm(int id) {
@@ -361,28 +372,32 @@ public class StorageAndControlService extends Service {
 		return new GetPairsTask().execute(exchangeCode).get();
 	}
 
-	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
+	public void createAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
 			float percent) throws InterruptedException, ExecutionException, IOException {
 		// Change alarms always check last value to build the change
-		PriceChangeAlarm priceChangeAlarm = ((new AddPercentageAlarm()).execute(new PercentageAlarmParameter(id, exchange, pair, period, notify, percent))).get();
-		addAlarm(priceChangeAlarm);
-		this.startAlarm(priceChangeAlarm);
+		PriceChangeAlarm alarm = ((new AddPercentageAlarmTask()).execute(new PercentageAlarmParameter(id, exchange, pair, period, notify, percent))).get();
+		if(alarm == null)
+			throw new IOException(getString(R.string.check_connection));
+		addAlarm(alarm);
+		this.startAlarm(alarm);
 	}
 
-	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
+	public void createAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
 			double change) throws InterruptedException, ExecutionException, IOException {
 		// Change alarms always check last value to build the change
-		PriceChangeAlarm priceChangeAlarm = ((new AddChangeAlarm()).execute(new ChangeAlarmParameter(id, exchange, pair, period, notify, change))).get();
-		addAlarm(priceChangeAlarm);
-		this.startAlarm(priceChangeAlarm);
+		PriceChangeAlarm alarm = ((new AddChangeAlarmTask()).execute(new ChangeAlarmParameter(id, exchange, pair, period, notify, change))).get();
+		if(alarm == null)
+			throw new IOException(getString(R.string.check_connection));
+		addAlarm(alarm);
+		this.startAlarm(alarm);
 	}
 
-	public void addAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
+	public void createAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
 			double upperBound, double lowerBound) throws UpperBoundSmallerThanLowerBoundException,
 			IOException {
-		PriceHitAlarm priceHitAlarm = new PriceHitAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
-		addAlarm(priceHitAlarm);
-		this.startAlarm(priceHitAlarm);
+		PriceHitAlarm alarm = new PriceHitAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
+		addAlarm(alarm);
+		this.startAlarm(alarm);
 	}
 
 	@SuppressWarnings("unchecked")
