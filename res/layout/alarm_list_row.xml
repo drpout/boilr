@@ -5,6 +5,7 @@
     android:orientation="horizontal" >
 
     <LinearLayout
+        android:id="@+id/on_off_layout"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
@@ -12,68 +13,92 @@
 
         <ToggleButton
             android:id="@+id/toggle_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
             android:focusable="false"
+            android:maxLines="1"
             android:onClick="onToggleClicked"
+            android:singleLine="false"
             android:textOff="@string/off"
             android:textOn="@string/on" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/exchange_layout"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:layout_weight="2"
+        android:layout_weight="1.9"
         android:orientation="vertical" >
 
         <TextView
             android:id="@+id/exchange"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="false"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/last_check"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="false"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/pair_layout"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:layout_weight="2"
+        android:layout_weight="1.8"
         android:orientation="vertical" >
 
         <TextView
             android:id="@+id/last_value"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="false"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/pair"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="false"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/options_layout"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
+        android:layout_weight="1.3"
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/change"
-            android:layout_width="wrap_content"
+            android:id="@+id/change_upper_bound"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="false"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/period"
-            android:layout_width="wrap_content"
+            android:id="@+id/period_lower_bound"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="false"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 

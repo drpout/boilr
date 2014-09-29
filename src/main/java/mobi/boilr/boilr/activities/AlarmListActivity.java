@@ -16,6 +16,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -70,7 +71,18 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		boolean isLandScape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+
+		if(isLandScape){
+			Log.d("LandScape");
+		}else{
+			Log.d("Vertigo");
+		}
+		
+		
 		setContentView(R.layout.alarm_list);
+
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
 
 		getListView().setOnTouchListener(new OnSwipeTouchListener(this));

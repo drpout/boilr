@@ -6,10 +6,13 @@ import java.util.List;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
+import android.app.ActionBar.LayoutParams;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +20,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -38,34 +43,66 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	@Override
 	// TODO If needed optimize with http://www.piwai.info/android-adapter-good-practices
 	public View getView(int position, View convertView, ViewGroup parent) {
+
+		boolean isLandScape = mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 		Alarm alarm = mAlarms.get(position);
-		View rowView = null;
-
-		if(alarm instanceof PriceHitAlarm) {
-			rowView = mInflater.inflate(R.layout.price_hit_alarm_row, parent, false);
-			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
-
-			TextView upperBound = (TextView) rowView.findViewById(R.id.upper_bound);
-			upperBound.setText(Conversions.formatEngNotation(priceHitAlarm.getUpperBound()));
-
-			TextView lowerBound = (TextView) rowView.findViewById(R.id.lower_bound);
-			lowerBound.setText(Conversions.formatEngNotation(priceHitAlarm.getLowerBound()));
-		} else if(alarm instanceof PriceChangeAlarm) {
-			rowView = mInflater.inflate(R.layout.price_change_alarm_row, parent, false);
-			PriceChangeAlarm priceChangeAlarm = (PriceChangeAlarm) alarm;
-
-			TextView periodTextView = (TextView) rowView.findViewById(R.id.period);
-			periodTextView.setText(Conversions.formatMilis(priceChangeAlarm.getPeriod()));
-
-			TextView change = (TextView) rowView.findViewById(R.id.change);
-			if(priceChangeAlarm.isPercent()) {
-				change.setText(Conversions.format2DecimalPlaces(priceChangeAlarm.getPercent()) + "%");
-			} else {
-				change.setText(Conversions.formatEngNotation(priceChangeAlarm.getChange()));
-			}
-		}
+		View rowView  = mInflater.inflate(R.layout.alarm_list_row, parent, false);
 
 		ToggleButton toggleButton = (ToggleButton) rowView.findViewById(R.id.toggle_button);
+		TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
+		TextView lastCheck = (TextView) rowView.findViewById(R.id.last_check);
+		TextView pair = (TextView) rowView.findViewById(R.id.pair);
+		TextView lastValue = (TextView) rowView.findViewById(R.id.last_value);
+
+		LinearLayout linearLayout;
+		if(isLandScape){
+			//Adjust Dimension to allow more content
+			linearLayout = (LinearLayout) rowView.findViewById(R.id.on_off_layout);
+			linearLayout = (LinearLayout) rowView.findViewById(R.id.exchange_layout);
+			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.5f));
+			linearLayout = (LinearLayout) rowView.findViewById(R.id.pair_layout);
+			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 2));
+			linearLayout = (LinearLayout) rowView.findViewById(R.id.options_layout);
+			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 2));
+			//			
+			lastValue.setText(Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) +" "+ alarm.getPair().getExchange());
+		}else{
+			lastValue.setText(Conversions.formatEngNotation(alarm.getLastValue()));
+		}
+
+
+		TextView changeUpperBound = (TextView) rowView.findViewById(R.id.change_upper_bound);
+		TextView periodLowerBound = (TextView) rowView.findViewById(R.id.period_lower_bound);
+
+		if(alarm instanceof PriceHitAlarm) {
+			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
+
+			if(isLandScape){
+				//Display full number on landscape
+				changeUpperBound.setText(priceHitAlarm.getUpperBound()+ " " + alarm.getPair().getExchange());
+				periodLowerBound.setText(priceHitAlarm.getLowerBound() + " " + alarm.getPair().getExchange());
+
+
+			}else{
+				changeUpperBound.setText(Conversions.formatEngNotation(priceHitAlarm.getUpperBound()));
+				periodLowerBound.setText(Conversions.formatEngNotation(priceHitAlarm.getLowerBound()));
+			}
+
+		} else if(alarm instanceof PriceChangeAlarm) {
+			PriceChangeAlarm priceChangeAlarm = (PriceChangeAlarm) alarm;
+
+			if(priceChangeAlarm.isPercent()) {
+				changeUpperBound.setText(Conversions.format2DecimalPlaces(priceChangeAlarm.getPercent()) + "%");
+			} else if(isLandScape){
+				changeUpperBound.setText(priceChangeAlarm.getChange() + " " + alarm.getPair().getExchange());
+			}else{
+				changeUpperBound.setText(Conversions.formatEngNotation(priceChangeAlarm.getChange()));
+			}
+
+			periodLowerBound.setText(Conversions.formatMilis(priceChangeAlarm.getPeriod()));
+		}
+
+
 		// hidden tag to identify the alarm
 		toggleButton.setTag(alarm.getId());
 		toggleButton.setChecked(alarm.isOn());
@@ -76,19 +113,15 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 			rowView.setBackgroundColor(Color.DKGRAY);
 		}
 
-		TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
 		exchange.setText(alarm.getExchange().getName());
 
-		TextView lastCheck = (TextView) rowView.findViewById(R.id.last_check);
+
 		if (alarm.getLastUpdateTimestamp() != null) {
 			lastCheck.setText(Conversions.formatMilis(System.currentTimeMillis() - alarm.getLastUpdateTimestamp().getTime()));
 		}
 
-		TextView pair = (TextView) rowView.findViewById(R.id.pair);
-		pair.setText(alarm.getPair().toString());
 
-		TextView lastValue = (TextView) rowView.findViewById(R.id.last_value);
-		lastValue.setText(Conversions.formatEngNotation(alarm.getLastValue()));
+		pair.setText(alarm.getPair().toString());
 
 		return rowView;
 	}
