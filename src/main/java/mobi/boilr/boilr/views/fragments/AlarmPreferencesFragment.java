@@ -104,6 +104,11 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	}
 
 	protected void updatePairsList(String exchangeCode, String exchangeName, String pairString) {
+		pairListPref.setEntries(null);
+		pairListPref.setEntryValues(null);
+		pairListPref.setSummary(null);
+		pairListPref.setEnabled(false);
+		disableDependentOnPairAux();
 		try {
 			if(!mBound) {
 				throw new IOException(enclosingActivity.getString(R.string.not_bound, "AlarmPreferencesFragment"));
@@ -119,12 +124,6 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 		String message = enclosingActivity.getString(R.string.couldnt_retrieve_pairs, exchangeName);
 		Toast.makeText(enclosingActivity, message, Toast.LENGTH_LONG).show();
 		Log.e(message, e);
-		pairListPref.setEntries(null);
-		pairListPref.setEntryValues(null);
-		pairListPref.setSummary(null);
-		pairListPref.setEnabled(false);
-		disableDependentOnPairAux();
-		lastValue = Double.POSITIVE_INFINITY;
 	}
 
 	public void updatePairsListCallback(String exchangeName, String pairString, List<Pair> pairs) {
@@ -157,6 +156,10 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 			updateDependentOnPair();
 			recoverSavedInstance = false;
 		} else {
+			lastValue = Double.POSITIVE_INFINITY;
+			lastValuePref.setEnabled(false);
+			lastValuePref.setText(null);
+			lastValuePref.setSummary(null);
 			try {
 				if(!mBound) {
 					throw new IOException(enclosingActivity.getString(R.string.not_bound, "AlarmPreferencesFragment"));
@@ -173,10 +176,6 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 		String message = enclosingActivity.getString(R.string.couldnt_retrieve_last_value, exchangeListPref.getEntry(), pairs.get(pairIndex).toString());
 		Toast.makeText(enclosingActivity, message, Toast.LENGTH_LONG).show();
 		Log.e(message, e);
-		lastValue = Double.POSITIVE_INFINITY;
-		lastValuePref.setEnabled(false);
-		lastValuePref.setText(null);
-		lastValuePref.setSummary(null);
 		updateDependentOnPair();
 	}
 
@@ -216,7 +215,6 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 		EditTextPreference[] edits = { upperBoundPref, lowerBoundPref };
 		for (EditTextPreference edit : edits) {
 			edit.setEnabled(false);
-			edit.setText(null);
 			edit.setSummary(null);
 		}
 	}
