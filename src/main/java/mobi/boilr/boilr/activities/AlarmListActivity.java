@@ -16,7 +16,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -30,9 +29,9 @@ import android.widget.SearchView.OnQueryTextListener;
 public class AlarmListActivity extends ListActivity {
 
 	private AlarmListAdapter adapter;
+	private SearchView searchView;
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
-	private SearchView searchView;
 	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
 
 		@Override
@@ -41,11 +40,9 @@ public class AlarmListActivity extends ListActivity {
 			mBound = true;
 
 			// Callback action performed after the service has been bound
-			if(mBound) {
-				List<Alarm> alarms = mStorageAndControlService.getAlarms();
-				adapter.clear();
-				adapter.addAll(alarms);
-			}
+			List<Alarm> alarms = mStorageAndControlService.getAlarms();
+			adapter.clear();
+			adapter.addAll(alarms);
 		}
 
 		@Override
@@ -71,18 +68,7 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		boolean isLandScape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-
-		if(isLandScape){
-			Log.d("LandScape");
-		}else{
-			Log.d("Vertigo");
-		}
-		
-		
 		setContentView(R.layout.alarm_list);
-
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
 
 		getListView().setOnTouchListener(new OnSwipeTouchListener(this));
@@ -127,11 +113,10 @@ public class AlarmListActivity extends ListActivity {
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long layout) {
-		// Handle list clicks. Pass corresponding alarm to populate the detailed view.
-		Integer id = (Integer) v.findViewById(R.id.toggle_button).getTag();
-		Log.d("ListView click " + id);
+		Alarm alarm = adapter.getItem(position);
 		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
-		alarmSettingsIntent.putExtra(AlarmSettingsActivity.ID, id);
+		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
+		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());
 		startActivity(alarmSettingsIntent);
 	}
 

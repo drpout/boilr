@@ -3,8 +3,8 @@ package mobi.boilr.boilr.views.fragments;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
-import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import android.content.ComponentName;
 import android.content.Context;
@@ -37,6 +37,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	private boolean mBound;
 	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mStorageAndControlService = ((LocalBinder<StorageAndControlService>) binder).getService();
@@ -109,7 +110,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 					e.setExperiedPeriod(pairInterval);
 				}
 			} else {
-				Log.d("PreferenceFragment not bound to StorageAndControlService.");
+				Log.d(getActivity().getString(R.string.not_bound, "PreferenceFragment"));
 			}
 		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT)) {
 			pref.setSummary(sharedPrefs.getString(key, "") + " s");

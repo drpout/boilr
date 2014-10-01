@@ -12,7 +12,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 
 public class Conversions {
-	private static long MILIS_IN_MINUTE = 60000; // 60 * 1000
+	public static long MILIS_IN_MINUTE = 60000; // 60 * 1000
 	private static long MILIS_IN_HOUR = 3600000; // 60 * 60 * 1000
 	private static long MILIS_IN_DAY = 86400000; // 24 * 60 * 60 * 1000
 
@@ -59,7 +59,7 @@ public class Conversions {
 	 *
 	 * Based on answer http://stackoverflow.com/a/25308216 by JBE
 	 * on Stack Overflow
-	 * 
+	 *
 	 * @param d double to be converted
 	 * @return String with up to 340 decimal places
 	 */
@@ -114,11 +114,11 @@ public class Conversions {
 		double tval = value;
 		int order = 0;
 		if(tval != 0.0 && tval != Double.POSITIVE_INFINITY && tval != Double.NEGATIVE_INFINITY && tval != Double.NaN) {
-			while(tval > 1000.0) {
+			while (tval > 1000.0) {
 				tval /= 1000.0;
 				order += 3;
 			}
-			while(tval < 1.0) {
+			while (tval < 1.0) {
 				tval *= 1000.0;
 				order -= 3;
 			}

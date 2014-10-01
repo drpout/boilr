@@ -17,6 +17,7 @@ import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.PercentageAlarmParameter;
+import mobi.boilr.boilr.views.fragments.AlarmPreferencesFragment;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libdynticker.bitstamp.BitstampExchange;
 import mobi.boilr.libdynticker.btcchina.BTCChinaExchange;
@@ -72,7 +73,7 @@ public class StorageAndControlService extends Service {
 					try {
 						alarms[0].run();
 						Log.d("Last value for alarm " + alarms[0].getId() + " " + Conversions.formatMaxDecimalPlaces(alarms[0].getLastValue()));
-					} catch(IOException e) {
+					} catch (IOException e) {
 						Log.e("Could not retrieve last value for alarm " + alarms[0].getId(), e);
 					}
 				}
@@ -86,19 +87,30 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class GetLastValueTask extends
-			AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
+	AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
+		private AlarmPreferencesFragment frag;
+
+		public GetLastValueTask(AlarmPreferencesFragment frag) {
+			super();
+			this.frag = frag;
+		}
+
 		@Override
 		protected Double doInBackground(android.util.Pair<Exchange, Pair>... pairs) {
 			if(hasNetworkConnection() && pairs.length == 1) {
 				try {
 					return pairs[0].first.getLastValue(pairs[0].second);
-				} catch(IOException e) {
+				} catch (IOException e) {
 					Log.e("Cannot get last value for " + pairs[0].first.getName() + " with pair " + pairs[0].second.toString(), e);
 				}
 			}
 			return null;
 		}
 
+		@Override
+		protected void onPostExecute(Double result) {
+			frag.getLastValueCallback(result);
+		}
 	}
 
 	private class PopupalteDBTask extends AsyncTask<Void, Void, Void> {
@@ -119,7 +131,7 @@ public class StorageAndControlService extends Service {
 					addAlarm(alarm);
 					startAlarm(alarm);
 				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				Log.e("Caught exception while populating DB.", e);
 			}
 			return null;
@@ -128,19 +140,35 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class GetPairsTask extends AsyncTask<String, Void, List<Pair>> {
+		private AlarmPreferencesFragment frag;
+		String exchangeName, pairString;
+
+		public GetPairsTask(AlarmPreferencesFragment frag, String exchangeName, String pairString) {
+			super();
+			this.frag = frag;
+			this.exchangeName = exchangeName;
+			this.pairString = pairString;
+		}
+
 		@Override
 		protected List<Pair> doInBackground(String... exchangeCode) {
 			try {
 				return getExchange(exchangeCode[0]).getPairs();
-			} catch(Exception e) {
+			} catch (Exception e) {
 				Log.e("Can't get pairs for " + exchangeCode[0], e);
 			}
 			return null;
 		}
+
+		@Override
+		protected void onPostExecute(List<Pair> result) {
+			frag.updatePairsListCallback(exchangeName, pairString, result);
+		}
+
 	}
 
 	private class AddPercentageAlarmTask extends
-	AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
+			AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(PercentageAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
@@ -152,7 +180,7 @@ public class StorageAndControlService extends Service {
 				float percent = arg0[0].getPercent();
 				try {
 					return new PriceChangeAlarm(id, exchange, pair, period, notify, percent);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					Log.e("AddPercentageAlarmTask failed", e);
 				}
 			}
@@ -161,7 +189,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class AddChangeAlarmTask extends
-			AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
+	AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(ChangeAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
@@ -173,7 +201,7 @@ public class StorageAndControlService extends Service {
 				double change = arg0[0].getChange();
 				try {
 					return new PriceChangeAlarm(id, exchange, pair, period, notify, change);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					Log.e("AddChangeAlarmTask failed.", e);
 				}
 			}
@@ -203,14 +231,14 @@ public class StorageAndControlService extends Service {
 				// new PopupalteDBTask().execute();
 			} else {
 				// Set Exchange and start alarm
-				for(Alarm alarm : alarmsMap.values()) {
+				for (Alarm alarm : alarmsMap.values()) {
 					alarm.setExchange(getExchange(alarm.getExchangeCode()));
 					if(alarm.isOn()) {
 						this.startAlarm(alarm);
 					}
 				}
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			Log.e("Caught exception while recovering alarms from DB.", e);
 		}
 	}
@@ -244,8 +272,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-	InstantiationException, IllegalAccessException, IllegalArgumentException,
-	InvocationTargetException, SecurityException {
+			InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException, SecurityException {
 		if(exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {
@@ -324,7 +352,7 @@ public class StorageAndControlService extends Service {
 	public void replaceAlarmDB(Alarm alarm) {
 		try {
 			db.updateAlarm(alarm);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Log.e("Could not update alarm " + alarm.getId() + " in the DB.", e);
 		}
 	}
@@ -342,7 +370,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private boolean anyActiveAlarm() {
-		for(Alarm alarm : alarmsMap.values())
+		for (Alarm alarm : alarmsMap.values())
 			if(alarm.isOn())
 				return true;
 		return false;
@@ -368,11 +396,19 @@ public class StorageAndControlService extends Service {
 		return wifiConnected || (mobileConnected && allowMobileData);
 	}
 
-	public List<Pair> getPairs(String exchangeCode) throws InterruptedException, ExecutionException {
-		return new GetPairsTask().execute(exchangeCode).get();
+	public void getPairs(AlarmPreferencesFragment frag, String exchangeCode,
+			String exchangeName, String pairString)
+					throws InterruptedException, ExecutionException {
+		new GetPairsTask(frag, exchangeName, pairString).execute(exchangeCode);
 	}
 
-	public void createAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
+	public void getLastValue(AlarmPreferencesFragment frag, Exchange e, Pair p)
+			throws InterruptedException, ExecutionException {
+		new GetLastValueTask(frag).execute(new android.util.Pair<Exchange, Pair>(e, p));
+	}
+
+	public void createAlarm(int id, Exchange exchange, Pair pair, long period,
+			AndroidNotify notify,
 			float percent) throws InterruptedException, ExecutionException, IOException {
 		// Change alarms always check last value to build the change
 		PriceChangeAlarm alarm = ((new AddPercentageAlarmTask()).execute(new PercentageAlarmParameter(id, exchange, pair, period, notify, percent))).get();
@@ -382,7 +418,8 @@ public class StorageAndControlService extends Service {
 		this.startAlarm(alarm);
 	}
 
-	public void createAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
+	public void createAlarm(int id, Exchange exchange, Pair pair, long period,
+			AndroidNotify notify,
 			double change) throws InterruptedException, ExecutionException, IOException {
 		// Change alarms always check last value to build the change
 		PriceChangeAlarm alarm = ((new AddChangeAlarmTask()).execute(new ChangeAlarmParameter(id, exchange, pair, period, notify, change))).get();
@@ -392,16 +429,12 @@ public class StorageAndControlService extends Service {
 		this.startAlarm(alarm);
 	}
 
-	public void createAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify,
+	public void createAlarm(int id, Exchange exchange, Pair pair, long period,
+			AndroidNotify notify,
 			double upperBound, double lowerBound) throws UpperBoundSmallerThanLowerBoundException,
 			IOException {
 		PriceHitAlarm alarm = new PriceHitAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
 		addAlarm(alarm);
 		this.startAlarm(alarm);
-	}
-
-	@SuppressWarnings("unchecked")
-	public double getLastValue(Exchange e, Pair p) throws InterruptedException, ExecutionException {
-		return (new GetLastValueTask()).execute(new android.util.Pair<Exchange, Pair>(e, p)).get();
 	}
 }

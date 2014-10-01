@@ -3,98 +3,108 @@ package mobi.boilr.boilr.views.fragments;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
-import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.text.InputType;
+import android.widget.Toast;
 
 public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
+	private PriceHitAlarm priceHitAlarm;
 
 	private class OnPriceHitSettingsPreferenceChangeListener extends
-			OnAlarmSettingsPreferenceChangeListener {
+	OnAlarmSettingsPreferenceChangeListener {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
-			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
 			String key = preference.getKey();
-			if(key.equals(PriceHitAlarmCreationFragment.PREF_KEY_UPPER_VALUE)) {
-				preference.setSummary(newValue + " " + alarm.getPair().getExchange());
-				priceHitAlarm.setUpperBound(Double.parseDouble((String) newValue));
-			} else if(key.equals(PriceHitAlarmCreationFragment.PREF_KEY_LOWER_VALUE)) {
-				preference.setSummary(newValue + " " + alarm.getPair().getExchange());
-				priceHitAlarm.setLowerBound(Double.parseDouble((String) newValue));
-			} else if(key.equals(PriceHitAlarmCreationFragment.PREF_KEY_UPDATE_INTERVAL)) {
+			if(key.equals(PREF_KEY_UPPER_VALUE)) {
+				try {
+					priceHitAlarm.setUpperBound(Double.parseDouble((String) newValue));
+					preference.setSummary(newValue + " " + alarm.getPair().getExchange());
+				} catch (Exception e) {
+					String msg = enclosingActivity.getString(R.string.cannot_set_bound);
+					Log.e(msg, e);
+					Toast.makeText(enclosingActivity, msg + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+					EditTextPreference edit = (EditTextPreference) preference;
+					edit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperBound()));
+				}
+			} else if(key.equals(PREF_KEY_LOWER_VALUE)) {
+				try {
+					priceHitAlarm.setLowerBound(Double.parseDouble((String) newValue));
+					preference.setSummary(newValue + " " + alarm.getPair().getExchange());
+				} catch (Exception e) {
+					String msg = enclosingActivity.getString(R.string.cannot_set_bound);
+					Log.e(msg, e);
+					Toast.makeText(enclosingActivity, msg + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+					EditTextPreference edit = (EditTextPreference) preference;
+					edit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerBound()));
+				}
+			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
 				preference.setSummary(newValue + " s");
 				alarm.setPeriod(1000 * Long.parseLong((String) newValue));
-				if(enclosingActivity.isBound()) {
-					enclosingActivity.getStorageAndControlService().restartAlarm(priceHitAlarm);
+				if(mBound) {
+					mStorageAndControlService.restartAlarm(priceHitAlarm);
 				} else {
-					Log.d("AlarmSettingsActivity not bound to StorageAndControlService.");
+					Log.d(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
 				}
 			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
-			if(enclosingActivity.isBound()) {
-				enclosingActivity.getStorageAndControlService().replaceAlarmDB(priceHitAlarm);
+			if(mBound) {
+				mStorageAndControlService.replaceAlarmDB(priceHitAlarm);
 			} else {
-				Log.d("AlarmSettingsActivity not bound to StorageAndControlService.");
+				Log.d(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
 			}
 			return true;
 		}
 	}
 
-	private OnAlarmSettingsPreferenceChangeListener listener = new OnPriceHitSettingsPreferenceChangeListener();
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		listener = new OnPriceHitSettingsPreferenceChangeListener();
+		super.onCreate(savedInstanceState);
 
-	public PriceHitAlarmSettingsFragment(Alarm alarm) {
-		super(alarm);
+		removePrefs(hitAlarmPrefsToKeep);
+
+		if(savedInstanceState == null) {
+			alarmTypePref.setValueIndex(0);
+			updateIntervalPref.setDialogMessage(R.string.pref_summary_update_interval_hit);
+		}
+		// Upper and lower bound prefs summary will be updated by updateDependentOnPair()
+		specificCat.setTitle(alarmTypePref.getEntry());
+		alarmTypePref.setSummary(alarmTypePref.getEntry());
 	}
 
 	@Override
-	public void onCreate(Bundle bundle) {
-		super.onCreate(bundle);
+	protected void updateDependentOnPair() {
+		super.updateDependentOnPair();
+		EditTextPreference[] edits = { upperBoundPref, lowerBoundPref };
+		String text;
+		for (EditTextPreference edit : edits) {
+			edit.setEnabled(true);
+			text = edit.getText();
+			if(text != null && !text.equals(""))
+				edit.setSummary(text + " " + alarm.getPair().getExchange());
+		}
+	}
 
-		PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
+	@Override
+	protected void disableDependentOnPair() {
+		disableDependentOnPairHitAlarm();
+	}
 
-		ListPreference alarmTypePref = (ListPreference) findPreference(PriceHitAlarmCreationFragment.PREF_KEY_TYPE);
-		alarmTypePref.setValueIndex(0);
-		alarmTypePref.setSummary(alarmTypePref.getEntry());
-		alarmTypePref.setEnabled(false);
-		PreferenceCategory category = (PreferenceCategory) findPreference(PriceHitAlarmCreationFragment.PREF_KEY_SPECIFIC);
-		category.setTitle(alarmTypePref.getEntry());
-
-		EditTextPreference edit = new EditTextPreference(enclosingActivity);
-		edit.setKey(PriceHitAlarmCreationFragment.PREF_KEY_UPPER_VALUE);
-		edit.setTitle(R.string.pref_title_upper_bound);
-		edit.setDialogTitle(R.string.pref_title_upper_bound);
-		edit.setOnPreferenceChangeListener(listener);
-		edit.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-		edit.setOrder(0);
-		String formated = Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperBound());
-		edit.setDefaultValue(formated);
-		edit.setSummary(formated + " " + alarm.getPair().getExchange());
-		category.addPreference(edit);
-		// setText only works after adding the preference.
-		edit.setText(formated);
-
-		edit = new EditTextPreference(enclosingActivity);
-		edit.setKey(PriceHitAlarmCreationFragment.PREF_KEY_LOWER_VALUE);
-		edit.setTitle(R.string.pref_title_lower_bound);
-		edit.setDialogTitle(R.string.pref_title_lower_bound);
-		edit.setOnPreferenceChangeListener(listener);
-		edit.getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-		edit.setOrder(1);
-		formated = Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerBound());
-		edit.setDefaultValue(formated);
-		edit.setSummary(formated + " " + alarm.getPair().getExchange());
-		category.addPreference(edit);
-		edit.setText(formated);
-		edit = (EditTextPreference) findPreference(PriceHitAlarmCreationFragment.PREF_KEY_UPDATE_INTERVAL);
-		edit.setDialogMessage(R.string.pref_summary_update_interval_hit);
-		edit.setSummary((priceHitAlarm.getPeriod() / 1000) + " s");
-		edit.setOnPreferenceChangeListener(listener);
+	@Override
+	protected void initializePreferences() {
+		priceHitAlarm = (PriceHitAlarm) alarm;
+		long secondsPeriod = alarm.getPeriod() / 1000;
+		updateIntervalPref.setSummary(secondsPeriod + " s");
+		if(!recoverSavedInstance) {
+			String formated = Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperBound());
+			upperBoundPref.setText(formated);
+			formated = Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerBound());
+			lowerBoundPref.setText(formated);
+			updateIntervalPref.setText(String.valueOf(secondsPeriod));
+		}
 	}
 }

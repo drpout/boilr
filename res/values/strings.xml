@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_about">About</string>
     <string name="alarm_settings">Alarm Settings</string>
-    <string name="add_alarm">Add Alarm</string>
+    <string name="add_alarm">Add alarm</string>
     <string name="on">ON</string>
     <string name="off">OFF</string>
     <string name="boilr_settings">Boilr Settings</string>
@@ -142,6 +142,7 @@
     <string name="pref_title_change_value">Change</string>
     <string name="pref_title_update_interval">Update interval</string>
     <string name="pref_title_time_frame">Time frame</string>
+    <string name="pref_title_last_value">Last value</string>
     <string name="pref_summary_update_interval_hit">In seconds. Defines how often the hit alarm gets data from the exchange.</string>
     <string name="pref_summary_update_interval_change">In minutes. Defines the time frame for the price change alarm.</string>
     
@@ -152,6 +153,9 @@
     <string name="no_updates">Your alarms cannot be updated.</string>
     
     <string name="couldnt_retrieve_pairs">Could not retrieve pairs for %1$s.</string>
+    <string name="couldnt_retrieve_last_value">Could not retrieve last value for %1$s with pair %2$s.</string>
     <string name="failed_create_alarm">Failed to create alarm.</string>
+    <string name="cannot_set_bound">Cannot set bound.</string>
     <string name="check_connection">Please check your internet connection.</string>
+    <string name="not_bound">%1$s not bound to StorageAndControlService.</string>
 </resources>

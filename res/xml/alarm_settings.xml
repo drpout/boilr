@@ -8,16 +8,24 @@
             android:entries="@array/pref_exchange_entries"
             android:entryValues="@array/pref_exchange_entries_values"
             android:key="pref_key_exchange"
-            android:title="@string/pref_exchange_title" />
+            android:title="@string/pref_exchange_title"
+            android:persistent="false" />
         <ListPreference
             android:key="pref_key_pair"
-            android:title="@string/pref_pair_title" />
+            android:title="@string/pref_pair_title"
+            android:persistent="false" />
+        <EditTextPreference
+            android:key="pref_key_last_value"
+            android:title="@string/pref_title_last_value"
+            android:persistent="false"
+            android:selectable="false" />
         <ListPreference
             android:defaultValue="@string/pref_type_default"
             android:entries="@array/pref_type_entries"
             android:entryValues="@array/pref_type_entries_values"
             android:key="pref_key_type"
-            android:title="@string/pref_type_title" />
+            android:title="@string/pref_type_title"
+            android:persistent="false" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_key_specific"
@@ -26,26 +34,31 @@
 		    android:key="pref_key_upper_value"
 			android:title="@string/pref_title_upper_bound"
 			android:inputType="numberDecimal"
-			android:defaultValue=""/>
+			android:defaultValue=""
+			android:persistent="false"/>
         <EditTextPreference
 		    android:key="pref_key_lower_value"
 			android:title="@string/pref_title_lower_bound"
 			android:inputType="numberDecimal"
-			android:defaultValue=""/>
+			android:defaultValue=""
+			android:persistent="false"/>
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="pref_key_change_in_percentage"
-            android:title="@string/pref_title_change_in_percentage" />
+            android:title="@string/pref_title_change_in_percentage"
+            android:persistent="false" />
         <EditTextPreference
 		    android:key="pref_key_change_value"
 			android:title="@string/pref_title_change_value"
 			android:inputType="numberDecimal"
-			android:defaultValue=""/>
+			android:defaultValue=""
+			android:persistent="false" />
         <EditTextPreference
 		    android:key="pref_key_update_interval"
 			android:title="@string/pref_title_update_interval"
 			android:inputType="number"
-			android:defaultValue=""/>
+			android:defaultValue=""
+			android:persistent="false" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_key_alerts"
@@ -55,7 +68,8 @@
             android:entries="@array/pref_entries_alert_type"
             android:entryValues="@array/pref_values_alert_type"
             android:key="pref_key_alarm_alert_type"
-            android:title="@string/pref_title_alarm_alert_type" />
+            android:title="@string/pref_title_alarm_alert_type"
+            android:persistent="false" />
         <RingtonePreference
             android:defaultValue="content://settings/system/alarm_alert"
             android:key="pref_key_alarm_alert_sound"
@@ -66,6 +80,7 @@
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="pref_key_alarm_vibrate"
-            android:title="@string/pref_title_alarm_vibrate" />
+            android:title="@string/pref_title_alarm_vibrate"
+            android:persistent="false" />
     </PreferenceCategory>
 </PreferenceScreen>

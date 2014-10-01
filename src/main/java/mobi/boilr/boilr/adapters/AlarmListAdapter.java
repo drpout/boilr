@@ -6,7 +6,6 @@ import java.util.List;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
-import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
@@ -21,7 +20,6 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -46,7 +44,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 
 		boolean isLandScape = mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 		Alarm alarm = mAlarms.get(position);
-		View rowView  = mInflater.inflate(R.layout.alarm_list_row, parent, false);
+		View rowView = mInflater.inflate(R.layout.alarm_list_row, parent, false);
 
 		ToggleButton toggleButton = (ToggleButton) rowView.findViewById(R.id.toggle_button);
 		TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
@@ -55,8 +53,9 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		TextView lastValue = (TextView) rowView.findViewById(R.id.last_value);
 
 		LinearLayout linearLayout;
-		if(isLandScape){
-			//Adjust Dimension to allow more content
+		String pairExchange = alarm.getPair().getExchange();
+		if(isLandScape) {
+			// Adjust Dimension to allow more content
 			linearLayout = (LinearLayout) rowView.findViewById(R.id.on_off_layout);
 			linearLayout = (LinearLayout) rowView.findViewById(R.id.exchange_layout);
 			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.5f));
@@ -64,12 +63,11 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 2));
 			linearLayout = (LinearLayout) rowView.findViewById(R.id.options_layout);
 			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 2));
-			//			
-			lastValue.setText(Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) +" "+ alarm.getPair().getExchange());
-		}else{
+			//
+			lastValue.setText(Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) + " " + pairExchange);
+		} else {
 			lastValue.setText(Conversions.formatEngNotation(alarm.getLastValue()));
 		}
-
 
 		TextView changeUpperBound = (TextView) rowView.findViewById(R.id.change_upper_bound);
 		TextView periodLowerBound = (TextView) rowView.findViewById(R.id.period_lower_bound);
@@ -77,13 +75,12 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		if(alarm instanceof PriceHitAlarm) {
 			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
 
-			if(isLandScape){
-				//Display full number on landscape
-				changeUpperBound.setText(priceHitAlarm.getUpperBound()+ " " + alarm.getPair().getExchange());
-				periodLowerBound.setText(priceHitAlarm.getLowerBound() + " " + alarm.getPair().getExchange());
+			if(isLandScape) {
+				// Display full number on landscape
+				changeUpperBound.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperBound()) + " " + pairExchange);
+				periodLowerBound.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerBound()) + " " + pairExchange);
 
-
-			}else{
+			} else {
 				changeUpperBound.setText(Conversions.formatEngNotation(priceHitAlarm.getUpperBound()));
 				periodLowerBound.setText(Conversions.formatEngNotation(priceHitAlarm.getLowerBound()));
 			}
@@ -93,15 +90,14 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 
 			if(priceChangeAlarm.isPercent()) {
 				changeUpperBound.setText(Conversions.format2DecimalPlaces(priceChangeAlarm.getPercent()) + "%");
-			} else if(isLandScape){
-				changeUpperBound.setText(priceChangeAlarm.getChange() + " " + alarm.getPair().getExchange());
-			}else{
+			} else if(isLandScape) {
+				changeUpperBound.setText(Conversions.formatMaxDecimalPlaces(priceChangeAlarm.getChange()) + " " + pairExchange);
+			} else {
 				changeUpperBound.setText(Conversions.formatEngNotation(priceChangeAlarm.getChange()));
 			}
 
 			periodLowerBound.setText(Conversions.formatMilis(priceChangeAlarm.getPeriod()));
 		}
-
 
 		// hidden tag to identify the alarm
 		toggleButton.setTag(alarm.getId());
@@ -115,11 +111,9 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 
 		exchange.setText(alarm.getExchange().getName());
 
-
-		if (alarm.getLastUpdateTimestamp() != null) {
+		if(alarm.getLastUpdateTimestamp() != null) {
 			lastCheck.setText(Conversions.formatMilis(System.currentTimeMillis() - alarm.getLastUpdateTimestamp().getTime()));
 		}
-
 
 		pair.setText(alarm.getPair().toString());
 

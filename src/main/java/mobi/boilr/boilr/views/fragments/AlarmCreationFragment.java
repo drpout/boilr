@@ -1,8 +1,6 @@
 package mobi.boilr.boilr.views.fragments;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import mobi.boilr.boilr.R;
@@ -15,13 +13,11 @@ import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.UpperBoundSmallerThanLowerBoundException;
-import android.app.Activity;
 import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -29,35 +25,40 @@ import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public abstract class AlarmCreationFragment extends PreferenceFragment {
-
-	protected static final String PREF_KEY_GENERIC = "pref_key_generic";
-	protected static final String PREF_KEY_SPECIFIC = "pref_key_specific";
-	protected static final String PREF_KEY_ALERTS = "pref_key_alerts";
-	protected static final String PREF_VALUE_PRICE_HIT = "price_hit";
-	protected static final String PREF_VALUE_PRICE_CHANGE = "price_change";
-	protected static final String PREF_KEY_EXCHANGE = "pref_key_exchange";
-	protected static final String PREF_KEY_TYPE = "pref_key_type";
-	protected static final String PREF_KEY_PAIR = "pref_key_pair";
-	protected static final String PREF_KEY_ALARM_ALERT_SOUND = "pref_key_alarm_alert_sound";
-	protected static final String PREF_KEY_ALARM_ALERT_TYPE = "pref_key_alarm_alert_type";
-	protected static final String PREF_KEY_ALARM_VIBRATE = "pref_key_alarm_vibrate";
-	protected static final String PREF_KEY_UPDATE_INTERVAL = "pref_key_update_interval";
-	protected Activity enclosingActivity;
-	protected int exchangeIndex = 0;
-	protected int pairIndex = 0;
+public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 	protected boolean defaultVibrateDef = true;
-	protected List<Pair> pairs = new ArrayList<Pair>();
 
-	protected OnAlarmSettingsPreferenceChangeListener listener = new OnAlarmSettingsPreferenceChangeListener();
+	private class UpdatePairsConnection implements ServiceConnection {
+		private String exchangeCode;
+		private String exchangeName;
+		private String pairString;
 
-	protected class OnAlarmSettingsPreferenceChangeListener implements OnPreferenceChangeListener {
+		public UpdatePairsConnection(String exchangeCode, String exchangeName, String pairString) {
+			super();
+			this.exchangeCode = exchangeCode;
+			this.exchangeName = exchangeName;
+			this.pairString = pairString;
+		}
+
+		@Override
+		public void onServiceConnected(ComponentName className, IBinder binder) {
+			mStorageAndControlService = ((LocalBinder<StorageAndControlService>) binder).getService();
+			mBound = true;
+			updatePairsList(exchangeCode, exchangeName, pairString);
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName className) {
+			mBound = false;
+		}
+	};
+
+	protected abstract class OnAlarmSettingsPreferenceChangeListener implements
+	OnPreferenceChangeListener {
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
@@ -66,17 +67,13 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 				exchangeIndex = listPref.findIndexOfValue((String) newValue);
 				String exchangeName = (String) listPref.getEntries()[exchangeIndex];
 				listPref.setSummary(exchangeName);
-				if(mBound) {
-					ListPreference pairListPref = (ListPreference) findPreference(PREF_KEY_PAIR);
-					pairIndex = 0;
-					updatePairsList(pairListPref, (String) newValue, exchangeName, pairIndex);
-				} else {
-					Log.d("AlarmCreationFragment not bound to StorageAndControlService.");
-				}
+				ListPreference pairListPref = (ListPreference) findPreference(PREF_KEY_PAIR);
+				pairIndex = 0;
+				updatePairsList((String) newValue, exchangeName, null);
 			} else if(key.equals(PREF_KEY_PAIR)) {
 				pairIndex = Integer.parseInt((String) newValue);
 				preference.setSummary(pairs.get(pairIndex).toString());
-				updateDependentOnPair();
+				updateDependentOnPairAux();
 			} else if(key.equals(PREF_KEY_TYPE)) {
 				Fragment creationFrag;
 				Bundle args = new Bundle();
@@ -84,7 +81,6 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 				args.putInt("pairIndex", pairIndex);
 				ListPreference alarmAlertTypePref = (ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE);
 				args.putString("alertType", alarmAlertTypePref.getValue());
-				SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
 				args.putString("alertSound", sharedPrefs.getString(PREF_KEY_ALARM_ALERT_SOUND, ""));
 				CheckBoxPreference vibratePref = (CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE);
 				args.putBoolean("vibrate", vibratePref.isChecked());
@@ -100,7 +96,6 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 				ListPreference alertTypePref = (ListPreference) preference;
 				alertTypePref.setSummary(alertTypePref.getEntries()[alertTypePref.findIndexOfValue((String) newValue)]);
 				// Change selectable ringtones according to the alert type
-				RingtonePreference alertSoundPref = (RingtonePreference) findPreference(PREF_KEY_ALARM_ALERT_SOUND);
 				int ringtoneType = Integer.parseInt((String) newValue);
 				alertSoundPref.setRingtoneType(ringtoneType);
 				String defaultRingtone = RingtoneManager.getDefaultUri(ringtoneType).toString();
@@ -117,58 +112,9 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 		}
 	}
 
-	protected StorageAndControlService mStorageAndControlService;
-	protected boolean mBound;
-	private ServiceConnection mStorageAndControlServiceConnection;
-
-	private class StorageAndControlServiceConnection implements ServiceConnection {
-
-		private CharSequence exchangeCode;
-		private CharSequence exchangeName;
-		private ListPreference pairListPref;
-
-		public StorageAndControlServiceConnection(CharSequence exchangeCode,
-				CharSequence exchangeName, ListPreference pairListPref) {
-			this.exchangeCode = exchangeCode;
-			this.exchangeName = exchangeName;
-			this.pairListPref = pairListPref;
-
-		}
-
-		@Override
-		public void onServiceConnected(ComponentName className, IBinder binder) {
-			mStorageAndControlService = ((LocalBinder<StorageAndControlService>) binder).getService();
-			mBound = true;
-			// Callback action performed after the service has been bound
-			updatePairsList(pairListPref, exchangeCode.toString(), exchangeName.toString(), pairIndex);
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName className) {
-			mBound = false;
-		}
-	};
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		enclosingActivity = getActivity();
-		addPreferencesFromResource(R.xml.alarm_settings);
-		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
-		ListPreference exchangeListPref = (ListPreference) findPreference(PREF_KEY_EXCHANGE);
-		ListPreference pairListPref = (ListPreference) findPreference(PREF_KEY_PAIR);
-		ListPreference alarmAlertTypePref = (ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE);
-		RingtonePreference alertSoundPref = (RingtonePreference) findPreference(PREF_KEY_ALARM_ALERT_SOUND);
-		CheckBoxPreference vibratePref = (CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE);
-		Preference[] prefs = { exchangeListPref,
-				pairListPref,
-				findPreference(PREF_KEY_TYPE),
-				alarmAlertTypePref,
-				alertSoundPref,
-				vibratePref };
-		for(Preference pref : prefs) {
-			pref.setOnPreferenceChangeListener(listener);
-		}
 		if(savedInstanceState == null) {
 			Bundle args = getArguments();
 			String alertType = null, alertSound = null;
@@ -222,8 +168,7 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 		exchangeListPref.setSummary(exchangeName);
 		exchangeListPref.setValueIndex(exchangeIndex);
 
-		Intent serviceIntent = new Intent(enclosingActivity, StorageAndControlService.class);
-		mStorageAndControlServiceConnection = new StorageAndControlServiceConnection(exchangeCode, exchangeName, pairListPref);
+		mStorageAndControlServiceConnection = new UpdatePairsConnection(exchangeCode.toString(), exchangeName.toString(), null);
 		enclosingActivity.bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
 
 		setHasOptionsMenu(true);
@@ -231,18 +176,12 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch(item.getItemId()) {
+		switch (item.getItemId()) {
 			case R.id.action_send_now:
 				createAlarmAndReturn();
 			default:
 				return super.onOptionsItemSelected(item);
 		}
-	}
-
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		enclosingActivity.unbindService(mStorageAndControlServiceConnection);
 	}
 
 	@Override
@@ -253,39 +192,7 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 		savedInstanceState.putBoolean("defaultVibrateDef", defaultVibrateDef);
 	}
 
-	private void updatePairsList(ListPreference pairListPref, String exchangeCode,
-			String exchangeName, int index) {
-		try {
-			pairs = mStorageAndControlService.getPairs(exchangeCode);
-			if(pairs == null)
-				throw new Exception("Pairs is null.");
-			CharSequence[] sequence = new CharSequence[pairs.size()];
-			CharSequence[] ids = new CharSequence[pairs.size()];
-			for(int i = 0; i < pairs.size(); i++) {
-				sequence[i] = pairs.get(i).getCoin() + "/" + pairs.get(i).getExchange();
-				ids[i] = String.valueOf(i);
-			}
-			pairListPref.setEnabled(true);
-			pairListPref.setEntries(sequence);
-			pairListPref.setEntryValues(ids);
-			pairListPref.setSummary(sequence[index]);
-			pairListPref.setValueIndex(index);
-			updateDependentOnPair();
-		} catch(Exception e) {
-			String message = enclosingActivity.getString(R.string.couldnt_retrieve_pairs, exchangeName);
-			Toast.makeText(enclosingActivity, message, Toast.LENGTH_LONG).show();
-			Log.e(message, e);
-			pairListPref.setEntries(null);
-			pairListPref.setEntryValues(null);
-			pairListPref.setSummary(null);
-			pairListPref.setEnabled(false);
-			disableDependentOnPair();
-		}
-	}
-
 	private void createAlarmAndReturn() {
-		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
-
 		Integer alertType = ((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getValue() != null ? Integer.parseInt(((ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE)).getValue()) : null;
 		String alertSound;
 		if(sharedPrefs.getString(PREF_KEY_ALARM_ALERT_SOUND, "").equals(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""))) {
@@ -296,18 +203,21 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 
 		Boolean vibrate = defaultVibrateDef ? null : ((CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE)).isChecked();
 
-		Log.d(alertType + " " + alertSound + " " + vibrate);
+		Log.d("alertType: " + alertType + ", alertSound: " + alertSound + ", vibrate: " + vibrate);
 
 		AndroidNotify notify = new AndroidNotify(enclosingActivity, alertType, alertSound, vibrate);
-		int id = mStorageAndControlService.generateAlarmID();
 
 		try {
+			if(!mBound) {
+				throw new IOException(enclosingActivity.getString(R.string.not_bound, "AlarmCreationFragment"));
+			}
+			int id = mStorageAndControlService.generateAlarmID();
 			Exchange exchange = mStorageAndControlService.getExchange(((ListPreference) findPreference(PREF_KEY_EXCHANGE)).getValue());
 			Pair pair = pairs.get(pairIndex);
 			makeAlarm(id, exchange, pair, notify);
 			Intent intent = new Intent(enclosingActivity, AlarmListActivity.class);
 			startActivity(intent);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			String failedCreate = enclosingActivity.getString(R.string.failed_create_alarm);
 			Log.e(failedCreate, e);
 			Toast.makeText(enclosingActivity, failedCreate + " " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -317,8 +227,4 @@ public abstract class AlarmCreationFragment extends PreferenceFragment {
 	protected abstract void makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotify notify)
 			throws UpperBoundSmallerThanLowerBoundException, IOException, InterruptedException,
 			ExecutionException;
-
-	protected abstract void updateDependentOnPair();
-
-	protected abstract void disableDependentOnPair();
 }
