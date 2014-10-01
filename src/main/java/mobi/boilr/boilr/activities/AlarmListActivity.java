@@ -34,6 +34,7 @@ public class AlarmListActivity extends ListActivity {
 	private boolean mBound;
 	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mStorageAndControlService = ((LocalBinder<StorageAndControlService>) binder).getService();

@@ -56,7 +56,6 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		String pairExchange = alarm.getPair().getExchange();
 		if(isLandScape) {
 			// Adjust Dimension to allow more content
-			linearLayout = (LinearLayout) rowView.findViewById(R.id.on_off_layout);
 			linearLayout = (LinearLayout) rowView.findViewById(R.id.exchange_layout);
 			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.5f));
 			linearLayout = (LinearLayout) rowView.findViewById(R.id.pair_layout);
