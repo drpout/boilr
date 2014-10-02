@@ -10,7 +10,7 @@
             android:key="pref_key_exchange"
             android:title="@string/pref_exchange_title"
             android:persistent="false" />
-        <ListPreference
+        <mobi.boilr.boilr.widgets.PairListPreference
             android:key="pref_key_pair"
             android:title="@string/pref_pair_title"
             android:persistent="false" />
