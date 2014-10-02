@@ -158,4 +158,5 @@
     <string name="cannot_set_bound">Cannot set bound.</string>
     <string name="check_connection">Please check your internet connection.</string>
     <string name="not_bound">%1$s not bound to StorageAndControlService.</string>
+    <string name="pair_search_description">Pair Search</string>
 </resources>
