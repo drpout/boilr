@@ -160,6 +160,8 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 			} 
 
 			mList.addAll(collection);
+			if(mFilter == null)
+				mFilter = new ListFilter<T>();
 			mFilter.filter();
 		}
 		notifyDataSetChanged();
@@ -193,5 +195,10 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 			mList.clear();
 		}
 		notifyDataSetChanged();
+	}
+	
+	
+	public Context getContext(){ 
+		return mContext;
 	}
 }

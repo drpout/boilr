@@ -1,7 +1,5 @@
 package mobi.boilr.boilr.widget;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import mobi.boilr.boilr.R;
@@ -14,39 +12,27 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class AlarmListAdapter extends BaseAdapter implements Filterable {
+public class AlarmListAdapter extends ListAdapter<Alarm> {
 
-	private List<Alarm> mAlarms;
-	private List<Alarm> mOriginalAlarms;
-	private Context mContext;
-	private Filter mFilter;
-	private LayoutInflater mInflater;
-	private final Object mLock = new Object();
 	private static final int[] attrs = new int[] { R.attr.off_alarm_row_color /* index 0 */};
 
 	public AlarmListAdapter(Context context, List<Alarm> alarms) {
-		mContext = context;
-		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mAlarms = alarms;
+		super(context,alarms);
 	}
 
 	@Override
 	// TODO If needed optimize with http://www.piwai.info/android-adapter-good-practices
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		boolean isLandScape = mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-		Alarm alarm = mAlarms.get(position);
-		View rowView = mInflater.inflate(R.layout.alarm_list_row, parent, false);
+		boolean isLandScape = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+		Alarm alarm = mList.get(position);
+		View rowView = getInflater().inflate(R.layout.alarm_list_row, parent, false);
 
 		ToggleButton toggleButton = (ToggleButton) rowView.findViewById(R.id.toggle_button);
 		TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
@@ -107,7 +93,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		if(alarm.isOn()) {
 			rowView.setBackgroundColor(Color.TRANSPARENT);
 		} else {
-			TypedArray ta = mContext.obtainStyledAttributes(attrs);
+			TypedArray ta = getContext().obtainStyledAttributes(attrs);
 			rowView.setBackgroundColor(ta.getColor(0, Color.DKGRAY));
 			ta.recycle();
 		}
@@ -121,142 +107,5 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		pair.setText(alarm.getPair().toString());
 
 		return rowView;
-	}
-
-	private class AlarmFilter extends Filter {
-
-		@Override
-		protected FilterResults performFiltering(CharSequence constraint) {
-			FilterResults results = new FilterResults();
-			if(mOriginalAlarms == null) {
-				synchronized(mLock) {
-					mOriginalAlarms = new ArrayList<Alarm>(mAlarms);
-				}
-			}
-			if(constraint == null || constraint.length() == 0) {
-				ArrayList<Alarm> list;
-				synchronized(mLock) {
-					list = new ArrayList<Alarm>(mOriginalAlarms);
-				}
-				results.values = list;
-				results.count = list.size();
-			} else {
-				List<Alarm> originalList;
-				synchronized(mLock) {
-					originalList = new ArrayList<Alarm>(mOriginalAlarms);
-				}
-				String[] filterStrings = constraint.toString().toLowerCase().split("\\s+");
-				int filtersCount = filterStrings.length;
-				List<Alarm> newList = new ArrayList<Alarm>();
-				Alarm filterableAlarm;
-				boolean containsAllFilters;
-				int count = originalList.size();
-				for(int i = 0; i < count; i++) {
-					containsAllFilters = true;
-					filterableAlarm = originalList.get(i);
-					for(int j = 0; j < filtersCount; j++) {
-						if(!filterableAlarm.toString().toLowerCase().contains(filterStrings[j])) {
-							containsAllFilters = false;
-							break;
-						}
-					}
-					if(containsAllFilters)
-						newList.add(filterableAlarm);
-				}
-				results.values = newList;
-				results.count = newList.size();
-			}
-			return results;
-		}
-
-		@SuppressWarnings("unchecked")
-		@Override
-		protected void publishResults(CharSequence constraint, FilterResults results) {
-			mAlarms = (List<Alarm>) results.values;
-			if(results.count > 0) {
-				notifyDataSetChanged();
-			} else {
-				notifyDataSetInvalidated();
-			}
-		}
-
-	}
-
-	public void add(Alarm alarm) {
-		synchronized(mLock) {
-			if(mOriginalAlarms != null) {
-				mOriginalAlarms.add(alarm);
-			} else {
-				mAlarms.add(alarm);
-			}
-		}
-		notifyDataSetChanged();
-	}
-
-	public void addAll(Collection<? extends Alarm> collection) {
-		synchronized(mLock) {
-			if(mOriginalAlarms != null) {
-				mOriginalAlarms.addAll(collection);
-			} else {
-				mAlarms.addAll(collection);
-			}
-		}
-		notifyDataSetChanged();
-	}
-
-	public void remove(Alarm alarm) {
-		synchronized(mLock) {
-			if(mOriginalAlarms != null) {
-				mOriginalAlarms.remove(alarm);
-			} else {
-				mAlarms.remove(alarm);
-			}
-		}
-		notifyDataSetChanged();
-	}
-
-	public void remove(int position) {
-		synchronized(mLock) {
-			if(mOriginalAlarms != null) {
-				mOriginalAlarms.remove(position);
-			} else {
-				mAlarms.remove(position);
-			}
-		}
-		notifyDataSetChanged();
-	}
-
-	public void clear() {
-		synchronized(mLock) {
-			if(mOriginalAlarms != null) {
-				mOriginalAlarms.clear();
-			} else {
-				mAlarms.clear();
-			}
-		}
-		notifyDataSetChanged();
-	}
-
-	@Override
-	public int getCount() {
-		return mAlarms.size();
-	}
-
-	@Override
-	public Alarm getItem(int position) {
-		return mAlarms.get(position);
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
-
-	@Override
-	public Filter getFilter() {
-		if(mFilter == null) {
-			mFilter = new AlarmFilter();
-		}
-		return mFilter;
 	}
 }

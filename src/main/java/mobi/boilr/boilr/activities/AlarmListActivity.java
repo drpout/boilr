@@ -10,7 +10,7 @@ import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
-import mobi.boilr.boilr.widget.AlarmListAdapter_old;
+import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
 import android.app.Activity;
 import android.app.ListActivity;
@@ -31,7 +31,7 @@ import android.widget.SearchView.OnQueryTextListener;
 public class AlarmListActivity extends ListActivity {
 
 	private static int REQUEST_SETTINGS = 0, REQUEST_CREATE = 1;
-	private AlarmListAdapter_old adapter;
+	private AlarmListAdapter adapter;
 	private SearchView searchView;
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
@@ -79,7 +79,7 @@ public class AlarmListActivity extends ListActivity {
 
 		getListView().setOnTouchListener(new OnSwipeTouchListener(this));
 
-		adapter = new AlarmListAdapter_old(AlarmListActivity.this, new ArrayList<Alarm>());
+		adapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<Alarm>());
 		setListAdapter(adapter);
 
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);

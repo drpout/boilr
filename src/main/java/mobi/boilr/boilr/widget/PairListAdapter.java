@@ -32,7 +32,8 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 
 	private static final String SEARCH = "Search...";
 	private PairListPreference pairListPreference;
-	protected CharSequence search = SEARCH;
+	private CharSequence search = SEARCH;
+	private final ArrayList<CharSequence> mFixedList;
 
 	private TextWatcher watcher = new TextWatcher() {
 
@@ -64,8 +65,7 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 		}
 	};
 
-	private View searchView;
-	private final ArrayList<CharSequence> mFixedList;
+	
 
 	public PairListAdapter(Context context, List<CharSequence> pairs, PairListPreference pairListPreference) {
 		super(context,pairs);
@@ -77,7 +77,7 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		if( position == 0 ){
-			convertView = searchView = getInflater().inflate(R.layout.pair_list_preference_search, parent, false);
+			convertView = getInflater().inflate(R.layout.pair_list_preference_search, parent, false);
 			convertView.setTag(SEARCH);
 			EditText editText = (EditText) convertView.findViewById(R.id.action_search_pair);
 			editText.setText(search);

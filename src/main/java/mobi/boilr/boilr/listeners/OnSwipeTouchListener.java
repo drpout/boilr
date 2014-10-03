@@ -2,7 +2,7 @@ package mobi.boilr.boilr.listeners;
 
 import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.boilr.widget.AlarmListAdapter_old;
+import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
 import android.view.MotionEvent;
 import android.view.View;
@@ -102,7 +102,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 					mListView.setEnabled(false);
 
 					if(remove) {
-						AlarmListAdapter_old adapter = (AlarmListAdapter_old) enclosingActivity
+						AlarmListAdapter adapter = (AlarmListAdapter) enclosingActivity
 								.getListAdapter();
 						Alarm alarm = adapter.getItem(pointToPosition);
 						if(enclosingActivity.ismBound()) {
