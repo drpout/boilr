@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.adapters.AlarmListAdapter;
 import mobi.boilr.boilr.database.DBManager;
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
@@ -20,6 +19,7 @@ import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.PercentageAlarmParameter;
 import mobi.boilr.boilr.views.fragments.AlarmPreferencesFragment;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
+import mobi.boilr.boilr.widget.AlarmListAdapter_old;
 import mobi.boilr.libdynticker.bitstamp.BitstampExchange;
 import mobi.boilr.libdynticker.btcchina.BTCChinaExchange;
 import mobi.boilr.libdynticker.btce.BTCEExchange;
@@ -114,11 +114,11 @@ public class StorageAndControlService extends Service {
 		}
 	}
 
-	private class UpdateOffedAlarmsTask extends AsyncTask<AlarmListAdapter, Void, AlarmListAdapter> {
+	private class UpdateOffedAlarmsTask extends AsyncTask<AlarmListAdapter_old, Void, AlarmListAdapter_old> {
 		private boolean anyOffedAlarms = false;
 
 		@Override
-		protected AlarmListAdapter doInBackground(AlarmListAdapter... adapters) {
+		protected AlarmListAdapter_old doInBackground(AlarmListAdapter_old... adapters) {
 			if(hasNetworkConnection() && adapters.length == 1) {
 				Alarm alarm = null;
 				try {
@@ -140,7 +140,7 @@ public class StorageAndControlService extends Service {
 		}
 
 		@Override
-		protected void onPostExecute(AlarmListAdapter adapter) {
+		protected void onPostExecute(AlarmListAdapter_old adapter) {
 			if(anyOffedAlarms)
 				adapter.notifyDataSetChanged();
 		}
@@ -439,7 +439,7 @@ public class StorageAndControlService extends Service {
 		new GetLastValueTask(frag).execute(new android.util.Pair<Exchange, Pair>(e, p));
 	}
 
-	public void updateOffedAlarms(AlarmListAdapter adapter) {
+	public void updateOffedAlarms(AlarmListAdapter_old adapter) {
 		new UpdateOffedAlarmsTask().execute(adapter);
 	}
 

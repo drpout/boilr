@@ -32,27 +32,8 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 
 	private static final String SEARCH = "Search...";
 	private PairListPreference pairListPreference;
-
-	//private List<CharSequence> mPairs;
-	//private Context mContext;
-
-	//private LayoutInflater mInflater;
-
-	//private ArrayList<CharSequence> mOriginalPairs;
-	//private Filter mFilter;
-	//private final Object mLock = new Object();
-
-	//private int selectedItem = 0;
 	protected CharSequence search = SEARCH;
-//	private OnEditorActionListener onEditorActionListener = new OnEditorActionListener() {
-//
-//		@Override
-//		public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//			PairListAdapter.this.getFilter().filter(v.getText());
-//			PairListAdapter.this.search = v.getText();
-//			return false;
-//		}
-//	};
+
 	private TextWatcher watcher = new TextWatcher() {
 
 		@Override
@@ -82,10 +63,10 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 			return false;
 		}
 	};
-	
+
 	private View searchView;
 	private final ArrayList<CharSequence> mFixedList;
-	
+
 	public PairListAdapter(Context context, List<CharSequence> pairs, PairListPreference pairListPreference) {
 		super(context,pairs);
 		this.mFixedList = new ArrayList<CharSequence>(pairs);
@@ -96,29 +77,18 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		if( position == 0 ){
-			if(searchView == null){
-				convertView = searchView = getInflater().inflate(R.layout.pair_list_preference_search, parent, false);
-				EditText editText = (EditText) convertView.findViewById(R.id.action_search_pair);
-				editText.setOnTouchListener(clearListener);
-				convertView.setTag(SEARCH);
-				
-			}else{
-				convertView = searchView;
-			}
-
+			convertView = searchView = getInflater().inflate(R.layout.pair_list_preference_search, parent, false);
+			convertView.setTag(SEARCH);
 			EditText editText = (EditText) convertView.findViewById(R.id.action_search_pair);
-			editText.removeTextChangedListener(watcher);
-			editText.setText(search);	
+			editText.setText(search);
+			editText.setOnTouchListener(clearListener);
 			editText.addTextChangedListener(watcher);
-
 			pairListPreference.getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
 			pairListPreference.getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_‌​VISIBLE);
-
 			if(!search.equals(SEARCH) && !search.equals("")){
 				editText.requestFocus();
-				int endOfFirstLine = editText.getLayout().getLineEnd(0);
-				editText.setSelection(endOfFirstLine < 0 ? 0 : endOfFirstLine );
 			}
+			
 		}else{
 			if(convertView == null || SEARCH.equals(convertView.getTag())){
 				convertView = getInflater().inflate(R.layout.pair_list_preference_row, parent, false);	
@@ -127,10 +97,8 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 			CharSequence pair = mList.get(position-1);
 			convertView.setTag(position-1);
 			convertView.setOnClickListener(this);
-
 			TextView pairName = (TextView) convertView.findViewById(R.id.pair_name);
 			pairName.setText(pair);
-
 			RadioButton pairRadiobutton = (RadioButton) convertView.findViewById(R.id.pair_radio_button);
 			if(this.pairListPreference.getValue().equals(String.valueOf(position-1))){
 				pairRadiobutton.setChecked(true);
@@ -150,30 +118,6 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 		pairListPreference.getOnPreferenceChangeListener().onPreferenceChange(pairListPreference, entryValue);
 		pairListPreference.getDialog().dismiss();
 	}
-
-	//	@Override
-	//	public void addAll(Collection<? extends CharSequence> collection) {
-	//		synchronized (mLock) {
-	//			if(mOriginalPairs != null) {
-	//				mOriginalPairs.addAll(collection);
-	//			} else {
-	//				mPairs.addAll(collection);
-	//			}
-	//		}
-	//		notifyDataSetChanged();
-	//	}
-
-	//	@Override
-	//	public void remove(CharSequence pair) {
-	//		synchronized (mLock) {
-	//			if(mOriginalPairs != null) {
-	//				mOriginalPairs.remove(pair);
-	//			} else {
-	//				mPairs.remove(pair);
-	//			}
-	//		}
-	//		notifyDataSetChanged();
-	//	}
 
 	@Override
 	public void remove(int position) {
