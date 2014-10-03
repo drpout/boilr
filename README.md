@@ -17,7 +17,5 @@ On your shell you can use `export ANDROID_LOG_TAGS="ActivityManager:I Boilr:D *:
 Donations
 ---------
 Donations and tips are welcomed.
-
 BTC: [1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx](bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx)
-
 XMR: 43KcTwXw5D43YRE8MSG4D7X3S2kjU6ehBABucyKAVNYnKbNxpGWZ8zGbEhCq79N4ZGDtefU5w4AGoeR6eNB5yMbEPhAw3FT

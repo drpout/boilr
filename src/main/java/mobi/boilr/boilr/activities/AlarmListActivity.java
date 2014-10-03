@@ -44,6 +44,7 @@ public class AlarmListActivity extends ListActivity {
 			List<Alarm> alarms = mStorageAndControlService.getAlarms();
 			adapter.clear();
 			adapter.addAll(alarms);
+			mStorageAndControlService.updateOffedAlarms(adapter);
 		}
 
 		@Override
@@ -96,7 +97,7 @@ public class AlarmListActivity extends ListActivity {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
-		switch (item.getItemId()) {
+		switch(item.getItemId()) {
 			case R.id.action_search:
 				// openSearch();
 				return true;
