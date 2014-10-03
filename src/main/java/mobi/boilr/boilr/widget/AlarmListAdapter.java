@@ -32,23 +32,25 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 
 		boolean isLandScape = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 		Alarm alarm = mList.get(position);
-		View rowView = getInflater().inflate(R.layout.alarm_list_row, parent, false);
 
-		ToggleButton toggleButton = (ToggleButton) rowView.findViewById(R.id.toggle_button);
-		TextView exchange = (TextView) rowView.findViewById(R.id.exchange);
-		TextView lastCheck = (TextView) rowView.findViewById(R.id.last_check);
-		TextView pair = (TextView) rowView.findViewById(R.id.pair);
-		TextView lastValue = (TextView) rowView.findViewById(R.id.last_value);
+		if(convertView == null)
+			convertView = getInflater().inflate(R.layout.alarm_list_row, parent, false);
+
+		ToggleButton toggleButton = (ToggleButton) convertView.findViewById(R.id.toggle_button);
+		TextView exchange = (TextView) convertView.findViewById(R.id.exchange);
+		TextView lastCheck = (TextView) convertView.findViewById(R.id.last_check);
+		TextView pair = (TextView) convertView.findViewById(R.id.pair);
+		TextView lastValue = (TextView) convertView.findViewById(R.id.last_value);
 
 		LinearLayout linearLayout;
 		String pairExchange = alarm.getPair().getExchange();
 		if(isLandScape) {
 			// Adjust Dimension to allow more content
-			linearLayout = (LinearLayout) rowView.findViewById(R.id.exchange_layout);
+			linearLayout = (LinearLayout) convertView.findViewById(R.id.exchange_layout);
 			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.5f));
-			linearLayout = (LinearLayout) rowView.findViewById(R.id.pair_layout);
+			linearLayout = (LinearLayout) convertView.findViewById(R.id.pair_layout);
 			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 2));
-			linearLayout = (LinearLayout) rowView.findViewById(R.id.options_layout);
+			linearLayout = (LinearLayout) convertView.findViewById(R.id.options_layout);
 			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 2));
 			//
 			lastValue.setText(Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) + " " + pairExchange);
@@ -56,8 +58,8 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 			lastValue.setText(Conversions.formatEngNotation(alarm.getLastValue()));
 		}
 
-		TextView changeUpperBound = (TextView) rowView.findViewById(R.id.change_upper_bound);
-		TextView periodLowerBound = (TextView) rowView.findViewById(R.id.period_lower_bound);
+		TextView changeUpperBound = (TextView) convertView.findViewById(R.id.change_upper_bound);
+		TextView periodLowerBound = (TextView) convertView.findViewById(R.id.period_lower_bound);
 
 		if(alarm instanceof PriceHitAlarm) {
 			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
@@ -91,10 +93,10 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 		toggleButton.setChecked(alarm.isOn());
 
 		if(alarm.isOn()) {
-			rowView.setBackgroundColor(Color.TRANSPARENT);
+			convertView.setBackgroundColor(Color.TRANSPARENT);
 		} else {
 			TypedArray ta = getContext().obtainStyledAttributes(attrs);
-			rowView.setBackgroundColor(ta.getColor(0, Color.DKGRAY));
+			convertView.setBackgroundColor(ta.getColor(0, Color.DKGRAY));
 			ta.recycle();
 		}
 
@@ -106,6 +108,6 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 
 		pair.setText(alarm.getPair().toString());
 
-		return rowView;
+		return convertView;
 	}
 }
