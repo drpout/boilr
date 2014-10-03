@@ -1,4 +1,4 @@
-package mobi.boilr.boilr.adapters;
+package mobi.boilr.boilr.widget;
 
 import java.util.ArrayList;
 import java.util.Collection;
