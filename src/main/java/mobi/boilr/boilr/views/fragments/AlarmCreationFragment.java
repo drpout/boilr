@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
@@ -13,6 +12,7 @@ import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.UpperBoundSmallerThanLowerBoundException;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
@@ -176,7 +176,7 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
+		switch(item.getItemId()) {
 			case R.id.action_send_now:
 				createAlarmAndReturn();
 			default:
@@ -215,9 +215,11 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 			Exchange exchange = mStorageAndControlService.getExchange(((ListPreference) findPreference(PREF_KEY_EXCHANGE)).getValue());
 			Pair pair = pairs.get(pairIndex);
 			makeAlarm(id, exchange, pair, notify);
-			Intent intent = new Intent(enclosingActivity, AlarmListActivity.class);
-			startActivity(intent);
-		} catch (Exception e) {
+			Intent alarmIdIntent = new Intent();
+			alarmIdIntent.putExtra("alarmID", id);
+			enclosingActivity.setResult(Activity.RESULT_OK, alarmIdIntent);
+			enclosingActivity.finish();
+		} catch(Exception e) {
 			String failedCreate = enclosingActivity.getString(R.string.failed_create_alarm);
 			Log.e(failedCreate, e);
 			Toast.makeText(enclosingActivity, failedCreate + " " + e.getMessage(), Toast.LENGTH_LONG).show();

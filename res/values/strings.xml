@@ -46,14 +46,14 @@
     <string name="pref_title_appearance">Appearance</string>
     <string name="pref_title_theme">Theme</string>
     <string-array name="pref_entries_theme">
-        <item>Light</item>
         <item>Dark</item>
+        <item>Light</item>
     </string-array>
     <string-array name="pref_values_theme">
-        <item>0</item>
-        <item>1</item>
+        <item>dark</item>
+        <item>light</item>
     </string-array>
-    <string name="pref_default_theme">1</string>
+    <string name="pref_default_theme">dark</string>
     <string name="pref_title_network_usage">Network usage</string>
     <string name="pref_title_mobile_data">Mobile data</string>
     <string name="pref_title_default_update_interval_hit">Hit alarm default update interval</string>

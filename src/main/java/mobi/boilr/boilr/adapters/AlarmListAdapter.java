@@ -12,6 +12,7 @@ import mobi.boilr.libpricealarm.PriceHitAlarm;
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	private Filter mFilter;
 	private LayoutInflater mInflater;
 	private final Object mLock = new Object();
+	private static final int[] attrs = new int[] { R.attr.off_alarm_row_color /* index 0 */};
 
 	public AlarmListAdapter(Context context, List<Alarm> alarms) {
 		mContext = context;
@@ -105,7 +107,9 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		if(alarm.isOn()) {
 			rowView.setBackgroundColor(Color.TRANSPARENT);
 		} else {
-			rowView.setBackgroundColor(Color.DKGRAY);
+			TypedArray ta = mContext.obtainStyledAttributes(attrs);
+			rowView.setBackgroundColor(ta.getColor(0, Color.DKGRAY));
+			ta.recycle();
 		}
 
 		exchange.setText(alarm.getExchange().getName());
@@ -125,20 +129,20 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults results = new FilterResults();
 			if(mOriginalAlarms == null) {
-				synchronized (mLock) {
+				synchronized(mLock) {
 					mOriginalAlarms = new ArrayList<Alarm>(mAlarms);
 				}
 			}
 			if(constraint == null || constraint.length() == 0) {
 				ArrayList<Alarm> list;
-				synchronized (mLock) {
+				synchronized(mLock) {
 					list = new ArrayList<Alarm>(mOriginalAlarms);
 				}
 				results.values = list;
 				results.count = list.size();
 			} else {
 				List<Alarm> originalList;
-				synchronized (mLock) {
+				synchronized(mLock) {
 					originalList = new ArrayList<Alarm>(mOriginalAlarms);
 				}
 				String[] filterStrings = constraint.toString().toLowerCase().split("\\s+");
@@ -147,10 +151,10 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 				Alarm filterableAlarm;
 				boolean containsAllFilters;
 				int count = originalList.size();
-				for (int i = 0; i < count; i++) {
+				for(int i = 0; i < count; i++) {
 					containsAllFilters = true;
 					filterableAlarm = originalList.get(i);
-					for (int j = 0; j < filtersCount; j++) {
+					for(int j = 0; j < filtersCount; j++) {
 						if(!filterableAlarm.toString().toLowerCase().contains(filterStrings[j])) {
 							containsAllFilters = false;
 							break;
@@ -179,7 +183,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void add(Alarm alarm) {
-		synchronized (mLock) {
+		synchronized(mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.add(alarm);
 			} else {
@@ -190,7 +194,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void addAll(Collection<? extends Alarm> collection) {
-		synchronized (mLock) {
+		synchronized(mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.addAll(collection);
 			} else {
@@ -201,7 +205,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void remove(Alarm alarm) {
-		synchronized (mLock) {
+		synchronized(mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.remove(alarm);
 			} else {
@@ -212,7 +216,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void remove(int position) {
-		synchronized (mLock) {
+		synchronized(mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.remove(position);
 			} else {
@@ -223,7 +227,7 @@ public class AlarmListAdapter extends BaseAdapter implements Filterable {
 	}
 
 	public void clear() {
-		synchronized (mLock) {
+		synchronized(mLock) {
 			if(mOriginalAlarms != null) {
 				mOriginalAlarms.clear();
 			} else {

@@ -9,8 +9,10 @@ import mobi.boilr.boilr.listeners.OnSwipeTouchListener;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
 import mobi.boilr.libpricealarm.Alarm;
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -28,6 +30,7 @@ import android.widget.SearchView.OnQueryTextListener;
 
 public class AlarmListActivity extends ListActivity {
 
+	private static int REQUEST_SETTINGS = 0, REQUEST_CREATE = 1;
 	private AlarmListAdapter adapter;
 	private SearchView searchView;
 	private StorageAndControlService mStorageAndControlService;
@@ -70,6 +73,7 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Themer.applyTheme(this);
 		setContentView(R.layout.alarm_list);
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
 
@@ -98,12 +102,9 @@ public class AlarmListActivity extends ListActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		switch(item.getItemId()) {
-			case R.id.action_search:
-				// openSearch();
-				return true;
 			case R.id.action_settings:
 				Intent intent = new Intent(this, SettingsActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent, REQUEST_SETTINGS);
 				return true;
 			case R.id.action_about:
 				(new AboutDialogFragment()).show(getFragmentManager(), "about");
@@ -125,8 +126,7 @@ public class AlarmListActivity extends ListActivity {
 	public void onAddAlarmClicked(View v) {
 		// Handle click on Add Button. Launch activity to create a new alarm.
 		Intent alarmCreationIntent = new Intent(this, AlarmCreationActivity.class);
-		startActivity(alarmCreationIntent);
-		adapter.notifyDataSetChanged();
+		startActivityForResult(alarmCreationIntent, REQUEST_CREATE);
 	}
 
 	public void onToggleClicked(View view) {
@@ -144,6 +144,23 @@ public class AlarmListActivity extends ListActivity {
 	}
 
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == REQUEST_SETTINGS && resultCode == SettingsActivity.RESULT_RESTART) {
+			finish();
+			startActivity(getIntent());
+		} else if(requestCode == REQUEST_CREATE && resultCode == Activity.RESULT_OK) {
+			int alarmID = data.getIntExtra("alarmID", Integer.MIN_VALUE);
+			if(alarmID != Integer.MIN_VALUE) {
+				if(mBound) {
+					adapter.add(mStorageAndControlService.getAlarm(alarmID));
+				} else {
+					Log.d(getString(R.string.not_bound, "AlarmListActivity"));
+				}
+			}
+		}
+	}
+
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		unbindService(mStorageAndControlServiceConnection);
@@ -152,6 +169,11 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	public void onStart() {
 		super.onStart();
+	}
+
+	@Override
+	public void onRestart() {
+		super.onRestart();
 	}
 
 	@Override

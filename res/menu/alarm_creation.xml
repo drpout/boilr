@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/action_send_now"
-        android:icon="@drawable/ic_action_send_now"
+        android:icon="?attr/ic_action_send_now"
         android:showAsAction="ifRoom"
         android:title="@string/action_send_now"/>
 
