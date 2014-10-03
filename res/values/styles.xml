@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <style name="BoilrTheme.Dark" parent="android:Theme.Holo">
+		<item name="ic_action_about">@drawable/ic_action_about_dark</item>
+		<item name="ic_action_search">@drawable/ic_action_search_dark</item>
+		<item name="ic_action_send_now">@drawable/ic_action_send_now_dark</item>
+		<item name="ic_action_settings">@drawable/ic_action_settings_dark</item>
+		<item name="off_alarm_row_color">@color/dkgray</item>
+    </style>
+
+    <style name="BoilrTheme.Light" parent="@android:Theme.Holo.Light">
+        <item name="ic_action_about">@drawable/ic_action_about_light</item>
+		<item name="ic_action_search">@drawable/ic_action_search_light</item>
+		<item name="ic_action_send_now">@drawable/ic_action_send_now_light</item>
+		<item name="ic_action_settings">@drawable/ic_action_settings_light</item>
+		<item name="off_alarm_row_color">@color/ltgray</item>
+    </style>
+</resources>

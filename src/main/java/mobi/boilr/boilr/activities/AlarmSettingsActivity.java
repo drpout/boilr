@@ -1,5 +1,6 @@
 package mobi.boilr.boilr.activities;
 
+import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.views.fragments.PriceChangeAlarmSettingsFragment;
 import mobi.boilr.boilr.views.fragments.PriceHitAlarmSettingsFragment;
 import android.app.Activity;
@@ -13,6 +14,7 @@ public class AlarmSettingsActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Themer.applyTheme(this);
 		if(savedInstanceState == null) {
 			Bundle extras = getIntent().getExtras();
 			Bundle args = new Bundle();

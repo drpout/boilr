@@ -1,6 +1,7 @@
 package mobi.boilr.boilr.activities;
 
 import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.views.fragments.PriceHitAlarmCreationFragment;
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,9 +13,11 @@ public class AlarmCreationActivity extends Activity {
 	@Override
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Themer.applyTheme(this);
 		if(savedInstanceState == null) {
 			getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmCreationFragment()).commit();
 		}
+		setResult(RESULT_CANCELED);
 	}
 
 	@Override

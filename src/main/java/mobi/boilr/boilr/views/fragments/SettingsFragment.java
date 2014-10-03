@@ -1,10 +1,12 @@
 package mobi.boilr.boilr.views.fragments;
 
 import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.activities.SettingsActivity;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.libdynticker.core.Exchange;
 import android.content.ComponentName;
 import android.content.Context;
@@ -60,7 +62,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		addPreferencesFromResource(R.xml.app_settings);
 		// Set summaries to be the current value for the selected preference
 		ListPreference listPref;
-		for (String key : listPrefs) {
+		for(String key : listPrefs) {
 			listPref = (ListPreference) findPreference(key);
 			listPref.setSummary(listPref.getEntry());
 		}
@@ -101,12 +103,14 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		} else if(key.equals(PREF_KEY_THEME)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
+			Themer.changeTheme(listPref.getValue());
+			getActivity().setResult(SettingsActivity.RESULT_RESTART);
 		} else if(key.equals(PREF_KEY_CHECK_PAIRS_INTERVAL)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
 			if(mBound) {
 				long pairInterval = Long.parseLong(sharedPrefs.getString(PREF_KEY_CHECK_PAIRS_INTERVAL, ""));
-				for (Exchange e : mStorageAndControlService.getLoadedExchanges()) {
+				for(Exchange e : mStorageAndControlService.getLoadedExchanges()) {
 					e.setExperiedPeriod(pairInterval);
 				}
 			} else {
