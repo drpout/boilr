@@ -96,7 +96,7 @@ public final class Notifications {
 	private static String getFiringReason(Alarm alarm) {
 		Pair pair = alarm.getPair();
 		if(alarm instanceof PriceHitAlarm) {
-			return pair.getCoin() + " @ " + alarm.getLastValue() + " " + pair.getExchange() +
+			return pair.getCoin() + " @ " + Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) + " " + pair.getExchange() +
 					"\nin " + alarm.getExchange().getName();
 		} else if(alarm instanceof PriceChangeAlarm) {
 			PriceChangeAlarm changeAlarm = (PriceChangeAlarm) alarm;

@@ -103,6 +103,7 @@
         <item>BullionVault</item>        
         <item>Cavirtex</item>
         <item>Cryptsy</item>
+        <item>Coin-Swap</item>
         <item>HitBTC</item>
         <item>Huobi</item>
         <item>Kraken</item>
@@ -125,6 +126,7 @@
         <item>mobi.boilr.libdynticker.bullionvault.BullionVaultExchange</item>
         <item>mobi.boilr.libdynticker.cavirtex.CavirtexExchange</item>
         <item>mobi.boilr.libdynticker.cryptsy.CryptsyExchange</item>
+        <item>mobi.boilr.libdynticker.coinswap.CoinswapExchange</item>
         <item>mobi.boilr.libdynticker.hitbtc.HitBTCExchange</item>
         <item>mobi.boilr.libdynticker.houbi.HuobiExchange</item>
         <item>mobi.boilr.libdynticker.kraken.KrakenExchange</item>
