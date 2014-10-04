@@ -1,46 +1,36 @@
 package mobi.boilr.boilr.widget;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.preference.PairListPreference;
+import mobi.boilr.boilr.preference.SearchableListPreference;
+import mobi.boilr.boilr.utils.Log;
 import android.content.Context;
-import android.drm.DrmStore.Action;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.BaseAdapter;
+import android.view.View.OnTouchListener;
 import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
-public class PairListAdapter extends ListAdapter<CharSequence> implements OnClickListener{
+public class SearchableListAdapter<T> extends ListAdapter<T> implements OnClickListener {
 
-	private static final String SEARCH = "Search...";
-	private PairListPreference pairListPreference;
-	private CharSequence search = SEARCH;
-	private final ArrayList<CharSequence> mFixedList;
+	protected static final String SEARCH = "Search...";
+	protected SearchableListPreference searchableListPreference;
+	protected CharSequence search = SEARCH;
 
 	private TextWatcher watcher = new TextWatcher() {
 
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {
-			PairListAdapter.this.search = s;
-			PairListAdapter.this.getFilter().filter(s);
+			SearchableListAdapter.this.search = s;
+			SearchableListAdapter.this.getFilter().filter(s);
 		}
 
 		@Override
@@ -58,7 +48,7 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 			if(event.getAction() == MotionEvent.ACTION_UP){
 				if(search.equals(SEARCH))
 					((EditText) v).setText("");
-				pairListPreference.getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+				searchableListPreference.getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
 				v.requestFocus();
 			}
 			return false;
@@ -67,14 +57,14 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 
 	
 
-	public PairListAdapter(Context context, List<CharSequence> pairs, PairListPreference pairListPreference) {
-		super(context,pairs);
-		this.mFixedList = new ArrayList<CharSequence>(pairs);
-		this.pairListPreference = pairListPreference;
+	public SearchableListAdapter(Context context, List<T> list, SearchableListPreference searchableListPreference) {
+		super(context,list);
+		this.searchableListPreference = searchableListPreference;
 	}
 
+
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public final View getView(int position, View convertView, ViewGroup parent) {
 
 		if( position == 0 ){
 			convertView = getInflater().inflate(R.layout.pair_list_preference_search, parent, false);
@@ -83,8 +73,8 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 			editText.setText(search);
 			editText.setOnTouchListener(clearListener);
 			editText.addTextChangedListener(watcher);
-			pairListPreference.getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-			pairListPreference.getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_‌​VISIBLE);
+			searchableListPreference.getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+			searchableListPreference.getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_‌​VISIBLE);
 			if(!search.equals(SEARCH) && !search.equals("")){
 				editText.requestFocus();
 			}
@@ -94,29 +84,22 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 				convertView = getInflater().inflate(R.layout.pair_list_preference_row, parent, false);	
 			}
 
-			CharSequence pair = mList.get(position-1);
+			CharSequence pair = (CharSequence) mList.get(position-1);
 			convertView.setTag(position-1);
 			convertView.setOnClickListener(this);
 			TextView pairName = (TextView) convertView.findViewById(R.id.pair_name);
 			pairName.setText(pair);
 			RadioButton pairRadiobutton = (RadioButton) convertView.findViewById(R.id.pair_radio_button);
-			if(this.pairListPreference.getValue().equals(String.valueOf(position-1))){
+			if(this.searchableListPreference.getEntry().equals(pair)){
 				pairRadiobutton.setChecked(true);
 			}else{
 				pairRadiobutton.setChecked(false);
 			}
 			pairRadiobutton.setClickable(false);
+
+			return convertView;
 		}
 		return convertView;
-	}
-
-	@Override
-	public void onClick(View view) {
-		TextView pairName = (TextView) view.findViewById(R.id.pair_name);
-		String entryValue = String.valueOf(mFixedList.indexOf(pairName.getText()));
-		pairListPreference.setValue(entryValue);
-		pairListPreference.getOnPreferenceChangeListener().onPreferenceChange(pairListPreference, entryValue);
-		pairListPreference.getDialog().dismiss();
 	}
 
 	@Override
@@ -138,12 +121,33 @@ public class PairListAdapter extends ListAdapter<CharSequence> implements OnClic
 	}
 
 	@Override
-	public CharSequence getItem(int position) {
+	public T getItem(int position) {
 		return mList.get(position + 1);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		return position - 1;
+	}
+
+
+	@Override
+	public void onClick(View view) {
+		TextView textView = (TextView) view.findViewById(R.id.pair_name);
+		CharSequence[] values = searchableListPreference.getEntryValues();
+
+		CharSequence [] entries = searchableListPreference.getEntries();
+		CharSequence value = null;
+		for(int  i = 0 ; i<entries.length; i++){
+			Log.d( entries[i]+"=="+ textView.getText());
+			if(entries[i].equals(textView.getText())){
+				value = values[i];
+				Log.d("\t" + value);
+				break;
+			}
+		}
+		searchableListPreference.setValue((String) value);
+		searchableListPreference.getOnPreferenceChangeListener().onPreferenceChange(searchableListPreference, value);
+		searchableListPreference.getDialog().dismiss();
 	}
 }

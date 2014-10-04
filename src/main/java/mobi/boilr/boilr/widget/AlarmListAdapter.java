@@ -33,6 +33,7 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 		boolean isLandScape = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 		Alarm alarm = mList.get(position);
 
+		//View recycling 
 		if(convertView == null)
 			convertView = getInflater().inflate(R.layout.alarm_list_row, parent, false);
 
@@ -56,6 +57,12 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 			lastValue.setText(Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) + " " + pairExchange);
 		} else {
 			lastValue.setText(Conversions.formatEngNotation(alarm.getLastValue()));
+			linearLayout = (LinearLayout) convertView.findViewById(R.id.exchange_layout);
+			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.9f));
+			linearLayout = (LinearLayout) convertView.findViewById(R.id.pair_layout);
+			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.8f));
+			linearLayout = (LinearLayout) convertView.findViewById(R.id.options_layout);
+			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.3f));
 		}
 
 		TextView changeUpperBound = (TextView) convertView.findViewById(R.id.change_upper_bound);
