@@ -108,6 +108,7 @@
         <item>Huobi</item>
         <item>Kraken</item>
         <item>LocalBitcoins</item>
+        <item>Melotic</item>
         <item>MintPal</item>
         <item>OKCoin</item>
         <item>Poloniex</item>
@@ -131,6 +132,7 @@
         <item>mobi.boilr.libdynticker.houbi.HuobiExchange</item>
         <item>mobi.boilr.libdynticker.kraken.KrakenExchange</item>
         <item>mobi.boilr.libdynticker.localbitcoins.LocalBitcoins</item>
+        <item>mobi.boilr.libdynticker.melotic.MeloticExchange</item>
         <item>mobi.boilr.libdynticker.mintpal.MintPalExchange</item>
         <item>mobi.boilr.libdynticker.okcoin.OKCoinExchange</item>
         <item>mobi.boilr.libdynticker.poloniex.PoloniexExchange</item>
