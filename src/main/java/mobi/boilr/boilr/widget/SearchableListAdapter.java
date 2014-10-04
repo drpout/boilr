@@ -15,11 +15,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-public class SearchableListAdapter<T> extends ListAdapter<T> implements OnClickListener {
+public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchListener {
 
 	protected static final String SEARCH = "Search...";
 	protected SearchableListPreference searchableListPreference;
@@ -63,7 +64,7 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnClickL
 	public final View getView(int position, View convertView, ViewGroup parent) {
 
 		if( position == 0 ){
-			convertView = getInflater().inflate(R.layout.pair_list_preference_search, parent, false);
+			convertView = getInflater().inflate(R.layout.list_preference_search, parent, false);
 			convertView.setTag(SEARCH);
 			EditText editText = (EditText) convertView.findViewById(R.id.action_search_pair);
 			editText.setText(search);
@@ -74,15 +75,16 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnClickL
 			if(!search.equals(SEARCH) && !search.equals("")){
 				editText.requestFocus();
 			}
-			
+
 		}else{
 			if(convertView == null || SEARCH.equals(convertView.getTag())){
-				convertView = getInflater().inflate(R.layout.pair_list_preference_row, parent, false);	
+				convertView = getInflater().inflate(R.layout.list_preference_row, parent, false);	
 			}
 
 			CharSequence pair = (CharSequence) mList.get(position-1);
 			convertView.setTag(position-1);
-			convertView.setOnClickListener(this);
+			//convertView.setOnClickListener(this);
+			convertView.setOnTouchListener(this);
 			TextView pairName = (TextView) convertView.findViewById(R.id.pair_name);
 			pairName.setText(pair);
 			RadioButton pairRadiobutton = (RadioButton) convertView.findViewById(R.id.pair_radio_button);
@@ -127,22 +129,52 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnClickL
 	}
 
 	@Override
-	public void onClick(View view) {
-		TextView textView = (TextView) view.findViewById(R.id.pair_name);
-		CharSequence[] values = searchableListPreference.getEntryValues();
+	public boolean onTouch(View view, MotionEvent event) {
+		switch(event.getAction()){
+			case MotionEvent.ACTION_UP:
+				TextView textView = (TextView) view.findViewById(R.id.pair_name);
+				CharSequence[] values = searchableListPreference.getEntryValues();
 
-		CharSequence [] entries = searchableListPreference.getEntries();
-		CharSequence value = null;
-		for(int  i = 0 ; i<entries.length; i++){
-			Log.d( entries[i]+"=="+ textView.getText());
-			if(entries[i].equals(textView.getText())){
-				value = values[i];
-				Log.d("\t" + value);
+				CharSequence [] entries = searchableListPreference.getEntries();
+				CharSequence value = null;
+				for(int  i = 0 ; i<entries.length; i++){
+					Log.d( entries[i]+"=="+ textView.getText());
+					if(entries[i].equals(textView.getText())){
+						value = values[i];
+						Log.d("\t" + value);
+						break;
+					}
+				}
+				searchableListPreference.setValue((String) value);
+				searchableListPreference.getOnPreferenceChangeListener().onPreferenceChange(searchableListPreference, value);
+				searchableListPreference.getDialog().dismiss();
 				break;
-			}
+			case MotionEvent.ACTION_MOVE:
+				InputMethodManager imm = (InputMethodManager)getContext().getSystemService(
+						Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+				break;
 		}
-		searchableListPreference.setValue((String) value);
-		searchableListPreference.getOnPreferenceChangeListener().onPreferenceChange(searchableListPreference, value);
-		searchableListPreference.getDialog().dismiss();
+		return false;
 	}
+
+	//	@Override
+	//	public void onClick(View view) {
+	//		TextView textView = (TextView) view.findViewById(R.id.pair_name);
+	//		CharSequence[] values = searchableListPreference.getEntryValues();
+	//
+	//		CharSequence [] entries = searchableListPreference.getEntries();
+	//		CharSequence value = null;
+	//		for(int  i = 0 ; i<entries.length; i++){
+	//			Log.d( entries[i]+"=="+ textView.getText());
+	//			if(entries[i].equals(textView.getText())){
+	//				value = values[i];
+	//				Log.d("\t" + value);
+	//				break;
+	//			}
+	//		}
+	//		searchableListPreference.setValue((String) value);
+	//		searchableListPreference.getOnPreferenceChangeListener().onPreferenceChange(searchableListPreference, value);
+	//		searchableListPreference.getDialog().dismiss();
+	//	}
 }
