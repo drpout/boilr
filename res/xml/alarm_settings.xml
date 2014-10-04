@@ -3,14 +3,14 @@
     <PreferenceCategory
         android:key="pref_key_generic"
         android:title="@string/pref_title_generic" >
-        <ListPreference
+        <mobi.boilr.boilr.preference.SearchableListPreference
             android:defaultValue="@string/pref_exchange_default"
             android:entries="@array/pref_exchange_entries"
             android:entryValues="@array/pref_exchange_entries_values"
             android:key="pref_key_exchange"
             android:title="@string/pref_exchange_title"
             android:persistent="false" />
-        <mobi.boilr.boilr.widgets.PairListPreference
+        <mobi.boilr.boilr.preference.SearchableListPreference
             android:key="pref_key_pair"
             android:title="@string/pref_pair_title"
             android:persistent="false" />

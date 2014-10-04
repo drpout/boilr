@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.adapters.AlarmListAdapter;
 import mobi.boilr.boilr.database.DBManager;
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
@@ -20,6 +19,7 @@ import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.PercentageAlarmParameter;
 import mobi.boilr.boilr.views.fragments.AlarmPreferencesFragment;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
+import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libdynticker.bitstamp.BitstampExchange;
 import mobi.boilr.libdynticker.btcchina.BTCChinaExchange;
 import mobi.boilr.libdynticker.btce.BTCEExchange;

@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.adapters.AlarmListAdapter;
 import mobi.boilr.boilr.listeners.OnSwipeTouchListener;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
+import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
 import android.app.Activity;
 import android.app.ListActivity;

@@ -1,8 +1,8 @@
 package mobi.boilr.boilr.listeners;
 
 import mobi.boilr.boilr.activities.AlarmListActivity;
-import mobi.boilr.boilr.adapters.AlarmListAdapter;
 import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
 import android.view.MotionEvent;
 import android.view.View;
