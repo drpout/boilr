@@ -27,6 +27,8 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
 			this.currentConstraint = constraint;
+			this.filterStrings = constraint.toString().toLowerCase().split("\\s+");
+			
 			FilterResults results = new FilterResults();
 			if(mOriginalList==null) {
 				synchronized (mLock) {
@@ -45,22 +47,11 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 				synchronized (mLock) {
 					originalList = (List<T>) new ArrayList<P>((List<P>)mOriginalList);
 				}
-				this.filterStrings = constraint.toString().toLowerCase().split("\\s+");
-				//int filtersCount = filterStrings.length;
 				List<T> newList = new ArrayList<T>();
 				T filterable;
-				//boolean containsAllFilters;
 				int count = originalList.size();
 				for (int i = 0; i < count; i++) {
-					//containsAllFilters = true;
 					filterable = originalList.get(i);
-				
-//					for (int j = 0; j < filtersCount; j++) {
-//						if(!filterable.toString().toLowerCase().contains(filterStrings[j])) {
-//							containsAllFilters = false;
-//							break;
-//						}
-//					}
 					if(belongs2Filter(filterable.toString()))
 						newList.add(filterable);
 				}
@@ -89,7 +80,6 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 
 		public boolean belongs2Filter(String filterable){
 			if( currentConstraint != null ){
-				//String[] filterStrings = currentConstraint.toString().toLowerCase().split("\\s+");
 				int filtersCount = filterStrings.length;
 				boolean containsAllFilters = true;
 				for (int j = 0; j < filtersCount; j++) {

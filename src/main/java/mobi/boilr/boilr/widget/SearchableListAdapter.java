@@ -24,7 +24,6 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnClickL
 	protected static final String SEARCH = "Search...";
 	protected SearchableListPreference searchableListPreference;
 	protected CharSequence search = SEARCH;
-
 	private TextWatcher watcher = new TextWatcher() {
 
 		@Override
@@ -55,13 +54,10 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnClickL
 		}
 	};
 
-	
-
 	public SearchableListAdapter(Context context, List<T> list, SearchableListPreference searchableListPreference) {
 		super(context,list);
 		this.searchableListPreference = searchableListPreference;
 	}
-
 
 	@Override
 	public final View getView(int position, View convertView, ViewGroup parent) {
@@ -129,7 +125,6 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnClickL
 	public long getItemId(int position) {
 		return position - 1;
 	}
-
 
 	@Override
 	public void onClick(View view) {
