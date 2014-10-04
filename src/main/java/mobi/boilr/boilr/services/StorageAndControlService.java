@@ -74,7 +74,7 @@ public class StorageAndControlService extends Service {
 					try {
 						alarms[0].run();
 						Log.d("Last value for alarm " + alarms[0].getId() + " " + Conversions.formatMaxDecimalPlaces(alarms[0].getLastValue()));
-					} catch(IOException e) {
+					} catch (IOException e) {
 						Log.e("Could not retrieve last value for alarm " + alarms[0].getId(), e);
 					}
 				}
@@ -88,7 +88,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class GetLastValueTask extends
-	AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
+			AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
 		private AlarmPreferencesFragment frag;
 
 		public GetLastValueTask(AlarmPreferencesFragment frag) {
@@ -101,7 +101,7 @@ public class StorageAndControlService extends Service {
 			if(hasNetworkConnection() && pairs.length == 1) {
 				try {
 					return pairs[0].first.getLastValue(pairs[0].second);
-				} catch(IOException e) {
+				} catch (IOException e) {
 					Log.e("Cannot get last value for " + pairs[0].first.getName() + " with pair " + pairs[0].second.toString(), e);
 				}
 			}
@@ -123,14 +123,14 @@ public class StorageAndControlService extends Service {
 				Alarm alarm = null;
 				try {
 					int count = adapters[0].getCount();
-					for(int i = 0; i < count; i++) {
+					for (int i = 0; i < count; i++) {
 						alarm = adapters[0].getItem(i);
 						if(!alarm.isOn()) {
 							anyOffedAlarms = true;
 							alarm.setLastValue(alarm.getExchangeLastValue());
 						}
 					}
-				} catch(IOException e) {
+				} catch (IOException e) {
 					Log.e("Cannot get last value for alarm " + alarm.getId() + " with exchange " +
 							alarm.getExchange().getName() + " and pair " + alarm.getPair() + ".", e);
 				}
@@ -164,7 +164,7 @@ public class StorageAndControlService extends Service {
 					addAlarm(alarm);
 					startAlarm(alarm);
 				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				Log.e("Caught exception while populating DB.", e);
 			}
 			return null;
@@ -187,7 +187,7 @@ public class StorageAndControlService extends Service {
 		protected List<Pair> doInBackground(String... exchangeCode) {
 			try {
 				return getExchange(exchangeCode[0]).getPairs();
-			} catch(Exception e) {
+			} catch (Exception e) {
 				Log.e("Can't get pairs for " + exchangeCode[0], e);
 			}
 			return null;
@@ -201,7 +201,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class AddPercentageAlarmTask extends
-			AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
+	AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(PercentageAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
@@ -213,7 +213,7 @@ public class StorageAndControlService extends Service {
 				float percent = arg0[0].getPercent();
 				try {
 					return new PriceChangeAlarm(id, exchange, pair, period, notify, percent);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					Log.e("AddPercentageAlarmTask failed", e);
 				}
 			}
@@ -222,7 +222,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class AddChangeAlarmTask extends
-	AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
+			AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(ChangeAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
@@ -234,7 +234,7 @@ public class StorageAndControlService extends Service {
 				double change = arg0[0].getChange();
 				try {
 					return new PriceChangeAlarm(id, exchange, pair, period, notify, change);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					Log.e("AddChangeAlarmTask failed.", e);
 				}
 			}
@@ -264,14 +264,14 @@ public class StorageAndControlService extends Service {
 				// new PopupalteDBTask().execute();
 			} else {
 				// Set Exchange and start alarm
-				for(Alarm alarm : alarmsMap.values()) {
+				for (Alarm alarm : alarmsMap.values()) {
 					alarm.setExchange(getExchange(alarm.getExchangeCode()));
 					if(alarm.isOn()) {
 						this.startAlarm(alarm);
 					}
 				}
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			Log.e("Caught exception while recovering alarms from DB.", e);
 		}
 	}
@@ -305,8 +305,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-			InstantiationException, IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, SecurityException {
+	InstantiationException, IllegalAccessException, IllegalArgumentException,
+	InvocationTargetException, SecurityException {
 		if(exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {
@@ -385,7 +385,7 @@ public class StorageAndControlService extends Service {
 	public void replaceAlarmDB(Alarm alarm) {
 		try {
 			db.updateAlarm(alarm);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Log.e("Could not update alarm " + alarm.getId() + " in the DB.", e);
 		}
 	}
@@ -403,7 +403,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private boolean anyActiveAlarm() {
-		for(Alarm alarm : alarmsMap.values())
+		for (Alarm alarm : alarmsMap.values())
 			if(alarm.isOn())
 				return true;
 		return false;

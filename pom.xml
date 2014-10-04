@@ -300,15 +300,15 @@
 								</goals>
 								<phase>package</phase>
 								<configuration>
-									<removeExistingSignatures>true</removeExistingSignatures>
+									<!--<removeExistingSignatures>true</removeExistingSignatures> -->
 									<archiveDirectory />
 									<keystore>~/boilr.keystore</keystore>
 									<alias>Boilr</alias>
 									<storepass>${sign.storepass}</storepass>
-									<verbose>true</verbose>
+									<verbose>false</verbose>
 									<arguments>
 										<argument>-sigalg</argument>
-										<argument>SHA256withRSA</argument>
+										<argument>SHA1withRSA</argument>
 										<argument>-digestalg</argument>
 										<argument>SHA1</argument>
 									</arguments>

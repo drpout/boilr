@@ -5,8 +5,18 @@ Boilr uses [libdynticker](https://github.com/andrefbsantos/libdynticker) to get 
 
 To create alarms Boilr uses [libpricealarm](https://github.com/andrefbsantos/libpricealarm).
 
+## Troubleshooting
+
+Trouble | Solution
+------- | --------
+Alarm not updating when phone is sleeping. | Set `Settings > Wi-Fi > Advanced > Keep Wi-Fi on during sleep` to `Always`
+
 ## Building
-You need to fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted) and to get the Android SDK for Android 3.0 (API 11). Then run `mvn validate` once to make Maven aware of the plugins we use to download and install dependencies which are not in Maven repositories. For then on you can run `mvn package` to build an APK in debug mode which can be deployed to a device or emulator. Use `mvn package -P release` to build an APK in release mode, which will be optimized, signed and aligned.
+You need to fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted) and to get the Android SDK for API 20. Then run `mvn validate` once to make Maven aware of the plugins we use to download and install dependencies which are not in Maven repositories. For then on you can use:
+
+* `mvn package` to build an apk in debug mode.
+* `mvn package -P release` to build an apk in release mode, which will be optimized, signed and aligned.
+* `mvn android:deploy` to install the generated apk through USB in any connected phones.
 
 ## Versioning
 Boilr follows [Semantic Versioning](http://semver.org) with the API being the user-interface.
