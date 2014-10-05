@@ -45,18 +45,19 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 	private OnTouchListener clearListener = new OnTouchListener() {
 		@Override
 		public boolean onTouch(View v, MotionEvent event) {
-			if(event.getAction() == MotionEvent.ACTION_UP){
+			if(event.getAction() == MotionEvent.ACTION_UP) {
 				if(search.equals(SEARCH))
 					((EditText) v).setText("");
-				searchableListPreference.getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+				searchableListPreference.getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
 				v.requestFocus();
 			}
 			return false;
 		}
 	};
 
-	public SearchableListAdapter(Context context, List<T> list, SearchableListPreference searchableListPreference) {
-		super(context,list);
+	public SearchableListAdapter(Context context, List<T> list,
+			SearchableListPreference searchableListPreference) {
+		super(context, list);
 		this.searchableListPreference = searchableListPreference;
 	}
 
@@ -78,7 +79,7 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 
 		}else{
 			if(convertView == null || SEARCH.equals(convertView.getTag())){
-				convertView = getInflater().inflate(R.layout.list_preference_row, parent, false);	
+				convertView = getInflater().inflate(R.layout.list_preference_row, parent, false);
 			}
 
 			CharSequence pair = (CharSequence) mList.get(position-1);
@@ -104,9 +105,9 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 	public void remove(int position) {
 		synchronized (mLock) {
 			if(mOriginalList != null) {
-				mOriginalList.remove(position+1);
+				mOriginalList.remove(position + 1);
 			} else {
-				mList.remove(position+1);
+				mList.remove(position + 1);
 			}
 		}
 		notifyDataSetChanged();
@@ -114,7 +115,7 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 
 	@Override
 	public int getCount() {
-		//Used to determinate the number of rows to display
+		// Used to determinate the number of rows to display
 		return mList.size() + 1;
 	}
 
@@ -130,18 +131,16 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 
 	@Override
 	public boolean onTouch(View view, MotionEvent event) {
-		switch(event.getAction()){
+		switch (event.getAction()) {
 			case MotionEvent.ACTION_UP:
 				TextView textView = (TextView) view.findViewById(R.id.pair_name);
 				CharSequence[] values = searchableListPreference.getEntryValues();
 
-				CharSequence [] entries = searchableListPreference.getEntries();
+				CharSequence[] entries = searchableListPreference.getEntries();
 				CharSequence value = null;
-				for(int  i = 0 ; i<entries.length; i++){
-					Log.d( entries[i]+"=="+ textView.getText());
-					if(entries[i].equals(textView.getText())){
+				for (int i = 0; i < entries.length; i++) {
+					if(entries[i].equals(textView.getText())) {
 						value = values[i];
-						Log.d("\t" + value);
 						break;
 					}
 				}
@@ -150,31 +149,11 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 				searchableListPreference.getDialog().dismiss();
 				break;
 			case MotionEvent.ACTION_MOVE:
-				InputMethodManager imm = (InputMethodManager)getContext().getSystemService(
+				InputMethodManager imm = (InputMethodManager) getContext().getSystemService(
 						Context.INPUT_METHOD_SERVICE);
 				imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 				break;
 		}
 		return false;
 	}
-
-	//	@Override
-	//	public void onClick(View view) {
-	//		TextView textView = (TextView) view.findViewById(R.id.pair_name);
-	//		CharSequence[] values = searchableListPreference.getEntryValues();
-	//
-	//		CharSequence [] entries = searchableListPreference.getEntries();
-	//		CharSequence value = null;
-	//		for(int  i = 0 ; i<entries.length; i++){
-	//			Log.d( entries[i]+"=="+ textView.getText());
-	//			if(entries[i].equals(textView.getText())){
-	//				value = values[i];
-	//				Log.d("\t" + value);
-	//				break;
-	//			}
-	//		}
-	//		searchableListPreference.setValue((String) value);
-	//		searchableListPreference.getOnPreferenceChangeListener().onPreferenceChange(searchableListPreference, value);
-	//		searchableListPreference.getDialog().dismiss();
-	//	}
 }
