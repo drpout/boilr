@@ -1,7 +1,14 @@
 # Boilr
-Android application which triggers an alarm when price of a cryptocurrency or bullion changes or reaches target value on a given exchange.
+Android application which triggers an alarm when price of a cryptocurrency or bullion changes or reaches a target value on a given exchange.
 
-Boilr uses [libdynticker](https://github.com/andrefbsantos/libdynticker) to get data from the exchanges. Therefore, it supports all the exchanges available on libdynticker with all their traded pairs.
+Supports 2 types of alarms:
+
+* Price Hit, were you can define an upper bound, a lower bound and an update interval (e.g. 30 s).
+* Price Change, were you define a change amount (in currency or percentage) and a time frame (e.g. 1 day).
+
+The alarm sound and vibration are configurable globally and for each alarm in particular. Lists of exchanges, pairs and alarms are fully searchable allowing a quick alarm setup and configuration.
+
+Market data is retrieved directly from the exchanges using Wi-Fi or Mobile Data (if allowed). [libdynticker](https://github.com/andrefbsantos/libdynticker) is used to interface with the exchanges. Therefore, Boilr supports all the [exchanges available on libdynticker](https://github.com/andrefbsantos/libdynticker/#supported-exchanges) with all their traded pairs.
 
 To create alarms Boilr uses [libpricealarm](https://github.com/andrefbsantos/libpricealarm).
 
@@ -23,6 +30,11 @@ Boilr follows [Semantic Versioning](http://semver.org) with the API being the us
 
 ## Debuging
 On your shell you can use `export ANDROID_LOG_TAGS="ActivityManager:I Boilr:D *:S"` to filter logcat, then run `adb logcat` as usual.
+
+## License
+All Boilr code is licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to the [contributors listed on GitHub](https://github.com/andrefbsantos/boilr/graphs/contributors).
+
+The Boilr logo and artworks were created by [Ricardo Duarte](http://cargocollective.com/ricardoduarte) and are dual licensed under [CC-BY-SA 3.0 Unported](https://creativecommons.org/licenses/by-sa/3.0) or [GPLv3+](/LICENSE).
 
 ## Donations
 Donations and tips are welcomed.

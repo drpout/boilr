@@ -16,7 +16,7 @@ import android.preference.PreferenceManager;
 
 public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 	private class OnPriceChangeSettingsPreferenceChangeListener extends
-			OnAlarmSettingsPreferenceChangeListener {
+	OnAlarmSettingsPreferenceChangeListener {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -58,6 +58,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			for (EditTextPreference p : prefs) {
 				p.setText(null);
 			}
+			updateIntervalPref.setTitle(R.string.pref_title_time_frame);
 			updateIntervalPref.setDialogMessage(R.string.pref_summary_update_interval_change);
 			updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
 		} else {
@@ -81,7 +82,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		String updateInterval = ((EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL)).getText();
 		// Time is in minutes, convert to milliseconds
 		long period = Conversions.MILIS_IN_MINUTE * Long.parseLong(updateInterval != null ? updateInterval :
-			sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""));
+				sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""));
 		String changeValueString = ((EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE)).getText();
 		double change;
 		if(changeValueString == null || changeValueString.equals(""))

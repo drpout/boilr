@@ -12,7 +12,7 @@
     <string name="about_title">About Boilr</string>
     <string name="about_website_button">Website</string>
     <string name="ok">OK</string>
-    <string name="about_license">Released under the GNU GPLv3 license.</string>
+    <string name="about_license">Released under GNU GPLv3+ license.</string>
     <string name="about_website">Website: </string>
     <string name="about_version">Version: </string>
     <string name="about_developers">Developers: </string>

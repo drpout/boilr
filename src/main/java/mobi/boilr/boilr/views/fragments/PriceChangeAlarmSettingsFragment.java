@@ -11,7 +11,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 	private PriceChangeAlarm priceChangeAlarm;
 
 	private class OnPriceChangeSettingsPreferenceChangeListener extends
-	OnAlarmSettingsPreferenceChangeListener {
+			OnAlarmSettingsPreferenceChangeListener {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -72,6 +72,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 
 		if(savedInstanceState == null) {
 			alarmTypePref.setValueIndex(1);
+			updateIntervalPref.setTitle(R.string.pref_title_time_frame);
 			updateIntervalPref.setDialogMessage(R.string.pref_summary_update_interval_change);
 		}
 		// Change value pref summary will be updated by updateDependentOnPair()
