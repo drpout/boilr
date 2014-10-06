@@ -26,7 +26,6 @@ public class OnSwipeTouchListener implements OnTouchListener {
 	public OnSwipeTouchListener(AlarmListActivity ctx) {
 		enclosingActivity = ctx;
 		mListView = ctx.getListView();
-		// gestureDetector = new GestureDetector(ctx, new GestureListener(ctx));
 	}
 
 	@Override

@@ -15,7 +15,7 @@
         android:layout_weight="4"
         android:paddingBottom="11dip"
         android:paddingLeft="11dip"
-        android:paddingRight="0dip"
+        android:paddingRight="1dip"
         android:paddingTop="11dip"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:gravity="center_vertical|start"
-    android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal" >
 
     <ImageView
