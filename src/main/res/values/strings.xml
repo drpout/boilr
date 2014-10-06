@@ -91,6 +91,7 @@
     <string name="pref_type_default">price_hit</string>
     <string name="pref_exchange_title">Exchange</string>
     <string-array name="pref_exchange_entries">
+        <item>796 Exchange</item>
         <item>Allcoin</item>
         <item>Bitcoin.de</item>
         <item>Bitstamp</item>
@@ -102,6 +103,7 @@
         <item>BTER</item>
         <item>BullionVault</item>        
         <item>Cavirtex</item>
+        <item>CHBTC</item>
         <item>Cryptsy</item>
         <item>Coin-Swap</item>
         <item>HitBTC</item>
@@ -111,32 +113,36 @@
         <item>Melotic</item>
         <item>MintPal</item>
         <item>OKCoin</item>
+        <item>Peatio</item>
         <item>Poloniex</item>
         <item>VoS</item>
     </string-array>
     <string-array name="pref_exchange_entries_values">
-        <item>mobi.boilr.libdynticker.allcoin.AllcoinExchange</item>
-        <item>mobi.boilr.libdynticker.bitcoinde.Bitcoinde</item>
-        <item>mobi.boilr.libdynticker.bitstamp.BitstampExchange</item>
-        <item>mobi.boilr.libdynticker.bittrex.BittrexExchange</item>
-        <item>mobi.boilr.libdynticker.bleutrade.BleuTradeExchange</item>
-        <item>mobi.boilr.libdynticker.btc38.BTC38Exchange</item>
-        <item>mobi.boilr.libdynticker.btcchina.BTCChinaExchange</item>
-        <item>mobi.boilr.libdynticker.btce.BTCEExchange</item>
-        <item>mobi.boilr.libdynticker.bter.BTERExchange</item>
-        <item>mobi.boilr.libdynticker.bullionvault.BullionVaultExchange</item>
-        <item>mobi.boilr.libdynticker.cavirtex.CavirtexExchange</item>
-        <item>mobi.boilr.libdynticker.cryptsy.CryptsyExchange</item>
-        <item>mobi.boilr.libdynticker.coinswap.CoinswapExchange</item>
-        <item>mobi.boilr.libdynticker.hitbtc.HitBTCExchange</item>
-        <item>mobi.boilr.libdynticker.houbi.HuobiExchange</item>
-        <item>mobi.boilr.libdynticker.kraken.KrakenExchange</item>
-        <item>mobi.boilr.libdynticker.localbitcoins.LocalBitcoins</item>
-        <item>mobi.boilr.libdynticker.melotic.MeloticExchange</item>
-        <item>mobi.boilr.libdynticker.mintpal.MintPalExchange</item>
-        <item>mobi.boilr.libdynticker.okcoin.OKCoinExchange</item>
-        <item>mobi.boilr.libdynticker.poloniex.PoloniexExchange</item>
-        <item>mobi.boilr.libdynticker.vos.VoSExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.E796Exchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.AllcoinExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitcoindeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitstampExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BittrexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BleuTradeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTC38Exchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTCChinaExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTCEExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTERExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BullionVaultExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CavirtexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.ChbtcExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CryptsyExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CoinswapExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.HitBTCExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.HuobiExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.KrakenExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.LocalBitcoinsExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.MeloticExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.MintPalExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.OKCoinExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.PeatioExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.PoloniexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.VoSExchange</item>
     </string-array>
     <string name="pref_exchange_default">mobi.boilr.libdynticker.allcoin.AllcoinExchange</string>
     <string name="pref_pair_title">Pair</string>
