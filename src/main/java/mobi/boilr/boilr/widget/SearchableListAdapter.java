@@ -7,6 +7,8 @@ import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.preference.SearchableListPreference;
 import mobi.boilr.boilr.utils.Log;
 import android.content.Context;
+import android.graphics.Color;
+import android.preference.CheckBoxPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
@@ -67,7 +69,7 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 		if( position == 0 ){
 			convertView = getInflater().inflate(R.layout.list_preference_search, parent, false);
 			convertView.setTag(SEARCH);
-			EditText editText = (EditText) convertView.findViewById(R.id.action_search_pair);
+			EditText editText = (EditText) convertView.findViewById(R.id.searchable_edit_text);
 			editText.setText(search);
 			editText.setOnTouchListener(clearListener);
 			editText.addTextChangedListener(watcher);
@@ -86,9 +88,9 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 			convertView.setTag(position-1);
 			//convertView.setOnClickListener(this);
 			convertView.setOnTouchListener(this);
-			TextView pairName = (TextView) convertView.findViewById(R.id.pair_name);
-			pairName.setText(pair);
-			RadioButton pairRadiobutton = (RadioButton) convertView.findViewById(R.id.pair_radio_button);
+			TextView textView = (TextView) convertView.findViewById(R.id.searchable_text_view);
+			textView.setText(pair);
+			RadioButton pairRadiobutton = (RadioButton) convertView.findViewById(R.id.searchable_radio_button);
 			if(this.searchableListPreference.getEntry().equals(pair)){
 				pairRadiobutton.setChecked(true);
 			}else{
@@ -133,7 +135,11 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 	public boolean onTouch(View view, MotionEvent event) {
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_UP:
-				TextView textView = (TextView) view.findViewById(R.id.pair_name);
+				RadioButton radioButton = (RadioButton)view.findViewById(R.id.searchable_radio_button);
+				radioButton.setChecked(true);
+				//view.setBackgroundColor(R.);;
+				
+				TextView textView = (TextView) view.findViewById(R.id.searchable_text_view);
 				CharSequence[] values = searchableListPreference.getEntryValues();
 
 				CharSequence[] entries = searchableListPreference.getEntries();

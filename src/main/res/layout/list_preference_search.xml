@@ -3,6 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
+    android:gravity="center_vertical|start"
+    android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal" >
 
     <ImageView
@@ -11,11 +13,11 @@
         android:layout_gravity="center_vertical"
         android:layout_weight="1"
         android:contentDescription="@string/pair_search_description"
-        android:src="?attr/ic_action_search"/>
+        android:src="?attr/ic_action_search" />
 
     <EditText
-        android:id="@+id/action_search_pair"
-        android:layout_width="0.dp"
+        android:id="@+id/searchable_edit_text"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="4"
         android:inputType="text" >
