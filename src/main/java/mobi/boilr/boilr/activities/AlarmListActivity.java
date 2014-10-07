@@ -18,17 +18,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
@@ -122,14 +117,12 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long layout) {
 		Alarm alarm = adapter.getItem(position);
-		
-		if(!alarm.isOn()){			
-			v.setBackgroundColor(getResources().getColor(R.color.highlightblue));
-		}
-		
 		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
 		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
 		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());
+		if(!alarm.isOn()){			
+			v.setBackgroundColor(getResources().getColor(R.color.highlightblue));
+		}
 		startActivity(alarmSettingsIntent);
 	}
 

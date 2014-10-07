@@ -3,6 +3,8 @@ package mobi.boilr.boilr.widget;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omg.CORBA.CTX_RESTRICT_SCOPE;
+
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.preference.SearchableListPreference;
 import mobi.boilr.boilr.utils.Log;
@@ -78,15 +80,12 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 			if(!search.equals(SEARCH) && !search.equals("")){
 				editText.requestFocus();
 			}
-
 		}else{
 			if(convertView == null || SEARCH.equals(convertView.getTag())){
 				convertView = getInflater().inflate(R.layout.list_preference_row, parent, false);
 			}
-
 			CharSequence pair = (CharSequence) mList.get(position-1);
 			convertView.setTag(position-1);
-			//convertView.setOnClickListener(this);
 			convertView.setOnTouchListener(this);
 			TextView textView = (TextView) convertView.findViewById(R.id.searchable_text_view);
 			textView.setText(pair);
@@ -97,8 +96,6 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 				pairRadiobutton.setChecked(false);
 			}
 			pairRadiobutton.setClickable(false);
-
-			return convertView;
 		}
 		return convertView;
 	}
@@ -137,7 +134,8 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 			case MotionEvent.ACTION_UP:
 				RadioButton radioButton = (RadioButton)view.findViewById(R.id.searchable_radio_button);
 				radioButton.setChecked(true);
-				//view.setBackgroundColor(R.);;
+				
+				view.setBackgroundColor(searchableListPreference.getContext().getResources().getColor(R.color.highlightblue));
 				
 				TextView textView = (TextView) view.findViewById(R.id.searchable_text_view);
 				CharSequence[] values = searchableListPreference.getEntryValues();

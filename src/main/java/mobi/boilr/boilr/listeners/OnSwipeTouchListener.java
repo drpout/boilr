@@ -44,7 +44,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 		}
 
 		if(mSwipeSlop < 0) {
-			mSwipeSlop = ViewConfiguration.get(enclosingActivity).getScaledTouchSlop()*3;
+			mSwipeSlop = ViewConfiguration.get(enclosingActivity).getScaledTouchSlop()*3 ;
 		}
 
 		switch(event.getAction()) {

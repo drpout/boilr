@@ -3,7 +3,6 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:background="?android:attr/listChoiceBackgroundIndicator"
     android:clickable="true"
     android:gravity="center_vertical|start"
     android:orientation="horizontal" >
@@ -14,8 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_weight="4"
         android:paddingBottom="11dip"
+        android:paddingEnd="1dip"
         android:paddingLeft="11dip"
         android:paddingRight="1dip"
+        android:paddingStart="11dip"
         android:paddingTop="11dip"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

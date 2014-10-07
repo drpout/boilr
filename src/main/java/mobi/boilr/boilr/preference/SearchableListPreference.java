@@ -23,7 +23,7 @@ public class SearchableListPreference extends ListPreference {
 	@Override
 	protected void onPrepareDialogBuilder(Builder builder) {
 		if(adapter == null){
-			adapter = new SearchableListAdapter(getContext(), Arrays.asList(getEntries()), this);
+			adapter = new SearchableListAdapter<CharSequence>(getContext(), Arrays.asList(getEntries()), this);
 		}else{
 			adapter.clear();
 			adapter.addAll(Arrays.asList(getEntries()));
