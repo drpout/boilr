@@ -29,7 +29,7 @@ import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.Notify;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
-import mobi.boilr.libpricealarm.UpperBoundSmallerThanLowerBoundException;
+import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -88,7 +88,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class GetLastValueTask extends
-			AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
+	AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
 		private AlarmPreferencesFragment frag;
 
 		public GetLastValueTask(AlarmPreferencesFragment frag) {
@@ -201,7 +201,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class AddPercentageAlarmTask extends
-	AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
+			AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(PercentageAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
@@ -222,7 +222,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class AddChangeAlarmTask extends
-			AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
+	AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(ChangeAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
@@ -305,8 +305,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-	InstantiationException, IllegalAccessException, IllegalArgumentException,
-	InvocationTargetException, SecurityException {
+			InstantiationException, IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException, SecurityException {
 		if(exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {
@@ -466,10 +466,10 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void createAlarm(int id, Exchange exchange, Pair pair, long period,
-			AndroidNotify notify,
-			double upperBound, double lowerBound) throws UpperBoundSmallerThanLowerBoundException,
+			AndroidNotify notify, double upperLimit, double lowerLimit)
+			throws UpperLimitSmallerOrEqualLowerLimitException,
 			IOException {
-		PriceHitAlarm alarm = new PriceHitAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
+		PriceHitAlarm alarm = new PriceHitAlarm(id, exchange, pair, period, notify, upperLimit, lowerLimit);
 		addAlarm(alarm);
 		this.startAlarm(alarm);
 	}

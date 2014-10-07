@@ -152,8 +152,8 @@
     <string name="pref_title_alarm_vibrate">Vibrate</string>
     <string name="pref_title_generic">Generic</string>
     <string name="pref_title_specific">Specific</string>
-    <string name="pref_title_upper_bound">Upper bound</string>
-    <string name="pref_title_lower_bound">Lower bound</string>
+    <string name="pref_title_upper_limit">Upper limit</string>
+    <string name="pref_title_lower_limit">Lower limit</string>
     <string name="pref_title_change_in_percentage">Change in percentage</string>
     <string name="pref_title_change_value">Change</string>
     <string name="pref_title_update_interval">Update interval</string>
@@ -171,7 +171,7 @@
     <string name="couldnt_retrieve_pairs">Could not retrieve pairs for %1$s.</string>
     <string name="couldnt_retrieve_last_value">Could not retrieve last value for %1$s with pair %2$s.</string>
     <string name="failed_create_alarm">Failed to create alarm.</string>
-    <string name="cannot_set_bound">Cannot set bound.</string>
+    <string name="cannot_set_limit">Cannot set limit.</string>
     <string name="check_connection">Please check your internet connection.</string>
     <string name="not_bound">%1$s not bound to StorageAndControlService.</string>
     <string name="pair_search_description">Pair Search</string>

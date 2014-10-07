@@ -11,7 +11,7 @@ import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-import mobi.boilr.libpricealarm.UpperBoundSmallerThanLowerBoundException;
+import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ComponentName;
@@ -227,6 +227,6 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 	}
 
 	protected abstract void makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotify notify)
-			throws UpperBoundSmallerThanLowerBoundException, IOException, InterruptedException,
+			throws UpperLimitSmallerOrEqualLowerLimitException, IOException, InterruptedException,
 			ExecutionException;
 }

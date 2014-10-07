@@ -20,25 +20,25 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 			String key = preference.getKey();
 			if(key.equals(PREF_KEY_UPPER_VALUE)) {
 				try {
-					priceHitAlarm.setUpperBound(Double.parseDouble((String) newValue));
+					priceHitAlarm.setUpperLimit(Double.parseDouble((String) newValue));
 					preference.setSummary(newValue + " " + alarm.getPair().getExchange());
 				} catch (Exception e) {
-					String msg = enclosingActivity.getString(R.string.cannot_set_bound);
+					String msg = enclosingActivity.getString(R.string.cannot_set_limit);
 					Log.e(msg, e);
 					Toast.makeText(enclosingActivity, msg + " " + e.getMessage(), Toast.LENGTH_LONG).show();
 					EditTextPreference edit = (EditTextPreference) preference;
-					edit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperBound()));
+					edit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperLimit()));
 				}
 			} else if(key.equals(PREF_KEY_LOWER_VALUE)) {
 				try {
-					priceHitAlarm.setLowerBound(Double.parseDouble((String) newValue));
+					priceHitAlarm.setLowerLimit(Double.parseDouble((String) newValue));
 					preference.setSummary(newValue + " " + alarm.getPair().getExchange());
 				} catch (Exception e) {
-					String msg = enclosingActivity.getString(R.string.cannot_set_bound);
+					String msg = enclosingActivity.getString(R.string.cannot_set_limit);
 					Log.e(msg, e);
 					Toast.makeText(enclosingActivity, msg + " " + e.getMessage(), Toast.LENGTH_LONG).show();
 					EditTextPreference edit = (EditTextPreference) preference;
-					edit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerBound()));
+					edit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerLimit()));
 				}
 			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
 				preference.setSummary(newValue + " s");
@@ -71,7 +71,7 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 			alarmTypePref.setValueIndex(0);
 			updateIntervalPref.setDialogMessage(R.string.pref_summary_update_interval_hit);
 		}
-		// Upper and lower bound prefs summary will be updated by updateDependentOnPair()
+		// Upper and lower limit prefs summary will be updated by updateDependentOnPair()
 		specificCat.setTitle(alarmTypePref.getEntry());
 		alarmTypePref.setSummary(alarmTypePref.getEntry());
 	}
@@ -79,7 +79,7 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 	@Override
 	protected void updateDependentOnPair() {
 		super.updateDependentOnPair();
-		EditTextPreference[] edits = { upperBoundPref, lowerBoundPref };
+		EditTextPreference[] edits = { upperLimitPref, lowerLimitPref };
 		String text;
 		for (EditTextPreference edit : edits) {
 			edit.setEnabled(true);
@@ -100,10 +100,10 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 		long secondsPeriod = alarm.getPeriod() / 1000;
 		updateIntervalPref.setSummary(secondsPeriod + " s");
 		if(!recoverSavedInstance) {
-			String formated = Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperBound());
-			upperBoundPref.setText(formated);
-			formated = Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerBound());
-			lowerBoundPref.setText(formated);
+			String formated = Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperLimit());
+			upperLimitPref.setText(formated);
+			formated = Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerLimit());
+			lowerLimitPref.setText(formated);
 			updateIntervalPref.setText(String.valueOf(secondsPeriod));
 		}
 	}

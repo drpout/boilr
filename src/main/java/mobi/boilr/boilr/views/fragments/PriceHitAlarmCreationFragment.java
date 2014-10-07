@@ -7,7 +7,7 @@ import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-import mobi.boilr.libpricealarm.UpperBoundSmallerThanLowerBoundException;
+import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -15,7 +15,7 @@ import android.preference.Preference;
 public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 
 	private class OnPriceHitSettingsPreferenceChangeListener extends
-	OnAlarmSettingsPreferenceChangeListener {
+			OnAlarmSettingsPreferenceChangeListener {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -33,7 +33,7 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 
 	@Override
 	protected void updateDependentOnPair() {
-		EditTextPreference[] edits = { upperBoundPref, lowerBoundPref };
+		EditTextPreference[] edits = { upperLimitPref, lowerLimitPref };
 		if(!recoverSavedInstance && lastValue != Double.POSITIVE_INFINITY) {
 			for (EditTextPreference edit : edits)
 				edit.setText(Conversions.formatMaxDecimalPlaces(lastValue));
@@ -60,14 +60,14 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 		removePrefs(hitAlarmPrefsToKeep);
 		if(savedInstanceState == null) {
 			alarmTypePref.setValueIndex(0);
-			EditTextPreference[] prefs = { upperBoundPref, lowerBoundPref, updateIntervalPref };
+			EditTextPreference[] prefs = { upperLimitPref, lowerLimitPref, updateIntervalPref };
 			for (EditTextPreference p : prefs) {
 				p.setText(null);
 			}
 			updateIntervalPref.setDialogMessage(R.string.pref_summary_update_interval_hit);
 			updateIntervalPref.setSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, "") + " s");
 		} else {
-			// Upper and lower bound prefs summary will be updated by updateDependentOnPair()
+			// Upper and lower limit prefs summary will be updated by updateDependentOnPair()
 			String updateInterval = updateIntervalPref.getText();
 			if(updateInterval == null || updateInterval.equals("")) {
 				updateIntervalPref.setSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, "") + " s");
@@ -81,25 +81,25 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 
 	@Override
 	public void makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotify notify)
-			throws UpperBoundSmallerThanLowerBoundException, IOException {
+			throws UpperLimitSmallerOrEqualLowerLimitException, IOException {
 		String updateInterval = updateIntervalPref.getText();
 		// Time is in seconds, convert to milliseconds
 		long period = 1000 * Long.parseLong(updateInterval != null ? updateInterval :
-			sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, ""));
-		String upperBoundString = upperBoundPref.getText();
-		double upperBound;
-		if(upperBoundString == null || upperBoundString.equals(""))
-			upperBound = Double.POSITIVE_INFINITY;
+				sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, ""));
+		String upperLimitString = upperLimitPref.getText();
+		double upperLimit;
+		if(upperLimitString == null || upperLimitString.equals(""))
+			upperLimit = Double.POSITIVE_INFINITY;
 		else
-			upperBound = Double.parseDouble(upperBoundString);
-		String lowerBoundString = lowerBoundPref.getText();
-		double lowerBound;
-		if(lowerBoundString == null || lowerBoundString.equals(""))
-			lowerBound = Double.NEGATIVE_INFINITY;
+			upperLimit = Double.parseDouble(upperLimitString);
+		String lowerLimitString = lowerLimitPref.getText();
+		double lowerLimit;
+		if(lowerLimitString == null || lowerLimitString.equals(""))
+			lowerLimit = Double.NEGATIVE_INFINITY;
 		else
-			lowerBound = Double.parseDouble(lowerBoundString);
+			lowerLimit = Double.parseDouble(lowerLimitString);
 		if(mBound) {
-			mStorageAndControlService.createAlarm(id, exchange, pair, period, notify, upperBound, lowerBound);
+			mStorageAndControlService.createAlarm(id, exchange, pair, period, notify, upperLimit, lowerLimit);
 		} else {
 			throw new IOException(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmCreationFragment"));
 		}

@@ -32,13 +32,13 @@
         android:title="pref_title_specific" >
         <EditTextPreference
 		    android:key="pref_key_upper_value"
-			android:title="@string/pref_title_upper_bound"
+			android:title="@string/pref_title_upper_limit"
 			android:inputType="numberDecimal"
 			android:defaultValue=""
 			android:persistent="false"/>
         <EditTextPreference
 		    android:key="pref_key_lower_value"
-			android:title="@string/pref_title_lower_bound"
+			android:title="@string/pref_title_lower_limit"
 			android:inputType="numberDecimal"
 			android:defaultValue=""
 			android:persistent="false"/>

@@ -23,7 +23,7 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 	private static final int[] attrs = new int[] { R.attr.off_alarm_row_color /* index 0 */};
 
 	public AlarmListAdapter(Context context, List<Alarm> alarms) {
-		super(context,alarms);
+		super(context, alarms);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 		boolean isLandScape = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
 		Alarm alarm = mList.get(position);
 
-		//View recycling 
+		// View recycling
 		if(convertView == null)
 			convertView = getInflater().inflate(R.layout.alarm_list_row, parent, false);
 
@@ -65,34 +65,34 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.3f));
 		}
 
-		TextView changeUpperBound = (TextView) convertView.findViewById(R.id.change_upper_bound);
-		TextView periodLowerBound = (TextView) convertView.findViewById(R.id.period_lower_bound);
+		TextView changeUpperLimit = (TextView) convertView.findViewById(R.id.change_upper_limit);
+		TextView periodLowerLimit = (TextView) convertView.findViewById(R.id.period_lower_limit);
 
 		if(alarm instanceof PriceHitAlarm) {
 			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
 
 			if(isLandScape) {
 				// Display full number on landscape
-				changeUpperBound.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperBound()) + " " + pairExchange);
-				periodLowerBound.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerBound()) + " " + pairExchange);
+				changeUpperLimit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperLimit()) + " " + pairExchange);
+				periodLowerLimit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerLimit()) + " " + pairExchange);
 
 			} else {
-				changeUpperBound.setText(Conversions.formatEngNotation(priceHitAlarm.getUpperBound()));
-				periodLowerBound.setText(Conversions.formatEngNotation(priceHitAlarm.getLowerBound()));
+				changeUpperLimit.setText(Conversions.formatEngNotation(priceHitAlarm.getUpperLimit()));
+				periodLowerLimit.setText(Conversions.formatEngNotation(priceHitAlarm.getLowerLimit()));
 			}
 
 		} else if(alarm instanceof PriceChangeAlarm) {
 			PriceChangeAlarm priceChangeAlarm = (PriceChangeAlarm) alarm;
 
 			if(priceChangeAlarm.isPercent()) {
-				changeUpperBound.setText(Conversions.format2DecimalPlaces(priceChangeAlarm.getPercent()) + "%");
+				changeUpperLimit.setText(Conversions.format2DecimalPlaces(priceChangeAlarm.getPercent()) + "%");
 			} else if(isLandScape) {
-				changeUpperBound.setText(Conversions.formatMaxDecimalPlaces(priceChangeAlarm.getChange()) + " " + pairExchange);
+				changeUpperLimit.setText(Conversions.formatMaxDecimalPlaces(priceChangeAlarm.getChange()) + " " + pairExchange);
 			} else {
-				changeUpperBound.setText(Conversions.formatEngNotation(priceChangeAlarm.getChange()));
+				changeUpperLimit.setText(Conversions.formatEngNotation(priceChangeAlarm.getChange()));
 			}
 
-			periodLowerBound.setText(Conversions.formatMilis(priceChangeAlarm.getPeriod()));
+			periodLowerLimit.setText(Conversions.formatMilis(priceChangeAlarm.getPeriod()));
 		}
 
 		// hidden tag to identify the alarm

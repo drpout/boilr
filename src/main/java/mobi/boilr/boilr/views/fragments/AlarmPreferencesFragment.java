@@ -57,7 +57,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected ListPreference exchangeListPref, pairListPref, alarmTypePref, alarmAlertTypePref;
 	protected RingtonePreference alertSoundPref;
 	protected CheckBoxPreference isPercentPref, vibratePref;
-	protected EditTextPreference lastValuePref, upperBoundPref, lowerBoundPref, updateIntervalPref,
+	protected EditTextPreference lastValuePref, upperLimitPref, lowerLimitPref, updateIntervalPref,
 			changePref;
 	protected OnPreferenceChangeListener listener;
 	protected StorageAndControlService mStorageAndControlService;
@@ -82,14 +82,14 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 		alarmAlertTypePref = (ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE);
 		alertSoundPref = (RingtonePreference) findPreference(PREF_KEY_ALARM_ALERT_SOUND);
 		vibratePref = (CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE);
-		upperBoundPref = (EditTextPreference) findPreference(PREF_KEY_UPPER_VALUE);
-		lowerBoundPref = (EditTextPreference) findPreference(PREF_KEY_LOWER_VALUE);
+		upperLimitPref = (EditTextPreference) findPreference(PREF_KEY_UPPER_VALUE);
+		lowerLimitPref = (EditTextPreference) findPreference(PREF_KEY_LOWER_VALUE);
 		isPercentPref = (CheckBoxPreference) findPreference(PREF_KEY_CHANGE_IN_PERCENTAGE);
 		changePref = (EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE);
 		updateIntervalPref = (EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL);
 
 		Preference[] prefs = { exchangeListPref, pairListPref, lastValuePref,
-				alarmTypePref, upperBoundPref, lowerBoundPref,
+				alarmTypePref, upperLimitPref, lowerLimitPref,
 				isPercentPref, changePref, updateIntervalPref,
 				alarmAlertTypePref, alertSoundPref, vibratePref };
 		for (Preference pref : prefs) {
@@ -212,7 +212,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected abstract void disableDependentOnPair();
 
 	protected void disableDependentOnPairHitAlarm() {
-		EditTextPreference[] edits = { upperBoundPref, lowerBoundPref };
+		EditTextPreference[] edits = { upperLimitPref, lowerLimitPref };
 		for (EditTextPreference edit : edits) {
 			edit.setEnabled(false);
 			edit.setSummary(null);
