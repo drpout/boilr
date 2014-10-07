@@ -34,8 +34,13 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 		Alarm alarm = mList.get(position);
 
 		// View recycling
-		if(convertView == null)
+		if(convertView == null){
 			convertView = getInflater().inflate(R.layout.alarm_list_row, parent, false);
+		}else{
+			//Recycle views retain the alpha and translation from when they were removed.
+			if(convertView.getAlpha() != 1)	convertView.setAlpha(1);
+			if(convertView.getTranslationX() != 0 )	convertView.setTranslationX(0);
+		}
 
 		ToggleButton toggleButton = (ToggleButton) convertView.findViewById(R.id.toggle_button);
 		TextView exchange = (TextView) convertView.findViewById(R.id.exchange);
