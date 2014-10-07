@@ -23,9 +23,11 @@ Alarm not updating when phone is sleeping. | Set `Settings > Wi-Fi > Advanced > 
 ## Building
 You need to fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted) and to get the Android SDK for API 20. Then run `mvn validate` once to make Maven aware of the plugins we use to download and install dependencies which are not in Maven repositories. For then on you can use:
 
-* `mvn package` to build an apk in debug mode.
+* `mvn package -P debug` to build an apk in debug mode.
 * `mvn package -P release` to build an apk in release mode, which will be optimized, signed and aligned.
 * `mvn android:deploy` to install the generated apk through USB in any connected phones.
+
+Note: `mvn package` with no profile associated builds an unsigned release mode apk, unsuitable for deploy. It is meant for further processing by downstream projects like F-Droid.
 
 ## Versioning
 Boilr follows [Semantic Versioning](http://semver.org) with the API being the user-interface.

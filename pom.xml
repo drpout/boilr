@@ -110,11 +110,20 @@
 					<deleteConflictingFiles>true</deleteConflictingFiles>
 					<undeployBeforeDeploy>true</undeployBeforeDeploy>
 					<dex>
-						<optimize>false</optimize>
+						<optimize>true</optimize>
 					</dex>
 					<dexIncremental>false</dexIncremental>
 					<dexPreDex>true</dexPreDex>
-					<release>false</release>
+					<release>true</release>
+					<sign>
+						<debug>false</debug>
+					</sign>
+					<manifest>
+						<debuggable>false</debuggable>
+					</manifest>
+					<proguard>
+						<skip>true</skip>
+					</proguard>
 				</configuration>
 				<extensions>true</extensions>
 			</plugin>
@@ -356,6 +365,43 @@
 								</goals>
 							</execution>
 						</executions>
+						<extensions>true</extensions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>debug</id>
+			<!-- via this activation the profile is automatically used when the release 
+				is done with the maven release plugin -->
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+						<artifactId>android-maven-plugin</artifactId>
+						<version>4.0.0-rc.1</version>
+						<configuration>
+							<sdk>
+								<platform>20</platform>
+							</sdk>
+							<deleteConflictingFiles>true</deleteConflictingFiles>
+							<undeployBeforeDeploy>true</undeployBeforeDeploy>
+							<dex>
+								<optimize>false</optimize>
+							</dex>
+							<dexIncremental>false</dexIncremental>
+							<dexPreDex>true</dexPreDex>
+							<release>false</release>
+							<sign>
+								<debug>true</debug>
+							</sign>
+						</configuration>
 						<extensions>true</extensions>
 					</plugin>
 				</plugins>
