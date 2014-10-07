@@ -12,11 +12,9 @@ import android.widget.ListView;
 
 public class OnSwipeTouchListener implements OnTouchListener {
 	private AlarmListActivity enclosingActivity;
-	private static final int SWIPE_DURATION = 250;
 	private static final double REMOVE_THRESHOLD = 0.5;
-	private static final long DURATION = 500;
 
-	private int pointToPosition = -1;
+	private int mPointToPosition = -1;
 	private float mDownX;
 	private int mSwipeSlop = -1;
 	private boolean mItemPressed = false;
@@ -30,15 +28,23 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
 	@Override
 	public boolean onTouch(final View view, MotionEvent event) {
-		pointToPosition = pointToPosition == -1 ? enclosingActivity.getListView()
-				.pointToPosition((int) event.getX(), (int) event.getY()) : pointToPosition;
-		View childView = mListView.getChildAt(pointToPosition);
+		//pointToPosition returns the absolute position of the view in the list.
+		mPointToPosition = mPointToPosition == -1 ? mListView.pointToPosition((int) event.getX(), (int) event.getY()) : mPointToPosition;
+
+		//getChildAt returns the the n visible view
+		View childView = mListView.getChildAt(mPointToPosition - (mListView.getFirstVisiblePosition() - mListView.getHeaderViewsCount()));
+
 		// When no row is selected, do nothing
 		if(childView == null) {
+			//Touching empty space.
+			mPointToPosition = -1;
+			mSwiping = false;
+			mItemPressed = false;
 			return false;
 		}
+
 		if(mSwipeSlop < 0) {
-			mSwipeSlop = ViewConfiguration.get(enclosingActivity).getScaledTouchSlop();
+			mSwipeSlop = ViewConfiguration.get(enclosingActivity).getScaledTouchSlop()*3;
 		}
 
 		switch(event.getAction()) {
@@ -47,14 +53,17 @@ public class OnSwipeTouchListener implements OnTouchListener {
 					// Multi-item swipes not handled
 					return false;
 				}
+
 				mItemPressed = true;
 				mDownX = event.getX();
 				break;
+
 			case MotionEvent.ACTION_CANCEL:
 				childView.setAlpha(1);
 				childView.setTranslationX(0);
 				mItemPressed = false;
 				break;
+
 			case MotionEvent.ACTION_MOVE: {
 				float x = event.getX() + view.getTranslationX();
 				float deltaX = x - mDownX;
@@ -63,7 +72,12 @@ public class OnSwipeTouchListener implements OnTouchListener {
 					if(deltaXAbs > mSwipeSlop) {
 						mSwiping = true;
 						mListView.requestDisallowInterceptTouchEvent(true);
-						// mBackgroundContainer.showBackground(v.getTop(), v.getHeight());
+					}else{
+						//It's not an horizontal swipe, it most something else, let another listener handle it
+						mPointToPosition = -1;
+						mSwiping = false;
+						mItemPressed = false;
+						return false;
 					}
 				}
 				if(mSwiping) {
@@ -72,64 +86,47 @@ public class OnSwipeTouchListener implements OnTouchListener {
 					childView.setAlpha(1 - deltaXAbs / view.getWidth());
 				}
 			}
-				break;
+			break;
+
 			case MotionEvent.ACTION_UP: {
-				// User let go - figure out whether to animate the view out, or back into place
+				// User let go - figure out whether to animate the view out, or back into place				
 				if(mSwiping) {
 					float x = event.getX() + view.getTranslationX();
 					float deltaX = x - mDownX;
 					float deltaXAbs = Math.abs(deltaX);
-					float fractionCovered;
-					float endX;
-					float endAlpha;
-					final boolean remove;
-					if(deltaXAbs > view.getWidth() * REMOVE_THRESHOLD) {
-						// Greater than a quarter of the width - animate it out
-						fractionCovered = deltaXAbs / childView.getWidth();
-						endX = deltaX < 0 ? -view.getWidth() : view.getWidth();
-						endAlpha = 0;
-						remove = true;
-					} else {
-						// Not far enough - animate it back
-						fractionCovered = 1 - (deltaXAbs / view.getWidth());
-						endX = 0;
-						endAlpha = 1;
-						remove = false;
-					}
-
-					long duration = (int) ((1 - fractionCovered) * SWIPE_DURATION);
+					final boolean remove = deltaXAbs > view.getWidth() * REMOVE_THRESHOLD;
 					mListView.setEnabled(false);
-
 					if(remove) {
-						AlarmListAdapter adapter = (AlarmListAdapter) enclosingActivity
-								.getListAdapter();
-						Alarm alarm = adapter.getItem(pointToPosition);
+						//remove view
+						AlarmListAdapter adapter = (AlarmListAdapter) enclosingActivity.getListAdapter();
+						Alarm alarm = adapter.getItem(mPointToPosition);
 						if(enclosingActivity.ismBound()) {
 							enclosingActivity.getmStorageAndControlService().deleteAlarm(alarm);
-							adapter.remove(pointToPosition);
+							adapter.remove(mPointToPosition);
 						} else {
 							Log.d("Couldn't remove alarm " + alarm.getId());
-						}
-						mSwiping = false;
-						mListView.setEnabled(true);
+						}						
 					} else {
-						mSwiping = false;
-						mListView.setEnabled(true);
+						//back into place
 						childView.setAlpha(1);
 						childView.setTranslationX(0);
 					}
+					mListView.setEnabled(true);
+					mSwiping = false;
 				} else {
-					// It's not a swipe, it most be a click, return false to signal it
+					// It's not an horizontal swipe, let another listener handle it.
+					mSwiping = false;
+					mPointToPosition = -1;
+					mItemPressed = false;
 					return false;
 				}
-			}
-				pointToPosition = -1;
+				mPointToPosition = -1;
 				mItemPressed = false;
-				break;
+			}
+			break;
 			default:
 				return false;
 		}
-
 		return true;
 	}
 }
