@@ -63,7 +63,7 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 				if(alertSound == null) {
 					alertSound = sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, "");
 				}
-				alertSoundPref.setDefaultValue(alertSound);
+				sharedPrefs.edit().putString(PREF_KEY_ALARM_ALERT_SOUND, alertSound).commit();
 				alertSoundPref.setSummary(Conversions.ringtoneUriToName(alertSound, enclosingActivity));
 
 				Boolean isVibrate = notify.isVibrate();

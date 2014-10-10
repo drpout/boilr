@@ -26,7 +26,6 @@
     <string name="boilr_website">http://boilr.mobi</string>
     <string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a></string>
     <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
-    <string name="xmr_addr">43KcTwXw5D43YRE8MSG4D7X3S2kjU6ehBABucyKAVNYnKbNxpGWZ8zGbEhCq79N4ZGDtefU5w4AGoeR6eNB5yMbEPhAw3FT</string>
     
     <string name="pref_title_alerts">Alerts</string>
     <string name="pref_title_default_alert_type">Default type</string>
@@ -177,4 +176,6 @@
     <string name="check_connection">Please check your internet connection.</string>
     <string name="not_bound">%1$s not bound to StorageAndControlService.</string>
     <string name="pair_search_description">Pair Search</string>
+    
+    <string name="silent">Silent</string>
 </resources>

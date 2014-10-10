@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import mobi.boilr.boilr.R;
 import android.app.Activity;
 import android.content.Context;
 import android.media.Ringtone;
@@ -82,10 +83,11 @@ public class Conversions {
 	}
 
 	public static String ringtoneUriToName(String stringUri, Activity activity) {
+		if(stringUri.equals("")) return activity.getString(R.string.silent);
 		Uri uri = Uri.parse(stringUri);
 		Context context = activity.getApplicationContext();
 		Ringtone ringtone = RingtoneManager.getRingtone(context, uri);
-		return ringtone.getTitle(context);
+		return ringtone!=null ? ringtone.getTitle(context) : "Unknown ringtone";
 	}
 
 	private static final Map<Integer, String> prefixes;
