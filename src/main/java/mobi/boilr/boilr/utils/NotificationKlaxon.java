@@ -64,37 +64,39 @@ public class NotificationKlaxon {
 			alertSoundUri = Uri.parse(alertSound);
 		else
 			alertSoundUri = Uri.parse(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""));
+		
+		if(!alertSound.equals("")) { // Silent or None was selected
+			sMediaPlayer = new MediaPlayer();
+			sMediaPlayer.setOnErrorListener(new OnErrorListener() {
+				@Override
+				public boolean onError(MediaPlayer mp, int what, int extra) {
+					Log.e("Error occurred while playing audio. Stopping NotificationKlaxon.");
+					NotificationKlaxon.stop(context);
+					return true;
+				}
+			});
 
-		sMediaPlayer = new MediaPlayer();
-		sMediaPlayer.setOnErrorListener(new OnErrorListener() {
-			@Override
-			public boolean onError(MediaPlayer mp, int what, int extra) {
-				Log.e("Error occurred while playing audio. Stopping NotificationKlaxon.");
-				NotificationKlaxon.stop(context);
-				return true;
+			Integer alertType = notify.getAlertType();
+			if(alertType == null) {
+				alertType = Integer.parseInt(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE, ""));
 			}
-		});
-
-		Integer alertType = notify.getAlertType();
-		if(alertType == null) {
-			alertType = Integer.parseInt(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE, ""));
-		}
-		try {
-			sMediaPlayer.setDataSource(context, alertSoundUri);
-			startAlarm(context, sMediaPlayer, alertType);
-		} catch(Exception ex) {
-			Log.v("NotificationKlaxon using the fallback ringtone.");
-			// The alarmNoise may be on the sd card which could be busy right
-			// now. Use the fallback ringtone.
 			try {
-				// Must reset the media player to clear the error state.
-				sMediaPlayer.reset();
-				alertSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 				sMediaPlayer.setDataSource(context, alertSoundUri);
 				startAlarm(context, sMediaPlayer, alertType);
-			} catch(Exception ex2) {
-				// At this point we just don't play anything.
-				Log.e("NotificationKlaxon failed to play fallback ringtone.", ex2);
+			} catch(Exception ex) {
+				Log.v("NotificationKlaxon using the fallback ringtone.");
+				// The alarmNoise may be on the sd card which could be busy right
+				// now. Use the fallback ringtone.
+				try {
+					// Must reset the media player to clear the error state.
+					sMediaPlayer.reset();
+					alertSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+					sMediaPlayer.setDataSource(context, alertSoundUri);
+					startAlarm(context, sMediaPlayer, alertType);
+				} catch(Exception ex2) {
+					// At this point we just don't play anything.
+					Log.e("NotificationKlaxon failed to play fallback ringtone.", ex2);
+				}
 			}
 		}
 

@@ -134,10 +134,10 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 			alarmAlertTypePref.setSummary(alarmAlertTypePref.getEntries()[alarmAlertTypePref.findIndexOfValue(alertType)]);
 			alertSoundPref.setRingtoneType(Integer.parseInt(alertType));
 
-			alertSoundPref.setDefaultValue(alertSound);
 			if(alertSound == null) {
 				alertSound = sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, "");
 			}
+			sharedPrefs.edit().putString(PREF_KEY_ALARM_ALERT_SOUND, alertSound).commit();
 			alertSoundPref.setSummary(Conversions.ringtoneUriToName(alertSound, enclosingActivity));
 
 			if(defaultDef == null) {
