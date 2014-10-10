@@ -2,3 +2,5 @@ Version 0.1.0
 
 + Added Bitfinex exchange.
 * Improved Boilr icon.
+* RingtonePreference in alarm creation and settings now displaying the correct sound.
+- Removed XMR donation address from the app. Altcoins' addresses are available only on the website.
