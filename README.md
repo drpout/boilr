@@ -38,7 +38,7 @@ On your shell you can use `export ANDROID_LOG_TAGS="ActivityManager:I Boilr:D *:
 ## License
 All Boilr code is licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to the [contributors listed on GitHub](https://github.com/andrefbsantos/boilr/graphs/contributors).
 
-The Boilr icon and artworks were created by [Ricardo Duarte](http://cargocollective.com/ricardoduarte) and are dual licensed under [CC-BY-SA 3.0 Unported](https://creativecommons.org/licenses/by-sa/3.0) or [GPLv3+](/LICENSE).
+The Boilr icon and artworks were created by [Ricardo Duarte](http://cargocollective.com/ricardoduarte) and are dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE).
 
 ## Donations
 Donations and tips are welcomed.
