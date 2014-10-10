@@ -94,6 +94,7 @@
         <item>796 Exchange</item>
         <item>Allcoin</item>
         <item>Bitcoin.de</item>
+        <item>Bitfinex</item>
         <item>Bitstamp</item>
         <item>Bittrex</item>
         <item>BleuTrade</item>
@@ -121,6 +122,7 @@
         <item>mobi.boilr.libdynticker.exchanges.E796Exchange</item>
         <item>mobi.boilr.libdynticker.exchanges.AllcoinExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BitcoindeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitfinexExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BitstampExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BittrexExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BleuTradeExchange</item>

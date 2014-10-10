@@ -15,7 +15,7 @@ import android.preference.Preference;
 public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 
 	private class OnPriceHitSettingsPreferenceChangeListener extends
-			OnAlarmSettingsPreferenceChangeListener {
+	OnAlarmSettingsPreferenceChangeListener {
 
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -35,11 +35,12 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 	protected void updateDependentOnPair() {
 		EditTextPreference[] edits = { upperLimitPref, lowerLimitPref };
 		if(!recoverSavedInstance && lastValue != Double.POSITIVE_INFINITY) {
-			for (EditTextPreference edit : edits)
+			for(EditTextPreference edit : edits) {
 				edit.setText(Conversions.formatMaxDecimalPlaces(lastValue));
+			}
 		}
 		String text;
-		for (EditTextPreference edit : edits) {
+		for(EditTextPreference edit : edits) {
 			edit.setEnabled(true);
 			text = edit.getText();
 			if(text != null && !text.equals(""))
@@ -61,7 +62,7 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 		if(savedInstanceState == null) {
 			alarmTypePref.setValueIndex(0);
 			EditTextPreference[] prefs = { upperLimitPref, lowerLimitPref, updateIntervalPref };
-			for (EditTextPreference p : prefs) {
+			for(EditTextPreference p : prefs) {
 				p.setText(null);
 			}
 			updateIntervalPref.setDialogMessage(R.string.pref_summary_update_interval_hit);
@@ -85,7 +86,7 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 		String updateInterval = updateIntervalPref.getText();
 		// Time is in seconds, convert to milliseconds
 		long period = 1000 * Long.parseLong(updateInterval != null ? updateInterval :
-				sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, ""));
+			sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, ""));
 		String upperLimitString = upperLimitPref.getText();
 		double upperLimit;
 		if(upperLimitString == null || upperLimitString.equals(""))
