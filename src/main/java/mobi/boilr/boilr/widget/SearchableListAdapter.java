@@ -9,6 +9,7 @@ import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.preference.SearchableListPreference;
 import mobi.boilr.boilr.utils.Log;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.preference.CheckBoxPreference;
 import android.text.Editable;
@@ -17,14 +18,17 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchListener {
+public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchListener, OnClickListener {
 
 	protected static final String SEARCH = "Search...";
 	protected SearchableListPreference searchableListPreference;
@@ -58,6 +62,7 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 			return false;
 		}
 	};
+	//private OnTouchListener closeListener = new OnTou
 
 	public SearchableListAdapter(Context context, List<T> list,
 			SearchableListPreference searchableListPreference) {
@@ -77,6 +82,17 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 			editText.addTextChangedListener(watcher);
 			searchableListPreference.getDialog().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
 			searchableListPreference.getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_‌​VISIBLE);
+			
+			Button btnClose = (Button) convertView.findViewById(R.id.searchable_close_button);
+			TypedArray ta = getContext().obtainStyledAttributes(new int[]{R.attr.ic_action_remove});
+			btnClose.setBackgroundDrawable(ta.getDrawable(0));
+			ta.recycle();
+			
+			btnClose.setOnClickListener(this);
+			
+			//btnClose.setBackgroundDrawable(R);
+			
+			
 			if(!search.equals(SEARCH) && !search.equals("")){
 				editText.requestFocus();
 			}
@@ -160,4 +176,9 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 		}
 		return false;
 	}
+	
+	@Override
+	public void onClick(View v) {
+		((EditText) ((View) v.getParent()).findViewById(R.id.searchable_edit_text)).setText("");
+		}
 }
