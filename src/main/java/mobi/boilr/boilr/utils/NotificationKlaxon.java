@@ -68,7 +68,7 @@ public class NotificationKlaxon {
 			alertSoundUri = Uri.parse(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""));		
 		
 		
-		if(!("").equals(alertSound) && !(Uri.EMPTY).equals(alertSoundUri)) { // Silent or None was selected
+		if(!(Uri.EMPTY).equals(alertSoundUri)) { // Silent or None was selected
 			sMediaPlayer = new MediaPlayer();
 			sMediaPlayer.setOnErrorListener(new OnErrorListener() {
 				@Override
