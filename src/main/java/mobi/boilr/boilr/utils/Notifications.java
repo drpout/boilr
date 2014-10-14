@@ -19,16 +19,17 @@ public final class Notifications {
 
 	private static final int noInternetNotificationID = 432191926;
 	private static Notification.Builder noInternetNotification = null;
+	private static boolean isNoInternetNotificationActive = false;
 
 	private static Notification.Builder setCommonNotificationProps(Context context, int alarmID,
 			String firingReason) {
 		Notification.Builder notification = new Notification.Builder(context)
-				.setContentTitle(context.getString(R.string.boilr_alarm))
-				.setContentText(firingReason)
-				.setSmallIcon(R.drawable.ic_action_alarms)
-				.setLights(0xFFFF0000, 333, 333) // Blink in red ~3 times per second.
-				.setOngoing(false)
-				.setAutoCancel(true);
+		.setContentTitle(context.getString(R.string.boilr_alarm))
+		.setContentText(firingReason)
+		.setSmallIcon(R.drawable.ic_action_alarms)
+		.setLights(0xFFFF0000, 333, 333) // Blink in red ~3 times per second.
+		.setOngoing(false)
+		.setAutoCancel(true);
 
 		Intent viewAlarmsIntent = new Intent(context, AlarmListActivity.class);
 		viewAlarmsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -75,22 +76,24 @@ public final class Notifications {
 	}
 
 	public static void showNoInternetNotification(Context context) {
-		if(noInternetNotification == null) {
-			Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
-			changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			noInternetNotification = new Notification.Builder(context)
-					.setContentTitle(context.getString(R.string.no_internet))
-					.setContentText(context.getString(R.string.no_updates))
-					.setSmallIcon(R.drawable.ic_action_warning)
-					.setOngoing(false)
-					.setAutoCancel(true)
-					.setPriority(Notification.PRIORITY_DEFAULT)
-					.setWhen(0)
-					.setContentIntent(PendingIntent.getActivity(context, noInternetNotificationID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+		if(!isNoInternetNotificationActive) {
+			if(noInternetNotification == null) {
+				Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
+				changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				noInternetNotification = new Notification.Builder(context)
+				.setContentTitle(context.getString(R.string.no_internet))
+				.setContentText(context.getString(R.string.no_updates))
+				.setSmallIcon(R.drawable.ic_action_warning)
+				.setOngoing(false)
+				.setAutoCancel(true)
+				.setPriority(Notification.PRIORITY_DEFAULT)
+				.setWhen(0)
+				.setContentIntent(PendingIntent.getActivity(context, noInternetNotificationID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+			}
+			NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+			nm.notify(noInternetNotificationID, noInternetNotification.build());
+			isNoInternetNotificationActive = true;
 		}
-		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		nm.cancel(noInternetNotificationID);
-		nm.notify(noInternetNotificationID, noInternetNotification.build());
 	}
 
 	private static String getFiringReason(Alarm alarm) {
@@ -105,7 +108,8 @@ public final class Notifications {
 				reason += Conversions.format2DecimalPlaces(changeAlarm.getLastChange()) + "%";
 			else
 				reason += Conversions.formatMaxDecimalPlaces(changeAlarm.getLastChange()) + " " + pair.getExchange();
-			reason += " change\nin " + alarm.getExchange().getName();
+			reason += " change\nin " + alarm.getExchange().getName() + "\nduring "
+					+ Conversions.formatMilis(changeAlarm.getElapsedMilis());
 			return reason;
 		}
 		return "Could not retrieve firing reason.";
@@ -118,7 +122,10 @@ public final class Notifications {
 	}
 
 	public static void clearNoInternetNotification(Context context) {
-		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		nm.cancel(noInternetNotificationID);
+		if(isNoInternetNotificationActive) {
+			NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+			nm.cancel(noInternetNotificationID);
+			isNoInternetNotificationActive = false;
+		}
 	}
 }

@@ -67,20 +67,34 @@ public class StorageAndControlService extends Service {
 	};
 
 	private class RunAlarmTask extends AsyncTask<Alarm, Void, Void> {
+		private static final long REPEAT_LOWER_BOUND = 10000; // 10 seconds
+
 		@Override
 		protected Void doInBackground(Alarm... alarms) {
-			if(hasNetworkConnection()) {
-				if(alarms.length == 1) {
+			if(alarms.length == 1) {
+				Alarm alarm = alarms[0];
+				if(hasNetworkConnection()) {
 					try {
-						alarms[0].run();
-						Log.d("Last value for alarm " + alarms[0].getId() + " " + Conversions.formatMaxDecimalPlaces(alarms[0].getLastValue()));
+						alarm.run();
+						Log.d("Last value for alarm " + alarm.getId() + " " + Conversions.formatMaxDecimalPlaces(alarm.getLastValue()));
 					} catch (IOException e) {
-						Log.e("Could not retrieve last value for alarm " + alarms[0].getId(), e);
+						Log.e("Could not retrieve last value for alarm " + alarm.getId(), e);
 					}
+					Notifications.clearNoInternetNotification(StorageAndControlService.this);
+				} else {
+					/*
+					 * If it is a PriceChangeAlarm try to get last value sooner.
+					 * Check issue #35 https://github.com/andrefbsantos/boilr/issues/35
+					 */
+					if(alarm instanceof PriceChangeAlarm) {
+						long delay = (long) (alarm.getPeriod() * 0.01);
+						if(delay < REPEAT_LOWER_BOUND) {
+							delay = REPEAT_LOWER_BOUND;
+						}
+						addToAlarmManager(alarm, delay);
+					}
+					Notifications.showNoInternetNotification(StorageAndControlService.this);
 				}
-				Notifications.clearNoInternetNotification(StorageAndControlService.this);
-			} else {
-				Notifications.showNoInternetNotification(StorageAndControlService.this);
 			}
 			AlarmAlertWakeLock.releaseCpuLock();
 			return null;
@@ -88,7 +102,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class GetLastValueTask extends
-	AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
+			AsyncTask<android.util.Pair<Exchange, Pair>, Void, Double> {
 		private AlarmPreferencesFragment frag;
 
 		public GetLastValueTask(AlarmPreferencesFragment frag) {
@@ -201,7 +215,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class AddPercentageAlarmTask extends
-			AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
+	AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(PercentageAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
@@ -222,7 +236,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	private class AddChangeAlarmTask extends
-	AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
+			AsyncTask<ChangeAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(ChangeAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
@@ -305,8 +319,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-			InstantiationException, IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, SecurityException {
+	InstantiationException, IllegalAccessException, IllegalArgumentException,
+	InvocationTargetException, SecurityException {
 		if(exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {
@@ -336,17 +350,17 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void startAlarm(Alarm alarm) {
-		addToAlarmManager(alarm);
+		addToAlarmManager(alarm, alarm.getPeriod());
 		alarm.turnOn();
 		replaceAlarmDB(alarm);
 	}
 
-	private void addToAlarmManager(Alarm alarm) {
+	private void addToAlarmManager(Alarm alarm, long firstDelay) {
 		Intent intent = new Intent(this, StorageAndControlService.class);
 		intent.setAction(RUN_ALARM);
 		intent.putExtra("alarmID", alarm.getId());
 		PendingIntent pendingIntent = PendingIntent.getService(this, alarm.getId(), intent, 0);
-		alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, alarm.getPeriod(), alarm.getPeriod(), pendingIntent);
+		alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + firstDelay, alarm.getPeriod(), pendingIntent);
 	}
 
 	public void startAlarm(int alarmID) {
@@ -354,7 +368,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void restartAlarm(Alarm alarm) {
-		addToAlarmManager(alarm);
+		addToAlarmManager(alarm, alarm.getPeriod());
 	}
 
 	public void stopAlarm(Alarm alarm) {
@@ -467,8 +481,8 @@ public class StorageAndControlService extends Service {
 
 	public void createAlarm(int id, Exchange exchange, Pair pair, long period,
 			AndroidNotify notify, double upperLimit, double lowerLimit)
-			throws UpperLimitSmallerOrEqualLowerLimitException,
-			IOException {
+					throws UpperLimitSmallerOrEqualLowerLimitException,
+					IOException {
 		PriceHitAlarm alarm = new PriceHitAlarm(id, exchange, pair, period, notify, upperLimit, lowerLimit);
 		addAlarm(alarm);
 		this.startAlarm(alarm);
