@@ -8,6 +8,7 @@ import java.util.Map;
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libpricealarm.Alarm;
+import android.R.string;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
@@ -59,13 +60,15 @@ public class NotificationKlaxon {
 		stop(context);
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
 		String alertSound = notify.getAlertSound();
-		Uri alertSoundUri;
+		Uri alertSoundUri = null;
+				
 		if(alertSound != null)
 			alertSoundUri = Uri.parse(alertSound);
 		else
-			alertSoundUri = Uri.parse(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""));
+			alertSoundUri = Uri.parse(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, ""));		
 		
-		if(!alertSound.equals("")) { // Silent or None was selected
+		
+		if(!("").equals(alertSound) && !(Uri.EMPTY).equals(alertSoundUri)) { // Silent or None was selected
 			sMediaPlayer = new MediaPlayer();
 			sMediaPlayer.setOnErrorListener(new OnErrorListener() {
 				@Override

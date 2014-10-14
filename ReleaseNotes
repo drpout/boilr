@@ -1,3 +1,7 @@
+Version 0.2.1
++ Fixed a bug when alarms with default notification were crashing the application.
++ Fixed a bug where alarms with default silent notification were playing sound.
+
 Version 0.2.0
 + Added exchanges: ANX, BTC Markets, CampBX, CEX.IO, itBit and LakeBTC.
 
