@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Boilr</string>
     <string name="action_search">Search</string>
     <string name="action_settings">Settings</string>
@@ -25,9 +26,9 @@
     <string name="boilr_website">http://boilr.mobi</string>
     <string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a></string>
     <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
-    
     <string name="pref_title_alerts">Alerts</string>
     <string name="pref_title_default_alert_type">Default type</string>
+
     <string-array name="pref_entries_alert_type">
         <item>Alarm</item>
         <item>Notification</item>
@@ -38,11 +39,13 @@
         <item>2</item>
         <item>1</item>
     </string-array>
+
     <string name="pref_default_alert_type">4</string>
     <string name="pref_title_default_alert_sound">Default sound</string>
     <string name="pref_title_vibrate_default">Vibrate by default</string>
     <string name="pref_title_appearance">Appearance</string>
     <string name="pref_title_theme">Theme</string>
+
     <string-array name="pref_entries_theme">
         <item>Dark</item>
         <item>Light</item>
@@ -51,6 +54,7 @@
         <item>dark</item>
         <item>light</item>
     </string-array>
+
     <string name="pref_default_theme">dark</string>
     <string name="pref_title_network_usage">Network usage</string>
     <string name="pref_title_mobile_data">Mobile data</string>
@@ -59,6 +63,7 @@
     <string name="pref_title_default_update_interval_change">Change alarm default time frame</string>
     <string name="pref_summary_default_update_interval_change">In minutes. Defines the default time frame for price change alarms. You can set another time frame for a particular alarm on its settings.</string>
     <string name="pref_title_check_pairs_interval">Check for new pairs</string>
+
     <string-array name="pref_entries_check_pairs_interval">
         <item>Hourly</item>
         <item>Twice a day</item>
@@ -75,9 +80,10 @@
         <item>604800000</item>
         <item>1209600000</item>
     </string-array>
+
     <string name="pref_default_check_pairs_interval">604800000</string>
-    
     <string name="pref_type_title">Alarm type</string>
+
     <string-array name="pref_type_entries">
         <item>Price hit</item>
         <item>Price change</item>
@@ -86,8 +92,10 @@
         <item>price_hit</item>
         <item>price_change</item>
     </string-array>
+
     <string name="pref_type_default">price_hit</string>
     <string name="pref_exchange_title">Exchange</string>
+
     <string-array name="pref_exchange_entries">
         <item>796 Exchange</item>
         <item>Allcoin</item>
@@ -106,7 +114,7 @@
         <item>BTC-E</item>
         <item>BTER</item>
         <item>BullionVault</item>
-        <item>CampBX</item>        
+        <item>CampBX</item>
         <item>Cavirtex</item>
         <item>CEX.IO</item>
         <item>CHBTC</item>
@@ -170,6 +178,7 @@
         <item>mobi.boilr.libdynticker.exchanges.PoloniexExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.VoSExchange</item>
     </string-array>
+
     <string name="pref_exchange_default">mobi.boilr.libdynticker.allcoin.E796Exchange</string>
     <string name="pref_pair_title">Pair</string>
     <string name="action_send_now">Save</string>
@@ -187,13 +196,11 @@
     <string name="pref_title_last_value">Last value</string>
     <string name="pref_summary_update_interval_hit">In seconds. Defines how often the hit alarm gets data from the exchange.</string>
     <string name="pref_summary_update_interval_change">In minutes. Defines the time frame for the price change alarm.</string>
-    
     <string name="boilr_alarm">Boilr Alarm</string>
     <string name="turn_off">Turn off</string>
     <string name="keep_monitoring">Keep monitoring</string>
     <string name="no_internet">Boilr has no internet</string>
     <string name="no_updates">Your alarms cannot be updated.</string>
-    
     <string name="couldnt_retrieve_pairs">Could not retrieve pairs for %1$s.</string>
     <string name="couldnt_retrieve_last_value">Could not retrieve last value for %1$s with pair %2$s.</string>
     <string name="failed_create_alarm">Failed to create alarm.</string>
@@ -201,6 +208,25 @@
     <string name="check_connection">Please check your internet connection.</string>
     <string name="not_bound">%1$s not bound to StorageAndControlService.</string>
     <string name="pair_search_description">Pair Search</string>
-    
     <string name="silent">Silent</string>
+    
+
+    <string-array name="pref_entries_language">
+        <item>English</item>
+        <item>Čeština</item>
+    </string-array>
+    <string-array name="pref_values_language">
+        <item>en</item>
+        <item>cs</item>
+    </string-array>
+    <string name="pref_default_language">English</string>
+    <string name="pref_default_languange_code">en</string>
+    
+    <string name="pref_title_language">Language</string>
+    <string name="in">in</string>
+    <string name="had">had</string>
+    <string name="change">change</string>
+    <string name="during">during</string>
+    
+    
 </resources>

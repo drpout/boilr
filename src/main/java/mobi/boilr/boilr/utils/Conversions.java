@@ -1,8 +1,10 @@
 package mobi.boilr.boilr.utils;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import mobi.boilr.boilr.R;
@@ -35,7 +37,14 @@ public class Conversions {
 		return formated;
 	}
 
-	private static DecimalFormat twoPlacesFormatter = new DecimalFormat("#.##");
+	//private static DecimalFormat twoPlacesFormatter = new DecimalFormat("#.##");
+	private static DecimalFormat twoPlacesFormatter;
+	
+	static {
+		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ENGLISH);
+		twoPlacesFormatter = (DecimalFormat)nf;
+		twoPlacesFormatter.applyPattern("#.##");
+	}
 
 	/**
 	 * Converts a double to a String using up to 2 decimal places
@@ -50,6 +59,10 @@ public class Conversions {
 
 	private static DecimalFormat maxPlacesFormater = new DecimalFormat();
 	static {
+		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ENGLISH);
+		maxPlacesFormater = (DecimalFormat)nf;
+		//maxPlacesFormater.applyPattern("#.##");
+		
 		maxPlacesFormater.setMaximumFractionDigits(340);
 		maxPlacesFormater.setGroupingUsed(false);
 	}

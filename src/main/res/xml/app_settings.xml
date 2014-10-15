@@ -30,6 +30,12 @@
 			android:entries="@array/pref_entries_theme"
 			android:entryValues="@array/pref_values_theme"
 			android:defaultValue="@string/pref_default_theme" />
+		<ListPreference
+			android:key="pref_key_language"
+			android:title="@string/pref_title_language"
+			android:entries="@array/pref_entries_language"
+			android:entryValues="@array/pref_values_language"
+			android:defaultValue="" />
 	</PreferenceCategory>
 	<PreferenceCategory
  	    android:key="pref_key_network_usage"

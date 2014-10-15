@@ -1,10 +1,13 @@
 package mobi.boilr.boilr.views.fragments;
 
+import java.util.Locale;
+
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.SettingsActivity;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.libdynticker.core.Exchange;
@@ -28,13 +31,14 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	public static final String PREF_KEY_DEFAULT_ALERT_TYPE = "pref_key_default_alert_type";
 	public static final String PREF_KEY_DEFAULT_ALERT_SOUND = "pref_key_default_alert_sound";
 	public static final String PREF_KEY_THEME = "pref_key_theme";
+	public static final String PREF_KEY_LANGUAGE = "pref_key_language";
 	static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT = "pref_key_default_update_interval_hit";
 	static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE = "pref_key_default_update_interval_change";
 	public static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
 	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
 	public static final String PREF_KEY_MOBILE_DATA = "pref_key_mobile_data";
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,
-		PREF_KEY_CHECK_PAIRS_INTERVAL };
+		PREF_KEY_CHECK_PAIRS_INTERVAL, PREF_KEY_LANGUAGE };
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
 	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
@@ -78,6 +82,23 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		pref.setSummary(sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, "") + " s");
 		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE);
 		pref.setSummary(Conversions.buildMinToDaysSummary(sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
+		
+		String language = sharedPreferences.getString(SettingsFragment.PREF_KEY_LANGUAGE, "");
+		
+		listPref = (ListPreference) findPreference(PREF_KEY_LANGUAGE);
+		int index  = listPref.findIndexOfValue(language);
+		if( index >= 0){
+			listPref.setSummary((String) listPref.getEntries()[index]);
+		}else{
+			//Get SO language
+			language = Locale.getDefault().getLanguage();
+			index = listPref.findIndexOfValue(language);
+			if( index >= 0){
+				listPref.setSummary((String) listPref.getEntries()[index]);
+			}else{
+				listPref.setSummary(getActivity().getString(R.string.pref_default_language));
+			}
+		}
 	}
 
 	@Override
@@ -104,6 +125,22 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
 			Themer.changeTheme(listPref.getValue());
+			getActivity().setResult(SettingsActivity.RESULT_RESTART);
+		} else if(key.equals(PREF_KEY_LANGUAGE)) {
+			ListPreference listPref = (ListPreference) pref;
+			listPref.setSummary(listPref.getEntry());
+			
+			Languager.setLanguage(getActivity().getBaseContext());
+			
+			
+			Intent intent = getActivity().getIntent();
+			getActivity().overridePendingTransition(0,0);
+			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+			getActivity().finish();
+			
+			getActivity().overridePendingTransition(0,0);
+			getActivity().startActivity(intent);
+			
 			getActivity().setResult(SettingsActivity.RESULT_RESTART);
 		} else if(key.equals(PREF_KEY_CHECK_PAIRS_INTERVAL)) {
 			ListPreference listPref = (ListPreference) pref;

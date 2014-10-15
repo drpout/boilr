@@ -2,6 +2,7 @@ package mobi.boilr.boilr.activities;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.services.NotificationService;
+import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Themer;
 import android.app.Activity;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ public class NotificationActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Themer.applyTheme(this);
+		Languager.setLanguage(this);
 		alarmID = getIntent().getIntExtra("alarmID", Integer.MIN_VALUE);
 		String firingReason = getIntent().getStringExtra("firingReason");
 		boolean canKeepMonitoring = getIntent().getBooleanExtra("canKeepMonitoring", false);

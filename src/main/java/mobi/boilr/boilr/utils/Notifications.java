@@ -38,8 +38,9 @@ public final class Notifications {
 	}
 
 	public static void showLowPriorityNotification(Context context, Alarm alarm) {
+		Languager.setLanguage(context);
 		int alarmID = alarm.getId();
-		String firingReason = getFiringReason(alarm);
+		String firingReason = getFiringReason(context,alarm);
 		Notification.Builder notification = setCommonNotificationProps(context, alarmID, firingReason);
 		notification.setPriority(Notification.PRIORITY_DEFAULT);
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -50,8 +51,9 @@ public final class Notifications {
 	public static void showAlarmNotification(Context context, Alarm alarm) {
 		int alarmID = alarm.getId();
 		// Close dialogs and window shade, so this will display
+		Languager.setLanguage(context);
 		context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
-		String firingReason = getFiringReason(alarm);
+		String firingReason = getFiringReason(context, alarm);
 		Notification.Builder notification = setCommonNotificationProps(context, alarmID, firingReason);
 		notification.setPriority(Notification.PRIORITY_MAX);
 
@@ -76,6 +78,7 @@ public final class Notifications {
 	}
 
 	public static void showNoInternetNotification(Context context) {
+		Languager.setLanguage(context);
 		if(!isNoInternetNotificationActive) {
 			if(noInternetNotification == null) {
 				Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
@@ -96,19 +99,19 @@ public final class Notifications {
 		}
 	}
 
-	private static String getFiringReason(Alarm alarm) {
+	private static String getFiringReason(Context context, Alarm alarm) {
 		Pair pair = alarm.getPair();
 		if(alarm instanceof PriceHitAlarm) {
 			return pair.getCoin() + " @ " + Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) + " " + pair.getExchange() +
-					"\nin " + alarm.getExchange().getName();
+					"\n"+context.getString(R.string.in)+" " + alarm.getExchange().getName();
 		} else if(alarm instanceof PriceChangeAlarm) {
 			PriceChangeAlarm changeAlarm = (PriceChangeAlarm) alarm;
-			String reason = pair.getCoin() + "/" + pair.getExchange() + " had\n";
+			String reason = pair.getCoin() + "/" + pair.getExchange() + " "+context.getString(R.string.had)+"\n";
 			if(changeAlarm.isPercent())
 				reason += Conversions.format2DecimalPlaces(changeAlarm.getLastChange()) + "%";
 			else
 				reason += Conversions.formatMaxDecimalPlaces(changeAlarm.getLastChange()) + " " + pair.getExchange();
-			reason += " change\nin " + alarm.getExchange().getName() + "\nduring "
+			reason += " "+context.getString(R.string.change)+"\n"+context.getString(R.string.in) +" " + alarm.getExchange().getName() + "\n"+context.getString(R.string.during)+" "
 					+ Conversions.formatMilis(changeAlarm.getElapsedMilis());
 			return reason;
 		}

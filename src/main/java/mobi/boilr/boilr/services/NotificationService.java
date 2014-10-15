@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
+import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.NotificationKlaxon;
 import mobi.boilr.boilr.utils.Notifications;
@@ -76,6 +77,8 @@ public class NotificationService extends Service {
 
 	@Override
 	public void onCreate() {
+		super.onCreate();
+		Languager.setLanguage(this);
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 		bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
 		mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);

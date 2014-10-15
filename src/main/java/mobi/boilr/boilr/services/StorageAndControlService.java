@@ -14,6 +14,7 @@ import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
 import mobi.boilr.boilr.utils.ChangeAlarmParameter;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.PercentageAlarmParameter;
@@ -260,6 +261,7 @@ public class StorageAndControlService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		Languager.setLanguage(this);
 		Log.d("Creating StorageAndControlService.");
 		// Register BroadcastReceiver to track connection changes.
 		IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);

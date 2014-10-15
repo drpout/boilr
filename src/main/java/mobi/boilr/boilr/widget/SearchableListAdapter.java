@@ -30,9 +30,9 @@ import android.widget.TextView;
 
 public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchListener, OnClickListener {
 
-	protected static final String SEARCH = "Search...";
+	protected final CharSequence SEARCH;
 	protected SearchableListPreference searchableListPreference;
-	protected CharSequence search = SEARCH;
+	protected CharSequence search;
 	private TextWatcher watcher = new TextWatcher() {
 
 		@Override
@@ -68,6 +68,7 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 			SearchableListPreference searchableListPreference) {
 		super(context, list);
 		this.searchableListPreference = searchableListPreference;
+		SEARCH = search = context.getString(R.string.action_search);
 	}
 
 	@Override
