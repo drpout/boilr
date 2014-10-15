@@ -19,7 +19,6 @@
     <string name="about_concept">Concept and Design: </string>
     <string name="about_donations">Donations:</string>
     <string name="about_btc">BTC: </string>
-    <string name="about_xmr">XMR: </string>
     <string name="andre_filipe_santos"><a href="https://github.com/andrefbsantos">André Filipe Santos</a></string>
     <string name="david_ludovino"><a href="https://github.com/dllud">David Ludovino</a></string>
     <string name="ricardo_duarte"><a href="http://cargocollective.com/ricardoduarte">Ricardo Duarte</a></string>
@@ -93,8 +92,11 @@
         <item>796 Exchange</item>
         <item>Allcoin</item>
         <item>ANX</item>
+        <item>BitBay</item>
         <item>Bitcoin.de</item>
+        <item>Bitcurex</item>
         <item>Bitfinex</item>
+        <item>BitMarket.pl</item>
         <item>Bitstamp</item>
         <item>Bittrex</item>
         <item>BleuTrade</item>
@@ -108,17 +110,21 @@
         <item>Cavirtex</item>
         <item>CEX.IO</item>
         <item>CHBTC</item>
+        <item>Crypto-Trade</item>
+        <item>Cryptonit</item>
         <item>Cryptsy</item>
         <item>Coin-Swap</item>
         <item>HitBTC</item>
         <item>Huobi</item>
         <item>itBit</item>
+        <item>Justcoin</item>
         <item>Kraken</item>
         <item>LakeBTC</item>
         <item>LocalBitcoins</item>
         <item>Melotic</item>
-        <item>MintPal</item>
+        <!-- <item>MintPal</item> -->
         <item>OKCoin</item>
+        <item>Paymium</item>
         <item>Peatio</item>
         <item>Poloniex</item>
         <item>VoS</item>
@@ -127,8 +133,11 @@
         <item>mobi.boilr.libdynticker.exchanges.E796Exchange</item>
         <item>mobi.boilr.libdynticker.exchanges.AllcoinExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.ANXExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitBayExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BitcoindeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitcurexExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BitfinexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitMarketPlExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BitstampExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BittrexExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BleuTradeExchange</item>
@@ -142,22 +151,26 @@
         <item>mobi.boilr.libdynticker.exchanges.CavirtexExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CEXIOExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.ChbtcExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CryptoTradeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CryptonitExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CryptsyExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CoinswapExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.HitBTCExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.HuobiExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.ItBitExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.JustcoinExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.KrakenExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.LakeBTCExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.LocalBitcoinsExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.MeloticExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.MintPalExchange</item>
+        <!-- <item>mobi.boilr.libdynticker.exchanges.MintPalExchange</item> -->
         <item>mobi.boilr.libdynticker.exchanges.OKCoinExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.PaymiumExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.PeatioExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.PoloniexExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.VoSExchange</item>
     </string-array>
-    <string name="pref_exchange_default">mobi.boilr.libdynticker.allcoin.AllcoinExchange</string>
+    <string name="pref_exchange_default">mobi.boilr.libdynticker.allcoin.E796Exchange</string>
     <string name="pref_pair_title">Pair</string>
     <string name="action_send_now">Save</string>
     <string name="pref_title_alarm_alert_type">Alert type</string>
