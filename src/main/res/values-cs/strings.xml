@@ -42,8 +42,8 @@
     <string name="pref_default_alert_type">4</string>
     <string name="pref_title_default_alert_sound">Výchozí zvuk</string>
     <string name="pref_title_vibrate_default">Vibrovat</string>
-    <string name="pref_title_appearance">Appearance</string>
-    <string name="pref_title_theme">Vzhled</string>
+    <string name="pref_title_appearance">Vzhled</string>
+    <string name="pref_title_theme">Motiv</string>
     <string-array name="pref_entries_theme">
         <item>Tmavý</item>
         <item>Světlý</item>
