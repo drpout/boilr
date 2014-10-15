@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Boilr</string>
+    <string name="action_search">Hledat</string>
+    <string name="action_settings">Nastavení</string>
+    <string name="action_about">O aplikaci</string>
+    <string name="alarm_settings">Nastavení upozornění</string>
+    <string name="add_alarm">Přidat upozornění</string>
+    <string name="on">ZAP</string>
+    <string name="off">VYP</string>
+    <string name="boilr_settings">Boilr nastavení</string>
+    <string name="about_title">O aplikaci Boilr</string>
+    <string name="about_website_button">Webová stránka</string>
+    <string name="ok">OK</string>
+    <string name="about_license">Uvolněno pod licencí GNU GPLv3+.</string>
+    <string name="about_website">Webová stránka: </string>
+    <string name="about_version">Verze: </string>
+    <string name="about_developers">Vývojáři: </string>
+    <string name="about_concept">Koncept a design: </string>
+    <string name="about_donations">Přispěvatelé:</string>
+    <string name="about_btc">BTC: </string>
+    <string name="about_xmr">XMR: </string>
+    <string name="andre_filipe_santos"><a href="https://github.com/andrefbsantos">André Filipe Santos</a></string>
+    <string name="david_ludovino"><a href="https://github.com/dllud">David Ludovino</a></string>
+    <string name="ricardo_duarte"><a href="http://cargocollective.com/ricardoduarte">Ricardo Duarte</a></string>
+    <string name="boilr_website">http://boilr.mobi</string>
+    <string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a></string>
+    <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
+    
+    <string name="pref_title_alerts">Upozornění</string>
+    <string name="pref_title_default_alert_type">Výchozí typ</string>
+    <string-array name="pref_entries_alert_type">
+        <item>Alarm</item>
+        <item>Upozornění</item>
+        <item>Vyzvánění</item>
+    </string-array>
+    <string-array name="pref_values_alert_type">
+        <item>4</item>
+        <item>2</item>
+        <item>1</item>
+    </string-array>
+    <string name="pref_default_alert_type">4</string>
+    <string name="pref_title_default_alert_sound">Výchozí zvuk</string>
+    <string name="pref_title_vibrate_default">Vibrovat</string>
+    <string name="pref_title_appearance">Vzhled</string>
+    <string name="pref_title_theme">Motiv</string>
+    <string-array name="pref_entries_theme">
+        <item>Tmavý</item>
+        <item>Světlý</item>
+    </string-array>
+    <string-array name="pref_values_theme">
+        <item>tmavý</item>
+        <item>světlý</item>
+    </string-array>
+    <string name="pref_default_theme">tmavý</string>
+    <string name="pref_title_network_usage">Využití sítě</string>
+    <string name="pref_title_mobile_data">Mobilní připojení</string>
+    <string name="pref_title_default_update_interval_hit">Výchozí interval aktualizace pro upozornění</string>
+    <string name="pref_summary_default_update_interval_hit">V sekundách. Určuje jak často jsou získávána data pro upozornění z burzy. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>
+    <string name="pref_title_default_update_interval_change">Změnit výchozí časový interval upozornění</string>
+    <string name="pref_summary_default_update_interval_change">V minutách. Určuje časový interval pro upozornění na změnu ceny. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>
+    <string name="pref_title_check_pairs_interval">Hledat nové páry</string>
+    <string-array name="pref_entries_check_pairs_interval">
+        <item>Každou hodinu</item>
+        <item>Dvakrát denně</item>
+        <item>Jednou denně</item>
+        <item>Každý druhý den</item>
+        <item>Jednou týdně</item>
+        <item>Každé dva týdny</item>
+    </string-array>
+    <string-array name="pref_values_check_pairs_interval">
+        <item>3600000</item>
+        <item>43200000</item>
+        <item>86400000</item> <!-- 24 hours * 60 minutes * 60 seconds * 1000 milis -->
+        <item>172800000</item>
+        <item>604800000</item>
+        <item>1209600000</item>
+    </string-array>
+    <string name="pref_default_check_pairs_interval">604800000</string>
+    
+    <string name="pref_type_title">Typ upozornění</string>
+    <string-array name="pref_type_entries">
+        <item>Dosažení ceny</item>
+        <item>Změna ceny</item>
+    </string-array>
+    <string-array name="pref_type_entries_values">
+        <item>price_hit</item>
+        <item>price_change</item>
+    </string-array>
+    <string name="pref_type_default">price_hit</string>
+    <string name="pref_exchange_title">Burza</string>
+    <string-array name="pref_exchange_entries">
+        <item>796 Exchange</item>
+        <item>Allcoin</item>
+        <item>ANX</item>
+        <item>Bitcoin.de</item>
+        <item>Bitfinex</item>
+        <item>Bitstamp</item>
+        <item>Bittrex</item>
+        <item>BleuTrade</item>
+        <item>BTC38</item>
+        <item>BTC China</item>
+        <item>BTC Markets</item>
+        <item>BTC-E</item>
+        <item>BTER</item>
+        <item>BullionVault</item>
+        <item>CampBX</item>        
+        <item>Cavirtex</item>
+        <item>CEX.IO</item>
+        <item>CHBTC</item>
+        <item>Cryptsy</item>
+        <item>Coin-Swap</item>
+        <item>HitBTC</item>
+        <item>Huobi</item>
+        <item>itBit</item>
+        <item>Kraken</item>
+        <item>LakeBTC</item>
+        <item>LocalBitcoins</item>
+        <item>Melotic</item>
+        <item>MintPal</item>
+        <item>OKCoin</item>
+        <item>Peatio</item>
+        <item>Poloniex</item>
+        <item>VoS</item>
+    </string-array>
+    <string-array name="pref_exchange_entries_values">
+        <item>mobi.boilr.libdynticker.exchanges.E796Exchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.AllcoinExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.ANXExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitcoindeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitfinexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitstampExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BittrexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BleuTradeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTC38Exchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTCChinaExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTCMarketsExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTCEExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTERExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BullionVaultExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CampBXExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CavirtexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CEXIOExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.ChbtcExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CryptsyExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CoinswapExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.HitBTCExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.HuobiExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.ItBitExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.KrakenExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.LakeBTCExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.LocalBitcoinsExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.MeloticExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.MintPalExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.OKCoinExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.PeatioExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.PoloniexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.VoSExchange</item>
+    </string-array>
+    <string name="pref_exchange_default">mobi.boilr.libdynticker.allcoin.AllcoinExchange</string>
+    <string name="pref_pair_title">Pár</string>
+    <string name="action_send_now">Uložit</string>
+    <string name="pref_title_alarm_alert_type">Typ upozornění</string>
+    <string name="pref_title_alarm_alert_sound">Zvuk</string>
+    <string name="pref_title_alarm_vibrate">Vibrovat</string>
+    <string name="pref_title_generic">Základní</string>
+    <string name="pref_title_specific">Specifické</string>
+    <string name="pref_title_upper_limit">Horní limit</string>
+    <string name="pref_title_lower_limit">Spodní limit</string>
+    <string name="pref_title_change_in_percentage">Změna v procentech</string>
+    <string name="pref_title_change_value">Změna</string>
+    <string name="pref_title_update_interval">Interval aktualizace</string>
+    <string name="pref_title_time_frame">Časové období</string>
+    <string name="pref_title_last_value">Poslední hodnota</string>
+    <string name="pref_summary_update_interval_hit">V sekundách. Určuje jak často jsou získávána data pro upozornění z burzy.</string>
+    <string name="pref_summary_update_interval_change">V minutách. Určuje časový interval pro upozornění na změnu ceny.</string>
+    
+    <string name="boilr_alarm">Upozornění aplikace Boilr</string>
+    <string name="turn_off">Vypnout</string>
+    <string name="keep_monitoring">Pokračovat ve sledování</string>
+    <string name="no_internet">Boilr není připojen</string>
+    <string name="no_updates">Vaše upozornění nemohou být aktualizována.</string>
+    
+    <string name="couldnt_retrieve_pairs">Nelze získat páry pro %1$s.</string>
+    <string name="couldnt_retrieve_last_value">Nelze získat poslední hodnotu pro %1$s pro pár %2$s.</string>
+    <string name="failed_create_alarm">Chyba při vytváření upozornění.</string>
+    <string name="cannot_set_limit">Nelze nastavit limit.</string>
+    <string name="check_connection">Ověřte prosím své internetové připojení.</string>
+    <string name="not_bound">%1$s nepřipojen k službě StorageAndControlService.</string>
+    <string name="pair_search_description">Hledat pár</string>
+    
+    <string name="silent">Tichý</string>
+</resources>
