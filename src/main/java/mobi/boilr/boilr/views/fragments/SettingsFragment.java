@@ -9,6 +9,7 @@ import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.libdynticker.core.Exchange;
 import android.content.ComponentName;
@@ -66,7 +67,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		addPreferencesFromResource(R.xml.app_settings);
 		// Set summaries to be the current value for the selected preference
 		ListPreference listPref;
-		for(String key : listPrefs) {
+		for (String key : listPrefs) {
 			listPref = (ListPreference) findPreference(key);
 			listPref.setSummary(listPref.getEntry());
 		}
@@ -82,20 +83,20 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		pref.setSummary(sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, "") + " s");
 		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE);
 		pref.setSummary(Conversions.buildMinToDaysSummary(sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
-		
+
 		String language = sharedPreferences.getString(SettingsFragment.PREF_KEY_LANGUAGE, "");
-		
+
 		listPref = (ListPreference) findPreference(PREF_KEY_LANGUAGE);
-		int index  = listPref.findIndexOfValue(language);
-		if( index >= 0){
-			listPref.setSummary((String) listPref.getEntries()[index]);
-		}else{
-			//Get SO language
+		int index = listPref.findIndexOfValue(language);
+		if(index >= 0) {
+			listPref.setSummary(listPref.getEntries()[index]);
+		} else {
+			// Get SO language
 			language = Locale.getDefault().getLanguage();
 			index = listPref.findIndexOfValue(language);
-			if( index >= 0){
-				listPref.setSummary((String) listPref.getEntries()[index]);
-			}else{
+			if(index >= 0) {
+				listPref.setSummary(listPref.getEntries()[index]);
+			} else {
 				listPref.setSummary(getActivity().getString(R.string.pref_default_language));
 			}
 		}
@@ -129,25 +130,19 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		} else if(key.equals(PREF_KEY_LANGUAGE)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
-			
 			Languager.setLanguage(getActivity().getBaseContext());
-			
-			
+			getActivity().setResult(SettingsActivity.RESULT_RESTART);
 			Intent intent = getActivity().getIntent();
-			getActivity().overridePendingTransition(0,0);
 			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 			getActivity().finish();
-			
-			getActivity().overridePendingTransition(0,0);
 			getActivity().startActivity(intent);
-			
-			getActivity().setResult(SettingsActivity.RESULT_RESTART);
+			Notifications.rebuildNoInternetNotification();
 		} else if(key.equals(PREF_KEY_CHECK_PAIRS_INTERVAL)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
 			if(mBound) {
 				long pairInterval = Long.parseLong(sharedPrefs.getString(PREF_KEY_CHECK_PAIRS_INTERVAL, ""));
-				for(Exchange e : mStorageAndControlService.getLoadedExchanges()) {
+				for (Exchange e : mStorageAndControlService.getLoadedExchanges()) {
 					e.setExperiedPeriod(pairInterval);
 				}
 			} else {

@@ -25,6 +25,7 @@ public class NotificationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		Themer.applyTheme(this);
 		Languager.setLanguage(this);
+		setTitle(getResources().getString(R.string.boilr_alarm));
 		alarmID = getIntent().getIntExtra("alarmID", Integer.MIN_VALUE);
 		String firingReason = getIntent().getStringExtra("firingReason");
 		boolean canKeepMonitoring = getIntent().getBooleanExtra("canKeepMonitoring", false);
