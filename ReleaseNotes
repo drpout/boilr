@@ -1,5 +1,5 @@
 Version 0.3.0
-+ Added exchanges: BitBay, Bitcurex, BitMarket.pl, Crypto-Trade, Cryptonit, Justcoin and Paymium.
++ Added exchanges: BitBay, Bitcurex, BitMarket.pl, CCEDK, Crypto-Trade, Cryptonit, Justcoin and Paymium.
 * Price Change alarms now retry to get last value after failing due to unavailable internet connection.
 - Removed Mintpal exchange (currently offline).
 

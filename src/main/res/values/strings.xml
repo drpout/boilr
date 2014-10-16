@@ -116,6 +116,7 @@
         <item>BullionVault</item>
         <item>CampBX</item>
         <item>Cavirtex</item>
+        <item>CCEDK</item>
         <item>CEX.IO</item>
         <item>CHBTC</item>
         <item>Crypto-Trade</item>
@@ -157,6 +158,7 @@
         <item>mobi.boilr.libdynticker.exchanges.BullionVaultExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CampBXExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CavirtexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CCEDKExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CEXIOExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.ChbtcExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CryptoTradeExchange</item>

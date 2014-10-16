@@ -37,12 +37,10 @@ public class Conversions {
 		return formated;
 	}
 
-	//private static DecimalFormat twoPlacesFormatter = new DecimalFormat("#.##");
 	private static DecimalFormat twoPlacesFormatter;
-	
 	static {
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ENGLISH);
-		twoPlacesFormatter = (DecimalFormat)nf;
+		twoPlacesFormatter = (DecimalFormat) nf;
 		twoPlacesFormatter.applyPattern("#.##");
 	}
 
@@ -57,12 +55,10 @@ public class Conversions {
 		return twoPlacesFormatter.format(d);
 	}
 
-	private static DecimalFormat maxPlacesFormater = new DecimalFormat();
+	private static DecimalFormat maxPlacesFormater;
 	static {
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ENGLISH);
-		maxPlacesFormater = (DecimalFormat)nf;
-		//maxPlacesFormater.applyPattern("#.##");
-		
+		maxPlacesFormater = (DecimalFormat) nf;
 		maxPlacesFormater.setMaximumFractionDigits(340);
 		maxPlacesFormater.setGroupingUsed(false);
 	}
@@ -130,11 +126,11 @@ public class Conversions {
 		double tval = value;
 		int order = 0;
 		if(tval != 0.0 && tval != Double.POSITIVE_INFINITY && tval != Double.NEGATIVE_INFINITY && tval != Double.NaN) {
-			while (tval > 1000.0) {
+			while(tval >= 1000.0) {
 				tval /= 1000.0;
 				order += 3;
 			}
-			while (tval < 1.0) {
+			while(tval < 1.0) {
 				tval *= 1000.0;
 				order -= 3;
 			}

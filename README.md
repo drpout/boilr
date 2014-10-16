@@ -40,8 +40,12 @@ All Boilr code is licensed under [GNU GPL v3](/LICENSE) or later. Copyright belo
 
 The Boilr icon and artworks were created by [Ricardo Duarte](http://cargocollective.com/ricardoduarte) and are dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE).
 
+Czech translation by [Jaroslav Lichtblau](https://github.com/svetlemodry).
+
 ## Donations
 Donations and tips are welcomed.
 
-* BTC: [1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx](bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx)
+* BTC: 1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx
 * XMR: 43KcTwXw5D43YRE8MSG4D7X3S2kjU6ehBABucyKAVNYnKbNxpGWZ8zGbEhCq79N4ZGDtefU5w4AGoeR6eNB5yMbEPhAw3FT
+* DOGE: DSSJyAtJy9xokkbfTUQ5NQov8M1WQ8FaYg
+* NXT: NXT-PMQL-5RXJ-QE46-2L4SQ
