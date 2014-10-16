@@ -1,5 +1,6 @@
 package mobi.boilr.boilr.activities;
 
+import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
@@ -16,6 +17,7 @@ public class SettingsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		Themer.applyTheme(this);
 		Languager.setLanguage(this);
+		setTitle(getResources().getString(R.string.boilr_settings));
 		// Display the fragment as the main content.
 		settingsFragment = new SettingsFragment();
 		getFragmentManager().beginTransaction().replace(android.R.id.content, settingsFragment).commit();

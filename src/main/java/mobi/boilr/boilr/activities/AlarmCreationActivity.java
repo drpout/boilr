@@ -15,7 +15,8 @@ public class AlarmCreationActivity extends Activity {
 	protected void onCreate(final Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Themer.applyTheme(this);
-		Languager.setLanguage(this.getBaseContext());
+		Languager.setLanguage(this);
+		setTitle(getResources().getString(R.string.add_alarm));
 		if(savedInstanceState == null) {
 			getFragmentManager().beginTransaction().replace(android.R.id.content, new PriceHitAlarmCreationFragment()).commit();
 		}

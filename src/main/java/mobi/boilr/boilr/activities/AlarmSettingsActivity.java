@@ -1,5 +1,6 @@
 package mobi.boilr.boilr.activities;
 
+import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.views.fragments.PriceChangeAlarmSettingsFragment;
@@ -16,7 +17,8 @@ public class AlarmSettingsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Themer.applyTheme(this);
-		Languager.setLanguage(this.getBaseContext());
+		Languager.setLanguage(this);
+		setTitle(getResources().getString(R.string.alarm_settings));
 		if(savedInstanceState == null) {
 			Bundle extras = getIntent().getExtras();
 			Bundle args = new Bundle();
