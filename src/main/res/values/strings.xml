@@ -100,6 +100,7 @@
         <item>796 Exchange</item>
         <item>Allcoin</item>
         <item>ANX</item>
+        <item>Atomic Trade</item>
         <item>BitBay</item>
         <item>Bitcoin.de</item>
         <item>Bitcurex</item>
@@ -116,13 +117,16 @@
         <item>BullionVault</item>
         <item>CampBX</item>
         <item>Cavirtex</item>
+        <item>C-CEX</item>
         <item>CCEDK</item>
         <item>CEX.IO</item>
         <item>CHBTC</item>
         <item>Crypto-Trade</item>
         <item>Cryptonit</item>
         <item>Cryptsy</item>
+        <item>CoinMkt</item>
         <item>Coin-Swap</item>
+        <item>Coins-E</item>
         <item>HitBTC</item>
         <item>Huobi</item>
         <item>itBit</item>
@@ -136,12 +140,14 @@
         <item>Paymium</item>
         <item>Peatio</item>
         <item>Poloniex</item>
+        <item>Vircurex</item>
         <item>VoS</item>
     </string-array>
     <string-array name="pref_exchange_entries_values">
         <item>mobi.boilr.libdynticker.exchanges.E796Exchange</item>
         <item>mobi.boilr.libdynticker.exchanges.AllcoinExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.ANXExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.AtomicTradeExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BitBayExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BitcoindeExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BitcurexExchange</item>
@@ -158,13 +164,16 @@
         <item>mobi.boilr.libdynticker.exchanges.BullionVaultExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CampBXExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CavirtexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CCEXExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CCEDKExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CEXIOExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.ChbtcExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CryptoTradeExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CryptonitExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CryptsyExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CoinMktExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CoinswapExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CoinsEExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.HitBTCExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.HuobiExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.ItBitExchange</item>
@@ -178,6 +187,7 @@
         <item>mobi.boilr.libdynticker.exchanges.PaymiumExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.PeatioExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.PoloniexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.VircurexExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.VoSExchange</item>
     </string-array>
 
