@@ -37,7 +37,6 @@ public final class Notifications {
 	}
 
 	public static void showLowPriorityNotification(Context context, Alarm alarm) {
-		Languager.setLanguage(context);
 		int alarmID = alarm.getId();
 		String firingReason = getFiringReason(context, alarm);
 		Notification.Builder notification = setCommonNotificationProps(context, alarmID, firingReason);
@@ -50,7 +49,6 @@ public final class Notifications {
 	public static void showAlarmNotification(Context context, Alarm alarm) {
 		int alarmID = alarm.getId();
 		// Close dialogs and window shade, so this will display
-		Languager.setLanguage(context);
 		context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
 		String firingReason = getFiringReason(context, alarm);
 		Notification.Builder notification = setCommonNotificationProps(context, alarmID, firingReason);
@@ -77,7 +75,6 @@ public final class Notifications {
 	}
 
 	public static void showNoInternetNotification(Context context) {
-		Languager.setLanguage(context);
 		if(noInternetNotification == null) {
 			Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
 			changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
