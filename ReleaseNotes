@@ -1,3 +1,7 @@
+Version 0.4.0
++ Added exchanges: BTC100 and BtcTrade.
++ Added OKCoin futures.
+
 Version 0.3.0
 + Added exchanges: Atomic Trade, BitBay, Bitcurex, BitMarket.pl, C-CEX, CCEDK, CoinMkt, Coins-E, Crypto-Trade, Cryptonit, Justcoin, Paymium and Vircurex.
 + Added Czech translation.

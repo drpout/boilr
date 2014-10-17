@@ -127,6 +127,9 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 				vibrate = args.getBoolean("vibrate");
 				defaultDef = args.getBoolean("defaultVibrateDef");
 			}
+			else {
+				exchangeIndex = exchangeListPref.findIndexOfValue(enclosingActivity.getString(R.string.pref_exchange_default));
+			}
 			alarmAlertTypePref.setValue(alertType);
 			if(alertType == null) {
 				alertType = sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE, "");

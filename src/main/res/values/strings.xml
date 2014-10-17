@@ -97,6 +97,7 @@
     <string name="pref_exchange_title">Exchange</string>
 
     <string-array name="pref_exchange_entries">
+<!--         <item>1Bse</item> -->
         <item>796 Exchange</item>
         <item>Allcoin</item>
         <item>ANX</item>
@@ -109,10 +110,12 @@
         <item>Bitstamp</item>
         <item>Bittrex</item>
         <item>BleuTrade</item>
+        <item>BTC100</item>
         <item>BTC38</item>
         <item>BTC China</item>
         <item>BTC Markets</item>
         <item>BTC-E</item>
+        <item>BtcTrade</item>
         <item>BTER</item>
         <item>BullionVault</item>
         <item>CampBX</item>
@@ -144,6 +147,7 @@
         <item>VoS</item>
     </string-array>
     <string-array name="pref_exchange_entries_values">
+<!--         <item>mobi.boilr.libdynticker.exchanges.OneBseExchange</item> -->
         <item>mobi.boilr.libdynticker.exchanges.E796Exchange</item>
         <item>mobi.boilr.libdynticker.exchanges.AllcoinExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.ANXExchange</item>
@@ -156,10 +160,12 @@
         <item>mobi.boilr.libdynticker.exchanges.BitstampExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BittrexExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BleuTradeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTC100Exchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BTC38Exchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BTCChinaExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BTCMarketsExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BTCEExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BtcTradeExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BTERExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.BullionVaultExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.CampBXExchange</item>
@@ -191,7 +197,7 @@
         <item>mobi.boilr.libdynticker.exchanges.VoSExchange</item>
     </string-array>
 
-    <string name="pref_exchange_default">mobi.boilr.libdynticker.allcoin.E796Exchange</string>
+    <string name="pref_exchange_default">mobi.boilr.libdynticker.exchanges.OKCoinExchange</string>
     <string name="pref_pair_title">Pair</string>
     <string name="action_send_now">Save</string>
     <string name="pref_title_alarm_alert_type">Alert type</string>
