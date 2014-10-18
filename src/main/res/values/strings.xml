@@ -197,7 +197,7 @@
         <item>mobi.boilr.libdynticker.exchanges.VoSExchange</item>
     </string-array>
 
-    <string name="pref_exchange_default">mobi.boilr.libdynticker.exchanges.OKCoinExchange</string>
+    <string name="pref_exchange_default">mobi.boilr.libdynticker.exchanges.E796Exchange</string>
     <string name="pref_pair_title">Pair</string>
     <string name="action_send_now">Save</string>
     <string name="pref_title_alarm_alert_type">Alert type</string>
