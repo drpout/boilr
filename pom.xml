@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mobi.boilr.boilr</groupId>
 	<artifactId>boilr</artifactId>
-	<version>0.4.1</version>
+	<version>0.5.0</version>
 	<packaging>apk</packaging>
 	<description>Android application which triggers an alarm when price of a cryptocurrency or bullion changes or reaches target value on a given exchange.</description>
 	<inceptionYear>2014</inceptionYear>
@@ -24,7 +24,7 @@
 		<libdynticker.version>0.4.0</libdynticker.version>
 		<libpricealarm.version>0.1.0</libpricealarm.version>
 		<release.description>
-			\+ ???
+			\+ Added Portuguese translation.
 		</release.description>
 	</properties>
 

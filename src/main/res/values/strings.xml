@@ -203,7 +203,7 @@
     <string name="pref_title_alarm_alert_type">Alert type</string>
     <string name="pref_title_alarm_alert_sound">Sound</string>
     <string name="pref_title_alarm_vibrate">Vibrate</string>
-    <string name="pref_title_generic">Generic</string>
+    <string name="pref_title_generic">General</string>
     <string name="pref_title_specific">Specific</string>
     <string name="pref_title_upper_limit">Upper limit</string>
     <string name="pref_title_lower_limit">Lower limit</string>
@@ -225,17 +225,20 @@
     <string name="cannot_set_limit">Cannot set limit.</string>
     <string name="check_connection">Please check your internet connection.</string>
     <string name="not_bound">%1$s not bound to StorageAndControlService.</string>
-    <string name="pair_search_description">Pair Search</string>
+    <string name="pair_search_description">Pair search</string>
     <string name="silent">Silent</string>
+    <string name="unknown_ringtone">Unknown ringtone</string>
     
 
     <string-array name="pref_entries_language">
         <item>English</item>
         <item>Čeština</item>
+        <item>Português</item>
     </string-array>
     <string-array name="pref_values_language">
         <item>en</item>
         <item>cs</item>
+        <item>pt</item>
     </string-array>
     <string name="pref_default_language">English</string>
     <string name="pref_default_languange_code">en</string>
@@ -245,6 +248,8 @@
     <string name="had">had</string>
     <string name="change">change</string>
     <string name="during">during</string>
-    
-    
+    <string name="minutes_short">min</string>
+    <string name="day">day</string>
+    <string name="days">days</string>
+    <string name="at">at</string>
 </resources>

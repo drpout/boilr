@@ -90,10 +90,15 @@
     <string name="not_bound">%1$s nepřipojen k službě StorageAndControlService.</string>
     <string name="pair_search_description">Hledat pár</string>
     <string name="silent">Tichý</string>
+    <string name="unknown_ringtone">Neznámý vyzvánění</string>
+
     <string name="pref_title_language">Jazyk</string>
     <string name="in">v</string>
     <string name="had">měl</string>
     <string name="change">změna</string>
     <string name="during">během</string>
-
+	<string name="minutes_short">min</string>
+	<string name="day">den</string>
+    <string name="days">dny</string>
+    <string name="at">na</string>
 </resources>

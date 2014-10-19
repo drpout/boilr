@@ -8,7 +8,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import mobi.boilr.boilr.R;
-import android.app.Activity;
 import android.content.Context;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
@@ -79,25 +78,27 @@ public class Conversions {
 
 	private static final double MINUTES_IN_DAY = 1440; // 60*24
 
-	public static String buildMinToDaysSummary(String minutesString) {
+	public static String buildMinToDaysSummary(String minutesString, Context context) {
 		int min = Integer.parseInt(minutesString);
 		double days = min / MINUTES_IN_DAY;
-		String result = minutesString + " min (" + format2DecimalPlaces(days);
+		String result = minutesString + " " + context.getString(R.string.minutes_short)
+				+ " (" + format2DecimalPlaces(days) + " ";
 		if(days == 1.0) {
-			result += " day)";
+			result += context.getString(R.string.day);
 		} else {
-			result += " days)";
+			result += context.getString(R.string.days);
 		}
+		result += ")";
 		return result;
 	}
 
-	public static String ringtoneUriToName(String stringUri, Activity activity) {
+	public static String ringtoneUriToName(String stringUri, Context context) {
 		if(stringUri.equals(""))
-			return activity.getString(R.string.silent);
+			return context.getString(R.string.silent);
 		Uri uri = Uri.parse(stringUri);
-		Context context = activity.getApplicationContext();
+		// Context context = activity.getApplicationContext();
 		Ringtone ringtone = RingtoneManager.getRingtone(context, uri);
-		return ringtone != null ? ringtone.getTitle(context) : "Unknown ringtone";
+		return ringtone != null ? ringtone.getTitle(context) : context.getString(R.string.unknown_ringtone);
 	}
 
 	private static final Map<Integer, String> prefixes;
@@ -126,11 +127,11 @@ public class Conversions {
 		double tval = value;
 		int order = 0;
 		if(tval != 0.0 && tval != Double.POSITIVE_INFINITY && tval != Double.NEGATIVE_INFINITY && tval != Double.NaN) {
-			while(tval >= 1000.0) {
+			while (tval >= 1000.0) {
 				tval /= 1000.0;
 				order += 3;
 			}
-			while(tval < 1.0) {
+			while (tval < 1.0) {
 				tval *= 1000.0;
 				order -= 3;
 			}

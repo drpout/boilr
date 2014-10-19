@@ -4,15 +4,15 @@
     <string name="action_search">Procurar</string>
     <string name="action_settings">Definições</string>
     <string name="action_about">Sobre</string>
-    <string name="alarm_settings">Definições de alarme</string>
+    <string name="alarm_settings">Definições do alarme</string>
     <string name="add_alarm">Adicionar alarme</string>
     <string name="on">ON</string>
     <string name="off">OFF</string>
-    <string name="boilr_settings">Definições Boilr</string>
-    <string name="about_title">Sobre Boilr</string>
+    <string name="boilr_settings">Definições do Boilr</string>
+    <string name="about_title">Sobre o Boilr</string>
     <string name="about_website_button">Website</string>
     <string name="ok">OK</string>
-    <string name="about_license">Released under GNU GPLv3+ license.</string>
+    <string name="about_license">Distribuído sob a licensa GNU GPLv3+.</string>
     <string name="about_website">Website: </string>
     <string name="about_version">Versão: </string>
     <string name="about_developers">Programadores: </string>
@@ -37,21 +37,21 @@
         <item>Claro</item>
     </string-array>
 
-    <string name="pref_title_network_usage">Network usage</string>
-    <string name="pref_title_mobile_data">Dados moveís</string>
-    <string name="pref_title_default_update_interval_hit">Hit alarm default update interval</string>
-    <string name="pref_summary_default_update_interval_hit">In seconds. Defines how often a price hit alarm gets data from the exchange. You can set another interval for a particular alarm on its settings.</string>
-    <string name="pref_title_default_update_interval_change">Change alarm default time frame</string>
-    <string name="pref_summary_default_update_interval_change">In minutes. Defines the default time frame for price change alarms. You can set another time frame for a particular alarm on its settings.</string>
+    <string name="pref_title_network_usage">Utilização de dados</string>
+    <string name="pref_title_mobile_data">Dados móveis</string>
+    <string name="pref_title_default_update_interval_hit">Intervalo de atualização por omissão para alarme de limite</string>
+    <string name="pref_summary_default_update_interval_hit">Em segundos. Define a frequência por omissão com que um alarme de preço limite obtém dados da bolsa. Pode definir outro intervalo para um alarme em particular nas suas definições.</string>
+    <string name="pref_title_default_update_interval_change">Prazo por omissão para alarme de variação</string>
+    <string name="pref_summary_default_update_interval_change">Em minutos. Define o prazo por omissão para os alarmes de variação de preço. Pode definir outro prazo para um alarme em particular nas suas definições.</string>
     <string name="pref_title_check_pairs_interval">Procurar novos pares</string>
 
     <string-array name="pref_entries_check_pairs_interval">
-        <item>Hora a hora</item>
+        <item>De hora a hora</item>
         <item>Duas vezes por dia</item>
         <item>Diáriamente</item>
         <item>De dois em dois dias</item>
-        <item>Semanal</item>
-        <item>Quinzenal</item>
+        <item>Semanalmente</item>
+        <item>Quinzenalmente</item>
     </string-array>
 
     <string name="pref_type_title">Tipo de alarme</string>
@@ -61,52 +61,45 @@
         <item>Variação de preço</item>
     </string-array>
 
-    <string name="pref_exchange_title">Exchange</string>
+    <string name="pref_exchange_title">Bolsa</string>
     <string name="pref_pair_title">Par</string>
     <string name="action_send_now">Salvar</string>
-    <string name="pref_title_alarm_alert_type">Tipo de Alerta</string>
+    <string name="pref_title_alarm_alert_type">Tipo de alerta</string>
     <string name="pref_title_alarm_alert_sound">Som</string>
     <string name="pref_title_alarm_vibrate">Vibrar</string>
-    <string name="pref_title_generic">Genérico</string>
+    <string name="pref_title_generic">Geral</string>
     <string name="pref_title_specific">Específico</string>
     <string name="pref_title_upper_limit">Limite superior</string>
     <string name="pref_title_lower_limit">Limite inferior</string>
     <string name="pref_title_change_in_percentage">Variação percentual</string>
     <string name="pref_title_change_value">Variação</string>
-    <string name="pref_title_update_interval">Intervalo de actualização</string>
-    <string name="pref_title_time_frame">Time frame</string>
+    <string name="pref_title_update_interval">Intervalo de atualização</string>
+    <string name="pref_title_time_frame">Prazo</string>
     <string name="pref_title_last_value">Último valor</string>
-    <string name="pref_summary_update_interval_hit">In seconds. Defines how often the hit alarm gets data from the exchange.</string>
-    <string name="pref_summary_update_interval_change">In minutes. Defines the time frame for the price change alarm.</string>
+    <string name="pref_summary_update_interval_hit">Em segundos. Define a frequência com que o alarme de preço limite obtém dados da bolsa.</string>
+    <string name="pref_summary_update_interval_change">Em minutos. Define o prazo para o alarme de variação de preço.</string>
     <string name="boilr_alarm">Alarme Boilr</string>
     <string name="turn_off">Desligar</string>
     <string name="keep_monitoring">Continuar a monitorizar</string>
     <string name="no_internet">Boilr não tem internet</string>
-    <string name="no_updates">Your alarms cannot be updated.</string>
-    <string name="couldnt_retrieve_pairs">Could not retrieve pairs for %1$s.</string>
-    <string name="couldnt_retrieve_last_value">Could not retrieve last value for %1$s with pair %2$s.</string>
-    <string name="failed_create_alarm">Failed to create alarm.</string>
-    <string name="cannot_set_limit">Cannot set limit.</string>
-    <string name="check_connection">Please check your internet connection.</string>
-    <string name="not_bound">%1$s not bound to StorageAndControlService.</string>
-    <string name="pair_search_description">Pair Search</string>
+    <string name="no_updates">Os alarmes não podem ser atualizados.</string>
+    <string name="couldnt_retrieve_pairs">Impossível obter pares para %1$s.</string>
+    <string name="couldnt_retrieve_last_value">Impossível obter o último preço para %1$s com o par %2$s.</string>
+    <string name="failed_create_alarm">Falha ao criar alarme.</string>
+    <string name="cannot_set_limit">Impossível definir o limite.</string>
+    <string name="check_connection">Verifique a sua ligação à internet.</string>
+    <string name="not_bound">%1$s não está ligado ao StorageAndControlService.</string>
+    <string name="pair_search_description">Pesquisa de pares</string>
     <string name="silent">Silencioso</string>
+    <string name="unknown_ringtone">Toque desconhecido</string>
 
-    <string-array name="pref_entries_language">
-        <item>English</item>
-        <item>Čeština</item>
-    </string-array>
-    <string-array name="pref_values_language">
-        <item>en</item>
-        <item>cs</item>
-    </string-array>
-
-    <string name="pref_default_language">English</string>
-    <string name="pref_default_languange_code">en</string>
     <string name="pref_title_language">Idioma</string>
-    <string name="in">tem</string>
+    <string name="in">em</string>
     <string name="had">tinha</string>
     <string name="change">variou</string>
     <string name="during">durante</string>
-
+	<string name="minutes_short">min</string>
+	<string name="day">dia</string>
+    <string name="days">dias</string>
+    <string name="at">a</string>
 </resources>

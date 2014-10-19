@@ -12,6 +12,7 @@ import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.libdynticker.core.Exchange;
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +29,7 @@ import android.preference.PreferenceFragment;
 import android.preference.RingtonePreference;
 
 public class SettingsFragment extends PreferenceFragment implements
-OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
+		OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	public static final String PREF_KEY_DEFAULT_ALERT_TYPE = "pref_key_default_alert_type";
 	public static final String PREF_KEY_DEFAULT_ALERT_SOUND = "pref_key_default_alert_sound";
 	public static final String PREF_KEY_THEME = "pref_key_theme";
@@ -39,7 +40,8 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
 	public static final String PREF_KEY_MOBILE_DATA = "pref_key_mobile_data";
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,
-		PREF_KEY_CHECK_PAIRS_INTERVAL, PREF_KEY_LANGUAGE };
+			PREF_KEY_CHECK_PAIRS_INTERVAL, PREF_KEY_LANGUAGE };
+	private Activity enclosingActivity;
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
 	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
@@ -60,8 +62,9 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Intent serviceIntent = new Intent(getActivity(), StorageAndControlService.class);
-		getActivity().bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
+		enclosingActivity = getActivity();
+		Intent serviceIntent = new Intent(enclosingActivity, StorageAndControlService.class);
+		enclosingActivity.bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
 
 		// Load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.app_settings);
@@ -76,13 +79,15 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 		RingtonePreference alertSoundPref = (RingtonePreference) findPreference(PREF_KEY_DEFAULT_ALERT_SOUND);
 		ListPreference alertTypePref = (ListPreference) findPreference(PREF_KEY_DEFAULT_ALERT_TYPE);
 		alertSoundPref.setRingtoneType(Integer.parseInt(alertTypePref.getValue()));
-		alertSoundPref.setSummary(Conversions.ringtoneUriToName(sharedPreferences.getString(PREF_KEY_DEFAULT_ALERT_SOUND, ""), getActivity()));
+		alertSoundPref.setSummary(Conversions.ringtoneUriToName(
+				sharedPreferences.getString(PREF_KEY_DEFAULT_ALERT_SOUND, ""), enclosingActivity));
 
 		Preference pref;
 		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT);
 		pref.setSummary(sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, "") + " s");
 		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE);
-		pref.setSummary(Conversions.buildMinToDaysSummary(sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
+		pref.setSummary(Conversions.buildMinToDaysSummary(
+				sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""), enclosingActivity));
 
 		String language = sharedPreferences.getString(SettingsFragment.PREF_KEY_LANGUAGE, "");
 
@@ -97,7 +102,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 			if(index >= 0) {
 				listPref.setSummary(listPref.getEntries()[index]);
 			} else {
-				listPref.setSummary(getActivity().getString(R.string.pref_default_language));
+				listPref.setSummary(enclosingActivity.getString(R.string.pref_default_language));
 			}
 		}
 	}
@@ -105,7 +110,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		getActivity().unbindService(mStorageAndControlServiceConnection);
+		enclosingActivity.unbindService(mStorageAndControlServiceConnection);
 	}
 
 	@Override
@@ -121,21 +126,21 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 			alertSoundPref.setRingtoneType(ringtoneType);
 			String defaultRingtone = RingtoneManager.getDefaultUri(ringtoneType).toString();
 			sharedPrefs.edit().putString(PREF_KEY_DEFAULT_ALERT_SOUND, defaultRingtone).apply();
-			alertSoundPref.setSummary(Conversions.ringtoneUriToName(defaultRingtone, getActivity()));
+			alertSoundPref.setSummary(Conversions.ringtoneUriToName(defaultRingtone, enclosingActivity));
 		} else if(key.equals(PREF_KEY_THEME)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
 			Themer.changeTheme(listPref.getValue());
-			getActivity().setResult(SettingsActivity.RESULT_RESTART);
+			enclosingActivity.setResult(SettingsActivity.RESULT_RESTART);
 		} else if(key.equals(PREF_KEY_LANGUAGE)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
-			Languager.setLanguage(getActivity().getBaseContext());
-			getActivity().setResult(SettingsActivity.RESULT_RESTART);
-			Intent intent = getActivity().getIntent();
+			Languager.setLanguage(enclosingActivity.getBaseContext());
+			enclosingActivity.setResult(SettingsActivity.RESULT_RESTART);
+			Intent intent = enclosingActivity.getIntent();
 			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			getActivity().finish();
-			getActivity().startActivity(intent);
+			enclosingActivity.finish();
+			enclosingActivity.startActivity(intent);
 			Notifications.rebuildNoInternetNotification();
 		} else if(key.equals(PREF_KEY_CHECK_PAIRS_INTERVAL)) {
 			ListPreference listPref = (ListPreference) pref;
@@ -146,12 +151,12 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 					e.setExperiedPeriod(pairInterval);
 				}
 			} else {
-				Log.d(getActivity().getString(R.string.not_bound, "PreferenceFragment"));
+				Log.d(enclosingActivity.getString(R.string.not_bound, "PreferenceFragment"));
 			}
 		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT)) {
 			pref.setSummary(sharedPrefs.getString(key, "") + " s");
 		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE)) {
-			pref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(key, "")));
+			pref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(key, ""), enclosingActivity));
 		} else if(key.equals(PREF_KEY_MOBILE_DATA)) {
 			StorageAndControlService.allowMobileData = sharedPrefs.getBoolean(key, false);
 		}
@@ -163,7 +168,7 @@ OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
 	 */
 	@Override
 	public boolean onPreferenceChange(Preference pref, Object newValue) {
-		pref.setSummary(Conversions.ringtoneUriToName((String) newValue, getActivity()));
+		pref.setSummary(Conversions.ringtoneUriToName((String) newValue, enclosingActivity));
 		return true;
 	}
 }

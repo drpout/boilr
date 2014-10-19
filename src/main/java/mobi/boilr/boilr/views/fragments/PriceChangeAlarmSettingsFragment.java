@@ -33,7 +33,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 				}
 				preference.setSummary(getChangeValueSummary((String) newValue));
 			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
-				preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue));
+				preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue, enclosingActivity));
 				priceChangeAlarm.setPeriod(Long.parseLong((String) newValue) * Conversions.MILIS_IN_MINUTE);
 				if(mBound) {
 					mStorageAndControlService.restartAlarm(priceChangeAlarm);
@@ -95,7 +95,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 	protected void initializePreferences() {
 		priceChangeAlarm = (PriceChangeAlarm) alarm;
 		long minPeriod = alarm.getPeriod() / Conversions.MILIS_IN_MINUTE;
-		updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(String.valueOf(minPeriod)));
+		updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(String.valueOf(minPeriod), enclosingActivity));
 		if(!recoverSavedInstance) {
 			isPercentage = priceChangeAlarm.isPercent();
 			isPercentPref.setChecked(isPercentage);

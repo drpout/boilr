@@ -95,8 +95,14 @@ public final class Notifications {
 	private static String getFiringReason(Context context, Alarm alarm) {
 		Pair pair = alarm.getPair();
 		if(alarm instanceof PriceHitAlarm) {
-			return pair.getCoin() + " @ " + Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) + " " + pair.getExchange() +
-					"\n" + context.getString(R.string.in) + " " + alarm.getExchange().getName();
+			PriceHitAlarm hitAlarm = (PriceHitAlarm) alarm;
+			return pair.getCoin() + " " + context.getString(R.string.at) + " "
+			+ Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) + " " + pair.getExchange()
+			+ "\n" + context.getString(R.string.in) + " " + alarm.getExchange().getName()
+			+ "\n\n" + context.getString(R.string.pref_title_upper_limit) + ": "
+			+ Conversions.formatMaxDecimalPlaces(hitAlarm.getUpperLimit())
+			+ "\n" + context.getString(R.string.pref_title_lower_limit) + ": "
+			+ Conversions.formatMaxDecimalPlaces(hitAlarm.getLowerLimit());
 		} else if(alarm instanceof PriceChangeAlarm) {
 			PriceChangeAlarm changeAlarm = (PriceChangeAlarm) alarm;
 			String reason = pair.getCoin() + "/" + pair.getExchange() + " " + context.getString(R.string.had) + "\n";

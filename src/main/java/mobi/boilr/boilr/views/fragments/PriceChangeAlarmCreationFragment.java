@@ -27,7 +27,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			} else if(key.equals(PREF_KEY_CHANGE_VALUE)) {
 				preference.setSummary(getChangeValueSummary((String) newValue));
 			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
-				preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue));
+				preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue, enclosingActivity));
 			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
@@ -60,15 +60,17 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			}
 			updateIntervalPref.setTitle(R.string.pref_title_time_frame);
 			updateIntervalPref.setDialogMessage(R.string.pref_summary_update_interval_change);
-			updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
+			updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(
+					sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""), enclosingActivity));
 		} else {
 			// Change value pref summary will be updated by updateDependentOnPair()
 
 			String updateInterval = updateIntervalPref.getText();
 			if(updateInterval == null || updateInterval.equals("")) {
-				updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, "")));
+				updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(
+						sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""), enclosingActivity));
 			} else {
-				updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(updateInterval));
+				updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(updateInterval, enclosingActivity));
 			}
 		}
 		specificCat.setTitle(alarmTypePref.getEntry());
