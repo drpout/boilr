@@ -69,8 +69,7 @@
             android:entryValues="@array/pref_values_alert_type"
             android:key="pref_key_alarm_alert_type"
             android:title="@string/pref_title_alarm_alert_type"
-            android:persistent="false"
-            android:dialogMessage="@string/pref_summary_alert_type" />
+            android:persistent="false" />
         <RingtonePreference
             android:defaultValue="content://settings/system/alarm_alert"
             android:key="pref_key_alarm_alert_sound"

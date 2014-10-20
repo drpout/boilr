@@ -60,7 +60,16 @@ public final class Notifications {
 		fullScreenIntent.putExtra("alarmID", alarmID);
 		fullScreenIntent.putExtra("firingReason", firingReason);
 		fullScreenIntent.putExtra("canKeepMonitoring", canKeepMonitoring(alarm));
-		fullScreenIntent.putExtra("directionisUp", alarm.getDirection() == Direction.UP);
+		if(alarm instanceof PriceHitAlarm) {
+			/*
+			 * PriceHitAlarm has no valid direction if it triggers on the first
+			 * time it fetches last price.
+			 */
+			PriceHitAlarm hitAlarm = (PriceHitAlarm) alarm;
+			fullScreenIntent.putExtra("isDirectionUp", hitAlarm.wasUpperLimitHit());
+		} else {
+			fullScreenIntent.putExtra("isDirectionUp", alarm.getDirection() == Direction.UP);
+		}
 		fullScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
 		notification.setFullScreenIntent(PendingIntent.getActivity(context, alarmID, fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT), true);
 
@@ -98,7 +107,7 @@ public final class Notifications {
 		Pair pair = alarm.getPair();
 		if(alarm instanceof PriceHitAlarm) {
 			return pair.getCoin() + " " + context.getString(R.string.at) + " " + Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) + " "
-				+ pair.getExchange() + "\n" + context.getString(R.string.in) + " " + alarm.getExchange().getName();
+					+ pair.getExchange() + "\n" + context.getString(R.string.in) + " " + alarm.getExchange().getName();
 		} else if(alarm instanceof PriceChangeAlarm) {
 			PriceChangeAlarm changeAlarm = (PriceChangeAlarm) alarm;
 			String reason = pair.getCoin() + "/" + pair.getExchange() + " " + context.getString(R.string.had) + "\n";

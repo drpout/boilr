@@ -30,7 +30,7 @@ public class NotificationActivity extends Activity {
 		alarmID = getIntent().getIntExtra("alarmID", Integer.MIN_VALUE);
 		String firingReason = getIntent().getStringExtra("firingReason");
 		boolean canKeepMonitoring = getIntent().getBooleanExtra("canKeepMonitoring", false);
-		boolean directionisUp = getIntent().getBooleanExtra("directionisUp", true);
+		boolean isDirectionUp = getIntent().getBooleanExtra("isDirectionUp", true);
 		final Window win = getWindow();
 		win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
 				WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
@@ -42,7 +42,7 @@ public class NotificationActivity extends Activity {
 		view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 		((TextView) view.findViewById(R.id.firing_reason)).setText(firingReason);
 		TextView arrow = (TextView) view.findViewById(R.id.arrow);
-		if(directionisUp) {
+		if(isDirectionUp) {
 			arrow.setText("▲");
 			arrow.setTextColor(Color.GREEN);
 		} else {
