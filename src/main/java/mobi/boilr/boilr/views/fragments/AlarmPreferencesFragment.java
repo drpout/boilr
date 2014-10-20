@@ -100,6 +100,10 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		SharedPreferences.Editor editor = sharedPrefs.edit();
+		editor.putInt("exchangeIndex", exchangeIndex);
+		editor.putInt("pairIndex", pairIndex);
+		editor.commit();
 		enclosingActivity.unbindService(mStorageAndControlServiceConnection);
 	}
 

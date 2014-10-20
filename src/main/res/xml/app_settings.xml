@@ -8,7 +8,8 @@
 			android:title="@string/pref_title_default_alert_type"
 			android:entries="@array/pref_entries_alert_type"
 			android:entryValues="@array/pref_values_alert_type"
-			android:defaultValue="@string/pref_default_alert_type" />
+			android:defaultValue="@string/pref_default_alert_type"
+			android:dialogMessage="@string/pref_summary_alert_type" />
 		<RingtonePreference
 			android:key="pref_key_default_alert_sound"
 			android:title="@string/pref_title_default_alert_sound"

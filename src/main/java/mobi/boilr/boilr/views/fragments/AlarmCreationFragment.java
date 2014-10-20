@@ -67,7 +67,6 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 				exchangeIndex = listPref.findIndexOfValue((String) newValue);
 				String exchangeName = (String) listPref.getEntries()[exchangeIndex];
 				listPref.setSummary(exchangeName);
-				ListPreference pairListPref = (ListPreference) findPreference(PREF_KEY_PAIR);
 				pairIndex = 0;
 				updatePairsList((String) newValue, exchangeName, null);
 			} else if(key.equals(PREF_KEY_PAIR)) {
@@ -128,7 +127,8 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 				defaultDef = args.getBoolean("defaultVibrateDef");
 			}
 			else {
-				exchangeIndex = exchangeListPref.findIndexOfValue(enclosingActivity.getString(R.string.pref_exchange_default));
+				exchangeIndex = sharedPrefs.getInt("exchangeIndex", exchangeListPref.findIndexOfValue(exchangeListPref.getValue()));
+				pairIndex = sharedPrefs.getInt("pairIndex", 0);
 			}
 			alarmAlertTypePref.setValue(alertType);
 			if(alertType == null) {

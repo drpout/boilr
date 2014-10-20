@@ -22,9 +22,10 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
 		<libdynticker.version>0.4.0</libdynticker.version>
-		<libpricealarm.version>0.1.0</libpricealarm.version>
+		<libpricealarm.version>0.2.0</libpricealarm.version>
 		<release.description>
-			\+ Added Portuguese translation.
+			\+ Added Portuguese and Italian translations.
+			\+ Last price on alarm list is now coloured according to price direction (up, down or same).
 		</release.description>
 	</properties>
 

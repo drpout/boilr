@@ -18,7 +18,6 @@ public class Languager {
 			locale = new Locale(language);
 		}else{
 			language = Locale.getDefault().getLanguage();
-			Log.d("SOLanguage " + language);
 			String [] knownLanguages = context.getResources().getStringArray(R.array.pref_values_language);
 			int size = knownLanguages.length;
 			for(int i = 0 ; i<size;i++ ){

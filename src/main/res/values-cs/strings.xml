@@ -19,6 +19,7 @@
     <string name="about_donations">Přispěvatelé:</string>
     <string name="pref_title_alerts">Upozornění</string>
     <string name="pref_title_default_alert_type">Výchozí typ</string>
+    <!-- Missing translation --><string name="pref_summary_alert_type"></string>
 
     <string-array name="pref_entries_alert_type">
         <item>Alarm</item>
@@ -74,7 +75,7 @@
     <string name="pref_title_change_value">Změna</string>
     <string name="pref_title_update_interval">Interval aktualizace</string>
     <string name="pref_title_time_frame">Časové období</string>
-    <string name="pref_title_last_value">Poslední hodnota</string>
+    <string name="pref_title_last_value">Poslední cena</string>
     <string name="pref_summary_update_interval_hit">V sekundách. Určuje jak často jsou získávána data pro upozornění z burzy.</string>
     <string name="pref_summary_update_interval_change">V minutách. Určuje časový interval pro upozornění na změnu ceny.</string>
     <string name="boilr_alarm">Upozornění aplikace Boilr</string>

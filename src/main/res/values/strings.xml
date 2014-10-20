@@ -28,6 +28,7 @@
     <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
     <string name="pref_title_alerts">Alerts</string>
     <string name="pref_title_default_alert_type">Default type</string>
+    <string name="pref_summary_alert_type">Boilr uses the system volume for the selected Alert type. On most devices the Alarm type is at full volume even when the phone is set to silent.</string>
 
     <string-array name="pref_entries_alert_type">
         <item>Alarm</item>
@@ -211,7 +212,7 @@
     <string name="pref_title_change_value">Change</string>
     <string name="pref_title_update_interval">Update interval</string>
     <string name="pref_title_time_frame">Time frame</string>
-    <string name="pref_title_last_value">Last value</string>
+    <string name="pref_title_last_value">Last price</string>
     <string name="pref_summary_update_interval_hit">In seconds. Defines how often the hit alarm gets data from the exchange.</string>
     <string name="pref_summary_update_interval_change">In minutes. Defines the time frame for the price change alarm.</string>
     <string name="boilr_alarm">Boilr Alarm</string>
@@ -233,11 +234,13 @@
     <string-array name="pref_entries_language">
         <item>English</item>
         <item>Čeština</item>
+        <item>Italiano</item>
         <item>Português</item>
     </string-array>
     <string-array name="pref_values_language">
         <item>en</item>
         <item>cs</item>
+        <item>it</item>
         <item>pt</item>
     </string-array>
     <string name="pref_default_language">English</string>

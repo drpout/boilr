@@ -101,7 +101,7 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 						throw new IOException(enclosingActivity.getString(R.string.not_bound, "AlarmSettingsFragment"));
 					}
 					alarm.setExchange(mStorageAndControlService.getExchange((String) newValue));
-				} catch (Exception e) {
+				} catch(Exception e) {
 					Log.e("Cannot change Exchange.", e);
 				}
 			} else if(key.equals(PREF_KEY_PAIR)) {

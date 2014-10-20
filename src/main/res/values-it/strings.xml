@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">Boilr</string>
+    <string name="action_search">Cerca</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="action_about">Circa</string>
+    <string name="alarm_settings">Impostazioni avvisi</string>
+    <string name="add_alarm">aggiungi avviso</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="boilr_settings">Boilr impostazioni</string>
+    <string name="about_title">Circa Boilr</string>
+    <string name="about_website_button">Website</string>
+    <string name="ok">OK</string>
+    <string name="about_license">Rilasciato con licenza GNU GPLv3+.</string>
+    <string name="about_website">Website: </string>
+    <string name="about_version">Versione: </string>
+    <string name="about_developers">Programmatori: </string>
+    <string name="about_concept">Concept e Design: </string>
+    <string name="about_donations">Donazioni:</string>
+    <string name="pref_title_alerts">Avvisi</string>
+    <string name="pref_title_default_alert_type">Tipo default</string>
+    <!-- Missing translation --><string name="pref_summary_alert_type"></string>
+
+    <string-array name="pref_entries_alert_type">
+        <item>Avviso</item>
+        <item>Notifiche</item>
+        <item>Suonerie</item>
+    </string-array>
+
+    <string name="pref_title_default_alert_sound">Suoni default</string>
+    <string name="pref_title_vibrate_default">Vibrazione default</string>
+    <string name="pref_title_appearance">Aspetto</string>
+    <string name="pref_title_theme">Tema</string>
+
+    <string-array name="pref_entries_theme">
+        <item>Scuro</item>
+        <item>Chiaro</item>
+    </string-array>
+
+    <string name="pref_default_theme">scuro</string>
+    <string name="pref_title_network_usage">Uso Network</string>
+    <string name="pref_title_mobile_data">Dati Mobile</string>
+    <string name="pref_title_default_update_interval_hit">Hit alarm default update interval</string>
+    <string name="pref_summary_default_update_interval_hit">In pochi secondi. Definisce quante volte un allarme "price hit" riceve i dati dallo scambio. È possibile impostare un intervallo per un particolare allarme sulla sua configurazione.</string>
+    <string name="pref_title_default_update_interval_change">Modifica allarme lasso di tempo predefinito</string>
+    <string name="pref_summary_default_update_interval_change">In pochi minuti. Definisce l\'intervallo di tempo predefinito per l\'allarme "cambiamento di prezzo". È possibile impostare un intervallo di tempo di un particolare allarme sulla sua configurazione.</string>
+    <string name="pref_title_check_pairs_interval">Verificare la presenza di nuove coppie</string>
+
+    <string-array name="pref_entries_check_pairs_interval">
+        <item>Ogni ora</item>
+        <item>Due volte al giorno</item>
+        <item>Giornalmente</item>
+        <item>Un giorno si un giorno no</item>
+        <item>Settimanalmente</item>
+        <item>Due volte al mese</item>
+    </string-array>
+
+    <string name="pref_type_title">Tipo di allarme</string>
+
+    <string-array name="pref_type_entries">
+        <item>Price hit</item>
+        <item>Cambio prezzo</item>
+    </string-array>
+
+    <string name="pref_exchange_title">cambio</string>
+    <string name="pref_pair_title">Coppia</string>
+    <string name="action_send_now">Salva</string>
+    <string name="pref_title_alarm_alert_type">Tipo avviso</string>
+    <string name="pref_title_alarm_alert_sound">Suono</string>
+    <string name="pref_title_alarm_vibrate">Vibrazione</string>
+    <string name="pref_title_generic">Generale</string>
+    <string name="pref_title_specific">Specifico</string>
+    <string name="pref_title_upper_limit">Limite massimo</string>
+    <string name="pref_title_lower_limit">Limite minimo</string>
+    <string name="pref_title_change_in_percentage">Cambio in percentuale</string>
+    <string name="pref_title_change_value">Cambio</string>
+    <string name="pref_title_update_interval">Update interval</string>
+    <string name="pref_title_time_frame">Periodo</string>
+    <string name="pref_title_last_value">Ultimo prezzo</string>
+    <string name="pref_summary_update_interval_hit">In pochi secondi. Definisce la frequenza di allarme quando riceve i dati dal cambio.</string>
+    <string name="pref_summary_update_interval_change">In pochi minuti. Definisce l\'intervallo di tempo per l\'allarme "variazione di prezzo".</string>
+    <string name="boilr_alarm">Boilr Alarm</string>
+    <string name="turn_off">Spegni</string>
+    <string name="keep_monitoring">monitoraggio</string>
+    <string name="no_internet">Boilr non è connesso</string>
+    <string name="no_updates">Il tuo allarme non può essere aggiornato.</string>
+    <string name="couldnt_retrieve_pairs">Impossibile recuperare coppie %1$s.</string>
+    <string name="couldnt_retrieve_last_value">Impossibile recuperate l\'ultimo valore %1$s con coppie %2$s.</string>
+    <string name="failed_create_alarm">Impossibile creare allarme.</string>
+    <string name="cannot_set_limit">Impossibile impostare il limite.</string>
+    <string name="check_connection">Prego controlla la connessione a internet.</string>
+    <string name="not_bound">%1$s non legato a StorageAndControlService.</string>
+    <string name="pair_search_description">Cerca coppie</string>
+    <string name="silent">Silenzioso</string>
+    <string name="unknown_ringtone">Suoneria sconosciuta</string>
+    <string name="pref_title_language">Lingua</string>
+    <string name="in">in</string>
+    <string name="had">aveva</string>
+    <string name="change">cambio</string>
+    <string name="during">durante</string>
+    <string name="minutes_short">min</string>
+    <string name="day">giorno</string>
+    <string name="days">giorni</string>
+    <string name="at">a</string>
+</resources>

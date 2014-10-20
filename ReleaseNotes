@@ -1,5 +1,6 @@
 Version 0.5.0
-+ Added Portuguese translation.
++ Added Portuguese and Italian translations.
++ Last price on alarm list is now coloured according to price direction (up, down or same).
 
 Version 0.4.0
 + Added exchanges: BTC100 and BtcTrade.

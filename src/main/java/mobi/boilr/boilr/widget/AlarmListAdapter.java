@@ -5,6 +5,7 @@ import java.util.List;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libpricealarm.Alarm;
+import mobi.boilr.libpricealarm.Alarm.Direction;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
 import android.app.ActionBar.LayoutParams;
@@ -47,7 +48,11 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 		TextView lastCheck = (TextView) convertView.findViewById(R.id.last_check);
 		TextView pair = (TextView) convertView.findViewById(R.id.pair);
 		TextView lastValue = (TextView) convertView.findViewById(R.id.last_value);
-
+		if(alarm.getDirection() == Direction.UP) {
+			lastValue.setTextColor(Color.GREEN);
+		} else if(alarm.getDirection() == Direction.DOWN) {
+			lastValue.setTextColor(Color.RED);
+		}
 		LinearLayout linearLayout;
 		String pairExchange = alarm.getPair().getExchange();
 		if(isLandScape) {
