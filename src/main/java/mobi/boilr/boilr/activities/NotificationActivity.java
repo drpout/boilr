@@ -5,6 +5,7 @@ import mobi.boilr.boilr.services.NotificationService;
 import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Themer;
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ public class NotificationActivity extends Activity {
 		alarmID = getIntent().getIntExtra("alarmID", Integer.MIN_VALUE);
 		String firingReason = getIntent().getStringExtra("firingReason");
 		boolean canKeepMonitoring = getIntent().getBooleanExtra("canKeepMonitoring", false);
+		boolean directionisUp = getIntent().getBooleanExtra("directionisUp", true);
 		final Window win = getWindow();
 		win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
 				WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
@@ -39,6 +41,14 @@ public class NotificationActivity extends Activity {
 		final View view = inflater.inflate(R.layout.alarm_alert, null);
 		view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 		((TextView) view.findViewById(R.id.firing_reason)).setText(firingReason);
+		TextView arrow = (TextView) view.findViewById(R.id.arrow);
+		if(directionisUp) {
+			arrow.setText("▲");
+			arrow.setTextColor(Color.GREEN);
+		} else {
+			arrow.setText("▼");
+			arrow.setTextColor(Color.RED);
+		}
 		if(!canKeepMonitoring) {
 			view.findViewById(R.id.keep_monitoring_wrapper).setVisibility(View.GONE);
 			view.findViewById(R.id.turn_off_wrapper).setLayoutParams(

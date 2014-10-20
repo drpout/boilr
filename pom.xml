@@ -26,6 +26,7 @@
 		<release.description>
 			\+ Added Portuguese and Italian translations.
 			\+ Last price on alarm list is now coloured according to price direction (up, down or same).
+			\+ Added arrow to the alarm triggered notification showing which direction the price took.
 		</release.description>
 	</properties>
 

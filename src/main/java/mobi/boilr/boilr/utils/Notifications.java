@@ -6,6 +6,7 @@ import mobi.boilr.boilr.activities.NotificationActivity;
 import mobi.boilr.boilr.activities.SettingsActivity;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
+import mobi.boilr.libpricealarm.Alarm.Direction;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
 import android.app.Notification;
@@ -59,6 +60,7 @@ public final class Notifications {
 		fullScreenIntent.putExtra("alarmID", alarmID);
 		fullScreenIntent.putExtra("firingReason", firingReason);
 		fullScreenIntent.putExtra("canKeepMonitoring", canKeepMonitoring(alarm));
+		fullScreenIntent.putExtra("directionisUp", alarm.getDirection() == Direction.UP);
 		fullScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
 		notification.setFullScreenIntent(PendingIntent.getActivity(context, alarmID, fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT), true);
 
