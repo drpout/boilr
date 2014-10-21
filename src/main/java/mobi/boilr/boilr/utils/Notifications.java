@@ -14,33 +14,42 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 
 /* Based on Android DeskClock AlarmNotifications. */
 public final class Notifications {
 
 	private static final int noInternetNotificationID = 432191926;
 	private static Notification.Builder noInternetNotification = null;
+	private static final Bitmap upArrowBitmap = textAsBitmap("▲", 100, Color.GREEN);
+	private static final Bitmap downArrowBitmap = textAsBitmap("▼", 100, Color.RED);
 
-	private static Notification.Builder setCommonNotificationProps(Context context, int alarmID,
+	private static Notification.Builder setCommonNotificationProps(Context context, Alarm alarm,
 			String firingReason) {
 		Notification.Builder notification = new Notification.Builder(context)
-		.setContentTitle(context.getString(R.string.boilr_alarm))
-		.setContentText(firingReason)
-		.setSmallIcon(R.drawable.ic_action_alarms)
-		.setLights(0xFFFF0000, 333, 333) // Blink in red ~3 times per second.
-		.setOngoing(false)
-		.setAutoCancel(true);
-
+			.setContentTitle(context.getString(R.string.boilr_alarm))
+			.setContentText(firingReason)
+			.setSmallIcon(R.drawable.ic_action_alarms)
+			.setLights(0xFFFF0000, 333, 333) // Blink in red ~3 times per second.
+			.setOngoing(false)
+			.setAutoCancel(true);
+		if(isDirectionUp(alarm)) {
+			notification.setLargeIcon(upArrowBitmap);
+		} else {
+			notification.setLargeIcon(downArrowBitmap);
+		}
 		Intent viewAlarmsIntent = new Intent(context, AlarmListActivity.class);
 		viewAlarmsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		notification.setContentIntent(PendingIntent.getActivity(context, alarmID, viewAlarmsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+		notification.setContentIntent(PendingIntent.getActivity(context, alarm.getId(), viewAlarmsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 		return notification;
 	}
 
 	public static void showLowPriorityNotification(Context context, Alarm alarm) {
-		int alarmID = alarm.getId();
 		String firingReason = getFiringReason(context, alarm);
-		Notification.Builder notification = setCommonNotificationProps(context, alarmID, firingReason);
+		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReason);
 		notification.setPriority(Notification.PRIORITY_DEFAULT);
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(alarm.hashCode());
@@ -52,7 +61,7 @@ public final class Notifications {
 		// Close dialogs and window shade, so this will display
 		context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
 		String firingReason = getFiringReason(context, alarm);
-		Notification.Builder notification = setCommonNotificationProps(context, alarmID, firingReason);
+		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReason);
 		notification.setPriority(Notification.PRIORITY_MAX);
 
 		// Setup fullscreen intent
@@ -60,15 +69,12 @@ public final class Notifications {
 		fullScreenIntent.putExtra("alarmID", alarmID);
 		fullScreenIntent.putExtra("firingReason", firingReason);
 		fullScreenIntent.putExtra("canKeepMonitoring", canKeepMonitoring(alarm));
-		if(alarm instanceof PriceHitAlarm) {
-			/*
-			 * PriceHitAlarm has no valid direction if it triggers on the first
-			 * time it fetches last price.
-			 */
-			PriceHitAlarm hitAlarm = (PriceHitAlarm) alarm;
-			fullScreenIntent.putExtra("isDirectionUp", hitAlarm.wasUpperLimitHit());
+		if(isDirectionUp(alarm)) {
+			fullScreenIntent.putExtra("arrow", "▲");
+			fullScreenIntent.putExtra("colour", Color.GREEN);
 		} else {
-			fullScreenIntent.putExtra("isDirectionUp", alarm.getDirection() == Direction.UP);
+			fullScreenIntent.putExtra("arrow", "▼");
+			fullScreenIntent.putExtra("colour", Color.RED);
 		}
 		fullScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
 		notification.setFullScreenIntent(PendingIntent.getActivity(context, alarmID, fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT), true);
@@ -78,7 +84,39 @@ public final class Notifications {
 		nm.notify(alarm.hashCode(), notification.build());
 	}
 
-	public static boolean canKeepMonitoring(Alarm alarm) {
+	private static boolean isDirectionUp(Alarm alarm) {
+		boolean isDirectionUp;
+		if(alarm instanceof PriceHitAlarm) {
+			/*
+			 * PriceHitAlarm has no valid direction if it triggers on the first
+			 * time it fetches last price.
+			 */
+			PriceHitAlarm hitAlarm = (PriceHitAlarm) alarm;
+			isDirectionUp = hitAlarm.wasUpperLimitHit();
+		} else {
+			isDirectionUp = alarm.getDirection() == Direction.UP;
+		}
+		return isDirectionUp;
+	}
+
+	/*
+	 * By Ted Hopp https://stackoverflow.com/a/8799344
+	 */
+	private static Bitmap textAsBitmap(String text, float textSize, int textColor) {
+		Paint paint = new Paint();
+		paint.setTextSize(textSize);
+		paint.setColor(textColor);
+		paint.setTextAlign(Paint.Align.LEFT);
+		int width = (int) (paint.measureText(text) + 0.5f); // round
+		float baseline = (int) (-paint.ascent() + 0.5f); // ascent() is negative
+		int height = (int) (baseline + paint.descent() + 0.5f);
+		Bitmap image = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(image);
+		canvas.drawText(text, 0, baseline, paint);
+		return image;
+	}
+
+	private static boolean canKeepMonitoring(Alarm alarm) {
 		if(alarm instanceof PriceChangeAlarm)
 			return true;
 		else

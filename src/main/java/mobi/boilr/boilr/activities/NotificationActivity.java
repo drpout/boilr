@@ -30,7 +30,8 @@ public class NotificationActivity extends Activity {
 		alarmID = getIntent().getIntExtra("alarmID", Integer.MIN_VALUE);
 		String firingReason = getIntent().getStringExtra("firingReason");
 		boolean canKeepMonitoring = getIntent().getBooleanExtra("canKeepMonitoring", false);
-		boolean isDirectionUp = getIntent().getBooleanExtra("isDirectionUp", true);
+		String arrow = getIntent().getStringExtra("arrow");
+		int colour = getIntent().getIntExtra("colour", Color.TRANSPARENT);
 		final Window win = getWindow();
 		win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
 				WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
@@ -41,14 +42,9 @@ public class NotificationActivity extends Activity {
 		final View view = inflater.inflate(R.layout.alarm_alert, null);
 		view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 		((TextView) view.findViewById(R.id.firing_reason)).setText(firingReason);
-		TextView arrow = (TextView) view.findViewById(R.id.arrow);
-		if(isDirectionUp) {
-			arrow.setText("▲");
-			arrow.setTextColor(Color.GREEN);
-		} else {
-			arrow.setText("▼");
-			arrow.setTextColor(Color.RED);
-		}
+		TextView arrowView = (TextView) view.findViewById(R.id.arrow);
+		arrowView.setText(arrow);
+		arrowView.setTextColor(colour);
 		if(!canKeepMonitoring) {
 			view.findViewById(R.id.keep_monitoring_wrapper).setVisibility(View.GONE);
 			view.findViewById(R.id.turn_off_wrapper).setLayoutParams(
