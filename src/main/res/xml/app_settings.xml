@@ -16,6 +16,12 @@
 			android:defaultValue="content://settings/system/alarm_alert"
 			android:showDefault="false"
 			android:showSilent="true" />
+		<mobi.boilr.boilr.preference.VolumePreference
+		    android:key="pref_key_sound_volume"
+			android:title="@string/pref_title_sound_volume"
+			android:dialogMessage="@string/pref_summary_sound_volume"
+			android:negativeButtonText="@string/cancel"
+			android:positiveButtonText="@string/system_volumes"/>
 		<CheckBoxPreference
 		    android:key="pref_key_vibrate_default"
 			android:title="@string/pref_title_vibrate_default"

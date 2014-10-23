@@ -37,6 +37,7 @@ public class SettingsFragment extends PreferenceFragment implements
 	static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT = "pref_key_default_update_interval_hit";
 	static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE = "pref_key_default_update_interval_change";
 	public static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
+	public static final String PREF_KEY_SOUND_VOLUME = "pref_key_sound_volume";
 	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
 	public static final String PREF_KEY_MOBILE_DATA = "pref_key_mobile_data";
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,

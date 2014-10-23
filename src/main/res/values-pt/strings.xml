@@ -20,7 +20,6 @@
     <string name="about_donations">Doações:</string>
     <string name="pref_title_alerts">Alertas</string>
     <string name="pref_title_default_alert_type">Tipo por omissão</string>
-    <string name="pref_summary_alert_type">O Boilr usa o volume do sistema para o tipo de alerta selecionado. Na maioria dos dispositivos o tipo Alarme permanece no volume máximo mesmo quando o dispositivo está em silêncio.</string>
 
     <string-array name="pref_entries_alert_type">
         <item>Alarme</item>
@@ -29,6 +28,10 @@
     </string-array>
 
     <string name="pref_title_default_alert_sound">Som por omissão</string>
+    <string name="pref_title_sound_volume">Volume do som</string>
+    <string name="pref_summary_sound_volume">O Boilr usa o volume do sistema para o tipo de alerta selecionado. Na maioria dos dispositivos o tipo Alarme permanece no volume máximo mesmo quando o dispositivo está em silêncio.</string>
+    <string name="cancel">Cancelar</string>
+    <string name="system_volumes">Volumes do sistema</string>
     <string name="pref_title_vibrate_default">Vibrar por omissão</string>
     <string name="pref_title_appearance">Aparência</string>
     <string name="pref_title_theme">Tema</string>

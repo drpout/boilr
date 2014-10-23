@@ -19,7 +19,6 @@
     <string name="about_donations">Donazioni:</string>
     <string name="pref_title_alerts">Avvisi</string>
     <string name="pref_title_default_alert_type">Tipo default</string>
-    <!-- Missing translation --><string name="pref_summary_alert_type"></string>
 
     <string-array name="pref_entries_alert_type">
         <item>Avviso</item>
@@ -28,6 +27,10 @@
     </string-array>
 
     <string name="pref_title_default_alert_sound">Suoni default</string>
+    <string name="pref_title_sound_volume">Volume del suono</string>
+    <!-- Missing translation --><string name="pref_summary_sound_volume"></string>
+    <string name="cancel">Cancellare</string>
+    <string name="system_volumes">volumi di sistema</string>
     <string name="pref_title_vibrate_default">Vibrazione default</string>
     <string name="pref_title_appearance">Aspetto</string>
     <string name="pref_title_theme">Tema</string>

@@ -28,7 +28,6 @@
     <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
     <string name="pref_title_alerts">Alerts</string>
     <string name="pref_title_default_alert_type">Default type</string>
-    <string name="pref_summary_alert_type">Boilr uses the system volume for the selected Alert type. On most devices the Alarm type is at full volume even when the phone is set to silent.</string>
 
     <string-array name="pref_entries_alert_type">
         <item>Alarm</item>
@@ -44,6 +43,10 @@
     <string name="pref_default_alert_type">4</string>
     <string name="pref_title_default_alert_sound">Default sound</string>
     <string name="pref_title_vibrate_default">Vibrate by default</string>
+    <string name="pref_title_sound_volume">Sound volume</string>
+    <string name="pref_summary_sound_volume">Boilr uses the system volume for the selected Alert type. On most devices the Alarm type is at full volume even when the phone is set to silent.</string>
+    <string name="cancel">Cancel</string>
+    <string name="system_volumes">System volumes</string>
     <string name="pref_title_appearance">Appearance</string>
     <string name="pref_title_theme">Theme</string>
 
