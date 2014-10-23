@@ -28,7 +28,7 @@
 
     <string name="pref_title_default_alert_sound">Suoni default</string>
     <string name="pref_title_sound_volume">Volume del suono</string>
-    <!-- Missing translation --><string name="pref_summary_sound_volume"></string>
+    <!-- Missing translation<string name="pref_summary_sound_volume"></string>-->
     <string name="cancel">Cancellare</string>
     <string name="system_volumes">volumi di sistema</string>
     <string name="pref_title_vibrate_default">Vibrazione default</string>
@@ -43,6 +43,7 @@
     <string name="pref_default_theme">scuro</string>
     <string name="pref_title_network_usage">Uso Network</string>
     <string name="pref_title_mobile_data">Dati Mobile</string>
+    <!-- Review please --><string name="pref_title_show_internet_warning">Avvertire senza internet</string>
     <string name="pref_title_default_update_interval_hit">Hit alarm default update interval</string>
     <string name="pref_summary_default_update_interval_hit">In pochi secondi. Definisce quante volte un allarme "price hit" riceve i dati dallo scambio. È possibile impostare un intervallo per un particolare allarme sulla sua configurazione.</string>
     <string name="pref_title_default_update_interval_change">Modifica allarme lasso di tempo predefinito</string>

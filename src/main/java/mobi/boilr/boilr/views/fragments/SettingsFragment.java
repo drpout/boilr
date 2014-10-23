@@ -34,10 +34,10 @@ public class SettingsFragment extends PreferenceFragment implements
 	public static final String PREF_KEY_DEFAULT_ALERT_SOUND = "pref_key_default_alert_sound";
 	public static final String PREF_KEY_THEME = "pref_key_theme";
 	public static final String PREF_KEY_LANGUAGE = "pref_key_language";
-	static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT = "pref_key_default_update_interval_hit";
-	static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE = "pref_key_default_update_interval_change";
+	public static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT = "pref_key_default_update_interval_hit";
+	public static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE = "pref_key_default_update_interval_change";
 	public static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
-	public static final String PREF_KEY_SOUND_VOLUME = "pref_key_sound_volume";
+	private static final String PREF_KEY_SHOW_INTERNET_WARNING = "pref_key_show_internet_warning";
 	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
 	public static final String PREF_KEY_MOBILE_DATA = "pref_key_mobile_data";
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,
@@ -160,6 +160,11 @@ public class SettingsFragment extends PreferenceFragment implements
 			pref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(key, ""), enclosingActivity));
 		} else if(key.equals(PREF_KEY_MOBILE_DATA)) {
 			StorageAndControlService.allowMobileData = sharedPrefs.getBoolean(key, false);
+		} else if(key.equals(PREF_KEY_SHOW_INTERNET_WARNING)) {
+			boolean show = sharedPrefs.getBoolean(key, true);
+			Notifications.allowNoInternetNotification = show;
+			if(!show)
+				Notifications.clearNoInternetNotification(enclosingActivity);
 		}
 	}
 

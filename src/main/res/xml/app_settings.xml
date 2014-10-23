@@ -50,6 +50,10 @@
 		    android:key="pref_key_mobile_data"
 			android:title="@string/pref_title_mobile_data"
 			android:defaultValue="false" />
+		<CheckBoxPreference
+		    android:key="pref_key_show_internet_warning"
+			android:title="@string/pref_title_show_internet_warning"
+			android:defaultValue="true" />
 		<EditTextPreference
 		    android:key="pref_key_default_update_interval_hit"
 			android:title="@string/pref_title_default_update_interval_hit"

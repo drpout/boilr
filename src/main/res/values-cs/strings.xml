@@ -28,7 +28,7 @@
 
     <string name="pref_title_default_alert_sound">Výchozí zvuk</string>
     <string name="pref_title_sound_volume">Hlasitost zvuk</string>
-    <!-- Missing translation --><string name="pref_summary_sound_volume"></string>
+    <!-- Missing translation <string name="pref_summary_sound_volume"></string>-->
     <string name="cancel">Zrušit</string>
     <string name="system_volumes">Hlasitost systém</string>
     <string name="pref_title_vibrate_default">Vibrovat</string>
@@ -42,6 +42,7 @@
 
     <string name="pref_title_network_usage">Využití sítě</string>
     <string name="pref_title_mobile_data">Mobilní připojení</string>
+    <!-- Review please --><string name="pref_title_show_internet_warning">Varovat ne internet</string>
     <string name="pref_title_default_update_interval_change">Změnit výchozí časový interval upozornění</string>
     <string name="pref_title_default_update_interval_hit">Výchozí interval aktualizace pro upozornění</string>
     <string name="pref_summary_default_update_interval_hit">V sekundách. Určuje jak často jsou získávána data pro upozornění z burzy. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>

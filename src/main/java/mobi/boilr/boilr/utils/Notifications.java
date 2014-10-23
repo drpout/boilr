@@ -24,6 +24,7 @@ public final class Notifications {
 
 	private static final int noInternetNotificationID = 432191926;
 	private static Notification.Builder noInternetNotification = null;
+	public static boolean allowNoInternetNotification = true;
 	private static final Bitmap upArrowBitmap = textAsBitmap("▲", 100, Color.GREEN);
 	private static final Bitmap downArrowBitmap = textAsBitmap("▼", 100, Color.RED);
 
@@ -124,21 +125,23 @@ public final class Notifications {
 	}
 
 	public static void showNoInternetNotification(Context context) {
-		if(noInternetNotification == null) {
-			Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
-			changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			noInternetNotification = new Notification.Builder(context)
-			.setContentTitle(context.getString(R.string.no_internet))
-			.setContentText(context.getString(R.string.no_updates))
-			.setSmallIcon(R.drawable.ic_action_warning)
-			.setOngoing(false)
-			.setAutoCancel(true)
-			.setPriority(Notification.PRIORITY_DEFAULT)
-			.setWhen(0)
-			.setContentIntent(PendingIntent.getActivity(context, noInternetNotificationID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+		if(allowNoInternetNotification) {
+			if(noInternetNotification == null) {
+				Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
+				changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				noInternetNotification = new Notification.Builder(context)
+						.setContentTitle(context.getString(R.string.no_internet))
+						.setContentText(context.getString(R.string.no_updates))
+						.setSmallIcon(R.drawable.ic_action_warning)
+						.setOngoing(false)
+						.setAutoCancel(true)
+						.setPriority(Notification.PRIORITY_DEFAULT)
+						.setWhen(0)
+						.setContentIntent(PendingIntent.getActivity(context, noInternetNotificationID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+			}
+			NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+			nm.notify(noInternetNotificationID, noInternetNotification.build());
 		}
-		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		nm.notify(noInternetNotificationID, noInternetNotification.build());
 	}
 
 	private static String getFiringReason(Context context, Alarm alarm) {
