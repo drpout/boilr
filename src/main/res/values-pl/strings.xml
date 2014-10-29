@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_search">Szukaj</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="action_about">O aplikacji</string>
+    <string name="alarm_settings">Ustawienia powiadomień</string>
+    <string name="add_alarm">Dodaj powiadomienie</string>
+    <string name="on">WŁ</string>
+    <string name="off">WYŁ</string>
+    <string name="boilr_settings">Ustawienia Boilr</string>
+    <string name="about_title">O aplikacji Boilr</string>
+    <string name="about_website_button">Strona WWW</string>
+    <string name="ok">OK</string>
+    <string name="about_license">Udostępniony na licencji GNU GPLv3+.</string>
+    <string name="about_website">Strona WWW: </string>
+    <string name="about_version">Wersja: </string>
+    <string name="about_developers">Twórcy: </string>
+    <string name="about_concept">Design: </string>
+    <string name="about_donations">Darowizny:</string>
+    <string name="pref_title_alerts">Powiadomienia</string>
+    <string name="pref_title_default_alert_type">Domyślny rodzaj</string>
+
+    <string-array name="pref_entries_alert_type">
+        <item>Alarm</item>
+        <item>Powiadomienie</item>
+        <item>Dźwięk</item>
+    </string-array>
+
+    <string name="pref_title_default_alert_sound">Domyślny dźwięk</string>
+    <string name="pref_title_vibrate_default">Domyślna wibracja</string>
+    <string name="pref_title_sound_volume">Głośność dźwięku</string>
+    <string name="pref_summary_sound_volume">Boilr korzysta z ustawień systemowych poziomu głośności dla tego powiadomienia. Na większości urządzeń powiadomienia są ustawione na pełną głośność nawet jeśli telefon jest wyciszony.</string>
+    <string name="cancel">Anuluj</string>
+    <string name="system_volumes">Dźwięki systemowe</string>
+    <string name="pref_title_appearance">Wygląd</string>
+    <string name="pref_title_theme">Motyw</string>
+
+    <string-array name="pref_entries_theme">
+        <item>Ciemny</item>
+        <item>Jasny</item>
+    </string-array>
+
+    <string name="pref_title_network_usage">Wykorzystanie sieci</string>
+    <string name="pref_title_mobile_data">Dane mobilne</string>
+    <string name="pref_title_show_internet_warning">Nie pokazuj ostrzeżenia o połączeniu</string>
+    <string name="pref_title_default_update_interval_hit">Odstęp pomiędzy  sprawdzeniami ceny</string>
+    <string name="pref_summary_default_update_interval_hit">W sekundach. Opisuje jak często sprawdzana jest cena na giełdzie. Możesz zdefiniować inny odstęp dla konkretnego powiadomienia w jego ustawieniach.</string>
+    <string name="pref_title_default_update_interval_change">Zmień długość powiadomienia</string>
+    <string name="pref_summary_default_update_interval_change">W minutach. Opisuje domyślny czas trwania powiadomienia o zmianie cen. Możesz zdefiniować inny czas dla konkretnego powiadomienia w jego ustawieniach.</string>
+    <string name="pref_title_check_pairs_interval">Sprawdź nowe pary</string>
+
+    <string-array name="pref_entries_check_pairs_interval">
+        <item>Co godzinę</item>
+        <item>Dwa razy dziennie</item>
+        <item>Raz dziennie</item>
+        <item>Co dwa dni</item>
+        <item>Raz na tydzień</item>
+        <item>Raz na dwa tygodnie</item>
+    </string-array>
+    
+    <string name="pref_type_title">Rodzaj powiadomienia</string>
+
+    <string-array name="pref_type_entries">
+        <item>Osiągnięcie ceny</item>
+        <item>Zmiana ceny</item>
+    </string-array>
+
+    <string name="pref_exchange_title">Giełda</string>
+    <string name="pref_pair_title">Para</string>
+    <string name="action_send_now">Zapisz</string>
+    <string name="pref_title_alarm_alert_type">Rodzaj powiadomienia</string>
+    <string name="pref_title_alarm_alert_sound">Dźwięk</string>
+    <string name="pref_title_alarm_vibrate">Wibracja</string>
+    <string name="pref_title_generic">Ogólne</string>
+    <string name="pref_title_specific">Szczególne</string>
+    <string name="pref_title_upper_limit">Górny limit</string>
+    <string name="pref_title_lower_limit">Dolny limit</string>
+    <string name="pref_title_change_in_percentage">Zmiana procentowa</string>
+    <string name="pref_title_change_value">Zmiana</string>
+    <string name="pref_title_update_interval">Częstotliwość zmian</string>
+    <string name="pref_title_time_frame">Okres czasu</string>
+    <string name="pref_title_last_value">Ostatnia cena</string>
+    <string name="pref_summary_update_interval_hit">W sekundach. Opisuje jak często sprawdzana jest cena na giełdzie.</string>
+    <string name="pref_summary_update_interval_change"> minutach. Opisuje domyślny czas trwania powiadomienia o zmianie cen.</string>
+    <string name="boilr_alarm">Powiadomienie Boilr</string>
+    <string name="turn_off">Wyłącz</string>
+    <string name="keep_monitoring">Kontynuuj monitorowanie</string>
+    <string name="no_internet">Boilr nie może połączyć się z internetem</string>
+    <string name="no_updates">Ustawienia powiadomień nie mogą być zaktualizowane.</string>
+    <string name="couldnt_retrieve_pairs">Nie można pobrać par dla %1$s.</string>
+    <string name="couldnt_retrieve_last_value">Nie można pobać ostatniej wartości %1$s dla pary %2$s.</string>
+    <string name="failed_create_alarm">Nie można utworzyć powiadomienia.</string>
+    <string name="cannot_set_limit">Nie można ustawić limitu.</string>
+    <string name="check_connection">Sprawdź połączenie internetowe.</string>
+    <string name="not_bound">%1$s nie połączony z usługą StorageAndControlService.</string>
+    <string name="pair_search_description">Szukaj par</string>
+    <string name="silent">Wyciszenie</string>
+    <string name="unknown_ringtone">Nieznany dźwięk</string>
+    
+    <string name="pref_title_language">Język</string>
+    <string name="in">w</string>
+    <string name="had">miał</string>
+    <string name="change">zmiana</string>
+    <string name="during">przez</string>
+    <string name="minutes_short">min</string>
+    <string name="day">dzień</string>
+    <string name="days">dni</string>
+    <string name="at">na</string>
+</resources>

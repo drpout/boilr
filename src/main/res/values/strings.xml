@@ -239,12 +239,14 @@
         <item>English</item>
         <item>Čeština</item>
         <item>Italiano</item>
+        <item>Polski</item>
         <item>Português</item>
     </string-array>
     <string-array name="pref_values_language">
         <item>en</item>
         <item>cs</item>
         <item>it</item>
+        <item>pl</item>
         <item>pt</item>
     </string-array>
     <string name="pref_default_language">English</string>

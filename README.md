@@ -42,6 +42,7 @@ The Boilr icon and artworks were created by [Ricardo Duarte](http://cargocollect
 
 Czech translation by [Jaroslav Lichtblau](https://github.com/svetlemodry).
 Italian translation by Richi Maraviglia.
+Polish translation by [Michal Pleban](https://pl.linkedin.com/in/michalpleban).
 
 ## Donations
 Donations and tips are welcomed.

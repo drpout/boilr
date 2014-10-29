@@ -24,7 +24,7 @@
 		<libdynticker.version>0.4.0</libdynticker.version>
 		<libpricealarm.version>0.2.0</libpricealarm.version>
 		<release.description>
-			\+ Added Portuguese and Italian translations.
+			\+ Added Italian, Polish and Portuguese translations.
 			\+ Last price on alarm list is now coloured according to price direction (up, down or same).
 			\+ Added arrow to the alarm triggered notification showing which direction the price took.
 			\+ Added app settings to control volume and dismiss no internet notification.
