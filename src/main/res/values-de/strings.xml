@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_search">Suche</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_about">Info</string>
+    <string name="alarm_settings">Alarm Einstellungen</string>
+    <string name="add_alarm">Alarm hinzufügen</string>
+    <string name="on">AN</string>
+    <string name="off">AUS</string>
+    <string name="boilr_settings">Boilr Einstellungen</string>
+    <string name="about_title">Info zu Boilr</string>
+    <string name="about_website_button">Webseite</string>
+    <string name="ok">OK</string>
+    <string name="about_license">Unter GNU GPLv3+ Lizenz veröffentlicht</string>
+    <string name="about_website">Webseite: </string>
+    <string name="about_version">Version: </string>
+    <string name="about_developers">Entwickler: </string>
+    <string name="about_concept">Konzept und Design: </string>
+    <string name="about_donations">Spenden:</string>
+    <string name="pref_title_alerts">Benachrichtigungen</string>
+    <string name="pref_title_default_alert_type">Standardeinstellungen</string>
+
+    <string-array name="pref_entries_alert_type">
+        <item>Alarm</item>
+        <item>Benachrichtigung</item>
+        <item>Klingelton</item>
+    </string-array>
+
+    <string name="pref_title_default_alert_sound">4</string>
+    <string name="pref_title_sound_volume">Lautstärke</string>
+    <string name="pref_summary_sound_volume">Boiler nutzt die Gerätlautstärke für den ausgewählten Benachrichtigungstyp. Die meisten Geräte behalten, selbst bei Stummschaltung, die Lautstärke für Alarme bei.</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="system_volumes">Gerätlautstärke</string>
+    <string name="pref_title_vibrate_default">Vibrieren</string>
+    <string name="pref_title_appearance">Erscheinung</string>
+    <string name="pref_title_theme">Motiv</string>
+
+    <string-array name="pref_entries_theme">
+        <item>Dunkel</item>
+        <item>Hell</item>
+    </string-array>
+
+    <string name="pref_title_network_usage">Netznutzung</string>
+    <string name="pref_title_mobile_data">Mobile Daten</string>
+    <string name="pref_title_show_internet_warning">Warnung bei fehlender Internetverbindung</string>
+    <string name="pref_title_default_update_interval_hit">Standardaktualisierung für Alarme zu Treffern</string>
+    <string name="pref_summary_default_update_interval_hit">In Sekunden. Bestimmt wie oft ein Alarm zu einem Preistreffer seine Daten von der Börse erhält. Sie können einen anderen Aktualisierungsintervall für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
+    <string name="pref_title_default_update_interval_change">Standardzeitrahmen für Alarm ändern</string>
+    <string name="pref_summary_default_update_interval_change">In Minuten. Bestimmt den Standardzeitrahmen für Alarme zu Preisänderungen. Sie können einen anderen Zeitrahmen für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
+    <string name="pref_title_check_pairs_interval">Suche nach neuen Paaren</string>
+
+    <string-array name="pref_entries_check_pairs_interval">
+        <item>Stündlich</item>
+        <item>Zweimal am Tag</item>
+        <item>Täglich</item>
+        <item>Jeden zweiten Tag</item>
+        <item>Wöchentlich</item>
+        <item>Alle 2 Wochen</item>
+    </string-array>
+
+    <string name="pref_type_title">Alarmtyp</string>
+
+    <string-array name="pref_type_entries">
+        <item>Preistreffer</item>
+        <item>Preisveränderung</item>
+    </string-array>
+
+    <string name="pref_exchange_title">Börse</string>
+    <string name="pref_pair_title">Paar</string>
+    <string name="action_send_now">Speichern</string>
+    <string name="pref_title_alarm_alert_type">Benachrichtigungstyp</string>
+    <string name="pref_title_alarm_alert_sound">Ton</string>
+    <string name="pref_title_alarm_vibrate">Vibrieren</string>
+    <string name="pref_title_generic">Allgemein</string>
+    <string name="pref_title_specific">Details</string>
+    <string name="pref_title_upper_limit">Höchstes Limit</string>
+    <string name="pref_title_lower_limit">Niedrigstes Limit</string>
+    <string name="pref_title_change_in_percentage">Veränderung in Prozent</string>
+    <string name="pref_title_change_value">Veränderung</string>
+    <string name="pref_title_update_interval">Aktualisierungsintervall</string>
+    <string name="pref_title_time_frame">Zeitrahmen</string>
+    <string name="pref_title_last_value">Letzter Preis</string>
+    <string name="pref_summary_update_interval_hit">In Sekunden. Bestimmt wie oft der Trefferalarm seine Daten von der Börse erhält.</string>
+    <string name="pref_summary_update_interval_change">In Minuten. Bestimmt den Zeitrahmen für den Alarm zu Preisänderungen.</string>
+    <string name="boilr_alarm">Boilr Alarm</string>
+    <string name="turn_off">Ausschalten</string>
+    <string name="keep_monitoring">Weiterhin beobachten</string>
+    <string name="no_internet">Boilr hat keine Internetverbindung</string>
+    <string name="no_updates">Ihre Alarme können nicht aktualisiert werden.</string>
+    <string name="couldnt_retrieve_pairs">Keine Paarergebnisse für %1$s.</string>
+    <string name="couldnt_retrieve_last_value">Keine Ergebnisse für den letzten Wert von %1$s in Verbindung mit %2$s.</string>
+    <string name="failed_create_alarm">Erstellung von Alarm fehlgeschlagen.</string>
+    <string name="cannot_set_limit">Konnte Limit nicht festsetzen.</string>
+    <string name="check_connection">Bitte überprüfen Sie Ihre Internetverbindung.</string>
+    <string name="not_bound">%1$s nicht gebunden zu StorageAndControlService.</string>
+    <string name="pair_search_description">Paar Suche</string>
+    <string name="silent">Stumm</string>
+    <string name="unknown_ringtone">Unbekannter Klingelton</string>
+
+    <string name="pref_title_language">Sprache</string>
+    <string name="in">in</string>
+    <string name="had">hatte</string>
+    <string name="change">verändern</string>
+    <string name="during">während</string>
+	<string name="minutes_short">min</string>
+	<string name="day">Tag</string>
+    <string name="days">Tage</string>
+    <string name="at">bei</string>
+</resources>
