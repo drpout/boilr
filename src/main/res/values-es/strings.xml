@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_search">buscar</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="action_about">sobre</string>
+    <string name="alarm_settings">Ajustes de alarma</string>
+    <string name="add_alarm">Añadir alarma</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="boilr_settings">Ajustes de Boilr</string>
+    <string name="about_title">Sobre Boilr</string>
+    <string name="about_website_button">Website</string>
+    <string name="ok">OK</string>
+    <string name="about_license">Licencia</string>
+    <string name="about_website">Website: </string>
+    <string name="about_version">Versión: </string>
+    <string name="about_developers">Desarrolladores: </string>
+    <string name="about_concept">Concepto: </string>
+    <string name="about_donations">Donaciones: </string>
+    <string name="pref_title_alerts">Alertas</string>
+    <string name="pref_title_default_alert_type">Tipo de alerta</string>
+
+    <string-array name="pref_entries_alert_type">
+        <item>Alarma</item>
+        <item>Notificación</item>
+        <item>Toque</item>
+    </string-array>
+
+    <string name="pref_title_default_alert_sound">Sonido por omisión</string>
+    <string name="pref_title_sound_volume">Volumen de sonido</string>
+    <string name="pref_summary_sound_volume">Boilr utiliza el volumen del sistema para el tipo de alarma seleccionada. En la mayoría de los dispositivos el tipo de alarma permanece con el volumen máximo incluso cuando el dispositivo está en silencio.</string>
+    <string name="cancel">Cancelar</string>
+    <string name="system_volumes">Volúmenes del sistema</string>
+    <string name="pref_title_vibrate_default">Vibrar por omisión</string>
+    <string name="pref_title_appearance">Apariencia</string>
+    <string name="pref_title_theme">Tema</string>
+
+    <string-array name="pref_entries_theme">
+        <item>Oscuro</item>
+        <item>Claro</item>
+    </string-array>
+
+    <string name="pref_title_network_usage">Uso de datos</string>
+    <string name="pref_title_mobile_data">Datos móviles</string>
+    <string name="pref_title_show_internet_warning">Avisar sin internet</string>
+    <string name="pref_title_default_update_interval_hit">Intervalo de actualización por omisión para alarma del límite</string>
+    <string name="pref_summary_default_update_interval_hit">En segundos. Define la frecuencia por omisión com que una alarma de precio límite obtiene datos de bolsa. Puede definir otro intervalo para una alarma en particular en sus ajustes</string>
+    <string name="pref_title_default_update_interval_change">Plazo por omisión para alarma de variación</string>
+    <string name="pref_summary_default_update_interval_change">En minutos. Define el plazo por omisión para las alarmas de variación del precio. Puede definir otro plazo de alarma en particular en sus ajustes.</string>
+    <string name="pref_title_check_pairs_interval">Buscar nuevos pares</string>
+
+    <string-array name="pref_entries_check_pairs_interval">
+        <item>De hora a hora</item>
+        <item>Dos veces al día</item>
+        <item>Diariamente</item>
+        <item>Cada dos días</item>
+        <item>Semanalmente</item>
+        <item>Quincenalmente</item>
+    </string-array>
+
+    <string name="pref_type_title">Tipo de alarma</string>
+
+    <string-array name="pref_type_entries">
+        <item>Precio límite</item>
+        <item>Variación de precio</item>
+    </string-array>
+
+    <string name="pref_exchange_title">Bolsa</string>
+    <string name="pref_pair_title">Par</string>
+    <string name="action_send_now">Guardar</string>
+    <string name="pref_title_alarm_alert_type">Tipo de alarma</string>
+    <string name="pref_title_alarm_alert_sound">Sonido</string>
+    <string name="pref_title_alarm_vibrate">Vibrar</string>
+    <string name="pref_title_generic">General</string>
+    <string name="pref_title_specific">Específico</string>
+    <string name="pref_title_upper_limit">Límite superior</string>
+    <string name="pref_title_lower_limit">Límite inferior</string>
+    <string name="pref_title_change_in_percentage">Variación porcentual</string>
+    <string name="pref_title_change_value">Variación</string>
+    <string name="pref_title_update_interval">Intervalo de actualización</string>
+    <string name="pref_title_time_frame">Plazo</string>
+    <string name="pref_title_last_value">Último precio</string>
+    <string name="pref_summary_update_interval_hit">En segundos. Define la frecuencia con la que la alarma del precio límite obtiene datos de bolsa</string>
+    <string name="pref_summary_update_interval_change">En minutos. Define el plazo de la alarma de variación de precio </string>
+    <string name="boilr_alarm">Alarma Boilr</string>
+    <string name="turn_off">Apagar</string>
+    <string name="keep_monitoring">Seguir activo</string>
+    <string name="no_internet">Boilr no tiene acceso a internet</string>
+    <string name="no_updates">Las alarmas no pueden actualizarse</string>
+    <string name="couldnt_retrieve_pairs">Imposible obtener pares para %1$s</string>
+    <string name="couldnt_retrieve_last_value">Imposible obtener el último precio para %1$s con el par %2$s</string>
+    <string name="failed_create_alarm">Fallo al crear alarma.</string>
+    <string name="cannot_set_limit">Imposible definir el límite.</string>
+    <string name="check_connection">Verifique la conexión a internet.</string>
+    <string name="not_bound">%1$s no está conectado al StorageAndControlService.</string>
+    <string name="pair_search_description">Buscador de pares</string>
+    <string name="silent">Silencioso</string>
+    <string name="unknown_ringtone">Sonido desconocido</string>
+
+    <string name="pref_title_language">Idioma</string>
+    <string name="in">en</string>
+    <string name="had">tenía</string>
+    <string name="change">varió</string>
+    <string name="during">durante</string>
+	<string name="minutes_short">min</string>
+	<string name="day">día</string>
+    <string name="days">días</string>
+    <string name="at">a</string>
+</resources>
