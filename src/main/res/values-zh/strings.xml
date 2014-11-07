@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Boilr</string>
+    <string name="action_search">搜索</string>
+    <string name="action_settings">设置</string>
+    <string name="action_about">关于</string>
+    <string name="alarm_settings">提醒设置</string>
+    <string name="add_alarm">添加提醒</string>
+    <string name="on">开</string>
+    <string name="off">关</string>
+    <string name="boilr_settings">Boilr设置</string>
+    <string name="about_title">关于Boilr</string>
+    <string name="about_website_button">网站</string>
+    <string name="ok">OK</string>
+    <string name="about_license">Released under GNU GPLv3+ license.</string>
+    <string name="about_website">网站: </string>
+    <string name="about_version">版本: </string>
+    <string name="about_developers">开发者: </string>
+    <string name="about_concept">概念与设计: </string>
+    <string name="about_donations">捐赠:</string>
+    <string name="about_btc">BTC: </string>
+    <string name="andre_filipe_santos"><a href="https://github.com/andrefbsantos">André Filipe Santos</a></string>
+    <string name="david_ludovino"><a href="https://github.com/dllud">David Ludovino</a></string>
+    <string name="ricardo_duarte"><a href="http://cargocollective.com/ricardoduarte">Ricardo Duarte</a></string>
+    <string name="boilr_website">http://boilr.mobi</string>
+    <string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a></string>
+    <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
+    <string name="pref_title_alerts">提醒</string>
+    <string name="pref_title_default_alert_type">默认类型</string>
+
+    <string-array name="pref_entries_alert_type">
+        <item>闹钟</item>
+        <item>通知栏</item>
+        <item>铃声</item>
+    </string-array>
+    <string-array name="pref_values_alert_type">
+        <item>4</item>
+        <item>2</item>
+        <item>1</item>
+    </string-array>
+
+    <string name="pref_default_alert_type">4</string>
+    <string name="pref_title_default_alert_sound">默认声音</string>
+    <string name="pref_title_vibrate_default">默认震动</string>
+    <string name="pref_title_sound_volume">音量</string>
+    <string name="pref_summary_sound_volume">Boilr闹钟使用系统音量(System Volume)。在大多数设备上，即使设备处于静音状态，闹钟仍然使用最大音量。</string>
+    <string name="cancel">取消</string>
+    <string name="system_volumes">系统音量</string>
+    <string name="pref_title_appearance">外观</string>
+    <string name="pref_title_theme">主题</string>
+
+    <string-array name="pref_entries_theme">
+        <item>Dark</item>
+        <item>Light</item>
+    </string-array>
+    <string-array name="pref_values_theme">
+        <item>dark</item>
+        <item>light</item>
+    </string-array>
+
+    <string name="pref_default_theme">dark</string>
+    <string name="pref_title_network_usage">网络使用情况</string>
+    <string name="pref_title_mobile_data">移动数据</string>
+    <string name="pref_title_show_internet_warning">没有网络时提醒</string>
+    <string name="pref_title_default_update_interval_hit">设置价格触及提醒默认更新间隔</string>
+    <string name="pref_summary_default_update_interval_hit">以秒为单位。设置价格触及提醒多久从交易所获取一次数据。您可以针对特定提醒单独设置此间隔。</string>
+    <string name="pref_title_default_update_interval_change">设置价格波动提醒默认时间范围</string>
+    <string name="pref_summary_default_update_interval_change">以分钟为单位。设置价格波动提醒的默认时间范围。您可以针对特定价格变动窗口设置此范围。</string>
+    <string name="pref_title_check_pairs_interval">新交易对检查间隔</string>
+
+    <string-array name="pref_entries_check_pairs_interval">
+        <item>每小时</item>
+        <item>一天两次</item>
+        <item>每天</item>
+        <item>隔天</item>
+        <item>每周</item>
+        <item>隔周</item>
+    </string-array>
+    <string-array name="pref_values_check_pairs_interval">
+        <item>3600000</item>
+        <item>43200000</item>
+        <item>86400000</item> <!-- 24 hours * 60 minutes * 60 seconds * 1000 milis -->
+        <item>172800000</item>
+        <item>604800000</item>
+        <item>1209600000</item>
+    </string-array>
+
+    <string name="pref_default_check_pairs_interval">604800000</string>
+    <string name="pref_type_title">提醒类型</string>
+
+    <string-array name="pref_type_entries">
+        <item>价格触及</item>
+        <item>价格变动</item>
+    </string-array>
+    <string-array name="pref_type_entries_values">
+        <item>price_hit</item>
+        <item>price_change</item>
+    </string-array>
+
+    <string name="pref_type_default">price_hit</string>
+    <string name="pref_exchange_title">交易所</string>
+
+    <string-array name="pref_exchange_entries">
+<!--         <item>1Bse</item> -->
+        <item>796 Exchange</item>
+        <item>Allcoin</item>
+        <item>ANX</item>
+        <item>Atomic Trade</item>
+        <item>BitBay</item>
+        <item>Bitcoin.de</item>
+        <item>Bitcurex</item>
+        <item>Bitfinex</item>
+        <item>BitMarket.pl</item>
+        <item>Bitstamp</item>
+        <item>Bittrex</item>
+        <item>BleuTrade</item>
+        <item>BTC100</item>
+        <item>BTC38</item>
+        <item>BTC China</item>
+        <item>BTC Markets</item>
+        <item>BTC-E</item>
+        <item>BtcTrade</item>
+        <item>BTER</item>
+        <item>BullionVault</item>
+        <item>CampBX</item>
+        <item>Cavirtex</item>
+        <item>C-CEX</item>
+        <item>CCEDK</item>
+        <item>CEX.IO</item>
+        <item>CHBTC</item>
+        <item>Crypto-Trade</item>
+        <item>Cryptonit</item>
+        <item>Cryptsy</item>
+        <item>CoinMkt</item>
+        <item>Coin-Swap</item>
+        <item>Coins-E</item>
+        <item>HitBTC</item>
+        <item>Huobi</item>
+        <item>itBit</item>
+        <item>Justcoin</item>
+        <item>Kraken</item>
+        <item>LakeBTC</item>
+        <item>LocalBitcoins</item>
+        <item>Melotic</item>
+        <!-- <item>MintPal</item> -->
+        <item>OKCoin</item>
+        <item>Paymium</item>
+        <item>Peatio</item>
+        <item>Poloniex</item>
+        <item>Vircurex</item>
+        <item>VoS</item>
+    </string-array>
+    <string-array name="pref_exchange_entries_values">
+<!--         <item>mobi.boilr.libdynticker.exchanges.OneBseExchange</item> -->
+        <item>mobi.boilr.libdynticker.exchanges.E796Exchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.AllcoinExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.ANXExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.AtomicTradeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitBayExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitcoindeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitcurexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitfinexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitMarketPlExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BitstampExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BittrexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BleuTradeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTC100Exchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTC38Exchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTCChinaExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTCMarketsExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTCEExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BtcTradeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BTERExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.BullionVaultExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CampBXExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CavirtexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CCEXExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CCEDKExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CEXIOExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.ChbtcExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CryptoTradeExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CryptonitExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CryptsyExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CoinMktExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CoinswapExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.CoinsEExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.HitBTCExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.HuobiExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.ItBitExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.JustcoinExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.KrakenExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.LakeBTCExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.LocalBitcoinsExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.MeloticExchange</item>
+        <!-- <item>mobi.boilr.libdynticker.exchanges.MintPalExchange</item> -->
+        <item>mobi.boilr.libdynticker.exchanges.OKCoinExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.PaymiumExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.PeatioExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.PoloniexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.VircurexExchange</item>
+        <item>mobi.boilr.libdynticker.exchanges.VoSExchange</item>
+    </string-array>
+
+    <string name="pref_exchange_default">mobi.boilr.libdynticker.exchanges.E796Exchange</string>
+    <string name="pref_pair_title">交易对</string>
+    <string name="action_send_now">保存</string>
+    <string name="pref_title_alarm_alert_type">提醒类型</string>
+    <string name="pref_title_alarm_alert_sound">声音</string>
+    <string name="pref_title_alarm_vibrate">震动</string>
+    <string name="pref_title_generic">General</string>
+    <string name="pref_title_specific">Specific</string>
+    <string name="pref_title_upper_limit">上限</string>
+    <string name="pref_title_lower_limit">下限</string>
+    <string name="pref_title_change_in_percentage">波动百分比</string>
+    <string name="pref_title_change_value">波动大小</string>
+    <string name="pref_title_update_interval">更新间隔</string>
+    <string name="pref_title_time_frame">时间范围</string>
+    <string name="pref_title_last_value">最新报价</string>
+    <string name="pref_summary_update_interval_hit">以秒为单位。设置价格触及提醒多久从交易所获取一次数据。</string>
+    <string name="pref_summary_update_interval_change">以分钟为单位。设置价格波动提醒的时间范围。</string>
+    <string name="boilr_alarm">Boilr提醒</string>
+    <string name="turn_off">关闭</string>
+    <string name="keep_monitoring">保持监测</string>
+    <string name="no_internet">没有网络连接</string>
+    <string name="no_updates">无法获取最新数据</string>
+    <string name="couldnt_retrieve_pairs">无法获取%1$s的数据。</string>
+    <string name="couldnt_retrieve_last_value">无法获取%1$s %2$s的最新价格。</string>
+    <string name="failed_create_alarm">创建提醒失败。</string>
+    <string name="cannot_set_limit">无法设置上限/下限。</string>
+    <string name="check_connection">请检查您的网络连接。</string>
+    <string name="not_bound">%1$s not bound to StorageAndControlService.</string>
+    <string name="pair_search_description">交易对搜索</string>
+    <string name="silent">静音</string>
+    <string name="unknown_ringtone">未知铃声</string>
+    
+
+    <string-array name="pref_entries_language">
+        <item>English</item>
+        <item>Čeština</item>
+        <item>Italiano</item>
+        <item>Polski</item>
+        <item>Português</item>
+        <item>中文</item>
+    </string-array>
+    <string-array name="pref_values_language">
+        <item>en</item>
+        <item>cs</item>
+        <item>it</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>zh</item>
+    </string-array>
+    <string name="pref_default_language">English</string>
+    <string name="pref_default_languange_code">en</string>
+    
+    <string name="pref_title_language">语言</string>
+    <string name="in">in</string>
+    <string name="had">had</string>
+    <string name="change">change</string>
+    <string name="during">during</string>
+    <string name="minutes_short">min</string>
+    <string name="day">day</string>
+    <string name="days">days</string>
+    <string name="at">at</string>
+</resources>
