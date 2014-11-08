@@ -43,7 +43,7 @@
 
     <string name="pref_title_network_usage">Utilização de dados</string>
     <string name="pref_title_mobile_data">Dados móveis</string>
-    <string name="pref_title_show_internet_warning">Avisar sem internet</string>
+    <string name="pref_title_show_internet_warning">Aviso sem internet</string>
     <string name="pref_title_default_update_interval_hit">Intervalo de atualização por omissão para alarme de limite</string>
     <string name="pref_summary_default_update_interval_hit">Em segundos. Define a frequência por omissão com que um alarme de preço limite obtém dados da bolsa. Pode definir outro intervalo para um alarme em particular nas suas definições.</string>
     <string name="pref_title_default_update_interval_change">Prazo por omissão para alarme de variação</string>
