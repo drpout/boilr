@@ -24,7 +24,7 @@ public class NotificationService extends Service {
 	// Private action used to stop a notification with this service.
 	private static final String STOP_NOTIFY_ACTION = "STOP_NOTIFY";
 
-	private Alarm mCurrentAlarm = null;
+	private static int currentAlarmID = Integer.MIN_VALUE;
 	private TelephonyManager mTelephonyManager;
 	private StorageAndControlService mService;
 	private boolean mBound;
@@ -47,18 +47,22 @@ public class NotificationService extends Service {
 			mBound = false;
 		}
 	};
+	private boolean mInFullScreen = false;
 
 	/**
 	 * Utility method to help start a notification properly.
 	 * Based on code from Android DeskClock.
 	 */
 	public static void startNotify(Context context, int alarmID) {
-		Intent serviceIntent = new Intent(context, NotificationService.class);
-		serviceIntent.setAction(START_NOTIFY_ACTION);
-		serviceIntent.putExtra("alarmID", alarmID);
-		// Maintain a cpu wake lock until the service can get it
-		AlarmAlertWakeLock.acquireCpuWakeLock(context);
-		context.startService(serviceIntent);
+		if(alarmID != currentAlarmID) {
+			currentAlarmID = alarmID;
+			Intent serviceIntent = new Intent(context, NotificationService.class);
+			serviceIntent.setAction(START_NOTIFY_ACTION);
+			serviceIntent.putExtra("alarmID", alarmID);
+			// Maintain a cpu wake lock until the service can get it
+			AlarmAlertWakeLock.acquireCpuWakeLock(context);
+			context.startService(serviceIntent);
+		}
 	}
 
 	/**
@@ -97,10 +101,11 @@ public class NotificationService extends Service {
 				else
 					mPendingAlarms.add(alarmID);
 			} else if(STOP_NOTIFY_ACTION.equals(action)) {
+				mInFullScreen = false; //It might be redundant
 				boolean keepMonitoring = intent.getBooleanExtra("keepMonitoring", false);
-				if(!keepMonitoring)
+				if(keepMonitoring)
 					if(mBound)
-						mService.stopAlarm(alarmID);
+						mService.startAlarm(alarmID);
 				stopSelf();
 			}
 		}
@@ -110,36 +115,35 @@ public class NotificationService extends Service {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		if(mCurrentAlarm == null) {
+		if(currentAlarmID == Integer.MIN_VALUE) {
 			Log.v("NotificationService - There is no current alarm to stop.");
 			return;
 		}
 		NotificationKlaxon.stop(this);
-		mCurrentAlarm = null;
+		currentAlarmID = Integer.MIN_VALUE;
 		AlarmAlertWakeLock.releaseCpuLock();
 		unbindService(mConnection);
 	}
 
 	private void startNotify(int alarmID) {
 		Alarm alarm = mService.getAlarm(alarmID);
-		if(mCurrentAlarm == null) {
-			mCurrentAlarm = alarm;
-			int callState = mTelephonyManager.getCallState();
-			boolean inCall = callState != TelephonyManager.CALL_STATE_IDLE;
-			if(inCall) {
-				/*
-				 * Place a notification for this alarm in the drawer and
-				 * keep the alarm on so it can fire again later.
-				 */
-				Log.d("Showing in call notification for alarm " + alarmID + ".");
-				Notifications.showLowPriorityNotification(this, alarm);
-				NotificationKlaxon.ringSingleNotification(this);
-				stopSelf();
-			} else {
-				Log.d("Showing fullscreen notification for alarm " + alarmID + ".");
-				Notifications.showAlarmNotification(this, mCurrentAlarm);
-				NotificationKlaxon.start(this, mCurrentAlarm);
-			}
+		int callState = mTelephonyManager.getCallState();
+		boolean inCall = callState != TelephonyManager.CALL_STATE_IDLE;
+		if(inCall) {
+			/*
+			 * Place a notification for this alarm in the drawer and
+			 * keep the alarm on so it can fire again later.
+			 */
+			Log.d("Showing in call notification for alarm " + alarmID + ".");
+			Notifications.showLowPriorityNotification(this, alarm);
+			NotificationKlaxon.ringSingleNotification(this);
+			stopSelf();
+		} else if(!mInFullScreen){
+			mInFullScreen = true;
+			Log.d("Showing fullscreen notification for alarm " + alarmID + ".");
+			mService.stopAlarm(alarmID);
+			Notifications.showAlarmNotification(this, alarm);
+			NotificationKlaxon.start(this, alarm);
 		} else {
 			/*
 			 * A full screen notification is already being displayed.

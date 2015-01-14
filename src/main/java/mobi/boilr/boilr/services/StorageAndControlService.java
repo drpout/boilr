@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -67,6 +68,8 @@ public class StorageAndControlService extends Service {
 			updateConnectedFlags();
 		}
 	};
+	
+	private HashSet<Integer> runTaskAlarmList = new HashSet<Integer>();
 
 	private class RunAlarmTask extends AsyncTask<Alarm, Void, Void> {
 		private static final long REPEAT_LOWER_BOUND = CoinMktExchange.COINMKT_DELAY;
@@ -97,6 +100,7 @@ public class StorageAndControlService extends Service {
 					}
 					Notifications.showNoInternetNotification(StorageAndControlService.this);
 				}
+				runTaskAlarmList.remove(alarm.getId());
 			}
 			AlarmAlertWakeLock.releaseCpuLock();
 			return null;
@@ -300,9 +304,12 @@ public class StorageAndControlService extends Service {
 			if(action != null && RUN_ALARM.equals(action)) {
 				int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
 				if(alarmID != Integer.MIN_VALUE) {
-					Alarm alarm = getAlarm(alarmID);
-					AlarmAlertWakeLock.acquireCpuWakeLock(this);
-					new RunAlarmTask().execute(alarm);
+					if(!runTaskAlarmList.contains(alarmID)){
+						runTaskAlarmList.add(alarmID);
+						Alarm alarm = getAlarm(alarmID);
+						AlarmAlertWakeLock.acquireCpuWakeLock(this);
+						new RunAlarmTask().execute(alarm);
+					}
 				}
 			}
 		}
@@ -374,7 +381,9 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void restartAlarm(Alarm alarm) {
-		addToAlarmManager(alarm, alarm.getPeriod());
+		if(alarm.isOn()){
+			addToAlarmManager(alarm, alarm.getPeriod());
+		}
 	}
 
 	public void stopAlarm(Alarm alarm) {
