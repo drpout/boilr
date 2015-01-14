@@ -143,7 +143,6 @@
         <item>LakeBTC</item>
         <item>LocalBitcoins</item>
         <item>Melotic</item>
-        <!-- <item>MintPal</item> -->
         <item>OKCoin</item>
         <item>Paymium</item>
         <item>Peatio</item>
@@ -193,7 +192,6 @@
         <item>mobi.boilr.libdynticker.exchanges.LakeBTCExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.LocalBitcoinsExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.MeloticExchange</item>
-        <!-- <item>mobi.boilr.libdynticker.exchanges.MintPalExchange</item> -->
         <item>mobi.boilr.libdynticker.exchanges.OKCoinExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.PaymiumExchange</item>
         <item>mobi.boilr.libdynticker.exchanges.PeatioExchange</item>
@@ -241,6 +239,7 @@
         <item>Italiano</item>
         <item>Polski</item>
         <item>Português</item>
+        <item>中文</item>
     </string-array>
     <string-array name="pref_values_language">
         <item>en</item>
@@ -248,6 +247,7 @@
         <item>it</item>
         <item>pl</item>
         <item>pt</item>
+        <item>zh</item>
     </string-array>
     <string name="pref_default_language">English</string>
     <string name="pref_default_languange_code">en</string>

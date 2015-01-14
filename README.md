@@ -40,6 +40,7 @@ All Boilr code is licensed under [GNU GPL v3](/LICENSE) or later. Copyright belo
 
 The Boilr icon and artworks were created by [Ricardo Duarte](http://cargocollective.com/ricardoduarte) and are dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE).
 
+Chinese translation by [Jan Xie](https://github.com/janx) and Mar Song.
 Czech translation by [Jaroslav Lichtblau](https://github.com/svetlemodry).
 Italian translation by Richi Maraviglia.
 Polish translation by [Michal Pleban](https://pl.linkedin.com/in/michalpleban).
