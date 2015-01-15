@@ -82,28 +82,35 @@ public class StorageAndControlService extends Service {
 					try {
 						alarm.run();
 						Log.d("Last value for alarm " + alarm.getId() + " " + Conversions.formatMaxDecimalPlaces(alarm.getLastValue()));
-					} catch (IOException e) {
+					} catch(NumberFormatException e) {
+						Log.e("Could format last value for alarm " + alarm.getId(), e);
+					} catch(IOException e) {
+						reschedule(alarm);
 						Log.e("Could not retrieve last value for alarm " + alarm.getId(), e);
 					}
 					Notifications.clearNoInternetNotification(StorageAndControlService.this);
 				} else {
-					/*
-					 * If it is a PriceChangeAlarm try to get last value sooner.
-					 * Check issue #35 https://github.com/andrefbsantos/boilr/issues/35
-					 */
-					if(alarm instanceof PriceChangeAlarm) {
-						long delay = (long) (alarm.getPeriod() * 0.01);
-						if(delay < REPEAT_LOWER_BOUND) {
-							delay = REPEAT_LOWER_BOUND;
-						}
-						addToAlarmManager(alarm, delay);
-					}
+					reschedule(alarm);
 					Notifications.showNoInternetNotification(StorageAndControlService.this);
 				}
 				runTaskAlarmList.remove(alarm.getId());
 			}
 			AlarmAlertWakeLock.releaseCpuLock();
 			return null;
+		}
+
+		private void reschedule(Alarm alarm) {
+			/*
+			 * If it is a PriceChangeAlarm try to get last value sooner.
+			 * Check issue #35 https://github.com/andrefbsantos/boilr/issues/35
+			 */
+			if(alarm instanceof PriceChangeAlarm) {
+				long delay = (long) (alarm.getPeriod() * 0.01);
+				if(delay < REPEAT_LOWER_BOUND) {
+					delay = REPEAT_LOWER_BOUND;
+				}
+				addToAlarmManager(alarm, delay);
+			}
 		}
 	}
 

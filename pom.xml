@@ -30,8 +30,7 @@
 			\+ Added app settings to control volume and dismiss no internet notification.
 			\+ Icon was completely redesigned.
 			\* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.
-			\* * Fixed alarm triggering multiple times for the same setting.
-
+			\* Fixed exchange data fetching on low quality internet connections.
 		</release.description>
 	</properties>
 
