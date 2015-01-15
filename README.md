@@ -1,5 +1,5 @@
 # Boilr
-Android application which monitors cryptocurrencies and bullion prices, and triggers alarms according to user settings.
+Android application which monitors Bitcoin, cryptocurrencies and bullion prices, and triggers alarms according to user settings.
 
 Supports 2 types of alarms:
 
