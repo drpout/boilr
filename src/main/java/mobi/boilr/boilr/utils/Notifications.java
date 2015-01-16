@@ -2,6 +2,7 @@ package mobi.boilr.boilr.utils;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmListActivity;
+import mobi.boilr.boilr.activities.AlarmSettingsActivity;
 import mobi.boilr.boilr.activities.NotificationActivity;
 import mobi.boilr.boilr.activities.SettingsActivity;
 import mobi.boilr.libdynticker.core.Pair;
@@ -42,9 +43,11 @@ public final class Notifications {
 		} else {
 			notification.setLargeIcon(downArrowBitmap);
 		}
-		Intent viewAlarmsIntent = new Intent(context, AlarmListActivity.class);
-		viewAlarmsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		notification.setContentIntent(PendingIntent.getActivity(context, alarm.getId(), viewAlarmsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+		Intent alarmSettingsIntent = new Intent(context, AlarmSettingsActivity.class);
+		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
+		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());
+		alarmSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		notification.setContentIntent(PendingIntent.getActivity(context, alarm.getId(), alarmSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 		return notification;
 	}
 
@@ -52,10 +55,10 @@ public final class Notifications {
 		String firingReason = getFiringReason(context, alarm);
 		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReason);
 		notification.setPriority(Notification.PRIORITY_DEFAULT);
-		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE); 
 		nm.cancel(alarm.hashCode());
 		nm.notify(alarm.hashCode(), notification.build());
-	}
+	} 
 
 	public static void showAlarmNotification(Context context, Alarm alarm) {
 		int alarmID = alarm.getId();
