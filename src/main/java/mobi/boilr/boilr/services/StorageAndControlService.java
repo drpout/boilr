@@ -19,19 +19,18 @@ import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.PercentageAlarmParameter;
+import mobi.boilr.boilr.utils.SpikeChangeAlarmParameter;
+import mobi.boilr.boilr.utils.SpikePercentageAlarmParameter;
 import mobi.boilr.boilr.views.fragments.AlarmPreferencesFragment;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-import mobi.boilr.libdynticker.exchanges.BTCChinaExchange;
-import mobi.boilr.libdynticker.exchanges.BTCEExchange;
-import mobi.boilr.libdynticker.exchanges.BitstampExchange;
 import mobi.boilr.libdynticker.exchanges.CoinMktExchange;
 import mobi.boilr.libpricealarm.Alarm;
-import mobi.boilr.libpricealarm.Notify;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
+import mobi.boilr.libpricealarm.PriceSpikeAlarm;
 import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -104,7 +103,9 @@ public class StorageAndControlService extends Service {
 			 * If it is a PriceChangeAlarm try to get last value sooner.
 			 * Check issue #35 https://github.com/andrefbsantos/boilr/issues/35
 			 */
-			if(alarm instanceof PriceChangeAlarm) {
+			if(alarm instanceof PriceSpikeAlarm) {
+				// Do nothing. PriceSpikeAlarm has a short update interval.
+			} else if(alarm instanceof PriceChangeAlarm) {
 				long delay = (long) (alarm.getPeriod() * 0.01);
 				if(delay < REPEAT_LOWER_BOUND) {
 					delay = REPEAT_LOWER_BOUND;
@@ -173,32 +174,6 @@ public class StorageAndControlService extends Service {
 		}
 	}
 
-	private class PopupalteDBTask extends AsyncTask<Void, Void, Void> {
-		@Override
-		protected Void doInBackground(Void... arg) {
-			Log.d("Populating DB.");
-			try {
-				Alarm alarm = new PriceHitAlarm(generateAlarmID(), new BitstampExchange(10000000), new Pair("BTC", "USD"), 60000, new AndroidNotify(StorageAndControlService.this), 476, 475);
-				addAlarm(alarm);
-				startAlarm(alarm);
-
-				alarm = new PriceHitAlarm(generateAlarmID(), new BTCEExchange(10000000), new Pair("BTC", "EUR"), 60000, new AndroidNotify(StorageAndControlService.this), 374, 373);
-				addAlarm(alarm);
-				startAlarm(alarm);
-
-				if(hasNetworkConnection()) {
-					alarm = new PriceChangeAlarm(generateAlarmID(), new BTCChinaExchange(10000000), new Pair("BTC", "CNY"), 60000, new AndroidNotify(StorageAndControlService.this), 0.01f);
-					addAlarm(alarm);
-					startAlarm(alarm);
-				}
-			} catch (Exception e) {
-				Log.e("Caught exception while populating DB.", e);
-			}
-			return null;
-		}
-
-	}
-
 	private class GetPairsTask extends AsyncTask<String, Void, List<Pair>> {
 		private AlarmPreferencesFragment frag;
 		String exchangeName, pairString;
@@ -227,19 +202,19 @@ public class StorageAndControlService extends Service {
 
 	}
 
+	/*
+	 * TODO Find a way to use a single AddAlarmTask suitable for all alarm
+	 * types.
+	 */
 	private class AddPercentageAlarmTask extends
 			AsyncTask<PercentageAlarmParameter, Void, PriceChangeAlarm> {
 		@Override
 		protected PriceChangeAlarm doInBackground(PercentageAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
-				int id = arg0[0].getId();
-				Exchange exchange = arg0[0].getExchange();
-				Pair pair = arg0[0].getPair();
-				long period = arg0[0].getPeriod();
-				Notify notify = arg0[0].getNotify();
-				float percent = arg0[0].getPercent();
+				PercentageAlarmParameter params = arg0[0];
 				try {
-					return new PriceChangeAlarm(id, exchange, pair, period, notify, percent);
+					return new PriceChangeAlarm(params.getId(), params.getExchange(), params.getPair(), params.getPeriod(), params.getNotify(),
+							params.getPercent());
 				} catch (Exception e) {
 					Log.e("AddPercentageAlarmTask failed", e);
 				}
@@ -253,16 +228,44 @@ public class StorageAndControlService extends Service {
 		@Override
 		protected PriceChangeAlarm doInBackground(ChangeAlarmParameter... arg0) {
 			if(hasNetworkConnection() && arg0.length == 1) {
-				int id = arg0[0].getId();
-				Exchange exchange = arg0[0].getExchange();
-				Pair pair = arg0[0].getPair();
-				long period = arg0[0].getPeriod();
-				Notify notify = arg0[0].getNotify();
-				double change = arg0[0].getChange();
+				ChangeAlarmParameter params = arg0[0];
 				try {
-					return new PriceChangeAlarm(id, exchange, pair, period, notify, change);
+					return new PriceChangeAlarm(params.getId(), params.getExchange(), params.getPair(), params.getPeriod(), params.getNotify(),
+							params.getChange());
 				} catch (Exception e) {
 					Log.e("AddChangeAlarmTask failed.", e);
+				}
+			}
+			return null;
+		}
+	}
+
+	private class AddSpikePercentageAlarmTask extends AsyncTask<SpikePercentageAlarmParameter, Void, PriceSpikeAlarm> {
+		@Override
+		protected PriceSpikeAlarm doInBackground(SpikePercentageAlarmParameter... arg0) {
+			if(hasNetworkConnection() && arg0.length == 1) {
+				SpikePercentageAlarmParameter params = arg0[0];
+				try {
+					return new PriceSpikeAlarm(params.getId(), params.getExchange(), params.getPair(), params.getPeriod(), params.getNotify(),
+							params.getPercent(), params.getTimeFrame());
+				} catch(Exception e) {
+					Log.e("AddSpikePercentageAlarmTask failed", e);
+				}
+			}
+			return null;
+		}
+	}
+
+	private class AddSpikeChangeAlarmTask extends AsyncTask<SpikeChangeAlarmParameter, Void, PriceSpikeAlarm> {
+		@Override
+		protected PriceSpikeAlarm doInBackground(SpikeChangeAlarmParameter... arg0) {
+			if(hasNetworkConnection() && arg0.length == 1) {
+				SpikeChangeAlarmParameter params = arg0[0];
+				try {
+					return new PriceSpikeAlarm(params.getId(), params.getExchange(), params.getPair(), params.getPeriod(), params.getNotify(),
+							params.getChange(), params.getTimeFrame());
+				} catch(Exception e) {
+					Log.e("AddSpikeChangeAlarmTask failed.", e);
 				}
 			}
 			return null;
@@ -288,9 +291,7 @@ public class StorageAndControlService extends Service {
 			db = new DBManager(this);
 			prevAlarmID = db.getNextID();
 			alarmsMap = db.getAlarms();
-			if(prevAlarmID == 0) {
-				// new PopupalteDBTask().execute();
-			} else {
+			if(prevAlarmID > 0) {
 				// Set Exchange and start alarm
 				for (Alarm alarm : alarmsMap.values()) {
 					alarm.setExchange(getExchange(alarm.getExchangeCode()));
@@ -479,15 +480,25 @@ public class StorageAndControlService extends Service {
 		new UpdateOffedAlarmsTask().execute(adapter);
 	}
 
+	private void createAlarmAux(Alarm alarm) throws IOException {
+		if(alarm == null)
+			throw new IOException(getString(R.string.check_connection));
+		addAlarm(alarm);
+		startAlarm(alarm);
+	}
+
+	public void createAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify, double upperLimit, double lowerLimit)
+			throws UpperLimitSmallerOrEqualLowerLimitException, IOException {
+		PriceHitAlarm alarm = new PriceHitAlarm(id, exchange, pair, period, notify, upperLimit, lowerLimit);
+		createAlarmAux(alarm);
+	}
+
 	public void createAlarm(int id, Exchange exchange, Pair pair, long period,
 			AndroidNotify notify,
 			float percent) throws InterruptedException, ExecutionException, IOException {
 		// Change alarms always check last value to build the change
 		PriceChangeAlarm alarm = ((new AddPercentageAlarmTask()).execute(new PercentageAlarmParameter(id, exchange, pair, period, notify, percent))).get();
-		if(alarm == null)
-			throw new IOException(getString(R.string.check_connection));
-		addAlarm(alarm);
-		startAlarm(alarm);
+		createAlarmAux(alarm);
 	}
 
 	public void createAlarm(int id, Exchange exchange, Pair pair, long period,
@@ -495,18 +506,22 @@ public class StorageAndControlService extends Service {
 			double change) throws InterruptedException, ExecutionException, IOException {
 		// Change alarms always check last value to build the change
 		PriceChangeAlarm alarm = ((new AddChangeAlarmTask()).execute(new ChangeAlarmParameter(id, exchange, pair, period, notify, change))).get();
-		if(alarm == null)
-			throw new IOException(getString(R.string.check_connection));
-		addAlarm(alarm);
-		startAlarm(alarm);
+		createAlarmAux(alarm);
 	}
 
-	public void createAlarm(int id, Exchange exchange, Pair pair, long period,
-			AndroidNotify notify, double upperLimit, double lowerLimit)
-			throws UpperLimitSmallerOrEqualLowerLimitException,
-			IOException {
-		PriceHitAlarm alarm = new PriceHitAlarm(id, exchange, pair, period, notify, upperLimit, lowerLimit);
-		addAlarm(alarm);
-		startAlarm(alarm);
+	public void createAlarm(int id, Exchange exchange, Pair pair, long updateInterval, AndroidNotify notify, float percent, long timeFrame)
+			throws InterruptedException, ExecutionException, IOException {
+		// Change alarms always check last value to build the change
+		PriceSpikeAlarm alarm = ((new AddSpikePercentageAlarmTask()).execute(new SpikePercentageAlarmParameter(id, exchange, pair, updateInterval,
+				notify, percent, timeFrame))).get();
+		createAlarmAux(alarm);
+	}
+
+	public void createAlarm(int id, Exchange exchange, Pair pair, long updateInterval, AndroidNotify notify, double change, long timeFrame)
+			throws InterruptedException, ExecutionException, IOException {
+		// Change alarms always check last value to build the change
+		PriceSpikeAlarm alarm = ((new AddSpikeChangeAlarmTask()).execute(new SpikeChangeAlarmParameter(id, exchange, pair, updateInterval, notify,
+				change, timeFrame))).get();
+		createAlarmAux(alarm);
 	}
 }

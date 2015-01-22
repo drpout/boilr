@@ -44,10 +44,10 @@
     <string name="pref_title_network_usage">网络使用情况</string>
     <string name="pref_title_mobile_data">移动数据</string>
     <string name="pref_title_show_internet_warning">忽略提醒</string>
-    <string name="pref_title_default_update_interval_hit">触价提醒默认更新间隔</string>
-    <string name="pref_summary_default_update_interval_hit">以秒为单位。设置触价提醒多久从交易所获取一次数据。您可以针对特定提醒单独设置此间隔。</string>
-    <string name="pref_title_default_update_interval_change">波动提醒默认时间范围</string>
-    <string name="pref_summary_default_update_interval_change">以分钟为单位。设置波动提醒的默认时间范围。您可以针对特定价格变动窗口设置此范围。</string>
+    <!-- Review please --><string name="pref_title_default_update_interval">默认更新间隔</string>
+    <string name="pref_summary_default_update_interval">以秒为单位。设置触价提醒多久从交易所获取一次数据。您可以针对特定提醒单独设置此间隔。</string>
+    <!-- Review please --><string name="pref_title_default_time_frame">提醒默认时间范围</string>
+    <string name="pref_summary_default_time_frame">以分钟为单位。设置波动提醒的默认时间范围。您可以针对特定价格变动窗口设置此范围。</string>
     <string name="pref_title_check_pairs_interval">新交易对检查间隔</string>
 
     <string-array name="pref_entries_check_pairs_interval">
@@ -76,13 +76,14 @@
     <string name="pref_title_specific">特殊</string>
     <string name="pref_title_upper_limit">上限</string>
     <string name="pref_title_lower_limit">下限</string>
+    <!-- Missing translation <string name="pref_summary_sound_volume"></string>-->
     <string name="pref_title_change_in_percentage">按百分比调节</string>
     <string name="pref_title_change_value">按数值调节</string>
     <string name="pref_title_update_interval">更新间隔</string>
     <string name="pref_title_time_frame">时间范围</string>
     <string name="pref_title_last_value">最新报价</string>
-    <string name="pref_summary_update_interval_hit">以秒为单位。设置触价提醒多久从交易所获取一次数据。</string>
-    <string name="pref_summary_update_interval_change">以分钟为单位。设置波动提醒的时间范围。</string>
+    <string name="pref_summary_update_interval">以秒为单位。设置触价提醒多久从交易所获取一次数据。</string>
+    <string name="pref_summary_time_frame">以分钟为单位。设置波动提醒的时间范围。</string>
     <string name="boilr_alarm">Boilr提醒</string>
     <string name="turn_off">关闭</string>
     <string name="keep_monitoring">保持监控</string>

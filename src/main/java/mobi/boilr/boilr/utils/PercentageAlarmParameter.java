@@ -11,7 +11,6 @@ public class PercentageAlarmParameter extends AlarmParameter{
 	public PercentageAlarmParameter(int id, Exchange exchange, Pair pair, long period,
 			AndroidNotify notify, float percent) {
 		super(id, exchange, pair, period, notify);
-		// TODO Auto-generated constructor stub
 		this.percent = percent;
 	}
 

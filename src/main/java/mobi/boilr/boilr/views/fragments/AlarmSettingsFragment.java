@@ -110,6 +110,14 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 				preference.setSummary(pair.toString());
 				updateDependentOnPairAux();
 				alarm.setPair(pair);
+			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
+				preference.setSummary(newValue + " s");
+				alarm.setPeriod(1000 * Long.parseLong((String) newValue));
+				if(mBound) {
+					mStorageAndControlService.restartAlarm(alarm);
+				} else {
+					Log.d(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
+				}
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_TYPE)) {
 				ListPreference alertTypePref = (ListPreference) preference;
 				alertTypePref.setSummary(alertTypePref.getEntries()[alertTypePref.findIndexOfValue((String) newValue)]);

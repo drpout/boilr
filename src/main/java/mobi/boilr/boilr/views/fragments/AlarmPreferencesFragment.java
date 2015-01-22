@@ -39,25 +39,29 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected static final String PREF_KEY_ALARM_ALERT_SOUND = "pref_key_alarm_alert_sound";
 	protected static final String PREF_KEY_ALARM_ALERT_TYPE = "pref_key_alarm_alert_type";
 	protected static final String PREF_KEY_ALARM_VIBRATE = "pref_key_alarm_vibrate";
+	protected static final String PREF_KEY_TIME_FRAME = "pref_key_time_frame";
 	protected static final String PREF_KEY_UPDATE_INTERVAL = "pref_key_update_interval";
 	protected static final String PREF_KEY_LAST_VALUE = "pref_key_last_value";
 	protected static final String PREF_KEY_UPPER_VALUE = "pref_key_upper_value";
 	protected static final String PREF_KEY_LOWER_VALUE = "pref_key_lower_value";
+	protected static final String PREF_KEY_SPIKE_ALERT = "pref_key_spike_alert";
 	protected static final String PREF_KEY_CHANGE_IN_PERCENTAGE = "pref_key_change_in_percentage";
 	protected static final String PREF_KEY_CHANGE_VALUE = "pref_key_change_value";
-	protected static final List<String> hitAlarmPrefsToKeep = Arrays.asList(PREF_KEY_UPPER_VALUE, PREF_KEY_LOWER_VALUE, PREF_KEY_UPDATE_INTERVAL);
-	protected static final List<String> changeAlarmPrefsToKeep = Arrays.asList(PREF_KEY_CHANGE_IN_PERCENTAGE, PREF_KEY_CHANGE_VALUE, PREF_KEY_UPDATE_INTERVAL);
+	protected static final List<String> hitAlarmPrefsToKeep = Arrays.asList(PREF_KEY_UPPER_VALUE, PREF_KEY_LOWER_VALUE,
+			PREF_KEY_UPDATE_INTERVAL);
+	protected static final List<String> changeAlarmPrefsToKeep = Arrays.asList(PREF_KEY_SPIKE_ALERT, PREF_KEY_CHANGE_IN_PERCENTAGE,
+			PREF_KEY_CHANGE_VALUE, PREF_KEY_TIME_FRAME, PREF_KEY_UPDATE_INTERVAL);
 	protected Activity enclosingActivity;
 	protected int exchangeIndex = 0, pairIndex = 0;
 	protected List<Pair> pairs = new ArrayList<Pair>();
 	protected double lastValue = Double.POSITIVE_INFINITY;
-	protected boolean isPercentage = false, recoverSavedInstance = false;
+	protected boolean isSpikeAlert = true, isPercentage = false, recoverSavedInstance = false;
 	protected SharedPreferences sharedPrefs;
 	protected PreferenceCategory specificCat;
 	protected ListPreference exchangeListPref, pairListPref, alarmTypePref, alarmAlertTypePref;
 	protected RingtonePreference alertSoundPref;
-	protected CheckBoxPreference isPercentPref, vibratePref;
-	protected EditTextPreference lastValuePref, upperLimitPref, lowerLimitPref, updateIntervalPref,
+	protected CheckBoxPreference spikeAlertPref, isPercentPref, vibratePref;
+	protected EditTextPreference lastValuePref, upperLimitPref, lowerLimitPref, timeFramePref, updateIntervalPref,
 			changePref;
 	protected OnPreferenceChangeListener listener;
 	protected StorageAndControlService mStorageAndControlService;
@@ -84,13 +88,15 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 		vibratePref = (CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE);
 		upperLimitPref = (EditTextPreference) findPreference(PREF_KEY_UPPER_VALUE);
 		lowerLimitPref = (EditTextPreference) findPreference(PREF_KEY_LOWER_VALUE);
+		spikeAlertPref = (CheckBoxPreference) findPreference(PREF_KEY_SPIKE_ALERT);
 		isPercentPref = (CheckBoxPreference) findPreference(PREF_KEY_CHANGE_IN_PERCENTAGE);
 		changePref = (EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE);
+		timeFramePref = (EditTextPreference) findPreference(PREF_KEY_TIME_FRAME);
 		updateIntervalPref = (EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL);
 
 		Preference[] prefs = { exchangeListPref, pairListPref, lastValuePref,
-				alarmTypePref, upperLimitPref, lowerLimitPref,
-				isPercentPref, changePref, updateIntervalPref,
+				alarmTypePref, upperLimitPref, lowerLimitPref, spikeAlertPref,
+				isPercentPref, changePref, timeFramePref, updateIntervalPref,
 				alarmAlertTypePref, alertSoundPref, vibratePref };
 		for (Preference pref : prefs) {
 			pref.setOnPreferenceChangeListener(listener);

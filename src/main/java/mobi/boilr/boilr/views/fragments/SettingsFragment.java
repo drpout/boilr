@@ -34,8 +34,8 @@ public class SettingsFragment extends PreferenceFragment implements
 	public static final String PREF_KEY_DEFAULT_ALERT_SOUND = "pref_key_default_alert_sound";
 	public static final String PREF_KEY_THEME = "pref_key_theme";
 	public static final String PREF_KEY_LANGUAGE = "pref_key_language";
-	public static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT = "pref_key_default_update_interval_hit";
-	public static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE = "pref_key_default_update_interval_change";
+	public static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL = "pref_key_default_update_interval";
+	public static final String PREF_KEY_DEFAULT_TIME_FRAME = "pref_key_default_time_frame";
 	public static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
 	private static final String PREF_KEY_SHOW_INTERNET_WARNING = "pref_key_show_internet_warning";
 	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
@@ -84,11 +84,11 @@ public class SettingsFragment extends PreferenceFragment implements
 				sharedPreferences.getString(PREF_KEY_DEFAULT_ALERT_SOUND, ""), enclosingActivity));
 
 		Preference pref;
-		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT);
-		pref.setSummary(sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT, "") + " s");
-		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE);
+		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL);
+		pref.setSummary(sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL, "") + " s");
+		pref = findPreference(PREF_KEY_DEFAULT_TIME_FRAME);
 		pref.setSummary(Conversions.buildMinToDaysSummary(
-				sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""), enclosingActivity));
+				sharedPreferences.getString(PREF_KEY_DEFAULT_TIME_FRAME, ""), enclosingActivity));
 
 		String language = sharedPreferences.getString(SettingsFragment.PREF_KEY_LANGUAGE, "");
 
@@ -154,9 +154,9 @@ public class SettingsFragment extends PreferenceFragment implements
 			} else {
 				Log.d(enclosingActivity.getString(R.string.not_bound, "PreferenceFragment"));
 			}
-		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_HIT)) {
+		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL)) {
 			pref.setSummary(sharedPrefs.getString(key, "") + " s");
-		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE)) {
+		} else if(key.equals(PREF_KEY_DEFAULT_TIME_FRAME)) {
 			pref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(key, ""), enclosingActivity));
 		} else if(key.equals(PREF_KEY_MOBILE_DATA)) {
 			StorageAndControlService.allowMobileData = sharedPrefs.getBoolean(key, false);

@@ -55,15 +55,15 @@
 			android:title="@string/pref_title_show_internet_warning"
 			android:defaultValue="true" />
 		<EditTextPreference
-		    android:key="pref_key_default_update_interval_hit"
-			android:title="@string/pref_title_default_update_interval_hit"
-			android:dialogMessage="@string/pref_summary_default_update_interval_hit"
+		    android:key="pref_key_default_update_interval"
+			android:title="@string/pref_title_default_update_interval"
+			android:dialogMessage="@string/pref_summary_default_update_interval"
 			android:inputType="number"
 			android:defaultValue="30" />
 		<EditTextPreference
-		    android:key="pref_key_default_update_interval_change"
-			android:title="@string/pref_title_default_update_interval_change"
-			android:dialogMessage="@string/pref_summary_default_update_interval_change"
+		    android:key="pref_key_default_time_frame"
+			android:title="@string/pref_title_default_time_frame"
+			android:dialogMessage="@string/pref_summary_default_time_frame"
 			android:inputType="number"
 			android:defaultValue="1440" />
 		<ListPreference

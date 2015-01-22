@@ -23,12 +23,16 @@
 		<jdk.version>1.6</jdk.version>
 		<libdynticker.version>0.4.0</libdynticker.version>
 		<libpricealarm.version>0.2.0</libpricealarm.version>
+		<android.maven.plugin.groupid>com.simpligility.maven.plugins</android.maven.plugin.groupid>
+		<android.maven.plugin.version>4.1.0</android.maven.plugin.version>
+		<android.sdk.version>21</android.sdk.version>
 		<release.description>
+			\+ Added Price Spike Alarm.
 			\+ Added Chinese, Italian, Polish and Portuguese translations.
 			\+ Last price on alarm list is now coloured according to price direction (up, down or same).
 			\+ Added arrow to the alarm triggered notification showing which direction the price took.
 			\+ Added app settings to control volume and dismiss no internet notification.
-			\+ Icon was completely redesigned.
+			\* Icon was completely redesigned.
 			\* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.
 			\* Fixed exchange data fetching on low quality internet connections.
 		</release.description>
@@ -66,13 +70,6 @@
 		</repository>
 	</distributionManagement>
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>jabylon-plugins</id>
-			<url>http://jabylon.org/maven</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.google.android</groupId>
@@ -109,12 +106,12 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+				<groupId>${android.maven.plugin.groupid}</groupId>
 				<artifactId>android-maven-plugin</artifactId>
-				<version>4.0.0-rc.1</version>
+				<version>${android.maven.plugin.version}</version>
 				<configuration>
 					<sdk>
-						<platform>20</platform>
+						<platform>${android.sdk.version}</platform>
 					</sdk>
 					<deleteConflictingFiles>true</deleteConflictingFiles>
 					<undeployBeforeDeploy>true</undeployBeforeDeploy>
@@ -138,7 +135,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>3.2</version>
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
@@ -239,7 +236,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
+				<version>1.8</version>
 				<executions>
 					<execution>
 						<id>copy-pom</id>
@@ -259,7 +256,7 @@
 			<plugin>
 				<groupId>de.jutzig</groupId>
 				<artifactId>github-release-plugin</artifactId>
-				<version>1.0.3</version>
+				<version>1.1.0</version>
 				<configuration>
 					<releaseName>${project.version}</releaseName>
 					<tag>${project.version}</tag>
@@ -336,12 +333,12 @@
 						</executions>
 					</plugin>
 					<plugin>
-						<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+						<groupId>${android.maven.plugin.groupid}</groupId>
 						<artifactId>android-maven-plugin</artifactId>
-						<version>4.0.0-rc.1</version>
+						<version>${android.maven.plugin.version}</version>
 						<configuration>
 							<sdk>
-								<platform>20</platform>
+								<platform>${android.sdk.version}</platform>
 							</sdk>
 							<deleteConflictingFiles>true</deleteConflictingFiles>
 							<undeployBeforeDeploy>true</undeployBeforeDeploy>
@@ -393,12 +390,12 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+						<groupId>${android.maven.plugin.groupid}</groupId>
 						<artifactId>android-maven-plugin</artifactId>
-						<version>4.0.0-rc.1</version>
+						<version>${android.maven.plugin.version}</version>
 						<configuration>
 							<sdk>
-								<platform>20</platform>
+								<platform>${android.sdk.version}</platform>
 							</sdk>
 							<deleteConflictingFiles>true</deleteConflictingFiles>
 							<undeployBeforeDeploy>true</undeployBeforeDeploy>

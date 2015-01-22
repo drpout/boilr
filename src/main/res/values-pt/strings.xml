@@ -44,10 +44,10 @@
     <string name="pref_title_network_usage">Utilização de dados</string>
     <string name="pref_title_mobile_data">Dados móveis</string>
     <string name="pref_title_show_internet_warning">Aviso sem internet</string>
-    <string name="pref_title_default_update_interval_hit">Intervalo de atualização por omissão para alarme de limite</string>
-    <string name="pref_summary_default_update_interval_hit">Em segundos. Define a frequência por omissão com que um alarme de preço limite obtém dados da bolsa. Pode definir outro intervalo para um alarme em particular nas suas definições.</string>
-    <string name="pref_title_default_update_interval_change">Prazo por omissão para alarme de variação</string>
-    <string name="pref_summary_default_update_interval_change">Em minutos. Define o prazo por omissão para os alarmes de variação de preço. Pode definir outro prazo para um alarme em particular nas suas definições.</string>
+    <string name="pref_title_default_update_interval">Intervalo de atualização por omissão</string>
+    <string name="pref_summary_default_update_interval">Em segundos. Define a frequência por omissão com que um alarme de preço limite obtém dados da bolsa. Pode definir outro intervalo para um alarme em particular nas suas definições.</string>
+    <string name="pref_title_default_time_frame">Prazo por omissão</string>
+    <string name="pref_summary_default_time_frame">Em minutos. Define o prazo por omissão para os alarmes de variação de preço. Pode definir outro prazo para um alarme em particular nas suas definições.</string>
     <string name="pref_title_check_pairs_interval">Procurar novos pares</string>
 
     <string-array name="pref_entries_check_pairs_interval">
@@ -76,13 +76,14 @@
     <string name="pref_title_specific">Específico</string>
     <string name="pref_title_upper_limit">Limite superior</string>
     <string name="pref_title_lower_limit">Limite inferior</string>
+    <string name="pref_title_spike_alert">Alerta de picos</string>
     <string name="pref_title_change_in_percentage">Variação percentual</string>
     <string name="pref_title_change_value">Variação</string>
     <string name="pref_title_update_interval">Intervalo de atualização</string>
     <string name="pref_title_time_frame">Prazo</string>
     <string name="pref_title_last_value">Último preço</string>
-    <string name="pref_summary_update_interval_hit">Em segundos. Define a frequência com que o alarme de preço limite obtém dados da bolsa.</string>
-    <string name="pref_summary_update_interval_change">Em minutos. Define o prazo para o alarme de variação de preço.</string>
+    <string name="pref_summary_update_interval">Em segundos. Define a frequência com que o alarme de preço limite obtém dados da bolsa.</string>
+    <string name="pref_summary_time_frame">Em minutos. Define o prazo para o alarme de variação de preço.</string>
     <string name="boilr_alarm">Alarme Boilr</string>
     <string name="turn_off">Desligar</string>
     <string name="keep_monitoring">Continuar a monitorizar</string>

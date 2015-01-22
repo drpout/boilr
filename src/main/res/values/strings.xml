@@ -63,10 +63,10 @@
     <string name="pref_title_network_usage">Network usage</string>
     <string name="pref_title_mobile_data">Mobile data</string>
     <string name="pref_title_show_internet_warning">Show no internet warning</string>
-    <string name="pref_title_default_update_interval_hit">Hit alarm default update interval</string>
-    <string name="pref_summary_default_update_interval_hit">In seconds. Defines how often a price hit alarm gets data from the exchange. You can set another interval for a particular alarm on its settings.</string>
-    <string name="pref_title_default_update_interval_change">Change alarm default time frame</string>
-    <string name="pref_summary_default_update_interval_change">In minutes. Defines the default time frame for price change alarms. You can set another time frame for a particular alarm on its settings.</string>
+    <string name="pref_title_default_update_interval">Default update interval</string>
+    <string name="pref_summary_default_update_interval">In seconds. Defines how often a price hit alarm gets data from the exchange. You can set another interval for a particular alarm on its settings.</string>
+    <string name="pref_title_default_time_frame">Default time frame</string>
+    <string name="pref_summary_default_time_frame">In minutes. Defines the default time frame for price change alarms. You can set another time frame for a particular alarm on its settings.</string>
     <string name="pref_title_check_pairs_interval">Check for new pairs</string>
 
     <string-array name="pref_entries_check_pairs_interval">
@@ -210,13 +210,14 @@
     <string name="pref_title_specific">Specific</string>
     <string name="pref_title_upper_limit">Upper limit</string>
     <string name="pref_title_lower_limit">Lower limit</string>
+    <string name="pref_title_spike_alert">Spike alert</string>
     <string name="pref_title_change_in_percentage">Change in percentage</string>
     <string name="pref_title_change_value">Change</string>
     <string name="pref_title_update_interval">Update interval</string>
     <string name="pref_title_time_frame">Time frame</string>
     <string name="pref_title_last_value">Last price</string>
-    <string name="pref_summary_update_interval_hit">In seconds. Defines how often the hit alarm gets data from the exchange.</string>
-    <string name="pref_summary_update_interval_change">In minutes. Defines the time frame for the price change alarm.</string>
+    <string name="pref_summary_update_interval">In seconds. Defines how often the hit alarm gets data from the exchange.</string>
+    <string name="pref_summary_time_frame">In minutes. Defines the time frame for the price change alarm.</string>
     <string name="boilr_alarm">Boilr Alarm</string>
     <string name="turn_off">Turn off</string>
     <string name="keep_monitoring">Keep monitoring</string>

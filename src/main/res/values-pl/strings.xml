@@ -44,10 +44,10 @@
     <string name="pref_title_network_usage">Wykorzystanie sieci</string>
     <string name="pref_title_mobile_data">Dane mobilne</string>
     <string name="pref_title_show_internet_warning">Nie pokazuj ostrzeżenia o połączeniu</string>
-    <string name="pref_title_default_update_interval_hit">Odstęp pomiędzy  sprawdzeniami ceny</string>
-    <string name="pref_summary_default_update_interval_hit">W sekundach. Opisuje jak często sprawdzana jest cena na giełdzie. Możesz zdefiniować inny odstęp dla konkretnego powiadomienia w jego ustawieniach.</string>
-    <string name="pref_title_default_update_interval_change">Zmień długość powiadomienia</string>
-    <string name="pref_summary_default_update_interval_change">W minutach. Opisuje domyślny czas trwania powiadomienia o zmianie cen. Możesz zdefiniować inny czas dla konkretnego powiadomienia w jego ustawieniach.</string>
+    <!-- Review please --><string name="pref_title_default_update_interval">Odstęp pomiędzy sprawdzeniami ceny</string>
+    <string name="pref_summary_default_update_interval">W sekundach. Opisuje jak często sprawdzana jest cena na giełdzie. Możesz zdefiniować inny odstęp dla konkretnego powiadomienia w jego ustawieniach.</string>
+    <!-- Review please --><string name="pref_title_default_time_frame">Długość powiadomienia</string>
+    <string name="pref_summary_default_time_frame">W minutach. Opisuje domyślny czas trwania powiadomienia o zmianie cen. Możesz zdefiniować inny czas dla konkretnego powiadomienia w jego ustawieniach.</string>
     <string name="pref_title_check_pairs_interval">Sprawdź nowe pary</string>
 
     <string-array name="pref_entries_check_pairs_interval">
@@ -76,13 +76,14 @@
     <string name="pref_title_specific">Szczególne</string>
     <string name="pref_title_upper_limit">Górny limit</string>
     <string name="pref_title_lower_limit">Dolny limit</string>
+    <!-- Review please --><string name="pref_title_spike_alert">Alarm o kolce</string>
     <string name="pref_title_change_in_percentage">Zmiana procentowa</string>
     <string name="pref_title_change_value">Zmiana</string>
     <string name="pref_title_update_interval">Częstotliwość zmian</string>
     <string name="pref_title_time_frame">Okres czasu</string>
     <string name="pref_title_last_value">Ostatnia cena</string>
-    <string name="pref_summary_update_interval_hit">W sekundach. Opisuje jak często sprawdzana jest cena na giełdzie.</string>
-    <string name="pref_summary_update_interval_change"> minutach. Opisuje domyślny czas trwania powiadomienia o zmianie cen.</string>
+    <string name="pref_summary_update_interval">W sekundach. Opisuje jak często sprawdzana jest cena na giełdzie.</string>
+    <string name="pref_summary_time_frame"> minutach. Opisuje domyślny czas trwania powiadomienia o zmianie cen.</string>
     <string name="boilr_alarm">Powiadomienie Boilr</string>
     <string name="turn_off">Wyłącz</string>
     <string name="keep_monitoring">Kontynuuj monitorowanie</string>

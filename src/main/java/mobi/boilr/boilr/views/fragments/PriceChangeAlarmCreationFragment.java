@@ -21,12 +21,14 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
-			if(key.equals(PREF_KEY_CHANGE_IN_PERCENTAGE)) {
+			if(key.equals(PREF_KEY_SPIKE_ALERT)) {
+				isSpikeAlert = (Boolean) newValue;
+			} else if(key.equals(PREF_KEY_CHANGE_IN_PERCENTAGE)) {
 				isPercentage = (Boolean) newValue;
 				updateChangeValueSummary();
 			} else if(key.equals(PREF_KEY_CHANGE_VALUE)) {
 				preference.setSummary(getChangeValueSummary((String) newValue));
-			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
+			} else if(key.equals(PREF_KEY_TIME_FRAME)) {
 				preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue, enclosingActivity));
 			} else {
 				return super.onPreferenceChange(preference, newValue);
@@ -51,28 +53,38 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		super.onCreate(savedInstanceState);
 
 		removePrefs(changeAlarmPrefsToKeep);
+		isSpikeAlert = spikeAlertPref.isChecked();
 		isPercentage = isPercentPref.isChecked();
+		updateIntervalPref.setDependency(PREF_KEY_SPIKE_ALERT);
 		if(savedInstanceState == null) {
-			alarmTypePref.setValueIndex(1);
-			EditTextPreference[] prefs = { changePref, updateIntervalPref };
-			for (EditTextPreference p : prefs) {
-				p.setText(null);
+			changePref.setText(null);
+			timeFramePref.setText(null);
+			timeFramePref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, ""),
+					enclosingActivity));
+			if(isSpikeAlert) {
+				updateIntervalPref.setText(null);
+				updateIntervalPref.setSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "") + " s");
 			}
-			updateIntervalPref.setTitle(R.string.pref_title_time_frame);
-			updateIntervalPref.setDialogMessage(R.string.pref_summary_update_interval_change);
-			updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(
-					sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""), enclosingActivity));
 		} else {
 			// Change value pref summary will be updated by updateDependentOnPair()
 
-			String updateInterval = updateIntervalPref.getText();
-			if(updateInterval == null || updateInterval.equals("")) {
-				updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(
-						sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""), enclosingActivity));
+			String timeFrame = timeFramePref.getText();
+			if(timeFrame == null || timeFrame.equals("")) {
+				timeFramePref.setSummary(Conversions.buildMinToDaysSummary(
+						sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, ""), enclosingActivity));
 			} else {
-				updateIntervalPref.setSummary(Conversions.buildMinToDaysSummary(updateInterval, enclosingActivity));
+				timeFramePref.setSummary(Conversions.buildMinToDaysSummary(timeFrame, enclosingActivity));
+			}
+			if(isSpikeAlert) {
+				String updateInterval = updateIntervalPref.getText();
+				if(updateInterval == null || updateInterval.equals("")) {
+					updateIntervalPref.setSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "") + " s");
+				} else {
+					updateIntervalPref.setSummary(updateInterval + " s");
+				}
 			}
 		}
+		alarmTypePref.setValueIndex(1);
 		specificCat.setTitle(alarmTypePref.getEntry());
 		alarmTypePref.setSummary(alarmTypePref.getEntry());
 	}
@@ -81,22 +93,38 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 	public void makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotify notify)
 			throws InterruptedException, ExecutionException, IOException {
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
-		String updateInterval = ((EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL)).getText();
+		String timeFrameString = ((EditTextPreference) findPreference(PREF_KEY_TIME_FRAME)).getText();
 		// Time is in minutes, convert to milliseconds
-		long period = Conversions.MILIS_IN_MINUTE * Long.parseLong(updateInterval != null ? updateInterval :
-				sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL_CHANGE, ""));
+		long timeFrame = Conversions.MILIS_IN_MINUTE
+			* Long.parseLong(timeFrameString != null ? timeFrameString :
+				sharedPreferences.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, ""));
 		String changeValueString = ((EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE)).getText();
 		double change;
 		if(changeValueString == null || changeValueString.equals(""))
 			change = Double.POSITIVE_INFINITY;
 		else
 			change = Double.parseDouble(changeValueString);
+		long updateInterval = 3000;
+		if(isSpikeAlert) {
+			String updateIntervalString = updateIntervalPref.getText();
+			// Time is in seconds, convert to milliseconds
+			updateInterval = 1000 * Long.parseLong(updateIntervalString != null ? updateIntervalString : sharedPrefs.getString(
+					SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, ""));
+		}
 		if(mBound) {
 			if(isPercentage) {
 				float percent = (float) change;
-				mStorageAndControlService.createAlarm(id, exchange, pair, period, notify, percent);
+				if(isSpikeAlert) {
+					mStorageAndControlService.createAlarm(id, exchange, pair, updateInterval, notify, percent, timeFrame);
+				} else {
+					mStorageAndControlService.createAlarm(id, exchange, pair, timeFrame, notify, percent);
+				}
 			} else {
-				mStorageAndControlService.createAlarm(id, exchange, pair, period, notify, change);
+				if(isSpikeAlert) {
+					mStorageAndControlService.createAlarm(id, exchange, pair, updateInterval, notify, change, timeFrame);
+				} else {
+					mStorageAndControlService.createAlarm(id, exchange, pair, timeFrame, notify, change);
+				}
 			}
 		} else {
 			throw new IOException(enclosingActivity.getString(R.string.not_bound, "PriceChangeAlarmCreationFragment"));

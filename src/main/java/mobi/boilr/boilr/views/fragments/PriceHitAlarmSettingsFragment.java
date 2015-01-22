@@ -40,14 +40,6 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 					EditTextPreference edit = (EditTextPreference) preference;
 					edit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerLimit()));
 				}
-			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
-				preference.setSummary(newValue + " s");
-				alarm.setPeriod(1000 * Long.parseLong((String) newValue));
-				if(mBound) {
-					mStorageAndControlService.restartAlarm(priceHitAlarm);
-				} else {
-					Log.d(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
-				}
 			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
@@ -66,12 +58,8 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 		super.onCreate(savedInstanceState);
 
 		removePrefs(hitAlarmPrefsToKeep);
-
-		if(savedInstanceState == null) {
-			alarmTypePref.setValueIndex(0);
-			updateIntervalPref.setDialogMessage(R.string.pref_summary_update_interval_hit);
-		}
 		// Upper and lower limit prefs summary will be updated by updateDependentOnPair()
+		alarmTypePref.setValueIndex(0);
 		specificCat.setTitle(alarmTypePref.getEntry());
 		alarmTypePref.setSummary(alarmTypePref.getEntry());
 	}

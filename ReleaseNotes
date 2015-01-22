@@ -1,9 +1,10 @@
 Version 0.5.0
++ Added Price Spike Alarm.
 + Added Chinese, Italian, Polish and Portuguese translations.
 + Last price on alarm list is now coloured according to price direction (up, down or same).
 + Added arrow to the alarm triggered notification showing which direction the price took.
 + Added app settings to control volume and dismiss no internet notification.
-+ Icon was completely redesigned.
+* Icon was completely redesigned.
 * Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.
 * Fixed exchange data fetching on low quality internet connections.
 
