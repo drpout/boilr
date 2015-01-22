@@ -33,6 +33,7 @@
 			\+ Added arrow to the alarm triggered notification showing which direction the price took.
 			\+ Added app settings to control volume and dismiss no internet notification.
 			\* Icon was completely redesigned.
+			\* Rearranged information on the alarms' rows.
 			\* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.
 			\* Fixed exchange data fetching on low quality internet connections.
 		</release.description>
