@@ -7,6 +7,7 @@ import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libpricealarm.PriceHitAlarm;
 import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -97,7 +98,7 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 		else
 			lowerLimit = Double.parseDouble(lowerLimitString);
 		if(mBound) {
-			mStorageAndControlService.createAlarm(id, exchange, pair, period, notify, upperLimit, lowerLimit);
+			mStorageAndControlService.addAlarm(new PriceHitAlarm(id, exchange, pair, period, notify, upperLimit, lowerLimit));
 		} else {
 			throw new IOException(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmCreationFragment"));
 		}

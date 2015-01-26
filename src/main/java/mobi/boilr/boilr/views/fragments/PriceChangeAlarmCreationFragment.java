@@ -1,13 +1,15 @@
 package mobi.boilr.boilr.views.fragments;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.domain.AndroidNotify;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libpricealarm.PriceChangeAlarm;
+import mobi.boilr.libpricealarm.PriceSpikeAlarm;
+import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -91,7 +93,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 
 	@Override
 	public void makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotify notify)
-			throws InterruptedException, ExecutionException, IOException {
+			throws TimeFrameSmallerOrEqualUpdateIntervalException, IOException {
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
 		String timeFrameString = ((EditTextPreference) findPreference(PREF_KEY_TIME_FRAME)).getText();
 		// Time is in minutes, convert to milliseconds
@@ -115,15 +117,15 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			if(isPercentage) {
 				float percent = (float) change;
 				if(isSpikeAlert) {
-					mStorageAndControlService.createAlarm(id, exchange, pair, updateInterval, notify, percent, timeFrame);
+					mStorageAndControlService.addAlarm(new PriceSpikeAlarm(id, exchange, pair, updateInterval, notify, percent, timeFrame));
 				} else {
-					mStorageAndControlService.createAlarm(id, exchange, pair, timeFrame, notify, percent);
+					mStorageAndControlService.addAlarm(new PriceChangeAlarm(id, exchange, pair, timeFrame, notify, percent));
 				}
 			} else {
 				if(isSpikeAlert) {
-					mStorageAndControlService.createAlarm(id, exchange, pair, updateInterval, notify, change, timeFrame);
+					mStorageAndControlService.addAlarm(new PriceSpikeAlarm(id, exchange, pair, updateInterval, notify, change, timeFrame));
 				} else {
-					mStorageAndControlService.createAlarm(id, exchange, pair, timeFrame, notify, change);
+					mStorageAndControlService.addAlarm(new PriceChangeAlarm(id, exchange, pair, timeFrame, notify, change));
 				}
 			}
 		} else {

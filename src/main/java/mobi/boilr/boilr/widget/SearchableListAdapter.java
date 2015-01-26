@@ -91,9 +91,6 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 			
 			btnClose.setOnClickListener(this);
 			
-			//btnClose.setBackgroundDrawable(R);
-			
-			
 			if(!search.equals(SEARCH) && !search.equals("")){
 				editText.requestFocus();
 			}
