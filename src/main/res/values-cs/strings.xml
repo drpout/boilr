@@ -91,7 +91,9 @@
     <string name="couldnt_retrieve_pairs">Nelze získat páry pro %1$s.</string>
     <string name="couldnt_retrieve_last_value">Nelze získat poslední hodnotu pro %1$s pro pár %2$s.</string>
     <string name="failed_create_alarm">Chyba při vytváření upozornění.</string>
-    <string name="cannot_set_limit">Nelze nastavit limit.</string>
+    <!-- Missing translation <string name="failed_save_alarm">Failed to save alarm.</string>
+    <string name="upper_must_larger_lower">Upper limit must be larger than lower limit.</string>
+    <string name="frame_must_longer_interval">Time frame must be longer than update interval.</string>-->
     <string name="check_connection">Ověřte prosím své internetové připojení.</string>
     <string name="not_bound">%1$s nepřipojen k službě StorageAndControlService.</string>
     <string name="pair_search_description">Hledat pár</string>

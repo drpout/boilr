@@ -21,7 +21,7 @@ Trouble | Solution
 Alarm not updating when phone is sleeping. | Set `Settings > Wi-Fi > Advanced > Keep Wi-Fi on during sleep` to `Always`
 
 ## Building
-You need to fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted) and to get the Android SDK for API 20. Then run `mvn validate` once to make Maven aware of the plugins we use to download and install dependencies which are not in Maven repositories. For then on you can use:
+You need to fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted) and to get the Android SDK for API 21. Then run `mvn validate` once to make Maven aware of the plugins we use to download and install dependencies which are not in Maven repositories. For then on you can use:
 
 * `mvn package -P debug` to build an apk in debug mode.
 * `mvn package -P release` to build an apk in release mode, which will be optimized, signed and aligned.

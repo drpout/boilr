@@ -4,6 +4,7 @@ import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
+import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -22,23 +23,15 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 				try {
 					priceHitAlarm.setUpperLimit(Double.parseDouble((String) newValue));
 					preference.setSummary(newValue + " " + alarm.getPair().getExchange());
-				} catch (Exception e) {
-					String msg = enclosingActivity.getString(R.string.cannot_set_limit);
-					Log.e(msg, e);
-					Toast.makeText(enclosingActivity, msg + " " + e.getMessage(), Toast.LENGTH_LONG).show();
-					EditTextPreference edit = (EditTextPreference) preference;
-					edit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperLimit()));
+				} catch(UpperLimitSmallerOrEqualLowerLimitException e) {
+					handleLimitsExceptions(e);
 				}
 			} else if(key.equals(PREF_KEY_LOWER_VALUE)) {
 				try {
 					priceHitAlarm.setLowerLimit(Double.parseDouble((String) newValue));
 					preference.setSummary(newValue + " " + alarm.getPair().getExchange());
-				} catch (Exception e) {
-					String msg = enclosingActivity.getString(R.string.cannot_set_limit);
-					Log.e(msg, e);
-					Toast.makeText(enclosingActivity, msg + " " + e.getMessage(), Toast.LENGTH_LONG).show();
-					EditTextPreference edit = (EditTextPreference) preference;
-					edit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerLimit()));
+				} catch(UpperLimitSmallerOrEqualLowerLimitException e) {
+					handleLimitsExceptions(e);
 				}
 			} else {
 				return super.onPreferenceChange(preference, newValue);
@@ -49,6 +42,21 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 				Log.d(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
 			}
 			return true;
+		}
+
+		private void handleLimitsExceptions(UpperLimitSmallerOrEqualLowerLimitException e) {
+			String msg = enclosingActivity.getString(R.string.failed_save_alarm) + " "
+				+ enclosingActivity.getString(R.string.upper_must_larger_lower);
+			Log.e(msg, e);
+			Toast.makeText(enclosingActivity, msg, Toast.LENGTH_LONG).show();
+			/*
+			 * The following does not work. We would have to use a
+			 * SharedPreferences instead of Preference:
+			 * http://stackoverflow.com/a/20598084
+			 * ((EditTextPreference) preference)
+			 * .getEditText().setText(Conversions.formatMaxDecimalPlaces
+			 * (limitValue));
+			 */
 		}
 	}
 

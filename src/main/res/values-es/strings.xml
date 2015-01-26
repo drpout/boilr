@@ -92,7 +92,9 @@
     <string name="couldnt_retrieve_pairs">Imposible obtener pares para %1$s</string>
     <string name="couldnt_retrieve_last_value">Imposible obtener el último precio para %1$s con el par %2$s</string>
     <string name="failed_create_alarm">Fallo al crear alarma.</string>
-    <string name="cannot_set_limit">Imposible definir el límite.</string>
+    <string name="failed_save_alarm">Fallo al guardar alarma.</string>
+    <string name="upper_must_larger_lower">Límite superior debe ser mayor que límite inferior.</string>
+    <string name="frame_must_longer_interval">Plazo debe ser más largo que intervalo de actualización.</string>
     <string name="check_connection">Verifique la conexión a internet.</string>
     <string name="not_bound">%1$s no está conectado al StorageAndControlService.</string>
     <string name="pair_search_description">Buscador de pares</string>

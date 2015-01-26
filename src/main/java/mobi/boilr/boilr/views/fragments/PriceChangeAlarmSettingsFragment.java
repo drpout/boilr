@@ -5,8 +5,10 @@ import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceSpikeAlarm;
+import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.widget.Toast;
 
 public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 	private PriceChangeAlarm priceChangeAlarm;
@@ -34,17 +36,24 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 				}
 				preference.setSummary(getChangeValueSummary((String) newValue));
 			} else if(key.equals(PREF_KEY_TIME_FRAME)) {
-				preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue, enclosingActivity));
 				long timeFrame = Long.parseLong((String) newValue) * Conversions.MILIS_IN_MINUTE;
-				if(isSpikeAlert) {
-					((PriceSpikeAlarm) priceChangeAlarm).setTimeFrame(timeFrame);
-				} else {
-					priceChangeAlarm.setPeriod(timeFrame);
-					if(mBound) {
-						mStorageAndControlService.restartAlarm(priceChangeAlarm);
+				try {
+					if(isSpikeAlert) {
+						((PriceSpikeAlarm) priceChangeAlarm).setTimeFrame(timeFrame);
 					} else {
-						Log.d(enclosingActivity.getString(R.string.not_bound, "PriceChangeAlarmSettingsFragment"));
+						priceChangeAlarm.setPeriod(timeFrame);
+						if(mBound) {
+							mStorageAndControlService.restartAlarm(priceChangeAlarm);
+						} else {
+							Log.d(enclosingActivity.getString(R.string.not_bound, "PriceChangeAlarmSettingsFragment"));
+						}
 					}
+					preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue, enclosingActivity));
+				} catch(TimeFrameSmallerOrEqualUpdateIntervalException e) {
+					String msg = enclosingActivity.getString(R.string.failed_save_alarm) + " "
+						+ enclosingActivity.getString(R.string.frame_must_longer_interval);
+					Log.e(msg, e);
+					Toast.makeText(enclosingActivity, msg, Toast.LENGTH_LONG).show();
 				}
 			} else {
 				return super.onPreferenceChange(preference, newValue);

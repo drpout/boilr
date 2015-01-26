@@ -11,6 +11,7 @@ import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
+import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ServiceConnection;
@@ -21,6 +22,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.RingtonePreference;
+import android.widget.Toast;
 
 public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 	protected Alarm alarm;
@@ -111,12 +113,19 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 				updateDependentOnPairAux();
 				alarm.setPair(pair);
 			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
-				preference.setSummary(newValue + " s");
-				alarm.setPeriod(1000 * Long.parseLong((String) newValue));
-				if(mBound) {
-					mStorageAndControlService.restartAlarm(alarm);
-				} else {
-					Log.d(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
+				try {
+					alarm.setPeriod(1000 * Long.parseLong((String) newValue));
+					if(mBound) {
+						mStorageAndControlService.restartAlarm(alarm);
+					} else {
+						Log.d(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
+					}
+					preference.setSummary(newValue + " s");
+				} catch(TimeFrameSmallerOrEqualUpdateIntervalException e) {
+					String msg = enclosingActivity.getString(R.string.failed_save_alarm) + " "
+						+ enclosingActivity.getString(R.string.frame_must_longer_interval);
+					Log.e(msg, e);
+					Toast.makeText(enclosingActivity, msg, Toast.LENGTH_LONG).show();
 				}
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_TYPE)) {
 				ListPreference alertTypePref = (ListPreference) preference;

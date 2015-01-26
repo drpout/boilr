@@ -493,17 +493,15 @@ public class StorageAndControlService extends Service {
 		createAlarmAux(alarm);
 	}
 
-	public void createAlarm(int id, Exchange exchange, Pair pair, long period,
-			AndroidNotify notify,
-			float percent) throws InterruptedException, ExecutionException, IOException {
+	public void createAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify, float percent) throws InterruptedException,
+			ExecutionException, IOException {
 		// Change alarms always check last value to build the change
 		PriceChangeAlarm alarm = ((new AddPercentageAlarmTask()).execute(new PercentageAlarmParameter(id, exchange, pair, period, notify, percent))).get();
 		createAlarmAux(alarm);
 	}
 
-	public void createAlarm(int id, Exchange exchange, Pair pair, long period,
-			AndroidNotify notify,
-			double change) throws InterruptedException, ExecutionException, IOException {
+	public void createAlarm(int id, Exchange exchange, Pair pair, long period, AndroidNotify notify, double change) throws InterruptedException,
+			ExecutionException, IOException {
 		// Change alarms always check last value to build the change
 		PriceChangeAlarm alarm = ((new AddChangeAlarmTask()).execute(new ChangeAlarmParameter(id, exchange, pair, period, notify, change))).get();
 		createAlarmAux(alarm);

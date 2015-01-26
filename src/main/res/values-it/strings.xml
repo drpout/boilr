@@ -79,7 +79,7 @@
     <!-- Review please --><string name="pref_title_spike_alert">Allarme di picchi</string>
     <string name="pref_title_change_in_percentage">Cambio in percentuale</string>
     <string name="pref_title_change_value">Cambio</string>
-    <string name="pref_title_update_interval">Update interval</string>
+    <string name="pref_title_update_interval">Intervallo di aggiornamento</string>
     <string name="pref_title_time_frame">Periodo</string>
     <string name="pref_title_last_value">Ultimo prezzo</string>
     <string name="pref_summary_update_interval">In pochi secondi. Definisce la frequenza di allarme quando riceve i dati dal cambio.</string>
@@ -92,7 +92,9 @@
     <string name="couldnt_retrieve_pairs">Impossibile recuperare coppie %1$s.</string>
     <string name="couldnt_retrieve_last_value">Impossibile recuperate l\'ultimo valore %1$s con coppie %2$s.</string>
     <string name="failed_create_alarm">Impossibile creare allarme.</string>
-    <string name="cannot_set_limit">Impossibile impostare il limite.</string>
+    <string name="failed_save_alarm">Impossibile salvare allarme.</string>
+    <!-- Review please --><string name="upper_must_larger_lower">Limite massimo deve essere maggiore al limite minimo.</string>
+    <string name="frame_must_longer_interval">Periodo deve essere più lungo al intervallo di aggiornamento.</string>
     <string name="check_connection">Prego controlla la connessione a internet.</string>
     <string name="not_bound">%1$s non legato a StorageAndControlService.</string>
     <string name="pair_search_description">Cerca coppie</string>

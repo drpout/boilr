@@ -11,6 +11,7 @@ import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
 import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
 import android.app.Activity;
 import android.app.Fragment;
@@ -211,7 +212,8 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 		Log.d("alertType: " + alertType + ", alertSound: " + alertSound + ", vibrate: " + vibrate);
 
 		AndroidNotify notify = new AndroidNotify(enclosingActivity, alertType, alertSound, vibrate);
-
+		
+		String failMsg = enclosingActivity.getString(R.string.failed_create_alarm);
 		try {
 			if(!mBound) {
 				throw new IOException(enclosingActivity.getString(R.string.not_bound, "AlarmCreationFragment"));
@@ -224,14 +226,22 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 			alarmIdIntent.putExtra("alarmID", id);
 			enclosingActivity.setResult(Activity.RESULT_OK, alarmIdIntent);
 			enclosingActivity.finish();
+		} catch(UpperLimitSmallerOrEqualLowerLimitException e) {
+			failMsg += " " + enclosingActivity.getString(R.string.upper_must_larger_lower);
+			Log.e(failMsg, e);
+			Toast.makeText(enclosingActivity, failMsg, Toast.LENGTH_LONG).show();
+		} catch(TimeFrameSmallerOrEqualUpdateIntervalException e) {
+			failMsg += " " + enclosingActivity.getString(R.string.frame_must_longer_interval);
+			Log.e(failMsg, e);
+			Toast.makeText(enclosingActivity, failMsg, Toast.LENGTH_LONG).show();
 		} catch(Exception e) {
-			String failedCreate = enclosingActivity.getString(R.string.failed_create_alarm);
-			Log.e(failedCreate, e);
-			Toast.makeText(enclosingActivity, failedCreate + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+			Log.e(failMsg, e);
+			Toast.makeText(enclosingActivity, failMsg + " " + e.getMessage(), Toast.LENGTH_LONG).show();
 		}
 	}
 
 	protected abstract void makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotify notify)
-			throws UpperLimitSmallerOrEqualLowerLimitException, IOException, InterruptedException,
+ throws UpperLimitSmallerOrEqualLowerLimitException,
+			TimeFrameSmallerOrEqualUpdateIntervalException, IOException, InterruptedException,
 			ExecutionException;
 }
