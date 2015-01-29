@@ -41,6 +41,8 @@
 			\* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.
 			\* Fixed exchange data fetching on low quality internet connections.
 			\- Removed Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
+			\- Removed Justcoin exchange.
+			\- Removed Vault of Satoshi exchange.
 		</release.description>
 	</properties>
 
