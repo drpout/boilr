@@ -103,6 +103,12 @@
 			<artifactId>libpricealarm</artifactId>
 			<version>${libpricealarm.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.github.gabrielemariotti.changeloglib</groupId>
+			<artifactId>library</artifactId>
+			<version>1.5.2</version>
+			<type>aar</type>
+		</dependency>
 	</dependencies>
 
 	<build>
