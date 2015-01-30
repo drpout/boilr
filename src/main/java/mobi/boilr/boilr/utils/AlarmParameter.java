@@ -1,6 +1,6 @@
 package mobi.boilr.boilr.utils;
 
-import mobi.boilr.boilr.domain.AndroidNotify;
+import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
@@ -10,15 +10,15 @@ public class AlarmParameter {
 	private final Exchange exchange;
 	private final Pair pair;
 	private final long period;
-	private final AndroidNotify notify;
+	private final AndroidNotifier notifier;
 
 	public AlarmParameter(int id, Exchange exchange, Pair pair, long period,
-			AndroidNotify notify) {
+			AndroidNotifier notifier) {
 		this.id = id;
 		this.exchange = exchange;
 		this.pair = pair;
 		this.period = period;
-		this.notify = notify;
+		this.notifier = notifier;
 	}
 
 	public int getId() {
@@ -37,7 +37,7 @@ public class AlarmParameter {
 		return period;
 	}
 
-	public AndroidNotify getNotify() {
-		return notify;
+	public AndroidNotifier getNotifier() {
+		return notifier;
 	}
 }

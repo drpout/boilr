@@ -39,7 +39,7 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 			if(mBound) {
 				mStorageAndControlService.replaceAlarmDB(priceHitAlarm);
 			} else {
-				Log.d(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
+				Log.e(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
 			}
 			return true;
 		}

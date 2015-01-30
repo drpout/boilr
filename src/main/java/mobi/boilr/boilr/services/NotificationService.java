@@ -3,6 +3,7 @@ package mobi.boilr.boilr.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
 import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
@@ -37,7 +38,7 @@ public class NotificationService extends Service {
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
-			Log.d("NotificationService bound to StorageAndControlService.");
+			Log.e(getString(R.string.not_bound, "NotificationService"));
 			for (int alarmID : mPendingAlarms)
 				startNotify(alarmID);
 		}
@@ -98,14 +99,19 @@ public class NotificationService extends Service {
 			if(START_NOTIFY_ACTION.equals(action)) {
 				if(mBound)
 					startNotify(alarmID);
-				else
+				else {
 					mPendingAlarms.add(alarmID);
+					Log.e(getString(R.string.not_bound, "NotificationService"));
+				}
 			} else if(STOP_NOTIFY_ACTION.equals(action)) {
 				mInFullScreen = false; //It might be redundant
 				boolean keepMonitoring = intent.getBooleanExtra("keepMonitoring", false);
-				if(keepMonitoring)
+				if(keepMonitoring) {
 					if(mBound)
 						mService.startAlarm(alarmID);
+					else
+						Log.e(getString(R.string.not_bound, "NotificationService"));
+				}
 				stopSelf();
 			}
 		}
@@ -116,7 +122,7 @@ public class NotificationService extends Service {
 	public void onDestroy() {
 		super.onDestroy();
 		if(currentAlarmID == Integer.MIN_VALUE) {
-			Log.v("NotificationService - There is no current alarm to stop.");
+			Log.d("NotificationService: there is no current alarm to stop.");
 			return;
 		}
 		NotificationKlaxon.stop(this);

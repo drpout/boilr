@@ -152,7 +152,7 @@ public class SettingsFragment extends PreferenceFragment implements
 					e.setExperiedPeriod(pairInterval);
 				}
 			} else {
-				Log.d(enclosingActivity.getString(R.string.not_bound, "PreferenceFragment"));
+				Log.e(enclosingActivity.getString(R.string.not_bound, "PreferenceFragment"));
 			}
 		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL)) {
 			pref.setSummary(sharedPrefs.getString(key, "") + " s");

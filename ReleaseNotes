@@ -6,6 +6,7 @@ Version 0.5.0
 + Added app settings to control volume and dismiss no internet notification.
 * Icon was completely redesigned.
 * Rearranged information on the alarms' rows.
+* Offed alarms are now continuously updated while alarm list is visible.
 * Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.
 * Fixed exchange data fetching on low quality internet connections.
 

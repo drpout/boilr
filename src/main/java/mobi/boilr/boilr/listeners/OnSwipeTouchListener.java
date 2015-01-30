@@ -1,5 +1,6 @@
 package mobi.boilr.boilr.listeners;
 
+import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
@@ -104,7 +105,8 @@ public class OnSwipeTouchListener implements OnTouchListener {
 							enclosingActivity.getmStorageAndControlService().deleteAlarm(alarm);
 							adapter.remove(mPointToPosition);
 						} else {
-							Log.d("Couldn't remove alarm " + alarm.getId());
+						Log.e(enclosingActivity.getString(R.string.not_bound, "OnSwipeTouchListener"));
+						Log.e("Couldn't remove alarm " + alarm.getId());
 						}						
 					} else {
 						//back into place

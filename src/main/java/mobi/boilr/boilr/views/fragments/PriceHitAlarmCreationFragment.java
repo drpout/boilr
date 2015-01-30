@@ -2,11 +2,11 @@ package mobi.boilr.boilr.views.fragments;
 
 import java.io.IOException;
 
-import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.domain.AndroidNotify;
+import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
 import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
 import android.os.Bundle;
@@ -79,7 +79,7 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 	}
 
 	@Override
-	public void makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotify notify)
+	public Alarm makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotifier notifier)
 			throws UpperLimitSmallerOrEqualLowerLimitException, IOException {
 		String updateInterval = updateIntervalPref.getText();
 		// Time is in seconds, convert to milliseconds
@@ -97,10 +97,6 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 			lowerLimit = Double.NEGATIVE_INFINITY;
 		else
 			lowerLimit = Double.parseDouble(lowerLimitString);
-		if(mBound) {
-			mStorageAndControlService.addAlarm(new PriceHitAlarm(id, exchange, pair, period, notify, upperLimit, lowerLimit));
-		} else {
-			throw new IOException(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmCreationFragment"));
-		}
+		return new PriceHitAlarm(id, exchange, pair, period, notifier, upperLimit, lowerLimit);
 	}
 }

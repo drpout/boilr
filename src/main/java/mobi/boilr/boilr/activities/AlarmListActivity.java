@@ -2,18 +2,15 @@ package mobi.boilr.boilr.activities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.listeners.OnSwipeTouchListener;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
-import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
-import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
 import android.app.Activity;
@@ -22,14 +19,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.ListPreference;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,7 +48,7 @@ public class AlarmListActivity extends ListActivity {
 			List<Alarm> alarms = mStorageAndControlService.getAlarms();
 			adapter.clear();
 			adapter.addAll(alarms);
-			mStorageAndControlService.updateOffedAlarms(adapter);
+			mStorageAndControlService.scheduleOffedAlarms();
 		}
 
 		@Override
@@ -146,14 +138,10 @@ public class AlarmListActivity extends ListActivity {
 	public void onToggleClicked(View view) {
 		int id = (Integer) view.getTag();
 		if(mBound) {
-			if(mStorageAndControlService.getAlarm(id).isOn()) {
-				Log.d("Turning off alarm " + id);
-				mStorageAndControlService.stopAlarm(id);
-			} else {
-				mStorageAndControlService.startAlarm(id);
-				Log.d("Turning on alarm " + id);
-			}
+			mStorageAndControlService.toggleAlarm(id);
 			adapter.notifyDataSetChanged();
+		} else {
+			Log.e(getString(R.string.not_bound, "AlarmListActivity"));
 		}
 	}
 
@@ -168,7 +156,7 @@ public class AlarmListActivity extends ListActivity {
 				if(mBound) {
 					adapter.add(mStorageAndControlService.getAlarm(alarmID));
 				} else {
-					Log.d(getString(R.string.not_bound, "AlarmListActivity"));
+					Log.e(getString(R.string.not_bound, "AlarmListActivity"));
 				}
 			}
 		}
@@ -176,8 +164,13 @@ public class AlarmListActivity extends ListActivity {
 
 	@Override
 	protected void onDestroy() {
+		if(mBound) {
+			mStorageAndControlService.unscheduleOffedAlarms();
+			unbindService(mStorageAndControlServiceConnection);
+		} else {
+			Log.e(getString(R.string.not_bound, "AlarmListActivity"));
+		}
 		super.onDestroy();
-		unbindService(mStorageAndControlServiceConnection);
 	}
 
 	@Override

@@ -4,13 +4,14 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.domain.AndroidNotify;
+import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
 import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
 import android.app.Activity;
@@ -206,13 +207,8 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 		} else {
 			alertSound = sharedPrefs.getString(PREF_KEY_ALARM_ALERT_SOUND, "");
 		}
-
 		Boolean vibrate = defaultVibrateDef ? null : ((CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE)).isChecked();
-
-		Log.d("alertType: " + alertType + ", alertSound: " + alertSound + ", vibrate: " + vibrate);
-
-		AndroidNotify notify = new AndroidNotify(enclosingActivity, alertType, alertSound, vibrate);
-		
+		AndroidNotifier notifier = new AndroidNotifier(enclosingActivity, alertType, alertSound, vibrate);
 		String failMsg = enclosingActivity.getString(R.string.failed_create_alarm);
 		try {
 			if(!mBound) {
@@ -221,7 +217,8 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 			int id = mStorageAndControlService.generateAlarmID();
 			Exchange exchange = mStorageAndControlService.getExchange(((ListPreference) findPreference(PREF_KEY_EXCHANGE)).getValue());
 			Pair pair = pairs.get(pairIndex);
-			makeAlarm(id, exchange, pair, notify);
+			Alarm alarm = makeAlarm(id, exchange, pair, notifier);
+			mStorageAndControlService.addAlarm(alarm);
 			Intent alarmIdIntent = new Intent();
 			alarmIdIntent.putExtra("alarmID", id);
 			enclosingActivity.setResult(Activity.RESULT_OK, alarmIdIntent);
@@ -240,7 +237,7 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 		}
 	}
 
-	protected abstract void makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotify notify)
+	protected abstract Alarm makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotifier notifier)
  throws UpperLimitSmallerOrEqualLowerLimitException,
 			TimeFrameSmallerOrEqualUpdateIntervalException, IOException, InterruptedException,
 			ExecutionException;

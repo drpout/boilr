@@ -2,11 +2,11 @@ package mobi.boilr.boilr.views.fragments;
 
 import java.io.IOException;
 
-import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.domain.AndroidNotify;
+import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceSpikeAlarm;
 import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
@@ -92,7 +92,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 	}
 
 	@Override
-	public void makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotify notify)
+	public Alarm makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotifier notifier)
 			throws TimeFrameSmallerOrEqualUpdateIntervalException, IOException {
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
 		String timeFrameString = ((EditTextPreference) findPreference(PREF_KEY_TIME_FRAME)).getText();
@@ -113,23 +113,21 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			updateInterval = 1000 * Long.parseLong(updateIntervalString != null ? updateIntervalString : sharedPrefs.getString(
 					SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, ""));
 		}
-		if(mBound) {
-			if(isPercentage) {
-				float percent = (float) change;
-				if(isSpikeAlert) {
-					mStorageAndControlService.addAlarm(new PriceSpikeAlarm(id, exchange, pair, updateInterval, notify, percent, timeFrame));
-				} else {
-					mStorageAndControlService.addAlarm(new PriceChangeAlarm(id, exchange, pair, timeFrame, notify, percent));
-				}
+		Alarm ret;
+		if(isPercentage) {
+			float percent = (float) change;
+			if(isSpikeAlert) {
+				ret = new PriceSpikeAlarm(id, exchange, pair, updateInterval, notifier, percent, timeFrame);
 			} else {
-				if(isSpikeAlert) {
-					mStorageAndControlService.addAlarm(new PriceSpikeAlarm(id, exchange, pair, updateInterval, notify, change, timeFrame));
-				} else {
-					mStorageAndControlService.addAlarm(new PriceChangeAlarm(id, exchange, pair, timeFrame, notify, change));
-				}
+				ret = new PriceChangeAlarm(id, exchange, pair, timeFrame, notifier, percent);
 			}
 		} else {
-			throw new IOException(enclosingActivity.getString(R.string.not_bound, "PriceChangeAlarmCreationFragment"));
+			if(isSpikeAlert) {
+				ret = new PriceSpikeAlarm(id, exchange, pair, updateInterval, notifier, change, timeFrame);
+			} else {
+				ret = new PriceChangeAlarm(id, exchange, pair, timeFrame, notifier, change);
+			}
 		}
+		return ret;
 	}
 }

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmSettingsActivity;
-import mobi.boilr.boilr.domain.AndroidNotify;
+import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
@@ -52,8 +52,8 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 			} else {
 				exchangeListPref.setValue(exchangeCode);
 
-				AndroidNotify notify = (AndroidNotify) alarm.getNotify();
-				Integer alertType = notify.getAlertType();
+				AndroidNotifier notifier = (AndroidNotifier) alarm.getNotifier();
+				Integer alertType = notifier.getAlertType();
 				if(alertType == null) {
 					alertType = Integer.parseInt(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE, ""));
 				}
@@ -61,14 +61,14 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 				alarmAlertTypePref.setSummary(alarmAlertTypePref.getEntries()[alarmAlertTypePref.findIndexOfValue(alertType.toString())]);
 				alertSoundPref.setRingtoneType(alertType);
 
-				String alertSound = notify.getAlertSound();
+				String alertSound = notifier.getAlertSound();
 				if(alertSound == null) {
 					alertSound = sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, "");
 				}
 				sharedPrefs.edit().putString(PREF_KEY_ALARM_ALERT_SOUND, alertSound).commit();
 				alertSoundPref.setSummary(Conversions.ringtoneUriToName(alertSound, enclosingActivity));
 
-				Boolean isVibrate = notify.isVibrate();
+				Boolean isVibrate = notifier.isVibrate();
 				if(isVibrate == null) {
 					isVibrate = sharedPrefs.getBoolean(SettingsFragment.PREF_KEY_VIBRATE_DEFAULT, true);
 				}
@@ -90,7 +90,7 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
-			AndroidNotify androidNotify = (AndroidNotify) alarm.getNotify();
+			AndroidNotifier notifier = (AndroidNotifier) alarm.getNotifier();
 			if(key.equals(PREF_KEY_EXCHANGE)) {
 				ListPreference listPref = (ListPreference) preference;
 				exchangeIndex = listPref.findIndexOfValue((String) newValue);
@@ -116,9 +116,9 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 				try {
 					alarm.setPeriod(1000 * Long.parseLong((String) newValue));
 					if(mBound) {
-						mStorageAndControlService.restartAlarm(alarm);
+						mStorageAndControlService.resetAlarmPeriod(alarm);
 					} else {
-						Log.d(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
+						Log.e(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
 					}
 					preference.setSummary(newValue + " s");
 				} catch(TimeFrameSmallerOrEqualUpdateIntervalException e) {
@@ -135,15 +135,15 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 				alertSoundPref.setRingtoneType(ringtoneType);
 				String defaultRingtone = RingtoneManager.getDefaultUri(ringtoneType).toString();
 				alertSoundPref.setSummary(Conversions.ringtoneUriToName(defaultRingtone, enclosingActivity));
-				androidNotify.setAlertType(ringtoneType);
-				androidNotify.setAlertSound(defaultRingtone);
+				notifier.setAlertType(ringtoneType);
+				notifier.setAlertSound(defaultRingtone);
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_SOUND)) {
 				RingtonePreference alertSoundPref = (RingtonePreference) preference;
 				String alertSound = (String) newValue;
 				alertSoundPref.setSummary(Conversions.ringtoneUriToName(alertSound, enclosingActivity));
-				androidNotify.setAlertSound(alertSound);
+				notifier.setAlertSound(alertSound);
 			} else if(key.equals(PREF_KEY_ALARM_VIBRATE)) {
-				androidNotify.setVibrate((Boolean) newValue);
+				notifier.setVibrate((Boolean) newValue);
 			} else {
 				Log.d("No behavior for " + key);
 				return true;
@@ -152,7 +152,7 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 			if(mBound) {
 				mStorageAndControlService.replaceAlarmDB(alarm);
 			} else {
-				Log.d(enclosingActivity.getString(R.string.not_bound, "AlarmSettingsFragment"));
+				Log.e(enclosingActivity.getString(R.string.not_bound, "AlarmSettingsFragment"));
 			}
 			return true;
 		}

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import mobi.boilr.boilr.domain.AndroidNotify;
+import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.libpricealarm.Alarm;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
@@ -43,7 +43,7 @@ public class DBManager {
 				int id = cursor.getInt(cursor.getColumnIndex(_ID));
 				Alarm alarm = (Alarm) Serializer.deserializeObject(cursor.getBlob(cursor
 						.getColumnIndex(BYTES)));
-				((AndroidNotify) alarm.getNotify()).setContext(context);
+				((AndroidNotifier) alarm.getNotifier()).setContext(context);
 				alarmsMap.put(id, alarm);
 			} while(cursor.moveToNext());
 		}

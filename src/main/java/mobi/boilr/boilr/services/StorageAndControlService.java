@@ -16,7 +16,6 @@ import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.views.fragments.AlarmPreferencesFragment;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
-import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libdynticker.exchanges.CoinMktExchange;
@@ -45,12 +44,14 @@ public class StorageAndControlService extends Service {
 	public static boolean allowMobileData = false;
 	private Map<Integer, Alarm> alarmsMap;
 	private Map<String, Exchange> exchangesMap;
+	private List<Alarm> scheduledOffedAlarms = new ArrayList<Alarm>();
 	private int prevAlarmID = 0;
 	private AlarmManager alarmManager;
 	private DBManager db;
 	private SharedPreferences sharedPrefs;
 	// Private action used to update last value from the Exchange.
 	private static final String RUN_ALARM = "RUN_ALARM";
+	private boolean offedAlarmsScheduled = false;
 
 	private BroadcastReceiver networkReceiver = new BroadcastReceiver() {
 		@Override
@@ -133,38 +134,6 @@ public class StorageAndControlService extends Service {
 		}
 	}
 
-	private class UpdateOffedAlarmsTask extends AsyncTask<AlarmListAdapter, Void, AlarmListAdapter> {
-		private boolean anyOffedAlarms = false;
-
-		@Override
-		protected AlarmListAdapter doInBackground(AlarmListAdapter... adapters) {
-			if(hasNetworkConnection() && adapters.length == 1) {
-				Alarm alarm = null;
-				try {
-					int count = adapters[0].getCount();
-					for (int i = 0; i < count; i++) {
-						alarm = adapters[0].getItem(i);
-						if(!alarm.isOn()) {
-							anyOffedAlarms = true;
-							alarm.setLastValue(alarm.getExchangeLastValue());
-						}
-					}
-				} catch (IOException e) {
-					Log.e("Cannot get last value for alarm " + alarm.getId() + " with exchange " +
-							alarm.getExchange().getName() + " and pair " + alarm.getPair() + ".", e);
-				}
-				return adapters[0];
-			}
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(AlarmListAdapter adapter) {
-			if(anyOffedAlarms)
-				adapter.notifyDataSetChanged();
-		}
-	}
-
 	private class GetPairsTask extends AsyncTask<String, Void, List<Pair>> {
 		private AlarmPreferencesFragment frag;
 		String exchangeName, pairString;
@@ -217,7 +186,7 @@ public class StorageAndControlService extends Service {
 				for (Alarm alarm : alarmsMap.values()) {
 					alarm.setExchange(getExchange(alarm.getExchangeCode()));
 					if(alarm.isOn()) {
-						this.startAlarm(alarm);
+						addToAlarmManager(alarm, 0);
 					}
 				}
 			}
@@ -253,8 +222,8 @@ public class StorageAndControlService extends Service {
 	@Override
 	public void onDestroy() {
 		Log.d("StorageAndControlService destroyed.");
-		super.onDestroy();
 		unregisterReceiver(networkReceiver);
+		super.onDestroy();
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
@@ -288,10 +257,75 @@ public class StorageAndControlService extends Service {
 		return ++prevAlarmID;
 	}
 
-	public void startAlarm(Alarm alarm) {
+	public void scheduleOffedAlarms() {
+		for(Alarm alarm : alarmsMap.values()) {
+			if(!alarm.isOn())
+				scheduledOffedAlarms.add(alarm);
+		}
+		for(Alarm alarm : scheduledOffedAlarms) {
+			addToAlarmManager(alarm, 0);
+		}
+		offedAlarmsScheduled = true;
+	}
+
+	public void unscheduleOffedAlarms() {
+		for(Alarm alarm : scheduledOffedAlarms) {
+			removeFromAlarmManager(alarm.getId());
+		}
+		boolean onlyOffedAlarms = scheduledOffedAlarms.containsAll(alarmsMap.values());
+		scheduledOffedAlarms.clear();
+		if(onlyOffedAlarms)
+			stopSelf();
+		offedAlarmsScheduled = false;
+	}
+
+	public void toggleAlarm(int alarmID) {
+		Alarm alarm = alarmsMap.get(alarmID);
+		alarm.toggle();
+		if(alarm.isOn())
+			scheduledOffedAlarms.remove(alarm);
+		else
+			scheduledOffedAlarms.add(alarm);
+		replaceAlarmDB(alarm);
+	}
+
+	public void startAlarm(int alarmID) {
+		Alarm alarm = alarmsMap.get(alarmID);
 		alarm.turnOn();
+		scheduledOffedAlarms.remove(alarm);
 		addToAlarmManager(alarm, 0);
 		replaceAlarmDB(alarm);
+	}
+
+	public void stopAlarm(int alarmID) {
+		Alarm alarm = alarmsMap.get(alarmID);
+		alarm.turnOff();
+		replaceAlarmDB(alarm);
+		if(offedAlarmsScheduled) {
+			/*
+			 * Keep this alarm running if offed alarms are scheduled (i.e.
+			 * AlarmListActivity is active).
+			 */
+			scheduledOffedAlarms.add(alarm);
+		} else {
+			removeFromAlarmManager(alarmID);
+		}
+	}
+
+	public void addAlarm(Alarm alarm) throws IOException {
+		alarmsMap.put(alarm.getId(), alarm);
+		db.storeAlarm(alarm);
+		addToAlarmManager(alarm, 0);
+	}
+
+	public void deleteAlarm(Alarm alarm) {
+		removeFromAlarmManager(alarm.getId());
+		db.deleteAlarm(alarm);
+		alarmsMap.remove(alarm.getId());
+		scheduledOffedAlarms.remove(alarm);
+		if(scheduledOffedAlarms.isEmpty() && alarmsMap.isEmpty()) {
+			stopSelf();
+		}
 	}
 
 	private void addToAlarmManager(Alarm alarm, long firstDelay) {
@@ -302,27 +336,8 @@ public class StorageAndControlService extends Service {
 		alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + firstDelay, alarm.getPeriod(), pendingIntent);
 	}
 
-	public void startAlarm(int alarmID) {
-		startAlarm(alarmsMap.get(alarmID));
-	}
-
-	public void restartAlarm(Alarm alarm) {
-		if(alarm.isOn()){
-			addToAlarmManager(alarm, alarm.getPeriod());
-		}
-	}
-
-	public void stopAlarm(Alarm alarm) {
-		stopAlarm(alarm.getId());
-	}
-
-	public void stopAlarm(int alarmID) {
-		removeFromAlarmManager(alarmID);
-		Alarm alarm = alarmsMap.get(alarmID);
-		alarm.turnOff();
-		replaceAlarmDB(alarm);
-		if(!anyActiveAlarm())
-			stopSelf();
+	public void resetAlarmPeriod(Alarm alarm) {
+		addToAlarmManager(alarm, 0);
 	}
 
 	private void removeFromAlarmManager(int alarmID) {
@@ -332,37 +347,12 @@ public class StorageAndControlService extends Service {
 		alarmManager.cancel(pendingIntent);
 	}
 
-	public void addAlarm(Alarm alarm) throws IOException {
-		alarmsMap.put(alarm.getId(), alarm);
-		db.storeAlarm(alarm);
-		addToAlarmManager(alarm, 0);
-	}
-
 	public void replaceAlarmDB(Alarm alarm) {
 		try {
 			db.updateAlarm(alarm);
 		} catch (IOException e) {
 			Log.e("Could not update alarm " + alarm.getId() + " in the DB.", e);
 		}
-	}
-
-	public void deleteAlarm(Alarm alarm) {
-		removeFromAlarmManager(alarm.getId());
-		db.deleteAlarm(alarm);
-		alarmsMap.remove(alarm.getId());
-		if(!anyActiveAlarm())
-			stopSelf();
-	}
-
-	public void deleteAlarm(int id) {
-		deleteAlarm(alarmsMap.get(id));
-	}
-
-	private boolean anyActiveAlarm() {
-		for (Alarm alarm : alarmsMap.values())
-			if(alarm.isOn())
-				return true;
-		return false;
 	}
 
 	/**
@@ -393,9 +383,5 @@ public class StorageAndControlService extends Service {
 	@SuppressWarnings("unchecked")
 	public void getLastValue(AlarmPreferencesFragment frag, Exchange e, Pair p) {
 		new GetLastValueTask(frag).execute(new android.util.Pair<Exchange, Pair>(e, p));
-	}
-
-	public void updateOffedAlarms(AlarmListAdapter adapter) {
-		new UpdateOffedAlarmsTask().execute(adapter);
 	}
 }

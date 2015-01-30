@@ -43,9 +43,9 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 					} else {
 						priceChangeAlarm.setPeriod(timeFrame);
 						if(mBound) {
-							mStorageAndControlService.restartAlarm(priceChangeAlarm);
+							mStorageAndControlService.resetAlarmPeriod(priceChangeAlarm);
 						} else {
-							Log.d(enclosingActivity.getString(R.string.not_bound, "PriceChangeAlarmSettingsFragment"));
+							Log.e(enclosingActivity.getString(R.string.not_bound, "PriceChangeAlarmSettingsFragment"));
 						}
 					}
 					preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue, enclosingActivity));
@@ -61,7 +61,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 			if(mBound) {
 				mStorageAndControlService.replaceAlarmDB(priceChangeAlarm);
 			} else {
-				Log.d(enclosingActivity.getString(R.string.not_bound, "PriceChangeAlarmSettingsFragment"));
+				Log.e(enclosingActivity.getString(R.string.not_bound, "PriceChangeAlarmSettingsFragment"));
 			}
 			return true;
 		}

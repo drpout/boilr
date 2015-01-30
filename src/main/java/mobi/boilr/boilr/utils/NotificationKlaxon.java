@@ -5,10 +5,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import mobi.boilr.boilr.domain.AndroidNotify;
+import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libpricealarm.Alarm;
-import android.R.string;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
@@ -38,7 +37,6 @@ public class NotificationKlaxon {
 
 	public static void stop(final Context context) {
 		if(sStarted) {
-			Log.v("NotificationKlaxon stopped.");
 			// Stop audio playing
 			if(sMediaPlayer != null) {
 				sMediaPlayer.stop();
@@ -53,13 +51,11 @@ public class NotificationKlaxon {
 	}
 
 	public static void start(final Context context, Alarm alarm) {
-		Log.v("NotificationKlaxon started.");
-
-		AndroidNotify notify = (AndroidNotify) alarm.getNotify();
+		AndroidNotifier notifier = (AndroidNotifier) alarm.getNotifier();
 		// Make sure we are stop before starting
 		stop(context);
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-		String alertSound = notify.getAlertSound();
+		String alertSound = notifier.getAlertSound();
 		Uri alertSoundUri = null;
 				
 		if(alertSound != null)
@@ -79,7 +75,7 @@ public class NotificationKlaxon {
 				}
 			});
 
-			Integer alertType = notify.getAlertType();
+			Integer alertType = notifier.getAlertType();
 			if(alertType == null) {
 				alertType = Integer.parseInt(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE, ""));
 			}
@@ -87,7 +83,7 @@ public class NotificationKlaxon {
 				sMediaPlayer.setDataSource(context, alertSoundUri);
 				startAlarm(context, sMediaPlayer, alertType);
 			} catch(Exception ex) {
-				Log.v("NotificationKlaxon using the fallback ringtone.");
+				Log.d("NotificationKlaxon using the fallback ringtone.");
 				// The alarmNoise may be on the sd card which could be busy right
 				// now. Use the fallback ringtone.
 				try {
@@ -103,7 +99,7 @@ public class NotificationKlaxon {
 			}
 		}
 
-		Boolean vibrate = notify.isVibrate();
+		Boolean vibrate = notifier.isVibrate();
 		if(vibrate == null)
 			vibrate = sharedPrefs.getBoolean(SettingsFragment.PREF_KEY_VIBRATE_DEFAULT, true);
 		if(vibrate) {

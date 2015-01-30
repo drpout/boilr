@@ -1,10 +1,10 @@
 package mobi.boilr.boilr.domain;
 
 import mobi.boilr.boilr.services.NotificationService;
-import mobi.boilr.libpricealarm.Notify;
+import mobi.boilr.libpricealarm.Notifier;
 import android.content.Context;
 
-public class AndroidNotify implements Notify {
+public class AndroidNotifier extends Notifier {
 
 	private static final long serialVersionUID = 228178154489839207L;
 	private transient Context context;
@@ -16,11 +16,11 @@ public class AndroidNotify implements Notify {
 	private String alertSound;
 	private Boolean vibrate;
 
-	public AndroidNotify(Context context) {
+	public AndroidNotifier(Context context) {
 		this.context = context;
 	}
 
-	public AndroidNotify(Context context, Integer alertType, String alertSound, Boolean vibrate) {
+	public AndroidNotifier(Context context, Integer alertType, String alertSound, Boolean vibrate) {
 		this.context = context;
 		this.alertType = alertType;
 		this.alertSound = alertSound;
@@ -28,7 +28,7 @@ public class AndroidNotify implements Notify {
 	}
 
 	@Override
-	public boolean trigger(int alarmID) {
+	public boolean notify(int alarmID) {
 		NotificationService.startNotify(context, alarmID);
 		return false;
 	}
