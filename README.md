@@ -35,15 +35,19 @@ Boilr follows [Semantic Versioning](http://semver.org) with the API being the us
 ## Debuging
 On your shell you can use `export ANDROID_LOG_TAGS="ActivityManager:I Boilr:D *:S"` to filter logcat, then run `adb logcat` as usual.
 
-## License
+## License and authorship
 All Boilr code is licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to the [contributors listed on GitHub](https://github.com/andrefbsantos/boilr/graphs/contributors).
 
-The Boilr icon and artworks were created by [Ricardo Duarte](http://cargocollective.com/ricardoduarte) and are dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE).
+The Boilr icon and artworks were created by [Ricardo Duarte](http://vimeo.com/ricardoduarte) and are dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE).
 
-Chinese translation by [Jan Xie](https://github.com/janx) and Mar Song.
-Czech translation by [Jaroslav Lichtblau](https://github.com/svetlemodry).
-Italian translation by Richi Maraviglia.
-Polish translation by [Michal Pleban](https://pl.linkedin.com/in/michalpleban).
+Translators:
+
+* Chinese: [Jan Xie](https://github.com/janx) and Mar Song
+* Czech: [Jaroslav Lichtblau](https://github.com/svetlemodry)
+* German: Luca Rui
+* Italian: Richi Maraviglia
+* Polish: [Michal Pleban](https://pl.linkedin.com/in/michalpleban)
+* Spanish: Mariona
 
 ## Donations
 Donations and tips are welcomed.

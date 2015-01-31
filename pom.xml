@@ -28,7 +28,7 @@
 		<android.sdk.version>21</android.sdk.version>
 		<release.description>
 			\+ Added spike alert option to Price Change Alarm.
-			\+ Added Chinese, Italian, Polish and Portuguese translations.
+			\+ Added Chinese, German, Italian, Polish, Portuguese and Spanish translations.
 			\+ Last price on alarm list is now coloured according to price direction (up, down or same).
 			\+ Added arrow to the alarm triggered notification showing which direction the price took.
 			\+ Added app settings to control volume and dismiss no internet notification.

@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 /**
@@ -47,9 +46,6 @@ public class NotificationActivity extends Activity {
 		arrowView.setTextColor(colour);
 		if(!canKeepMonitoring) {
 			view.findViewById(R.id.keep_monitoring_wrapper).setVisibility(View.GONE);
-			view.findViewById(R.id.turn_off_wrapper).setLayoutParams(
-					new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-							LinearLayout.LayoutParams.WRAP_CONTENT, 2f));
 		}
 		setContentView(view);
 	}

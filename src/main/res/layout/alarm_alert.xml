@@ -6,60 +6,75 @@
 	android:layout_height="match_parent"
 	android:orientation="vertical"
 	tools:context="mobi.boilr.boilr.activities.NotificationActivity">
-	
+
     <LinearLayout
-        android:id="@+id/firing_reason_wrapper"
+        android:id="@+id/text_wrapper"
 	    android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_weight="0">
+		android:layout_height="0dp"
+		android:orientation="horizontal"
+		android:layout_weight="1">
 		
         <TextView
 		    android:id="@+id/arrow"
 			android:textSize="160dp"
-			android:layout_width="match_parent"
+			android:layout_weight="1"
+			android:layout_width="110dp"
 			android:layout_height="match_parent"
-			android:gravity="center"
-			android:layout_weight="3" />
-	
-		<TextView
-		    android:id="@+id/firing_reason"
-			android:textStyle="bold"
-			android:textSize="22dp"
-			android:layout_width="match_parent"
+			android:gravity="center|clip_vertical"/>
+	    
+        <LinearLayout
+		    android:id="@+id/firing_reason_wrapper"
+		    android:layout_weight="3"
+		    android:layout_width="wrap_content"
 			android:layout_height="match_parent"
-			android:gravity="center"
-			android:layout_weight="1" />
+			android:gravity="center">
+			<TextView
+			    android:id="@+id/firing_reason"
+				android:textStyle="bold"
+				android:textSize="22dp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center_vertical"/>
+		</LinearLayout>
 	</LinearLayout>
 	
-	<LinearLayout
-	    android:id="@+id/keep_monitoring_wrapper"
-	    android:layout_weight="1"
+    <LinearLayout
+        android:id="@+id/buttons_wrapper"
 	    android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center">
-		<Button
-			android:id="@+id/keep_monitoring"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:text="@string/keep_monitoring"
-			android:onClick="onKeepMonitoringClicked">
-		</Button>
-	</LinearLayout>
-	
-	<LinearLayout
-	    android:id="@+id/turn_off_wrapper"
-	    android:layout_weight="1"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center">
-		<Button
-			android:id="@+id/turn_off"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:gravity="center"
-			android:text="@string/turn_off"
-			android:onClick="onTurnOffClicked">
-		</Button>
+		android:layout_height="0dp"
+		android:orientation="vertical"
+		android:layout_weight="1">
+		
+		<LinearLayout
+		    android:id="@+id/keep_monitoring_wrapper"
+		    android:layout_weight="1"
+		    android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:gravity="center">
+			<Button
+				android:id="@+id/keep_monitoring"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:text="@string/keep_monitoring"
+				android:onClick="onKeepMonitoringClicked">
+			</Button>
+		</LinearLayout>
+		
+		<LinearLayout
+		    android:id="@+id/turn_off_wrapper"
+		    android:layout_weight="1"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:gravity="center">
+			<Button
+				android:id="@+id/turn_off"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:gravity="center"
+				android:text="@string/turn_off"
+				android:onClick="onTurnOffClicked">
+			</Button>
+		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>
