@@ -27,5 +27,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ChangeLogLibrary"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

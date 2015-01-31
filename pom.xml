@@ -27,7 +27,7 @@
 		<android.maven.plugin.version>4.1.0</android.maven.plugin.version>
 		<android.sdk.version>21</android.sdk.version>
 		<release.description>
-			\+ Added Price Spike Alarm.
+			\+ Added spike alert option to Price Change Alarm.
 			\+ Added Chinese, Italian, Polish and Portuguese translations.
 			\+ Last price on alarm list is now coloured according to price direction (up, down or same).
 			\+ Added arrow to the alarm triggered notification showing which direction the price took.

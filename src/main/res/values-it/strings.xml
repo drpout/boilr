@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Boilr</string>
     <string name="action_search">Cerca</string>
@@ -9,17 +10,17 @@
     <string name="off">OFF</string>
     <string name="boilr_settings">Boilr impostazioni</string>
     <string name="about_title">Circa Boilr</string>
-    <string name="about_website_button">Website</string>
-    <string name="ok">OK</string>
-    <string name="about_license">Rilasciato con licenza GNU GPLv3+.</string>
-    <string name="about_website">Website: </string>
+    <string name="release_notes">Modifiche tra versioni</string>
     <string name="about_version">Versione: </string>
+    <string name="about_website">Website: </string>
     <string name="about_developers">Programmatori: </string>
     <string name="about_concept">Concept e Design: </string>
-    <string name="about_donations">Donazioni:</string>
+    <string name="about_donations">Donazioni: </string>
+    <string name="about_license">Licenza: </string>
+    <string name="about_libraries">Librerie che usiamo: </string>
+
     <string name="pref_title_alerts">Avvisi</string>
     <string name="pref_title_default_alert_type">Tipo default</string>
-
     <string-array name="pref_entries_alert_type">
         <item>Avviso</item>
         <item>Notifiche</item>

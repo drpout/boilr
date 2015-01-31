@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<changelog bulletedList="false">
+	<changelogversion versionName="0.5.0" changeDate="?? Fev 2015">
+		<changelogtext>+ Adicionada opção de alerta de picos ao alarme de variação de preço.</changelogtext>
+		<changelogtext>+ Adicionadas traduções para chinês, italiano, polaco e português.</changelogtext>
+		<changelogtext>+ O último preço na lista de alarmes é agora colorido consoante a direção do preço (subida, descida ou manutenção).</changelogtext>
+		<changelogtext>+ Adicionada seta que indica a direção do preço na notificação mostrada quando um alarme dispara.</changelogtext>
+		<changelogtext>+ Adiconadas configurações para controlar o volume e esconder o aviso de falha de ligação à internet.</changelogtext>
+		<changelogtext>* Ícone completamente redesenhado.</changelogtext>
+		<changelogtext>* Rearranjo da informação na lista de alarmes.</changelogtext>
+		<changelogtext>* Alarmes desligados são agora continuamente atualizados quando a lista de alarmes está visível.</changelogtext>
+		<changelogtext>* Corrigida falha que disparava repetidamente alarmes cujo intervalo de atualização fosse curto.</changelogtext>
+		<changelogtext>* Corrigido o carregamento de dados das bolsas em ligações de má qualidade.</changelogtext>
+	</changelogversion>
+	
+	<changelogversion versionName="0.4.0" changeDate="17 Out 2014">
+		<changelogtext>+ Adicionadas as bolsas: BTC100 e BtcTrade.</changelogtext>
+		<changelogtext>+ Adicionados os futuros da bolsa OKCoin.</changelogtext>
+	</changelogversion>
+	
+	<changelogversion versionName="0.3.0" changeDate="16 Out 2014">
+		<changelogtext>+ Adicionadas as bolsas: Atomic Trade, BitBay, Bitcurex, BitMarket.pl, C-CEX, CCEDK, CoinMkt, Coins-E, Crypto-Trade, Cryptonit, Justcoin, Paymium e Vircurex.</changelogtext>
+		<changelogtext>+ Adicionada tradução para checo.</changelogtext>
+		<changelogtext>* Alarmes de variação de preço tentam agora obter o último preço novamente após falha de ligação à internet.</changelogtext>
+		<changelogtext>- Removida a bolsa Mintpal (atualmente indisponível).</changelogtext>
+	</changelogversion>
+	
+	<changelogversion versionName="0.2.1" changeDate="14 Out 2014">
+		<changelogtext>* Corrigida falha quando se usava alarmes com a notificação por omissão.</changelogtext>
+		<changelogtext>* Corrigida falha em que alarmes com a notificação por omissão em silêncio tocavam som.</changelogtext>
+	</changelogversion>
+	
+	<changelogversion versionName="0.2.0" changeDate="13 Out 2014">
+		<changelogtext>+ Adicionadas as bolsas: ANX, BTC Markets, CampBX, CEX.IO, itBit e LakeBTC.</changelogtext>
+	</changelogversion>
+	
+	<changelogversion versionName="0.1.0" changeDate="10 Out 2014">
+		<changelogtext>+ Adicionada a bolsa Bitfinex.</changelogtext>
+		<changelogtext>+ Adicionado o ícone X na SearchableListPreference para apagar todo o texto de uma só vez.</changelogtext>
+		<changelogtext>* Melhoramentos no ícone do Boilr.</changelogtext>
+		<changelogtext>* A RingtonePreference na criação e configuração de alarmes já mostra corretamente o nome do som.</changelogtext>
+		<changelogtext>- Retirado o endereço de doações em XMR. Os endereços para criptomoedas alternativas estão agora disponíveis no site.</changelogtext>
+	</changelogversion>
+</changelog>

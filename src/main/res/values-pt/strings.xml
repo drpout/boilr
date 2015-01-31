@@ -10,17 +10,17 @@
     <string name="off">OFF</string>
     <string name="boilr_settings">Definições do Boilr</string>
     <string name="about_title">Sobre o Boilr</string>
-    <string name="about_website_button">Website</string>
-    <string name="ok">OK</string>
-    <string name="about_license">Distribuído sob a licensa GNU GPLv3+.</string>
-    <string name="about_website">Website: </string>
+    <string name="release_notes">Mudanças entre versões</string>
     <string name="about_version">Versão: </string>
+    <string name="about_website">Website: </string>
     <string name="about_developers">Programadores: </string>
     <string name="about_concept">Conceito e Desenho: </string>
-    <string name="about_donations">Doações:</string>
+    <string name="about_donations">Doações: </string>
+    <string name="about_license">Licensa: </string>
+    <string name="about_libraries">Bibliotecas que usamos: </string>
+    
     <string name="pref_title_alerts">Alertas</string>
     <string name="pref_title_default_alert_type">Tipo por omissão</string>
-
     <string-array name="pref_entries_alert_type">
         <item>Alarme</item>
         <item>Notificação</item>

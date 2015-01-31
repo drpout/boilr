@@ -10,6 +10,7 @@ import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Themer;
+import mobi.boilr.boilr.utils.VersionTracker;
 import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
@@ -76,6 +77,7 @@ public class AlarmListActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		Themer.applyTheme(this);
 		Languager.setLanguage(this);
+		VersionTracker.showChangeLog(this);
 		
 		setContentView(R.layout.alarm_list);
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);

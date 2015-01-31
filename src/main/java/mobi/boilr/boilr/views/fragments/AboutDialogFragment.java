@@ -46,6 +46,12 @@ public class AboutDialogFragment extends DialogFragment {
 					@Override
 					public void onClick(DialogInterface dialog, int whichButton) {
 					}
+				}).setPositiveButton(R.string.release_notes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int whichButton) {
+						dialog.dismiss();
+						(new ChangelogDialogFragment()).show(getFragmentManager(), "changelog");
+					}
 				});
 
 		// The following texts have links specified by putting <a> tags in the string

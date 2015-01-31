@@ -10,17 +10,17 @@
     <string name="off">WYŁ</string>
     <string name="boilr_settings">Ustawienia Boilr</string>
     <string name="about_title">O aplikacji Boilr</string>
-    <string name="about_website_button">Strona WWW</string>
-    <string name="ok">OK</string>
-    <string name="about_license">Udostępniony na licencji GNU GPLv3+.</string>
-    <string name="about_website">Strona WWW: </string>
+    <!-- Review please --><string name="release_notes">Zmiany pomiędzy wersją</string>
     <string name="about_version">Wersja: </string>
+    <string name="about_website">Strona WWW: </string>
     <string name="about_developers">Twórcy: </string>
     <string name="about_concept">Design: </string>
-    <string name="about_donations">Darowizny:</string>
+    <string name="about_donations">Darowizny: </string>
+    <string name="about_license">Licencji: </string>
+    <!-- Review please --><string name="about_libraries">Bibliotek, których używamy: </string>
+
     <string name="pref_title_alerts">Powiadomienia</string>
     <string name="pref_title_default_alert_type">Domyślny rodzaj</string>
-
     <string-array name="pref_entries_alert_type">
         <item>Alarm</item>
         <item>Powiadomienie</item>

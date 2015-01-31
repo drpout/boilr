@@ -11,24 +11,27 @@
     <string name="off">OFF</string>
     <string name="boilr_settings">Boilr Settings</string>
     <string name="about_title">About Boilr</string>
-    <string name="about_website_button">Website</string>
+    <string name="release_notes">Release notes</string>
     <string name="ok">OK</string>
-    <string name="about_license">Released under GNU GPLv3+ license.</string>
-    <string name="about_website">Website: </string>
     <string name="about_version">Version: </string>
+    <string name="about_website">Website: </string>
     <string name="about_developers">Developers: </string>
     <string name="about_concept">Concept and Design: </string>
-    <string name="about_donations">Donations:</string>
-    <string name="about_btc">BTC: </string>
+    <string name="about_donations">Donations: </string>
+    <string name="about_license">License: </string>
+    <string name="about_libraries">Libraries we use: </string>
+    
+    <string name="boilr_website">http://boilr.mobi</string>
     <string name="andre_filipe_santos"><a href="https://github.com/andrefbsantos">André Filipe Santos</a></string>
     <string name="david_ludovino"><a href="https://github.com/dllud">David Ludovino</a></string>
     <string name="ricardo_duarte"><a href="http://cargocollective.com/ricardoduarte">Ricardo Duarte</a></string>
-    <string name="boilr_website">http://boilr.mobi</string>
-    <string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a></string>
+    <string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a> (BTC)</string>
     <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
+    <string name="gplv3">GNU GPLv3+</string>
+    <string name="changeloglib"><a href="https://github.com/gabrielemariotti/changeloglib">changeloglib</a></string>
+    
     <string name="pref_title_alerts">Alerts</string>
     <string name="pref_title_default_alert_type">Default type</string>
-
     <string-array name="pref_entries_alert_type">
         <item>Alarm</item>
         <item>Notification</item>

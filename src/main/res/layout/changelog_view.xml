@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:chg="http://schemas.android.com/apk/res-auto"
+	class="it.gmariotti.changelibs.library.view.ChangeLogListView"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:id="@+id/changelog_view"
+	chg:rowHeaderLayoutId="@layout/changelog_row_header"
+	chg:rowLayoutId="@layout/changelog_row">
+</view>
