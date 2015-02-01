@@ -18,6 +18,7 @@
     <string name="about_donations">Přispěvatelé: </string>
     <string name="about_license">Licencí: </string>
     <string name="about_libraries">Knihovny: </string>
+    <string name="changelog_header_version">"Verze "</string>
     
     <string name="pref_title_alerts">Upozornění</string>
     <string name="pref_title_default_alert_type">Výchozí typ</string>

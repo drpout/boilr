@@ -19,6 +19,7 @@
     <string name="about_donations">捐赠 </string>
     <string name="about_license">许可证 </string>
     <!-- Review please --><string name="about_libraries">库 </string>
+    <string name="changelog_header_version">"版本 "</string>
     
     <string name="pref_title_alerts">提醒</string>
     <string name="pref_title_default_alert_type">默认类型</string>

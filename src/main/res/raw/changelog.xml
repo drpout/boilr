@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
-	<changelogversion versionName="0.5.0" changeDate="?? Fev 2015">
+	<changelogversion versionName="0.5.0" changeDate="?? Feb 2015">
 		<changelogtext>+ Added spike alert option to Price Change Alarm.</changelogtext>
 		<changelogtext>+ Added Chinese, German, Italian, Polish, Portuguese and Spanish translations.</changelogtext>
 		<changelogtext>+ Last price on alarm list is now coloured according to price direction (up, down or same).</changelogtext>

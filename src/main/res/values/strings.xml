@@ -20,6 +20,7 @@
     <string name="about_donations">Donations: </string>
     <string name="about_license">License: </string>
     <string name="about_libraries">Libraries we use: </string>
+    <string name="changelog_header_version">"Version "</string>
     
     <string name="boilr_website">http://boilr.mobi</string>
     <string name="andre_filipe_santos"><a href="https://github.com/andrefbsantos">André Filipe Santos</a></string>

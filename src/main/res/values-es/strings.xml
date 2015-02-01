@@ -18,6 +18,7 @@
     <string name="about_donations">Donaciones: </string>
     <string name="about_license">Licencia: </string>
     <string name="about_libraries">Bibliotecas que usamos: </string>
+    <string name="changelog_header_version">"Versión "</string>
     
     <string name="pref_title_alerts">Alertas</string>
     <string name="pref_title_default_alert_type">Tipo de alerta</string>
