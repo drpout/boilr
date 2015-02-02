@@ -101,14 +101,16 @@
     <string name="pair_search_description">Buscador de pares</string>
     <string name="silent">Silencioso</string>
     <string name="unknown_ringtone">Sonido desconocido</string>
-
     <string name="pref_title_language">Idioma</string>
-    <string name="in">en</string>
-    <string name="had">tenía</string>
-    <string name="change">varió</string>
-    <string name="during">durante</string>
-	<string name="minutes_short">min</string>
-	<string name="day">día</string>
-    <string name="days">días</string>
-    <string name="at">a</string>
+    
+    <!-- Review everything below please -->
+    <string name="price_hit_firing_reason">%1$s a %2$s %3$s\nen %4$s.</string>
+    <string name="price_change_firing_reason">%1$s/%2$s ha tenido\n%3$s varió\nen %4$s\ndurante %5$s.</string>
+    <string name="seconds_abbreviation">%1$d s</string>
+    <string name="sec_abrv_input_as_string">%1$s s</string>
+    <string name="minutes_abbreviation">%1$d min</string>
+    <string name="hours_abbreviation">%1$d hr</string>
+    <string name="days_abbreviation">%1$d dí</string>
+    <string name="days_abrv_input_as_string">%1$s di</string>
+    <string name="days_abrv_input_as_string">%1$s di</string>
 </resources>

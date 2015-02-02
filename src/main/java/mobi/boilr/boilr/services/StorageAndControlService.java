@@ -293,7 +293,7 @@ public class StorageAndControlService extends Service {
 		Alarm alarm = alarmsMap.get(alarmID);
 		alarm.turnOn();
 		scheduledOffedAlarms.remove(alarm);
-		addToAlarmManager(alarm, 0);
+		addToAlarmManager(alarm, alarm.getPeriod());
 		replaceAlarmDB(alarm);
 	}
 

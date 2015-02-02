@@ -29,7 +29,7 @@
     <string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a> (BTC)</string>
     <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
     <string name="gplv3">GNU GPLv3+</string>
-    <string name="changeloglib"><a href="https://github.com/gabrielemariotti/changeloglib">changeloglib</a></string>
+    <string name="lib_list"><a href="https://github.com/andrefbsantos/libdynticker">libdynticker</a> <a href="https://github.com/andrefbsantos/libpricealarm">libpricealarm</a> <a href="https://github.com/gabrielemariotti/changeloglib">changeloglib</a></string>
     
     <string name="pref_title_alerts">Alerts</string>
     <string name="pref_title_default_alert_type">Default type</string>
@@ -238,7 +238,6 @@
     <string name="pair_search_description">Pair search</string>
     <string name="silent">Silent</string>
     <string name="unknown_ringtone">Unknown ringtone</string>
-    
 
     <string-array name="pref_entries_language">
         <item>English</item>
@@ -258,14 +257,14 @@
     </string-array>
     <string name="pref_default_language">English</string>
     <string name="pref_default_languange_code">en</string>
-    
     <string name="pref_title_language">Language</string>
-    <string name="in">in</string>
-    <string name="had">had</string>
-    <string name="change">change</string>
-    <string name="during">during</string>
-    <string name="minutes_short">min</string>
-    <string name="day">day</string>
-    <string name="days">days</string>
-    <string name="at">at</string>
+    
+    <string name="price_hit_firing_reason">%1$s at %2$s %3$s\nin %4$s.</string>
+    <string name="price_change_firing_reason">%1$s/%2$s had\n%3$s change\nin %4$s\nduring %5$s.</string>
+    <string name="seconds_abbreviation">%1$d s</string>
+    <string name="sec_abrv_input_as_string">%1$s s</string>
+    <string name="minutes_abbreviation">%1$d min</string>
+    <string name="hours_abbreviation">%1$d hr</string>
+    <string name="days_abbreviation">%1$d dy</string>
+    <string name="days_abrv_input_as_string">%1$s dy</string>
 </resources>

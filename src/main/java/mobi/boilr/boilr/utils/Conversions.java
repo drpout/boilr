@@ -18,20 +18,16 @@ public class Conversions {
 	private static long MILIS_IN_HOUR = 3600000; // 60 * 60 * 1000
 	private static long MILIS_IN_DAY = 86400000; // 24 * 60 * 60 * 1000
 
-	public static String formatMilis(long milis) {
+	public static String formatMilis(long milis, Context context) {
 		String formated;
 		if(milis < MILIS_IN_MINUTE) {
-			// seconds
-			formated = milis / 1000 + "s";
+			formated = context.getString(R.string.seconds_abbreviation, milis / 1000);
 		} else if(milis < MILIS_IN_HOUR) {
-			// minutes
-			formated = (milis / MILIS_IN_MINUTE) + "m";
+			formated = context.getString(R.string.minutes_abbreviation, milis / MILIS_IN_MINUTE);
 		} else if(milis < MILIS_IN_DAY) {
-			// hours
-			formated = (milis / MILIS_IN_HOUR) + "h";
+			formated = context.getString(R.string.hours_abbreviation, milis / MILIS_IN_HOUR);
 		} else {
-			// days
-			formated = (milis / MILIS_IN_DAY) + "d";
+			formated = context.getString(R.string.days_abbreviation, milis / MILIS_IN_DAY);
 		}
 		return formated;
 	}
@@ -76,20 +72,30 @@ public class Conversions {
 		return maxPlacesFormater.format(d);
 	}
 
+	private static DecimalFormat eightSignificantFormatter;
+	static {
+		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ENGLISH);
+		eightSignificantFormatter = (DecimalFormat) nf;
+		eightSignificantFormatter.applyPattern("@#######");
+	}
+
+	/**
+	 * Converts a double to a String with a minimum of 1 significant digit and a
+	 * maximum of 8.
+	 *
+	 * @param d double to be converted
+	 * @return String with up to 8 significant digits
+	 */
+	public static String format8SignificantDigits(double d) {
+		return eightSignificantFormatter.format(d);
+	}
+
 	private static final double MINUTES_IN_DAY = 1440; // 60*24
 
 	public static String buildMinToDaysSummary(String minutesString, Context context) {
 		int min = Integer.parseInt(minutesString);
-		double days = min / MINUTES_IN_DAY;
-		String result = minutesString + " " + context.getString(R.string.minutes_short)
-				+ " (" + format2DecimalPlaces(days) + " ";
-		if(days == 1.0) {
-			result += context.getString(R.string.day);
-		} else {
-			result += context.getString(R.string.days);
-		}
-		result += ")";
-		return result;
+		String days = format2DecimalPlaces((min / MINUTES_IN_DAY));
+		return context.getString(R.string.minutes_abbreviation, min) + " (" + context.getString(R.string.days_abrv_input_as_string, days) + ")";
 	}
 
 	public static String ringtoneUriToName(String stringUri, Context context) {

@@ -102,14 +102,15 @@
     <string name="pair_search_description">搜索交易对</string>
     <string name="silent">静音</string>
     <string name="unknown_ringtone">未知铃声</string>
-    
     <string name="pref_title_language">语言</string>
-    <!-- Missing translation <string name="in">in</string>
-    <string name="had">had</string>
-    <string name="change">change</string>
-    <string name="during">during</string>
-    <string name="minutes_short">min</string>
-    <string name="day">day</string>
-    <string name="days">days</string>
-    <string name="at">at</string>-->
+    
+    <!-- Missing translation
+    <string name="price_hit_firing_reason">%1$s at %2$s %3$s\nin %4$s.</string>
+    <string name="price_change_firing_reason">%1$s/%2$s had\n%3$s change\nin %4$s\nduring %5$s.</string>-->
+    <string name="seconds_abbreviation">%1$d秒</string>
+    <string name="sec_abrv_input_as_string">%1$s秒</string>
+    <string name="minutes_abbreviation">%1$d分钟</string>
+    <string name="hours_abbreviation">%1$d小时</string>
+    <string name="days_abbreviation">%1$d天</string>
+    <string name="days_abrv_input_as_string">%1$s天</string>
 </resources>

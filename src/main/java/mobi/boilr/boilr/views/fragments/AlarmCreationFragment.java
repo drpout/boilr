@@ -34,6 +34,7 @@ import android.widget.Toast;
 public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 	protected boolean defaultVibrateDef = true;
 
+	@SuppressWarnings("unchecked")
 	private class UpdatePairsConnection implements ServiceConnection {
 		private String exchangeCode;
 		private String exchangeName;
@@ -94,7 +95,7 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 				creationFrag.setArguments(args);
 				enclosingActivity.getFragmentManager().beginTransaction().replace(android.R.id.content, creationFrag).commit();
 			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
-				preference.setSummary(newValue + " s");
+				preference.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string, newValue));
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_TYPE)) {
 				ListPreference alertTypePref = (ListPreference) preference;
 				alertTypePref.setSummary(alertTypePref.getEntries()[alertTypePref.findIndexOfValue((String) newValue)]);

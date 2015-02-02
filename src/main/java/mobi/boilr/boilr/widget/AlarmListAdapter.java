@@ -102,7 +102,7 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 				changeUpperLimit.setText(Conversions.formatEngNotation(priceChangeAlarm.getChange()));
 			}
 
-			periodLowerLimit.setText(Conversions.formatMilis(priceChangeAlarm.getPeriod()));
+			periodLowerLimit.setText(Conversions.formatMilis(priceChangeAlarm.getPeriod(), this.getContext()));
 		}
 
 		// hidden tag to identify the alarm
@@ -120,7 +120,7 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 		exchange.setText(alarm.getExchange().getName());
 
 		if(alarm.getLastUpdateTimestamp() != null) {
-			lastCheck.setText(Conversions.formatMilis(System.currentTimeMillis() - alarm.getLastUpdateTimestamp().getTime()));
+			lastCheck.setText(Conversions.formatMilis(System.currentTimeMillis() - alarm.getLastUpdateTimestamp().getTime(), this.getContext()));
 		}
 
 		pair.setText(alarm.getPair().toString());

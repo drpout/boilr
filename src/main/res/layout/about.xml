@@ -158,18 +158,13 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
 		
-		<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical">
 			
-			<TextView
-			    android:id="@+id/changeloglib"
-				android:text="@string/changeloglib"
-				android:paddingLeft="5dp"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content" />
-		</LinearLayout>
+	    <TextView
+		    android:id="@+id/lib_list"
+			android:text="@string/lib_list"
+			android:paddingLeft="5dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
 	</LinearLayout>
 	
 </LinearLayout>

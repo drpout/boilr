@@ -1,7 +1,6 @@
 package mobi.boilr.boilr.utils;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.activities.AlarmSettingsActivity;
 import mobi.boilr.boilr.activities.NotificationActivity;
 import mobi.boilr.boilr.activities.SettingsActivity;
@@ -150,18 +149,17 @@ public final class Notifications {
 	private static String getFiringReason(Context context, Alarm alarm) {
 		Pair pair = alarm.getPair();
 		if(alarm instanceof PriceHitAlarm) {
-			return pair.getCoin() + " " + context.getString(R.string.at) + " " + Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) + " "
-					+ pair.getExchange() + "\n" + context.getString(R.string.in) + " " + alarm.getExchange().getName();
+			return context.getString(R.string.price_hit_firing_reason, pair.getCoin(), Conversions.formatMaxDecimalPlaces(alarm.getLastValue()),
+					pair.getExchange(), alarm.getExchange().getName());
 		} else if(alarm instanceof PriceChangeAlarm) {
 			PriceChangeAlarm changeAlarm = (PriceChangeAlarm) alarm;
-			String reason = pair.getCoin() + "/" + pair.getExchange() + " " + context.getString(R.string.had) + "\n";
+			String change;
 			if(changeAlarm.isPercent())
-				reason += Conversions.format2DecimalPlaces(changeAlarm.getLastChange()) + "%";
+				change = Conversions.format2DecimalPlaces(changeAlarm.getLastChange()) + "%";
 			else
-				reason += Conversions.formatMaxDecimalPlaces(changeAlarm.getLastChange()) + " " + pair.getExchange();
-			reason += " " + context.getString(R.string.change) + "\n" + context.getString(R.string.in) + " " + alarm.getExchange().getName() + "\n" + context.getString(R.string.during) + " "
-					+ Conversions.formatMilis(changeAlarm.getElapsedMilis());
-			return reason;
+				change = Conversions.format8SignificantDigits(changeAlarm.getLastChange()) + " " + pair.getExchange();
+			return context.getString(R.string.price_change_firing_reason, pair.getCoin(), pair.getExchange(), change, alarm.getExchange().getName(),
+					Conversions.formatMilis(changeAlarm.getElapsedMilis(), context));
 		}
 		return "Could not retrieve firing reason.";
 	}

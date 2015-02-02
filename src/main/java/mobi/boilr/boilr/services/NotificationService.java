@@ -120,15 +120,15 @@ public class NotificationService extends Service {
 
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
 		if(currentAlarmID == Integer.MIN_VALUE) {
 			Log.d("NotificationService: there is no current alarm to stop.");
-			return;
+		} else {
+			NotificationKlaxon.stop(this);
+			currentAlarmID = Integer.MIN_VALUE;
 		}
-		NotificationKlaxon.stop(this);
-		currentAlarmID = Integer.MIN_VALUE;
-		AlarmAlertWakeLock.releaseCpuLock();
 		unbindService(mConnection);
+		super.onDestroy();
+		AlarmAlertWakeLock.releaseCpuLock();
 	}
 
 	private void startNotify(int alarmID) {

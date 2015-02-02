@@ -101,14 +101,15 @@
     <string name="pair_search_description">Paar Suche</string>
     <string name="silent">Stumm</string>
     <string name="unknown_ringtone">Unbekannter Klingelton</string>
-
     <string name="pref_title_language">Sprache</string>
-    <string name="in">in</string>
-    <string name="had">hatte</string>
-    <string name="change">verändern</string>
-    <string name="during">während</string>
-	<string name="minutes_short">min</string>
-	<string name="day">Tag</string>
-    <string name="days">Tage</string>
-    <string name="at">bei</string>
+    
+    <!-- Review everything below please -->
+    <string name="price_hit_firing_reason">%1$s bei %2$s %3$s\nin %4$s.</string>
+    <string name="price_change_firing_reason">%1$s/%2$s hatte\n%3$s verändern\nin %4$s\nwährend %5$s.</string>
+    <string name="seconds_abbreviation">%1$d s</string>
+    <string name="sec_abrv_input_as_string">%1$s s</string>
+    <string name="minutes_abbreviation">%1$d Min</string>
+    <string name="hours_abbreviation">%1$d St</string>
+    <string name="days_abbreviation">%1$d Tg</string>
+    <string name="days_abrv_input_as_string">%1$s Tg</string>
 </resources>

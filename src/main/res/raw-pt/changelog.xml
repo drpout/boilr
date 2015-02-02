@@ -41,4 +41,8 @@
 		<changelogtext>* A RingtonePreference na criação e configuração de alarmes já mostra corretamente o nome do som.</changelogtext>
 		<changelogtext>- Retirado o endereço de doações em XMR. Os endereços para criptomoedas alternativas estão agora disponíveis no site.</changelogtext>
 	</changelogversion>
+	
+	<changelogversion versionName="0.0.0" changeDate="7 Out 2014">
+		<changelogtext>Primeiro beta público.</changelogtext>
+	</changelogversion>
 </changelog>

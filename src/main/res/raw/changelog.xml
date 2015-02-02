@@ -41,4 +41,8 @@
 		<changelogtext>* RingtonePreference in alarm creation and settings now displaying the correct sound.</changelogtext>
 		<changelogtext>- Removed XMR donation address from the app. Altcoins' addresses are available only on the website.</changelogtext>
 	</changelogversion>
+	
+	<changelogversion versionName="0.0.0" changeDate="7 Oct 2014">
+		<changelogtext>First public beta.</changelogtext>
+	</changelogversion>
 </changelog>

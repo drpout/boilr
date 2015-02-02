@@ -94,7 +94,7 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 	protected void initializePreferences() {
 		priceHitAlarm = (PriceHitAlarm) alarm;
 		long secondsPeriod = alarm.getPeriod() / 1000;
-		updateIntervalPref.setSummary(secondsPeriod + " s");
+		updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, secondsPeriod));
 		if(!recoverSavedInstance) {
 			String formated = Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperLimit());
 			upperLimitPref.setText(formated);

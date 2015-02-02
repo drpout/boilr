@@ -57,11 +57,12 @@ public class AboutDialogFragment extends DialogFragment {
 		// The following texts have links specified by putting <a> tags in the string
 		// resource. The following makes these links respond to user clicks.
 		// Found by Richard and posted on Stack Overflow http://stackoverflow.com/a/2746708
-		TextView[] devs = { (TextView) view.findViewById(R.id.devs_andre),
+		TextView[] links = { (TextView) view.findViewById(R.id.devs_andre),
 				(TextView) view.findViewById(R.id.devs_david),
-				(TextView) view.findViewById(R.id.devs_ricardo) };
-		for (TextView dev : devs)
-			dev.setMovementMethod(LinkMovementMethod.getInstance());
+				(TextView) view.findViewById(R.id.devs_ricardo),
+				(TextView) view.findViewById(R.id.lib_list) };
+		for (TextView link : links)
+			link.setMovementMethod(LinkMovementMethod.getInstance());
 
 		((TextView) view.findViewById(R.id.btc_addr)).setOnClickListener(new OnClickListener() {
 			@Override

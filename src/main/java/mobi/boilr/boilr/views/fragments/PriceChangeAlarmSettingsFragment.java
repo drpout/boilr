@@ -109,7 +109,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 			PriceSpikeAlarm priceSpike = (PriceSpikeAlarm) priceChangeAlarm;
 			minPeriod = priceSpike.getTimeFrame() / Conversions.MILIS_IN_MINUTE;
 			secondsPeriod = priceSpike.getPeriod() / 1000;
-			updateIntervalPref.setSummary(secondsPeriod + " s");
+			updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, secondsPeriod));
 		} else {
 			minPeriod = alarm.getPeriod() / Conversions.MILIS_IN_MINUTE;
 			specificCat.removePreference(updateIntervalPref);
