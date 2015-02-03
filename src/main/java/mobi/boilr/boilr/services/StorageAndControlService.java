@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import mobi.boilr.boilr.database.DBManager;
+import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Languager;
@@ -18,9 +19,12 @@ import mobi.boilr.boilr.views.fragments.AlarmPreferencesFragment;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.exchanges.BitstampExchange;
 import mobi.boilr.libdynticker.exchanges.CoinMktExchange;
 import mobi.boilr.libpricealarm.Alarm;
+import mobi.boilr.libpricealarm.Notifier;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
+import mobi.boilr.libpricealarm.PriceHitAlarm;
 import mobi.boilr.libpricealarm.PriceSpikeAlarm;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -59,7 +63,7 @@ public class StorageAndControlService extends Service {
 			updateConnectedFlags();
 		}
 	};
-	
+
 	private HashSet<Integer> runTaskAlarmList = new HashSet<Integer>();
 
 	private class RunAlarmTask extends AsyncTask<Alarm, Void, Void> {
@@ -162,6 +166,26 @@ public class StorageAndControlService extends Service {
 
 	}
 
+
+	private class PopupalteDBTask extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected Void doInBackground(Void... arg) {
+			Log.d("Populating DB.");
+			try {
+
+				Notifier notifier = new AndroidNotifier(StorageAndControlService.this);
+				Alarm alarm = new PriceHitAlarm(1, new BitstampExchange(10000000), new Pair("BTC", "USD"), 10000, notifier, 10000, 100);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
+				
+			} catch (Exception e) {
+				Log.e("Caught exception while populating DB.", e);
+			}
+			return null;
+		}
+
+	}
+
 	@SuppressLint("UseSparseArrays")
 	@Override
 	public void onCreate() {
@@ -181,6 +205,9 @@ public class StorageAndControlService extends Service {
 			db = new DBManager(this);
 			prevAlarmID = db.getNextID();
 			alarmsMap = db.getAlarms();
+			if(prevAlarmID == 0) {
+				// new PopupalteDBTask().execute();
+			}
 			if(prevAlarmID > 0) {
 				// Set Exchange and start alarm
 				for (Alarm alarm : alarmsMap.values()) {
@@ -227,8 +254,8 @@ public class StorageAndControlService extends Service {
 	}
 
 	public Exchange getExchange(String classname) throws ClassNotFoundException,
-			InstantiationException, IllegalAccessException, IllegalArgumentException,
-			InvocationTargetException, SecurityException {
+	InstantiationException, IllegalAccessException, IllegalArgumentException,
+	InvocationTargetException, SecurityException {
 		if(exchangesMap.containsKey(classname)) {
 			return exchangesMap.get(classname);
 		} else {

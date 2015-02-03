@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="mobi.boilr.boilr.activities.AlarmListActivity" >
 
     <LinearLayout
         android:id="@+id/bottom_control_bar"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" >
 
@@ -17,16 +17,23 @@
             android:id="@+id/add_alarm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/add_alarm"
-            android:onClick="onAddAlarmClicked">
+            android:onClick="onAddAlarmClicked"
+            android:text="@string/add_alarm" >
         </Button>
     </LinearLayout>
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    <mobi.boilr.boilr.widget.AlarmGridView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@id/bottom_control_bar"
-        android:dividerHeight="2dp" >
-    </ListView>
+        android:columnWidth="250dp"
+        android:gravity="center"
+        android:horizontalSpacing="8dp"
+        android:numColumns="auto_fit"
+        android:padding="8dp"
+        android:scrollbarStyle="outsideOverlay"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="8dp" />
+
 </RelativeLayout>

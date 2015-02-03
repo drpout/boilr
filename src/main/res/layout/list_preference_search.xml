@@ -22,7 +22,7 @@
         android:inputType="text" >
     </EditText>
 
-    <Button
+    <Button	
         android:id="@+id/searchable_close_button"
         android:layout_width="25dip"
         android:layout_height="25dip">

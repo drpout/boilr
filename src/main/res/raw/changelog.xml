@@ -14,6 +14,7 @@
 		<changelogtext>* Fixed bugs in Bitcoin.de, CCEX and Kraken exchanges' interaction.</changelogtext>
 		<changelogtext>* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.</changelogtext>
 		<changelogtext>* Fixed exchange data fetching on low quality internet connections.</changelogtext>
+		<changelogtext>- Removed Justcoin and Vault of Satoshi exchange.</changelogtext>
 	</changelogversion>
 	
 	<changelogversion versionName="0.4.0" changeDate="17 Oct 2014">

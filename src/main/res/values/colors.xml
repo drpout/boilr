@@ -4,5 +4,7 @@
     <color name="dkgray">#444444</color>
     <color name="ltgray">#CCCCCC</color>
     <color name="highlightblue">#33B5E5</color>
-
+    <color name="tickergreen">#00CC00</color>
+    <color name="tickerred">#CC0000</color>
+    
 </resources>

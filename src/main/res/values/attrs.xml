@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-	<attr name="ic_action_about" format="reference"/>
-	<attr name="ic_action_search" format="reference"/>
-	<attr name="ic_action_send_now" format="reference"/>
-	<attr name="ic_action_settings" format="reference"/>
-	<attr name="ic_action_remove" format="reference"/>
-	<attr name="off_alarm_row_color" format="reference"/>
+
+    <attr name="ic_action_about" format="reference" />
+    <attr name="ic_action_overflow" format="reference" />
+    <attr name="ic_action_search" format="reference" />
+    <attr name="ic_action_send_now" format="reference" />
+    <attr name="ic_action_settings" format="reference" />
+    <attr name="ic_action_remove" format="reference" />
+    <attr name="progress_circle_color_on" format="reference" />
+    <attr name="progress_circle_color_off" format="reference" />
+
+    <declare-styleable name="ProgressCircle">
+        <attr name="max" format="integer" />
+        <attr name="outer" format="boolean" />
+        <attr name="hollow" format="boolean" />
+    </declare-styleable>
+
 </resources>

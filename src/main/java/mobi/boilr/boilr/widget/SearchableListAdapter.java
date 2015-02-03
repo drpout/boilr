@@ -62,7 +62,6 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 			return false;
 		}
 	};
-	//private OnTouchListener closeListener = new OnTou
 
 	public SearchableListAdapter(Context context, List<T> list,
 			SearchableListPreference searchableListPreference) {
