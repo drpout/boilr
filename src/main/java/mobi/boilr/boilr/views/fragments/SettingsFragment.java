@@ -150,7 +150,7 @@ public class SettingsFragment extends PreferenceFragment implements
 			if(mBound) {
 				long pairInterval = Long.parseLong(sharedPrefs.getString(PREF_KEY_CHECK_PAIRS_INTERVAL, ""));
 				for (Exchange e : mStorageAndControlService.getLoadedExchanges()) {
-					e.setExperiedPeriod(pairInterval);
+					e.setExpiredPeriod(pairInterval);
 				}
 			} else {
 				Log.e(enclosingActivity.getString(R.string.not_bound, "PreferenceFragment"));

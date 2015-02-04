@@ -2,13 +2,16 @@
 <changelog bulletedList="false">
 	<changelogversion versionName="0.5.0" changeDate="?? Fev 2015">
 		<changelogtext>+ Adicionada opção de alerta de picos ao alarme de variação de preço.</changelogtext>
-		<changelogtext>+ Adicionadas traduções para chinês, italiano, polaco e português.</changelogtext>
+		<changelogtext>+ Adicionadas as bolsas: Bitspark, Coinbase, Mulcoin, OneWorldCoin e Yunbi.</changelogtext>
+		<changelogtext>+ Adicionadas traduções para alemão, chinês, castelhano, italiano, polaco e português.</changelogtext>
 		<changelogtext>+ O último preço na lista de alarmes é agora colorido consoante a direção do preço (subida, descida ou manutenção).</changelogtext>
 		<changelogtext>+ Adicionada seta que indica a direção do preço na notificação mostrada quando um alarme dispara.</changelogtext>
 		<changelogtext>+ Adiconadas configurações para controlar o volume e esconder o aviso de falha de ligação à internet.</changelogtext>
 		<changelogtext>* Ícone completamente redesenhado.</changelogtext>
 		<changelogtext>* Rearranjo da informação na lista de alarmes.</changelogtext>
 		<changelogtext>* Alarmes desligados são agora continuamente atualizados quando a lista de alarmes está visível.</changelogtext>
+		<changelogtext>* Atualização dos pares das bolsas ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange e OKCoin.</changelogtext>
+		<changelogtext>* Corrigidos erros na interação com as bolsas Bitcoin.de, CCEX e Kraken.</changelogtext>
 		<changelogtext>* Corrigida falha que disparava repetidamente alarmes cujo intervalo de atualização fosse curto.</changelogtext>
 		<changelogtext>* Corrigido o carregamento de dados das bolsas em ligações de má qualidade.</changelogtext>
 	</changelogversion>
