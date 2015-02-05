@@ -92,15 +92,13 @@ public class AlarmListActivity extends Activity {
 		mView.start();
 		mView.setOnTouchListener(new OnSwipeTouchListener(this));
 		OnItemClickListener listener = new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
 				getStorageAndControlService().toggleAlarm(((AlarmLayout) view).getAlarm().getId());
-				
-			}};
-			
-		mView.setOnItemClickListener(listener);
 
+			}
+		};
+		mView.setOnItemClickListener(listener);
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 		startService(serviceIntent);
 		bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);

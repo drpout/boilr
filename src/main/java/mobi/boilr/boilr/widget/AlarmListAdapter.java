@@ -43,10 +43,11 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 			mAlarmLayout = ((AlarmLayout) convertView);
 			mAlarmLayout.start();
 			View menu = convertView.findViewById(R.id.menu);
+
 			menu.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Alarm alarm = ((AlarmLayout) v.getParent()).getAlarm();
+					Alarm alarm = ((AlarmLayout) v.getParent().getParent()).getAlarm();
 					Intent alarmSettingsIntent = new Intent(getContext(), AlarmSettingsActivity.class);
 					alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
 					alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());

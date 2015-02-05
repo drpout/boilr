@@ -29,8 +29,8 @@ public class AlarmGridView extends GridView implements Runnable {
 		for(int i = 0; i < getChildCount(); i++) {
 			mView = getChildAt(i);
 			if(mView.isShown()) {
-				// post((Runnable) view);
-				((AlarmLayout) mView).updateChildren(mCurrent);
+				post((Runnable) mView);
+				// ((AlarmLayout) mView).updateChildren(mCurrent);
 			}
 		}
 		postDelayed(this, REFRESH_INTERVAL);

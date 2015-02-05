@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background_color"
-    android:orientation="vertical"		
+    android:orientation="vertical"
     tools:context="mobi.boilr.boilr.activities.AlarmListActivity" >
 
     <LinearLayout
@@ -22,11 +22,25 @@
         </Button>
     </LinearLayout>
 
+    <!-- <mobi.boilr.boilr.widget.AlarmGridView -->
+    <!-- android:id="@+id/list" -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="match_parent" -->
+    <!-- android:layout_above="@id/bottom_control_bar" -->
+    <!-- android:columnWidth="250dp" -->
+    <!-- android:gravity="center" -->
+    <!-- android:horizontalSpacing="8dp" -->
+    <!-- android:numColumns="auto_fit" -->
+    <!-- android:padding="8dp" -->
+    <!-- android:scrollbarStyle="outsideOverlay" -->
+    <!-- android:stretchMode="columnWidth" -->
+    <!-- android:verticalSpacing="8dp" /> -->
+
     <mobi.boilr.boilr.widget.AlarmGridView
         android:id="@+id/list"
+        android:layout_above="@id/bottom_control_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_control_bar"
         android:columnWidth="250dp"
         android:gravity="center"
         android:horizontalSpacing="8dp"

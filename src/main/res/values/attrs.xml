@@ -9,11 +9,11 @@
     <attr name="ic_action_remove" format="reference" />
     <attr name="background_color" format="reference" />
     <attr name="row_color" format="reference" />
-    <attr name="windowBackground" format="reference" />
+<!--     <attr name="row_color_drawable" format="reference" /> -->
+<!--     <attr name="windowBackground" format="reference" /> -->
     <attr name="progress_circle_color_on" format="reference" />
     <attr name="progress_circle_color_off" format="reference" />
-    
-    
+
     <declare-styleable name="ProgressCircle">
         <attr name="max" format="integer" />
         <attr name="outer" format="boolean" />

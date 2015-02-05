@@ -20,6 +20,7 @@ import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libdynticker.exchanges.BitstampExchange;
+import mobi.boilr.libdynticker.exchanges.BullionVaultExchange;
 import mobi.boilr.libdynticker.exchanges.CoinMktExchange;
 import mobi.boilr.libdynticker.exchanges.OKCoinExchange;
 import mobi.boilr.libdynticker.exchanges.PoloniexExchange;
@@ -176,45 +177,25 @@ public class StorageAndControlService extends Service {
 		protected Void doInBackground(Void... arg) {
 			Log.d("Populating DB.");
 			try {
+				Alarm alarm;
 
 				Notifier notifier = new AndroidNotifier(StorageAndControlService.this);
-				Alarm alarm = new PriceHitAlarm(generateAlarmID(), new BitstampExchange(10000000), new Pair("BTC", "USD"), 10000, notifier, 10000,
+				alarm = new PriceHitAlarm(generateAlarmID(), new BitstampExchange(10000000), new Pair("BTC", "USD"), 10000, notifier, 10000,
 						100);
 				addAlarm(alarm);
 				startAlarm(alarm.getId());
 
-				alarm = new PriceHitAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 10000, notifier, 20000, 200);
-				addAlarm(alarm);
-				stopAlarm(alarm.getId());
-
-				alarm = new PriceHitAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 10000, notifier, 30000, 300);
+				alarm = new PriceChangeAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 60000, notifier, 1f);
 				addAlarm(alarm);
 				startAlarm(alarm.getId());
 
-				alarm = new PriceHitAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 10000, notifier, 20000, 200);
-				addAlarm(alarm);
-				stopAlarm(alarm.getId());
-
-				alarm = new PriceHitAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 10000, notifier, 30000, 300);
+				alarm = new PriceSpikeAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 30000, notifier, 5, 60000);
 				addAlarm(alarm);
 				startAlarm(alarm.getId());
 
-				alarm = new PriceHitAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 10000, notifier, 20000, 200);
-				addAlarm(alarm);
-				stopAlarm(alarm.getId());
-
-				alarm = new PriceHitAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 10000, notifier, 30000, 300);
+				alarm = new PriceSpikeAlarm(generateAlarmID(), new BullionVaultExchange(10000000), new Pair("AUX", "USD"), 30000, notifier, 5, 660000);
 				addAlarm(alarm);
 				startAlarm(alarm.getId());
-
-				alarm = new PriceHitAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 10000, notifier, 20000, 200);
-				addAlarm(alarm);
-				stopAlarm(alarm.getId());
-
-				alarm = new PriceHitAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 10000, notifier, 30000, 300);
-				addAlarm(alarm);
-				startAlarm(alarm.getId());
-
 			} catch (Exception e) {
 				Log.e("Caught exception while populating DB.", e);
 			}

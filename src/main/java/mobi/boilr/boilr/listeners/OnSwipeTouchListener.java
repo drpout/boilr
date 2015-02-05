@@ -47,7 +47,6 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
 		switch(event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			Log.d("Down");
 			if(mItemPressed) {
 				// Multi-item swipes not handled
 				return false;

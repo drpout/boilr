@@ -56,8 +56,6 @@ public class ProgressCircle extends View {
 		mRect = new Rect();
 
 		mPaint = new Paint();
-		// mPaint.setARGB(0x99, 0x33, 0x33, 0x33);
-		// mPaint.setColor(context.getResources().getColor(R.color.ltgray));
 		mPaint.setColor(mColor);
 		mPaint.setAntiAlias(true);
 		mPaint.setStrokeCap(Paint.Cap.BUTT);

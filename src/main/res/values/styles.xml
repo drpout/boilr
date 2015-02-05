@@ -11,8 +11,9 @@
         <item name="progress_circle_color_on">@color/highlightblue</item>
         <item name="progress_circle_color_off">@color/ltgray</item>
         <item name="background_color">@color/dkbackground</item>
-        <item name="row_color">@color/ltbackground</item>
-        <item name="windowBackground">@drawable/windowBackgroundDark</item>
+        <item name="row_color">@drawable/dkrow</item>
+        <!-- <item name="row_color_drawable">@drawable/dkrow</item> -->
+        <!-- <item name="windowBackground">@drawable/windowBackgroundDark</item> -->
     </style>
 
     <style name="BoilrTheme.Light" parent="@android:Theme.Holo.Light">
@@ -25,8 +26,9 @@
         <item name="progress_circle_color_on">@color/highlightblue</item>
         <item name="progress_circle_color_off">@color/dkgray</item>
         <item name="background_color">@color/ltbackground</item>
-        <item name="row_color">@color/dkbackground</item>
-        <item name="windowBackground">@drawable/windowBackgroundLight</item>
+        <item name="row_color">@drawable/ltrow</item>
+        <!-- <item name="row_color_drawable">@drawable/ltrow</item> -->
+        <!-- <item name="windowBackground">@drawable/windowBackgroundLight</item> -->
     </style>
 
 </resources>

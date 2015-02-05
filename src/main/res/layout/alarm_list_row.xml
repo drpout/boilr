@@ -4,7 +4,7 @@
     xmlns:boilr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@drawable/menu"
+    android:background="?attr/row_color"
     android:orientation="horizontal" >
 
     <LinearLayout
@@ -22,7 +22,7 @@
             android:ellipsize="end"
             android:gravity="bottom|center_horizontal"
             android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -33,7 +33,7 @@
             android:ellipsize="end"
             android:gravity="top|center_horizontal"
             android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,7 +64,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:gravity="bottom|center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:singleLine="true"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/last_value"
@@ -72,7 +73,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:singleLine="true"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -81,40 +83,48 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:gravity="top|center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:singleLine="true"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <FrameLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|start"
                 android:gravity="bottom|start"
-                android:paddingBottom="8dp" >
+                android:paddingBottom="4dp" >
 
                 <mobi.boilr.boilr.widget.ProgressCircle
                     android:id="@+id/progress_update"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:gravity="bottom|start"
                     boilr:hollow="false"
                     boilr:max="1000" />
 
                 <mobi.boilr.boilr.widget.ProgressCircle
-                    android:id="@+id/progress_period"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:id="@+id/progress_time_frame"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:gravity="bottom|start"
                     boilr:hollow="true"
                     boilr:max="1000" />
             </FrameLayout>
         </FrameLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="45dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        >
 
         <LinearLayout
             android:id="@+id/change_options"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="start"
             android:orientation="vertical" >
 
             <TextView
@@ -122,7 +132,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="bottom|start"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:singleLine="true"
+                android:textSize="14sp"
                 android:visibility="gone" />
 
             <TextView
@@ -130,19 +141,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|start"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:singleLine="true"
+                android:textSize="12sp"
                 android:visibility="gone" />
         </LinearLayout>
-    </LinearLayout>
 
-    <ImageView
-        android:id="@+id/menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:gravity="bottom|end"
-        android:background="@drawable/normal"
-        android:paddingBottom="4dp"
-        android:src="?attr/ic_action_overflow" />
+        <ImageView
+            android:id="@+id/menu"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/normal"
+            android:gravity="bottom|end"
+            android:src="?attr/ic_action_overflow" />
+    </FrameLayout>
 
 </mobi.boilr.boilr.widget.AlarmLayout>
