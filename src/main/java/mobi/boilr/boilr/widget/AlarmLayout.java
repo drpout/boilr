@@ -20,7 +20,8 @@ public class AlarmLayout extends LinearLayout {
 	private static final int PRIMARYCOLOR = 2;
 
 	private Alarm mAlarm;
-	private TextView mLastValue;
+	private TextView mLastValueView;
+	private long mLastValue;
 	private ProgressCircle mProgressUpdate;
 	private TypedArray mColorsArray;
 	private TextView mUpperLimit;
@@ -50,7 +51,7 @@ public class AlarmLayout extends LinearLayout {
 
 	public void start() {
 		mColorsArray = getContext().obtainStyledAttributes(ATTRS);
-		mLastValue = (TextView) findViewById(R.id.last_value);
+		mLastValueView = (TextView) findViewById(R.id.last_value);
 		mUpperLimit = (TextView) findViewById(R.id.upper_limit);
 		mLowerLimit = (TextView) findViewById(R.id.lower_limit);
 		mVariance = (TextView) findViewById(R.id.variance);
@@ -60,15 +61,16 @@ public class AlarmLayout extends LinearLayout {
 
 	public void updateChildren(long currentTime) {
 
-
-		if(mAlarm.getDirection() == Direction.UP) {
-			mLastValue.setTextColor(getResources().getColor(R.color.tickergreen));
-		} else if(mAlarm.getDirection() == Direction.DOWN) {
-			mLastValue.setTextColor(getResources().getColor(R.color.tickerred));
-		} else {
-			mLastValue.setTextColor(mColorsArray.getColor(PRIMARYCOLOR, Color.RED));
+		if(mLastValue != mAlarm.getLastValue()) {
+			if(mAlarm.getDirection() == Direction.UP) {
+				mLastValueView.setTextColor(getResources().getColor(R.color.tickergreen));
+			} else if(mAlarm.getDirection() == Direction.DOWN) {
+				mLastValueView.setTextColor(getResources().getColor(R.color.tickerred));
+			} else {
+				mLastValueView.setTextColor(mColorsArray.getColor(PRIMARYCOLOR, Color.RED));
+			}
+			mLastValueView.setText(Conversions.formatMaxDecimalPlaces(mAlarm.getLastValue()));
 		}
-		mLastValue.setText(Conversions.formatMaxDecimalPlaces(mAlarm.getLastValue()));
 
 		mUpperLimit.setText(Conversions.formatMaxDecimalPlaces(mAlarm.getUpperLimit()));
 

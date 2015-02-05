@@ -3,6 +3,7 @@ package mobi.boilr.boilr.services;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +12,6 @@ import java.util.Map;
 import mobi.boilr.boilr.database.DBManager;
 import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
-import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Notifications;
@@ -21,7 +21,10 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libdynticker.exchanges.BitstampExchange;
 import mobi.boilr.libdynticker.exchanges.CoinMktExchange;
+import mobi.boilr.libdynticker.exchanges.OKCoinExchange;
+import mobi.boilr.libdynticker.exchanges.PoloniexExchange;
 import mobi.boilr.libpricealarm.Alarm;
+import mobi.boilr.libpricealarm.AlarmPositionComparator;
 import mobi.boilr.libpricealarm.Notifier;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
@@ -76,7 +79,8 @@ public class StorageAndControlService extends Service {
 				if(hasNetworkConnection()) {
 					try {
 						alarm.run();
-						Log.d("Last value for alarm " + alarm.getId() + " " + Conversions.formatMaxDecimalPlaces(alarm.getLastValue()));
+						// Log.d("Last value for alarm " + alarm.getId() + " " +
+						// Conversions.formatMaxDecimalPlaces(alarm.getLastValue()));
 					} catch(NumberFormatException e) {
 						Log.e("Could format last value for alarm " + alarm.getId(), e);
 					} catch(IOException e) {
@@ -174,10 +178,43 @@ public class StorageAndControlService extends Service {
 			try {
 
 				Notifier notifier = new AndroidNotifier(StorageAndControlService.this);
-				Alarm alarm = new PriceHitAlarm(1, new BitstampExchange(10000000), new Pair("BTC", "USD"), 10000, notifier, 10000, 100);
+				Alarm alarm = new PriceHitAlarm(generateAlarmID(), new BitstampExchange(10000000), new Pair("BTC", "USD"), 10000, notifier, 10000,
+						100);
 				addAlarm(alarm);
 				startAlarm(alarm.getId());
-				
+
+				alarm = new PriceHitAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 10000, notifier, 20000, 200);
+				addAlarm(alarm);
+				stopAlarm(alarm.getId());
+
+				alarm = new PriceHitAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 10000, notifier, 30000, 300);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
+
+				alarm = new PriceHitAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 10000, notifier, 20000, 200);
+				addAlarm(alarm);
+				stopAlarm(alarm.getId());
+
+				alarm = new PriceHitAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 10000, notifier, 30000, 300);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
+
+				alarm = new PriceHitAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 10000, notifier, 20000, 200);
+				addAlarm(alarm);
+				stopAlarm(alarm.getId());
+
+				alarm = new PriceHitAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 10000, notifier, 30000, 300);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
+
+				alarm = new PriceHitAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 10000, notifier, 20000, 200);
+				addAlarm(alarm);
+				stopAlarm(alarm.getId());
+
+				alarm = new PriceHitAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 10000, notifier, 30000, 300);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
+
 			} catch (Exception e) {
 				Log.e("Caught exception while populating DB.", e);
 			}
@@ -206,7 +243,7 @@ public class StorageAndControlService extends Service {
 			prevAlarmID = db.getNextID();
 			alarmsMap = db.getAlarms();
 			if(prevAlarmID == 0) {
-				// new PopupalteDBTask().execute();
+				new PopupalteDBTask().execute();
 			}
 			if(prevAlarmID > 0) {
 				// Set Exchange and start alarm
@@ -273,7 +310,9 @@ public class StorageAndControlService extends Service {
 	}
 
 	public List<Alarm> getAlarms() {
-		return new ArrayList<Alarm>(alarmsMap.values());
+		List<Alarm> alarms = new ArrayList<Alarm>(alarmsMap.values());
+		Collections.sort(alarms, new AlarmPositionComparator());
+		return alarms;
 	}
 
 	public Alarm getAlarm(int alarmID) {
@@ -340,9 +379,18 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void addAlarm(Alarm alarm) throws IOException {
+		alarm.setPosition(prevAlarmID);
 		alarmsMap.put(alarm.getId(), alarm);
 		db.storeAlarm(alarm);
 		addToAlarmManager(alarm, 0);
+	}
+
+	public void updateAlarmPosition(Alarm a1, Alarm a2) {
+		int pos2 = a2.getPosition();
+		a2.setPosition(a1.getPosition());
+		a1.setPosition(pos2);
+		replaceAlarmDB(a1);
+		replaceAlarmDB(a2);
 	}
 
 	public void deleteAlarm(Alarm alarm) {

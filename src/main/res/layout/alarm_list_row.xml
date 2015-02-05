@@ -4,7 +4,7 @@
     xmlns:boilr="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@drawable/alarm"
+    android:background="@drawable/menu"
     android:orientation="horizontal" >
 
     <LinearLayout
@@ -21,11 +21,6 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="bottom|center_horizontal"
-            android:paddingEnd="4dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="4dp"
-            android:paddingStart="8dp"
-            android:paddingTop="4dp"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold" />
@@ -37,12 +32,6 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:gravity="top|center_horizontal"
-            android:paddingBottom="4dp"
-            android:paddingEnd="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingStart="8dp"
-            android:paddingTop="4dp"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
@@ -152,6 +141,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:gravity="bottom|end"
+        android:background="@drawable/normal"
         android:paddingBottom="4dp"
         android:src="?attr/ic_action_overflow" />
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import mobi.boilr.libpricealarm.Alarm;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
@@ -114,6 +115,10 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 	@Override
 	public T getItem(int arg0) {
 		return mList.get(arg0);
+	}
+
+	public int indexOf(Alarm arg0) {
+		return mList.indexOf(arg0);
 	}
 
 	@Override

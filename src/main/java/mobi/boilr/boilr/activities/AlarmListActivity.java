@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.listeners.OnSwipeTouchListener;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Languager;
@@ -12,6 +13,7 @@ import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.utils.VersionTracker;
 import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
 import mobi.boilr.boilr.widget.AlarmGridView;
+import mobi.boilr.boilr.widget.AlarmLayout;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
 import android.app.Activity;
@@ -25,6 +27,8 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
@@ -86,7 +90,16 @@ public class AlarmListActivity extends Activity {
 		mAdapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<Alarm>());
 		mView.setAdapter(mAdapter);
 		mView.start();
-		// mView.setOnTouchListener(new OnSwipeTouchListener(this));
+		mView.setOnTouchListener(new OnSwipeTouchListener(this));
+		OnItemClickListener listener = new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
+				getStorageAndControlService().toggleAlarm(((AlarmLayout) view).getAlarm().getId());
+				
+			}};
+			
+		mView.setOnItemClickListener(listener);
 
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 		startService(serviceIntent);

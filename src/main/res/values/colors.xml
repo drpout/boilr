@@ -6,5 +6,12 @@
     <color name="highlightblue">#33B5E5</color>
     <color name="tickergreen">#00CC00</color>
     <color name="tickerred">#CC0000</color>
-    
+    <color name="dkbackground">#444444</color>
+    <color name="ltbackground">#CCCCCC</color>
+
+    <drawable name="highlightblue">@color/highlightblue</drawable>
+    <!-- <drawable name="defaultcolor">"?android:attr/windowBackground"</drawable> -->
+    <drawable name="windowBackgroundDark">@color/dkgray</drawable>
+    <drawable name="windowBackgroundLight">@color/ltgray</drawable>
+
 </resources>

@@ -10,6 +10,9 @@
         <item name="ic_action_remove">@drawable/ic_action_remove_dark</item>
         <item name="progress_circle_color_on">@color/highlightblue</item>
         <item name="progress_circle_color_off">@color/ltgray</item>
+        <item name="background_color">@color/dkbackground</item>
+        <item name="row_color">@color/ltbackground</item>
+        <item name="windowBackground">@drawable/windowBackgroundDark</item>
     </style>
 
     <style name="BoilrTheme.Light" parent="@android:Theme.Holo.Light">
@@ -21,6 +24,9 @@
         <item name="ic_action_remove">@drawable/ic_action_remove_light</item>
         <item name="progress_circle_color_on">@color/highlightblue</item>
         <item name="progress_circle_color_off">@color/dkgray</item>
+        <item name="background_color">@color/ltbackground</item>
+        <item name="row_color">@color/dkbackground</item>
+        <item name="windowBackground">@drawable/windowBackgroundLight</item>
     </style>
 
 </resources>
