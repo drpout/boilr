@@ -168,9 +168,7 @@ public class StorageAndControlService extends Service {
 		protected void onPostExecute(List<Pair> result) {
 			frag.updatePairsListCallback(exchangeName, pairString, result);
 		}
-
 	}
-
 
 	private class PopupalteDBTask extends AsyncTask<Void, Void, Void> {
 		@Override
@@ -178,24 +176,44 @@ public class StorageAndControlService extends Service {
 			Log.d("Populating DB.");
 			try {
 				Alarm alarm;
-
 				Notifier notifier = new AndroidNotifier(StorageAndControlService.this);
-				alarm = new PriceHitAlarm(generateAlarmID(), new BitstampExchange(10000000), new Pair("BTC", "USD"), 10000, notifier, 10000,
-						100);
+				alarm = new PriceHitAlarm(generateAlarmID(), new BitstampExchange(10000000), new Pair("BTC", "USD"), 10000, notifier, 10000000,
+						0.00000001);
 				addAlarm(alarm);
 				startAlarm(alarm.getId());
-
 				alarm = new PriceChangeAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 60000, notifier, 1f);
 				addAlarm(alarm);
 				startAlarm(alarm.getId());
-
+				alarm = new PriceChangeAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 60000, notifier, 10f);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
+				alarm = new PriceChangeAlarm(generateAlarmID(), new PoloniexExchange(10000000), new Pair("XMR", "BTC"), 60000, notifier, 10000000);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
 				alarm = new PriceSpikeAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 30000, notifier, 5, 60000);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
+				alarm = new PriceSpikeAlarm(generateAlarmID(), new BullionVaultExchange(10000000), new Pair("AUX", "USD"), 30000, notifier, 5, 660000);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
+				alarm = new PriceSpikeAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 30000, notifier, 5, 60000);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
+				alarm = new PriceSpikeAlarm(generateAlarmID(), new BullionVaultExchange(10000000), new Pair("AUX", "USD"), 30000, notifier, 5, 660000);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
+				alarm = new PriceSpikeAlarm(generateAlarmID(), new BullionVaultExchange(10000000), new Pair("AUX", "USD"), 30000, notifier, 5, 660000);
+				addAlarm(alarm);
+				startAlarm(alarm.getId());
+
+				alarm = new PriceSpikeAlarm(generateAlarmID(), new OKCoinExchange(10000000), new Pair("BTC", "CNY"), 30000, notifier, 10, 60000);
 				addAlarm(alarm);
 				startAlarm(alarm.getId());
 
 				alarm = new PriceSpikeAlarm(generateAlarmID(), new BullionVaultExchange(10000000), new Pair("AUX", "USD"), 30000, notifier, 5, 660000);
 				addAlarm(alarm);
 				startAlarm(alarm.getId());
+
 			} catch (Exception e) {
 				Log.e("Caught exception while populating DB.", e);
 			}

@@ -85,7 +85,6 @@ public class AlarmListActivity extends Activity {
 		VersionTracker.showChangeLog(this);
 		setContentView(R.layout.alarm_list);
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
-
 		mView = ((AlarmGridView) findViewById(R.id.list));
 		mAdapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<Alarm>());
 		mView.setAdapter(mAdapter);
@@ -95,7 +94,6 @@ public class AlarmListActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
 				getStorageAndControlService().toggleAlarm(((AlarmLayout) view).getAlarm().getId());
-
 			}
 		};
 		mView.setOnItemClickListener(listener);

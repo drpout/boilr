@@ -43,7 +43,6 @@ public class OnSwipeTouchListener implements OnTouchListener {
 					mPointToPosition = -1;
 					mSwiping = false;
 					mItemPressed = false;
-					Log.d("STARTING");
 					ClipData data = ClipData.newPlainText("", "");
 					DragShadowBuilder sb = new View.DragShadowBuilder(view);
 					view.startDrag(data, sb, new Reference<View>(view), 0);
@@ -56,7 +55,6 @@ public class OnSwipeTouchListener implements OnTouchListener {
 		public void setView(View view) {
 			this.view = view;
 		}
-
 	}
 
 	private AlarmListActivity mActivity;
@@ -79,12 +77,9 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
 	@Override
 	public boolean onTouch(final View view, MotionEvent event) {
-		// pointToPosition returns the absolute position of the view in the
-		// list.
+		// pointToPosition returns the absolute position of the view in the list.
 		mPointToPosition = mPointToPosition == -1 ? mView.pointToPosition((int) event.getX(), (int) event.getY()) : mPointToPosition;
 		// getChildAt returns the the n visible view
-		Log.d("pos " + mPointToPosition);
-
 		View childView = mView.getChildAt(mPointToPosition - mView.getFirstVisiblePosition());
 		// When no row is selected, do nothing
 		if(childView == null) {
@@ -96,7 +91,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 		}
 
 		if(mSwipeSlop < 0) {
-			mSwipeSlop = ViewConfiguration.get(mActivity).getScaledTouchSlop() * 3;
+			mSwipeSlop = ViewConfiguration.get(mActivity).getScaledTouchSlop();
 			mSwipeSlopX = mSwipeSlop * 3;
 		}
 
@@ -106,14 +101,12 @@ public class OnSwipeTouchListener implements OnTouchListener {
 				// Multi-item swipes not handled
 				return false;
 			}
-			Log.d("Down");
-
 			mLongClickTask.setView(childView);
 			mHandler.postDelayed(mLongClickTask, 1000);
 			mItemPressed = true;
 			mDownX = event.getX();
 			mDownY = event.getY();
-			break;
+			return false;
 
 		case MotionEvent.ACTION_CANCEL:
 			Log.d("Cancel");
@@ -123,7 +116,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 			mPointToPosition = -1;
 			mItemPressed = false;
 			mSwiping = false;
-			break;
+			return false;
 
 		case MotionEvent.ACTION_MOVE: {
 			Log.d("Move");
@@ -139,8 +132,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 					mView.requestDisallowInterceptTouchEvent(true);
 					mHandler.removeCallbacks(mLongClickTask);
 				} else if(deltaYAbs > mSwipeSlop) {
-					// It's not an horizontal swipe, it most something else, let
-					// another listener handle it
+					// It's not an horizontal swipe, it most something else, let another listener handle it
 					mPointToPosition = -1;
 					mSwiping = false;
 					mItemPressed = false;
@@ -150,8 +142,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 			}
 			if(mSwiping) {
 				childView.setTranslationX((x - mDownX));
-				// Set fade to be almost invisible when when threshold to remove
-				// is achieved.
+				// Set fade to be almost invisible when when threshold to remove is achieved.
 				childView.setAlpha(1 - deltaXAbs / view.getWidth());
 			}
 		}
@@ -159,13 +150,12 @@ public class OnSwipeTouchListener implements OnTouchListener {
 
 		case MotionEvent.ACTION_UP: {
 			Log.d("UP");
-			// User let go - figure out whether to animate the view out, or back
-			// into place
+			// User let go - figure out whether to animate the view out, or back into place
 			if(mSwiping) {
 				float x = event.getX() + view.getTranslationX();
 				float deltaX = x - mDownX;
 				float deltaXAbs = Math.abs(deltaX);
-				final boolean remove = deltaXAbs > view.getWidth() * REMOVE_THRESHOLD;
+				final boolean remove = deltaXAbs > childView.getWidth() * REMOVE_THRESHOLD;
 				mView.setEnabled(false);
 				if(remove) {
 					// remove view
@@ -186,7 +176,6 @@ public class OnSwipeTouchListener implements OnTouchListener {
 				mSwiping = false;
 			} else {
 				// It's not an horizontal swipe, let another listener handle it.
-				mSwiping = false;
 				mPointToPosition = -1;
 				mItemPressed = false;
 				mHandler.removeCallbacks(mLongClickTask);
@@ -195,11 +184,13 @@ public class OnSwipeTouchListener implements OnTouchListener {
 			mPointToPosition = -1;
 			mItemPressed = false;
 			mHandler.removeCallbacks(mLongClickTask);
+			return false;
 		}
-			break;
+
 		default:
 			return false;
 		}
+
 		return true;
 	}
 }

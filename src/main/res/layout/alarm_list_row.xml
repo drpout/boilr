@@ -7,34 +7,48 @@
     android:background="?attr/row_color"
     android:orientation="horizontal" >
 
-    <LinearLayout
-        android:id="@+id/abc"
-        android:layout_width="100dp"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical" >
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
 
-        <TextView
-            android:id="@+id/pair"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="bottom|center_horizontal"
-            android:singleLine="true"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:id="@+id/abc"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/exchange"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:gravity="top|center_horizontal"
-            android:singleLine="true"
-            android:textSize="16sp" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/pair"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="bottom|center_horizontal"
+                android:singleLine="true"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/exchange"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="top|center_horizontal"
+                android:singleLine="true"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <mobi.boilr.boilr.widget.ProgressCircle
+            android:id="@+id/progress_update"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="bottom|end"
+            android:gravity="bottom|end"
+            boilr:hollow="false"
+            boilr:max="1000" />
+    </FrameLayout>
 
     <FrameLayout
         android:layout_width="0dp"
@@ -78,22 +92,6 @@
                 android:singleLine="true"
                 android:textSize="14sp" />
         </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:gravity="bottom|start"
-            android:paddingBottom="4dp" >
-
-            <mobi.boilr.boilr.widget.ProgressCircle
-                android:id="@+id/progress_update"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:gravity="bottom|start"
-                boilr:hollow="false"
-                boilr:max="1000" />
-        </FrameLayout>
     </FrameLayout>
 
     <FrameLayout

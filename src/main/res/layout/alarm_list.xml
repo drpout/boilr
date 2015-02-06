@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/background_color"
-    android:orientation="vertical"
-    tools:context="mobi.boilr.boilr.activities.AlarmListActivity" >
+    android:orientation="vertical" >
 
     <LinearLayout
         android:id="@+id/bottom_control_bar"
@@ -38,9 +37,9 @@
 
     <mobi.boilr.boilr.widget.AlarmGridView
         android:id="@+id/list"
-        android:layout_above="@id/bottom_control_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/bottom_control_bar"
         android:columnWidth="250dp"
         android:gravity="center"
         android:horizontalSpacing="8dp"
