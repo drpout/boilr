@@ -65,7 +65,7 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 		} else if(mAlarm.getDirection() == Direction.DOWN) {
 			mLastValueView.setTextColor(getResources().getColor(R.color.tickerred));
 		} else {
-			mLastValueView.setTextColor(mColorsArray.getColor(PRIMARYCOLOR, Color.RED));
+			mLastValueView.setTextColor(mColorsArray.getColor(PRIMARYCOLOR, Color.GRAY));
 		}
 		mLastValueView.setText(Conversions.format8SignificantDigits(mAlarm.getLastValue()));
 

@@ -7,8 +7,7 @@
 		<changelogtext>+ O último preço na lista de alarmes é agora colorido consoante a direção do preço (subida, descida ou manutenção).</changelogtext>
 		<changelogtext>+ Adicionada seta que indica a direção do preço na notificação mostrada quando um alarme dispara.</changelogtext>
 		<changelogtext>+ Adiconadas configurações para controlar o volume e esconder o aviso de falha de ligação à internet.</changelogtext>
-		<changelogtext>* Ícone completamente redesenhado.</changelogtext>
-		<changelogtext>* Rearranjo da informação na lista de alarmes.</changelogtext>
+		<changelogtext>* Ícone e lista de alarmes foram completamente redesenhados.</changelogtext>
 		<changelogtext>* Alarmes desligados são agora continuamente atualizados quando a lista de alarmes está visível.</changelogtext>
 		<changelogtext>* Atualização dos pares das bolsas ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange e OKCoin.</changelogtext>
 		<changelogtext>* Corrigidos erros na interação com as bolsas Bitcoin.de, CCEX e Kraken.</changelogtext>

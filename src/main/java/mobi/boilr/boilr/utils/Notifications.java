@@ -16,7 +16,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 
 /* Based on Android DeskClock AlarmNotifications. */
@@ -25,13 +24,23 @@ public final class Notifications {
 	private static final int noInternetNotificationID = 432191926;
 	private static Notification.Builder noInternetNotification = null;
 	public static boolean allowNoInternetNotification = true;
-	private static final Bitmap smallUpArrowBitmap = textAsBitmap("▲", 100, Color.GREEN);
-	public static final Bitmap bigUpArrowBitmap = textAsBitmap("▲", 250, Color.GREEN);
-	private static final Bitmap smallDownArrowBitmap = textAsBitmap("▼", 100, Color.RED);
-	public static final Bitmap bigDownArrowBitmap = textAsBitmap("▼", 250, Color.RED);
+	private static Bitmap smallUpArrowBitmap = null;
+	public static Bitmap bigUpArrowBitmap = null;
+	private static Bitmap smallDownArrowBitmap = null;
+	public static Bitmap bigDownArrowBitmap = null;
+	private static final int bigArrowSize = 250;
+	private static final int smallArrowSize = 100;
 
 	private static Notification.Builder setCommonNotificationProps(Context context, Alarm alarm,
 			String firingReasonTitle, String firingReasonBody) {
+		if(smallUpArrowBitmap == null) {
+			int tickerGreen = context.getResources().getColor(R.color.tickergreen);
+			int tickerRed = context.getResources().getColor(R.color.tickerred);
+			smallUpArrowBitmap = textAsBitmap("▲", smallArrowSize, tickerGreen);
+			bigUpArrowBitmap = textAsBitmap("▲", bigArrowSize, tickerGreen);
+			smallDownArrowBitmap = textAsBitmap("▼", smallArrowSize, tickerRed);
+			bigDownArrowBitmap = textAsBitmap("▼", bigArrowSize, tickerRed);
+		}
 		Notification.Builder notification = new Notification.Builder(context)
 			.setContentTitle(firingReasonTitle)
 			.setContentText(firingReasonBody)

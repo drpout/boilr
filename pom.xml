@@ -33,8 +33,7 @@
 			\+ Last price on alarm list is now coloured according to price direction (up, down or same).
 			\+ Added arrow to the alarm triggered notification showing which direction the price took.
 			\+ Added app settings to control volume and dismiss no internet notification.
-			\* Icon was completely redesigned.
-			\* Rearranged information on the alarms' rows.
+			\* Icon and alarms' list were completely redesigned.
 			\* Offed alarms are now continuously updated while alarm list is visible.
 			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange and OKCoin pairs.
 			\* Fixed bugs in Bitcoin.de, CCEX and Kraken exchanges' interaction.
