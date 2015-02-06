@@ -2,7 +2,6 @@ package mobi.boilr.boilr.widget;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
-import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.Alarm.Direction;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
@@ -28,7 +27,6 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 	private TextView mVarianceView;
 	private TextView mBaseValueView;
 	private ProgressCircle mLastUpdateProgress;
-	private ProgressCircle mTimeFrameProgress;
 	private long progress;
 
 	public AlarmLayout(Context context) {
@@ -59,7 +57,6 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 		mVarianceView = (TextView) findViewById(R.id.variance);
 		mBaseValueView = (TextView) findViewById(R.id.base_value);
 		mLastUpdateProgress = (ProgressCircle) findViewById(R.id.progress_update);
-		mTimeFrameProgress = (ProgressCircle) findViewById(R.id.progress_time_frame);
 	}
 
 	public void updateChildren(long currentTime) {
@@ -70,9 +67,11 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 		} else {
 			mLastValueView.setTextColor(mColorsArray.getColor(PRIMARYCOLOR, Color.RED));
 		}
-		mLastValueView.setText(Conversions.formatMaxDecimalPlaces(mAlarm.getLastValue()));
-		mUpperLimitView.setText(Conversions.formatMaxDecimalPlaces(mAlarm.getUpperLimit()));
-		mLowerLimitView.setText(Conversions.formatMaxDecimalPlaces(mAlarm.getLowerLimit()));
+		mLastValueView.setText(Conversions.format8SignificantDigits(mAlarm.getLastValue()));
+
+		mUpperLimitView.setText(Conversions.format8SignificantDigits(mAlarm.getUpperLimit()));
+		mLowerLimitView.setText(Conversions.format8SignificantDigits(mAlarm.getLowerLimit()));
+
 		progress = mAlarm.getPeriod();
 		mLastUpdateProgress.setMax(progress);
 		if(mAlarm.getLastUpdateTimestamp() != null) {
@@ -89,27 +88,14 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 			if(priceChangeAlarm.isPercent()) {
 				mVarianceView.setText(Conversions.format2DecimalPlaces(priceChangeAlarm.getPercent()) + "%");
 			} else {
-				mVarianceView.setText(Conversions.formatMaxDecimalPlaces(priceChangeAlarm.getChange()));
+				mVarianceView.setText(Conversions.format8SignificantDigits(priceChangeAlarm.getChange()));
 			}
 			mVarianceView.setVisibility(VISIBLE);
 			if(mAlarm instanceof PriceSpikeAlarm) {
 				PriceSpikeAlarm priceSpikeAlarm = (PriceSpikeAlarm) mAlarm;
-				progress = priceSpikeAlarm.getTimeFrame();
-				mTimeFrameProgress.setMax(progress);
-				if(mAlarm.isOn()) {
-					mTimeFrameProgress.setColor(mColorsArray.getColor(COLORON, Color.LTGRAY));
-				} else {
-					mTimeFrameProgress.setColor(mColorsArray.getColor(COLOROFF, Color.LTGRAY));
-				}
-				if(mAlarm.getLastUpdateTimestamp() != null) {
-					progress = progress - (currentTime - priceSpikeAlarm.getLastUpdateTimestamp().getTime());
-				}
-
-				Log.d("progress " + progress);
-				mTimeFrameProgress.setProgress(progress);
 				mBaseValueView.setVisibility(VISIBLE);
 				mBaseValueView.setVisibility(VISIBLE);
-				mBaseValueView.setText(Conversions.formatMaxDecimalPlaces(priceSpikeAlarm.getBaseValue()));
+				mBaseValueView.setText(Conversions.format8SignificantDigits(priceSpikeAlarm.getBaseValue()));
 			} else {
 				mBaseValueView.setVisibility(GONE);
 			}

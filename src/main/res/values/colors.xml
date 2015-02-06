@@ -11,9 +11,4 @@
     <color name="ltrow">#FFFFFF</color>
     <color name="ltbackground">#D6D6D6</color>
 
-    <!-- <drawable name="highlightblue">@color/highlightblue</drawable> -->
-    <!-- <drawable name="defaultcolor">"?android:attr/windowBackground"</drawable> -->
-    <!-- <drawable name="dkrow">@color/dkrow</drawable> -->
-    <!-- <drawable name="ltrow">@color/ltrow</drawable> -->
-
 </resources>
