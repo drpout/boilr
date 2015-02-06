@@ -10,6 +10,12 @@
 		android:title="@string/action_search"/>
 	
 	<item
+	    android:id="@+id/action_add_alarm"
+	    android:icon="?attr/ic_action_new"
+		android:title="@string/add_alarm"
+		android:showAsAction="always" />
+	
+	<item
 	    android:id="@+id/action_settings"
 	    android:icon="?attr/ic_action_settings"
 		android:title="@string/action_settings"

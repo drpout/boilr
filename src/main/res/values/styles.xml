@@ -6,6 +6,7 @@
 		<item name="ic_action_send_now">@drawable/ic_action_send_now_dark</item>
 		<item name="ic_action_settings">@drawable/ic_action_settings_dark</item>
 		<item name="ic_action_remove">@drawable/ic_action_remove_dark</item>
+		<item name="ic_action_new">@drawable/ic_action_new_dark</item>
 		<item name="off_alarm_row_color">@color/dkgray</item>
     </style>
 
@@ -15,6 +16,7 @@
 		<item name="ic_action_send_now">@drawable/ic_action_send_now_light</item>
 		<item name="ic_action_settings">@drawable/ic_action_settings_light</item>
 		<item name="ic_action_remove">@drawable/ic_action_remove_light</item>
+		<item name="ic_action_new">@drawable/ic_action_new_light</item>
 		<item name="off_alarm_row_color">@color/ltgray</item>
     </style>
 </resources>

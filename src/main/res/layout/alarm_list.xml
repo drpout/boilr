@@ -7,26 +7,10 @@
     android:orientation="vertical"
     tools:context="mobi.boilr.boilr.activities.AlarmListActivity" >
 
-    <LinearLayout
-        android:id="@+id/bottom_control_bar"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
-
-        <Button
-            android:id="@+id/add_alarm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/add_alarm"
-            android:onClick="onAddAlarmClicked">
-        </Button>
-    </LinearLayout>
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/bottom_control_bar"
         android:dividerHeight="2dp" >
     </ListView>
 </RelativeLayout>

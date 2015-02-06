@@ -107,9 +107,11 @@ public class AlarmListActivity extends ListActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		switch(item.getItemId()) {
+			case R.id.action_add_alarm:
+				startActivityForResult(new Intent(this, AlarmCreationActivity.class), REQUEST_CREATE);
+				return true;
 			case R.id.action_settings:
-				Intent intent = new Intent(this, SettingsActivity.class);
-				startActivityForResult(intent, REQUEST_SETTINGS);
+				startActivityForResult(new Intent(this, SettingsActivity.class), REQUEST_SETTINGS);
 				return true;
 			case R.id.action_about:
 				(new AboutDialogFragment()).show(getFragmentManager(), "about");
@@ -129,12 +131,6 @@ public class AlarmListActivity extends ListActivity {
 			v.setBackgroundColor(getResources().getColor(R.color.highlightblue));
 		}
 		startActivity(alarmSettingsIntent);
-	}
-
-	public void onAddAlarmClicked(View v) {
-		// Handle click on Add Button. Launch activity to create a new alarm.
-		Intent alarmCreationIntent = new Intent(this, AlarmCreationActivity.class);
-		startActivityForResult(alarmCreationIntent, REQUEST_CREATE);
 	}
 
 	public void onToggleClicked(View view) {

@@ -5,5 +5,6 @@
 	<attr name="ic_action_send_now" format="reference"/>
 	<attr name="ic_action_settings" format="reference"/>
 	<attr name="ic_action_remove" format="reference"/>
+	<attr name="ic_action_new" format="reference"/>
 	<attr name="off_alarm_row_color" format="reference"/>
 </resources>
