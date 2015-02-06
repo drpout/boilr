@@ -3,14 +3,15 @@ package mobi.boilr.boilr.activities;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.services.NotificationService;
 import mobi.boilr.boilr.utils.Languager;
+import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.Themer;
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -29,8 +30,7 @@ public class NotificationActivity extends Activity {
 		alarmID = getIntent().getIntExtra("alarmID", Integer.MIN_VALUE);
 		String firingReason = getIntent().getStringExtra("firingReason");
 		boolean canKeepMonitoring = getIntent().getBooleanExtra("canKeepMonitoring", false);
-		String arrow = getIntent().getStringExtra("arrow");
-		int colour = getIntent().getIntExtra("colour", Color.TRANSPARENT);
+		boolean isDirectionUp = getIntent().getBooleanExtra("isDirectionUp", true);
 		final Window win = getWindow();
 		win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
 				WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
@@ -41,9 +41,11 @@ public class NotificationActivity extends Activity {
 		final View view = inflater.inflate(R.layout.alarm_alert, null);
 		view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
 		((TextView) view.findViewById(R.id.firing_reason)).setText(firingReason);
-		TextView arrowView = (TextView) view.findViewById(R.id.arrow);
-		arrowView.setText(arrow);
-		arrowView.setTextColor(colour);
+		ImageView arrowView = (ImageView) view.findViewById(R.id.arrow);
+		if(isDirectionUp)
+			arrowView.setImageBitmap(Notifications.bigUpArrowBitmap);
+		else
+			arrowView.setImageBitmap(Notifications.bigDownArrowBitmap);
 		if(!canKeepMonitoring) {
 			view.findViewById(R.id.keep_monitoring_wrapper).setVisibility(View.GONE);
 		}

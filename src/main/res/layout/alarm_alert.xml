@@ -14,19 +14,19 @@
 		android:orientation="horizontal"
 		android:layout_weight="1">
 		
-        <TextView
+        <ImageView
 		    android:id="@+id/arrow"
-			android:textSize="160dp"
 			android:layout_weight="1"
-			android:layout_width="110dp"
+			android:layout_width="0dp"
 			android:layout_height="match_parent"
-			android:gravity="center|clip_vertical"/>
+			android:scaleType="center"/>
 	    
         <LinearLayout
 		    android:id="@+id/firing_reason_wrapper"
 		    android:layout_weight="3"
-		    android:layout_width="wrap_content"
+		    android:layout_width="0dp"
 			android:layout_height="match_parent"
+			android:orientation="vertical"
 			android:gravity="center">
 			<TextView
 			    android:id="@+id/firing_reason"

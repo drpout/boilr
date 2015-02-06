@@ -133,16 +133,12 @@ public class SettingsFragment extends PreferenceFragment implements
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
 			Themer.changeTheme(listPref.getValue());
-			enclosingActivity.setResult(SettingsActivity.RESULT_RESTART);
+			restartActivity();
 		} else if(key.equals(PREF_KEY_LANGUAGE)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
 			Languager.setLanguage(enclosingActivity.getBaseContext());
-			enclosingActivity.setResult(SettingsActivity.RESULT_RESTART);
-			Intent intent = enclosingActivity.getIntent();
-			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-			enclosingActivity.finish();
-			enclosingActivity.startActivity(intent);
+			restartActivity();
 			Notifications.rebuildNoInternetNotification();
 		} else if(key.equals(PREF_KEY_CHECK_PAIRS_INTERVAL)) {
 			ListPreference listPref = (ListPreference) pref;
@@ -167,6 +163,14 @@ public class SettingsFragment extends PreferenceFragment implements
 			if(!show)
 				Notifications.clearNoInternetNotification(enclosingActivity);
 		}
+	}
+
+	private void restartActivity() {
+		enclosingActivity.setResult(SettingsActivity.RESULT_RESTART);
+		Intent intent = enclosingActivity.getIntent();
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+		enclosingActivity.finish();
+		enclosingActivity.startActivity(intent);
 	}
 
 	/*

@@ -104,8 +104,9 @@
     <string name="pref_title_language">Jazyk</string>
     
     <!-- Review everything below please -->
-    <string name="price_hit_firing_reason">%1$s na %2$s %3$s\nv %4$s.</string>
-    <string name="price_change_firing_reason">%1$s/%2$s měl\n%3$s změna\nv %4$s\nběhem %5$s.</string>
+    <string name="firing_reason_title">%1$s v %2$s</string>
+    <string name="price_hit_firing_reason">na %1$s %2$s.</string>
+    <string name="price_change_firing_reason">měl %3$s změna\nběhem %5$s.</string>
     <string name="seconds_abbreviation">%1$d s</string>
     <string name="sec_abrv_input_as_string">%1$s s</string>
     <string name="minutes_abbreviation">%1$d min</string>

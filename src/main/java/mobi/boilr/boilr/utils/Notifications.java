@@ -25,22 +25,24 @@ public final class Notifications {
 	private static final int noInternetNotificationID = 432191926;
 	private static Notification.Builder noInternetNotification = null;
 	public static boolean allowNoInternetNotification = true;
-	private static final Bitmap upArrowBitmap = textAsBitmap("▲", 100, Color.GREEN);
-	private static final Bitmap downArrowBitmap = textAsBitmap("▼", 100, Color.RED);
+	private static final Bitmap smallUpArrowBitmap = textAsBitmap("▲", 100, Color.GREEN);
+	public static final Bitmap bigUpArrowBitmap = textAsBitmap("▲", 250, Color.GREEN);
+	private static final Bitmap smallDownArrowBitmap = textAsBitmap("▼", 100, Color.RED);
+	public static final Bitmap bigDownArrowBitmap = textAsBitmap("▼", 250, Color.RED);
 
 	private static Notification.Builder setCommonNotificationProps(Context context, Alarm alarm,
-			String firingReason) {
+			String firingReasonTitle, String firingReasonBody) {
 		Notification.Builder notification = new Notification.Builder(context)
-			.setContentTitle(context.getString(R.string.boilr_alarm))
-			.setContentText(firingReason)
+			.setContentTitle(firingReasonTitle)
+			.setContentText(firingReasonBody)
 			.setSmallIcon(R.drawable.ic_action_alarms)
 			.setLights(0xFFFF0000, 333, 333) // Blink in red ~3 times per second.
 			.setOngoing(false)
 			.setAutoCancel(true);
 		if(isDirectionUp(alarm)) {
-			notification.setLargeIcon(upArrowBitmap);
+			notification.setLargeIcon(smallUpArrowBitmap);
 		} else {
-			notification.setLargeIcon(downArrowBitmap);
+			notification.setLargeIcon(smallDownArrowBitmap);
 		}
 		Intent alarmSettingsIntent = new Intent(context, AlarmSettingsActivity.class);
 		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
@@ -51,8 +53,9 @@ public final class Notifications {
 	}
 
 	public static void showLowPriorityNotification(Context context, Alarm alarm) {
-		String firingReason = getFiringReason(context, alarm);
-		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReason);
+		String firingReasonTitle = getFiringReasonTitle(context, alarm);
+		String firingReasonBody = getFiringReasonBody(context, alarm);
+		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReasonTitle, firingReasonBody);
 		notification.setPriority(Notification.PRIORITY_DEFAULT);
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE); 
 		nm.cancel(alarm.hashCode());
@@ -63,22 +66,17 @@ public final class Notifications {
 		int alarmID = alarm.getId();
 		// Close dialogs and window shade, so this will display
 		context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
-		String firingReason = getFiringReason(context, alarm);
-		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReason);
+		String firingReasonTitle = getFiringReasonTitle(context, alarm);
+		String firingReasonBody = getFiringReasonBody(context, alarm);
+		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReasonTitle, firingReasonBody);
 		notification.setPriority(Notification.PRIORITY_MAX);
 
 		// Setup fullscreen intent
 		Intent fullScreenIntent = new Intent(context, NotificationActivity.class);
 		fullScreenIntent.putExtra("alarmID", alarmID);
-		fullScreenIntent.putExtra("firingReason", firingReason);
+		fullScreenIntent.putExtra("firingReason", firingReasonTitle + "\n" + firingReasonBody);
 		fullScreenIntent.putExtra("canKeepMonitoring", canKeepMonitoring(alarm));
-		if(isDirectionUp(alarm)) {
-			fullScreenIntent.putExtra("arrow", "▲");
-			fullScreenIntent.putExtra("colour", Color.GREEN);
-		} else {
-			fullScreenIntent.putExtra("arrow", "▼");
-			fullScreenIntent.putExtra("colour", Color.RED);
-		}
+		fullScreenIntent.putExtra("isDirectionUp", isDirectionUp(alarm));
 		fullScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
 		notification.setFullScreenIntent(PendingIntent.getActivity(context, alarmID, fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT), true);
 
@@ -146,11 +144,15 @@ public final class Notifications {
 		}
 	}
 
-	private static String getFiringReason(Context context, Alarm alarm) {
+	private static String getFiringReasonTitle(Context context, Alarm alarm) {
+		return context.getString(R.string.firing_reason_title, alarm.getPair().toString(), alarm.getExchange().getName());
+	}
+
+	private static String getFiringReasonBody(Context context, Alarm alarm) {
 		Pair pair = alarm.getPair();
 		if(alarm instanceof PriceHitAlarm) {
-			return context.getString(R.string.price_hit_firing_reason, pair.getCoin(), Conversions.formatMaxDecimalPlaces(alarm.getLastValue()),
-					pair.getExchange(), alarm.getExchange().getName());
+			return context.getString(R.string.price_hit_firing_reason,
+					Conversions.format8SignificantDigits(alarm.getLastValue()), pair.getExchange());
 		} else if(alarm instanceof PriceChangeAlarm) {
 			PriceChangeAlarm changeAlarm = (PriceChangeAlarm) alarm;
 			String change;
@@ -158,7 +160,7 @@ public final class Notifications {
 				change = Conversions.format2DecimalPlaces(changeAlarm.getLastChange()) + "%";
 			else
 				change = Conversions.format8SignificantDigits(changeAlarm.getLastChange()) + " " + pair.getExchange();
-			return context.getString(R.string.price_change_firing_reason, pair.getCoin(), pair.getExchange(), change, alarm.getExchange().getName(),
+			return context.getString(R.string.price_change_firing_reason, change,
 					Conversions.formatMilis(changeAlarm.getElapsedMilis(), context));
 		}
 		return "Could not retrieve firing reason.";

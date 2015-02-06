@@ -107,7 +107,7 @@ public class AlarmListActivity extends ListActivity {
 		/*
 		 * Hack to keep the search icon consistent between themes. Without this
 		 * the icon for the light theme is smaller than the one on the dark
-		 * theme.
+		 * theme. By just_user on Stack Overflow http://stackoverflow.com/questions/10445760/how-to-change-the-default-icon-on-the-searchview-to-be-use-in-the-action-bar-on/18360563#18360563
 		 */
 		int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
 		ImageView view = (ImageView) searchView.findViewById(searchImgId);
