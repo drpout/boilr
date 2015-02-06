@@ -79,15 +79,24 @@ public class Conversions {
 		eightSignificantFormatter.applyPattern("@#######");
 	}
 
+	private static DecimalFormat eightDecimalPlacesFormatter;
+	static {
+		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ENGLISH);
+		eightDecimalPlacesFormatter = (DecimalFormat) nf;
+		eightDecimalPlacesFormatter.applyPattern("#.########");
+	}
+	
 	/**
-	 * Converts a double to a String with a minimum of 1 significant digit and a
-	 * maximum of 8.
+	 * Converts a double to a String with:
+	 * - a minimum of 1 significant digit and a maximum of 8 for
+	 * numbers bigger than 1;
+	 * - a maximum of 8 decimal places for numbers smaller than 1
 	 *
 	 * @param d double to be converted
 	 * @return String with up to 8 significant digits
 	 */
 	public static String format8SignificantDigits(double d) {
-		return eightSignificantFormatter.format(d);
+		return d < 1 ? eightDecimalPlacesFormatter.format(d) : eightSignificantFormatter.format(d);
 	}
 
 	private static final double MINUTES_IN_DAY = 1440; // 60*24

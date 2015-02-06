@@ -12,10 +12,11 @@ import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.utils.VersionTracker;
 import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
+import mobi.boilr.boilr.widget.AlarmGridView;
+import mobi.boilr.boilr.widget.AlarmLayout;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -27,19 +28,18 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
-public class AlarmListActivity extends ListActivity {
-
+public class AlarmListActivity extends Activity {
+	private static final int[] attrs = new int[] { R.attr.ic_action_search /*index 0*/};
 	private static int REQUEST_SETTINGS = 0, REQUEST_CREATE = 1;
-	private static final int[] attrs = new int[] { R.attr.ic_action_search /*
-																			 * index
-																			 * 0
-																			 */};
-	private AlarmListAdapter adapter;
+	private AlarmGridView mView;
+	private AlarmListAdapter mAdapter;
 	private SearchView searchView;
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
@@ -50,11 +50,10 @@ public class AlarmListActivity extends ListActivity {
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mStorageAndControlService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
-
 			// Callback action performed after the service has been bound
 			List<Alarm> alarms = mStorageAndControlService.getAlarms();
-			adapter.clear();
-			adapter.addAll(alarms);
+			mAdapter.clear();
+			mAdapter.addAll(alarms);
 			mStorageAndControlService.scheduleOffedAlarms();
 		}
 
@@ -72,27 +71,33 @@ public class AlarmListActivity extends ListActivity {
 
 		@Override
 		public boolean onQueryTextChange(String newText) {
-			adapter.getFilter().filter(newText);
+			mAdapter.getFilter().filter(newText);
 			return true;
 		}
-
 	};
-	
+
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Themer.applyTheme(this);
 		Languager.setLanguage(this);
 		VersionTracker.showChangeLog(this);
-		
 		setContentView(R.layout.alarm_list);
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
-
-		getListView().setOnTouchListener(new OnSwipeTouchListener(this));
-
-		adapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<Alarm>());
-		setListAdapter(adapter);
-
+		mView = ((AlarmGridView) findViewById(R.id.list));
+		mAdapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<Alarm>());
+		mView.setAdapter(mAdapter);
+		mView.start();
+		mView.setOnTouchListener(new OnSwipeTouchListener(this));
+		OnItemClickListener listener = new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
+				getStorageAndControlService().toggleAlarm(((AlarmLayout) view).getAlarm().getId());
+			}
+		};
+		mView.setOnItemClickListener(listener);
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 		startService(serviceIntent);
 		bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
@@ -136,23 +141,11 @@ public class AlarmListActivity extends ListActivity {
 		}
 	}
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long layout) {
-		Alarm alarm = adapter.getItem(position);
-		Intent alarmSettingsIntent = new Intent(this, AlarmSettingsActivity.class);
-		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
-		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());
-		if(!alarm.isOn()){			
-			v.setBackgroundColor(getResources().getColor(R.color.highlightblue));
-		}
-		startActivity(alarmSettingsIntent);
-	}
-
 	public void onToggleClicked(View view) {
 		int id = (Integer) view.getTag();
 		if(mBound) {
 			mStorageAndControlService.toggleAlarm(id);
-			adapter.notifyDataSetChanged();
+			mAdapter.notifyDataSetChanged();
 		} else {
 			Log.e(getString(R.string.not_bound, "AlarmListActivity"));
 		}
@@ -167,7 +160,7 @@ public class AlarmListActivity extends ListActivity {
 			int alarmID = data.getIntExtra("alarmID", Integer.MIN_VALUE);
 			if(alarmID != Integer.MIN_VALUE) {
 				if(mBound) {
-					adapter.add(mStorageAndControlService.getAlarm(alarmID));
+					mAdapter.add(mStorageAndControlService.getAlarm(alarmID));
 				} else {
 					Log.e(getString(R.string.not_bound, "AlarmListActivity"));
 				}
@@ -189,24 +182,34 @@ public class AlarmListActivity extends ListActivity {
 	@Override
 	public void onStart() {
 		super.onStart();
-	}
-
-	@Override
-	public void onRestart() {
-		super.onRestart();
+		mView.start();
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		adapter.notifyDataSetChanged();
+		mAdapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public void onStop(){
+		super.onStop();
+		mView.stop();
 	}
 
 	public boolean ismBound() {
 		return mBound;
 	}
 
-	public StorageAndControlService getmStorageAndControlService() {
+	public StorageAndControlService getStorageAndControlService() {
 		return mStorageAndControlService;
+	}
+
+	public AlarmListAdapter getAdapter() {
+		return mAdapter;
+	}
+
+	public GridView getGridView() {
+		return mView;
 	}
 }

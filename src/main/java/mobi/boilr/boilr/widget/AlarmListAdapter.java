@@ -3,128 +3,97 @@ package mobi.boilr.boilr.widget;
 import java.util.List;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.activities.AlarmListActivity;
+import mobi.boilr.boilr.activities.AlarmSettingsActivity;
+import mobi.boilr.boilr.listeners.OnSwipeTouchListener.Reference;
 import mobi.boilr.libpricealarm.Alarm;
-import mobi.boilr.libpricealarm.Alarm.Direction;
-import mobi.boilr.libpricealarm.PriceChangeAlarm;
-import mobi.boilr.libpricealarm.PriceHitAlarm;
-import android.app.ActionBar.LayoutParams;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.content.res.TypedArray;
-import android.graphics.Color;
+import android.content.Intent;
+import android.view.DragEvent;
 import android.view.View;
+import android.view.View.OnDragListener;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 public class AlarmListAdapter extends ListAdapter<Alarm> {
 
-	private static final int[] attrs = new int[] { R.attr.off_alarm_row_color /* index 0 */};
+	private AlarmListActivity mAlarmListActivity;
+	private Alarm mAlarm;
+	private AlarmLayout mAlarmLayout;
+	private TextView mExchange;
+	private TextView mPair;
 
-	public AlarmListAdapter(Context context, List<Alarm> alarms) {
-		super(context, alarms);
+	public AlarmListAdapter(AlarmListActivity alarmListActivity, List<Alarm> alarms) {
+		super(alarmListActivity, alarms);
+		this.mAlarmListActivity = alarmListActivity;
 	}
 
 	@Override
 	// TODO If needed optimize with http://www.piwai.info/android-adapter-good-practices
 	public View getView(int position, View convertView, ViewGroup parent) {
-
-		boolean isLandScape = getContext().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-		Alarm alarm = mList.get(position);
-
+		mAlarm = mList.get(position);
 		// View recycling
 		if(convertView == null){
 			convertView = getInflater().inflate(R.layout.alarm_list_row, parent, false);
-		}else{
-			//Recycle views retain the alpha and translation from when they were removed.
-			if(convertView.getAlpha() != 1)	convertView.setAlpha(1);
-			if(convertView.getTranslationX() != 0 )	convertView.setTranslationX(0);
-		}
+			mAlarmLayout = ((AlarmLayout) convertView);
+			mAlarmLayout.start();
+			View menu = convertView.findViewById(R.id.menu);
 
-		ToggleButton toggleButton = (ToggleButton) convertView.findViewById(R.id.toggle_button);
-		TextView exchange = (TextView) convertView.findViewById(R.id.exchange);
-		TextView lastCheck = (TextView) convertView.findViewById(R.id.last_check);
-		TextView pair = (TextView) convertView.findViewById(R.id.pair);
-		TextView lastValue = (TextView) convertView.findViewById(R.id.last_value);
-		if(alarm.getDirection() == Direction.UP) {
-			lastValue.setTextColor(Color.GREEN);
-		} else if(alarm.getDirection() == Direction.DOWN) {
-			lastValue.setTextColor(Color.RED);
-		}
-		LinearLayout linearLayout;
-		String pairExchange = alarm.getPair().getExchange();
-		if(isLandScape) {
-			// Adjust Dimension to allow more content
-			linearLayout = (LinearLayout) convertView.findViewById(R.id.exchange_layout);
-			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.5f));
-			linearLayout = (LinearLayout) convertView.findViewById(R.id.pair_layout);
-			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 2));
-			linearLayout = (LinearLayout) convertView.findViewById(R.id.options_layout);
-			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 2));
-			//
-			lastValue.setText(Conversions.formatMaxDecimalPlaces(alarm.getLastValue()) + " " + pairExchange);
+			menu.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Alarm alarm = ((AlarmLayout) v.getParent().getParent()).getAlarm();
+					Intent alarmSettingsIntent = new Intent(getContext(), AlarmSettingsActivity.class);
+					alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
+					alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());
+					getContext().startActivity(alarmSettingsIntent);
+				}
+			});
+			convertView.setOnDragListener(new OnDragListener() {
+				@SuppressWarnings("unchecked")
+				@Override
+				public boolean onDrag(View dstView, DragEvent event) {
+					Reference<View> ref = (Reference<View>) event.getLocalState();
+					final View mView = ref.getReference();
+					switch(event.getAction()) {
+					case DragEvent.ACTION_DRAG_ENTERED:
+						mView.setVisibility(View.VISIBLE);
+						dstView.setVisibility(View.INVISIBLE);
+						AlarmListAdapter.this.moveTo(((AlarmLayout) mView).getAlarm(), ((AlarmLayout) dstView).getAlarm());
+						ref.setReference(dstView);
+						break;
+					case DragEvent.ACTION_DRAG_ENDED:
+						mView.post(new Runnable() {
+							@Override
+							public void run() {
+								mView.setVisibility(View.VISIBLE);
+							}
+						});
+						break;
+					}
+					return true;
+				}
+			});
+
 		} else {
-			lastValue.setText(Conversions.formatEngNotation(alarm.getLastValue()));
-			linearLayout = (LinearLayout) convertView.findViewById(R.id.exchange_layout);
-			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.9f));
-			linearLayout = (LinearLayout) convertView.findViewById(R.id.pair_layout);
-			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.8f));
-			linearLayout = (LinearLayout) convertView.findViewById(R.id.options_layout);
-			linearLayout.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1.3f));
+			// Recycled views retain the alpha and translation from when they were removed.
+			if(convertView.getAlpha() != 1)
+				convertView.setAlpha(1);
+			if(convertView.getTranslationX() != 0)
+				convertView.setTranslationX(0);
 		}
-
-		TextView changeUpperLimit = (TextView) convertView.findViewById(R.id.change_upper_limit);
-		TextView periodLowerLimit = (TextView) convertView.findViewById(R.id.period_lower_limit);
-
-		if(alarm instanceof PriceHitAlarm) {
-			PriceHitAlarm priceHitAlarm = (PriceHitAlarm) alarm;
-
-			if(isLandScape) {
-				// Display full number on landscape
-				changeUpperLimit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperLimit()) + " " + pairExchange);
-				periodLowerLimit.setText(Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerLimit()) + " " + pairExchange);
-
-			} else {
-				changeUpperLimit.setText(Conversions.formatEngNotation(priceHitAlarm.getUpperLimit()));
-				periodLowerLimit.setText(Conversions.formatEngNotation(priceHitAlarm.getLowerLimit()));
-			}
-
-		} else if(alarm instanceof PriceChangeAlarm) {
-			PriceChangeAlarm priceChangeAlarm = (PriceChangeAlarm) alarm;
-
-			if(priceChangeAlarm.isPercent()) {
-				changeUpperLimit.setText(Conversions.format2DecimalPlaces(priceChangeAlarm.getPercent()) + "%");
-			} else if(isLandScape) {
-				changeUpperLimit.setText(Conversions.formatMaxDecimalPlaces(priceChangeAlarm.getChange()) + " " + pairExchange);
-			} else {
-				changeUpperLimit.setText(Conversions.formatEngNotation(priceChangeAlarm.getChange()));
-			}
-
-			periodLowerLimit.setText(Conversions.formatMilis(priceChangeAlarm.getPeriod(), this.getContext()));
-		}
-
-		// hidden tag to identify the alarm
-		toggleButton.setTag(alarm.getId());
-		toggleButton.setChecked(alarm.isOn());
-
-		if(alarm.isOn()) {
-			convertView.setBackgroundColor(Color.TRANSPARENT);
-		} else {
-			TypedArray ta = getContext().obtainStyledAttributes(attrs);
-			convertView.setBackgroundColor(ta.getColor(0, Color.DKGRAY));
-			ta.recycle();
-		}
-
-		exchange.setText(alarm.getExchange().getName());
-
-		if(alarm.getLastUpdateTimestamp() != null) {
-			lastCheck.setText(Conversions.formatMilis(System.currentTimeMillis() - alarm.getLastUpdateTimestamp().getTime(), this.getContext()));
-		}
-
-		pair.setText(alarm.getPair().toString());
-
+		mExchange = (TextView) convertView.findViewById(R.id.exchange);
+		mExchange.setText(mAlarm.getExchange().getName());
+		mPair = (TextView) convertView.findViewById(R.id.pair);
+		mPair.setText(mAlarm.getPair().toString());
+		mAlarmLayout = ((AlarmLayout) convertView);
+		mAlarmLayout.setAlarm(mAlarm);
+		mAlarmLayout.updateChildren(System.currentTimeMillis());
 		return convertView;
+	}
+
+	@Override
+	public void moveTo(Alarm A1, Alarm A2) {
+		super.moveTo(A1, A2);
+		mAlarmListActivity.getStorageAndControlService().updateAlarmPosition(A1, A2);
 	}
 }

@@ -4,5 +4,11 @@
     <color name="dkgray">#444444</color>
     <color name="ltgray">#CCCCCC</color>
     <color name="highlightblue">#33B5E5</color>
+    <color name="tickergreen">#00CC00</color>
+    <color name="tickerred">#CC0000</color>
+    <color name="dkrow">#000000</color>
+    <color name="dkbackground">#292929</color>
+    <color name="ltrow">#FFFFFF</color>
+    <color name="ltbackground">#D6D6D6</color>
 
 </resources>

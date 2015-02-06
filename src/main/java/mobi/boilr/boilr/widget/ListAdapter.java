@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import mobi.boilr.libpricealarm.Alarm;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
@@ -28,7 +29,7 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 		protected FilterResults performFiltering(CharSequence constraint) {
 			this.currentConstraint = constraint;
 			this.filterStrings = constraint.toString().toLowerCase().split("\\s+");
-			
+
 			FilterResults results = new FilterResults();
 			if(mOriginalList==null) {
 				synchronized (mLock) {
@@ -116,6 +117,10 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 		return mList.get(arg0);
 	}
 
+	public int indexOf(Alarm arg0) {
+		return mList.indexOf(arg0);
+	}
+
 	@Override
 	public long getItemId(int arg0) {
 		return arg0;
@@ -186,9 +191,21 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 		}
 		notifyDataSetChanged();
 	}
-	
-	
+
 	public Context getContext(){ 
 		return mContext;
+	}
+
+	public void moveTo(T t1, T t2) {
+		int t1Pos = mList.indexOf(t1);
+		int t2Pos = mList.indexOf(t2);
+		if(t1Pos < t2Pos) {
+			mList.add(t2Pos + 1, t1);
+			mList.remove(t1Pos);
+		} else {
+			mList.add(t2Pos, t1);
+			mList.remove(t1Pos + 1);
+		}
+		notifyDataSetChanged();
 	}
 }
