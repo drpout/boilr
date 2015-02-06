@@ -33,10 +33,10 @@ import android.widget.GridView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
-//public class AlarmListActivity extends ListActivity {
 public class AlarmListActivity extends Activity {
 
 	private static int REQUEST_SETTINGS = 0, REQUEST_CREATE = 1;
+	private AlarmGridView mView;
 	private AlarmListAdapter mAdapter;
 	private SearchView searchView;
 	private StorageAndControlService mStorageAndControlService;
@@ -75,7 +75,7 @@ public class AlarmListActivity extends Activity {
 		}
 	};
 
-	private AlarmGridView mView;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -130,22 +130,6 @@ public class AlarmListActivity extends Activity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
-	//	@Override
-	// protected void onListItemClick(ListView l, View v, int position, long
-	// layout) {
-	// Alarm alarm = mAdapter.getItem(position);
-	// Intent alarmSettingsIntent = new Intent(this,
-	// AlarmSettingsActivity.class);
-	// alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID,
-	// alarm.getId());
-	// alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType,
-	// alarm.getClass().getSimpleName());
-	// if(!alarm.isOn()){
-	// v.setBackgroundColor(getResources().getColor(R.color.highlightblue));
-	// }
-	// startActivity(alarmSettingsIntent);
-	// }
 
 	public void onAddAlarmClicked(View v) {
 		// Handle click on Add Button. Launch activity to create a new alarm.
