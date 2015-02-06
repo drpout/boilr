@@ -38,8 +38,8 @@
     <string name="pref_title_theme">Tema</string>
 
     <string-array name="pref_entries_theme">
-        <item>Scuro</item>
         <item>Chiaro</item>
+        <item>Scuro</item>
     </string-array>
 
     <string name="pref_default_theme">scuro</string>

@@ -38,8 +38,8 @@
     <string name="pref_title_theme">Motyw</string>
 
     <string-array name="pref_entries_theme">
-        <item>Ciemny</item>
         <item>Jasny</item>
+        <item>Ciemny</item>
     </string-array>
 
     <string name="pref_title_network_usage">Wykorzystanie sieci</string>

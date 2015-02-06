@@ -20,12 +20,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
@@ -33,6 +35,10 @@ import android.widget.SearchView.OnQueryTextListener;
 public class AlarmListActivity extends ListActivity {
 
 	private static int REQUEST_SETTINGS = 0, REQUEST_CREATE = 1;
+	private static final int[] attrs = new int[] { R.attr.ic_action_search /*
+																			 * index
+																			 * 0
+																			 */};
 	private AlarmListAdapter adapter;
 	private SearchView searchView;
 	private StorageAndControlService mStorageAndControlService;
@@ -98,6 +104,15 @@ public class AlarmListActivity extends ListActivity {
 		getMenuInflater().inflate(R.menu.alarm_list, menu);
 		searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 		searchView.setOnQueryTextListener(queryListener);
+		/*
+		 * Hack to keep the search icon consistent between themes. Without this
+		 * the icon for the light theme is smaller than the one on the dark
+		 * theme.
+		 */
+		int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
+		ImageView view = (ImageView) searchView.findViewById(searchImgId);
+		TypedArray ta = obtainStyledAttributes(attrs);
+		view.setImageResource(ta.getResourceId(0, R.drawable.ic_action_remove_light));
 		return super.onCreateOptionsMenu(menu);
 	}
 

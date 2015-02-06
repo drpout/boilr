@@ -55,15 +55,15 @@
     <string name="pref_title_theme">Theme</string>
 
     <string-array name="pref_entries_theme">
-        <item>Dark</item>
         <item>Light</item>
+        <item>Dark</item>
     </string-array>
     <string-array name="pref_values_theme">
-        <item>dark</item>
         <item>light</item>
+        <item>dark</item>
     </string-array>
 
-    <string name="pref_default_theme">dark</string>
+    <string name="pref_default_theme">light</string>
     <string name="pref_title_network_usage">Network usage</string>
     <string name="pref_title_mobile_data">Mobile data</string>
     <string name="pref_title_show_internet_warning">Show no internet warning</string>

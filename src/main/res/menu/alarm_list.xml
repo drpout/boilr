@@ -2,10 +2,11 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	tools:context="mobi.boilr.boilr.AlarmList" >
-
+	
 	<item
 		android:id="@+id/action_search"
 		android:actionViewClass="android.widget.SearchView"
+		android:icon="?attr/ic_action_search"
 		android:showAsAction="ifRoom"
 		android:title="@string/action_search"/>
 	
