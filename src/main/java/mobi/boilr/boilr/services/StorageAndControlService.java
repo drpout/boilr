@@ -242,7 +242,7 @@ public class StorageAndControlService extends Service {
 			prevAlarmID = db.getNextID();
 			alarmsMap = db.getAlarms();
 			if(prevAlarmID == 0) {
-				new PopupalteDBTask().execute();
+				// new PopupalteDBTask().execute();
 			}
 			if(prevAlarmID > 0) {
 				// Set Exchange and start alarm
