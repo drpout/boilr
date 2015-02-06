@@ -7,6 +7,7 @@
     <attr name="ic_action_send_now" format="reference" />
     <attr name="ic_action_settings" format="reference" />
     <attr name="ic_action_remove" format="reference" />
+    <attr name="ic_action_new" format="reference" />
     <attr name="background_color" format="reference" />
     <attr name="row_color" format="reference" />
     <attr name="progress_circle_color_on" format="reference" />
@@ -17,5 +18,5 @@
         <attr name="outer" format="boolean" />
         <attr name="hollow" format="boolean" />
     </declare-styleable>
-
+    
 </resources>

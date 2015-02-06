@@ -6,40 +6,11 @@
     android:background="?attr/background_color"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+id/bottom_control_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
-
-        <Button
-            android:id="@+id/add_alarm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onAddAlarmClicked"
-            android:text="@string/add_alarm" >
-        </Button>
-    </LinearLayout>
-
-    <!-- <mobi.boilr.boilr.widget.AlarmGridView -->
-    <!-- android:id="@+id/list" -->
-    <!-- android:layout_width="match_parent" -->
-    <!-- android:layout_height="match_parent" -->
-    <!-- android:layout_above="@id/bottom_control_bar" -->
-    <!-- android:columnWidth="250dp" -->
-    <!-- android:gravity="center" -->
-    <!-- android:horizontalSpacing="8dp" -->
-    <!-- android:numColumns="auto_fit" -->
-    <!-- android:padding="8dp" -->
-    <!-- android:scrollbarStyle="outsideOverlay" -->
-    <!-- android:stretchMode="columnWidth" -->
-    <!-- android:verticalSpacing="8dp" /> -->
-
     <mobi.boilr.boilr.widget.AlarmGridView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_control_bar"
+        android:clipToPadding="false"
         android:columnWidth="250dp"
         android:gravity="center"
         android:horizontalSpacing="8dp"

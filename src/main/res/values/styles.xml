@@ -8,6 +8,7 @@
         <item name="ic_action_send_now">@drawable/ic_action_send_now_dark</item>
         <item name="ic_action_settings">@drawable/ic_action_settings_dark</item>
         <item name="ic_action_remove">@drawable/ic_action_remove_dark</item>
+        <item name="ic_action_new">@drawable/ic_action_new_dark</item>
         <item name="progress_circle_color_on">@color/highlightblue</item>
         <item name="progress_circle_color_off">@color/ltgray</item>
         <item name="background_color">@color/dkbackground</item>
@@ -21,6 +22,7 @@
         <item name="ic_action_send_now">@drawable/ic_action_send_now_light</item>
         <item name="ic_action_settings">@drawable/ic_action_settings_light</item>
         <item name="ic_action_remove">@drawable/ic_action_remove_light</item>
+        <item name="ic_action_new">@drawable/ic_action_new_light</item>
         <item name="progress_circle_color_on">@color/highlightblue</item>
         <item name="progress_circle_color_off">@color/dkgray</item>
         <item name="background_color">@color/ltbackground</item>

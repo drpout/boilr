@@ -21,6 +21,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -30,11 +31,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
 
 public class AlarmListActivity extends Activity {
-
+	private static final int[] attrs = new int[] { R.attr.ic_action_search /*index 0*/};
 	private static int REQUEST_SETTINGS = 0, REQUEST_CREATE = 1;
 	private AlarmGridView mView;
 	private AlarmListAdapter mAdapter;
@@ -48,7 +50,6 @@ public class AlarmListActivity extends Activity {
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mStorageAndControlService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
-
 			// Callback action performed after the service has been bound
 			List<Alarm> alarms = mStorageAndControlService.getAlarms();
 			mAdapter.clear();
@@ -108,6 +109,15 @@ public class AlarmListActivity extends Activity {
 		getMenuInflater().inflate(R.menu.alarm_list, menu);
 		searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
 		searchView.setOnQueryTextListener(queryListener);
+		/*
+		 * Hack to keep the search icon consistent between themes. Without this
+		 * the icon for the light theme is smaller than the one on the dark
+		 * theme.
+		 */
+		int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
+		ImageView view = (ImageView) searchView.findViewById(searchImgId);
+		TypedArray ta = obtainStyledAttributes(attrs);
+		view.setImageResource(ta.getResourceId(0, R.drawable.ic_action_remove_light));
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -117,22 +127,18 @@ public class AlarmListActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		switch(item.getItemId()) {
-		case R.id.action_settings:
-			Intent intent = new Intent(this, SettingsActivity.class);
-			startActivityForResult(intent, REQUEST_SETTINGS);
-			return true;
-		case R.id.action_about:
-			(new AboutDialogFragment()).show(getFragmentManager(), "about");
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
+			case R.id.action_add_alarm:
+				startActivityForResult(new Intent(this, AlarmCreationActivity.class), REQUEST_CREATE);
+				return true;
+			case R.id.action_settings:
+				startActivityForResult(new Intent(this, SettingsActivity.class), REQUEST_SETTINGS);
+				return true;
+			case R.id.action_about:
+				(new AboutDialogFragment()).show(getFragmentManager(), "about");
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
-	}
-
-	public void onAddAlarmClicked(View v) {
-		// Handle click on Add Button. Launch activity to create a new alarm.
-		Intent alarmCreationIntent = new Intent(this, AlarmCreationActivity.class);
-		startActivityForResult(alarmCreationIntent, REQUEST_CREATE);
 	}
 
 	public void onToggleClicked(View view) {
