@@ -18,6 +18,7 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 	private static final int COLORON = 0;
 	private static final int COLOROFF = 1;
 	private static final int PRIMARYCOLOR = 2;
+	private static final float APLHA_OFF = 0.5f;
 
 	private Alarm mAlarm;
 	private TextView mLastValueView;
@@ -60,6 +61,12 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 	}
 
 	public void updateChildren(long currentTime) {
+
+		if(mAlarm.isOn()) {
+			setAlpha(1);
+		} else {
+			setAlpha(APLHA_OFF);
+		}
 		if(mAlarm.getDirection() == Direction.UP) {
 			mLastValueView.setTextColor(getResources().getColor(R.color.tickergreen));
 		} else if(mAlarm.getDirection() == Direction.DOWN) {
@@ -68,10 +75,8 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 			mLastValueView.setTextColor(mColorsArray.getColor(PRIMARYCOLOR, Color.GRAY));
 		}
 		mLastValueView.setText(Conversions.format8SignificantDigits(mAlarm.getLastValue()));
-
 		mUpperLimitView.setText(Conversions.format8SignificantDigits(mAlarm.getUpperLimit()));
 		mLowerLimitView.setText(Conversions.format8SignificantDigits(mAlarm.getLowerLimit()));
-
 		progress = mAlarm.getPeriod();
 		mLastUpdateProgress.setMax(progress);
 		if(mAlarm.getLastUpdateTimestamp() != null) {

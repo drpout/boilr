@@ -1,6 +1,8 @@
 package mobi.boilr.boilr.widget;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmListActivity;
@@ -21,9 +23,22 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 	private TextView mExchange;
 	private TextView mPair;
 
+	// private final Map<Integer, Float> alphas;
+	
 	public AlarmListAdapter(AlarmListActivity alarmListActivity, List<Alarm> alarms) {
 		super(alarmListActivity, alarms);
 		this.mAlarmListActivity = alarmListActivity;
+		// alphas = new TreeMap<Integer, Float>();
+		//
+		// alphas.put(1, 0.95f);
+		// alphas.put(2, 0.90f);
+		// alphas.put(3, 0.85f);
+		// alphas.put(4, 0.80f);
+		// alphas.put(5, 0.75f);
+		// alphas.put(6, 0.50f);
+		// alphas.put(7, 0.35f);
+		// alphas.put(8, 0.25f);
+		
 	}
 
 	@Override
@@ -75,7 +90,6 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 					return true;
 				}
 			});
-
 		} else {
 			// Recycled views retain the alpha and translation from when they were removed.
 			if(convertView.getAlpha() != 1)
@@ -83,6 +97,11 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 			if(convertView.getTranslationX() != 0)
 				convertView.setTranslationX(0);
 		}
+
+		// if(alphas.containsKey(position)) {
+		// convertView.setAlpha(alphas.get(position));
+		// }
+
 		mExchange = (TextView) convertView.findViewById(R.id.exchange);
 		mExchange.setText(mAlarm.getExchange().getName());
 		mPair = (TextView) convertView.findViewById(R.id.pair);

@@ -9,7 +9,10 @@
 <!--     <item android:state_focused="true">
 			<color android:color="@color/highlightblue" /> -->
 <!--     </item> -->
-    <item><color android:color="@color/ltrow" />
+<!--     <item><color android:color="@color/ltrow" /> -->
+<!--     </item> -->
+	<item android:drawable="@drawable/ltrowback">
     </item>
+
 
 </selector>

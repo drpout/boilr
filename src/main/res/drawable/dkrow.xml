@@ -1,16 +1,13 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-<!--     <item android:state_selected="true"> -->
-<!--         <color android:color="@color/highlightblue" /> -->
-<!--     </item> -->
     <item android:state_pressed="true">
         <color android:color="@color/highlightblue" />
     </item>
-<!--     <item android:state_focused="true"> -->
-<!--         <color android:color="@color/highlightblue" /> -->
-<!--     </item> -->
-    <item>
-        <color android:color="@color/dkrow" />
+    <!-- <item> -->
+    <!-- <color android:color="@color/dkrow" /> -->
+    <!-- </item> -->
+
+    <item android:drawable="@drawable/dkrowback">
     </item>
 
 </selector>

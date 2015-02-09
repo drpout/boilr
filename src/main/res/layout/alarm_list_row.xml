@@ -83,9 +83,11 @@
 
             <mobi.boilr.boilr.widget.ProgressCircle
                 android:id="@+id/progress_update"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="4dp"
+                android:paddingRight="4dp"
                 android:gravity="end|top"
                 boilr:hollow="false"
                 boilr:max="1000" />
