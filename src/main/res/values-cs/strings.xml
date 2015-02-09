@@ -38,8 +38,8 @@
     <string name="pref_title_theme">Motiv</string>
 
     <string-array name="pref_entries_theme">
-        <item>Světlý</item>
         <item>Tmavý</item>
+        <item>Světlý</item>
     </string-array>
 
     <string name="pref_title_network_usage">Využití sítě</string>

@@ -38,8 +38,8 @@
     <string name="pref_title_theme">Tema</string>
 
     <string-array name="pref_entries_theme">
-        <item>Claro</item>
         <item>Oscuro</item>
+        <item>Claro</item>
     </string-array>
 
     <string name="pref_title_network_usage">Uso de datos</string>

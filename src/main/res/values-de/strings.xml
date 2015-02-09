@@ -38,8 +38,8 @@
     <string name="pref_title_theme">Motiv</string>
 
     <string-array name="pref_entries_theme">
-        <item>Hell</item>
         <item>Dunkel</item>
+        <item>Hell</item>
     </string-array>
 
     <string name="pref_title_network_usage">Netznutzung</string>

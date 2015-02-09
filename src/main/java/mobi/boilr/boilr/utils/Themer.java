@@ -24,7 +24,7 @@ public class Themer {
 	public static void applyTheme(Activity activity) {
 		if(curTheme == null) {
 			SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-			curTheme = Theme.valueOf(sharedPreferences.getString(SettingsFragment.PREF_KEY_THEME, "light"));
+			curTheme = Theme.valueOf(sharedPreferences.getString(SettingsFragment.PREF_KEY_THEME, "dark"));
 		}
 		switch(curTheme) {
 			case dark:

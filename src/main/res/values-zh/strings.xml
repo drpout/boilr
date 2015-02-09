@@ -39,8 +39,8 @@
     <string name="pref_title_theme">主题</string>
 
     <string-array name="pref_entries_theme">
-        <item>Light</item>
         <item>Dark</item>
+        <item>Light</item>
     </string-array>
 
     <string name="pref_title_network_usage">网络使用情况</string>
