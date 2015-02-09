@@ -62,7 +62,7 @@ public final class Notifications {
 	}
 
 	public static void showLowPriorityNotification(Context context, Alarm alarm) {
-		String firingReasonTitle = getFiringReasonTitle(context, alarm);
+		String firingReasonTitle = getFiringReasonTitle(alarm);
 		String firingReasonBody = getFiringReasonBody(context, alarm);
 		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReasonTitle, firingReasonBody);
 		notification.setPriority(Notification.PRIORITY_DEFAULT);
@@ -75,7 +75,7 @@ public final class Notifications {
 		int alarmID = alarm.getId();
 		// Close dialogs and window shade, so this will display
 		context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
-		String firingReasonTitle = getFiringReasonTitle(context, alarm);
+		String firingReasonTitle = getFiringReasonTitle(alarm);
 		String firingReasonBody = getFiringReasonBody(context, alarm);
 		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReasonTitle, firingReasonBody);
 		notification.setPriority(Notification.PRIORITY_MAX);
@@ -153,15 +153,14 @@ public final class Notifications {
 		}
 	}
 
-	private static String getFiringReasonTitle(Context context, Alarm alarm) {
-		return context.getString(R.string.firing_reason_title, alarm.getPair().toString(), alarm.getExchange().getName());
+	private static String getFiringReasonTitle(Alarm alarm) {
+		return alarm.getPair().toString() + " @ " + alarm.getExchange().getName();
 	}
 
 	private static String getFiringReasonBody(Context context, Alarm alarm) {
 		Pair pair = alarm.getPair();
 		if(alarm instanceof PriceHitAlarm) {
-			return context.getString(R.string.price_hit_firing_reason,
-					Conversions.format8SignificantDigits(alarm.getLastValue()), pair.getExchange());
+			return Conversions.format8SignificantDigits(alarm.getLastValue()) + " " + pair.getExchange();
 		} else if(alarm instanceof PriceChangeAlarm) {
 			PriceChangeAlarm changeAlarm = (PriceChangeAlarm) alarm;
 			String change;

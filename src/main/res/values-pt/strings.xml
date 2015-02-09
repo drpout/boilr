@@ -103,9 +103,7 @@
     <string name="unknown_ringtone">Toque desconhecido</string>
     <string name="pref_title_language">Idioma</string>
     
-    <string name="firing_reason_title">%1$s na %2$s</string>
-    <string name="price_hit_firing_reason">a %1$s %2$s.</string>
-    <string name="price_change_firing_reason">teve variação de %1$s\ndurante %2$s.</string>
+    <string name="price_change_firing_reason">variou %1$s\ndurante %2$s.</string>
     <string name="seconds_abbreviation">%1$d s</string>
     <string name="sec_abrv_input_as_string">%1$s s</string>
     <string name="minutes_abbreviation">%1$d min</string>

@@ -105,9 +105,7 @@
     <string name="pref_title_language">语言</string>
     
     <!-- Missing translation
-    <string name="firing_reason_title">%1$s in %2$s</string>
-    <string name="price_hit_firing_reason">at %1$s %2$s.</string>
-    <string name="price_change_firing_reason">had %1$s change\nduring %2$s.</string>-->
+    <string name="price_change_firing_reason">changed %1$s\nduring %2$s.</string>-->
     <string name="seconds_abbreviation">%1$d秒</string>
     <string name="sec_abrv_input_as_string">%1$s秒</string>
     <string name="minutes_abbreviation">%1$d分钟</string>
