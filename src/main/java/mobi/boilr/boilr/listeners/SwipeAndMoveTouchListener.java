@@ -47,8 +47,6 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 					ClipData data = ClipData.newPlainText("", "");
 					DragShadowBuilder sb = new View.DragShadowBuilder(view);
 					view.startDrag(data, sb, new Reference<View>(view), 0);
-					view.setVisibility(View.INVISIBLE);
-
 				}
 			});
 		}

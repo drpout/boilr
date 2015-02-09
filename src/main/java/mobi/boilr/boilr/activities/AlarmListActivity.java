@@ -3,7 +3,6 @@ package mobi.boilr.boilr.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.listeners.SwipeAndMoveTouchListener;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
@@ -16,6 +15,7 @@ import mobi.boilr.boilr.widget.AlarmGridView;
 import mobi.boilr.boilr.widget.AlarmLayout;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
+import mobi.boilr.boilr.R;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -77,8 +77,6 @@ public class AlarmListActivity extends Activity {
 		}
 	};
 
-
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -95,7 +93,11 @@ public class AlarmListActivity extends Activity {
 		OnItemClickListener listener = new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
-				getStorageAndControlService().toggleAlarm(((AlarmLayout) view).getAlarm().getId());
+				Alarm alarm = ((AlarmLayout) view).getAlarm();
+				Intent alarmSettingsIntent = new Intent(AlarmListActivity.this, AlarmSettingsActivity.class);
+				alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
+				alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());
+				AlarmListActivity.this.startActivity(alarmSettingsIntent);
 			}
 		};
 		mView.setOnItemClickListener(listener);
