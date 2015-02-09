@@ -108,6 +108,26 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:orientation="horizontal">
+
+		<TextView
+		    android:id="@+id/about_bugs"
+			android:text="@string/about_bugs"
+			android:textStyle="bold"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+			
+	    <TextView
+		    android:id="@+id/github_issues"
+			android:text="@string/github_issues"
+			android:paddingLeft="5dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content" />
+	</LinearLayout>
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="horizontal">
 		
 	    <TextView
 			android:id="@+id/about_donations"
@@ -157,7 +177,6 @@
 			android:textStyle="bold"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
-		
 			
 	    <TextView
 		    android:id="@+id/lib_list"
@@ -166,5 +185,4 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content" />
 	</LinearLayout>
-	
 </LinearLayout>

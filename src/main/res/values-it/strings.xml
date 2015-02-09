@@ -15,6 +15,7 @@
     <string name="about_website">Website: </string>
     <string name="about_developers">Programmatori: </string>
     <string name="about_concept">Concept e Design: </string>
+    <!-- Review please --><string name="about_bugs">Errori e richieste: </string>
     <string name="about_donations">Donazioni: </string>
     <string name="about_license">Licenza: </string>
     <string name="about_libraries">Librerie che usiamo: </string>

@@ -15,6 +15,7 @@
     <string name="about_website">Strona WWW: </string>
     <string name="about_developers">Twórcy: </string>
     <string name="about_concept">Design: </string>
+    <!-- Review please --><string name="about_bugs">Błędy i propozycji: </string>
     <string name="about_donations">Darowizny: </string>
     <string name="about_license">Licencji: </string>
     <!-- Review please --><string name="about_libraries">Bibliotek, których używamy: </string>

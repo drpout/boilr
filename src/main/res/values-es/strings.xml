@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="action_search">buscar</string>
+    <string name="action_search">Buscar</string>
     <string name="action_settings">Ajustes</string>
-    <string name="action_about">sobre</string>
+    <string name="action_about">Sobre</string>
     <string name="alarm_settings">Ajustes de alarma</string>
     <string name="add_alarm">Añadir alarma</string>
     <string name="on">ON</string>
@@ -15,6 +15,7 @@
     <string name="about_website">Website: </string>
     <string name="about_developers">Programadores: </string>
     <string name="about_concept">Concepto y Diseño: </string>
+    <!-- Review please --><string name="about_bugs">Errores y mejoras: </string>
     <string name="about_donations">Donaciones: </string>
     <string name="about_license">Licencia: </string>
     <string name="about_libraries">Bibliotecas que usamos: </string>

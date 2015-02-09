@@ -60,7 +60,8 @@ public class AboutDialogFragment extends DialogFragment {
 		TextView[] links = { (TextView) view.findViewById(R.id.devs_andre),
 				(TextView) view.findViewById(R.id.devs_david),
 				(TextView) view.findViewById(R.id.devs_ricardo),
-				(TextView) view.findViewById(R.id.lib_list) };
+				(TextView) view.findViewById(R.id.lib_list),
+				(TextView) view.findViewById(R.id.github_issues) };
 		for (TextView link : links)
 			link.setMovementMethod(LinkMovementMethod.getInstance());
 
