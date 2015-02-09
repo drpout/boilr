@@ -14,36 +14,32 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class DBManager {
 
-	public static final String DATABASE_NAME = "boilr";
-	public static final int VERSION = '1';
+	public static final String DATABASE_NAME = "boilrDB";
+	public static final int VERSION = 1;
 	public static final String TABLE_NAME = "alarms";
 	public static final String BYTES = "bytes";
 	public static final String _ID = "_id";
 	private static final String MAX = "max";
-
-	private DatabaseHelper databaseHelper;
-	private Context context;
+	private final DatabaseHelper mDatabaseHelper;
+	private final Context mContext;
 
 	public DBManager(Context context) {
-		this.context = context;
-		databaseHelper = new DatabaseHelper(context, DBManager.DATABASE_NAME, null, DBManager.VERSION, DBManager.TABLE_NAME);
+		this.mContext = context;
+		mDatabaseHelper = new DatabaseHelper(context, DBManager.DATABASE_NAME, null, DBManager.VERSION, DBManager.TABLE_NAME);
 	}
 
 	@SuppressLint("UseSparseArrays")
 	public Map<Integer, Alarm> getAlarms() throws ClassNotFoundException, IOException {
-		SQLiteDatabase db = databaseHelper.getWritableDatabase();
-
+		SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
 		String sql = "SELECT " + _ID + "," + BYTES + " FROM " + DBManager.TABLE_NAME + ";";
 		Cursor cursor = db.rawQuery(sql, null);
-
 		Map<Integer, Alarm> alarmsMap = new HashMap<Integer, Alarm>();
-
 		if(cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
 			do {
 				int id = cursor.getInt(cursor.getColumnIndex(_ID));
 				Alarm alarm = (Alarm) Serializer.deserializeObject(cursor.getBlob(cursor
 						.getColumnIndex(BYTES)));
-				((AndroidNotifier) alarm.getNotifier()).setContext(context);
+				((AndroidNotifier) alarm.getNotifier()).setContext(mContext);
 				alarmsMap.put(id, alarm);
 			} while(cursor.moveToNext());
 		}
@@ -54,19 +50,19 @@ public class DBManager {
 	}
 
 	public void clean() {
-		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
 		db.execSQL("DELETE FROM " + DBManager.TABLE_NAME + " ;");
 		db.close();
 	}
 
 	public void dropTable() {
-		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
 		db.execSQL("DROP TABLE " + DBManager.TABLE_NAME + " ;");
 		db.close();
 	}
 
 	public void storeAlarm(Alarm alarm) throws IOException {
-		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
 		byte[] bytes = Serializer.serializeObject(alarm);
 		ContentValues contentValues = new ContentValues();
 		contentValues.put(_ID, alarm.getId());
@@ -77,7 +73,7 @@ public class DBManager {
 	}
 
 	public void updateAlarm(Alarm alarm) throws IOException {
-		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
 		byte[] bytes = Serializer.serializeObject(alarm);
 
 		ContentValues values = new ContentValues();
@@ -93,7 +89,7 @@ public class DBManager {
 	}
 
 	public int getNextID() {
-		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
 		String sql = "SELECT MAX( " + _ID + " ) as " + MAX + " FROM " + DBManager.TABLE_NAME + ";";
 		Cursor cursor = db.rawQuery(sql, null);
 		int id = 0;
@@ -106,12 +102,11 @@ public class DBManager {
 	}
 
 	public void deleteAlarm(Alarm alarm) {
-		SQLiteDatabase db = databaseHelper.getWritableDatabase();
+		SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		values.put(_ID, alarm.getId());
 		String whereClause = _ID + " = ? "; // template
 		String[] whereArgs = new String[] { String.valueOf(alarm.getId()) }; // values
-		db.update(TABLE_NAME, values, whereClause, whereArgs);
 		db.delete(TABLE_NAME, whereClause, whereArgs);
 		db.close();
 	}
