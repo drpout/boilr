@@ -4,7 +4,7 @@ Android application which monitors Bitcoin, cryptocurrencies and bullion prices,
 Supports 2 types of alarms:
 
 * Price Hit - Triggered when price crosses the alarm's upper or lower limit.
-* Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 1 day). It has an optional "spike alert" function, which fetches data with a given updated interval (e.g. 30 s) and alerts about price spikes in the middle of the time frame.
+* Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 1 day). It has an optional "spike alert" function, which fetches data with a given update interval (e.g. 30 s) and alerts about price spikes in the middle of the time frame.
 
 Sound and vibration are configurable globally and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing a quick alarm setup and configuration.
 

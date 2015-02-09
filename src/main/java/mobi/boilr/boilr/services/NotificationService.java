@@ -38,7 +38,6 @@ public class NotificationService extends Service {
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mService = ((LocalBinder<StorageAndControlService>) binder).getService();
 			mBound = true;
-			Log.e(getString(R.string.not_bound, "NotificationService"));
 			for (int alarmID : mPendingAlarms)
 				startNotify(alarmID);
 		}

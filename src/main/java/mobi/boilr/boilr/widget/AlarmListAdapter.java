@@ -5,7 +5,7 @@ import java.util.List;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.activities.AlarmSettingsActivity;
-import mobi.boilr.boilr.listeners.OnSwipeTouchListener.Reference;
+import mobi.boilr.boilr.listeners.SwipeAndMoveTouchListener.Reference;
 import mobi.boilr.libpricealarm.Alarm;
 import android.content.Intent;
 import android.view.DragEvent;

@@ -1,5 +1,6 @@
 package mobi.boilr.boilr.listeners;
 
+import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
@@ -13,7 +14,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewConfiguration;
 import android.widget.GridView;
 
-public class OnSwipeTouchListener implements OnTouchListener {
+public class SwipeAndMoveTouchListener implements OnTouchListener {
 
 	public class Reference<T> {
 		private T reference;
@@ -70,7 +71,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 	private Handler mHandler = new Handler();
 	private final LongClickTask mLongClickTask = new LongClickTask();
 
-	public OnSwipeTouchListener(AlarmListActivity ctx) {
+	public SwipeAndMoveTouchListener(AlarmListActivity ctx) {
 		mActivity = ctx;
 		mView = ctx.getGridView();
 	}
@@ -102,14 +103,13 @@ public class OnSwipeTouchListener implements OnTouchListener {
 				return false;
 			}
 			mLongClickTask.setView(childView);
-			mHandler.postDelayed(mLongClickTask, 1000);
+			mHandler.postDelayed(mLongClickTask, ViewConfiguration.getLongPressTimeout());
 			mItemPressed = true;
 			mDownX = event.getX();
 			mDownY = event.getY();
 			return false;
 
 		case MotionEvent.ACTION_CANCEL:
-			Log.d("Cancel");
 			childView.setAlpha(1);
 			childView.setTranslationX(0);
 			mHandler.removeCallbacks(mLongClickTask);
@@ -119,7 +119,6 @@ public class OnSwipeTouchListener implements OnTouchListener {
 			return false;
 
 		case MotionEvent.ACTION_MOVE: {
-			Log.d("Move");
 			float x = event.getX() + view.getTranslationX();
 			float y = event.getY() + view.getTranslationY();
 			float deltaX = x - mDownX;
@@ -149,7 +148,6 @@ public class OnSwipeTouchListener implements OnTouchListener {
 			break;
 
 		case MotionEvent.ACTION_UP: {
-			Log.d("UP");
 			// User let go - figure out whether to animate the view out, or back into place
 			if(mSwiping) {
 				float x = event.getX() + view.getTranslationX();
@@ -165,7 +163,7 @@ public class OnSwipeTouchListener implements OnTouchListener {
 						mActivity.getStorageAndControlService().deleteAlarm(alarm);
 						adapter.remove(mPointToPosition);
 					} else {
-						Log.d("Couldn't remove alarm " + alarm.getId());
+						Log.e(mActivity.getString(R.string.not_bound, "SwipeAndMoveTouchListener"));
 					}
 				} else {
 					// back into place

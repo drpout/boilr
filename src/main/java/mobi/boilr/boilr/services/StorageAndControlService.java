@@ -227,7 +227,6 @@ public class StorageAndControlService extends Service {
 	public void onCreate() {
 		super.onCreate();
 		Languager.setLanguage(this);
-		Log.d("Creating StorageAndControlService.");
 		// Register BroadcastReceiver to track connection changes.
 		IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
 		registerReceiver(networkReceiver, filter);

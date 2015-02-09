@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.listeners.OnSwipeTouchListener;
+import mobi.boilr.boilr.listeners.SwipeAndMoveTouchListener;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Languager;
@@ -43,6 +43,7 @@ public class AlarmListActivity extends Activity {
 	private SearchView searchView;
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
+	private boolean unscheduleOffedAlarms = true;
 	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
 
 		@SuppressWarnings("unchecked")
@@ -90,7 +91,7 @@ public class AlarmListActivity extends Activity {
 		mAdapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<Alarm>());
 		mView.setAdapter(mAdapter);
 		mView.start();
-		mView.setOnTouchListener(new OnSwipeTouchListener(this));
+		mView.setOnTouchListener(new SwipeAndMoveTouchListener(this));
 		OnItemClickListener listener = new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
@@ -154,6 +155,12 @@ public class AlarmListActivity extends Activity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == REQUEST_SETTINGS && resultCode == SettingsActivity.RESULT_RESTART) {
+			/*
+			 * finish() runs always after startActivity() therefore we need the
+			 * following boolean to avoid staying with unscheduled offed alarms
+			 * while the newly created activity is running.
+			 */
+			unscheduleOffedAlarms = false;
 			finish();
 			startActivity(getIntent());
 		} else if(requestCode == REQUEST_CREATE && resultCode == Activity.RESULT_OK) {
@@ -171,7 +178,8 @@ public class AlarmListActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		if(mBound) {
-			mStorageAndControlService.unscheduleOffedAlarms();
+			if(unscheduleOffedAlarms)
+				mStorageAndControlService.unscheduleOffedAlarms();
 			unbindService(mStorageAndControlServiceConnection);
 		} else {
 			Log.e(getString(R.string.not_bound, "AlarmListActivity"));
