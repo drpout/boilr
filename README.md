@@ -38,21 +38,21 @@ Boilr follows [Semantic Versioning](http://semver.org) with the API being the us
 On your shell you can use `export ANDROID_LOG_TAGS="ActivityManager:I Boilr:D *:S"` to filter logcat, then run `adb logcat` as usual.
 
 ## License and authorship
-All Boilr code is licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to the [contributors listed on GitHub](https://github.com/andrefbsantos/boilr/graphs/contributors).
+Boilr code licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to the [contributors listed on GitHub](https://github.com/andrefbsantos/boilr/graphs/contributors), unless otherwise stated.
 
-The Boilr icon and artworks were created by [Ricardo Duarte](http://vimeo.com/ricardoduarte) and are dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE).
+Boilr icon and artworks created by [Ricardo Duarte](http://vimeo.com/ricardoduarte) and dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE).
 
 Translators:
 
-* Chinese: [Jan Xie](https://github.com/janx) and Mar Song
+* Chinese: [Jan Xie](https://github.com/janx) and Song
 * Czech: [Jaroslav Lichtblau](https://github.com/svetlemodry)
 * German: Luca Rui
-* Italian: Richi Maraviglia
+* Italian: Francesca Mautone
 * Polish: [Michal Pleban](https://pl.linkedin.com/in/michalpleban)
-* Spanish: Mariona
+* Spanish: Mariona Martinez
 
-## Donations
-Donations and tips are welcomed.
+## Donations and tips
+In case you wanna pay us a beer ;)
 
 * BTC: 1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx
 * XMR: 43KcTwXw5D43YRE8MSG4D7X3S2kjU6ehBABucyKAVNYnKbNxpGWZ8zGbEhCq79N4ZGDtefU5w4AGoeR6eNB5yMbEPhAw3FT
