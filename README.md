@@ -38,9 +38,9 @@ Boilr follows [Semantic Versioning](http://semver.org) with the API being the us
 On your shell you can use `export ANDROID_LOG_TAGS="ActivityManager:I Boilr:D *:S"` to filter logcat, then run `adb logcat` as usual.
 
 ## License and authorship
-Boilr code licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to the [contributors listed on GitHub](https://github.com/andrefbsantos/boilr/graphs/contributors), unless otherwise stated.
+Boilr code licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to [André Filipe Santos](https://github.com/andrefbsantos), [David Ludovino](https://github.com/dllud) and other [contributors listed on GitHub](https://github.com/andrefbsantos/boilr/graphs/contributors), unless otherwise stated.
 
-Boilr icon and artworks created by [Ricardo Duarte](http://vimeo.com/ricardoduarte) and dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE).
+Concept, design, icon and artwork by [Ricardo Duarte](http://vimeo.com/ricardoduarte). Icon dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE).
 
 Translators:
 
