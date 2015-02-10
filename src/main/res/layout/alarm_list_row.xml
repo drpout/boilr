@@ -76,19 +76,17 @@
         <LinearLayout
             android:id="@+id/progress_update_layout"
             android:layout_width="match_parent"
-            android:gravity="end|top"
             android:layout_height="0dp"
             android:background="@drawable/normal"
-            android:layout_weight="0.5" >
+            android:layout_weight="0.5"
+            android:gravity="center_horizontal"
+            android:paddingTop="6dp">
 
             <mobi.boilr.boilr.widget.ProgressCircle
                 android:id="@+id/progress_update"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="4dp"
-                android:paddingRight="4dp"
-                android:gravity="end|top"
+                android:gravity="center_horizontal"
                 boilr:hollow="false"
                 boilr:max="1000" />
         </LinearLayout>
@@ -103,7 +101,7 @@
                 android:id="@+id/variance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="bottom|start"
+                android:gravity="bottom|center_horizontal"
                 android:singleLine="true"
                 android:textSize="14sp"
                 android:visibility="gone" />
@@ -112,7 +110,7 @@
                 android:id="@+id/base_value"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="top|start"
+                android:gravity="top|center_horizontal"
                 android:singleLine="true"
                 android:textSize="10sp"
                 android:visibility="gone" />
