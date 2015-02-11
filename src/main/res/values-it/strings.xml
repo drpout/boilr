@@ -13,12 +13,11 @@
     <string name="release_notes">Modifiche tra versioni</string>
     <string name="about_version">Versione: </string>
     <string name="about_website">Website: </string>
-    <string name="about_developers">Programmatori: </string>
-    <string name="about_concept">Concept e Design: </string>
+    <string name="authors">Autori</string>
     <!-- Review please --><string name="about_bugs">Errori e richieste: </string>
     <string name="about_donations">Donazioni: </string>
     <string name="about_license">Licenza: </string>
-    <string name="about_libraries">Librerie che usiamo: </string>
+    <string name="about_libraries">Librerie: </string>
     <string name="changelog_header_version">"Versione "</string>
 
     <string name="pref_title_alerts">Avvisi</string>
@@ -109,8 +108,8 @@
     <string name="price_change_firing_reason">cambiato %1$s\ndurante %2$s.</string>
     <string name="seconds_abbreviation">%1$d s</string>
     <string name="sec_abrv_input_as_string">%1$s s</string>
-    <string name="minutes_abbreviation">%1$d min</string>
-    <string name="hours_abbreviation">%1$d or</string>
-    <string name="days_abbreviation">%1$d gi</string>
-    <string name="days_abrv_input_as_string">%1$s gi</string>
+    <string name="minutes_abbreviation">%1$d m</string>
+    <string name="hours_abbreviation">%1$d o</string>
+    <string name="days_abbreviation">%1$d g</string>
+    <string name="days_abrv_input_as_string">%1$s g</string>
 </resources>

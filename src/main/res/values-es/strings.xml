@@ -13,12 +13,11 @@
     <string name="release_notes">Cambios entre versiones</string>
     <string name="about_version">Versión: </string>
     <string name="about_website">Website: </string>
-    <string name="about_developers">Programadores: </string>
-    <string name="about_concept">Concepto y Diseño: </string>
+    <string name="authors">Autores</string>
     <!-- Review please --><string name="about_bugs">Errores y mejoras: </string>
     <string name="about_donations">Donaciones: </string>
     <string name="about_license">Licencia: </string>
-    <string name="about_libraries">Bibliotecas que usamos: </string>
+    <string name="about_libraries">Bibliotecas: </string>
     <string name="changelog_header_version">"Versión "</string>
     
     <string name="pref_title_alerts">Alertas</string>
@@ -108,9 +107,8 @@
     <string name="price_change_firing_reason">cambió %1$s\ndurante %2$s.</string>
     <string name="seconds_abbreviation">%1$d s</string>
     <string name="sec_abrv_input_as_string">%1$s s</string>
-    <string name="minutes_abbreviation">%1$d min</string>
-    <string name="hours_abbreviation">%1$d hr</string>
-    <string name="days_abbreviation">%1$d dí</string>
-    <string name="days_abrv_input_as_string">%1$s di</string>
-    <string name="days_abrv_input_as_string">%1$s di</string>
+    <string name="minutes_abbreviation">%1$d m</string>
+    <string name="hours_abbreviation">%1$d h</string>
+    <string name="days_abbreviation">%1$d d</string>
+    <string name="days_abrv_input_as_string">%1$s d</string>
 </resources>

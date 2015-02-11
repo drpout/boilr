@@ -15,18 +15,15 @@
     <string name="ok">OK</string>
     <string name="about_version">Version: </string>
     <string name="about_website">Website: </string>
-    <string name="about_developers">Developers: </string>
-    <string name="about_concept">Concept and Design: </string>
     <string name="about_bugs">Bugs and feature requests: </string>
+    <string name="authors">Authors</string>
     <string name="about_donations">Donations: </string>
     <string name="about_license">License: </string>
-    <string name="about_libraries">Libraries we use: </string>
+    <string name="about_libraries">Libraries: </string>
     <string name="changelog_header_version">"Version "</string>
     
+    <string name="authors_link">&lt;a href="https://github.com/andrefbsantos/boilr/blob/master/README.md#license-and-authorship">%1$s&lt;/a></string>
     <string name="boilr_website">http://boilr.mobi</string>
-    <string name="andre_filipe_santos"><a href="https://github.com/andrefbsantos">André Filipe Santos</a></string>
-    <string name="david_ludovino"><a href="https://github.com/dllud">David Ludovino</a></string>
-    <string name="ricardo_duarte"><a href="http://vimeo.com/ricardoduarte">Ricardo Duarte</a></string>
     <string name="github_issues"><a href="https://github.com/andrefbsantos/boilr/issues">GitHub issues</a></string>
     <string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a> (BTC)</string>
     <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
@@ -271,8 +268,8 @@
     <string name="price_change_firing_reason">changed %1$s\nduring %2$s.</string>
     <string name="seconds_abbreviation">%1$d s</string>
     <string name="sec_abrv_input_as_string">%1$s s</string>
-    <string name="minutes_abbreviation">%1$d min</string>
-    <string name="hours_abbreviation">%1$d hr</string>
-    <string name="days_abbreviation">%1$d dy</string>
-    <string name="days_abrv_input_as_string">%1$s dy</string>
+    <string name="minutes_abbreviation">%1$d m</string>
+    <string name="hours_abbreviation">%1$d h</string>
+    <string name="days_abbreviation">%1$d d</string>
+    <string name="days_abrv_input_as_string">%1$s d</string>
 </resources>

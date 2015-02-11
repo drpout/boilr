@@ -14,6 +14,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,13 +58,13 @@ public class AboutDialogFragment extends DialogFragment {
 		// The following texts have links specified by putting <a> tags in the string
 		// resource. The following makes these links respond to user clicks.
 		// Found by Richard and posted on Stack Overflow http://stackoverflow.com/a/2746708
-		TextView[] links = { (TextView) view.findViewById(R.id.devs_andre),
-				(TextView) view.findViewById(R.id.devs_david),
-				(TextView) view.findViewById(R.id.devs_ricardo),
+		TextView authors = (TextView) view.findViewById(R.id.authors);
+		TextView[] links = { authors,
 				(TextView) view.findViewById(R.id.lib_list),
 				(TextView) view.findViewById(R.id.github_issues) };
 		for (TextView link : links)
 			link.setMovementMethod(LinkMovementMethod.getInstance());
+		authors.setText(Html.fromHtml(currentActivity.getString(R.string.authors_link, currentActivity.getString(R.string.authors))));
 
 		((TextView) view.findViewById(R.id.btc_addr)).setOnClickListener(new OnClickListener() {
 			@Override
