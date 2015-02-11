@@ -73,23 +73,43 @@
         android:gravity="center"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/progress_update_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/normal"
             android:layout_weight="0.5"
-            android:gravity="center_horizontal"
-            android:paddingTop="6dp">
+            android:background="@drawable/normal"
+            android:gravity="center_horizontal" >
+
+            <mobi.boilr.boilr.widget.FixedCircle
+                android:id="@+id/fixed_circle"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:gravity="center_horizontal"
+                boilr:hollow="true"
+                boilr:max="1000" />
 
             <mobi.boilr.boilr.widget.ProgressCircle
                 android:id="@+id/progress_update"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
                 android:gravity="center_horizontal"
-                boilr:hollow="false"
+                boilr:hollow="true"
                 boilr:max="1000" />
-        </LinearLayout>
+
+            <ImageView
+                android:id="@+id/bar"
+                android:layout_width="4dp"
+                android:layout_height="14dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="6dp"
+                android:gravity="center"
+                android:src="?attr/off_bar" />
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

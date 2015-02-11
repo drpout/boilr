@@ -2,6 +2,7 @@ package mobi.boilr.boilr.widget;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.Alarm.Direction;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,6 +30,8 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 	private TextView mVarianceView;
 	private TextView mBaseValueView;
 	private ProgressCircle mLastUpdateProgress;
+	private FixedCircle mFixedCircle;
+	private ImageView mBar;
 	private long progress;
 
 	public AlarmLayout(Context context) {
@@ -58,6 +62,8 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 		mVarianceView = (TextView) findViewById(R.id.variance);
 		mBaseValueView = (TextView) findViewById(R.id.base_value);
 		mLastUpdateProgress = (ProgressCircle) findViewById(R.id.progress_update);
+		mFixedCircle = (FixedCircle) findViewById(R.id.fixed_circle);
+		mBar = (ImageView) findViewById(R.id.bar);
 	}
 
 	public void updateChildren(long currentTime) {
@@ -77,6 +83,7 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 		mLastValueView.setText(Conversions.format8SignificantDigits(mAlarm.getLastValue()));
 		mUpperLimitView.setText(Conversions.format8SignificantDigits(mAlarm.getUpperLimit()));
 		mLowerLimitView.setText(Conversions.format8SignificantDigits(mAlarm.getLowerLimit()));
+		mFixedCircle.setColor(mColorsArray.getColor(COLOROFF, Color.LTGRAY));
 		progress = mAlarm.getPeriod();
 		mLastUpdateProgress.setMax(progress);
 		if(mAlarm.getLastUpdateTimestamp() != null) {
@@ -84,10 +91,17 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 		}
 		if(mAlarm.isOn()) {
 			mLastUpdateProgress.setColor(mColorsArray.getColor(COLORON, Color.LTGRAY));
+			mBar.setImageDrawable(getResources().getDrawable(R.drawable.onbar));
 		} else {
 			mLastUpdateProgress.setColor(mColorsArray.getColor(COLOROFF, Color.LTGRAY));
+			if(Themer.getCurTheme().equals(Themer.Theme.light)) {
+				mBar.setImageDrawable(getResources().getDrawable(R.drawable.ltoffbar));
+			} else {
+				mBar.setImageDrawable(getResources().getDrawable(R.drawable.dkoffbar));
+			}
 		}
 		mLastUpdateProgress.setProgress(progress);
+		mFixedCircle.invalidate();
 		if(mAlarm instanceof PriceChangeAlarm) {
 			PriceChangeAlarm priceChangeAlarm = (PriceChangeAlarm) mAlarm;
 			if(priceChangeAlarm.isPercent()) {
