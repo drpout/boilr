@@ -65,7 +65,7 @@
 			android:title="@string/pref_title_default_time_frame"
 			android:dialogMessage="@string/pref_summary_default_time_frame"
 			android:inputType="number"
-			android:defaultValue="1440" />
+			android:defaultValue="15" />
 		<ListPreference
 			android:key="pref_key_check_pairs_interval"
 			android:title="@string/pref_title_check_pairs_interval"

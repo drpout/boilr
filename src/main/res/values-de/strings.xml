@@ -46,9 +46,9 @@
     <string name="pref_title_mobile_data">Mobile Daten</string>
     <string name="pref_title_show_internet_warning">Warnung bei fehlender Internetverbindung</string>
     <string name="pref_title_default_update_interval">Standardaktualisierung</string>
-    <string name="pref_summary_default_update_interval">In Sekunden. Bestimmt wie oft ein Alarm zu einem Preistreffer seine Daten von der Börse erhält. Sie können einen anderen Aktualisierungsintervall für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
+    <!-- Review please, original has changed --><string name="pref_summary_default_update_interval">In Sekunden. Bestimmt wie oft ein Alarm seine Daten von der Börse erhält. Sie können einen anderen Aktualisierungsintervall für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
     <string name="pref_title_default_time_frame">Standardzeitrahmen</string>
-    <string name="pref_summary_default_time_frame">In Minuten. Bestimmt den Standardzeitrahmen für Alarme zu Preisänderungen. Sie können einen anderen Zeitrahmen für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
+    <!-- Review please, original has changed --><string name="pref_summary_default_time_frame">In Minuten. Wird von Alarme zu Preisänderungen. Bestimmt welcher Preis, mit dem aktuellen vergleichen, z.B. der Pries von vor 15 Minuten. Sie können einen anderen Zeitrahmen für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
     <string name="pref_title_check_pairs_interval">Suche nach neuen Paaren</string>
 
     <string-array name="pref_entries_check_pairs_interval">
@@ -77,14 +77,13 @@
     <string name="pref_title_specific">Details</string>
     <string name="pref_title_upper_limit">Höchstes Limit</string>
     <string name="pref_title_lower_limit">Niedrigstes Limit</string>
-    <string name="pref_title_spike_alert">Spike-Alarm</string>
     <string name="pref_title_change_in_percentage">Veränderung in Prozent</string>
     <string name="pref_title_change_value">Veränderung</string>
     <string name="pref_title_update_interval">Aktualisierungsintervall</string>
     <string name="pref_title_time_frame">Zeitrahmen</string>
     <string name="pref_title_last_value">Letzter Preis</string>
-    <string name="pref_summary_update_interval">In Sekunden. Bestimmt wie oft der Trefferalarm seine Daten von der Börse erhält.</string>
-    <string name="pref_summary_time_frame">In Minuten. Bestimmt den Zeitrahmen für den Alarm zu Preisänderungen.</string>
+    <!-- Review please, original has changed --><string name="pref_summary_update_interval">In Sekunden. Bestimmt wie oft der Alarm seine Daten von der Börse erhält.</string>
+    <!-- Review please, original has changed --><string name="pref_summary_time_frame">In Minuten. Bestimmt welcher Preis, mit dem aktuellen vergleichen, z.B. der Pries von vor 15 Minuten.</string>
     <string name="boilr_alarm">Boilr Alarm</string>
     <string name="turn_off">Ausschalten</string>
     <string name="keep_monitoring">Weiterhin beobachten</string>

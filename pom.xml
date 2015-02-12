@@ -27,13 +27,13 @@
 		<android.maven.plugin.version>4.1.0</android.maven.plugin.version>
 		<android.sdk.version>21</android.sdk.version>
 		<release.description>
-			\+ Added spike alert option to Price Change Alarm.
 			\+ Added Bitspark, Coinbase, Mulcoin, OneWorldCoin and Yunbi exchanges.
 			\+ Added Chinese, German, Italian, Polish, Portuguese and Spanish translations.
 			\+ Last price on alarm list is now coloured according to price direction (up, down or same).
 			\+ Added arrow to the alarm triggered notification showing which direction the price took.
 			\+ Added app settings to control volume and dismiss no internet notification.
 			\* Icon and alarms' list were completely redesigned.
+			\* Price Change Alarm now uses a rolling time frame.
 			\* Offed alarms are now continuously updated while alarm list is visible.
 			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange and OKCoin pairs.
 			\* Fixed bugs in Bitcoin.de, CCEX and Kraken exchanges' interaction.
@@ -56,7 +56,7 @@
 
 	<licenses>
 		<license>
-			<name>GPL v3</name>
+			<name>GNU GPLv3+</name>
 			<url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
 			<distribution>repo</distribution>
 		</license>

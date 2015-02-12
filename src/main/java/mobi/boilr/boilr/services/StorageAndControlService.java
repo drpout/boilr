@@ -20,16 +20,10 @@ import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libdynticker.exchanges.BitstampExchange;
-import mobi.boilr.libdynticker.exchanges.BullionVaultExchange;
 import mobi.boilr.libdynticker.exchanges.CoinMktExchange;
-import mobi.boilr.libdynticker.exchanges.OKCoinExchange;
-import mobi.boilr.libdynticker.exchanges.PoloniexExchange;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.AlarmPositionComparator;
-import mobi.boilr.libpricealarm.Notifier;
-import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
-import mobi.boilr.libpricealarm.PriceSpikeAlarm;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -85,34 +79,16 @@ public class StorageAndControlService extends Service {
 					} catch(NumberFormatException e) {
 						Log.e("Could format last value for alarm " + alarm.getId(), e);
 					} catch(IOException e) {
-						reschedule(alarm);
 						Log.e("Could not retrieve last value for alarm " + alarm.getId(), e);
 					}
 					Notifications.clearNoInternetNotification(StorageAndControlService.this);
 				} else {
-					reschedule(alarm);
 					Notifications.showNoInternetNotification(StorageAndControlService.this);
 				}
 				runTaskAlarmList.remove(alarm.getId());
 			}
 			AlarmAlertWakeLock.releaseCpuLock();
 			return null;
-		}
-
-		private void reschedule(Alarm alarm) {
-			/*
-			 * If it is a PriceChangeAlarm try to get last value sooner.
-			 * Check issue #35 https://github.com/andrefbsantos/boilr/issues/35
-			 */
-			if(alarm instanceof PriceSpikeAlarm) {
-				// Do nothing. PriceSpikeAlarm has a short update interval.
-			} else if(alarm instanceof PriceChangeAlarm) {
-				long delay = (long) (alarm.getPeriod() * 0.01);
-				if(delay < REPEAT_LOWER_BOUND) {
-					delay = REPEAT_LOWER_BOUND;
-				}
-				addToAlarmManager(alarm, delay);
-			}
 		}
 	}
 

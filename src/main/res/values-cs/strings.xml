@@ -47,8 +47,8 @@
     <!-- Review please --><string name="pref_title_show_internet_warning">Varovat ne internet</string>
     <string name="pref_title_default_time_frame">Výchozí časový interval</string>
     <string name="pref_title_default_update_interval">Výchozí interval aktualizace</string>
-    <string name="pref_summary_default_update_interval">V sekundách. Určuje jak často jsou získávána data pro upozornění z burzy. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>
-    <string name="pref_summary_default_time_frame">V minutách. Určuje časový interval pro upozornění na změnu ceny. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>
+    <!-- Review please, original has changed --><string name="pref_summary_default_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>
+    <!-- Review please, original has changed --><string name="pref_summary_default_time_frame">V minutách. Určuje časový interval pro upozornění na změnu ceny. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>
     <string name="pref_title_check_pairs_interval">Hledat nové páry</string>
 
     <string-array name="pref_entries_check_pairs_interval">
@@ -77,14 +77,13 @@
     <string name="pref_title_specific">Specifické</string>
     <string name="pref_title_upper_limit">Horní limit</string>
     <string name="pref_title_lower_limit">Spodní limit</string>
-    <!-- Missing translation <string name="pref_title_spike_alert"></string>-->
     <string name="pref_title_change_in_percentage">Změna v procentech</string>
     <string name="pref_title_change_value">Změna</string>
     <string name="pref_title_update_interval">Interval aktualizace</string>
     <string name="pref_title_time_frame">Časové období</string>
     <string name="pref_title_last_value">Poslední cena</string>
-    <string name="pref_summary_update_interval">V sekundách. Určuje jak často jsou získávána data pro upozornění z burzy.</string>
-    <string name="pref_summary_time_frame">V minutách. Určuje časový interval pro upozornění na změnu ceny.</string>
+    <!-- Review please, original has changed --><string name="pref_summary_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy.</string>
+    <!-- Review please, original has changed --><string name="pref_summary_time_frame">V minutách. Určuje časový interval pro upozornění na změnu ceny.</string>
     <string name="boilr_alarm">Upozornění aplikace Boilr</string>
     <string name="turn_off">Vypnout</string>
     <string name="keep_monitoring">Pokračovat ve sledování</string>

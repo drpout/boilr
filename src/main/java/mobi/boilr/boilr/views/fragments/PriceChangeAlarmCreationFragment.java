@@ -8,8 +8,7 @@ import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
-import mobi.boilr.libpricealarm.PriceChangeAlarm;
-import mobi.boilr.libpricealarm.PriceSpikeAlarm;
+import mobi.boilr.libpricealarm.RollingPriceChangeAlarm;
 import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,9 +23,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		@Override
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
-			if(key.equals(PREF_KEY_SPIKE_ALERT)) {
-				isSpikeAlert = (Boolean) newValue;
-			} else if(key.equals(PREF_KEY_CHANGE_IN_PERCENTAGE)) {
+			if(key.equals(PREF_KEY_CHANGE_IN_PERCENTAGE)) {
 				isPercentage = (Boolean) newValue;
 				updateChangeValueSummary();
 			} else if(key.equals(PREF_KEY_CHANGE_VALUE)) {
@@ -56,19 +53,15 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		super.onCreate(savedInstanceState);
 
 		removePrefs(changeAlarmPrefsToKeep);
-		isSpikeAlert = spikeAlertPref.isChecked();
 		isPercentage = isPercentPref.isChecked();
-		updateIntervalPref.setDependency(PREF_KEY_SPIKE_ALERT);
 		if(savedInstanceState == null) {
 			changePref.setText(null);
 			timeFramePref.setText(null);
 			timeFramePref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, ""),
 					enclosingActivity));
-			if(isSpikeAlert) {
-				updateIntervalPref.setText(null);
-				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string,
-						sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
-			}
+			updateIntervalPref.setText(null);
+			updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string,
+					sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
 		} else {
 			// Change value pref summary will be updated by updateDependentOnPair()
 
@@ -79,14 +72,12 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			} else {
 				timeFramePref.setSummary(Conversions.buildMinToDaysSummary(timeFrame, enclosingActivity));
 			}
-			if(isSpikeAlert) {
-				String updateInterval = updateIntervalPref.getText();
-				if(updateInterval == null || updateInterval.equals("")) {
-					updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string,
-							sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
-				} else {
-					updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string, updateInterval));
-				}
+			String updateInterval = updateIntervalPref.getText();
+			if(updateInterval == null || updateInterval.equals("")) {
+				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string,
+						sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
+			} else {
+				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string, updateInterval));
 			}
 		}
 		alarmTypePref.setValueIndex(1);
@@ -110,26 +101,16 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		else
 			change = Double.parseDouble(changeValueString);
 		long updateInterval = 3000;
-		if(isSpikeAlert) {
-			String updateIntervalString = updateIntervalPref.getText();
-			// Time is in seconds, convert to milliseconds
-			updateInterval = 1000 * Long.parseLong(updateIntervalString != null ? updateIntervalString : sharedPrefs.getString(
-					SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, ""));
-		}
+		String updateIntervalString = updateIntervalPref.getText();
+		// Time is in seconds, convert to milliseconds
+		updateInterval = 1000 * Long.parseLong(updateIntervalString != null ? updateIntervalString : sharedPrefs.getString(
+				SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, ""));
 		Alarm ret;
 		if(isPercentage) {
 			float percent = (float) change;
-			if(isSpikeAlert) {
-				ret = new PriceSpikeAlarm(id, exchange, pair, updateInterval, notifier, percent, timeFrame);
-			} else {
-				ret = new PriceChangeAlarm(id, exchange, pair, timeFrame, notifier, percent);
-			}
+			ret = new RollingPriceChangeAlarm(id, exchange, pair, updateInterval, notifier, percent, timeFrame);
 		} else {
-			if(isSpikeAlert) {
-				ret = new PriceSpikeAlarm(id, exchange, pair, updateInterval, notifier, change, timeFrame);
-			} else {
-				ret = new PriceChangeAlarm(id, exchange, pair, timeFrame, notifier, change);
-			}
+			ret = new RollingPriceChangeAlarm(id, exchange, pair, updateInterval, notifier, change, timeFrame);
 		}
 		return ret;
 	}

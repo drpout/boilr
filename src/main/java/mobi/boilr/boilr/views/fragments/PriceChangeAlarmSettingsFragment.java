@@ -3,15 +3,14 @@ package mobi.boilr.boilr.views.fragments;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.libpricealarm.PriceChangeAlarm;
-import mobi.boilr.libpricealarm.PriceSpikeAlarm;
+import mobi.boilr.libpricealarm.RollingPriceChangeAlarm;
 import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.widget.Toast;
 
 public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
-	private PriceChangeAlarm priceChangeAlarm;
+	private RollingPriceChangeAlarm priceChangeAlarm;
 
 	private class OnPriceChangeSettingsPreferenceChangeListener extends
 			OnAlarmSettingsPreferenceChangeListener {
@@ -38,16 +37,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 			} else if(key.equals(PREF_KEY_TIME_FRAME)) {
 				long timeFrame = Long.parseLong((String) newValue) * Conversions.MILIS_IN_MINUTE;
 				try {
-					if(isSpikeAlert) {
-						((PriceSpikeAlarm) priceChangeAlarm).setTimeFrame(timeFrame);
-					} else {
-						priceChangeAlarm.setPeriod(timeFrame);
-						if(mBound) {
-							mStorageAndControlService.resetAlarmPeriod(priceChangeAlarm);
-						} else {
-							Log.e(enclosingActivity.getString(R.string.not_bound, "PriceChangeAlarmSettingsFragment"));
-						}
-					}
+					priceChangeAlarm.setTimeFrame(timeFrame);
 					preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue, enclosingActivity));
 				} catch(TimeFrameSmallerOrEqualUpdateIntervalException e) {
 					String msg = enclosingActivity.getString(R.string.failed_save_alarm) + " "
@@ -102,29 +92,17 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 
 	@Override
 	protected void initializePreferences() {
-		priceChangeAlarm = (PriceChangeAlarm) alarm;
-		long minPeriod, secondsPeriod = 30;
-		isSpikeAlert = priceChangeAlarm instanceof PriceSpikeAlarm;
-		if(isSpikeAlert) {
-			PriceSpikeAlarm priceSpike = (PriceSpikeAlarm) priceChangeAlarm;
-			minPeriod = priceSpike.getTimeFrame() / Conversions.MILIS_IN_MINUTE;
-			secondsPeriod = priceSpike.getPeriod() / 1000;
-			updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, secondsPeriod));
-		} else {
-			minPeriod = alarm.getPeriod() / Conversions.MILIS_IN_MINUTE;
-			specificCat.removePreference(updateIntervalPref);
-		}
+		priceChangeAlarm = (RollingPriceChangeAlarm) alarm;
+		long minPeriod = priceChangeAlarm.getTimeFrame() / Conversions.MILIS_IN_MINUTE;
+		long secondsPeriod = priceChangeAlarm.getPeriod() / 1000;
+		updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, secondsPeriod));
 		timeFramePref.setSummary(Conversions.buildMinToDaysSummary(String.valueOf(minPeriod), enclosingActivity));
-		spikeAlertPref.setEnabled(false);
 		if(!recoverSavedInstance) {
-			spikeAlertPref.setChecked(isSpikeAlert);
 			isPercentage = priceChangeAlarm.isPercent();
 			isPercentPref.setChecked(isPercentage);
 			updateChangeValueText();
 			timeFramePref.setText(String.valueOf(minPeriod));
-			if(isSpikeAlert) {
-				updateIntervalPref.setText(String.valueOf(secondsPeriod));
-			}
+			updateIntervalPref.setText(String.valueOf(secondsPeriod));
 		}
 	}
 }

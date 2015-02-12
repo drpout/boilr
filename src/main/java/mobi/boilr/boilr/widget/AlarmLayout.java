@@ -4,8 +4,7 @@ import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.Alarm.Direction;
-import mobi.boilr.libpricealarm.PriceChangeAlarm;
-import mobi.boilr.libpricealarm.PriceSpikeAlarm;
+import mobi.boilr.libpricealarm.RollingPriceChangeAlarm;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -88,22 +87,16 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 			mLastUpdateProgress.setColor(mColorsArray.getColor(COLOROFF, Color.LTGRAY));
 		}
 		mLastUpdateProgress.setProgress(progress);
-		if(mAlarm instanceof PriceChangeAlarm) {
-			PriceChangeAlarm priceChangeAlarm = (PriceChangeAlarm) mAlarm;
+		if(mAlarm instanceof RollingPriceChangeAlarm) {
+			RollingPriceChangeAlarm priceChangeAlarm = (RollingPriceChangeAlarm) mAlarm;
+			mVarianceView.setVisibility(VISIBLE);
 			if(priceChangeAlarm.isPercent()) {
 				mVarianceView.setText(Conversions.format2DecimalPlaces(priceChangeAlarm.getPercent()) + "%");
 			} else {
 				mVarianceView.setText(Conversions.format8SignificantDigits(priceChangeAlarm.getChange()));
 			}
-			mVarianceView.setVisibility(VISIBLE);
-			if(mAlarm instanceof PriceSpikeAlarm) {
-				PriceSpikeAlarm priceSpikeAlarm = (PriceSpikeAlarm) mAlarm;
-				mBaseValueView.setVisibility(VISIBLE);
-				mBaseValueView.setVisibility(VISIBLE);
-				mBaseValueView.setText(Conversions.format8SignificantDigits(priceSpikeAlarm.getBaseValue()));
-			} else {
-				mBaseValueView.setVisibility(GONE);
-			}
+			mBaseValueView.setVisibility(VISIBLE);
+			mBaseValueView.setText(Conversions.format8SignificantDigits(priceChangeAlarm.getBaseValue()));
 		} else {
 			mBaseValueView.setVisibility(GONE);
 			mVarianceView.setVisibility(GONE);

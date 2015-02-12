@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
 	<changelogversion versionName="0.5.0" changeDate="?? Feb 2015">
-		<changelogtext>+ Added spike alert option to Price Change Alarm.</changelogtext>
 		<changelogtext>+ Added Bitspark, Coinbase, Mulcoin, OneWorldCoin and Yunbi exchanges.</changelogtext>
 		<changelogtext>+ Added Chinese, German, Italian, Polish, Portuguese and Spanish translations.</changelogtext>
 		<changelogtext>+ Last price on alarm list is now coloured according to price direction (up, down or same).</changelogtext>
 		<changelogtext>+ Added arrow to the alarm triggered notification showing which direction the price took.</changelogtext>
 		<changelogtext>+ Added app settings to control volume and dismiss no internet notification.</changelogtext>
 		<changelogtext>* Icon and alarms' list were completely redesigned.</changelogtext>
+		<changelogtext>* Price Change Alarm now uses a rolling time frame.</changelogtext>
 		<changelogtext>* Offed alarms are now continuously updated while alarm list is visible.</changelogtext>
 		<changelogtext>* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange and OKCoin pairs.</changelogtext>
 		<changelogtext>* Fixed bugs in Bitcoin.de, CCEX and Kraken exchanges' interaction.</changelogtext>

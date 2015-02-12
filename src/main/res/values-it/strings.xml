@@ -47,9 +47,9 @@
     <string name="pref_title_mobile_data">Dati Mobile</string>
     <!-- Review please --><string name="pref_title_show_internet_warning">Avvertire senza internet</string>
     <string name="pref_title_default_update_interval">Intervallo di aggiornamento predefinito</string>
-    <string name="pref_summary_default_update_interval">In pochi secondi. Definisce quante volte un allarme "price hit" riceve i dati dallo scambio. È possibile impostare un intervallo per un particolare allarme sulla sua configurazione.</string>
+    <!-- Review please --><string name="pref_summary_default_update_interval">In pochi secondi. Definisce quante volte un allarme riceve i dati dallo scambio. È possibile impostare un intervallo per un particolare allarme sulla sua configurazione.</string>
     <string name="pref_title_default_time_frame">Lasso di tempo predefinito</string>
-    <string name="pref_summary_default_time_frame">In pochi minuti. Definisce l\'intervallo di tempo predefinito per l\'allarme "cambiamento di prezzo". È possibile impostare un intervallo di tempo di un particolare allarme sulla sua configurazione.</string>
+    <!-- Review please --><string name="pref_summary_default_time_frame">In pochi minuti. Usato per l\'allarme cambiamento di prezzo. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa. È possibile impostare un intervallo di tempo di un particolare allarme sulla sua configurazione.</string>
     <string name="pref_title_check_pairs_interval">Verificare la presenza di nuove coppie</string>
 
     <string-array name="pref_entries_check_pairs_interval">
@@ -78,14 +78,13 @@
     <string name="pref_title_specific">Specifico</string>
     <string name="pref_title_upper_limit">Limite massimo</string>
     <string name="pref_title_lower_limit">Limite minimo</string>
-    <!-- Review please --><string name="pref_title_spike_alert">Allarme di picchi</string>
     <string name="pref_title_change_in_percentage">Cambio in percentuale</string>
     <string name="pref_title_change_value">Cambio</string>
     <string name="pref_title_update_interval">Intervallo di aggiornamento</string>
     <string name="pref_title_time_frame">Periodo</string>
     <string name="pref_title_last_value">Ultimo prezzo</string>
-    <string name="pref_summary_update_interval">In pochi secondi. Definisce la frequenza di allarme quando riceve i dati dal cambio.</string>
-    <string name="pref_summary_time_frame">In pochi minuti. Definisce l\'intervallo di tempo per l\'allarme "variazione di prezzo".</string>
+    <!-- Review please --><string name="pref_summary_update_interval">In pochi secondi. Definisce la frequenza con cui l\'allarme riceve i dati dal cambio.</string>
+    <!-- Review please --><string name="pref_summary_time_frame">In pochi minuti. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa.</string>
     <string name="boilr_alarm">Boilr Alarm</string>
     <string name="turn_off">Spegni</string>
     <string name="keep_monitoring">monitoraggio</string>

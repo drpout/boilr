@@ -4,9 +4,9 @@ Android application which monitors Bitcoin, cryptocurrencies and bullion prices,
 Supports 2 types of alarms:
 
 * Price Hit - Triggered when price crosses the alarm's upper or lower limit.
-* Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 1 day). It has an optional "spike alert" function, which fetches data with a given update interval (e.g. 30 s) and alerts about price spikes in the middle of the time frame.
+* Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 15 min). It uses a rolling time frame: price is fetched with a given update interval (e.g. 30 s) and compared with the price fetched one time frame ago (e.g. 15 min ago).
 
-Sound and vibration are configurable globally and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing a quick alarm setup and configuration.
+Sound and vibration are configurable globally and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing a quick alarm setup and configuration. Alarms can be reordered. Disabled alarms keep updating while (and only while) the alarm list is visible, acting as tickers.
 
 Market data is retrieved directly from the exchanges using Wi-Fi or Mobile Data (if allowed). [libdynticker](https://github.com/andrefbsantos/libdynticker) is used to interface with the exchanges. Therefore, Boilr supports all [exchanges available on libdynticker](https://github.com/andrefbsantos/libdynticker/#supported-exchanges), as all their pairs.
 
