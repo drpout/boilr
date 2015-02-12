@@ -103,7 +103,7 @@ public class ProgressCircle extends View {
 		mPaint.setAntiAlias(true);
 		mPaint.setStrokeCap(Paint.Cap.BUTT);
 		mPaint.setColor(mColor);
-		canvas.drawArc(mRectF, -60, mProgress < 0 ? getMax() - 60 : mProgress * 300 / getMax(), !mHollow, mPaint);
+		canvas.drawArc(mRectF, -60, mProgress < 0 ? 300 : mProgress * 300 / getMax(), !mHollow, mPaint);
 	}
 
 	public void setColor(int color) {

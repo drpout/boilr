@@ -89,7 +89,7 @@
                 android:layout_marginTop="6dp"
                 android:gravity="center_horizontal"
                 boilr:hollow="true"
-                boilr:max="1000" />
+                boilr:max="300" />
 
             <mobi.boilr.boilr.widget.ProgressCircle
                 android:id="@+id/progress_update"
@@ -99,7 +99,7 @@
                 android:layout_marginTop="6dp"
                 android:gravity="center_horizontal"
                 boilr:hollow="true"
-                boilr:max="1000" />
+                boilr:max="300" />
 
             <ImageView
                 android:id="@+id/bar"
