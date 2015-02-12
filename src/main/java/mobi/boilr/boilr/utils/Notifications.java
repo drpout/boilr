@@ -44,7 +44,7 @@ public final class Notifications {
 		Notification.Builder notification = new Notification.Builder(context)
 			.setContentTitle(firingReasonTitle)
 			.setContentText(firingReasonBody)
-			.setSmallIcon(R.drawable.ic_action_alarms)
+			.setSmallIcon(R.drawable.ic_notification)
 			.setLights(0xFFFF0000, 333, 333) // Blink in red ~3 times per second.
 			.setOngoing(false)
 			.setAutoCancel(true);
