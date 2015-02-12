@@ -22,44 +22,41 @@ import android.util.TypedValue;
 import android.view.View;
 
 public class ProgressCircle extends View {
-	private Paint   mPaint;
-	private RectF   mRectF;
-	private Rect    mRect;
-	private long    mProgress;
-	private long    mMax;
-	private boolean mHollow;
-	private float   mPadding;
-	private float   mStrokeWidth;
-	private int mColor;
+	protected Paint mPaint;
+	protected RectF mRectF;
+	protected Rect mRect;
+	protected long mProgress;
+	protected long mMax;
+	protected boolean mHollow;
+	protected float mPadding;
+	protected float mStrokeWidth;
+	protected int mColor;
 
 	public ProgressCircle(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		setup(context, attrs);
+		setup(context, attrs, 5);
 	}
 
 	public ProgressCircle(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		setup(context, attrs);
+		setup(context, attrs, 5);
 	}
 
 	public ProgressCircle(Context context) {
 		super(context);
-		setup(context, null);
+		setup(context, null, 5);
 	}
 
-	private void setup(Context context, AttributeSet attrs) {
+	protected void setup(Context context, AttributeSet attrs, int strokeWidth) {
 		DisplayMetrics dm = getResources().getDisplayMetrics();
-		mPadding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, dm);
-		mStrokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, dm);
-
+		mPadding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, dm);
+		mStrokeWidth = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, strokeWidth, dm);
 		mRectF = new RectF();
 		mRect = new Rect();
-
 		mPaint = new Paint();
 		mPaint.setColor(mColor);
 		mPaint.setAntiAlias(true);
 		mPaint.setStrokeCap(Paint.Cap.BUTT);
-
 		if (attrs != null) {
 			Theme t = context.getTheme();
 			TypedArray a = t.obtainStyledAttributes(attrs, R.styleable.ProgressCircle, 0, 0);
@@ -103,16 +100,13 @@ public class ProgressCircle extends View {
 		mRect.right -= getPaddingRight() + mPadding;
 		mRect.bottom -= getPaddingBottom() + mPadding;
 		mRectF.set(mRect);
-
 		mPaint.setAntiAlias(true);
 		mPaint.setStrokeCap(Paint.Cap.BUTT);
 		mPaint.setColor(mColor);
-
-		canvas.drawArc(mRectF, -90, mProgress < 0 ? getMax() : mProgress * 360 / getMax(), !mHollow, mPaint);
+		canvas.drawArc(mRectF, -60, mProgress < 0 ? getMax() - 60 : mProgress * 300 / getMax(), !mHollow, mPaint);
 	}
 
 	public void setColor(int color) {
 		mColor = color;
-
 	}
 }
