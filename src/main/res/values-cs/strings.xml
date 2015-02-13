@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 
     <string name="action_search">Hledat</string>
@@ -110,4 +110,9 @@
     <string name="hours_abbreviation">%1$d h</string>
     <string name="days_abbreviation">%1$d d</string>
     <string name="days_abrv_input_as_string">%1$s d</string>
-</resources>
+<string name="app_name">Boilr</string>
+    <string name="release_notes">Poznámky k verzi</string>
+    <string name="ok">OK</string>
+    <string name="pref_default_language">Česky</string>
+    <string name="pref_default_languange_code">cs</string>
+    </resources>
