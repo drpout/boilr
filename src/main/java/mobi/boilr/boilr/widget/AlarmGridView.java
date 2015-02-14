@@ -8,7 +8,6 @@ import android.widget.GridView;
 public class AlarmGridView extends GridView implements Runnable {
 
 	private static final long REFRESH_INTERVAL = 100;
-	private long mCurrent;
 	private View mView;
 
 	public AlarmGridView(Context context) {
@@ -25,12 +24,11 @@ public class AlarmGridView extends GridView implements Runnable {
 
 	@Override
 	public void run() {
-		mCurrent = System.currentTimeMillis();
+		System.currentTimeMillis();
 		for(int i = 0; i < getChildCount(); i++) {
 			mView = getChildAt(i);
 			if(mView.isShown()) {
 				post((Runnable) mView);
-				// ((AlarmLayout) mView).updateChildren(mCurrent);
 			}
 		}
 		postDelayed(this, REFRESH_INTERVAL);

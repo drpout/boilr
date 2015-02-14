@@ -14,8 +14,6 @@
         <item name="row_color">@drawable/dkrow</item>
         <item name="off_bar">@drawable/dkoffbar</item>
 		<item name="backrepeat">@drawable/backrepeat_dark</item>
-		<item name="android:listViewStyle">@style/TransparentListView</item>
-		<item name="android:expandableListViewStyle">@style/TransparentExpandableListView</item>
     </style>
 
     <style name="BoilrTheme.Light" parent="@android:Theme.Holo.Light">
@@ -31,16 +29,5 @@
         <item name="row_color">@drawable/ltrow</item>
         <item name="off_bar">@drawable/ltoffbar</item>
         <item name="backrepeat">@drawable/backrepeat_light</item>
-		<item name="android:listViewStyle">@style/TransparentListView</item>
-		<item name="android:expandableListViewStyle">@style/TransparentExpandableListView</item>
     </style>
-    
-    <!-- Styles below by yanchenko http://stackoverflow.com/questions/2706913/how-to-make-android-apps-background-image-repeat/2706944#2706944 -->
-	<style name="TransparentListView" parent="@android:style/Widget.ListView">
-		<item name="android:cacheColorHint">@android:color/transparent</item>
-	</style>
-
-	<style name="TransparentExpandableListView" parent="@android:style/Widget.ExpandableListView">
-		<item name="android:cacheColorHint">@android:color/transparent</item>
-	</style>
 </resources>
