@@ -31,7 +31,7 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 	private ProgressCircle mLastUpdateProgress;
 	private FixedCircle mFixedCircle;
 	private ImageView mBar;
-	private long progress;
+	private long mProgress;
 
 	public AlarmLayout(Context context) {
 		super(context);
@@ -66,7 +66,6 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 	}
 
 	public void updateChildren(long currentTime) {
-
 		if(mAlarm.isOn()) {
 			setAlpha(1);
 		} else {
@@ -83,10 +82,10 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 		mUpperLimitView.setText(Conversions.format8SignificantDigits(mAlarm.getUpperLimit()));
 		mLowerLimitView.setText(Conversions.format8SignificantDigits(mAlarm.getLowerLimit()));
 		mFixedCircle.setColor(mColorsArray.getColor(COLOROFF, Color.LTGRAY));
-		progress = mAlarm.getPeriod();
-		mLastUpdateProgress.setMax(progress);
+		mProgress = mAlarm.getPeriod();
+		mLastUpdateProgress.setMax(mProgress);
 		if(mAlarm.getLastUpdateTimestamp() != null) {
-			progress = progress - (currentTime - mAlarm.getLastUpdateTimestamp().getTime());
+			mProgress = mProgress - (currentTime - mAlarm.getLastUpdateTimestamp().getTime());
 		}
 		if(mAlarm.isOn()) {
 			mLastUpdateProgress.setColor(mColorsArray.getColor(COLORON, Color.LTGRAY));
@@ -99,7 +98,7 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 				mBar.setImageDrawable(getResources().getDrawable(R.drawable.dkoffbar));
 			}
 		}
-		mLastUpdateProgress.setProgress(progress);
+		mLastUpdateProgress.setProgress(mProgress);
 		mFixedCircle.invalidate();
 		if(mAlarm instanceof RollingPriceChangeAlarm) {
 			RollingPriceChangeAlarm priceChangeAlarm = (RollingPriceChangeAlarm) mAlarm;

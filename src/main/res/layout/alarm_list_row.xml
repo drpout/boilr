@@ -47,7 +47,8 @@
             android:layout_height="wrap_content"
             android:gravity="bottom|center_horizontal"
             android:singleLine="true"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:background="@drawable/normal"/>
 
         <TextView
             android:id="@+id/last_value"
@@ -64,7 +65,8 @@
             android:layout_height="wrap_content"
             android:gravity="top|center_horizontal"
             android:singleLine="true"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:background="@drawable/normal"/>
     </LinearLayout>
 
     <LinearLayout
@@ -124,7 +126,8 @@
                 android:gravity="bottom|center_horizontal"
                 android:singleLine="true"
                 android:textSize="14sp"
-                android:visibility="gone" />
+                android:visibility="gone"
+                android:background="@drawable/normal" />
 
             <TextView
                 android:id="@+id/base_value"
