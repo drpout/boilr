@@ -111,4 +111,6 @@
     <string name="hours_abbreviation">%1$d小时</string>
     <string name="days_abbreviation">%1$d天</string>
     <string name="days_abrv_input_as_string">%1$s天</string>
+    
+    <!-- Missing translation <string name="limit_explanation">%1$s = %2$s (base value, from %3$s ago) %4$s %5$s (change)</string> -->
 </resources>

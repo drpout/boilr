@@ -115,4 +115,6 @@
     <string name="ok">OK</string>
     <string name="pref_default_language">Česky</string>
     <string name="pref_default_languange_code">cs</string>
-    </resources>
+    
+    <!-- Review please --><string name="limit_explanation">%1$s = %2$s (základní hodnoty, z doby před %3$s) %4$s %5$s (změna)</string>
+</resources>

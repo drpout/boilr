@@ -26,7 +26,7 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 	private TypedArray mColorsArray;
 	private TextView mUpperLimitView;
 	private TextView mLowerLimitView;
-	private TextView mVarianceView;
+	private TextView mChangeView;
 	private TextView mBaseValueView;
 	private ProgressCircle mLastUpdateProgress;
 	private FixedCircle mFixedCircle;
@@ -58,7 +58,7 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 		mLastValueView = (TextView) findViewById(R.id.last_value);
 		mUpperLimitView = (TextView) findViewById(R.id.upper_limit);
 		mLowerLimitView = (TextView) findViewById(R.id.lower_limit);
-		mVarianceView = (TextView) findViewById(R.id.variance);
+		mChangeView = (TextView) findViewById(R.id.change);
 		mBaseValueView = (TextView) findViewById(R.id.base_value);
 		mLastUpdateProgress = (ProgressCircle) findViewById(R.id.progress_update);
 		mFixedCircle = (FixedCircle) findViewById(R.id.fixed_circle);
@@ -102,17 +102,17 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 		mFixedCircle.invalidate();
 		if(mAlarm instanceof RollingPriceChangeAlarm) {
 			RollingPriceChangeAlarm priceChangeAlarm = (RollingPriceChangeAlarm) mAlarm;
-			mVarianceView.setVisibility(VISIBLE);
+			mChangeView.setVisibility(VISIBLE);
 			if(priceChangeAlarm.isPercent()) {
-				mVarianceView.setText(Conversions.format2DecimalPlaces(priceChangeAlarm.getPercent()) + "%");
+				mChangeView.setText(Conversions.format2DecimalPlaces(priceChangeAlarm.getPercent()) + "%");
 			} else {
-				mVarianceView.setText(Conversions.format8SignificantDigits(priceChangeAlarm.getChange()));
+				mChangeView.setText(Conversions.format8SignificantDigits(priceChangeAlarm.getChange()));
 			}
 			mBaseValueView.setVisibility(VISIBLE);
 			mBaseValueView.setText(Conversions.format8SignificantDigits(priceChangeAlarm.getBaseValue()));
 		} else {
 			mBaseValueView.setVisibility(GONE);
-			mVarianceView.setVisibility(GONE);
+			mChangeView.setVisibility(GONE);
 		}
 	}
 

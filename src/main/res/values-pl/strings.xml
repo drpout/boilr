@@ -110,4 +110,6 @@
     <string name="hours_abbreviation">%1$d g</string>
     <string name="days_abbreviation">%1$d d</string>
     <string name="days_abrv_input_as_string">%1$s d</string>
+    
+    <!-- Review please --><string name="limit_explanation">%1$s = %2$s (wartość bazowa, od %3$s temu) %4$s %5$s (zmiana)</string>
 </resources>
