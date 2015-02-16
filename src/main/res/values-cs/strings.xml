@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 
     <string name="action_search">Hledat</string>
@@ -13,6 +13,7 @@
     <!-- Missing translation <string name="release_notes">Release notes</string>-->
     <string name="about_version">Verze: </string>
     <string name="about_website">Webová stránka: </string>
+    <string name="release_notes">Poznámky k verzi</string>
     <string name="authors">Autoři</string>
     <!-- Review please --><string name="about_bugs">Chyby a požadavky na nové funkce: </string>
     <string name="about_donations">Přispěvatelé: </string>
