@@ -110,4 +110,6 @@
     <string name="hours_abbreviation">%1$d h</string>
     <string name="days_abbreviation">%1$d d</string>
     <string name="days_abrv_input_as_string">%1$s d</string>
+    
+    <!-- Review please --><string name="limit_explanation">%1$s = %2$s (základní hodnoty, z doby před %3$s) %4$s %5$s (změna)</string>
 </resources>

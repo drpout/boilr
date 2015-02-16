@@ -114,13 +114,15 @@
         </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/change_base_wrapper"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:background="@drawable/normal" >
 
             <TextView
-                android:id="@+id/variance"
+                android:id="@+id/change"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="bottom|center_horizontal"

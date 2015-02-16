@@ -272,5 +272,5 @@
     <string name="days_abbreviation">%1$d d</string>
     <string name="days_abrv_input_as_string">%1$s d</string>
     
-    <string name="limit_explanation">%1$s = %2$s (base value, from %3$s ago) + %4$s (change)</string>
+    <string name="limit_explanation">%1$s = %2$s (base value, from %3$s ago) %4$s %5$s (change)</string>
 </resources>
