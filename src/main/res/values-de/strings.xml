@@ -1,115 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="action_search">Suche</string>
-    <string name="action_settings">Einstellungen</string>
-    <string name="action_about">Info</string>
-    <string name="alarm_settings">Alarm Einstellungen</string>
-    <string name="add_alarm">Alarm hinzufügen</string>
-    <string name="on">AN</string>
-    <string name="off">AUS</string>
-    <string name="boilr_settings">Boilr Einstellungen</string>
-    <string name="about_title">Info zu Boilr</string>
-    <string name="release_notes">Changelog</string>
-    <string name="about_version">Version: </string>
-    <string name="about_website">Webseite: </string>
-    <string name="authors">Autoren</string>
-    <!-- Review please --><string name="about_bugs">Bugs und Feature Requests: </string>
-    <string name="about_donations">Spenden: </string>
-    <string name="about_license">Lizenz: </string>
-    <string name="about_libraries">Bibliotheken: </string>
-    <string name="changelog_header_version">"Version "</string>
-    
-    <string name="pref_title_alerts">Benachrichtigungen</string>
-    <string name="pref_title_default_alert_type">Standardeinstellungen</string>
-    <string-array name="pref_entries_alert_type">
-        <item>Alarm</item>
-        <item>Benachrichtigung</item>
-        <item>Klingelton</item>
-    </string-array>
-
-    <string name="pref_title_default_alert_sound">Standardsound</string>
-    <string name="pref_title_sound_volume">Lautstärke</string>
-    <string name="pref_summary_sound_volume">Boiler nutzt die Gerätlautstärke für den ausgewählten Benachrichtigungstyp. Die meisten Geräte behalten, selbst bei Stummschaltung, die Lautstärke für Alarme bei.</string>
-    <string name="cancel">Abbrechen</string>
-    <string name="system_volumes">Gerätlautstärke</string>
-    <string name="pref_title_vibrate_default">Vibrieren</string>
-    <string name="pref_title_appearance">Erscheinung</string>
-    <string name="pref_title_theme">Motiv</string>
-
-    <string-array name="pref_entries_theme">
-        <item>Dunkel</item>
-        <item>Hell</item>
-    </string-array>
-
-    <string name="pref_title_network_usage">Netznutzung</string>
-    <string name="pref_title_mobile_data">Mobile Daten</string>
-    <string name="pref_title_show_internet_warning">Warnung bei fehlender Internetverbindung</string>
-    <string name="pref_title_default_update_interval">Standardaktualisierung</string>
-    <!-- Review please, original has changed --><string name="pref_summary_default_update_interval">In Sekunden. Bestimmt wie oft ein Alarm seine Daten von der Börse erhält. Sie können einen anderen Aktualisierungsintervall für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
-    <string name="pref_title_default_time_frame">Standardzeitrahmen</string>
-    <!-- Review please, original has changed --><string name="pref_summary_default_time_frame">In Minuten. Wird von Alarme zu Preisänderungen. Bestimmt welcher Preis, mit dem aktuellen vergleichen, z.B. der Pries von vor 15 Minuten. Sie können einen anderen Zeitrahmen für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
-    <string name="pref_title_check_pairs_interval">Suche nach neuen Paaren</string>
-
-    <string-array name="pref_entries_check_pairs_interval">
-        <item>Stündlich</item>
-        <item>Zweimal am Tag</item>
-        <item>Täglich</item>
-        <item>Jeden zweiten Tag</item>
-        <item>Wöchentlich</item>
-        <item>Alle 2 Wochen</item>
-    </string-array>
-
-    <string name="pref_type_title">Alarmtyp</string>
-
-    <string-array name="pref_type_entries">
-        <item>Preistreffer</item>
-        <item>Preisveränderung</item>
-    </string-array>
-
-    <string name="pref_exchange_title">Börse</string>
-    <string name="pref_pair_title">Paar</string>
-    <string name="action_send_now">Speichern</string>
-    <string name="pref_title_alarm_alert_type">Benachrichtigungstyp</string>
-    <string name="pref_title_alarm_alert_sound">Ton</string>
-    <string name="pref_title_alarm_vibrate">Vibrieren</string>
-    <string name="pref_title_generic">Allgemein</string>
-    <string name="pref_title_specific">Details</string>
-    <string name="pref_title_upper_limit">Höchstes Limit</string>
-    <string name="pref_title_lower_limit">Niedrigstes Limit</string>
-    <string name="pref_title_change_in_percentage">Veränderung in Prozent</string>
-    <string name="pref_title_change_value">Veränderung</string>
-    <string name="pref_title_update_interval">Aktualisierungsintervall</string>
-    <string name="pref_title_time_frame">Zeitrahmen</string>
-    <string name="pref_title_last_value">Letzter Preis</string>
-    <!-- Review please, original has changed --><string name="pref_summary_update_interval">In Sekunden. Bestimmt wie oft der Alarm seine Daten von der Börse erhält.</string>
-    <!-- Review please, original has changed --><string name="pref_summary_time_frame">In Minuten. Bestimmt welcher Preis, mit dem aktuellen vergleichen, z.B. der Pries von vor 15 Minuten.</string>
-    <string name="boilr_alarm">Boilr Alarm</string>
-    <string name="turn_off">Ausschalten</string>
-    <string name="keep_monitoring">Weiterhin beobachten</string>
-    <string name="no_internet">Boilr hat keine Internetverbindung</string>
-    <string name="no_updates">Ihre Alarme können nicht aktualisiert werden.</string>
-    <string name="couldnt_retrieve_pairs">Keine Paarergebnisse für %1$s.</string>
-    <string name="couldnt_retrieve_last_value">Keine Ergebnisse für den letzten Wert von %1$s in Verbindung mit %2$s.</string>
-    <string name="failed_create_alarm">Erstellung von Alarm fehlgeschlagen.</string>
-    <string name="failed_save_alarm">Erstellung von Alarm speichern.</string>
-    <string name="upper_must_larger_lower">Höchstes Limit muss größer als Niedrigstes Limit sein.</string>
-    <string name="frame_must_longer_interval">Zeitrahmen muss länger als Aktualisierungsintervall sein.</string>
-    <string name="check_connection">Bitte überprüfen Sie Ihre Internetverbindung.</string>
-    <string name="not_bound">%1$s nicht gebunden zu StorageAndControlService.</string>
-    <string name="pair_search_description">Paar Suche</string>
-    <string name="silent">Stumm</string>
-    <string name="unknown_ringtone">Unbekannter Klingelton</string>
-    <string name="pref_title_language">Sprache</string>
-    
-    <!-- Review everything below please -->
-    <string name="price_change_firing_reason">verändert %1$s\nwährend %2$s.</string>
-    <string name="seconds_abbreviation">%1$d s</string>
-    <string name="sec_abrv_input_as_string">%1$s s</string>
-    <string name="minutes_abbreviation">%1$d M</string>
-    <string name="hours_abbreviation">%1$d S</string>
-    <string name="days_abbreviation">%1$d T</string>
-    <string name="days_abrv_input_as_string">%1$s T</string>
-    
-    <string name="limit_explanation">%1$s = %2$s (Basiswert, von vor %3$s) %4$s %5$s (Veränderung)</string>
+	<string name="action_search">Suche</string>
+	<string name="action_settings">Einstellungen</string>
+	<string name="action_about">Info</string>
+	<string name="alarm_settings">Alarm Einstellungen</string>
+	<string name="add_alarm">Alarm hinzufügen</string>
+	<string name="boilr_settings">Boilr Einstellungen</string>
+	<string name="about_title">Info zu Boilr</string>
+	<string name="release_notes">Changelog</string>
+	<string name="about_version">Version: </string>
+	<string name="about_website">Webseite: </string>
+	<string name="authors">Autoren</string>
+	<!-- Review please --><string name="about_bugs">Bugs und Feature Requests: </string>
+	<string name="about_donations">Spenden: </string>
+	<string name="about_license">Lizenz: </string>
+	<string name="about_libraries">Bibliotheken: </string>
+	<string name="changelog_header_version">"Version "</string>
+	<string name="pref_title_alerts">Benachrichtigungen</string>
+	<string name="pref_title_default_alert_type">Standardeinstellungen</string>
+	<!-- pref_entries_alert_type -->
+	<string name="pref_entries_alert_type_0">Alarm</string>
+	<string name="pref_entries_alert_type_1">Benachrichtigung</string>
+	<string name="pref_entries_alert_type_2">Klingelton</string>
+	<string name="pref_title_default_alert_sound">Standardsound</string>
+	<string name="pref_title_sound_volume">Lautstärke</string>
+	<string name="pref_summary_sound_volume">Boiler nutzt die Gerätlautstärke für den ausgewählten Benachrichtigungstyp. Die meisten Geräte behalten, selbst bei Stummschaltung, die Lautstärke für Alarme bei.</string>
+	<string name="cancel">Abbrechen</string>
+	<string name="system_volumes">Gerätlautstärke</string>
+	<string name="pref_title_vibrate_default">Vibrieren</string>
+	<string name="pref_title_appearance">Erscheinung</string>
+	<string name="pref_title_theme">Motiv</string>
+	<!-- pref_entries_theme -->
+	<string name="pref_entries_theme_0">Dunkel</string>
+	<string name="pref_entries_theme_1">Hell</string>
+	<string name="pref_title_network_usage">Netznutzung</string>
+	<string name="pref_title_mobile_data">Mobile Daten</string>
+	<string name="pref_title_show_internet_warning">Warnung bei fehlender Internetverbindung</string>
+	<string name="pref_title_default_update_interval">Standardaktualisierung</string>
+	<!-- Review please, original has changed --><string name="pref_summary_default_update_interval">In Sekunden. Bestimmt wie oft ein Alarm seine Daten von der Börse erhält. Sie können einen anderen Aktualisierungsintervall für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
+	<string name="pref_title_default_time_frame">Standardzeitrahmen</string>
+	<!-- Review please, original has changed --><string name="pref_summary_default_time_frame">In Minuten. Wird von Alarme zu Preisänderungen. Bestimmt welcher Preis, mit dem aktuellen vergleichen, z.B. der Pries von vor 15 Minuten. Sie können einen anderen Zeitrahmen für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
+	<string name="pref_title_check_pairs_interval">Suche nach neuen Paaren</string>
+	<!-- pref_entries_check_pairs_interval -->
+	<string name="pref_entries_check_pairs_interval_0">Stündlich</string>
+	<string name="pref_entries_check_pairs_interval_1">Zweimal am Tag</string>
+	<string name="pref_entries_check_pairs_interval_2">Täglich</string>
+	<string name="pref_entries_check_pairs_interval_3">Jeden zweiten Tag</string>
+	<string name="pref_entries_check_pairs_interval_4">Wöchentlich</string>
+	<string name="pref_entries_check_pairs_interval_5">Alle 2 Wochen</string>
+	<string name="pref_type_title">Alarmtyp</string>
+	<!-- pref_type_entries -->
+	<string name="pref_type_entries_0">Preistreffer</string>
+	<string name="pref_type_entries_1">Preisveränderung</string>
+	<string name="pref_exchange_title">Börse</string>
+	<string name="pref_pair_title">Paar</string>
+	<string name="action_send_now">Speichern</string>
+	<string name="pref_title_alarm_alert_type">Benachrichtigungstyp</string>
+	<string name="pref_title_alarm_alert_sound">Ton</string>
+	<string name="pref_title_alarm_vibrate">Vibrieren</string>
+	<string name="pref_title_generic">Allgemein</string>
+	<string name="pref_title_specific">Details</string>
+	<string name="pref_title_upper_limit">Höchstes Limit</string>
+	<string name="pref_title_lower_limit">Niedrigstes Limit</string>
+	<string name="pref_title_change_in_percentage">Veränderung in Prozent</string>
+	<string name="pref_title_change_value">Veränderung</string>
+	<string name="pref_title_update_interval">Aktualisierungsintervall</string>
+	<string name="pref_title_time_frame">Zeitrahmen</string>
+	<string name="pref_title_last_value">Letzter Preis</string>
+	<!-- Review please, original has changed --><string name="pref_summary_update_interval">In Sekunden. Bestimmt wie oft der Alarm seine Daten von der Börse erhält.</string>
+	<!-- Review please, original has changed --><string name="pref_summary_time_frame">In Minuten. Bestimmt welcher Preis, mit dem aktuellen vergleichen, z.B. der Pries von vor 15 Minuten.</string>
+	<string name="boilr_alarm">Boilr Alarm</string>
+	<string name="turn_off">Ausschalten</string>
+	<string name="keep_monitoring">Weiterhin beobachten</string>
+	<string name="no_internet">Boilr hat keine Internetverbindung</string>
+	<string name="no_updates">Ihre Alarme können nicht aktualisiert werden.</string>
+	<string name="couldnt_retrieve_pairs">Keine Paarergebnisse für %1$s.</string>
+	<string name="couldnt_retrieve_last_value">Keine Ergebnisse für den letzten Wert von %1$s in Verbindung mit %2$s.</string>
+	<string name="failed_create_alarm">Erstellung von Alarm fehlgeschlagen.</string>
+	<string name="failed_save_alarm">Erstellung von Alarm speichern.</string>
+	<string name="upper_must_larger_lower">Höchstes Limit muss größer als Niedrigstes Limit sein.</string>
+	<string name="frame_must_longer_interval">Zeitrahmen muss länger als Aktualisierungsintervall sein.</string>
+	<string name="check_connection">Bitte überprüfen Sie Ihre Internetverbindung.</string>
+	<string name="not_bound">%1$s nicht gebunden zu StorageAndControlService.</string>
+	<string name="pair_search_description">Paar Suche</string>
+	<string name="silent">Stumm</string>
+	<string name="unknown_ringtone">Unbekannter Klingelton</string>
+	<string name="pref_title_language">Sprache</string>
+	<!-- Review everything below please -->
+	<string name="price_change_firing_reason">verändert %1$s\nwährend %2$s.</string>
+	<string name="seconds_abbreviation">%1$d s</string>
+	<string name="sec_abrv_input_as_string">%1$s s</string>
+	<string name="minutes_abbreviation">%1$d M</string>
+	<string name="hours_abbreviation">%1$d S</string>
+	<string name="days_abbreviation">%1$d T</string>
+	<string name="days_abrv_input_as_string">%1$s T</string>
+	<string name="limit_explanation">%1$s = %2$s (Basiswert, von vor %3$s) %4$s %5$s (Veränderung)</string>
 </resources>

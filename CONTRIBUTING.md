@@ -2,6 +2,10 @@
 
 ## Adding a translation
 
+### Via Weblate
+1. Just go to [Boilr @ Hosted Weblate](https://hosted.weblate.org/projects/boilr/application/) and start editing. Tip: use Zen mode for a quicker string browsing.
+
+### Via git (for coders)
 0. Fork Boilr's repository.
 1. Create a directory on [src/main/res](/src/main/res) named values-xx where xx is the [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code.
 2. Copy the strings.xml file from any other values-xx directory to your new directory.

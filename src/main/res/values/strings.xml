@@ -1,276 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">Boilr</string>
-    <string name="action_search">Search</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_about">About</string>
-    <string name="alarm_settings">Alarm Settings</string>
-    <string name="add_alarm">Add alarm</string>
-    <string name="on">ON</string>
-    <string name="off">OFF</string>
-    <string name="boilr_settings">Boilr Settings</string>
-    <string name="about_title">About Boilr</string>
-    <string name="release_notes">Release notes</string>
-    <string name="ok">OK</string>
-    <string name="about_version">Version: </string>
-    <string name="about_website">Website: </string>
-    <string name="about_bugs">Bugs and feature requests: </string>
-    <string name="authors">Authors</string>
-    <string name="about_donations">Donations: </string>
-    <string name="about_license">License: </string>
-    <string name="about_libraries">Libraries: </string>
-    <string name="changelog_header_version">"Version "</string>
-    
-    <string name="authors_link">&lt;a href="https://github.com/andrefbsantos/boilr/blob/master/README.md#license-and-authorship">%1$s&lt;/a></string>
-    <string name="boilr_website">http://boilr.mobi</string>
-    <string name="github_issues"><a href="https://github.com/andrefbsantos/boilr/issues">GitHub issues</a></string>
-    <string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a> (BTC)</string>
-    <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
-    <string name="gplv3">GNU GPLv3+</string>
-    <string name="lib_list"><a href="https://github.com/andrefbsantos/libdynticker">libdynticker</a> <a href="https://github.com/andrefbsantos/libpricealarm">libpricealarm</a> <a href="https://github.com/gabrielemariotti/changeloglib">changeloglib</a></string>
-    
-    <string name="pref_title_alerts">Alerts</string>
-    <string name="pref_title_default_alert_type">Default type</string>
-    <string-array name="pref_entries_alert_type">
-        <item>Alarm</item>
-        <item>Notification</item>
-        <item>Ringtone</item>
-    </string-array>
-    <string-array name="pref_values_alert_type">
-        <item>4</item>
-        <item>2</item>
-        <item>1</item>
-    </string-array>
-
-    <string name="pref_default_alert_type">4</string>
-    <string name="pref_title_default_alert_sound">Default sound</string>
-    <string name="pref_title_vibrate_default">Vibrate by default</string>
-    <string name="pref_title_sound_volume">Sound volume</string>
-    <string name="pref_summary_sound_volume">Boilr uses the system volume for the selected Alert type. On most devices, the Alarm type is set to full volume even when the phone is set to silent.</string>
-    <string name="cancel">Cancel</string>
-    <string name="system_volumes">System volumes</string>
-    <string name="pref_title_appearance">Appearance</string>
-    <string name="pref_title_theme">Theme</string>
-
-    <string-array name="pref_entries_theme">
-        <item>Dark</item>
-        <item>Light</item>
-    </string-array>
-    <string-array name="pref_values_theme">
-        <item>dark</item>
-        <item>light</item>
-    </string-array>
-
-    <string name="pref_default_theme">dark</string>
-    <string name="pref_title_network_usage">Network usage</string>
-    <string name="pref_title_mobile_data">Mobile data</string>
-    <string name="pref_title_show_internet_warning">Show no internet warning</string>
-    <string name="pref_title_default_update_interval">Default update interval</string>
-    <string name="pref_summary_default_update_interval">In seconds. Defines how often alarms fetch data from the exchange. You can set another interval for a particular alarm on its settings.</string>
-    <string name="pref_title_default_time_frame">Default time frame</string>
-    <string name="pref_summary_default_time_frame">In minutes. Used by change alarms. Defines which price to compare with the current one, e.g., the price from 15 min ago. You can set another time frame for a particular alarm on its settings.</string>
-    <string name="pref_title_check_pairs_interval">Check for new pairs</string>
-
-    <string-array name="pref_entries_check_pairs_interval">
-        <item>Hourly</item>
-        <item>Twice a day</item>
-        <item>Daily</item>
-        <item>Every other day</item>
-        <item>Weekly</item>
-        <item>Fortnightly</item>
-    </string-array>
-    <string-array name="pref_values_check_pairs_interval">
-        <item>3600000</item>
-        <item>43200000</item>
-        <item>86400000</item> <!-- 24 hours * 60 minutes * 60 seconds * 1000 milis -->
-        <item>172800000</item>
-        <item>604800000</item>
-        <item>1209600000</item>
-    </string-array>
-
-    <string name="pref_default_check_pairs_interval">604800000</string>
-    <string name="pref_type_title">Alarm type</string>
-
-    <string-array name="pref_type_entries">
-        <item>Price hit</item>
-        <item>Price change</item>
-    </string-array>
-    <string-array name="pref_type_entries_values">
-        <item>price_hit</item>
-        <item>price_change</item>
-    </string-array>
-
-    <string name="pref_type_default">price_hit</string>
-    <string name="pref_exchange_title">Exchange</string>
-
-    <string-array name="pref_exchange_entries">
-<!--    <item>1Bse</item> -->
-        <item>796 Exchange</item>
-        <item>Allcoin</item>
-        <item>ANX</item>
-        <item>Atomic Trade</item>
-        <item>BitBay</item>
-        <item>Bitcoin.de</item>
-        <item>Bitcurex</item>
-        <item>Bitfinex</item>
-        <item>BitMarket.pl</item>
-        <item>Bitspark</item>
-        <item>Bitstamp</item>
-        <item>Bittrex</item>
-        <item>BleuTrade</item>
-        <item>BTC100</item>
-        <item>BTC38</item>
-        <item>BTC China</item>
-        <item>BTC Markets</item>
-        <item>BTC-E</item>
-        <item>BtcTrade</item>
-        <item>BTER</item>
-        <item>BullionVault</item>
-        <item>CampBX</item>
-        <item>Cavirtex</item>
-        <item>C-CEX</item>
-        <item>CCEDK</item>
-        <item>CEX.IO</item>
-        <item>CHBTC</item>
-        <item>Cryptonit</item>
-        <item>Cryptsy</item>
-        <item>Coinbase</item>
-        <item>CoinMkt</item>
-        <item>Coin-Swap</item>
-        <item>Coins-E</item>
-        <item>HitBTC</item>
-        <item>Huobi</item>
-        <item>itBit</item>
-        <item>Kraken</item>
-        <item>LakeBTC</item>
-        <item>LocalBitcoins</item>
-        <item>Melotic</item>
-        <item>Mulcoin</item>
-        <item>OKCoin</item>
-        <item>OneWorldCoin</item>
-        <item>Paymium</item>
-        <item>Poloniex</item>
-        <item>Vircurex</item>
-        <item>Yunbi</item>
-    </string-array>
-    <string-array name="pref_exchange_entries_values">
-<!--    <item>mobi.boilr.libdynticker.exchanges.OneBseExchange</item> -->
-        <item>mobi.boilr.libdynticker.exchanges.E796Exchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.AllcoinExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.ANXExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.AtomicTradeExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BitBayExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BitcoindeExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BitcurexExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BitfinexExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BitMarketPlExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BitsparkExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BitstampExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BittrexExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BleuTradeExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BTC100Exchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BTC38Exchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BTCChinaExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BTCMarketsExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BTCEExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BtcTradeExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BTERExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.BullionVaultExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.CampBXExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.CavirtexExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.CCEXExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.CCEDKExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.CEXIOExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.ChbtcExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.CryptonitExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.CryptsyExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.CoinbaseExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.CoinMktExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.CoinswapExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.CoinsEExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.HitBTCExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.HuobiExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.ItBitExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.KrakenExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.LakeBTCExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.LocalBitcoinsExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.MeloticExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.MulcoinExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.OKCoinExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.OneWorldCoinExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.PaymiumExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.PoloniexExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.VircurexExchange</item>
-        <item>mobi.boilr.libdynticker.exchanges.YunbiExchange</item>
-    </string-array>
-
-    <string name="pref_exchange_default">mobi.boilr.libdynticker.exchanges.E796Exchange</string>
-    <string name="pref_pair_title">Pair</string>
-    <string name="action_send_now">Save</string>
-    <string name="pref_title_alarm_alert_type">Alert type</string>
-    <string name="pref_title_alarm_alert_sound">Sound</string>
-    <string name="pref_title_alarm_vibrate">Vibrate</string>
-    <string name="pref_title_generic">General</string>
-    <string name="pref_title_specific">Specific</string>
-    <string name="pref_title_upper_limit">Upper limit</string>
-    <string name="pref_title_lower_limit">Lower limit</string>
-    <string name="pref_title_change_in_percentage">Change in percentage</string>
-    <string name="pref_title_change_value">Change</string>
-    <string name="pref_title_update_interval">Update interval</string>
-    <string name="pref_title_time_frame">Time frame</string>
-    <string name="pref_title_last_value">Last price</string>
-    <string name="pref_summary_update_interval">In seconds. Defines how often the alarm fetches data from the exchange.</string>
-    <string name="pref_summary_time_frame">In minutes. Defines the price to compare with the current one, e.g., the price from 15 min ago.</string>
-    <string name="boilr_alarm">Boilr Alarm</string>
-    <string name="turn_off">Turn off</string>
-    <string name="keep_monitoring">Keep monitoring</string>
-    <string name="no_internet">Boilr has no internet</string>
-    <string name="no_updates">Your alarms cannot be updated.</string>
-    <string name="couldnt_retrieve_pairs">Could not retrieve pairs for %1$s.</string>
-    <string name="couldnt_retrieve_last_value">Could not retrieve last value for %1$s with pair %2$s.</string>
-    <string name="failed_create_alarm">Failed to create alarm.</string>
-    <string name="failed_save_alarm">Failed to save alarm.</string>
-    <string name="upper_must_larger_lower">Upper limit must be larger than lower limit.</string>
-    <string name="frame_must_longer_interval">Time frame must be longer than update interval.</string>
-    <string name="check_connection">Please check your internet connection.</string>
-    <string name="not_bound">%1$s not bound to StorageAndControlService.</string>
-    <string name="pair_search_description">Pair search</string>
-    <string name="silent">Silent</string>
-    <string name="unknown_ringtone">Unknown ringtone</string>
-
-    <string-array name="pref_entries_language">
-        <item>English</item>
-        <item>Español</item>
-        <item>Čeština</item>
-        <item>Deutsch</item>
-        <item>Italiano</item>
-        <item>Polski</item>
-        <item>Português</item>
-        <item>中文</item>
-    </string-array>
-    <string-array name="pref_values_language">
-        <item>en</item>
-        <item>es</item>
-        <item>cs</item>
-        <item>de</item>
-        <item>it</item>
-        <item>pl</item>
-        <item>pt</item>
-        <item>zh</item>
-    </string-array>
-    <string name="pref_default_language">English</string>
-    <string name="pref_default_languange_code">en</string>
-    <string name="pref_title_language">Language</string>
-    
-    <!-- You can rearrange the sentence bellow to make it as short as possible. -->
-    <string name="price_change_firing_reason">changed %1$s\nduring %2$s.</string>
-    <string name="seconds_abbreviation">%1$d s</string>
-    <string name="sec_abrv_input_as_string">%1$s s</string>
-    <string name="minutes_abbreviation">%1$d m</string>
-    <string name="hours_abbreviation">%1$d h</string>
-    <string name="days_abbreviation">%1$d d</string>
-    <string name="days_abrv_input_as_string">%1$s d</string>
-    
-    <string name="limit_explanation">%1$s = %2$s (base value, from %3$s ago) %4$s %5$s (change)</string>
+	<string name="action_search">Search</string>
+	<string name="action_settings">Settings</string>
+	<string name="action_about">About</string>
+	<string name="alarm_settings">Alarm Settings</string>
+	<string name="add_alarm">Add alarm</string>
+	<string name="boilr_settings">Boilr Settings</string>
+	<string name="about_title">About Boilr</string>
+	<string name="release_notes">Release notes</string>
+	<string name="ok">OK</string>
+	<string name="about_version">Version: </string>
+	<string name="about_website">Website: </string>
+	<string name="about_bugs">Bugs and feature requests: </string>
+	<string name="authors">Authors</string>
+	<string name="about_donations">Donations: </string>
+	<string name="about_license">License: </string>
+	<string name="about_libraries">Libraries: </string>
+	<string name="changelog_header_version">"Version "</string>
+	<string name="pref_title_alerts">Alerts</string>
+	<string name="pref_title_default_alert_type">Default type</string>
+    <!-- pref_entries_alert_type -->
+    <string name="pref_entries_alert_type_0">Alarm</string>
+    <string name="pref_entries_alert_type_1">Notification</string>
+    <string name="pref_entries_alert_type_2">Ringtone</string>
+	<string name="pref_title_default_alert_sound">Default sound</string>
+	<string name="pref_title_vibrate_default">Vibrate by default</string>
+	<string name="pref_title_sound_volume">Sound volume</string>
+	<string name="pref_summary_sound_volume">Boilr uses the system volume for the selected Alert type. On most devices, the Alarm type is set to full volume even when the phone is set to silent.</string>
+	<string name="cancel">Cancel</string>
+	<string name="system_volumes">System volumes</string>
+	<string name="pref_title_appearance">Appearance</string>
+	<string name="pref_title_theme">Theme</string>
+    <!-- pref_entries_theme -->
+    <string name="pref_entries_theme_0">Dark</string>
+    <string name="pref_entries_theme_1">Light</string>
+	<string name="pref_title_network_usage">Network usage</string>
+	<string name="pref_title_mobile_data">Mobile data</string>
+	<string name="pref_title_show_internet_warning">Show no internet warning</string>
+	<string name="pref_title_default_update_interval">Default update interval</string>
+	<string name="pref_summary_default_update_interval">In seconds. Defines how often alarms fetch data from the exchange. You can set another interval for a particular alarm on its settings.</string>
+	<string name="pref_title_default_time_frame">Default time frame</string>
+	<string name="pref_summary_default_time_frame">In minutes. Used by change alarms. Defines which price to compare with the current one, e.g., the price from 15 min ago. You can set another time frame for a particular alarm on its settings.</string>
+	<string name="pref_title_check_pairs_interval">Check for new pairs</string>
+    <!-- pref_entries_check_pairs_interval -->
+    <string name="pref_entries_check_pairs_interval_0">Hourly</string>
+    <string name="pref_entries_check_pairs_interval_1">Twice a day</string>
+    <string name="pref_entries_check_pairs_interval_2">Daily</string>
+    <string name="pref_entries_check_pairs_interval_3">Every other day</string>
+    <string name="pref_entries_check_pairs_interval_4">Weekly</string>
+    <string name="pref_entries_check_pairs_interval_5">Fortnightly</string>
+	<string name="pref_type_title">Alarm type</string>
+    <!-- pref_type_entries -->
+    <string name="pref_type_entries_0">Price hit</string>
+    <string name="pref_type_entries_1">Price change</string>
+	<string name="pref_exchange_title">Exchange</string>
+	<string name="pref_pair_title">Pair</string>
+	<string name="action_send_now">Save</string>
+	<string name="pref_title_alarm_alert_type">Alert type</string>
+	<string name="pref_title_alarm_alert_sound">Sound</string>
+	<string name="pref_title_alarm_vibrate">Vibrate</string>
+	<string name="pref_title_generic">General</string>
+	<string name="pref_title_specific">Specific</string>
+	<string name="pref_title_upper_limit">Upper limit</string>
+	<string name="pref_title_lower_limit">Lower limit</string>
+	<string name="pref_title_change_in_percentage">Change in percentage</string>
+	<string name="pref_title_change_value">Change</string>
+	<string name="pref_title_update_interval">Update interval</string>
+	<string name="pref_title_time_frame">Time frame</string>
+	<string name="pref_title_last_value">Last price</string>
+	<string name="pref_summary_update_interval">In seconds. Defines how often the alarm fetches data from the exchange.</string>
+	<string name="pref_summary_time_frame">In minutes. Defines the price to compare with the current one, e.g., the price from 15 min ago.</string>
+	<string name="boilr_alarm">Boilr Alarm</string>
+	<string name="turn_off">Turn off</string>
+	<string name="keep_monitoring">Keep monitoring</string>
+	<string name="no_internet">Boilr has no internet</string>
+	<string name="no_updates">Your alarms cannot be updated.</string>
+	<string name="couldnt_retrieve_pairs">Could not retrieve pairs for %1$s.</string>
+	<string name="couldnt_retrieve_last_value">Could not retrieve last value for %1$s with pair %2$s.</string>
+	<string name="failed_create_alarm">Failed to create alarm.</string>
+	<string name="failed_save_alarm">Failed to save alarm.</string>
+	<string name="upper_must_larger_lower">Upper limit must be larger than lower limit.</string>
+	<string name="frame_must_longer_interval">Time frame must be longer than update interval.</string>
+	<string name="check_connection">Please check your internet connection.</string>
+	<string name="not_bound">%1$s not bound to StorageAndControlService.</string>
+	<string name="pair_search_description">Pair search</string>
+	<string name="silent">Silent</string>
+	<string name="unknown_ringtone">Unknown ringtone</string>
+	<string name="pref_title_language">Language</string>
+	<!-- You can rearrange the sentence bellow to make it as short as possible. -->
+	<string name="price_change_firing_reason">changed %1$s\nduring %2$s.</string>
+	<string name="seconds_abbreviation">%1$d s</string>
+	<string name="sec_abrv_input_as_string">%1$s s</string>
+	<string name="minutes_abbreviation">%1$d m</string>
+	<string name="hours_abbreviation">%1$d h</string>
+	<string name="days_abbreviation">%1$d d</string>
+	<string name="days_abrv_input_as_string">%1$s d</string>
+	<string name="limit_explanation">%1$s = %2$s (base value, from %3$s ago) %4$s %5$s (change)</string>
 </resources>

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="action_search">Szukaj</string>
     <string name="action_settings">Ustawienia</string>
     <string name="action_about">O aplikacji</string>
     <string name="alarm_settings">Ustawienia powiadomień</string>
     <string name="add_alarm">Dodaj powiadomienie</string>
-    <string name="on">WŁ</string>
-    <string name="off">WYŁ</string>
     <string name="boilr_settings">Ustawienia Boilr</string>
     <string name="about_title">O aplikacji Boilr</string>
     <!-- Review please --><string name="release_notes">Zmiany pomiędzy wersją</string>
@@ -19,15 +16,12 @@
     <string name="about_license">Licencji: </string>
     <string name="about_libraries">Bibliotek: </string>
     <string name="changelog_header_version">"Wersja "</string>
-
     <string name="pref_title_alerts">Powiadomienia</string>
     <string name="pref_title_default_alert_type">Domyślny rodzaj</string>
-    <string-array name="pref_entries_alert_type">
-        <item>Alarm</item>
-        <item>Powiadomienie</item>
-        <item>Dźwięk</item>
-    </string-array>
-
+    <!-- pref_entries_alert_type -->
+    <string name="pref_entries_alert_type_0">Alarm</string>
+    <string name="pref_entries_alert_type_1">Powiadomienie</string>
+    <string name="pref_entries_alert_type_2">Dźwięk</string>
     <string name="pref_title_default_alert_sound">Domyślny dźwięk</string>
     <string name="pref_title_vibrate_default">Domyślna wibracja</string>
     <string name="pref_title_sound_volume">Głośność dźwięku</string>
@@ -36,11 +30,9 @@
     <string name="system_volumes">Dźwięki systemowe</string>
     <string name="pref_title_appearance">Wygląd</string>
     <string name="pref_title_theme">Motyw</string>
-
-    <string-array name="pref_entries_theme">
-        <item>Ciemny</item>
-        <item>Jasny</item>
-    </string-array>
+    <!-- pref_entries_theme -->
+    <string name="pref_entries_theme_0">Ciemny</string>
+    <string name="pref_entries_theme_1">Jasny</string>
 
     <string name="pref_title_network_usage">Wykorzystanie sieci</string>
     <string name="pref_title_mobile_data">Dane mobilne</string>
@@ -50,23 +42,17 @@
     <!-- Review please --><string name="pref_title_default_time_frame">Długość powiadomienia</string>
     <!-- Review please --><string name="pref_summary_default_time_frame">W minutach. Używane przez powiadomienia o zmianie cen. Opisuje jak cena porównać z obecnym, na przykład cena od 15 minuty temu. Możesz zdefiniować inny czas dla konkretnego powiadomienia w jego ustawieniach.</string>
     <string name="pref_title_check_pairs_interval">Sprawdź nowe pary</string>
-
-    <string-array name="pref_entries_check_pairs_interval">
-        <item>Co godzinę</item>
-        <item>Dwa razy dziennie</item>
-        <item>Raz dziennie</item>
-        <item>Co dwa dni</item>
-        <item>Raz na tydzień</item>
-        <item>Raz na dwa tygodnie</item>
-    </string-array>
-    
+    <!-- pref_entries_check_pairs_interval -->
+    <string name="pref_entries_check_pairs_interval_0">Co godzinę</string>
+    <string name="pref_entries_check_pairs_interval_1">Dwa razy dziennie</string>
+    <string name="pref_entries_check_pairs_interval_2">Raz dziennie</string>
+    <string name="pref_entries_check_pairs_interval_3">Co dwa dni</string>
+    <string name="pref_entries_check_pairs_interval_4">Raz na tydzień</string>
+    <string name="pref_entries_check_pairs_interval_5">Raz na dwa tygodnie</string>
     <string name="pref_type_title">Rodzaj powiadomienia</string>
-
-    <string-array name="pref_type_entries">
-        <item>Osiągnięcie ceny</item>
-        <item>Zmiana ceny</item>
-    </string-array>
-
+    <!-- pref_type_entries -->
+    <string name="pref_type_entries_0">Osiągnięcie ceny</string>
+    <string name="pref_type_entries_1">Zmiana ceny</string>
     <string name="pref_exchange_title">Giełda</string>
     <string name="pref_pair_title">Para</string>
     <string name="action_send_now">Zapisz</string>
@@ -101,7 +87,6 @@
     <string name="silent">Wyciszenie</string>
     <string name="unknown_ringtone">Nieznany dźwięk</string>
     <string name="pref_title_language">Język</string>
-    
     <!-- Review everything below please -->
     <string name="price_change_firing_reason">zmieniony %1$s\nprzez %2$s.</string>
     <string name="seconds_abbreviation">%1$d s</string>
@@ -110,6 +95,5 @@
     <string name="hours_abbreviation">%1$d g</string>
     <string name="days_abbreviation">%1$d d</string>
     <string name="days_abrv_input_as_string">%1$s d</string>
-    
-    <!-- Review please --><string name="limit_explanation">%1$s = %2$s (wartość bazowa, od %3$s temu) %4$s %5$s (zmiana)</string>
+    <string name="limit_explanation">%1$s = %2$s (wartość bazowa, od %3$s temu) %4$s %5$s (zmiana)</string>
 </resources>

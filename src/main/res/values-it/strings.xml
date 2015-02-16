@@ -1,116 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Boilr</string>
-    <string name="action_search">Cerca</string>
-    <string name="action_settings">Impostazioni</string>
-    <string name="action_about">Circa</string>
-    <string name="alarm_settings">Impostazioni avvisi</string>
-    <string name="add_alarm">aggiungi avviso</string>
-    <string name="on">ON</string>
-    <string name="off">OFF</string>
-    <string name="boilr_settings">Boilr impostazioni</string>
-    <string name="about_title">Circa Boilr</string>
-    <string name="release_notes">Modifiche tra versioni</string>
-    <string name="about_version">Versione: </string>
-    <string name="about_website">Website: </string>
-    <string name="authors">Autori</string>
-    <!-- Review please --><string name="about_bugs">Errori e richieste: </string>
-    <string name="about_donations">Donazioni: </string>
-    <string name="about_license">Licenza: </string>
-    <string name="about_libraries">Librerie: </string>
-    <string name="changelog_header_version">"Versione "</string>
-
-    <string name="pref_title_alerts">Avvisi</string>
-    <string name="pref_title_default_alert_type">Tipo default</string>
-    <string-array name="pref_entries_alert_type">
-        <item>Avviso</item>
-        <item>Notifiche</item>
-        <item>Suonerie</item>
-    </string-array>
-
-    <string name="pref_title_default_alert_sound">Suoni default</string>
-    <string name="pref_title_sound_volume">Volume del suono</string>
-    <!-- Missing translation<string name="pref_summary_sound_volume"></string>-->
-    <string name="cancel">Cancellare</string>
-    <string name="system_volumes">volumi di sistema</string>
-    <string name="pref_title_vibrate_default">Vibrazione default</string>
-    <string name="pref_title_appearance">Aspetto</string>
-    <string name="pref_title_theme">Tema</string>
-
-    <string-array name="pref_entries_theme">
-        <item>Scuro</item>
-        <item>Chiaro</item>
-    </string-array>
-
-    <string name="pref_default_theme">scuro</string>
-    <string name="pref_title_network_usage">Uso Network</string>
-    <string name="pref_title_mobile_data">Dati Mobile</string>
-    <!-- Review please --><string name="pref_title_show_internet_warning">Avvertire senza internet</string>
-    <string name="pref_title_default_update_interval">Intervallo di aggiornamento predefinito</string>
-    <!-- Review please --><string name="pref_summary_default_update_interval">In pochi secondi. Definisce quante volte un allarme riceve i dati dallo scambio. È possibile impostare un intervallo per un particolare allarme sulla sua configurazione.</string>
-    <string name="pref_title_default_time_frame">Lasso di tempo predefinito</string>
-    <!-- Review please --><string name="pref_summary_default_time_frame">In pochi minuti. Usato per l\'allarme cambiamento di prezzo. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa. È possibile impostare un intervallo di tempo di un particolare allarme sulla sua configurazione.</string>
-    <string name="pref_title_check_pairs_interval">Verificare la presenza di nuove coppie</string>
-
-    <string-array name="pref_entries_check_pairs_interval">
-        <item>Ogni ora</item>
-        <item>Due volte al giorno</item>
-        <item>Giornalmente</item>
-        <item>Un giorno si un giorno no</item>
-        <item>Settimanalmente</item>
-        <item>Due volte al mese</item>
-    </string-array>
-
-    <string name="pref_type_title">Tipo di allarme</string>
-
-    <string-array name="pref_type_entries">
-        <item>Price hit</item>
-        <item>Cambio prezzo</item>
-    </string-array>
-
-    <string name="pref_exchange_title">cambio</string>
-    <string name="pref_pair_title">Coppia</string>
-    <string name="action_send_now">Salva</string>
-    <string name="pref_title_alarm_alert_type">Tipo avviso</string>
-    <string name="pref_title_alarm_alert_sound">Suono</string>
-    <string name="pref_title_alarm_vibrate">Vibrazione</string>
-    <string name="pref_title_generic">Generale</string>
-    <string name="pref_title_specific">Specifico</string>
-    <string name="pref_title_upper_limit">Limite massimo</string>
-    <string name="pref_title_lower_limit">Limite minimo</string>
-    <string name="pref_title_change_in_percentage">Cambio in percentuale</string>
-    <string name="pref_title_change_value">Cambio</string>
-    <string name="pref_title_update_interval">Intervallo di aggiornamento</string>
-    <string name="pref_title_time_frame">Periodo</string>
-    <string name="pref_title_last_value">Ultimo prezzo</string>
-    <!-- Review please --><string name="pref_summary_update_interval">In pochi secondi. Definisce la frequenza con cui l\'allarme riceve i dati dal cambio.</string>
-    <!-- Review please --><string name="pref_summary_time_frame">In pochi minuti. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa.</string>
-    <string name="boilr_alarm">Boilr Alarm</string>
-    <string name="turn_off">Spegni</string>
-    <string name="keep_monitoring">monitoraggio</string>
-    <string name="no_internet">Boilr non è connesso</string>
-    <string name="no_updates">Il tuo allarme non può essere aggiornato.</string>
-    <string name="couldnt_retrieve_pairs">Impossibile recuperare coppie %1$s.</string>
-    <string name="couldnt_retrieve_last_value">Impossibile recuperate l\'ultimo valore %1$s con coppie %2$s.</string>
-    <string name="failed_create_alarm">Impossibile creare allarme.</string>
-    <string name="failed_save_alarm">Impossibile salvare allarme.</string>
-    <!-- Review please --><string name="upper_must_larger_lower">Limite massimo deve essere maggiore al limite minimo.</string>
-    <string name="frame_must_longer_interval">Periodo deve essere più lungo al intervallo di aggiornamento.</string>
-    <string name="check_connection">Prego controlla la connessione a internet.</string>
-    <string name="not_bound">%1$s non legato a StorageAndControlService.</string>
-    <string name="pair_search_description">Cerca coppie</string>
-    <string name="silent">Silenzioso</string>
-    <string name="unknown_ringtone">Suoneria sconosciuta</string>
-    <string name="pref_title_language">Lingua</string>
-    
-    <!-- Review everything below please -->
-    <string name="price_change_firing_reason">cambiato %1$s\ndurante %2$s.</string>
-    <string name="seconds_abbreviation">%1$d s</string>
-    <string name="sec_abrv_input_as_string">%1$s s</string>
-    <string name="minutes_abbreviation">%1$d m</string>
-    <string name="hours_abbreviation">%1$d o</string>
-    <string name="days_abbreviation">%1$d g</string>
-    <string name="days_abrv_input_as_string">%1$s g</string>
-    
-    <string name="limit_explanation">%1$s = %2$s (valore base, da %3$s fa) %4$s %5$s (cambio)</string>
+	<string name="app_name">Boilr</string>
+	<string name="action_search">Cerca</string>
+	<string name="action_settings">Impostazioni</string>
+	<string name="action_about">Circa</string>
+	<string name="alarm_settings">Impostazioni avvisi</string>
+	<string name="add_alarm">aggiungi avviso</string>
+	<string name="boilr_settings">Boilr impostazioni</string>
+	<string name="about_title">Circa Boilr</string>
+	<string name="release_notes">Modifiche tra versioni</string>
+	<string name="about_version">Versione: </string>
+	<string name="about_website">Website: </string>
+	<string name="authors">Autori</string>
+	<!-- Review please --><string name="about_bugs">Errori e richieste: </string>
+	<string name="about_donations">Donazioni: </string>
+	<string name="about_license">Licenza: </string>
+	<string name="about_libraries">Librerie: </string>
+	<string name="changelog_header_version">"Versione "</string>
+	<string name="pref_title_alerts">Avvisi</string>
+	<string name="pref_title_default_alert_type">Tipo default</string>
+	<!-- pref_entries_alert_type -->
+	<string name="pref_entries_alert_type_0">Avviso</string>
+	<string name="pref_entries_alert_type_1">Notifiche</string>
+	<string name="pref_entries_alert_type_2">Suonerie</string>
+	<string name="pref_title_default_alert_sound">Suoni default</string>
+	<string name="pref_title_sound_volume">Volume del suono</string>
+	<!-- Missing translation<string name="pref_summary_sound_volume"></string>-->
+	<string name="cancel">Cancellare</string>
+	<string name="system_volumes">volumi di sistema</string>
+	<string name="pref_title_vibrate_default">Vibrazione default</string>
+	<string name="pref_title_appearance">Aspetto</string>
+	<string name="pref_title_theme">Tema</string>
+	<!-- pref_entries_theme -->
+	<string name="pref_entries_theme_0">Scuro</string>
+	<string name="pref_entries_theme_1">Chiaro</string>
+	<string name="pref_default_theme">scuro</string>
+	<string name="pref_title_network_usage">Uso Network</string>
+	<string name="pref_title_mobile_data">Dati Mobile</string>
+	<!-- Review please --><string name="pref_title_show_internet_warning">Avvertire senza internet</string>
+	<string name="pref_title_default_update_interval">Intervallo di aggiornamento predefinito</string>
+	<!-- Review please --><string name="pref_summary_default_update_interval">In pochi secondi. Definisce quante volte un allarme riceve i dati dallo scambio. È possibile impostare un intervallo per un particolare allarme sulla sua configurazione.</string>
+	<string name="pref_title_default_time_frame">Lasso di tempo predefinito</string>
+	<!-- Review please --><string name="pref_summary_default_time_frame">In pochi minuti. Usato per l\'allarme cambiamento di prezzo. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa. È possibile impostare un intervallo di tempo di un particolare allarme sulla sua configurazione.</string>
+	<string name="pref_title_check_pairs_interval">Verificare la presenza di nuove coppie</string>
+	<!-- pref_entries_check_pairs_interval -->
+	<string name="pref_entries_check_pairs_interval_0">Ogni ora</string>
+	<string name="pref_entries_check_pairs_interval_1">Due volte al giorno</string>
+	<string name="pref_entries_check_pairs_interval_2">Giornalmente</string>
+	<string name="pref_entries_check_pairs_interval_3">Un giorno si un giorno no</string>
+	<string name="pref_entries_check_pairs_interval_4">Settimanalmente</string>
+	<string name="pref_entries_check_pairs_interval_5">Due volte al mese</string>
+	<string name="pref_type_title">Tipo di allarme</string>
+	<!-- pref_type_entries -->
+	<string name="pref_type_entries_0">Price hit</string>
+	<string name="pref_type_entries_1">Cambio prezzo</string>
+	<string name="pref_exchange_title">cambio</string>
+	<string name="pref_pair_title">Coppia</string>
+	<string name="action_send_now">Salva</string>
+	<string name="pref_title_alarm_alert_type">Tipo avviso</string>
+	<string name="pref_title_alarm_alert_sound">Suono</string>
+	<string name="pref_title_alarm_vibrate">Vibrazione</string>
+	<string name="pref_title_generic">Generale</string>
+	<string name="pref_title_specific">Specifico</string>
+	<string name="pref_title_upper_limit">Limite massimo</string>
+	<string name="pref_title_lower_limit">Limite minimo</string>
+	<string name="pref_title_change_in_percentage">Cambio in percentuale</string>
+	<string name="pref_title_change_value">Cambio</string>
+	<string name="pref_title_update_interval">Intervallo di aggiornamento</string>
+	<string name="pref_title_time_frame">Periodo</string>
+	<string name="pref_title_last_value">Ultimo prezzo</string>
+	<!-- Review please --><string name="pref_summary_update_interval">In pochi secondi. Definisce la frequenza con cui l\'allarme riceve i dati dal cambio.</string>
+	<!-- Review please --><string name="pref_summary_time_frame">In pochi minuti. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa.</string>
+	<string name="boilr_alarm">Boilr Alarm</string>
+	<string name="turn_off">Spegni</string>
+	<string name="keep_monitoring">monitoraggio</string>
+	<string name="no_internet">Boilr non è connesso</string>
+	<string name="no_updates">Il tuo allarme non può essere aggiornato.</string>
+	<string name="couldnt_retrieve_pairs">Impossibile recuperare coppie %1$s.</string>
+	<string name="couldnt_retrieve_last_value">Impossibile recuperate l\'ultimo valore %1$s con coppie %2$s.</string>
+	<string name="failed_create_alarm">Impossibile creare allarme.</string>
+	<string name="failed_save_alarm">Impossibile salvare allarme.</string>
+	<!-- Review please --><string name="upper_must_larger_lower">Limite massimo deve essere maggiore al limite minimo.</string>
+	<string name="frame_must_longer_interval">Periodo deve essere più lungo al intervallo di aggiornamento.</string>
+	<string name="check_connection">Prego controlla la connessione a internet.</string>
+	<string name="not_bound">%1$s non legato a StorageAndControlService.</string>
+	<string name="pair_search_description">Cerca coppie</string>
+	<string name="silent">Silenzioso</string>
+	<string name="unknown_ringtone">Suoneria sconosciuta</string>
+	<string name="pref_title_language">Lingua</string>
+	<!-- Review everything below please -->
+	<string name="price_change_firing_reason">cambiato %1$s\ndurante %2$s.</string>
+	<string name="seconds_abbreviation">%1$d s</string>
+	<string name="sec_abrv_input_as_string">%1$s s</string>
+	<string name="minutes_abbreviation">%1$d m</string>
+	<string name="hours_abbreviation">%1$d o</string>
+	<string name="days_abbreviation">%1$d g</string>
+	<string name="days_abrv_input_as_string">%1$s g</string>
+	<string name="limit_explanation">%1$s = %2$s (valore base, da %3$s fa) %4$s %5$s (cambio)</string>
 </resources>
