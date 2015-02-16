@@ -117,4 +117,11 @@
     <string name="pref_default_languange_code">cs</string>
     
     <!-- Review please --><string name="limit_explanation">%1$s = %2$s (základní hodnoty, z doby před %3$s) %4$s %5$s (změna)</string>
-</resources>
+<string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a> (BTC)</string>
+    <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
+    <string name="pref_default_theme">tmavé</string>
+    <string name="pref_default_check_pairs_interval"/>
+    <string name="pref_type_default"/>
+    <string name="pref_exchange_default"/>
+    <string name="failed_save_alarm">Nepodařilo se uložit upozornění.</string>
+    </resources>
