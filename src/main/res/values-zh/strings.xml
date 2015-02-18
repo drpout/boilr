@@ -11,6 +11,8 @@
     <string name="about_title">关于Boilr</string>
     <string name="ok">完成</string>
     <!-- Missing translation <string name="release_notes">Release notes</string>-->
+    <string name="ok">OK</string>
+    <string name="cancel">取消</string>
     <string name="about_version">版本 </string>
     <string name="about_website"></string>
     <!-- Review please --><string name="authors">作者</string>
@@ -28,7 +30,6 @@
     <string name="pref_title_default_alert_sound">默认声音</string>
     <string name="pref_title_sound_volume">音量</string>
     <string name="pref_summary_sound_volume">Boilr会为所选的提醒类型使用系统音量(System Volume)。在大多数设备上，即使设备处于静音状态，此音量仍然会被设为最大音量。</string>
-    <string name="cancel">取消</string>
     <string name="system_volumes">系统音量</string>
     <string name="pref_title_vibrate_default">默认震动</string>
     <string name="pref_title_appearance">外观</string>

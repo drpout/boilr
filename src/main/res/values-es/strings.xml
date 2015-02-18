@@ -8,6 +8,8 @@
 	<string name="boilr_settings">Ajustes de Boilr</string>
 	<string name="about_title">Sobre Boilr</string>
 	<string name="release_notes">Cambios entre versiones</string>
+	<string name="ok">OK</string>
+	<string name="cancel">Cancelar</string>
 	<string name="about_version">Versión: </string>
 	<string name="about_website">Website: </string>
 	<string name="authors">Autores</string>
@@ -25,7 +27,6 @@
 	<string name="pref_title_default_alert_sound">Sonido por omisión</string>
 	<string name="pref_title_sound_volume">Volumen de sonido</string>
 	<string name="pref_summary_sound_volume">Boilr utiliza el volumen del sistema para el tipo de alarma seleccionada. En la mayoría de los dispositivos el tipo de alarma permanece con el volumen máximo incluso cuando el dispositivo está en silencio.</string>
-	<string name="cancel">Cancelar</string>
 	<string name="system_volumes">Volúmenes del sistema</string>
 	<string name="pref_title_vibrate_default">Vibrar por omisión</string>
 	<string name="pref_title_appearance">Apariencia</string>

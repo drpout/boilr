@@ -1,16 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-
     <string name="action_search">Hledat</string>
     <string name="action_settings">Nastavení</string>
     <string name="action_about">O aplikaci</string>
     <string name="alarm_settings">Nastavení upozornění</string>
     <string name="add_alarm">Přidat upozornění</string>
-    <string name="on">ZAP</string>
-    <string name="off">VYP</string>
     <string name="boilr_settings">Boilr nastavení</string>
     <string name="about_title">O aplikaci Boilr</string>
-    <!-- Missing translation <string name="release_notes">Release notes</string>-->
+	<string name="release_notes">Poznámky k verzi</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Zrušit</string>
     <string name="about_version">Verze: </string>
     <string name="about_website">Webová stránka: </string>
     <string name="authors">Autoři</string>
@@ -19,29 +18,22 @@
     <string name="about_license">Licencí: </string>
     <string name="about_libraries">Knihovny: </string>
     <string name="changelog_header_version">"Verze "</string>
-    
     <string name="pref_title_alerts">Upozornění</string>
     <string name="pref_title_default_alert_type">Výchozí typ</string>
-    <string-array name="pref_entries_alert_type">
-        <item>Alarm</item>
-        <item>Upozornění</item>
-        <item>Vyzvánění</item>
-    </string-array>
-
+	<!-- pref_entries_alert_type -->
+	<string name="pref_entries_alert_type_0">Alarm</string>
+	<string name="pref_entries_alert_type_1">Upozornění</string>
+	<string name="pref_entries_alert_type_2">Vyzvánění</string>
     <string name="pref_title_default_alert_sound">Výchozí zvuk</string>
     <string name="pref_title_sound_volume">Hlasitost zvuk</string>
     <!-- Missing translation <string name="pref_summary_sound_volume"></string>-->
-    <string name="cancel">Zrušit</string>
     <string name="system_volumes">Hlasitost systém</string>
     <string name="pref_title_vibrate_default">Vibrovat</string>
     <string name="pref_title_appearance">Vzhled</string>
     <string name="pref_title_theme">Motiv</string>
-
-    <string-array name="pref_entries_theme">
-        <item>Tmavý</item>
-        <item>Světlý</item>
-    </string-array>
-
+	<!-- pref_entries_theme -->
+	<string name="pref_entries_theme_0">Tmavý</string>
+	<string name="pref_entries_theme_1">Světlý</string>
     <string name="pref_title_network_usage">Využití sítě</string>
     <string name="pref_title_mobile_data">Mobilní připojení</string>
     <!-- Review please --><string name="pref_title_show_internet_warning">Varovat ne internet</string>
@@ -50,23 +42,17 @@
     <!-- Review please, original has changed --><string name="pref_summary_default_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>
     <!-- Review please, original has changed --><string name="pref_summary_default_time_frame">V minutách. Určuje časový interval pro upozornění na změnu ceny. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>
     <string name="pref_title_check_pairs_interval">Hledat nové páry</string>
-
-    <string-array name="pref_entries_check_pairs_interval">
-        <item>Každou hodinu</item>
-        <item>Dvakrát denně</item>
-        <item>Jednou denně</item>
-        <item>Každý druhý den</item>
-        <item>Jednou týdně</item>
-        <item>Každé dva týdny</item>
-    </string-array>
-
+	<!-- pref_entries_check_pairs_interval -->
+	<string name="pref_entries_check_pairs_interval_0">Každou hodinu</string>
+	<string name="pref_entries_check_pairs_interval_1">Dvakrát denně</string>
+	<string name="pref_entries_check_pairs_interval_2">Jednou denně</string>
+	<string name="pref_entries_check_pairs_interval_3">Každý druhý den</string>
+	<string name="pref_entries_check_pairs_interval_4">Jednou týdně</string>
+	<string name="pref_entries_check_pairs_interval_5">Každé dva týdny</string>
     <string name="pref_type_title">Typ upozornění</string>
-
-    <string-array name="pref_type_entries">
-        <item>Dosažení ceny</item>
-        <item>Změna ceny</item>
-    </string-array>
-
+	<!-- pref_type_entries -->
+	<string name="pref_type_entries_0">Dosažení ceny</string>
+	<string name="pref_type_entries_1">Změna ceny</string>
     <string name="pref_exchange_title">Burza</string>
     <string name="pref_pair_title">Pár</string>
     <string name="action_send_now">Uložit</string>
@@ -92,7 +78,7 @@
     <string name="couldnt_retrieve_pairs">Nelze získat páry pro %1$s.</string>
     <string name="couldnt_retrieve_last_value">Nelze získat poslední hodnotu pro %1$s pro pár %2$s.</string>
     <string name="failed_create_alarm">Chyba při vytváření upozornění.</string>
-    <!-- Missing translation <string name="failed_save_alarm">Failed to save alarm.</string>
+    <string name="failed_save_alarm">Nepodařilo se uložit upozornění.</string>
     <string name="upper_must_larger_lower">Upper limit must be larger than lower limit.</string>
     <string name="frame_must_longer_interval">Time frame must be longer than update interval.</string>-->
     <string name="check_connection">Ověřte prosím své internetové připojení.</string>
@@ -101,7 +87,6 @@
     <string name="silent">Tichý</string>
     <string name="unknown_ringtone">Neznámý vyzvánění</string>
     <string name="pref_title_language">Jazyk</string>
-    
     <!-- Review everything below please -->
     <string name="price_change_firing_reason">změnilo %3$s\nběhem %5$s.</string>
     <string name="seconds_abbreviation">%1$d s</string>
@@ -110,18 +95,5 @@
     <string name="hours_abbreviation">%1$d h</string>
     <string name="days_abbreviation">%1$d d</string>
     <string name="days_abrv_input_as_string">%1$s d</string>
-<string name="app_name">Boilr</string>
-    <string name="release_notes">Poznámky k verzi</string>
-    <string name="ok">OK</string>
-    <string name="pref_default_language">Česky</string>
-    <string name="pref_default_languange_code">cs</string>
-    
-    <!-- Review please --><string name="limit_explanation">%1$s = %2$s (základní hodnoty, z doby před %3$s) %4$s %5$s (změna)</string>
-<string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a> (BTC)</string>
-    <string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
-    <string name="pref_default_theme">tmavé</string>
-    <string name="pref_default_check_pairs_interval"/>
-    <string name="pref_type_default"/>
-    <string name="pref_exchange_default"/>
-    <string name="failed_save_alarm">Nepodařilo se uložit upozornění.</string>
-    </resources>
+    <string name="limit_explanation">%1$s = %2$s (základní hodnoty, z doby před %3$s) %4$s %5$s (změna)</string>
+</resources>

@@ -8,6 +8,8 @@
 	<string name="boilr_settings">Boilr Einstellungen</string>
 	<string name="about_title">Info zu Boilr</string>
 	<string name="release_notes">Changelog</string>
+	<string name="ok">OK</string>
+	<string name="cancel">Abbrechen</string>
 	<string name="about_version">Version: </string>
 	<string name="about_website">Webseite: </string>
 	<string name="authors">Autoren</string>
@@ -25,7 +27,6 @@
 	<string name="pref_title_default_alert_sound">Standardsound</string>
 	<string name="pref_title_sound_volume">Lautstärke</string>
 	<string name="pref_summary_sound_volume">Boiler nutzt die Gerätlautstärke für den ausgewählten Benachrichtigungstyp. Die meisten Geräte behalten, selbst bei Stummschaltung, die Lautstärke für Alarme bei.</string>
-	<string name="cancel">Abbrechen</string>
 	<string name="system_volumes">Gerätlautstärke</string>
 	<string name="pref_title_vibrate_default">Vibrieren</string>
 	<string name="pref_title_appearance">Erscheinung</string>

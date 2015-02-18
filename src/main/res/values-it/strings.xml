@@ -9,6 +9,8 @@
 	<string name="boilr_settings">Boilr impostazioni</string>
 	<string name="about_title">Circa Boilr</string>
 	<string name="release_notes">Modifiche tra versioni</string>
+	<string name="ok">OK</string>
+	<string name="cancel">Cancellare</string>
 	<string name="about_version">Versione: </string>
 	<string name="about_website">Website: </string>
 	<string name="authors">Autori</string>
@@ -26,7 +28,6 @@
 	<string name="pref_title_default_alert_sound">Suoni default</string>
 	<string name="pref_title_sound_volume">Volume del suono</string>
 	<!-- Missing translation<string name="pref_summary_sound_volume"></string>-->
-	<string name="cancel">Cancellare</string>
 	<string name="system_volumes">volumi di sistema</string>
 	<string name="pref_title_vibrate_default">Vibrazione default</string>
 	<string name="pref_title_appearance">Aspetto</string>
