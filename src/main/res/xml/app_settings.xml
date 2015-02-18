@@ -49,7 +49,7 @@
 		<SwitchPreference
 		    android:key="pref_key_mobile_data"
 			android:title="@string/pref_title_mobile_data"
-			android:defaultValue="false" />
+			android:defaultValue="true" />
 		<CheckBoxPreference
 		    android:key="pref_key_show_internet_warning"
 			android:title="@string/pref_title_show_internet_warning"

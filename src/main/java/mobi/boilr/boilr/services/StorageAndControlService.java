@@ -43,7 +43,7 @@ public class StorageAndControlService extends Service {
 
 	private static boolean wifiConnected = false;
 	private static boolean mobileConnected = false;
-	public static boolean allowMobileData = false;
+	public static boolean allowMobileData = true;
 	private Map<Integer, Alarm> alarmsMap;
 	private Map<String, Exchange> exchangesMap;
 	private List<Alarm> scheduledOffedAlarms = new ArrayList<Alarm>();
@@ -177,7 +177,7 @@ public class StorageAndControlService extends Service {
 		registerReceiver(networkReceiver, filter);
 		updateConnectedFlags();
 		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-		allowMobileData = sharedPrefs.getBoolean(SettingsFragment.PREF_KEY_MOBILE_DATA, false);
+		allowMobileData = sharedPrefs.getBoolean(SettingsFragment.PREF_KEY_MOBILE_DATA, true);
 		alarmsMap = new HashMap<Integer, Alarm>();
 		exchangesMap = new HashMap<String, Exchange>();
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);

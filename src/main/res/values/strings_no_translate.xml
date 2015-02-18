@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Boilr</string>
+	<string name="authors_link">&lt;a href="https://github.com/andrefbsantos/boilr/blob/master/README.md#license-and-authorship">%1$s&lt;/a></string>
+	<string name="boilr_website">http://boilr.mobi</string>
+	<string name="github_issues"><a href="https://github.com/andrefbsantos/boilr/issues">GitHub issues</a></string>
+	<string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a> (BTC)</string>
+	<string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
+	<string name="gplv3">GNU GPLv3+</string>
+	<string name="lib_list"><a href="https://github.com/andrefbsantos/libdynticker">libdynticker</a> <a href="https://github.com/andrefbsantos/libpricealarm">libpricealarm</a> <a href="https://github.com/gabrielemariotti/changeloglib">changeloglib</a></string>
+	<string-array name="pref_values_alert_type">
+		<item>4</item>
+		<item>2</item>
+		<item>1</item>
+	</string-array>
+	<string name="pref_default_alert_type">4</string>
+	<string-array name="pref_values_theme">
+		<item>dark</item>
+		<item>light</item>
+	</string-array>
+	<string name="pref_default_theme">dark</string>
+		<string-array name="pref_values_check_pairs_interval">
+		<item>3600000</item>
+		<item>43200000</item>
+		<item>86400000</item> <!-- 24 hours * 60 minutes * 60 seconds * 1000 milis -->
+		<item>172800000</item>
+		<item>604800000</item>
+		<item>1209600000</item>
+	</string-array>
+	<string name="pref_default_check_pairs_interval">604800000</string>
+		<string-array name="pref_type_entries_values">
+		<item>price_hit</item>
+		<item>price_change</item>
+	</string-array>
+	<string name="pref_type_default">price_hit</string>
+		<string-array name="pref_exchange_entries">
+		<!--<item>1Bse</item>-->
+		<item>796 Exchange</item>
+		<item>Allcoin</item>
+		<item>ANX</item>
+		<item>Atomic Trade</item>
+		<item>BitBay</item>
+		<item>Bitcoin.de</item>
+		<item>Bitcurex</item>
+		<item>Bitfinex</item>
+		<item>BitMarket.pl</item>
+		<item>Bitspark</item>
+		<item>Bitstamp</item>
+		<item>Bittrex</item>
+		<item>BleuTrade</item>
+		<item>BTC100</item>
+		<item>BTC38</item>
+		<item>BTC China</item>
+		<item>BTC Markets</item>
+		<item>BTC-E</item>
+		<item>BtcTrade</item>
+		<item>BTER</item>
+		<item>BullionVault</item>
+		<item>CampBX</item>
+		<item>Cavirtex</item>
+		<item>C-CEX</item>
+		<item>CCEDK</item>
+		<item>CEX.IO</item>
+		<item>CHBTC</item>
+		<item>Cryptonit</item>
+		<item>Cryptsy</item>
+		<item>Coinbase</item>
+		<item>CoinMkt</item>
+		<item>Coin-Swap</item>
+		<item>Coins-E</item>
+		<item>HitBTC</item>
+		<item>Huobi</item>
+		<item>itBit</item>
+		<item>Kraken</item>
+		<item>LakeBTC</item>
+		<item>LocalBitcoins</item>
+		<item>Melotic</item>
+		<item>Mulcoin</item>
+		<item>OKCoin</item>
+		<item>OneWorldCoin</item>
+		<item>Paymium</item>
+		<item>Poloniex</item>
+		<item>Vircurex</item>
+		<item>Yunbi</item>
+	</string-array>
+	<string-array name="pref_exchange_entries_values">
+		<!--<item>mobi.boilr.libdynticker.exchanges.OneBseExchange</item>-->
+		<item>mobi.boilr.libdynticker.exchanges.E796Exchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.AllcoinExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.ANXExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.AtomicTradeExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BitBayExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BitcoindeExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BitcurexExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BitfinexExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BitMarketPlExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BitsparkExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BitstampExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BittrexExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BleuTradeExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BTC100Exchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BTC38Exchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BTCChinaExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BTCMarketsExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BTCEExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BtcTradeExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BTERExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BullionVaultExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CampBXExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CavirtexExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CCEXExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CCEDKExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CEXIOExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.ChbtcExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CryptonitExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CryptsyExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CoinbaseExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CoinMktExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CoinswapExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CoinsEExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.HitBTCExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.HuobiExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.ItBitExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.KrakenExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.LakeBTCExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.LocalBitcoinsExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.MeloticExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.MulcoinExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.OKCoinExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.OneWorldCoinExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.PaymiumExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.PoloniexExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.VircurexExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.YunbiExchange</item>
+	</string-array>
+	<string name="pref_exchange_default">mobi.boilr.libdynticker.exchanges.E796Exchange</string>
+		<string-array name="pref_entries_language">
+		<item>English</item>
+		<item>Español</item>
+		<item>Čeština</item>
+		<item>Deutsch</item>
+		<item>Italiano</item>
+		<item>Polski</item>
+		<item>Português</item>
+		<item>中文</item>
+	</string-array>
+	<string-array name="pref_values_language">
+		<item>en</item>
+		<item>es</item>
+		<item>cs</item>
+		<item>de</item>
+		<item>it</item>
+		<item>pl</item>
+		<item>pt</item>
+		<item>zh</item>
+	</string-array>
+	<string name="pref_default_language">English</string>
+	<string name="pref_default_languange_code">en</string>
+		<string-array name="pref_entries_alert_type">
+		<item>@string/pref_entries_alert_type_0</item>
+		<item>@string/pref_entries_alert_type_1</item>
+		<item>@string/pref_entries_alert_type_2</item>
+	</string-array>
+	<string-array name="pref_entries_theme">
+		<item>@string/pref_entries_theme_0</item>
+		<item>@string/pref_entries_theme_1</item>
+	</string-array>
+	<string-array name="pref_entries_check_pairs_interval">
+		<item>@string/pref_entries_check_pairs_interval_0</item>
+		<item>@string/pref_entries_check_pairs_interval_1</item>
+		<item>@string/pref_entries_check_pairs_interval_2</item>
+		<item>@string/pref_entries_check_pairs_interval_3</item>
+		<item>@string/pref_entries_check_pairs_interval_4</item>
+		<item>@string/pref_entries_check_pairs_interval_5</item>
+	</string-array>
+	<string-array name="pref_type_entries">
+		<item>@string/pref_type_entries_0</item>
+		<item>@string/pref_type_entries_1</item>
+	</string-array>
+</resources>
