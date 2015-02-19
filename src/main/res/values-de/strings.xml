@@ -36,7 +36,7 @@
 	<string name="pref_entries_theme_1">Hell</string>
 	<string name="pref_title_network_usage">Netznutzung</string>
 	<string name="pref_title_mobile_data">Mobile Daten</string>
-	<string name="pref_title_show_internet_warning">Warnung bei fehlender Internetverbindung</string>
+	<string name="pref_title_show_internet_warning">Warnung bei fehlender Internetverbindung.</string>
 	<string name="pref_title_default_update_interval">Standardaktualisierung</string>
 	<!-- Review please, original has changed --><string name="pref_summary_default_update_interval">In Sekunden. Bestimmt wie oft ein Alarm seine Daten von der Börse erhält. Sie können einen anderen Aktualisierungsintervall für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
 	<string name="pref_title_default_time_frame">Standardzeitrahmen</string>

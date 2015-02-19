@@ -75,7 +75,7 @@
 	<string name="boilr_alarm">Boilr Alarm</string>
 	<string name="turn_off">Spegni</string>
 	<string name="keep_monitoring">monitoraggio</string>
-	<string name="no_internet">Boilr non è connesso</string>
+	<string name="no_internet">Boilr non è connesso.</string>
 	<string name="no_updates">Il tuo allarme non può essere aggiornato.</string>
 	<string name="couldnt_retrieve_pairs">Impossibile recuperare coppie %1$s.</string>
 	<string name="couldnt_retrieve_last_value">Impossibile recuperate l\'ultimo valore %1$s con coppie %2$s.</string>

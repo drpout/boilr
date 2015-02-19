@@ -5,8 +5,6 @@
     <string name="action_about">关于</string>
     <string name="alarm_settings">提醒设置</string>
     <string name="add_alarm">添加提醒</string>
-    <string name="on">开启</string>
-    <string name="off">关闭</string>
     <string name="boilr_settings">Boilr设置</string>
     <string name="about_title">关于Boilr</string>
     <string name="ok">完成</string>
@@ -43,7 +41,7 @@
     <!-- Review please --><string name="pref_title_default_update_interval">默认更新间隔</string>
     <!-- Review please, original has changed --><string name="pref_summary_default_update_interval">以秒为单位。设置触价提醒多久从交易所获取一次数据。您可以针对特定提醒单独设置此间隔。</string>
     <!-- Review please --><string name="pref_title_default_time_frame">提醒默认时间范围</string>
-    <!-- Review please, original has changed --><string name="pref_summary_default_time_frame">以分钟为单位。设置波动提醒的默认时间范围。您可以针对特定价格变动窗口设置此范围。</string>
+    <!-- Review please, original has changed --><string name="pref_summary_default_time_frame">以分钟为单位。设置波动提醒的默认时间范围。您可以针对特定价格变动窗口设置此范围	</string>
     <string name="pref_title_check_pairs_interval">新交易对检查间隔</string>
     <!-- pref_entries_check_pairs_interval -->
     <string name="pref_entries_check_pairs_interval_0">每小时</string>
@@ -76,8 +74,8 @@
     <string name="boilr_alarm">Boilr提醒</string>
     <string name="turn_off">关闭</string>
     <string name="keep_monitoring">保持监控</string>
-    <string name="no_internet">没有网络连接</string>
-    <string name="no_updates">无法获取最新数据</string>
+    <string name="no_internet">没有网络连接。</string>
+    <string name="no_updates">无法获取最新数据。</string>
     <string name="couldnt_retrieve_pairs">无法获取%1$s的交易对。</string>
     <string name="couldnt_retrieve_last_value">无法获取%1$s %2$s的最新价格。</string>
     <string name="failed_create_alarm">创建提醒失败。</string>

@@ -73,7 +73,7 @@
     <string name="boilr_alarm">Powiadomienie Boilr</string>
     <string name="turn_off">Wyłącz</string>
     <string name="keep_monitoring">Kontynuuj monitorowanie</string>
-    <string name="no_internet">Boilr nie może połączyć się z internetem</string>
+    <string name="no_internet">Boilr nie może połączyć się z internetem.</string>
     <string name="no_updates">Ustawienia powiadomień nie mogą być zaktualizowane.</string>
     <string name="couldnt_retrieve_pairs">Nie można pobrać par dla %1$s.</string>
     <string name="couldnt_retrieve_last_value">Nie można pobać ostatniej wartości %1$s dla pary %2$s.</string>
