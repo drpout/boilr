@@ -53,7 +53,7 @@
 	<string name="pref_entries_check_pairs_interval_5">Due volte al mese</string>
 	<string name="pref_type_title">Tipo di allarme</string>
 	<!-- pref_type_entries -->
-	<string name="pref_type_entries_0">Price hit</string>
+	<string name="pref_type_entries_0">Limite prezzo</string>
 	<string name="pref_type_entries_1">Cambio prezzo</string>
 	<string name="pref_exchange_title">cambio</string>
 	<string name="pref_pair_title">Coppia</string>
@@ -72,7 +72,7 @@
 	<string name="pref_title_last_value">Ultimo prezzo</string>
 	<!-- Review please --><string name="pref_summary_update_interval">In pochi secondi. Definisce la frequenza con cui l\'allarme riceve i dati dal cambio.</string>
 	<!-- Review please --><string name="pref_summary_time_frame">In pochi minuti. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa.</string>
-	<string name="boilr_alarm">Boilr Alarm</string>
+	<string name="boilr_alarm">Boilr Allarme</string>
 	<string name="turn_off">Spegni</string>
 	<string name="keep_monitoring">monitoraggio</string>
 	<string name="no_internet">Boilr non è connesso.</string>
