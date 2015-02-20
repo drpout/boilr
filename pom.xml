@@ -20,7 +20,7 @@
 		<!-- use UTF-8 for everything -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<jdk.version>1.6</jdk.version>
+		<jdk.version>7</jdk.version>
 		<libdynticker.version>0.5.0</libdynticker.version>
 		<libpricealarm.version>0.2.0</libpricealarm.version>
 		<android.maven.plugin.groupid>com.simpligility.maven.plugins</android.maven.plugin.groupid>
@@ -78,9 +78,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.google.android</groupId>
+			<groupId>android</groupId>
 			<artifactId>android</artifactId>
-			<version>4.1.1.4</version>
+			<version>5.0_r2</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -98,6 +98,12 @@
 			<artifactId>library</artifactId>
 			<version>1.5.2</version>
 			<type>aar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.cocosw</groupId>
+			<artifactId>undobar</artifactId>
+			<version>1.7.1</version>
+			<type>apklib</type>
 		</dependency>
 	</dependencies>
 

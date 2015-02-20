@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-
     <style name="BoilrTheme.Dark" parent="android:Theme.Holo">
         <item name="ic_action_about">@drawable/ic_action_about_dark</item>
         <item name="ic_action_overflow">@drawable/ic_action_overflow_dark</item>
@@ -13,9 +12,8 @@
         <item name="progress_circle_color_off">@color/ltgray</item>
         <item name="row_color">@drawable/dkrow</item>
         <item name="off_bar">@drawable/dkoffbar</item>
-		<item name="backrepeat">@drawable/backrepeat_dark</item>
+		<item name="android:windowBackground">@drawable/backrepeat_dark</item>
     </style>
-
     <style name="BoilrTheme.Light" parent="@android:Theme.Holo.Light">
         <item name="ic_action_about">@drawable/ic_action_about_light</item>
         <item name="ic_action_overflow">@drawable/ic_action_overflow_light</item>
@@ -28,6 +26,7 @@
         <item name="progress_circle_color_off">@color/dkgray</item>
         <item name="row_color">@drawable/ltrow</item>
         <item name="off_bar">@drawable/ltoffbar</item>
-        <item name="backrepeat">@drawable/backrepeat_light</item>
+        <item name="android:windowBackground">@drawable/backrepeat_light</item>
+        <item name="android:actionBarStyle">@android:style/Widget.Holo.Light.ActionBar</item>
     </style>
 </resources>
