@@ -8,6 +8,7 @@ import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.IconToast;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
@@ -29,7 +30,6 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.RingtonePreference;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 	protected boolean defaultVibrateDef = true;
@@ -227,14 +227,14 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 		} catch(UpperLimitSmallerOrEqualLowerLimitException e) {
 			failMsg += " " + enclosingActivity.getString(R.string.upper_must_larger_lower);
 			Log.e(failMsg, e);
-			Toast.makeText(enclosingActivity, failMsg, Toast.LENGTH_LONG).show();
+			IconToast.warning(enclosingActivity, failMsg);
 		} catch(TimeFrameSmallerOrEqualUpdateIntervalException e) {
 			failMsg += " " + enclosingActivity.getString(R.string.frame_must_longer_interval);
 			Log.e(failMsg, e);
-			Toast.makeText(enclosingActivity, failMsg, Toast.LENGTH_LONG).show();
+			IconToast.warning(enclosingActivity, failMsg);
 		} catch(Exception e) {
 			Log.e(failMsg, e);
-			Toast.makeText(enclosingActivity, failMsg + " " + e.getMessage(), Toast.LENGTH_LONG).show();
+			IconToast.warning(enclosingActivity, failMsg + " " + e.getMessage());
 		}
 	}
 

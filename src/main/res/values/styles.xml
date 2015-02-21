@@ -8,12 +8,15 @@
         <item name="ic_action_settings">@drawable/ic_action_settings_dark</item>
         <item name="ic_action_remove">@drawable/ic_action_remove_dark</item>
         <item name="ic_action_new">@drawable/ic_action_new_dark</item>
+        <item name="ic_action_warning">@drawable/ic_action_warning_dark</item>
         <item name="progress_circle_color_on">@color/highlightblue</item>
         <item name="progress_circle_color_off">@color/ltgray</item>
         <item name="row_color">@drawable/dkrow</item>
         <item name="off_bar">@drawable/dkoffbar</item>
 		<item name="android:windowBackground">@drawable/backrepeat_dark</item>
 		<item name="undoBarStyle">@style/DarkUndoBarStyle</item>
+		<item name="toastContainerStyle">@style/DarkToastContainerStyle</item>
+        <item name="toastTextStyle">@style/DarkToastTextStyle</item>
     </style>
     <style name="BoilrTheme.Light" parent="@android:Theme.Holo.Light">
         <item name="ic_action_about">@drawable/ic_action_about_light</item>
@@ -23,6 +26,7 @@
         <item name="ic_action_settings">@drawable/ic_action_settings_light</item>
         <item name="ic_action_remove">@drawable/ic_action_remove_light</item>
         <item name="ic_action_new">@drawable/ic_action_new_light</item>
+        <item name="ic_action_warning">@drawable/ic_action_warning_light</item>
         <item name="progress_circle_color_on">@color/highlightblue</item>
         <item name="progress_circle_color_off">@color/dkgray</item>
         <item name="row_color">@drawable/ltrow</item>
@@ -30,6 +34,8 @@
         <item name="android:windowBackground">@drawable/backrepeat_light</item>
         <item name="android:actionBarStyle">@android:style/Widget.Holo.Light.ActionBar</item>
         <item name="undoBarStyle">@style/LightUndoBarStyle</item>
+        <item name="toastContainerStyle">@style/LightToastContainerStyle</item>
+        <item name="toastTextStyle">@style/LightToastTextStyle</item>
     </style>
     
     <style name="BoilrUndoBarStyle" parent="UndoBarClassicStyle">
@@ -66,5 +72,21 @@
     
 	<style name="LightUndoBarDivider" parent="UndoBarDividerClassic">
         <item name="android:background">@drawable/undobar_divider_light</item>
+    </style>
+    
+	<style name="LightToastContainerStyle">
+        <item name="android:background">@drawable/toast_background_light</item>
+    </style>
+    
+	<style name="LightToastTextStyle">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+    
+	<style name="DarkToastContainerStyle">
+        <item name="android:background">@drawable/toast_background_dark</item>
+    </style>
+    
+	<style name="DarkToastTextStyle">
+        <item name="android:textColor">@android:color/white</item>
     </style>
 </resources>

@@ -2,6 +2,7 @@ package mobi.boilr.boilr.views.fragments;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.IconToast;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
 import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
@@ -9,7 +10,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
-import android.widget.Toast;
 
 public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 	private PriceHitAlarm priceHitAlarm;
@@ -49,7 +49,7 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 	public static void handleLimitsExceptions(UpperLimitSmallerOrEqualLowerLimitException e, Context context) {
 		String msg = context.getString(R.string.failed_save_alarm) + " " + context.getString(R.string.upper_must_larger_lower);
 		Log.e(msg, e);
-		Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+		IconToast.warning(context, msg);
 		/*
 		 * The following does not work. We would have to use a SharedPreferences
 		 * instead of Preference: http://stackoverflow.com/a/20598084

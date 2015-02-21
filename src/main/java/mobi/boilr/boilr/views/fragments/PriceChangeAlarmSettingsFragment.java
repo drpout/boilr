@@ -2,12 +2,12 @@ package mobi.boilr.boilr.views.fragments;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.IconToast;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libpricealarm.RollingPriceChangeAlarm;
 import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.widget.Toast;
 
 public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 	private RollingPriceChangeAlarm priceChangeAlarm;
@@ -43,7 +43,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 					String msg = enclosingActivity.getString(R.string.failed_save_alarm) + " "
 						+ enclosingActivity.getString(R.string.frame_must_longer_interval);
 					Log.e(msg, e);
-					Toast.makeText(enclosingActivity, msg, Toast.LENGTH_LONG).show();
+					IconToast.warning(enclosingActivity, msg);
 				}
 			} else {
 				return super.onPreferenceChange(preference, newValue);

@@ -6,6 +6,7 @@ import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.listeners.SwipeAndMoveTouchListener.Reference;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.IconToast;
 import mobi.boilr.boilr.views.fragments.PriceHitAlarmSettingsFragment;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceChangeAlarm;
@@ -223,11 +224,11 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 			Conversions.formatMaxDecimalPlaces(changeAlarm.getChange());
 		String limit = Conversions.formatMaxDecimalPlaces(isUpperLimit ? changeAlarm.getUpperLimit() : changeAlarm.getLowerLimit());
 		String op = isUpperLimit ? "+" : "-";
-		Toast.makeText(getContext(), getContext().getString(R.string.limit_explanation, 
+		IconToast.info(getContext(), getContext().getString(R.string.limit_explanation, 
 				limit,
 				Conversions.formatMaxDecimalPlaces(changeAlarm.getBaseValue()),
 				Conversions.formatMilis(changeAlarm.getTimeFrame(), getContext()),
 				op,
-				change), Toast.LENGTH_LONG).show();
+				change));
 	}
 }

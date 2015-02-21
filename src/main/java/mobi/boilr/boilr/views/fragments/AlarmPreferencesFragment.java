@@ -8,6 +8,7 @@ import java.util.List;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.IconToast;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
@@ -25,7 +26,6 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
-import android.widget.Toast;
 
 public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected static final String PREF_KEY_GENERIC = "pref_key_generic";
@@ -130,7 +130,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 
 	private void warnFailedRetrievePairs(String exchangeName, Exception e) {
 		String message = enclosingActivity.getString(R.string.couldnt_retrieve_pairs, exchangeName);
-		Toast.makeText(enclosingActivity, message, Toast.LENGTH_LONG).show();
+		IconToast.warning(enclosingActivity, message);
 		Log.e(message, e);
 	}
 
@@ -182,7 +182,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 
 	private void warnFailedRetrieveLastValue(Exception e) {
 		String message = enclosingActivity.getString(R.string.couldnt_retrieve_last_value, exchangeListPref.getEntry(), pairs.get(pairIndex).toString());
-		Toast.makeText(enclosingActivity, message, Toast.LENGTH_LONG).show();
+		IconToast.warning(enclosingActivity, message);
 		Log.e(message, e);
 		updateDependentOnPair();
 	}

@@ -65,10 +65,10 @@ public final class Notifications {
 		String firingReasonTitle = getFiringReasonTitle(alarm);
 		String firingReasonBody = getFiringReasonBody(context, alarm);
 		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReasonTitle, firingReasonBody);
-		notification.setPriority(Notification.PRIORITY_DEFAULT);
+		//notification.setPriority(Notification.PRIORITY_DEFAULT); API 16 only
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE); 
 		nm.cancel(alarm.hashCode());
-		nm.notify(alarm.hashCode(), notification.build());
+		nm.notify(alarm.hashCode(), notification.getNotification());
 	} 
 
 	public static void showAlarmNotification(Context context, Alarm alarm) {
@@ -78,7 +78,7 @@ public final class Notifications {
 		String firingReasonTitle = getFiringReasonTitle(alarm);
 		String firingReasonBody = getFiringReasonBody(context, alarm);
 		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReasonTitle, firingReasonBody);
-		notification.setPriority(Notification.PRIORITY_MAX);
+		//notification.setPriority(Notification.PRIORITY_MAX); API 16 only
 
 		// Setup fullscreen intent
 		Intent fullScreenIntent = new Intent(context, NotificationActivity.class);
@@ -91,7 +91,7 @@ public final class Notifications {
 
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(alarm.hashCode());
-		nm.notify(alarm.hashCode(), notification.build());
+		nm.notify(alarm.hashCode(), notification.getNotification());
 	}
 
 	private static boolean isDirectionUp(Alarm alarm) {
@@ -141,15 +141,15 @@ public final class Notifications {
 				noInternetNotification = new Notification.Builder(context)
 						.setContentTitle(context.getString(R.string.no_internet))
 						.setContentText(context.getString(R.string.no_updates))
-						.setSmallIcon(R.drawable.ic_action_warning)
+						.setSmallIcon(R.drawable.ic_action_warning_dark)
 						.setOngoing(false)
 						.setAutoCancel(true)
-						.setPriority(Notification.PRIORITY_DEFAULT)
+						//.setPriority(Notification.PRIORITY_DEFAULT) API 16 only
 						.setWhen(0)
 						.setContentIntent(PendingIntent.getActivity(context, noInternetNotificationID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 			}
 			NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-			nm.notify(noInternetNotificationID, noInternetNotification.build());
+			nm.notify(noInternetNotificationID, noInternetNotification.getNotification());
 		}
 	}
 

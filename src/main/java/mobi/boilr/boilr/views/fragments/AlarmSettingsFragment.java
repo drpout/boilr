@@ -8,6 +8,7 @@ import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.IconToast;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
@@ -22,7 +23,6 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.RingtonePreference;
-import android.widget.Toast;
 
 public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 	protected Alarm alarm;
@@ -125,7 +125,7 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 					String msg = enclosingActivity.getString(R.string.failed_save_alarm) + " "
 						+ enclosingActivity.getString(R.string.frame_must_longer_interval);
 					Log.e(msg, e);
-					Toast.makeText(enclosingActivity, msg, Toast.LENGTH_LONG).show();
+					IconToast.warning(enclosingActivity, msg);
 				}
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_TYPE)) {
 				ListPreference alertTypePref = (ListPreference) preference;

@@ -7,10 +7,13 @@
     <attr name="ic_action_settings" format="reference" />
     <attr name="ic_action_remove" format="reference" />
     <attr name="ic_action_new" format="reference" />
+    <attr name="ic_action_warning" format="reference" />
     <attr name="row_color" format="reference" />
     <attr name="progress_circle_color_on" format="reference" />
     <attr name="progress_circle_color_off" format="reference" />
     <attr name="off_bar" format="reference" />
+    <attr name="toastContainerStyle" format="reference" />
+    <attr name="toastTextStyle" format="reference" />
 
     <declare-styleable name="ProgressCircle">
         <attr name="max" format="integer" />
