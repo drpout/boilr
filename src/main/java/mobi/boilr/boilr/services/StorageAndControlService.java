@@ -185,10 +185,9 @@ public class StorageAndControlService extends Service {
 			db = new DBManager(this);
 			nextAlarmID = db.getMaxID();
 			alarmsMap = db.getAlarms();
-			if(nextAlarmID == 0) {
+			if(alarmsMap.isEmpty()) {
 				// new PopupalteDBTask().execute();
-			}
-			if(nextAlarmID > 0) {
+			} else {
 				// Set Exchange and start alarm
 				for (Alarm alarm : alarmsMap.values()) {
 					alarm.setExchange(getExchange(alarm.getExchangeCode()));
