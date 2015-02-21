@@ -7,13 +7,17 @@
 		<changelogtext>+ Added arrow to the alarm triggered notifications showing which direction the price took.</changelogtext>
 		<changelogtext>+ Added app settings to control volume and dismiss no internet notification.</changelogtext>
 		<changelogtext>+ In alarms' list, clicking on alarm's limits or change value opens a dialog for quick editing.</changelogtext>
-		<changelogtext>* Icon and alarms' list were completely redesigned.</changelogtext>
+		<changelogtext>+ Alarms can now be reordered.</changelogtext>
+		<changelogtext>+ Added undo toast when alarm is deleted.</changelogtext>
+		<changelogtext>+ Added pinstripe background.</changelogtext>
+		<changelogtext>* Icon and alarms' list completely redesigned.</changelogtext>
 		<changelogtext>* Price Change Alarm now uses a rolling time frame.</changelogtext>
 		<changelogtext>* Offed alarms are now continuously updated while alarm list is visible.</changelogtext>
 		<changelogtext>* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange and OKCoin pairs.</changelogtext>
 		<changelogtext>* Fixed bugs in Bitcoin.de, CCEX and Kraken exchanges' interaction.</changelogtext>
 		<changelogtext>* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.</changelogtext>
 		<changelogtext>* Fixed exchange data fetching on low quality internet connections.</changelogtext>
+		<changelogtext>- Removed Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.</changelogtext>
 	</changelogversion>
 	
 	<changelogversion versionName="0.4.0" changeDate="17 Oct 2014">

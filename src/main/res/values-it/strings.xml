@@ -98,4 +98,6 @@
 	<string name="days_abbreviation">%1$d g</string>
 	<string name="days_abrv_input_as_string">%1$s g</string>
 	<string name="limit_explanation">%1$s = %2$s (valore base, da %3$s fa) %4$s %5$s (cambio)</string>
+	<string name="alarm_deleted">Allarme eliminato</string>
+	<string name="undo">Annulla</string>
 </resources>

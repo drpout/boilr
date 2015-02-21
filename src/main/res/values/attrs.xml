@@ -11,7 +11,6 @@
     <attr name="progress_circle_color_on" format="reference" />
     <attr name="progress_circle_color_off" format="reference" />
     <attr name="off_bar" format="reference" />
-    <attr name="backrepeat" format="reference" />
 
     <declare-styleable name="ProgressCircle">
         <attr name="max" format="integer" />

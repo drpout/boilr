@@ -7,7 +7,7 @@
 	<string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a> (BTC)</string>
 	<string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
 	<string name="gplv3">GNU GPLv3+</string>
-	<string name="lib_list"><a href="https://github.com/andrefbsantos/libdynticker">libdynticker</a> <a href="https://github.com/andrefbsantos/libpricealarm">libpricealarm</a> <a href="https://github.com/gabrielemariotti/changeloglib">changeloglib</a></string>
+	<string name="lib_list"><a href="https://github.com/andrefbsantos/libdynticker">libdynticker</a> <a href="https://github.com/andrefbsantos/libpricealarm">libpricealarm</a> <a href="https://github.com/gabrielemariotti/changeloglib">changeloglib</a> <a href="https://github.com/soarcn/UndoBar">UndoBar</a></string>
 	<string-array name="pref_values_alert_type">
 		<item>4</item>
 		<item>2</item>

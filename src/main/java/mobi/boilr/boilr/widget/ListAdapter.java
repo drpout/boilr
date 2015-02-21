@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import mobi.boilr.libpricealarm.Alarm;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.BaseAdapter;
@@ -73,12 +72,6 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 			}
 		}
 
-		public void addWithFilter(P item){
-			if(belongs2Filter(item.toString())){
-				mList.add((T)item);
-			}
-		}
-
 		public boolean belongs2Filter(String filterable){
 			if( currentConstraint != null ){
 				int filtersCount = filterStrings.length;
@@ -113,17 +106,21 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 	}
 
 	@Override
-	public T getItem(int arg0) {
-		return mList.get(arg0);
+	public T getItem(int pos) {
+		return mList.get(pos);
 	}
 
-	public int indexOf(Alarm arg0) {
-		return mList.indexOf(arg0);
+	public int originalIndexOf(T obj) {
+		if(mOriginalList != null) {
+			return mOriginalList.indexOf(obj);
+		} else {
+			return -1;
+		}
 	}
 
 	@Override
-	public long getItemId(int arg0) {
-		return arg0;
+	public long getItemId(int pos) {
+		return pos;
 	}
 
 	@Override
@@ -138,12 +135,26 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 		return mInflater;
 	}
 
-	public void add(T pair) {
+	public void add(T obj) {
 		synchronized (mLock) {
 			if(mOriginalList != null) {
-				mOriginalList.add(pair);
-			} 
-			mFilter.addWithFilter(pair);
+				mOriginalList.add(obj);
+			}
+			if(mFilter.belongs2Filter(obj.toString())) {
+				mList.add(obj);
+			}
+		}
+		notifyDataSetChanged();
+	}
+
+	public void add(T obj, int filteredPos, int originalPos) {
+		synchronized(mLock) {
+			if(mOriginalList != null) {
+				mOriginalList.add(originalPos, obj);
+			}
+			if(mFilter.belongs2Filter(obj.toString())) {
+				mList.add(filteredPos, obj);
+			}
 		}
 		notifyDataSetChanged();
 	}
@@ -172,16 +183,6 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 		notifyDataSetChanged();
 	}
 
-	public void remove(int position) {
-		synchronized (mLock) {
-			if(mOriginalList != null) {
-				mOriginalList.remove(position);
-			} 
-			mList.remove(position);
-		}
-		notifyDataSetChanged();
-	}
-
 	public void clear() {
 		synchronized (mLock) {
 			if(mOriginalList != null) {
@@ -196,15 +197,28 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 		return mContext;
 	}
 
-	public void moveTo(T t1, T t2) {
-		int t1Pos = mList.indexOf(t1);
-		int t2Pos = mList.indexOf(t2);
-		if(t1Pos < t2Pos) {
-			mList.add(t2Pos + 1, t1);
-			mList.remove(t1Pos);
-		} else {
-			mList.add(t2Pos, t1);
-			mList.remove(t1Pos + 1);
+	public void moveTo(T obj1, T obj2) {
+		synchronized(mLock) {
+			int pos1 = mList.indexOf(obj1);
+			int pos2 = mList.indexOf(obj2);
+			if(pos1 < pos2) {
+				mList.add(pos2 + 1, obj1);
+				mList.remove(pos1);
+			} else {
+				mList.add(pos2, obj1);
+				mList.remove(pos1 + 1);
+			}
+			if(mOriginalList != null) {
+				pos1 = mOriginalList.indexOf(obj1);
+				pos2 = mOriginalList.indexOf(obj2);
+				if(pos1 < pos2) {
+					mOriginalList.add(pos2 + 1, obj1);
+					mOriginalList.remove(pos1);
+				} else {
+					mOriginalList.add(pos2, obj1);
+					mOriginalList.remove(pos1 + 1);
+				}
+			}
 		}
 		notifyDataSetChanged();
 	}

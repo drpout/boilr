@@ -13,6 +13,7 @@
         <item name="row_color">@drawable/dkrow</item>
         <item name="off_bar">@drawable/dkoffbar</item>
 		<item name="android:windowBackground">@drawable/backrepeat_dark</item>
+		<item name="undoBarStyle">@style/DarkUndoBarStyle</item>
     </style>
     <style name="BoilrTheme.Light" parent="@android:Theme.Holo.Light">
         <item name="ic_action_about">@drawable/ic_action_about_light</item>
@@ -28,5 +29,42 @@
         <item name="off_bar">@drawable/ltoffbar</item>
         <item name="android:windowBackground">@drawable/backrepeat_light</item>
         <item name="android:actionBarStyle">@android:style/Widget.Holo.Light.ActionBar</item>
+        <item name="undoBarStyle">@style/LightUndoBarStyle</item>
+    </style>
+    
+    <style name="BoilrUndoBarStyle" parent="UndoBarClassicStyle">
+        <item name="inAnimation">@anim/undobar_material_in_anim</item>
+        <item name="outAnimation">@anim/undobar_material_out_anim</item>
+    </style>
+    
+    <style name="DarkUndoBarStyle" parent="BoilrUndoBarStyle">
+        <item name="containerStyle">@style/DarkUndoBarContainer</item>
+    </style>
+    
+	<style name="DarkUndoBarContainer" parent="UndoBarClassic">
+        <item name="android:background">@drawable/toast_background_dark</item>
+    </style>
+    
+	<style name="LightUndoBarStyle" parent="BoilrUndoBarStyle">
+        <item name="containerStyle">@style/LightUndoBarContainer</item>
+        <item name="messageStyle">@style/LightUndoBarMessage</item>
+        <item name="buttonStyle">@style/LightUndoBarButton</item>
+        <item name="dividerStyle">@style/LightUndoBarDivider</item>
+    </style>
+    
+	<style name="LightUndoBarContainer" parent="UndoBarClassic">
+        <item name="android:background">@drawable/toast_background_light</item>
+    </style>
+    
+	<style name="LightUndoBarMessage" parent="UndoBarMessageClassic">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+    
+	<style name="LightUndoBarButton" parent="UndoBarButtonClassic">
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+    
+	<style name="LightUndoBarDivider" parent="UndoBarDividerClassic">
+        <item name="android:background">@drawable/undobar_divider_light</item>
     </style>
 </resources>

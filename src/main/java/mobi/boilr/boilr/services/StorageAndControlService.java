@@ -47,7 +47,7 @@ public class StorageAndControlService extends Service {
 	private Map<Integer, Alarm> alarmsMap;
 	private Map<String, Exchange> exchangesMap;
 	private List<Alarm> scheduledOffedAlarms = new ArrayList<Alarm>();
-	private int prevAlarmID = 0;
+	private int nextAlarmID = 0;
 	private AlarmManager alarmManager;
 	private DBManager db;
 	private SharedPreferences sharedPrefs;
@@ -183,12 +183,12 @@ public class StorageAndControlService extends Service {
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 		try {
 			db = new DBManager(this);
-			prevAlarmID = db.getNextID();
+			nextAlarmID = db.getMaxID();
 			alarmsMap = db.getAlarms();
-			if(prevAlarmID == 0) {
+			if(nextAlarmID == 0) {
 				// new PopupalteDBTask().execute();
 			}
-			if(prevAlarmID > 0) {
+			if(nextAlarmID > 0) {
 				// Set Exchange and start alarm
 				for (Alarm alarm : alarmsMap.values()) {
 					alarm.setExchange(getExchange(alarm.getExchangeCode()));
@@ -263,7 +263,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	public int generateAlarmID() {
-		return ++prevAlarmID;
+		return nextAlarmID++;
 	}
 
 	public void scheduleOffedAlarms() {
@@ -322,7 +322,6 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void addAlarm(Alarm alarm) throws IOException {
-		alarm.setPosition(prevAlarmID);
 		alarmsMap.put(alarm.getId(), alarm);
 		db.storeAlarm(alarm);
 		addToAlarmManager(alarm, 0);
@@ -334,6 +333,10 @@ public class StorageAndControlService extends Service {
 		a1.setPosition(pos2);
 		replaceAlarmDB(a1);
 		replaceAlarmDB(a2);
+	}
+
+	public void deleteAlarm(int alarmID) {
+		deleteAlarm(alarmsMap.get(alarmID));
 	}
 
 	public void deleteAlarm(Alarm alarm) {

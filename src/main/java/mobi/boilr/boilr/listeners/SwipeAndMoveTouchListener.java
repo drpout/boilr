@@ -6,13 +6,18 @@ import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
 import android.content.ClipData;
+import android.os.Bundle;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
 import android.view.View.OnTouchListener;
 import android.view.ViewConfiguration;
 import android.widget.GridView;
+
+import com.cocosw.undobar.UndoBarController.AdvancedUndoListener;
+import com.cocosw.undobar.UndoBarController.UndoBar;
 
 public class SwipeAndMoveTouchListener implements OnTouchListener {
 
@@ -35,7 +40,6 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 	private class LongClickTask implements Runnable {
 		private View view;
 
-
 		@Override
 		public void run() {
 			 view.post(new Runnable() {
@@ -55,6 +59,41 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 			this.view = view;
 		}
 	}
+	
+	private class UndoDeleteListener implements AdvancedUndoListener {
+		@Override
+		public void onUndo(Parcelable token) {
+			if(mActivity.ismBound()) {
+				Bundle b = (Bundle) token;
+				int alarmID = b.getInt("alarmID");
+				int filteredPos = b.getInt("filteredPos");
+				int originalPos = b.getInt("originalPos");
+				Alarm alarm = mActivity.getStorageAndControlService().getAlarm(alarmID);
+				AlarmListAdapter adapter = mActivity.getAdapter();
+				adapter.add(alarm, filteredPos, originalPos);
+			} else {
+				Log.e(mActivity.getString(R.string.not_bound, "SwipeAndMoveTouchListener"));
+			}
+		}
+
+		@Override
+		public void onHide(Parcelable token) {
+			Bundle b = (Bundle) token;
+			int alarmID = b.getInt("alarmID");
+			if(mActivity.ismBound()) {
+				mActivity.getStorageAndControlService().deleteAlarm(alarmID);
+			} else {
+				Log.e(mActivity.getString(R.string.not_bound, "SwipeAndMoveTouchListener"));
+			}
+		}
+
+		@Override
+		public void onClear(Parcelable[] tokens) {
+			for(Parcelable p : tokens) {
+				onHide(p);
+			}
+		}
+	}
 
 	private AlarmListActivity mActivity;
 	private static final double REMOVE_THRESHOLD = 0.5;
@@ -68,10 +107,13 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 	private GridView mView;
 	private Handler mHandler = new Handler();
 	private final LongClickTask mLongClickTask = new LongClickTask();
+	private final UndoDeleteListener mUndoListener = new UndoDeleteListener();
+	private final UndoBar mUndoBar;
 
-	public SwipeAndMoveTouchListener(AlarmListActivity ctx) {
-		mActivity = ctx;
-		mView = ctx.getGridView();
+	public SwipeAndMoveTouchListener(AlarmListActivity listActivity) {
+		mActivity = listActivity;
+		mView = listActivity.getGridView();
+		mUndoBar = new UndoBar(listActivity).listener(mUndoListener);
 	}
 
 	@Override
@@ -91,7 +133,7 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 
 		if(mSwipeSlop < 0) {
 			mSwipeSlop = ViewConfiguration.get(mActivity).getScaledTouchSlop();
-			mSwipeSlopX = mSwipeSlop * 3;
+			mSwipeSlopX = mSwipeSlop * 5;
 		}
 
 		switch(event.getAction()) {
@@ -154,15 +196,15 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 				final boolean remove = deltaXAbs > childView.getWidth() * REMOVE_THRESHOLD;
 				mView.setEnabled(false);
 				if(remove) {
-					// remove view
 					AlarmListAdapter adapter = mActivity.getAdapter();
 					Alarm alarm = adapter.getItem(mPointToPosition);
-					if(mActivity.ismBound()) {
-						mActivity.getStorageAndControlService().deleteAlarm(alarm);
-						adapter.remove(mPointToPosition);
-					} else {
-						Log.e(mActivity.getString(R.string.not_bound, "SwipeAndMoveTouchListener"));
-					}
+					Bundle b = new Bundle(3);
+					b.putInt("alarmID", alarm.getId());
+					b.putInt("filteredPos", mPointToPosition);
+					b.putInt("originalPos", adapter.originalIndexOf(alarm));
+					adapter.remove(alarm);
+					mUndoBar.clear();
+					mUndoBar.message(R.string.alarm_deleted).token(b).show();
 				} else {
 					// back into place
 					childView.setAlpha(1);

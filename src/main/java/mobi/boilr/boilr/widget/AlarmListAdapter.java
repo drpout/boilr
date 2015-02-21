@@ -128,9 +128,9 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 	}
 
 	@Override
-	public void moveTo(Alarm A1, Alarm A2) {
-		super.moveTo(A1, A2);
-		alarmListActivity.getStorageAndControlService().updateAlarmPosition(A1, A2);
+	public void moveTo(Alarm a1, Alarm a2) {
+		super.moveTo(a1, a2);
+		alarmListActivity.getStorageAndControlService().updateAlarmPosition(a1, a2);
 	}
 	
 	private void upperLimitClicked(View v) {

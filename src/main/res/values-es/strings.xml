@@ -96,4 +96,6 @@
 	<string name="days_abbreviation">%1$d d</string>
 	<string name="days_abrv_input_as_string">%1$s d</string>
 	<string name="limit_explanation">%1$s = %2$s (valor base, de hace %3$s) %4$s %5$s (variación)</string>
+	<string name="alarm_deleted">Alarma borrada</string>
+	<string name="undo">Deshacer</string>
 </resources>

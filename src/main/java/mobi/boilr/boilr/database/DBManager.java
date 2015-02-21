@@ -88,7 +88,7 @@ public class DBManager {
 		db.close();
 	}
 
-	public int getNextID() {
+	public int getMaxID() {
 		SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
 		String sql = "SELECT MAX( " + _ID + " ) as " + MAX + " FROM " + DBManager.TABLE_NAME + ";";
 		Cursor cursor = db.rawQuery(sql, null);

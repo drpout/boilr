@@ -3,6 +3,7 @@ package mobi.boilr.boilr.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.listeners.SwipeAndMoveTouchListener;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
@@ -15,7 +16,6 @@ import mobi.boilr.boilr.widget.AlarmGridView;
 import mobi.boilr.boilr.widget.AlarmLayout;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
-import mobi.boilr.boilr.R;
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;

@@ -72,8 +72,7 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 
 	@Override
 	public final View getView(int position, View convertView, ViewGroup parent) {
-
-		if( position == 0 ){
+		if(position == 0) {
 			convertView = getInflater().inflate(R.layout.list_preference_search, parent, false);
 			convertView.setTag(SEARCH);
 			EditText editText = (EditText) convertView.findViewById(R.id.searchable_edit_text);
@@ -93,8 +92,8 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 			if(!search.equals(SEARCH) && !search.equals("")){
 				editText.requestFocus();
 			}
-		}else{
-			if(convertView == null || SEARCH.equals(convertView.getTag())){
+		} else {
+			if(convertView == null || SEARCH.equals(convertView.getTag())) {
 				convertView = getInflater().inflate(R.layout.list_preference_row, parent, false);
 			}
 			CharSequence pair = (CharSequence) mList.get(position-1);
@@ -103,26 +102,14 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 			TextView textView = (TextView) convertView.findViewById(R.id.searchable_text_view);
 			textView.setText(pair);
 			RadioButton pairRadiobutton = (RadioButton) convertView.findViewById(R.id.searchable_radio_button);
-			if(this.searchableListPreference.getEntry().equals(pair)){
+			if(this.searchableListPreference.getEntry().equals(pair)) {
 				pairRadiobutton.setChecked(true);
-			}else{
+			} else {
 				pairRadiobutton.setChecked(false);
 			}
 			pairRadiobutton.setClickable(false);
 		}
 		return convertView;
-	}
-
-	@Override
-	public void remove(int position) {
-		synchronized (mLock) {
-			if(mOriginalList != null) {
-				mOriginalList.remove(position + 1);
-			} else {
-				mList.remove(position + 1);
-			}
-		}
-		notifyDataSetChanged();
 	}
 
 	@Override
@@ -177,5 +164,5 @@ public class SearchableListAdapter<T> extends ListAdapter<T> implements OnTouchL
 	@Override
 	public void onClick(View v) {
 		((EditText) ((View) v.getParent()).findViewById(R.id.searchable_edit_text)).setText("");
-		}
+	}
 }

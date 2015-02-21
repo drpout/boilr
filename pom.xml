@@ -33,7 +33,10 @@
 			\+ Added arrow to the alarm triggered notifications showing which direction the price took.
 			\+ Added app settings to control volume and dismiss no internet notification.
 			\+ In alarms' list, clicking on alarm's limits or change value opens a dialog for quick editing.
-			\* Icon and alarms' list were completely redesigned.
+			\+ Alarms can now be reordered.
+			\+ Added undo toast when alarm is deleted.
+			\+ Added pinstripe background.
+			\* Icon and alarms' list completely redesigned.
 			\* Price Change Alarm now uses a rolling time frame.
 			\* Offed alarms are now continuously updated while alarm list is visible.
 			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange and OKCoin pairs.

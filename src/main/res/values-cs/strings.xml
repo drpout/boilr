@@ -96,4 +96,6 @@
     <string name="days_abbreviation">%1$d d</string>
     <string name="days_abrv_input_as_string">%1$s d</string>
     <string name="limit_explanation">%1$s = %2$s (základní hodnoty, z doby před %3$s) %4$s %5$s (změna)</string>
+    <string name="alarm_deleted">Upozornění vypouští</string>
+	<string name="undo">Zrušit</string>
 </resources>
