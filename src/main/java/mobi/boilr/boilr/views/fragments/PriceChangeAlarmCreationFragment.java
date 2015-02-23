@@ -29,7 +29,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			} else if(key.equals(PREF_KEY_CHANGE_VALUE)) {
 				preference.setSummary(getChangeValueSummary((String) newValue));
 			} else if(key.equals(PREF_KEY_TIME_FRAME)) {
-				preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue, enclosingActivity));
+				preference.setSummary(Conversions.buildMinToHoursSummary((String) newValue, enclosingActivity));
 			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
@@ -57,27 +57,27 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		if(savedInstanceState == null) {
 			changePref.setText(null);
 			timeFramePref.setText(null);
-			timeFramePref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, ""),
+			timeFramePref.setSummary(Conversions.buildMinToHoursSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, ""),
 					enclosingActivity));
 			updateIntervalPref.setText(null);
-			updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string,
+			updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation,
 					sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
 		} else {
 			// Change value pref summary will be updated by updateDependentOnPair()
 
 			String timeFrame = timeFramePref.getText();
 			if(timeFrame == null || timeFrame.equals("")) {
-				timeFramePref.setSummary(Conversions.buildMinToDaysSummary(
+				timeFramePref.setSummary(Conversions.buildMinToHoursSummary(
 						sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, ""), enclosingActivity));
 			} else {
-				timeFramePref.setSummary(Conversions.buildMinToDaysSummary(timeFrame, enclosingActivity));
+				timeFramePref.setSummary(Conversions.buildMinToHoursSummary(timeFrame, enclosingActivity));
 			}
 			String updateInterval = updateIntervalPref.getText();
 			if(updateInterval == null || updateInterval.equals("")) {
-				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string,
+				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation,
 						sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
 			} else {
-				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string, updateInterval));
+				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, updateInterval));
 			}
 		}
 		alarmTypePref.setValueIndex(1);

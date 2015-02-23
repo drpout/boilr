@@ -89,12 +89,10 @@
     <string name="pref_title_language">Jazyk</string>
     <!-- Review everything below please -->
     <string name="price_change_firing_reason">změnilo %3$s\nběhem %5$s.</string>
-    <string name="seconds_abbreviation">%1$d s</string>
-    <string name="sec_abrv_input_as_string">%1$s s</string>
-    <string name="minutes_abbreviation">%1$d m</string>
-    <string name="hours_abbreviation">%1$d h</string>
-    <string name="days_abbreviation">%1$d d</string>
-    <string name="days_abrv_input_as_string">%1$s d</string>
+    <string name="seconds_abbreviation">%1$ss</string>
+    <string name="minutes_abbreviation">%1$sm</string>
+    <string name="hours_abbreviation">%1$sh</string>
+    <string name="days_abbreviation">%1$sd</string>
     <string name="limit_explanation">%1$s = %2$s (základní hodnoty, z doby před %3$s) %4$s %5$s (změna)</string>
     <string name="alarm_deleted">Upozornění vypouští</string>
 	<string name="undo">Zrušit</string>

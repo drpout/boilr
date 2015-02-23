@@ -64,16 +64,16 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 			for(EditTextPreference p : prefs) {
 				p.setText(null);
 			}
-			updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string,
+			updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation,
 					sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
 		} else {
 			// Upper and lower limit prefs summary will be updated by updateDependentOnPair()
 			String updateInterval = updateIntervalPref.getText();
 			if(updateInterval == null || updateInterval.equals("")) {
-				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string,
+				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation,
 						sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
 			} else {
-				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string, updateInterval));
+				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, updateInterval));
 			}
 		}
 		alarmTypePref.setValueIndex(0);

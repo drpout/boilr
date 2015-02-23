@@ -89,12 +89,10 @@
 	<string name="pref_title_language">Sprache</string>
 	<!-- Review everything below please -->
 	<string name="price_change_firing_reason">verändert %1$s\nwährend %2$s.</string>
-	<string name="seconds_abbreviation">%1$d s</string>
-	<string name="sec_abrv_input_as_string">%1$s s</string>
-	<string name="minutes_abbreviation">%1$d M</string>
-	<string name="hours_abbreviation">%1$d S</string>
-	<string name="days_abbreviation">%1$d T</string>
-	<string name="days_abrv_input_as_string">%1$s T</string>
+	<string name="seconds_abbreviation">%1$ss</string>
+	<string name="minutes_abbreviation">%1$sM</string>
+	<string name="hours_abbreviation">%1$sS</string>
+	<string name="days_abbreviation">%1$sT</string>
 	<string name="limit_explanation">%1$s = %2$s (Basiswert, von vor %3$s) %4$s %5$s (Veränderung)</string>
 	<string name="alarm_deleted">Alarm gelöscht</string>
 	<string name="undo">Rückgängig</string>

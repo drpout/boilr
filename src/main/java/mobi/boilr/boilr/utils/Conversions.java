@@ -21,13 +21,13 @@ public class Conversions {
 	public static String formatMilis(long milis, Context context) {
 		String formated;
 		if(milis < MILIS_IN_MINUTE) {
-			formated = context.getString(R.string.seconds_abbreviation, milis / 1000);
+			formated = context.getString(R.string.seconds_abbreviation, String.valueOf(milis / 1000));
 		} else if(milis < MILIS_IN_HOUR) {
-			formated = context.getString(R.string.minutes_abbreviation, milis / MILIS_IN_MINUTE);
+			formated = context.getString(R.string.minutes_abbreviation, String.valueOf(milis / MILIS_IN_MINUTE));
 		} else if(milis < MILIS_IN_DAY) {
-			formated = context.getString(R.string.hours_abbreviation, milis / MILIS_IN_HOUR);
+			formated = context.getString(R.string.hours_abbreviation, String.valueOf(milis / MILIS_IN_HOUR));
 		} else {
-			formated = context.getString(R.string.days_abbreviation, milis / MILIS_IN_DAY);
+			formated = context.getString(R.string.days_abbreviation, String.valueOf(milis / MILIS_IN_DAY));
 		}
 		return formated;
 	}
@@ -104,7 +104,15 @@ public class Conversions {
 	public static String buildMinToDaysSummary(String minutesString, Context context) {
 		int min = Integer.parseInt(minutesString);
 		String days = format2DecimalPlaces((min / MINUTES_IN_DAY));
-		return context.getString(R.string.minutes_abbreviation, min) + " (" + context.getString(R.string.days_abrv_input_as_string, days) + ")";
+		return context.getString(R.string.minutes_abbreviation, String.valueOf(min)) +
+				" (" + context.getString(R.string.days_abbreviation, days) + ")";
+	}
+
+	public static String buildMinToHoursSummary(String minutesString, Context context) {
+		int min = Integer.parseInt(minutesString);
+		String hours = format2DecimalPlaces((min / 60.0));
+		return context.getString(R.string.minutes_abbreviation, String.valueOf(min)) +
+				" (" + context.getString(R.string.hours_abbreviation, hours) + ")";
 	}
 
 	public static String ringtoneUriToName(String stringUri, Context context) {

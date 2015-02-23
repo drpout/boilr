@@ -89,12 +89,10 @@
     <string name="unknown_ringtone">未知铃声</string>
     <string name="pref_title_language">语言</string>
     <!-- Missing translation <string name="price_change_firing_reason">changed %1$s\nduring %2$s.</string>-->
-    <string name="seconds_abbreviation">%1$d秒</string>
-    <string name="sec_abrv_input_as_string">%1$s秒</string>
-    <string name="minutes_abbreviation">%1$d分钟</string>
-    <string name="hours_abbreviation">%1$d小时</string>
-    <string name="days_abbreviation">%1$d天</string>
-    <string name="days_abrv_input_as_string">%1$s天</string>
+    <string name="seconds_abbreviation">%1$s秒</string>
+    <string name="minutes_abbreviation">%1$s分钟</string>
+    <string name="hours_abbreviation">%1$s小时</string>
+    <string name="days_abbreviation">%1$s天</string>
     <!-- Missing translation <string name="limit_explanation">%1$s = %2$s (base value, from %3$s ago) %4$s %5$s (change)</string> -->
     <!-- Review please --><string name="alarm_deleted">删除提醒</string>
 	<string name="undo">撤销</string>

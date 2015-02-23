@@ -95,7 +95,7 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 				creationFrag.setArguments(args);
 				enclosingActivity.getFragmentManager().beginTransaction().replace(android.R.id.content, creationFrag).commit();
 			} else if(key.equals(PREF_KEY_UPDATE_INTERVAL)) {
-				preference.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string, newValue));
+				preference.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, newValue));
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_TYPE)) {
 				ListPreference alertTypePref = (ListPreference) preference;
 				alertTypePref.setSummary(alertTypePref.getEntries()[alertTypePref.findIndexOfValue((String) newValue)]);

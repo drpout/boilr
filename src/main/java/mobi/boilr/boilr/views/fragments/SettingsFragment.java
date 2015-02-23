@@ -85,10 +85,10 @@ public class SettingsFragment extends PreferenceFragment implements
 
 		Preference pref;
 		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL);
-		pref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string,
+		pref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation,
 				sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
 		pref = findPreference(PREF_KEY_DEFAULT_TIME_FRAME);
-		pref.setSummary(Conversions.buildMinToDaysSummary(
+		pref.setSummary(Conversions.buildMinToHoursSummary(
 				sharedPreferences.getString(PREF_KEY_DEFAULT_TIME_FRAME, ""), enclosingActivity));
 
 		String language = sharedPreferences.getString(SettingsFragment.PREF_KEY_LANGUAGE, "");
@@ -152,9 +152,9 @@ public class SettingsFragment extends PreferenceFragment implements
 				Log.e(enclosingActivity.getString(R.string.not_bound, "PreferenceFragment"));
 			}
 		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL)) {
-			pref.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string, sharedPrefs.getString(key, "")));
+			pref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, sharedPrefs.getString(key, "")));
 		} else if(key.equals(PREF_KEY_DEFAULT_TIME_FRAME)) {
-			pref.setSummary(Conversions.buildMinToDaysSummary(sharedPrefs.getString(key, ""), enclosingActivity));
+			pref.setSummary(Conversions.buildMinToHoursSummary(sharedPrefs.getString(key, ""), enclosingActivity));
 		} else if(key.equals(PREF_KEY_MOBILE_DATA)) {
 			StorageAndControlService.allowMobileData = sharedPrefs.getBoolean(key, false);
 		} else if(key.equals(PREF_KEY_SHOW_INTERNET_WARNING)) {

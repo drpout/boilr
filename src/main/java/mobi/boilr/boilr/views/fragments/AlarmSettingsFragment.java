@@ -120,7 +120,7 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 					} else {
 						Log.e(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
 					}
-					preference.setSummary(enclosingActivity.getString(R.string.sec_abrv_input_as_string, newValue));
+					preference.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, newValue));
 				} catch(TimeFrameSmallerOrEqualUpdateIntervalException e) {
 					String msg = enclosingActivity.getString(R.string.failed_save_alarm) + " "
 						+ enclosingActivity.getString(R.string.frame_must_longer_interval);

@@ -38,7 +38,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 				long timeFrame = Long.parseLong((String) newValue) * Conversions.MILIS_IN_MINUTE;
 				try {
 					priceChangeAlarm.setTimeFrame(timeFrame);
-					preference.setSummary(Conversions.buildMinToDaysSummary((String) newValue, enclosingActivity));
+					preference.setSummary(Conversions.buildMinToHoursSummary((String) newValue, enclosingActivity));
 				} catch(TimeFrameSmallerOrEqualUpdateIntervalException e) {
 					String msg = enclosingActivity.getString(R.string.failed_save_alarm) + " "
 						+ enclosingActivity.getString(R.string.frame_must_longer_interval);
@@ -95,8 +95,8 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 		priceChangeAlarm = (RollingPriceChangeAlarm) alarm;
 		long minPeriod = priceChangeAlarm.getTimeFrame() / Conversions.MILIS_IN_MINUTE;
 		long secondsPeriod = priceChangeAlarm.getPeriod() / 1000;
-		updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, secondsPeriod));
-		timeFramePref.setSummary(Conversions.buildMinToDaysSummary(String.valueOf(minPeriod), enclosingActivity));
+		updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, String.valueOf(secondsPeriod)));
+		timeFramePref.setSummary(Conversions.buildMinToHoursSummary(String.valueOf(minPeriod), enclosingActivity));
 		if(!recoverSavedInstance) {
 			isPercentage = priceChangeAlarm.isPercent();
 			isPercentPref.setChecked(isPercentage);
