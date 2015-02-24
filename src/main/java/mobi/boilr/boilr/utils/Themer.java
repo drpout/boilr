@@ -28,10 +28,10 @@ public class Themer {
 		}
 		switch(curTheme) {
 			case dark:
-				activity.setTheme(R.style.BoilrTheme_Dark);
+				activity.setTheme(R.style.Theme_Boilr_Dark);
 				break;
 			case light:
-				activity.setTheme(R.style.BoilrTheme_Light);
+				activity.setTheme(R.style.Theme_Boilr_Light);
 				break;
 		}
 	}

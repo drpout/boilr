@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <style name="BoilrTheme.Dark" parent="android:Theme.Holo">
+    <style name="Theme.Boilr.Dark" parent="@android:style/Theme.Holo">
         <item name="ic_action_about">@drawable/ic_action_about_dark</item>
         <item name="ic_action_overflow">@drawable/ic_action_overflow_dark</item>
         <item name="ic_action_search">@drawable/ic_action_search_dark</item>
@@ -18,7 +18,7 @@
 		<item name="toastContainerStyle">@style/DarkToastContainerStyle</item>
         <item name="toastTextStyle">@style/DarkToastTextStyle</item>
     </style>
-    <style name="BoilrTheme.Light" parent="@android:Theme.Holo.Light">
+    <style name="Theme.Boilr.Light" parent="@android:style/Theme.Holo.Light">
         <item name="ic_action_about">@drawable/ic_action_about_light</item>
         <item name="ic_action_overflow">@drawable/ic_action_overflow_light</item>
         <item name="ic_action_search">@drawable/ic_action_search_light</item>
