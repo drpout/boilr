@@ -1,6 +1,7 @@
 package mobi.boilr.boilr.utils;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,9 +15,9 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 
 public class Conversions {
-	public static long MILIS_IN_MINUTE = 60000; // 60 * 1000
-	private static long MILIS_IN_HOUR = 3600000; // 60 * 60 * 1000
-	private static long MILIS_IN_DAY = 86400000; // 24 * 60 * 60 * 1000
+	public static final long MILIS_IN_MINUTE = 60000; // 60 * 1000
+	private static final long MILIS_IN_HOUR = 3600000; // 60 * 60 * 1000
+	private static final long MILIS_IN_DAY = 86400000; // 24 * 60 * 60 * 1000
 
 	public static String formatMilis(long milis, Context context) {
 		String formated;
@@ -31,12 +32,19 @@ public class Conversions {
 		}
 		return formated;
 	}
+	
+	private static final DecimalFormatSymbols symbols;
+	static {
+		symbols = new DecimalFormatSymbols(Locale.ENGLISH);
+		symbols.setNaN("—");
+	}
 
-	private static DecimalFormat twoPlacesFormatter;
+	private static final DecimalFormat twoPlacesFormatter;
 	static {
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ENGLISH);
 		twoPlacesFormatter = (DecimalFormat) nf;
 		twoPlacesFormatter.applyPattern("#.##");
+		twoPlacesFormatter.setDecimalFormatSymbols(symbols);
 	}
 
 	/**
@@ -50,12 +58,13 @@ public class Conversions {
 		return twoPlacesFormatter.format(d);
 	}
 
-	private static DecimalFormat maxPlacesFormater;
+	private static final DecimalFormat maxPlacesFormater;
 	static {
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ENGLISH);
 		maxPlacesFormater = (DecimalFormat) nf;
 		maxPlacesFormater.setMaximumFractionDigits(340);
 		maxPlacesFormater.setGroupingUsed(false);
+		maxPlacesFormater.setDecimalFormatSymbols(symbols);
 	}
 
 	/**
@@ -72,18 +81,20 @@ public class Conversions {
 		return maxPlacesFormater.format(d);
 	}
 
-	private static DecimalFormat eightSignificantFormatter;
+	private static final DecimalFormat eightSignificantFormatter;
 	static {
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ENGLISH);
 		eightSignificantFormatter = (DecimalFormat) nf;
 		eightSignificantFormatter.applyPattern("@#######");
+		eightSignificantFormatter.setDecimalFormatSymbols(symbols);
 	}
 
-	private static DecimalFormat eightDecimalPlacesFormatter;
+	private static final DecimalFormat eightDecimalPlacesFormatter;
 	static {
 		NumberFormat nf = NumberFormat.getNumberInstance(Locale.ENGLISH);
 		eightDecimalPlacesFormatter = (DecimalFormat) nf;
 		eightDecimalPlacesFormatter.applyPattern("#.########");
+		eightDecimalPlacesFormatter.setDecimalFormatSymbols(symbols);
 	}
 	
 	/**
