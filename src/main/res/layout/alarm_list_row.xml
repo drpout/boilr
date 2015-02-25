@@ -44,7 +44,8 @@
         <TextView
             android:id="@+id/upper_limit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="bottom|center_horizontal"
             android:singleLine="true"
             android:textSize="14sp"
@@ -62,7 +63,8 @@
         <TextView
             android:id="@+id/lower_limit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:gravity="top|center_horizontal"
             android:singleLine="true"
             android:textSize="14sp"
