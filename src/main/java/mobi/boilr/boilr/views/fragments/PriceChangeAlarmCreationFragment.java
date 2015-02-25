@@ -2,7 +2,6 @@ package mobi.boilr.boilr.views.fragments;
 
 import java.io.IOException;
 
-import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
@@ -56,33 +55,31 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		isPercentage = isPercentPref.isChecked();
 		if(savedInstanceState == null) {
 			changePref.setText(null);
-			timeFramePref.setText(null);
-			timeFramePref.setSummary(Conversions.buildMinToHoursSummary(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, ""),
-					enclosingActivity));
-			updateIntervalPref.setText(null);
-			updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation,
-					sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
+			setTimeFramePref();
+			setUpdateIntervalPref();
 		} else {
 			// Change value pref summary will be updated by updateDependentOnPair()
-
-			String timeFrame = timeFramePref.getText();
-			if(timeFrame == null || timeFrame.equals("")) {
-				timeFramePref.setSummary(Conversions.buildMinToHoursSummary(
-						sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, ""), enclosingActivity));
-			} else {
-				timeFramePref.setSummary(Conversions.buildMinToHoursSummary(timeFrame, enclosingActivity));
-			}
-			String updateInterval = updateIntervalPref.getText();
-			if(updateInterval == null || updateInterval.equals("")) {
-				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation,
-						sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
-			} else {
-				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, updateInterval));
-			}
+			checkAndSetTimeFramePref();
+			checkAndSetUpdateIntervalPref();
 		}
 		alarmTypePref.setValueIndex(1);
 		specificCat.setTitle(alarmTypePref.getEntry());
 		alarmTypePref.setSummary(alarmTypePref.getEntry());
+	}
+
+	private void setTimeFramePref() {
+		String timeFrame = sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, "");
+		timeFramePref.setText(timeFrame);
+		timeFramePref.setSummary(Conversions.buildMinToHoursSummary(timeFrame, enclosingActivity));
+	}
+
+	private void checkAndSetTimeFramePref() {
+		String timeFrame = timeFramePref.getText();
+		if(timeFrame == null || timeFrame.equals("")) {
+			setTimeFramePref();
+		} else {
+			timeFramePref.setSummary(Conversions.buildMinToHoursSummary(timeFrame, enclosingActivity));
+		}
 	}
 
 	@Override

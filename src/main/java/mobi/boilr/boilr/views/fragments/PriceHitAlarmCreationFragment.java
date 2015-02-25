@@ -2,7 +2,6 @@ package mobi.boilr.boilr.views.fragments;
 
 import java.io.IOException;
 
-import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
@@ -60,21 +59,12 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 
 		removePrefs(hitAlarmPrefsToKeep);
 		if(savedInstanceState == null) {
-			EditTextPreference[] prefs = { upperLimitPref, lowerLimitPref, updateIntervalPref };
-			for(EditTextPreference p : prefs) {
-				p.setText(null);
-			}
-			updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation,
-					sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
+			upperLimitPref.setText(null);
+			lowerLimitPref.setText(null);
+			setUpdateIntervalPref();
 		} else {
 			// Upper and lower limit prefs summary will be updated by updateDependentOnPair()
-			String updateInterval = updateIntervalPref.getText();
-			if(updateInterval == null || updateInterval.equals("")) {
-				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation,
-						sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
-			} else {
-				updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, updateInterval));
-			}
+			checkAndSetUpdateIntervalPref();
 		}
 		alarmTypePref.setValueIndex(0);
 		specificCat.setTitle(alarmTypePref.getEntry());

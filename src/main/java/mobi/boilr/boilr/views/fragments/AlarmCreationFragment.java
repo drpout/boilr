@@ -242,4 +242,19 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
  throws UpperLimitSmallerOrEqualLowerLimitException,
 			TimeFrameSmallerOrEqualUpdateIntervalException, IOException, InterruptedException,
 			ExecutionException;
+
+	protected void setUpdateIntervalPref() {
+		String updateInterval = sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, "");
+		updateIntervalPref.setText(updateInterval);
+		updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, updateInterval));
+	}
+
+	protected void checkAndSetUpdateIntervalPref() {
+		String updateInterval = updateIntervalPref.getText();
+		if(updateInterval == null || updateInterval.equals("")) {
+			setUpdateIntervalPref();
+		} else {
+			updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, updateInterval));
+		}
+	}
 }
