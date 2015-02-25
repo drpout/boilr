@@ -8,10 +8,11 @@
     android:orientation="horizontal" >
 
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="110dp"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:paddingLeft="6dp" >
 
         <TextView
             android:id="@+id/pair"
