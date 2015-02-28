@@ -20,7 +20,6 @@ import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libdynticker.exchanges.BitstampExchange;
-import mobi.boilr.libdynticker.exchanges.CoinMktExchange;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.AlarmPositionComparator;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
@@ -65,7 +64,6 @@ public class StorageAndControlService extends Service {
 	private HashSet<Integer> runTaskAlarmList = new HashSet<Integer>();
 
 	private class RunAlarmTask extends AsyncTask<Alarm, Void, Void> {
-		private static final long REPEAT_LOWER_BOUND = CoinMktExchange.COINMKT_DELAY;
 
 		@Override
 		protected Void doInBackground(Alarm... alarms) {

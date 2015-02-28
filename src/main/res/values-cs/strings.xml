@@ -71,8 +71,8 @@
     <!-- Review please, original has changed --><string name="pref_summary_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy.</string>
     <!-- Review please, original has changed --><string name="pref_summary_time_frame">V minutách. Určuje časový interval pro upozornění na změnu ceny.</string>
     <string name="boilr_alarm">Upozornění aplikace Boilr</string>
-    <string name="turn_off">Vypnout</string>
-    <string name="keep_monitoring">Pokračovat ve sledování</string>
+    <string name="off">Vypnout</string>
+    <string name="resume">Pokračovat</string>
     <string name="no_internet">Boilr není připojen.</string>
     <string name="no_updates">Vaše upozornění nemohou být aktualizována.</string>
     <string name="couldnt_retrieve_pairs">Nelze získat páry pro %1$s.</string>
@@ -88,7 +88,7 @@
     <string name="unknown_ringtone">Neznámý vyzvánění</string>
     <string name="pref_title_language">Jazyk</string>
     <!-- Review everything below please -->
-    <string name="price_change_firing_reason">změnilo %3$s\nběhem %5$s.</string>
+    <string name="price_change_firing_reason">%3$s v %5$s</string>
     <string name="seconds_abbreviation">%1$ss</string>
     <string name="minutes_abbreviation">%1$sm</string>
     <string name="hours_abbreviation">%1$sh</string>

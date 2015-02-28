@@ -71,8 +71,8 @@
 	<string name="pref_summary_update_interval">In seconds. Defines how often the alarm fetches data from the exchange.</string>
 	<string name="pref_summary_time_frame">In minutes. Defines the price to compare with the current one, e.g., the price from 15 min ago.</string>
 	<string name="boilr_alarm">Boilr Alarm</string>
-	<string name="turn_off">Turn off</string>
-	<string name="keep_monitoring">Keep monitoring</string>
+	<string name="off">Off</string>
+	<string name="resume">Resume</string>
 	<string name="no_internet">Boilr has no internet.</string>
 	<string name="no_updates">Your alarms cannot be updated.</string>
 	<string name="couldnt_retrieve_pairs">Could not retrieve pairs for %1$s.</string>
@@ -88,7 +88,7 @@
 	<string name="unknown_ringtone">Unknown ringtone</string>
 	<string name="pref_title_language">Language</string>
 	<!-- You can rearrange the sentence bellow to make it as short as possible. -->
-	<string name="price_change_firing_reason">changed %1$s\nduring %2$s.</string>
+	<string name="price_change_firing_reason">%1$s in %2$s</string>
 	<string name="seconds_abbreviation">%1$ss</string>
 	<string name="minutes_abbreviation">%1$sm</string>
 	<string name="hours_abbreviation">%1$sh</string>

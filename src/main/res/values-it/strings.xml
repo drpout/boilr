@@ -73,8 +73,8 @@
 	<!-- Review please --><string name="pref_summary_update_interval">In pochi secondi. Definisce la frequenza con cui l\'allarme riceve i dati dal cambio.</string>
 	<!-- Review please --><string name="pref_summary_time_frame">In pochi minuti. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa.</string>
 	<string name="boilr_alarm">Boilr Allarme</string>
-	<string name="turn_off">Spegni</string>
-	<string name="keep_monitoring">monitoraggio</string>
+	<string name="off">Spegni</string>
+	<!-- Review please --><string name="resume">Riprendere</string>
 	<string name="no_internet">Boilr non è connesso.</string>
 	<string name="no_updates">Il tuo allarme non può essere aggiornato.</string>
 	<string name="couldnt_retrieve_pairs">Impossibile recuperare coppie %1$s.</string>
@@ -90,7 +90,7 @@
 	<string name="unknown_ringtone">Suoneria sconosciuta</string>
 	<string name="pref_title_language">Lingua</string>
 	<!-- Review everything below please -->
-	<string name="price_change_firing_reason">cambiato %1$s\ndurante %2$s.</string>
+	<string name="price_change_firing_reason">%1$s in %2$s</string>
 	<string name="seconds_abbreviation">%1$ss</string>
 	<string name="minutes_abbreviation">%1$sm</string>
 	<string name="hours_abbreviation">%1$so</string>

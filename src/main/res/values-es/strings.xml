@@ -71,8 +71,8 @@
 	<string name="pref_summary_update_interval">En segundos. Define la frecuencia con la que la obtiene datos de bolsa.</string>
 	<!-- Review please --><string name="pref_summary_time_frame">En minutos. Define qué precio comparar con el actual, por ejemplo el precio de hace 15 minutos.</string>
 	<string name="boilr_alarm">Alarma Boilr</string>
-	<string name="turn_off">Apagar</string>
-	<string name="keep_monitoring">Seguir activo</string>
+	<string name="off">Apagar</string>
+	<!-- Review please --><string name="resume">Reanudar</string>
 	<string name="no_internet">Boilr no tiene acceso a internet.</string>
 	<string name="no_updates">Las alarmas no pueden actualizarse.</string>
 	<string name="couldnt_retrieve_pairs">Imposible obtener pares para %1$s.</string>
@@ -88,7 +88,7 @@
 	<string name="unknown_ringtone">Sonido desconocido</string>
 	<string name="pref_title_language">Idioma</string>
 	<!-- Review everything below please -->
-	<string name="price_change_firing_reason">cambió %1$s\ndurante %2$s.</string>
+	<string name="price_change_firing_reason">%1$s en %2$s</string>
 	<string name="seconds_abbreviation">%1$ss</string>
 	<string name="minutes_abbreviation">%1$sm</string>
 	<string name="hours_abbreviation">%1$sh</string>

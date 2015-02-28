@@ -72,8 +72,8 @@
     <!-- Review please, original has changed --><string name="pref_summary_update_interval">以秒为单位。设置触价提醒多久从交易所获取一次数据。</string>
     <!-- Review please, original has changed --><string name="pref_summary_time_frame">以分钟为单位。设置波动提醒的时间范围。</string>
     <string name="boilr_alarm">Boilr提醒</string>
-    <string name="turn_off">关闭</string>
-    <string name="keep_monitoring">保持监控</string>
+    <string name="off">关闭</string>
+    <!-- Review please, original has changed --><string name="resume">保持监控</string>
     <string name="no_internet">没有网络连接。</string>
     <string name="no_updates">无法获取最新数据。</string>
     <string name="couldnt_retrieve_pairs">无法获取%1$s的交易对。</string>
@@ -88,7 +88,7 @@
     <string name="silent">静音</string>
     <string name="unknown_ringtone">未知铃声</string>
     <string name="pref_title_language">语言</string>
-    <!-- Missing translation <string name="price_change_firing_reason">changed %1$s\nduring %2$s.</string>-->
+    <!-- Missing translation <string name="price_change_firing_reason">%1$s in %2$s</string>-->
     <string name="seconds_abbreviation">%1$s秒</string>
     <string name="minutes_abbreviation">%1$s分钟</string>
     <string name="hours_abbreviation">%1$s小时</string>

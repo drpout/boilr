@@ -163,11 +163,12 @@ public final class Notifications {
 			return Conversions.format8SignificantDigits(alarm.getLastValue()) + " " + pair.getExchange();
 		} else if(alarm instanceof PriceChangeAlarm) {
 			PriceChangeAlarm changeAlarm = (PriceChangeAlarm) alarm;
-			String change;
+			String change = changeAlarm.getDirection() == Alarm.Direction.DOWN ? "-" : "+";
+			double lastChange = changeAlarm.getLastChange();
 			if(changeAlarm.isPercent())
-				change = Conversions.format2DecimalPlaces(changeAlarm.getLastChange()) + "%";
+				change += Conversions.format2DecimalPlaces(lastChange) + "%";
 			else
-				change = Conversions.format8SignificantDigits(changeAlarm.getLastChange()) + " " + pair.getExchange();
+				change += Conversions.format8SignificantDigits(lastChange) + " " + pair.getExchange();
 			return context.getString(R.string.price_change_firing_reason, change,
 					Conversions.formatMilis(changeAlarm.getElapsedMilis(), context));
 		}

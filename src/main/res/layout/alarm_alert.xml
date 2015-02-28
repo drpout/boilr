@@ -11,69 +11,66 @@
         android:id="@+id/text_wrapper"
 	    android:layout_width="match_parent"
 		android:layout_height="0dp"
-		android:orientation="horizontal"
-		android:layout_weight="1">
+		android:orientation="vertical"
+		android:layout_weight="1"
+		android:gravity="center_horizontal|bottom">
 		
         <ImageView
 		    android:id="@+id/arrow"
-			android:layout_weight="1"
-			android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:scaleType="center"/>
+			android:layout_width="wrap_content"
+			android:layout_height="100dp"
+			android:scaleType="center"
+			android:gravity="center"/>
 	    
-        <LinearLayout
-		    android:id="@+id/firing_reason_wrapper"
-		    android:layout_weight="3"
-		    android:layout_width="0dp"
-			android:layout_height="match_parent"
-			android:orientation="vertical"
-			android:gravity="center">
-			<TextView
-			    android:id="@+id/firing_reason"
-				android:textStyle="bold"
-				android:textSize="22dp"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:gravity="center_vertical"/>
-		</LinearLayout>
+		<TextView
+		    android:id="@+id/firing_reason"
+			android:textStyle="bold"
+			android:textSize="22dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="center"/>
 	</LinearLayout>
 	
     <LinearLayout
         android:id="@+id/buttons_wrapper"
 	    android:layout_width="match_parent"
 		android:layout_height="0dp"
-		android:orientation="vertical"
+		android:orientation="horizontal"
 		android:layout_weight="1">
 		
 		<LinearLayout
-		    android:id="@+id/keep_monitoring_wrapper"
+		    android:id="@+id/resume_wrapper"
 		    android:layout_weight="1"
-		    android:layout_width="match_parent"
-			android:layout_height="0dp"
+		    android:layout_width="0dp"
+			android:layout_height="match_parent"
 			android:gravity="center">
 			<Button
-				android:id="@+id/keep_monitoring"
+				android:id="@+id/resume"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center"
-				android:text="@string/keep_monitoring"
-				android:onClick="onKeepMonitoringClicked">
+				android:text="@string/resume"
+				android:drawableTop="?attr/ic_lock_reboot"
+				android:background="@drawable/normal"
+				android:onClick="onResumeClicked">
 			</Button>
 		</LinearLayout>
 		
 		<LinearLayout
-		    android:id="@+id/turn_off_wrapper"
+		    android:id="@+id/off_wrapper"
 		    android:layout_weight="1"
-			android:layout_width="match_parent"
-			android:layout_height="0dp"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
 			android:gravity="center">
 			<Button
-				android:id="@+id/turn_off"
+				android:id="@+id/off"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:gravity="center"
-				android:text="@string/turn_off"
-				android:onClick="onTurnOffClicked">
+				android:text="@string/off"
+				android:drawableTop="?attr/ic_lock_power_off"
+				android:background="@drawable/normal"
+				android:onClick="onOffClicked">
 			</Button>
 		</LinearLayout>
 	</LinearLayout>

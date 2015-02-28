@@ -36,7 +36,7 @@
 			\+ Alarms can now be reordered.
 			\+ Added undo toast when alarm is deleted.
 			\+ Added pinstripe background.
-			\* Icon and alarms' list completely redesigned.
+			\* Icon, alarms' list and alarm triggered notification completely redesigned.
 			\* Price Change Alarm now uses a rolling time frame.
 			\* Offed alarms are now continuously updated while alarm list is visible.
 			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange and OKCoin pairs.

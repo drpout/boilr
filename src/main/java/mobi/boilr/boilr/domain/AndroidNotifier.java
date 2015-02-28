@@ -28,7 +28,7 @@ public class AndroidNotifier extends Notifier {
 	}
 
 	@Override
-	public boolean notify(int alarmID) {
+	protected boolean notify(int alarmID) {
 		NotificationService.startNotify(context, alarmID);
 		return false;
 	}

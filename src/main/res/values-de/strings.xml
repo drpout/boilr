@@ -71,8 +71,8 @@
 	<!-- Review please, original has changed --><string name="pref_summary_update_interval">In Sekunden. Bestimmt wie oft der Alarm seine Daten von der Börse erhält.</string>
 	<!-- Review please, original has changed --><string name="pref_summary_time_frame">In Minuten. Bestimmt welcher Preis, mit dem aktuellen vergleichen, z.B. der Pries von vor 15 Minuten.</string>
 	<string name="boilr_alarm">Boilr Alarm</string>
-	<string name="turn_off">Ausschalten</string>
-	<string name="keep_monitoring">Weiterhin beobachten</string>
+	<string name="off">Ausschalten</string>
+	<string name="resume">Fortsetzen</string>
 	<string name="no_internet">Boilr hat keine Internetverbindung.</string>
 	<string name="no_updates">Ihre Alarme können nicht aktualisiert werden.</string>
 	<string name="couldnt_retrieve_pairs">Keine Paarergebnisse für %1$s.</string>
@@ -88,7 +88,7 @@
 	<string name="unknown_ringtone">Unbekannter Klingelton</string>
 	<string name="pref_title_language">Sprache</string>
 	<!-- Review everything below please -->
-	<string name="price_change_firing_reason">verändert %1$s\nwährend %2$s.</string>
+	<string name="price_change_firing_reason">%1$s in %2$s</string>
 	<string name="seconds_abbreviation">%1$ss</string>
 	<string name="minutes_abbreviation">%1$sM</string>
 	<string name="hours_abbreviation">%1$sS</string>

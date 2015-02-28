@@ -71,8 +71,8 @@
     <!-- Review please --><string name="pref_summary_update_interval">W sekundach. Opisuje jak często sprawdzana jest cena na giełdzie.</string>
     <!-- Review please --><string name="pref_summary_time_frame">W minutach. Opisuje jak cena porównać z obecnym, na przykład cena od 15 minuty temu.</string>
     <string name="boilr_alarm">Powiadomienie Boilr</string>
-    <string name="turn_off">Wyłącz</string>
-    <string name="keep_monitoring">Kontynuuj monitorowanie</string>
+    <string name="off">Wyłącz</string>
+    <!-- Review please --><string name="resume">Kontynuować</string>
     <string name="no_internet">Boilr nie może połączyć się z internetem.</string>
     <string name="no_updates">Ustawienia powiadomień nie mogą być zaktualizowane.</string>
     <string name="couldnt_retrieve_pairs">Nie można pobrać par dla %1$s.</string>
@@ -88,7 +88,7 @@
     <string name="unknown_ringtone">Nieznany dźwięk</string>
     <string name="pref_title_language">Język</string>
     <!-- Review everything below please -->
-    <string name="price_change_firing_reason">zmieniony %1$s\nprzez %2$s.</string>
+    <string name="price_change_firing_reason">%1$s w %2$s</string>
     <string name="seconds_abbreviation">%1$ss</string>
     <string name="minutes_abbreviation">%1$sm</string>
     <string name="hours_abbreviation">%1$sg</string>
