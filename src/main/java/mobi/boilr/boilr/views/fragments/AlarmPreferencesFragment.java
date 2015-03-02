@@ -10,7 +10,9 @@ import mobi.boilr.boilr.preference.ThemableRingtonePreference;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.IconToast;
+import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import android.app.Activity;
@@ -74,6 +76,8 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 		if(savedInstanceState != null)
 			mRecoverSavedInstance = true;
 		mEnclosingActivity = getActivity();
+		Themer.applyTheme(mEnclosingActivity);
+		Languager.setLanguage(mEnclosingActivity);
 		mServiceIntent = new Intent(mEnclosingActivity, StorageAndControlService.class);
 		addPreferencesFromResource(R.xml.alarm_settings);
 		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(mEnclosingActivity);
