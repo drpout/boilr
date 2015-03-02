@@ -25,14 +25,14 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 					priceHitAlarm.setUpperLimit(Double.parseDouble((String) newValue));
 					preference.setSummary(newValue + " " + alarm.getPair().getExchange());
 				} catch(UpperLimitSmallerOrEqualLowerLimitException e) {
-					handleLimitsExceptions(e, enclosingActivity);
+					handleLimitsExceptions(e, mEnclosingActivity);
 				}
 			} else if(key.equals(PREF_KEY_LOWER_VALUE)) {
 				try {
 					priceHitAlarm.setLowerLimit(Double.parseDouble((String) newValue));
 					preference.setSummary(newValue + " " + alarm.getPair().getExchange());
 				} catch(UpperLimitSmallerOrEqualLowerLimitException e) {
-					handleLimitsExceptions(e, enclosingActivity);
+					handleLimitsExceptions(e, mEnclosingActivity);
 				}
 			} else {
 				return super.onPreferenceChange(preference, newValue);
@@ -40,7 +40,7 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 			if(mBound) {
 				mStorageAndControlService.replaceAlarmDB(priceHitAlarm);
 			} else {
-				Log.e(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
+				Log.e(mEnclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
 			}
 			return true;
 		}
@@ -61,20 +61,20 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		listener = new OnPriceHitSettingsPreferenceChangeListener();
+		mListener = new OnPriceHitSettingsPreferenceChangeListener();
 		super.onCreate(savedInstanceState);
 
 		removePrefs(hitAlarmPrefsToKeep);
 		// Upper and lower limit prefs summary will be updated by updateDependentOnPair()
-		alarmTypePref.setValueIndex(0);
-		specificCat.setTitle(alarmTypePref.getEntry());
-		alarmTypePref.setSummary(alarmTypePref.getEntry());
+		mAlarmTypePref.setValueIndex(0);
+		mSpecificCat.setTitle(mAlarmTypePref.getEntry());
+		mAlarmTypePref.setSummary(mAlarmTypePref.getEntry());
 	}
 
 	@Override
 	protected void updateDependentOnPair() {
 		super.updateDependentOnPair();
-		EditTextPreference[] edits = { upperLimitPref, lowerLimitPref };
+		EditTextPreference[] edits = { mUpperLimitPref, mLowerLimitPref };
 		String text;
 		for (EditTextPreference edit : edits) {
 			edit.setEnabled(true);
@@ -93,13 +93,13 @@ public class PriceHitAlarmSettingsFragment extends AlarmSettingsFragment {
 	protected void initializePreferences() {
 		priceHitAlarm = (PriceHitAlarm) alarm;
 		long secondsPeriod = alarm.getPeriod() / 1000;
-		updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, String.valueOf(secondsPeriod)));
-		if(!recoverSavedInstance) {
+		mUpdateIntervalPref.setSummary(mEnclosingActivity.getString(R.string.seconds_abbreviation, String.valueOf(secondsPeriod)));
+		if(!mRecoverSavedInstance) {
 			String formated = Conversions.formatMaxDecimalPlaces(priceHitAlarm.getUpperLimit());
-			upperLimitPref.setText(formated);
+			mUpperLimitPref.setText(formated);
 			formated = Conversions.formatMaxDecimalPlaces(priceHitAlarm.getLowerLimit());
-			lowerLimitPref.setText(formated);
-			updateIntervalPref.setText(String.valueOf(secondsPeriod));
+			mLowerLimitPref.setText(formated);
+			mUpdateIntervalPref.setText(String.valueOf(secondsPeriod));
 		}
 	}
 }

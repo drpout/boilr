@@ -25,6 +25,7 @@
 	<string name="pref_entries_alert_type_1">Notificación</string>
 	<string name="pref_entries_alert_type_2">Toque</string>
 	<string name="pref_title_default_alert_sound">Sonido por omisión</string>
+	<!-- Review please --><string name="default_value">Omisión (%1$s)</string>
 	<string name="pref_title_sound_volume">Volumen de sonido</string>
 	<string name="pref_summary_sound_volume">Boilr utiliza el volumen del sistema para el tipo de alarma seleccionada. En la mayoría de los dispositivos el tipo de alarma permanece con el volumen máximo incluso cuando el dispositivo está en silencio.</string>
 	<string name="system_volumes">Volúmenes del sistema</string>

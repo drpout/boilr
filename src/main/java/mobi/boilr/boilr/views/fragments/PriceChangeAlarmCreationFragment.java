@@ -23,12 +23,12 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
 			if(key.equals(PREF_KEY_CHANGE_IN_PERCENTAGE)) {
-				isPercentage = (Boolean) newValue;
+				mIsPercentage = (Boolean) newValue;
 				updateChangeValueSummary();
 			} else if(key.equals(PREF_KEY_CHANGE_VALUE)) {
 				preference.setSummary(getChangeValueSummary((String) newValue));
 			} else if(key.equals(PREF_KEY_TIME_FRAME)) {
-				preference.setSummary(Conversions.buildMinToHoursSummary((String) newValue, enclosingActivity));
+				preference.setSummary(Conversions.buildMinToHoursSummary((String) newValue, mEnclosingActivity));
 			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
@@ -48,13 +48,13 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		listener = new OnPriceChangeSettingsPreferenceChangeListener();
+		mListener = new OnPriceChangeSettingsPreferenceChangeListener();
 		super.onCreate(savedInstanceState);
 
 		removePrefs(changeAlarmPrefsToKeep);
-		isPercentage = isPercentPref.isChecked();
+		mIsPercentage = mIsPercentPref.isChecked();
 		if(savedInstanceState == null) {
-			changePref.setText(null);
+			mChangePref.setText(null);
 			setTimeFramePref();
 			setUpdateIntervalPref();
 		} else {
@@ -62,30 +62,30 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 			checkAndSetTimeFramePref();
 			checkAndSetUpdateIntervalPref();
 		}
-		alarmTypePref.setValueIndex(1);
-		specificCat.setTitle(alarmTypePref.getEntry());
-		alarmTypePref.setSummary(alarmTypePref.getEntry());
+		mAlarmTypePref.setValueIndex(1);
+		mSpecificCat.setTitle(mAlarmTypePref.getEntry());
+		mAlarmTypePref.setSummary(mAlarmTypePref.getEntry());
 	}
 
 	private void setTimeFramePref() {
-		String timeFrame = sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, "");
-		timeFramePref.setText(timeFrame);
-		timeFramePref.setSummary(Conversions.buildMinToHoursSummary(timeFrame, enclosingActivity));
+		String timeFrame = mSharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_TIME_FRAME, "");
+		mTimeFramePref.setText(timeFrame);
+		mTimeFramePref.setSummary(Conversions.buildMinToHoursSummary(timeFrame, mEnclosingActivity));
 	}
 
 	private void checkAndSetTimeFramePref() {
-		String timeFrame = timeFramePref.getText();
+		String timeFrame = mTimeFramePref.getText();
 		if(timeFrame == null || timeFrame.equals("")) {
 			setTimeFramePref();
 		} else {
-			timeFramePref.setSummary(Conversions.buildMinToHoursSummary(timeFrame, enclosingActivity));
+			mTimeFramePref.setSummary(Conversions.buildMinToHoursSummary(timeFrame, mEnclosingActivity));
 		}
 	}
 
 	@Override
 	public Alarm makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotifier notifier)
 			throws TimeFrameSmallerOrEqualUpdateIntervalException, IOException {
-		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
+		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mEnclosingActivity);
 		String timeFrameString = ((EditTextPreference) findPreference(PREF_KEY_TIME_FRAME)).getText();
 		// Time is in minutes, convert to milliseconds
 		long timeFrame = Conversions.MILIS_IN_MINUTE
@@ -98,12 +98,12 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		else
 			change = Double.parseDouble(changeValueString);
 		long updateInterval = 3000;
-		String updateIntervalString = updateIntervalPref.getText();
+		String updateIntervalString = mUpdateIntervalPref.getText();
 		// Time is in seconds, convert to milliseconds
-		updateInterval = 1000 * Long.parseLong(updateIntervalString != null ? updateIntervalString : sharedPrefs.getString(
+		updateInterval = 1000 * Long.parseLong(updateIntervalString != null ? updateIntervalString : mSharedPrefs.getString(
 				SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, ""));
 		Alarm ret;
-		if(isPercentage) {
+		if(mIsPercentage) {
 			float percent = (float) change;
 			ret = new RollingPriceChangeAlarm(id, exchange, pair, updateInterval, notifier, percent, timeFrame);
 		} else {

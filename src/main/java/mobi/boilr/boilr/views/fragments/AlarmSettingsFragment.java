@@ -5,6 +5,7 @@ import java.io.IOException;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmSettingsActivity;
 import mobi.boilr.boilr.domain.AndroidNotifier;
+import mobi.boilr.boilr.preference.ThemableRingtonePreference;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
@@ -22,7 +23,6 @@ import android.os.IBinder;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.RingtonePreference;
 
 public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 	protected Alarm alarm;
@@ -43,36 +43,37 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 
 			String exchangeCode = alarm.getExchangeCode();
 			String exchangeName = alarm.getExchange().getName();
-			exchangeIndex = exchangeListPref.findIndexOfValue(exchangeCode);
-			exchangeListPref.setSummary(exchangeName);
+			mExchangeIndex = mExchangeListPref.findIndexOfValue(exchangeCode);
+			mExchangeListPref.setSummary(exchangeName);
 
-			if(recoverSavedInstance) {
-				alarmAlertTypePref.setSummary(alarmAlertTypePref.getEntry());
-				alertSoundPref.setSummary(Conversions.ringtoneUriToName(sharedPrefs.getString(PREF_KEY_ALARM_ALERT_SOUND, ""), enclosingActivity));
+			if(mRecoverSavedInstance) {
+				mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntry());
+				mAlertSoundPref.setRingtoneType(Integer.parseInt(mAlarmAlertTypePref.getValue()));
+				mAlertSoundPref.setSummary(mAlertSoundPref.getEntry());
 			} else {
-				exchangeListPref.setValue(exchangeCode);
+				mExchangeListPref.setValue(exchangeCode);
 
 				AndroidNotifier notifier = (AndroidNotifier) alarm.getNotifier();
 				Integer alertType = notifier.getAlertType();
 				if(alertType == null) {
-					alertType = Integer.parseInt(sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE, ""));
+					alertType = Integer.parseInt(mSharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE, ""));
 				}
-				alarmAlertTypePref.setValue(alertType.toString());
-				alarmAlertTypePref.setSummary(alarmAlertTypePref.getEntries()[alarmAlertTypePref.findIndexOfValue(alertType.toString())]);
-				alertSoundPref.setRingtoneType(alertType);
+				mAlarmAlertTypePref.setValue(alertType.toString());
+				mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntries()[mAlarmAlertTypePref.findIndexOfValue(alertType.toString())]);
+				mAlertSoundPref.setRingtoneType(alertType);
 
 				String alertSound = notifier.getAlertSound();
-				if(alertSound == null) {
-					alertSound = sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, "");
+				if(alertSound != null) {
+					mAlertSoundPref.setValue(alertSound);
+				} else {
+					mAlertSoundPref.setDefaultValue();
 				}
-				sharedPrefs.edit().putString(PREF_KEY_ALARM_ALERT_SOUND, alertSound).commit();
-				alertSoundPref.setSummary(Conversions.ringtoneUriToName(alertSound, enclosingActivity));
 
 				Boolean isVibrate = notifier.isVibrate();
 				if(isVibrate == null) {
-					isVibrate = sharedPrefs.getBoolean(SettingsFragment.PREF_KEY_VIBRATE_DEFAULT, true);
+					isVibrate = mSharedPrefs.getBoolean(SettingsFragment.PREF_KEY_VIBRATE_DEFAULT, true);
 				}
-				vibratePref.setChecked(isVibrate);
+				mVibratePref.setChecked(isVibrate);
 			}
 			initializePreferences();
 			updatePairsList(exchangeCode, exchangeName, alarm.getPair().toString());
@@ -93,22 +94,22 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 			AndroidNotifier notifier = (AndroidNotifier) alarm.getNotifier();
 			if(key.equals(PREF_KEY_EXCHANGE)) {
 				ListPreference listPref = (ListPreference) preference;
-				exchangeIndex = listPref.findIndexOfValue((String) newValue);
-				String exchangeName = (String) listPref.getEntries()[exchangeIndex];
+				mExchangeIndex = listPref.findIndexOfValue((String) newValue);
+				String exchangeName = (String) listPref.getEntries()[mExchangeIndex];
 				listPref.setSummary(exchangeName);
-				pairIndex = 0;
+				mPairIndex = 0;
 				updatePairsList((String) newValue, exchangeName, null);
 				try {
 					if(!mBound) {
-						throw new IOException(enclosingActivity.getString(R.string.not_bound, "AlarmSettingsFragment"));
+						throw new IOException(mEnclosingActivity.getString(R.string.not_bound, "AlarmSettingsFragment"));
 					}
 					alarm.setExchange(mStorageAndControlService.getExchange((String) newValue));
 				} catch(Exception e) {
 					Log.e("Cannot change Exchange.", e);
 				}
 			} else if(key.equals(PREF_KEY_PAIR)) {
-				pairIndex = Integer.parseInt((String) newValue);
-				Pair pair = pairs.get(pairIndex);
+				mPairIndex = Integer.parseInt((String) newValue);
+				Pair pair = mPairs.get(mPairIndex);
 				preference.setSummary(pair.toString());
 				updateDependentOnPairAux();
 				alarm.setPair(pair);
@@ -118,29 +119,29 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 					if(mBound) {
 						mStorageAndControlService.resetAlarmPeriod(alarm);
 					} else {
-						Log.e(enclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
+						Log.e(mEnclosingActivity.getString(R.string.not_bound, "PriceHitAlarmSettingsFragment"));
 					}
-					preference.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, newValue));
+					preference.setSummary(mEnclosingActivity.getString(R.string.seconds_abbreviation, newValue));
 				} catch(TimeFrameSmallerOrEqualUpdateIntervalException e) {
-					String msg = enclosingActivity.getString(R.string.failed_save_alarm) + " "
-						+ enclosingActivity.getString(R.string.frame_must_longer_interval);
+					String msg = mEnclosingActivity.getString(R.string.failed_save_alarm) + " "
+						+ mEnclosingActivity.getString(R.string.frame_must_longer_interval);
 					Log.e(msg, e);
-					IconToast.warning(enclosingActivity, msg);
+					IconToast.warning(mEnclosingActivity, msg);
 				}
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_TYPE)) {
 				ListPreference alertTypePref = (ListPreference) preference;
 				alertTypePref.setSummary(alertTypePref.getEntries()[alertTypePref.findIndexOfValue((String) newValue)]);
 				// Change selectable ringtones according to the alert type
 				int ringtoneType = Integer.parseInt((String) newValue);
-				alertSoundPref.setRingtoneType(ringtoneType);
+				mAlertSoundPref.setRingtoneType(ringtoneType);
 				String defaultRingtone = RingtoneManager.getDefaultUri(ringtoneType).toString();
-				alertSoundPref.setSummary(Conversions.ringtoneUriToName(defaultRingtone, enclosingActivity));
+				mAlertSoundPref.setSummary(Conversions.ringtoneUriToName(defaultRingtone, mEnclosingActivity));
 				notifier.setAlertType(ringtoneType);
 				notifier.setAlertSound(defaultRingtone);
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_SOUND)) {
-				RingtonePreference alertSoundPref = (RingtonePreference) preference;
 				String alertSound = (String) newValue;
-				alertSoundPref.setSummary(Conversions.ringtoneUriToName(alertSound, enclosingActivity));
+				if(alertSound.equals(ThemableRingtonePreference.DEFAULT))
+					alertSound = null;
 				notifier.setAlertSound(alertSound);
 			} else if(key.equals(PREF_KEY_ALARM_VIBRATE)) {
 				notifier.setVibrate((Boolean) newValue);
@@ -152,7 +153,7 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 			if(mBound) {
 				mStorageAndControlService.replaceAlarmDB(alarm);
 			} else {
-				Log.e(enclosingActivity.getString(R.string.not_bound, "AlarmSettingsFragment"));
+				Log.e(mEnclosingActivity.getString(R.string.not_bound, "AlarmSettingsFragment"));
 			}
 			return true;
 		}
@@ -160,7 +161,7 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 
 	@Override
 	protected void updateDependentOnPair() {
-		alarm.setPair(pairs.get(pairIndex));
+		alarm.setPair(mPairs.get(mPairIndex));
 	}
 
 	protected abstract void initializePreferences();
@@ -178,10 +179,10 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 		} else {
 			alarmID = savedInstanceState.getInt(AlarmSettingsActivity.alarmID);
 		}
-		alarmTypePref.setEnabled(false);
+		mAlarmTypePref.setEnabled(false);
 
 		mStorageAndControlServiceConnection = new InitializePreferencesConnection(alarmID);
-		enclosingActivity.bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
+		mEnclosingActivity.bindService(mServiceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
 	}
 
 	@Override

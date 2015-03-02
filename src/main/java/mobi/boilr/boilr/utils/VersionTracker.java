@@ -40,7 +40,7 @@ public class VersionTracker {
 	 */
 	private static final int NO_VERSION = -1;
 	private static int currentVersionCode;
-	private static boolean isFirstRun;
+	public static boolean isFirstRun;
 	private static Context context;
     
 	public static void showChangeLog(Activity activity) {
@@ -52,7 +52,7 @@ public class VersionTracker {
             currentVersionCode = packageInfo.versionCode;
         } catch (NameNotFoundException e) {
             currentVersionCode = NO_VERSION;
-            Log.e("Could not get version information from manifest!", e);
+			Log.e("Could not get version information from manifest.", e);
         }
 		isFirstRun = lastVersionCode < currentVersionCode;
 		if(isFirstRun)

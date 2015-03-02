@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.SettingsActivity;
+import mobi.boilr.boilr.preference.ThemableRingtonePreference;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
@@ -19,14 +20,12 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
-import android.preference.RingtonePreference;
 
 public class SettingsFragment extends PreferenceFragment implements
 		OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
@@ -77,11 +76,14 @@ public class SettingsFragment extends PreferenceFragment implements
 		}
 		SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
 
-		RingtonePreference alertSoundPref = (RingtonePreference) findPreference(PREF_KEY_DEFAULT_ALERT_SOUND);
+		ThemableRingtonePreference alertSoundPref = (ThemableRingtonePreference) findPreference(PREF_KEY_DEFAULT_ALERT_SOUND);
 		ListPreference alertTypePref = (ListPreference) findPreference(PREF_KEY_DEFAULT_ALERT_TYPE);
 		alertSoundPref.setRingtoneType(Integer.parseInt(alertTypePref.getValue()));
-		alertSoundPref.setSummary(Conversions.ringtoneUriToName(
-				sharedPreferences.getString(PREF_KEY_DEFAULT_ALERT_SOUND, ""), enclosingActivity));
+		if(alertSoundPref.getValue() == null) {
+			alertSoundPref.setDefaultValue();
+		} else {
+			alertSoundPref.setSummary(alertSoundPref.getEntry());
+		}
 
 		Preference pref;
 		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL);
@@ -123,12 +125,9 @@ public class SettingsFragment extends PreferenceFragment implements
 			ListPreference alertTypePref = (ListPreference) pref;
 			alertTypePref.setSummary(alertTypePref.getEntry());
 			// Change selectable ringtones according to the alert type
-			RingtonePreference alertSoundPref = (RingtonePreference) findPreference(PREF_KEY_DEFAULT_ALERT_SOUND);
+			ThemableRingtonePreference alertSoundPref = (ThemableRingtonePreference) findPreference(PREF_KEY_DEFAULT_ALERT_SOUND);
 			int ringtoneType = Integer.parseInt(alertTypePref.getValue());
 			alertSoundPref.setRingtoneType(ringtoneType);
-			String defaultRingtone = RingtoneManager.getDefaultUri(ringtoneType).toString();
-			sharedPrefs.edit().putString(PREF_KEY_DEFAULT_ALERT_SOUND, defaultRingtone).apply();
-			alertSoundPref.setSummary(Conversions.ringtoneUriToName(defaultRingtone, enclosingActivity));
 		} else if(key.equals(PREF_KEY_THEME)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());

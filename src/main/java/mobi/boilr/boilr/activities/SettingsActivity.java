@@ -6,7 +6,6 @@ import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import android.app.Activity;
 import android.os.Bundle;
-import android.preference.RingtonePreference;
 
 public class SettingsActivity extends Activity {
 	private SettingsFragment settingsFragment;
@@ -27,12 +26,6 @@ public class SettingsActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		settingsFragment.getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(settingsFragment);
-		/*
-		 * Patch to overcome onSharedPreferenceChange not being called by RingtonePreference.
-		 * By Arad on Stack Overflow http://stackoverflow.com/a/8105349
-		 */
-		RingtonePreference pref = (RingtonePreference) settingsFragment.findPreference(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND);
-		pref.setOnPreferenceChangeListener(settingsFragment);
 	}
 
 	@Override

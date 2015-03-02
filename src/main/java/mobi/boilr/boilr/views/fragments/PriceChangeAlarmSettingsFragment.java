@@ -19,8 +19,8 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
 			if(key.equals(PREF_KEY_CHANGE_IN_PERCENTAGE)) {
-				isPercentage = (Boolean) newValue;
-				if(isPercentage) {
+				mIsPercentage = (Boolean) newValue;
+				if(mIsPercentage) {
 					priceChangeAlarm.setPercent((float) priceChangeAlarm.getChange());
 				} else {
 					priceChangeAlarm.setChange(priceChangeAlarm.getPercent());
@@ -28,7 +28,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 				updateChangeValueText();
 				updateChangeValueSummary();
 			} else if(key.equals(PREF_KEY_CHANGE_VALUE)) {
-				if(isPercentage) {
+				if(mIsPercentage) {
 					priceChangeAlarm.setPercent(Float.parseFloat((String) newValue));
 				} else {
 					priceChangeAlarm.setChange(Double.parseDouble((String) newValue));
@@ -38,12 +38,12 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 				long timeFrame = Long.parseLong((String) newValue) * Conversions.MILIS_IN_MINUTE;
 				try {
 					priceChangeAlarm.setTimeFrame(timeFrame);
-					preference.setSummary(Conversions.buildMinToHoursSummary((String) newValue, enclosingActivity));
+					preference.setSummary(Conversions.buildMinToHoursSummary((String) newValue, mEnclosingActivity));
 				} catch(TimeFrameSmallerOrEqualUpdateIntervalException e) {
-					String msg = enclosingActivity.getString(R.string.failed_save_alarm) + " "
-						+ enclosingActivity.getString(R.string.frame_must_longer_interval);
+					String msg = mEnclosingActivity.getString(R.string.failed_save_alarm) + " "
+						+ mEnclosingActivity.getString(R.string.frame_must_longer_interval);
 					Log.e(msg, e);
-					IconToast.warning(enclosingActivity, msg);
+					IconToast.warning(mEnclosingActivity, msg);
 				}
 			} else {
 				return super.onPreferenceChange(preference, newValue);
@@ -51,7 +51,7 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 			if(mBound) {
 				mStorageAndControlService.replaceAlarmDB(priceChangeAlarm);
 			} else {
-				Log.e(enclosingActivity.getString(R.string.not_bound, "PriceChangeAlarmSettingsFragment"));
+				Log.e(mEnclosingActivity.getString(R.string.not_bound, "PriceChangeAlarmSettingsFragment"));
 			}
 			return true;
 		}
@@ -70,24 +70,24 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		listener = new OnPriceChangeSettingsPreferenceChangeListener();
+		mListener = new OnPriceChangeSettingsPreferenceChangeListener();
 		super.onCreate(savedInstanceState);
 
 		removePrefs(changeAlarmPrefsToKeep);
 		// Change value pref summary will be updated by updateDependentOnPair()
-		alarmTypePref.setValueIndex(1);
-		specificCat.setTitle(alarmTypePref.getEntry());
-		alarmTypePref.setSummary(alarmTypePref.getEntry());
+		mAlarmTypePref.setValueIndex(1);
+		mSpecificCat.setTitle(mAlarmTypePref.getEntry());
+		mAlarmTypePref.setSummary(mAlarmTypePref.getEntry());
 	}
 
 	private void updateChangeValueText() {
 		String formated;
-		if(isPercentage) {
+		if(mIsPercentage) {
 			formated = Conversions.formatMaxDecimalPlaces(priceChangeAlarm.getPercent());
 		} else {
 			formated = Conversions.formatMaxDecimalPlaces(priceChangeAlarm.getChange());
 		}
-		changePref.setText(formated);
+		mChangePref.setText(formated);
 	}
 
 	@Override
@@ -95,14 +95,14 @@ public class PriceChangeAlarmSettingsFragment extends AlarmSettingsFragment {
 		priceChangeAlarm = (RollingPriceChangeAlarm) alarm;
 		long minPeriod = priceChangeAlarm.getTimeFrame() / Conversions.MILIS_IN_MINUTE;
 		long secondsPeriod = priceChangeAlarm.getPeriod() / 1000;
-		updateIntervalPref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, String.valueOf(secondsPeriod)));
-		timeFramePref.setSummary(Conversions.buildMinToHoursSummary(String.valueOf(minPeriod), enclosingActivity));
-		if(!recoverSavedInstance) {
-			isPercentage = priceChangeAlarm.isPercent();
-			isPercentPref.setChecked(isPercentage);
+		mUpdateIntervalPref.setSummary(mEnclosingActivity.getString(R.string.seconds_abbreviation, String.valueOf(secondsPeriod)));
+		mTimeFramePref.setSummary(Conversions.buildMinToHoursSummary(String.valueOf(minPeriod), mEnclosingActivity));
+		if(!mRecoverSavedInstance) {
+			mIsPercentage = priceChangeAlarm.isPercent();
+			mIsPercentPref.setChecked(mIsPercentage);
 			updateChangeValueText();
-			timeFramePref.setText(String.valueOf(minPeriod));
-			updateIntervalPref.setText(String.valueOf(secondsPeriod));
+			mTimeFramePref.setText(String.valueOf(minPeriod));
+			mUpdateIntervalPref.setText(String.valueOf(secondsPeriod));
 		}
 	}
 }

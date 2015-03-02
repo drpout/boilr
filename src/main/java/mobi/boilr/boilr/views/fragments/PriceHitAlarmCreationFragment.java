@@ -22,7 +22,7 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
 			if(key.equals(PREF_KEY_UPPER_VALUE) || key.equals(PREF_KEY_LOWER_VALUE)) {
-				preference.setSummary(newValue + " " + pairs.get(pairIndex).getExchange());
+				preference.setSummary(newValue + " " + mPairs.get(mPairIndex).getExchange());
 			} else {
 				return super.onPreferenceChange(preference, newValue);
 			}
@@ -32,10 +32,10 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 
 	@Override
 	protected void updateDependentOnPair() {
-		EditTextPreference[] edits = { upperLimitPref, lowerLimitPref };
-		if(!recoverSavedInstance && lastValue != Double.POSITIVE_INFINITY) {
+		EditTextPreference[] edits = { mUpperLimitPref, mLowerLimitPref };
+		if(!mRecoverSavedInstance && mLastValue != Double.POSITIVE_INFINITY) {
 			for(EditTextPreference edit : edits) {
-				edit.setText(Conversions.formatMaxDecimalPlaces(lastValue));
+				edit.setText(Conversions.formatMaxDecimalPlaces(mLastValue));
 			}
 		}
 		String text;
@@ -43,7 +43,7 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 			edit.setEnabled(true);
 			text = edit.getText();
 			if(text != null && !text.equals(""))
-				edit.setSummary(text + " " + pairs.get(pairIndex).getExchange());
+				edit.setSummary(text + " " + mPairs.get(mPairIndex).getExchange());
 		}
 	}
 
@@ -54,37 +54,37 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		listener = new OnPriceHitSettingsPreferenceChangeListener();
+		mListener = new OnPriceHitSettingsPreferenceChangeListener();
 		super.onCreate(savedInstanceState);
 
 		removePrefs(hitAlarmPrefsToKeep);
 		if(savedInstanceState == null) {
-			upperLimitPref.setText(null);
-			lowerLimitPref.setText(null);
+			mUpperLimitPref.setText(null);
+			mLowerLimitPref.setText(null);
 			setUpdateIntervalPref();
 		} else {
 			// Upper and lower limit prefs summary will be updated by updateDependentOnPair()
 			checkAndSetUpdateIntervalPref();
 		}
-		alarmTypePref.setValueIndex(0);
-		specificCat.setTitle(alarmTypePref.getEntry());
-		alarmTypePref.setSummary(alarmTypePref.getEntry());
+		mAlarmTypePref.setValueIndex(0);
+		mSpecificCat.setTitle(mAlarmTypePref.getEntry());
+		mAlarmTypePref.setSummary(mAlarmTypePref.getEntry());
 	}
 
 	@Override
 	public Alarm makeAlarm(int id, Exchange exchange, Pair pair, AndroidNotifier notifier)
 			throws UpperLimitSmallerOrEqualLowerLimitException, IOException {
-		String updateInterval = updateIntervalPref.getText();
+		String updateInterval = mUpdateIntervalPref.getText();
 		// Time is in seconds, convert to milliseconds
 		long period = 1000 * Long.parseLong(updateInterval != null ? updateInterval :
-			sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, ""));
-		String upperLimitString = upperLimitPref.getText();
+			mSharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, ""));
+		String upperLimitString = mUpperLimitPref.getText();
 		double upperLimit;
 		if(upperLimitString == null || upperLimitString.equals(""))
 			upperLimit = Double.POSITIVE_INFINITY;
 		else
 			upperLimit = Double.parseDouble(upperLimitString);
-		String lowerLimitString = lowerLimitPref.getText();
+		String lowerLimitString = mLowerLimitPref.getText();
 		double lowerLimit;
 		if(lowerLimitString == null || lowerLimitString.equals(""))
 			lowerLimit = Double.NEGATIVE_INFINITY;

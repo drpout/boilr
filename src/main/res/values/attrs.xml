@@ -22,4 +22,8 @@
         <attr name="outer" format="boolean" />
         <attr name="hollow" format="boolean" />
     </declare-styleable>
+    
+    <declare-styleable name="ThemableRingtonePreference">
+        <attr name="showDefault" format="boolean" />
+    </declare-styleable>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:boilr="http://schemas.android.com/apk/res-auto" >
     <PreferenceCategory
         android:key="pref_key_generic"
         android:title="@string/pref_title_generic" >
@@ -78,13 +79,11 @@
             android:key="pref_key_alarm_alert_type"
             android:title="@string/pref_title_alarm_alert_type"
             android:persistent="false" />
-        <RingtonePreference
-            android:defaultValue="content://settings/system/alarm_alert"
+        <mobi.boilr.boilr.preference.ThemableRingtonePreference
             android:key="pref_key_alarm_alert_sound"
-            android:ringtoneType="alarm"
-            android:showDefault="false"
-            android:showSilent="true"
-            android:title="@string/pref_title_alarm_alert_sound" />
+            android:title="@string/pref_title_alarm_alert_sound"
+            boilr:showDefault="true"
+            android:persistent="false" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="pref_key_alarm_vibrate"

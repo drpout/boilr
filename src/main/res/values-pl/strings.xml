@@ -25,6 +25,7 @@
     <string name="pref_entries_alert_type_1">Powiadomienie</string>
     <string name="pref_entries_alert_type_2">Dźwięk</string>
     <string name="pref_title_default_alert_sound">Domyślny dźwięk</string>
+    <!-- Review please --><string name="default_value">Domyślny (%1$s)</string>
     <string name="pref_title_vibrate_default">Domyślna wibracja</string>
     <string name="pref_title_sound_volume">Głośność dźwięku</string>
     <string name="pref_summary_sound_volume">Boilr korzysta z ustawień systemowych poziomu głośności dla tego powiadomienia. Na większości urządzeń powiadomienia są ustawione na pełną głośność nawet jeśli telefon jest wyciszony.</string>

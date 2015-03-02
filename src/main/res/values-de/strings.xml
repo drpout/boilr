@@ -25,6 +25,7 @@
 	<string name="pref_entries_alert_type_1">Benachrichtigung</string>
 	<string name="pref_entries_alert_type_2">Klingelton</string>
 	<string name="pref_title_default_alert_sound">Standardsound</string>
+	<!-- Review please --><string name="default_value">Standardwert (%1$s)</string>
 	<string name="pref_title_sound_volume">Lautstärke</string>
 	<string name="pref_summary_sound_volume">Boiler nutzt die Gerätlautstärke für den ausgewählten Benachrichtigungstyp. Die meisten Geräte behalten, selbst bei Stummschaltung, die Lautstärke für Alarme bei.</string>
 	<string name="system_volumes">Gerätlautstärke</string>

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.preference.ThemableRingtonePreference;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.IconToast;
@@ -25,7 +26,6 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
 
 public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected static final String PREF_KEY_GENERIC = "pref_key_generic";
@@ -50,76 +50,76 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 			PREF_KEY_UPDATE_INTERVAL);
 	protected static final List<String> changeAlarmPrefsToKeep = Arrays.asList(PREF_KEY_CHANGE_IN_PERCENTAGE,
 			PREF_KEY_CHANGE_VALUE, PREF_KEY_TIME_FRAME, PREF_KEY_UPDATE_INTERVAL);
-	protected Activity enclosingActivity;
-	protected int exchangeIndex = 0, pairIndex = 0;
-	protected List<Pair> pairs = new ArrayList<Pair>();
-	protected double lastValue = Double.POSITIVE_INFINITY;
-	protected boolean isPercentage = false, recoverSavedInstance = false;
-	protected SharedPreferences sharedPrefs;
-	protected PreferenceCategory specificCat;
-	protected ListPreference exchangeListPref, pairListPref, alarmTypePref, alarmAlertTypePref;
-	protected RingtonePreference alertSoundPref;
-	protected CheckBoxPreference isPercentPref, vibratePref;
-	protected EditTextPreference lastValuePref, upperLimitPref, lowerLimitPref, timeFramePref, updateIntervalPref,
-			changePref;
-	protected OnPreferenceChangeListener listener;
+	protected Activity mEnclosingActivity;
+	protected int mExchangeIndex = 0, mPairIndex = 0;
+	protected List<Pair> mPairs = new ArrayList<Pair>();
+	protected double mLastValue = Double.POSITIVE_INFINITY;
+	protected boolean mIsPercentage = false, mRecoverSavedInstance = false;
+	protected SharedPreferences mSharedPrefs;
+	protected PreferenceCategory mSpecificCat;
+	protected ListPreference mExchangeListPref, mPairListPref, mAlarmTypePref, mAlarmAlertTypePref;
+	protected ThemableRingtonePreference mAlertSoundPref;
+	protected CheckBoxPreference mIsPercentPref, mVibratePref;
+	protected EditTextPreference mLastValuePref, mUpperLimitPref, mLowerLimitPref, mTimeFramePref, mUpdateIntervalPref,
+			mChangePref;
+	protected OnPreferenceChangeListener mListener;
 	protected StorageAndControlService mStorageAndControlService;
 	protected boolean mBound = false;
 	protected ServiceConnection mStorageAndControlServiceConnection;
-	protected Intent serviceIntent;
+	protected Intent mServiceIntent;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if(savedInstanceState != null)
-			recoverSavedInstance = true;
-		enclosingActivity = getActivity();
-		serviceIntent = new Intent(enclosingActivity, StorageAndControlService.class);
+			mRecoverSavedInstance = true;
+		mEnclosingActivity = getActivity();
+		mServiceIntent = new Intent(mEnclosingActivity, StorageAndControlService.class);
 		addPreferencesFromResource(R.xml.alarm_settings);
-		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(enclosingActivity);
-		exchangeListPref = (ListPreference) findPreference(PREF_KEY_EXCHANGE);
-		specificCat = (PreferenceCategory) findPreference(PREF_KEY_SPECIFIC);
-		pairListPref = (ListPreference) findPreference(PREF_KEY_PAIR);
-		lastValuePref = (EditTextPreference) findPreference(PREF_KEY_LAST_VALUE);
-		alarmTypePref = (ListPreference) findPreference(PREF_KEY_TYPE);
-		alarmAlertTypePref = (ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE);
-		alertSoundPref = (RingtonePreference) findPreference(PREF_KEY_ALARM_ALERT_SOUND);
-		vibratePref = (CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE);
-		upperLimitPref = (EditTextPreference) findPreference(PREF_KEY_UPPER_VALUE);
-		lowerLimitPref = (EditTextPreference) findPreference(PREF_KEY_LOWER_VALUE);
-		isPercentPref = (CheckBoxPreference) findPreference(PREF_KEY_CHANGE_IN_PERCENTAGE);
-		changePref = (EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE);
-		timeFramePref = (EditTextPreference) findPreference(PREF_KEY_TIME_FRAME);
-		updateIntervalPref = (EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL);
+		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(mEnclosingActivity);
+		mExchangeListPref = (ListPreference) findPreference(PREF_KEY_EXCHANGE);
+		mSpecificCat = (PreferenceCategory) findPreference(PREF_KEY_SPECIFIC);
+		mPairListPref = (ListPreference) findPreference(PREF_KEY_PAIR);
+		mLastValuePref = (EditTextPreference) findPreference(PREF_KEY_LAST_VALUE);
+		mAlarmTypePref = (ListPreference) findPreference(PREF_KEY_TYPE);
+		mAlarmAlertTypePref = (ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE);
+		mAlertSoundPref = (ThemableRingtonePreference) findPreference(PREF_KEY_ALARM_ALERT_SOUND);
+		mVibratePref = (CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE);
+		mUpperLimitPref = (EditTextPreference) findPreference(PREF_KEY_UPPER_VALUE);
+		mLowerLimitPref = (EditTextPreference) findPreference(PREF_KEY_LOWER_VALUE);
+		mIsPercentPref = (CheckBoxPreference) findPreference(PREF_KEY_CHANGE_IN_PERCENTAGE);
+		mChangePref = (EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE);
+		mTimeFramePref = (EditTextPreference) findPreference(PREF_KEY_TIME_FRAME);
+		mUpdateIntervalPref = (EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL);
 
-		Preference[] prefs = { exchangeListPref, pairListPref, lastValuePref,
-				alarmTypePref, upperLimitPref, lowerLimitPref, isPercentPref,
-				changePref, timeFramePref, updateIntervalPref,
-				alarmAlertTypePref, alertSoundPref, vibratePref };
+		Preference[] prefs = { mExchangeListPref, mPairListPref, mLastValuePref,
+				mAlarmTypePref, mUpperLimitPref, mLowerLimitPref, mIsPercentPref,
+				mChangePref, mTimeFramePref, mUpdateIntervalPref,
+				mAlarmAlertTypePref, mAlertSoundPref, mVibratePref };
 		for (Preference pref : prefs) {
-			pref.setOnPreferenceChangeListener(listener);
+			pref.setOnPreferenceChangeListener(mListener);
 		}
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		SharedPreferences.Editor editor = sharedPrefs.edit();
-		editor.putInt("exchangeIndex", exchangeIndex);
-		editor.putInt("pairIndex", pairIndex);
+		SharedPreferences.Editor editor = mSharedPrefs.edit();
+		editor.putInt("exchangeIndex", mExchangeIndex);
+		editor.putInt("pairIndex", mPairIndex);
 		editor.commit();
-		enclosingActivity.unbindService(mStorageAndControlServiceConnection);
+		mEnclosingActivity.unbindService(mStorageAndControlServiceConnection);
 	}
 
 	protected void updatePairsList(String exchangeCode, String exchangeName, String pairString) {
-		pairListPref.setEntries(null);
-		pairListPref.setEntryValues(null);
-		pairListPref.setSummary(null);
-		pairListPref.setEnabled(false);
+		mPairListPref.setEntries(null);
+		mPairListPref.setEntryValues(null);
+		mPairListPref.setSummary(null);
+		mPairListPref.setEnabled(false);
 		disableDependentOnPairAux();
 		try {
 			if(!mBound) {
-				throw new IOException(enclosingActivity.getString(R.string.not_bound, "AlarmPreferencesFragment"));
+				throw new IOException(mEnclosingActivity.getString(R.string.not_bound, "AlarmPreferencesFragment"));
 			}
 			mStorageAndControlService.getPairs(this, exchangeCode, exchangeName, pairString);
 		} catch (Exception e) {
@@ -129,13 +129,13 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	}
 
 	private void warnFailedRetrievePairs(String exchangeName, Exception e) {
-		String message = enclosingActivity.getString(R.string.couldnt_retrieve_pairs, exchangeName);
-		IconToast.warning(enclosingActivity, message);
+		String message = mEnclosingActivity.getString(R.string.couldnt_retrieve_pairs, exchangeName);
+		IconToast.warning(mEnclosingActivity, message);
 		Log.e(message, e);
 	}
 
 	public void updatePairsListCallback(String exchangeName, String pairString, List<Pair> pairs) {
-		this.pairs = pairs;
+		this.mPairs = pairs;
 		try {
 			if(pairs == null)
 				throw new Exception("Pairs is null.");
@@ -144,14 +144,14 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 			for (int i = 0; i < pairs.size(); i++) {
 				sequence[i] = pairs.get(i).toString();
 				if(pairString != null && sequence[i].equals(pairString))
-					pairIndex = i;
+					mPairIndex = i;
 				ids[i] = String.valueOf(i);
 			}
-			pairListPref.setEnabled(true);
-			pairListPref.setEntries(sequence);
-			pairListPref.setEntryValues(ids);
-			pairListPref.setSummary(sequence[pairIndex]);
-			pairListPref.setValueIndex(pairIndex);
+			mPairListPref.setEnabled(true);
+			mPairListPref.setEntries(sequence);
+			mPairListPref.setEntryValues(ids);
+			mPairListPref.setSummary(sequence[mPairIndex]);
+			mPairListPref.setValueIndex(mPairIndex);
 			updateDependentOnPairAux();
 		} catch (Exception e) {
 			warnFailedRetrievePairs(exchangeName, e);
@@ -159,21 +159,21 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	}
 
 	protected void updateDependentOnPairAux() {
-		if(recoverSavedInstance) {
-			lastValuePref.setSummary(lastValuePref.getText());
+		if(mRecoverSavedInstance) {
+			mLastValuePref.setSummary(mLastValuePref.getText());
 			updateDependentOnPair();
-			recoverSavedInstance = false;
+			mRecoverSavedInstance = false;
 		} else {
-			lastValue = Double.POSITIVE_INFINITY;
-			lastValuePref.setEnabled(false);
-			lastValuePref.setText(null);
-			lastValuePref.setSummary(null);
+			mLastValue = Double.POSITIVE_INFINITY;
+			mLastValuePref.setEnabled(false);
+			mLastValuePref.setText(null);
+			mLastValuePref.setSummary(null);
 			try {
 				if(!mBound) {
-					throw new IOException(enclosingActivity.getString(R.string.not_bound, "AlarmPreferencesFragment"));
+					throw new IOException(mEnclosingActivity.getString(R.string.not_bound, "AlarmPreferencesFragment"));
 				}
-				Exchange exchange = mStorageAndControlService.getExchange(exchangeListPref.getEntryValues()[exchangeIndex].toString());
-				mStorageAndControlService.getLastValue(this, exchange, pairs.get(pairIndex));
+				Exchange exchange = mStorageAndControlService.getExchange(mExchangeListPref.getEntryValues()[mExchangeIndex].toString());
+				mStorageAndControlService.getLastValue(this, exchange, mPairs.get(mPairIndex));
 			} catch (Exception e) {
 				warnFailedRetrieveLastValue(e);
 			}
@@ -181,8 +181,8 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	}
 
 	private void warnFailedRetrieveLastValue(Exception e) {
-		String message = enclosingActivity.getString(R.string.couldnt_retrieve_last_value, exchangeListPref.getEntry(), pairs.get(pairIndex).toString());
-		IconToast.warning(enclosingActivity, message);
+		String message = mEnclosingActivity.getString(R.string.couldnt_retrieve_last_value, mExchangeListPref.getEntry(), mPairs.get(mPairIndex).toString());
+		IconToast.warning(mEnclosingActivity, message);
 		Log.e(message, e);
 		updateDependentOnPair();
 	}
@@ -191,11 +191,11 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 		try {
 			if(result == null)
 				throw new Exception("Last value is null.");
-			lastValue = result;
-			lastValuePref.setEnabled(true);
-			String lastValueString = Conversions.formatMaxDecimalPlaces(lastValue) + " " + pairs.get(pairIndex).getExchange();
-			lastValuePref.setText(lastValueString);
-			lastValuePref.setSummary(lastValueString);
+			mLastValue = result;
+			mLastValuePref.setEnabled(true);
+			String lastValueString = Conversions.formatMaxDecimalPlaces(mLastValue) + " " + mPairs.get(mPairIndex).getExchange();
+			mLastValuePref.setText(lastValueString);
+			mLastValuePref.setSummary(lastValueString);
 			updateDependentOnPair();
 		} catch (Exception e) {
 			warnFailedRetrieveLastValue(e);
@@ -205,22 +205,22 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected abstract void updateDependentOnPair();
 
 	protected void updateDependentOnPairChangeAlarm() {
-		changePref.setEnabled(true);
+		mChangePref.setEnabled(true);
 		updateChangeValueSummary();
 	}
 
 	protected void disableDependentOnPairAux() {
-		lastValue = Double.POSITIVE_INFINITY;
-		lastValuePref.setEnabled(false);
-		lastValuePref.setText(null);
-		lastValuePref.setSummary(null);
+		mLastValue = Double.POSITIVE_INFINITY;
+		mLastValuePref.setEnabled(false);
+		mLastValuePref.setText(null);
+		mLastValuePref.setSummary(null);
 		disableDependentOnPair();
 	}
 
 	protected abstract void disableDependentOnPair();
 
 	protected void disableDependentOnPairHitAlarm() {
-		EditTextPreference[] edits = { upperLimitPref, lowerLimitPref };
+		EditTextPreference[] edits = { mUpperLimitPref, mLowerLimitPref };
 		for (EditTextPreference edit : edits) {
 			edit.setEnabled(false);
 			edit.setSummary(null);
@@ -228,32 +228,32 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	}
 
 	protected void disableDependentOnPairChangeAlarm() {
-		changePref.setEnabled(false);
-		changePref.setSummary(null);
+		mChangePref.setEnabled(false);
+		mChangePref.setSummary(null);
 	}
 
 	protected void removePrefs(List<String> prefsToKeep) {
 		Preference pref;
-		for (int i = 0; i < specificCat.getPreferenceCount(); i++) {
-			pref = specificCat.getPreference(i);
+		for (int i = 0; i < mSpecificCat.getPreferenceCount(); i++) {
+			pref = mSpecificCat.getPreference(i);
 			if(!prefsToKeep.contains(pref.getKey())) {
-				specificCat.removePreference(pref);
+				mSpecificCat.removePreference(pref);
 				i--;
 			}
 		}
 	}
 
 	protected void updateChangeValueSummary() {
-		String text = changePref.getText();
+		String text = mChangePref.getText();
 		if(text != null && !text.equals("")) {
-			changePref.setSummary(getChangeValueSummary(text));
+			mChangePref.setSummary(getChangeValueSummary(text));
 		}
 	}
 
 	protected String getChangeValueSummary(String value) {
-		if(isPercentage)
+		if(mIsPercentage)
 			return value + "%";
 		else
-			return value + " " + pairs.get(pairIndex).getExchange();
+			return value + " " + mPairs.get(mPairIndex).getExchange();
 	}
 }

@@ -7,11 +7,13 @@ import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.listeners.SwipeAndMoveTouchListener;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
+import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.utils.VersionTracker;
 import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
+import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.boilr.widget.AlarmGridView;
 import mobi.boilr.boilr.widget.AlarmLayout;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
@@ -22,6 +24,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.TypedArray;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -83,8 +86,13 @@ public class AlarmListActivity extends Activity {
 		Themer.applyTheme(this);
 		Languager.setLanguage(this);
 		VersionTracker.showChangeLog(this);
-		setContentView(R.layout.alarm_list);
 		PreferenceManager.setDefaultValues(this, R.xml.app_settings, false);
+		if(VersionTracker.isFirstRun) {
+			PreferenceManager.getDefaultSharedPreferences(this).edit()
+					.putString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, Conversions.getSystemRingtone(RingtoneManager.TYPE_ALARM, this))
+					.commit();
+		}
+		setContentView(R.layout.alarm_list);
 		mView = ((AlarmGridView) findViewById(R.id.list));
 		mAdapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<Alarm>());
 		mView.setAdapter(mAdapter);

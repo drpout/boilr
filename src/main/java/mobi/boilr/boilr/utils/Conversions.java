@@ -10,9 +10,11 @@ import java.util.Map;
 
 import mobi.boilr.boilr.R;
 import android.content.Context;
+import android.database.Cursor;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.provider.Settings;
 
 public class Conversions {
 	public static final long MILIS_IN_MINUTE = 60000; // 60 * 1000
@@ -133,6 +135,29 @@ public class Conversions {
 		// Context context = activity.getApplicationContext();
 		Ringtone ringtone = RingtoneManager.getRingtone(context, uri);
 		return ringtone != null ? ringtone.getTitle(context) : context.getString(R.string.unknown_ringtone);
+	}
+
+	/**
+	 * Based on Stack Overflow answer by Beatlej
+	 * https://stackoverflow.com/a/28378096
+	 */
+	public static String getSystemRingtone(int ringtoneType, Context context) {
+		Uri mediaUri = RingtoneManager.getDefaultUri(ringtoneType);
+		if(mediaUri.getAuthority().equals(Settings.AUTHORITY)) {
+			Cursor c = null;
+			try {
+				c = context.getContentResolver().query(mediaUri, new String[] { Settings.NameValueTable.VALUE }, null, null, null);
+				if(c != null && c.moveToFirst()) {
+					String val = c.getString(0);
+					mediaUri = Uri.parse(val);
+				}
+			} catch(Exception e) {
+				Log.e("Error getting system ringtone." + e);
+			} finally {
+				c.close();
+			}
+		}
+		return mediaUri.toString();
 	}
 
 	private static final Map<Integer, String> prefixes;
