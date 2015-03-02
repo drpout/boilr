@@ -48,6 +48,7 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 				mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntry());
 				mAlertSoundPref.setRingtoneType(mAlarmAlertTypePref.getValue());
 				mAlertSoundPref.setSummary(mAlertSoundPref.getEntry());
+				mVibratePref.setSummary(mVibratePref.getEntry());
 			} else {
 				mExchangeListPref.setValue(exchangeCode);
 
@@ -55,8 +56,8 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 				Integer alertType = notifier.getAlertType();
 				mAlarmAlertTypePref.setValue(alertType == null ? DEFAULT : alertType.toString());
 				mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntry());
-				mAlertSoundPref.setRingtoneType(mAlarmAlertTypePref.getValue());
 
+				mAlertSoundPref.setRingtoneType(mAlarmAlertTypePref.getValue());
 				String alertSound = notifier.getAlertSound();
 				if(alertSound != null) {
 					mAlertSoundPref.setValue(alertSound);
@@ -64,11 +65,9 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 					mAlertSoundPref.setDefaultValue();
 				}
 
-				Boolean isVibrate = notifier.isVibrate();
-				if(isVibrate == null) {
-					isVibrate = mSharedPrefs.getBoolean(SettingsFragment.PREF_KEY_VIBRATE_DEFAULT, true);
-				}
-				mVibratePref.setChecked(isVibrate);
+				Boolean vibrate = notifier.isVibrate();
+				mVibratePref.setValue(vibrate == null ? DEFAULT : vibrate.toString());
+				mVibratePref.setSummary(mVibratePref.getEntry());
 			}
 			initializePreferences();
 			updatePairsList(exchangeCode, exchangeName, alarm.getPair().toString());
@@ -141,7 +140,13 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 					alertSound = null;
 				notifier.setAlertSound(alertSound);
 			} else if(key.equals(PREF_KEY_ALARM_VIBRATE)) {
-				notifier.setVibrate((Boolean) newValue);
+				ListPreference vibratePref = (ListPreference) preference;
+				String vibrate = (String) newValue;
+				vibratePref.setSummary(vibratePref.getEntries()[vibratePref.findIndexOfValue(vibrate)]);
+				if(vibrate.equals(DEFAULT))
+					notifier.setVibrate(null);
+				else
+					notifier.setVibrate(Boolean.parseBoolean(vibrate));
 			} else {
 				Log.d("No behavior for " + key);
 				return true;

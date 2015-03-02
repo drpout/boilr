@@ -7,6 +7,8 @@
     <string name="add_alarm">添加提醒</string>
     <string name="boilr_settings">Boilr设置</string>
     <string name="about_title">关于Boilr</string>
+    <!-- Review please --><string name="yes">是</string>
+	<!-- Review please --><string name="no">不</string>
     <string name="ok">完成</string>
     <!-- Missing translation <string name="release_notes">Release notes</string>-->
     <string name="ok">OK</string>

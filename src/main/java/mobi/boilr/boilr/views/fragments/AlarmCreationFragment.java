@@ -28,7 +28,6 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.view.MenuItem;
 
 public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
-	protected boolean defaultVibrateDef = true;
 
 	@SuppressWarnings("unchecked")
 	private class UpdatePairsConnection implements ServiceConnection {
@@ -79,8 +78,7 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 				args.putInt("pairIndex", mPairIndex);
 				args.putString("alertType", mAlarmAlertTypePref.getValue());
 				args.putString("alertSound", mAlertSoundPref.getValue());
-				args.putBoolean("vibrate", mVibratePref.isChecked());
-				args.putBoolean("defaultVibrateDef", defaultVibrateDef);
+				args.putString("vibrate", mVibratePref.getValue());
 				if(newValue.equals(PREF_VALUE_PRICE_CHANGE)) {
 					creationFrag = new PriceChangeAlarmCreationFragment();
 				} else { // newValue.equals(PREF_VALUE_PRICE_HIT))
@@ -100,7 +98,8 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_SOUND)) {
 				// Nothing to do.
 			} else if(key.equals(PREF_KEY_ALARM_VIBRATE)) {
-				defaultVibrateDef = false;
+				ListPreference vibratePref = (ListPreference) preference;
+				vibratePref.setSummary(vibratePref.getEntries()[vibratePref.findIndexOfValue((String) newValue)]);
 			} else {
 				Log.d("No behavior for " + key);
 			}
@@ -111,51 +110,47 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		String alertType = null, vibrate = null;
 		if(savedInstanceState == null) {
 			Bundle args = getArguments();
-			String alertType = null, alertSound = null;
-			Boolean vibrate = null, defaultDef = null;
+			String alertSound = null;
 			if(args != null) {
 				mExchangeIndex = args.getInt("exchangeIndex");
 				mPairIndex = args.getInt("pairIndex");
 				alertType = args.getString("alertType");
 				alertSound = args.getString("alertSound");
-				vibrate = args.getBoolean("vibrate");
-				defaultDef = args.getBoolean("defaultVibrateDef");
+				vibrate = args.getString("vibrate");
 			}
 			else {
 				mExchangeIndex = mSharedPrefs.getInt("exchangeIndex", mExchangeListPref.findIndexOfValue(mExchangeListPref.getValue()));
 				mPairIndex = mSharedPrefs.getInt("pairIndex", 0);
 			}
 
-			if(alertType == null) {
+			if(alertType == null)
 				alertType = DEFAULT;
-			}
-			mAlarmAlertTypePref.setValue(alertType);
-			mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntry());
+			if(vibrate == null)
+				vibrate = DEFAULT;
+
 			mAlertSoundPref.setRingtoneType(alertType);
 			if(alertSound != null) {
 				mAlertSoundPref.setValue(alertSound);
 			} else {
 				mAlertSoundPref.setDefaultValue();
 			}
-
-			if(defaultDef == null) {
-				vibrate = mSharedPrefs.getBoolean(SettingsFragment.PREF_KEY_VIBRATE_DEFAULT, true);
-			} else {
-				defaultVibrateDef = defaultDef;
-			}
-			mVibratePref.setChecked(vibrate);
 		} else {
 			mExchangeIndex = savedInstanceState.getInt("exchangeIndex");
 			mPairIndex = savedInstanceState.getInt("pairIndex");
-			defaultVibrateDef = savedInstanceState.getBoolean("defaultVibrateDef");
-			String alertType = savedInstanceState.getString("alertType");
-			mAlarmAlertTypePref.setValue(alertType);
-			mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntry());
+			alertType = savedInstanceState.getString("alertType");
+			vibrate = savedInstanceState.getString("vibrate");
+
 			mAlertSoundPref.setRingtoneType(alertType);
 			mAlertSoundPref.setSummary(mAlertSoundPref.getEntry());
 		}
+		mAlarmAlertTypePref.setValue(alertType);
+		mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntry());
+		mVibratePref.setValue(vibrate);
+		mVibratePref.setSummary(mVibratePref.getEntry());
+
 		CharSequence exchangeCode = mExchangeListPref.getEntryValues()[mExchangeIndex];
 		CharSequence exchangeName = mExchangeListPref.getEntries()[mExchangeIndex];
 		mExchangeListPref.setSummary(exchangeName);
@@ -182,14 +177,14 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 		super.onSaveInstanceState(savedInstanceState);
 		savedInstanceState.putInt("exchangeIndex", mExchangeIndex);
 		savedInstanceState.putInt("pairIndex", mPairIndex);
-		savedInstanceState.putBoolean("defaultVibrateDef", defaultVibrateDef);
 		savedInstanceState.putString("alertType", mAlarmAlertTypePref.getValue());
+		savedInstanceState.putString("vibrate", mVibratePref.getValue());
 	}
 
 	private void createAlarmAndReturn() {
 		Integer alertType = mAlarmAlertTypePref.getValue().equals(DEFAULT) ? null : Integer.parseInt(mAlarmAlertTypePref.getValue());
 		String alertSound = mAlertSoundPref.getValue().equals(DEFAULT) ? null : mAlertSoundPref.getValue();
-		Boolean vibrate = defaultVibrateDef ? null : mVibratePref.isChecked();
+		Boolean vibrate = mVibratePref.getValue().equals(DEFAULT) ? null : Boolean.parseBoolean(mVibratePref.getValue());
 		AndroidNotifier notifier = new AndroidNotifier(mEnclosingActivity, alertType, alertSound, vibrate);
 		String failMsg = mEnclosingActivity.getString(R.string.failed_create_alarm);
 		try {

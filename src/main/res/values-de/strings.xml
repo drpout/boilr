@@ -8,6 +8,8 @@
 	<string name="boilr_settings">Boilr Einstellungen</string>
 	<string name="about_title">Info zu Boilr</string>
 	<string name="release_notes">Changelog</string>
+	<string name="yes">Ja</string>
+	<string name="no">Nein</string>
 	<string name="ok">OK</string>
 	<string name="cancel">Abbrechen</string>
 	<string name="about_version">Version: </string>

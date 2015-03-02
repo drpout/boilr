@@ -36,6 +36,7 @@
 			\+ Alarms can now be reordered.
 			\+ Added undo toast when alarm is deleted.
 			\+ Added pinstripe background.
+			\+ Alert type, sound and vibrate can now be switched between an alarm specific value and the app default.
 			\* Icon, alarms' list and alarm triggered notification completely redesigned.
 			\* Price Change Alarm now uses a rolling time frame.
 			\* Offed alarms are now continuously updated while alarm list is visible.

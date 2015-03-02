@@ -189,4 +189,14 @@
 		<item>@string/pref_type_entries_0</item>
 		<item>@string/pref_type_entries_1</item>
 	</string-array>
+	<string-array name="pref_entries_alarm_vibrate">
+		<item>@string/default_value</item>
+		<item>@string/yes</item>
+		<item>@string/no</item>
+	</string-array>
+	<string-array name="pref_values_alarm_vibrate">
+		<item>default</item>
+		<item>true</item>
+		<item>false</item>
+	</string-array>
 </resources>

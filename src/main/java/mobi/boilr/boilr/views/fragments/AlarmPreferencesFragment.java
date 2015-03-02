@@ -60,9 +60,9 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected boolean mIsPercentage = false, mRecoverSavedInstance = false;
 	protected SharedPreferences mSharedPrefs;
 	protected PreferenceCategory mSpecificCat;
-	protected ListPreference mExchangeListPref, mPairListPref, mAlarmTypePref, mAlarmAlertTypePref;
+	protected ListPreference mExchangeListPref, mPairListPref, mAlarmTypePref, mAlarmAlertTypePref, mVibratePref;
 	protected ThemableRingtonePreference mAlertSoundPref;
-	protected CheckBoxPreference mIsPercentPref, mVibratePref;
+	protected CheckBoxPreference mIsPercentPref;
 	protected EditTextPreference mLastValuePref, mUpperLimitPref, mLowerLimitPref, mTimeFramePref, mUpdateIntervalPref,
 			mChangePref;
 	protected OnPreferenceChangeListener mListener;
@@ -90,7 +90,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 		mAlarmTypePref = (ListPreference) findPreference(PREF_KEY_TYPE);
 		mAlarmAlertTypePref = (ListPreference) findPreference(PREF_KEY_ALARM_ALERT_TYPE);
 		mAlertSoundPref = (ThemableRingtonePreference) findPreference(PREF_KEY_ALARM_ALERT_SOUND);
-		mVibratePref = (CheckBoxPreference) findPreference(PREF_KEY_ALARM_VIBRATE);
+		mVibratePref = (ListPreference) findPreference(PREF_KEY_ALARM_VIBRATE);
 		mUpperLimitPref = (EditTextPreference) findPreference(PREF_KEY_UPPER_VALUE);
 		mLowerLimitPref = (EditTextPreference) findPreference(PREF_KEY_LOWER_VALUE);
 		mIsPercentPref = (CheckBoxPreference) findPreference(PREF_KEY_CHANGE_IN_PERCENTAGE);
@@ -106,11 +106,13 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 			pref.setOnPreferenceChangeListener(mListener);
 		}
 		
-		String value = mAlarmAlertTypePref.getValue();
 		CharSequence[] entries = mAlarmAlertTypePref.getEntries();
 		entries[0] = mEnclosingActivity.getString(R.string.default_value, getDefaultAlertTypeName());
 		mAlarmAlertTypePref.setEntries(entries);
-		mAlarmAlertTypePref.setValue(value);
+		
+		entries = mVibratePref.getEntries();
+		entries[0] = mEnclosingActivity.getString(R.string.default_value, getDefaultVibrateName());
+		mVibratePref.setEntries(entries);
 	}
 
 	@Override
@@ -277,5 +279,10 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected CharSequence getDefaultAlertTypeName() {
 		return mAlarmAlertTypePref.getEntries()[mAlarmAlertTypePref.
 		                                        findIndexOfValue(getDefaultAlertType(mSharedPrefs, mEnclosingActivity))];
+	}
+
+	protected CharSequence getDefaultVibrateName() {
+		return mSharedPrefs.getBoolean(SettingsFragment.PREF_KEY_VIBRATE_DEFAULT, true) ? 
+				mEnclosingActivity.getString(R.string.yes) : mEnclosingActivity.getString(R.string.no);
 	}
 }

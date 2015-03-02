@@ -8,6 +8,8 @@
     <string name="boilr_settings">Boilr nastavení</string>
     <string name="about_title">O aplikaci Boilr</string>
 	<string name="release_notes">Poznámky k verzi</string>
+	<string name="yes">Ano</string>
+	<string name="no">Ne</string>
     <string name="ok">OK</string>
     <string name="cancel">Zrušit</string>
     <string name="about_version">Verze: </string>

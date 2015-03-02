@@ -84,8 +84,10 @@
             android:title="@string/pref_title_alarm_alert_sound"
             boilr:showDefault="true"
             android:persistent="false" />
-        <CheckBoxPreference
-            android:defaultValue="true"
+        <ListPreference
+            android:defaultValue="default"
+            android:entries="@array/pref_entries_alarm_vibrate"
+            android:entryValues="@array/pref_values_alarm_vibrate"
             android:key="pref_key_alarm_vibrate"
             android:title="@string/pref_title_alarm_vibrate"
             android:persistent="false" />

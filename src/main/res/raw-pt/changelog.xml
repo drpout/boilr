@@ -10,6 +10,7 @@
 		<changelogtext>+ Os alarmes já podem ser reordenados.</changelogtext>
 		<changelogtext>+ Mostrada mensagem de aviso quando se apaga um alarme, permitindo voltar atrás.</changelogtext>
 		<changelogtext>+ Adicionado fundo com padrão baço tipo camisa.</changelogtext>
+		<changelogtext>+ Tipo de alerta, som e vibração podem agora ser mudados entre um valor específico para o alarme e o valor por omissão da aplicação.</changelogtext>
 		<changelogtext>* Ícone, lista de alarmes e notificação quando alarme dispara foram completamente redesenhados.</changelogtext>
 		<changelogtext>* O alarme de variação de preço usa agora uma janela temporal deslizante.</changelogtext>
 		<changelogtext>* Alarmes desligados são agora continuamente atualizados quando a lista de alarmes está visível.</changelogtext>

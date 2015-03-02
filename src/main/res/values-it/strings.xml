@@ -9,6 +9,8 @@
 	<string name="boilr_settings">Boilr impostazioni</string>
 	<string name="about_title">Circa Boilr</string>
 	<string name="release_notes">Modifiche tra versioni</string>
+	<string name="yes">Sì</string>
+	<string name="no">No</string>
 	<string name="ok">OK</string>
 	<string name="cancel">Cancellare</string>
 	<string name="about_version">Versione: </string>
