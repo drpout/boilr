@@ -5,7 +5,6 @@ import java.util.concurrent.ExecutionException;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.domain.AndroidNotifier;
-import mobi.boilr.boilr.preference.ThemableRingtonePreference;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.IconToast;
@@ -93,10 +92,10 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 				preference.setSummary(mEnclosingActivity.getString(R.string.seconds_abbreviation, newValue));
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_TYPE)) {
 				ListPreference alertTypePref = (ListPreference) preference;
-				alertTypePref.setSummary(alertTypePref.getEntries()[alertTypePref.findIndexOfValue((String) newValue)]);
+				String alertType = (String) newValue;
+				alertTypePref.setSummary(alertTypePref.getEntries()[alertTypePref.findIndexOfValue(alertType)]);
 				// Change selectable ringtones according to the alert type
-				int ringtoneType = Integer.parseInt((String) newValue);
-				mAlertSoundPref.setRingtoneType(ringtoneType);
+				mAlertSoundPref.setRingtoneType(alertType);
 				mAlertSoundPref.setDefaultValue();
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_SOUND)) {
 				// Nothing to do.
@@ -112,7 +111,6 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		String defaultAlertType = mSharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE, "");
 		if(savedInstanceState == null) {
 			Bundle args = getArguments();
 			String alertType = null, alertSound = null;
@@ -130,12 +128,12 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 				mPairIndex = mSharedPrefs.getInt("pairIndex", 0);
 			}
 
-			mAlarmAlertTypePref.setValue(alertType);
 			if(alertType == null) {
-				alertType = defaultAlertType;
+				alertType = DEFAULT;
 			}
-			mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntries()[mAlarmAlertTypePref.findIndexOfValue(alertType)]);
-			mAlertSoundPref.setRingtoneType(Integer.parseInt(alertType));
+			mAlarmAlertTypePref.setValue(alertType);
+			mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntry());
+			mAlertSoundPref.setRingtoneType(alertType);
 			if(alertSound != null) {
 				mAlertSoundPref.setValue(alertSound);
 			} else {
@@ -152,15 +150,10 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 			mExchangeIndex = savedInstanceState.getInt("exchangeIndex");
 			mPairIndex = savedInstanceState.getInt("pairIndex");
 			defaultVibrateDef = savedInstanceState.getBoolean("defaultVibrateDef");
-
-			if(mAlarmAlertTypePref.getValue() == null) {
-				mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntries()[mAlarmAlertTypePref.findIndexOfValue(defaultAlertType)]);
-			} else {
-				mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntry());
-			}
-
-			String alarmAlertType = mAlarmAlertTypePref.getValue() == null ? defaultAlertType : mAlarmAlertTypePref.getValue();
-			mAlertSoundPref.setRingtoneType(Integer.parseInt(alarmAlertType));
+			String alertType = savedInstanceState.getString("alertType");
+			mAlarmAlertTypePref.setValue(alertType);
+			mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntry());
+			mAlertSoundPref.setRingtoneType(alertType);
 			mAlertSoundPref.setSummary(mAlertSoundPref.getEntry());
 		}
 		CharSequence exchangeCode = mExchangeListPref.getEntryValues()[mExchangeIndex];
@@ -190,12 +183,12 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 		savedInstanceState.putInt("exchangeIndex", mExchangeIndex);
 		savedInstanceState.putInt("pairIndex", mPairIndex);
 		savedInstanceState.putBoolean("defaultVibrateDef", defaultVibrateDef);
+		savedInstanceState.putString("alertType", mAlarmAlertTypePref.getValue());
 	}
 
 	private void createAlarmAndReturn() {
-		Integer alertType = mAlarmAlertTypePref.getValue() != null ? Integer.parseInt(mAlarmAlertTypePref.getValue()) : null;
-		String alertSound = mAlertSoundPref.getValue().equals(ThemableRingtonePreference.DEFAULT) ?
-				null : mAlertSoundPref.getValue();
+		Integer alertType = mAlarmAlertTypePref.getValue().equals(DEFAULT) ? null : Integer.parseInt(mAlarmAlertTypePref.getValue());
+		String alertSound = mAlertSoundPref.getValue().equals(DEFAULT) ? null : mAlertSoundPref.getValue();
 		Boolean vibrate = defaultVibrateDef ? null : mVibratePref.isChecked();
 		AndroidNotifier notifier = new AndroidNotifier(mEnclosingActivity, alertType, alertSound, vibrate);
 		String failMsg = mEnclosingActivity.getString(R.string.failed_create_alarm);

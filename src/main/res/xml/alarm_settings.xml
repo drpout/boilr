@@ -73,9 +73,9 @@
         android:key="pref_key_alerts"
         android:title="@string/pref_title_alerts" >
         <ListPreference
-            android:defaultValue="@string/pref_default_alert_type"
-            android:entries="@array/pref_entries_alert_type"
-            android:entryValues="@array/pref_values_alert_type"
+            android:defaultValue="default"
+            android:entries="@array/pref_entries_alert_type_default"
+            android:entryValues="@array/pref_values_alert_type_default"
             android:key="pref_key_alarm_alert_type"
             android:title="@string/pref_title_alarm_alert_type"
             android:persistent="false" />

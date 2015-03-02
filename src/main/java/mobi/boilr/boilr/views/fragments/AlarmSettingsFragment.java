@@ -5,10 +5,8 @@ import java.io.IOException;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmSettingsActivity;
 import mobi.boilr.boilr.domain.AndroidNotifier;
-import mobi.boilr.boilr.preference.ThemableRingtonePreference;
 import mobi.boilr.boilr.services.LocalBinder;
 import mobi.boilr.boilr.services.StorageAndControlService;
-import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.IconToast;
 import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Pair;
@@ -17,7 +15,6 @@ import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ServiceConnection;
-import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.ListPreference;
@@ -34,6 +31,7 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 			this.alarmID = alarmID;
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void onServiceConnected(ComponentName className, IBinder binder) {
 			mStorageAndControlService = ((LocalBinder<StorageAndControlService>) binder).getService();
@@ -48,19 +46,16 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 
 			if(mRecoverSavedInstance) {
 				mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntry());
-				mAlertSoundPref.setRingtoneType(Integer.parseInt(mAlarmAlertTypePref.getValue()));
+				mAlertSoundPref.setRingtoneType(mAlarmAlertTypePref.getValue());
 				mAlertSoundPref.setSummary(mAlertSoundPref.getEntry());
 			} else {
 				mExchangeListPref.setValue(exchangeCode);
 
 				AndroidNotifier notifier = (AndroidNotifier) alarm.getNotifier();
 				Integer alertType = notifier.getAlertType();
-				if(alertType == null) {
-					alertType = Integer.parseInt(mSharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE, ""));
-				}
-				mAlarmAlertTypePref.setValue(alertType.toString());
-				mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntries()[mAlarmAlertTypePref.findIndexOfValue(alertType.toString())]);
-				mAlertSoundPref.setRingtoneType(alertType);
+				mAlarmAlertTypePref.setValue(alertType == null ? DEFAULT : alertType.toString());
+				mAlarmAlertTypePref.setSummary(mAlarmAlertTypePref.getEntry());
+				mAlertSoundPref.setRingtoneType(mAlarmAlertTypePref.getValue());
 
 				String alertSound = notifier.getAlertSound();
 				if(alertSound != null) {
@@ -130,17 +125,19 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 				}
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_TYPE)) {
 				ListPreference alertTypePref = (ListPreference) preference;
-				alertTypePref.setSummary(alertTypePref.getEntries()[alertTypePref.findIndexOfValue((String) newValue)]);
+				String alertType = (String) newValue;
+				alertTypePref.setSummary(alertTypePref.getEntries()[alertTypePref.findIndexOfValue(alertType)]);
 				// Change selectable ringtones according to the alert type
-				int ringtoneType = Integer.parseInt((String) newValue);
-				mAlertSoundPref.setRingtoneType(ringtoneType);
-				String defaultRingtone = RingtoneManager.getDefaultUri(ringtoneType).toString();
-				mAlertSoundPref.setSummary(Conversions.ringtoneUriToName(defaultRingtone, mEnclosingActivity));
-				notifier.setAlertType(ringtoneType);
-				notifier.setAlertSound(defaultRingtone);
+				mAlertSoundPref.setRingtoneType(alertType);
+				mAlertSoundPref.setDefaultValue();
+				if(alertType.equals(DEFAULT))
+					notifier.setAlertType(null);
+				else
+					notifier.setAlertType(Integer.parseInt(alertType));
+				notifier.setAlertSound(null);
 			} else if(key.equals(PREF_KEY_ALARM_ALERT_SOUND)) {
 				String alertSound = (String) newValue;
-				if(alertSound.equals(ThemableRingtonePreference.DEFAULT))
+				if(alertSound.equals(DEFAULT))
 					alertSound = null;
 				notifier.setAlertSound(alertSound);
 			} else if(key.equals(PREF_KEY_ALARM_VIBRATE)) {

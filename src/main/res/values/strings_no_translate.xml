@@ -13,6 +13,12 @@
 		<item>2</item>
 		<item>1</item>
 	</string-array>
+	<string-array name="pref_values_alert_type_default">
+		<item>default</item>
+		<item>4</item>
+		<item>2</item>
+		<item>1</item>
+	</string-array>
 	<string name="pref_default_alert_type">4</string>
 	<string-array name="pref_values_theme">
 		<item>dark</item>
@@ -156,7 +162,13 @@
 	</string-array>
 	<string name="pref_default_language">English</string>
 	<string name="pref_default_languange_code">en</string>
-		<string-array name="pref_entries_alert_type">
+	<string-array name="pref_entries_alert_type">
+		<item>@string/pref_entries_alert_type_0</item>
+		<item>@string/pref_entries_alert_type_1</item>
+		<item>@string/pref_entries_alert_type_2</item>
+	</string-array>
+	<string-array name="pref_entries_alert_type_default">
+		<item>@string/default_value</item>
 		<item>@string/pref_entries_alert_type_0</item>
 		<item>@string/pref_entries_alert_type_1</item>
 		<item>@string/pref_entries_alert_type_2</item>

@@ -7,10 +7,12 @@ import java.util.List;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.views.fragments.AlarmPreferencesFragment;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.Resources.Theme;
 import android.content.res.TypedArray;
 import android.database.Cursor;
@@ -34,9 +36,9 @@ public class ThemableRingtonePreference extends ListPreference {
 
 	private MediaPlayer mMediaPlayer;
 	private int mClickedDialogEntryIndex, mRingtoneType = 4;
-	private boolean mShowDefault = false;
+	private boolean mCurrentShowDefault, mShowDefault;
 	private String mAppRingtone;
-	public static final String DEFAULT = "default";
+	private SharedPreferences mSharedPrefs;
 
 	/**
 	 * After the constructor call setRingtoneType(int) to fill ringtone's list.
@@ -47,11 +49,12 @@ public class ThemableRingtonePreference extends ListPreference {
 			Theme t = context.getTheme();
 			TypedArray a = t.obtainStyledAttributes(attrs, R.styleable.ThemableRingtonePreference, 0, 0);
 			try {
-				mShowDefault = a.getBoolean(R.styleable.ThemableRingtonePreference_showDefault, false);
+				mCurrentShowDefault = mShowDefault = a.getBoolean(R.styleable.ThemableRingtonePreference_showDefault, false);
 			} finally {
 				a.recycle();
 			}
 		}
+		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
 	}
 
 	/**
@@ -81,7 +84,7 @@ public class ThemableRingtonePreference extends ListPreference {
 			public void onClick(DialogInterface dialog, int which) {
 				mClickedDialogEntryIndex = which;
 				String value = getEntryValues()[which].toString();
-				if(value.equals(DEFAULT))
+				if(value.equals(AlarmPreferencesFragment.DEFAULT))
 					value = mAppRingtone;
 				try {
 					playTone(value);
@@ -117,18 +120,24 @@ public class ThemableRingtonePreference extends ListPreference {
 		mMediaPlayer.release();
 	}
 
-	public void setRingtoneType(int ringtoneType) {
-		mRingtoneType = ringtoneType;
+	private int getAlertInt(String alertType) {
+		return Integer.parseInt(alertType.equals(AlarmPreferencesFragment.DEFAULT) ?
+				AlarmPreferencesFragment.getDefaultAlertType(mSharedPrefs, getContext()) : alertType);
+	}
+
+	public void setRingtoneType(String alertType) {
+		mRingtoneType = getAlertInt(alertType);
 		RingtoneManager ringtoneManager = new RingtoneManager(getContext());
-		ringtoneManager.setType(ringtoneType);
+		mCurrentShowDefault = mShowDefault && alertType.equals(AlarmPreferencesFragment.DEFAULT) ? true : false;
+		ringtoneManager.setType(mRingtoneType);
 		final Cursor ringtones = ringtoneManager.getCursor();
 		List<String> entries = new ArrayList<String>();
 		List<String> entryValues = new ArrayList<String>();
-		if(mShowDefault) {
-			mAppRingtone = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(
-					SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, RingtoneManager.getDefaultUri(ringtoneType).toString());
+		if(mCurrentShowDefault) {
+			mAppRingtone = mSharedPrefs.getString(
+					SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, Conversions.getSystemRingtone(mRingtoneType, getContext()));
 			entries.add(getContext().getString(R.string.default_value, Conversions.ringtoneUriToName(mAppRingtone, getContext())));
-			entryValues.add(DEFAULT);
+			entryValues.add(AlarmPreferencesFragment.DEFAULT);
 		}
 		// Silent
 		entries.add(getContext().getString(R.string.silent));
@@ -142,7 +151,7 @@ public class ThemableRingtonePreference extends ListPreference {
 	}
 
 	public void setDefaultValue() {
-		if(mShowDefault) {
+		if(mCurrentShowDefault) {
 			setValue((String) getEntryValues()[0]);
 		} else {
 			setValue(Conversions.getSystemRingtone(mRingtoneType, getContext()));

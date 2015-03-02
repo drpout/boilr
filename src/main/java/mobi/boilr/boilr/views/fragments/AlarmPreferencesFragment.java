@@ -16,6 +16,7 @@ import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -69,6 +70,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected boolean mBound = false;
 	protected ServiceConnection mStorageAndControlServiceConnection;
 	protected Intent mServiceIntent;
+	public static final String DEFAULT = "default";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -103,6 +105,12 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 		for (Preference pref : prefs) {
 			pref.setOnPreferenceChangeListener(mListener);
 		}
+		
+		String value = mAlarmAlertTypePref.getValue();
+		CharSequence[] entries = mAlarmAlertTypePref.getEntries();
+		entries[0] = mEnclosingActivity.getString(R.string.default_value, getDefaultAlertTypeName());
+		mAlarmAlertTypePref.setEntries(entries);
+		mAlarmAlertTypePref.setValue(value);
 	}
 
 	@Override
@@ -259,5 +267,15 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 			return value + "%";
 		else
 			return value + " " + mPairs.get(mPairIndex).getExchange();
+	}
+	
+	public static String getDefaultAlertType(SharedPreferences sharedPrefs, Context context) {
+		return sharedPrefs.getString(SettingsFragment.PREF_KEY_DEFAULT_ALERT_TYPE,
+				context.getString(R.string.pref_default_alert_type));
+	}
+
+	protected CharSequence getDefaultAlertTypeName() {
+		return mAlarmAlertTypePref.getEntries()[mAlarmAlertTypePref.
+		                                        findIndexOfValue(getDefaultAlertType(mSharedPrefs, mEnclosingActivity))];
 	}
 }

@@ -24,11 +24,9 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceFragment;
 
-public class SettingsFragment extends PreferenceFragment implements
-		OnSharedPreferenceChangeListener, OnPreferenceChangeListener {
+public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 	public static final String PREF_KEY_DEFAULT_ALERT_TYPE = "pref_key_default_alert_type";
 	public static final String PREF_KEY_DEFAULT_ALERT_SOUND = "pref_key_default_alert_sound";
 	public static final String PREF_KEY_THEME = "pref_key_theme";
@@ -44,6 +42,8 @@ public class SettingsFragment extends PreferenceFragment implements
 	private Activity enclosingActivity;
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
+	private ThemableRingtonePreference mAlertSoundPref;
+
 	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
 
 		@SuppressWarnings("unchecked")
@@ -76,14 +76,10 @@ public class SettingsFragment extends PreferenceFragment implements
 		}
 		SharedPreferences sharedPreferences = getPreferenceScreen().getSharedPreferences();
 
-		ThemableRingtonePreference alertSoundPref = (ThemableRingtonePreference) findPreference(PREF_KEY_DEFAULT_ALERT_SOUND);
+		mAlertSoundPref = (ThemableRingtonePreference) findPreference(PREF_KEY_DEFAULT_ALERT_SOUND);
 		ListPreference alertTypePref = (ListPreference) findPreference(PREF_KEY_DEFAULT_ALERT_TYPE);
-		alertSoundPref.setRingtoneType(Integer.parseInt(alertTypePref.getValue()));
-		if(alertSoundPref.getValue() == null) {
-			alertSoundPref.setDefaultValue();
-		} else {
-			alertSoundPref.setSummary(alertSoundPref.getEntry());
-		}
+		mAlertSoundPref.setRingtoneType(alertTypePref.getValue());
+		mAlertSoundPref.setSummary(mAlertSoundPref.getEntry());
 
 		Preference pref;
 		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL);
@@ -125,9 +121,10 @@ public class SettingsFragment extends PreferenceFragment implements
 			ListPreference alertTypePref = (ListPreference) pref;
 			alertTypePref.setSummary(alertTypePref.getEntry());
 			// Change selectable ringtones according to the alert type
-			ThemableRingtonePreference alertSoundPref = (ThemableRingtonePreference) findPreference(PREF_KEY_DEFAULT_ALERT_SOUND);
-			int ringtoneType = Integer.parseInt(alertTypePref.getValue());
-			alertSoundPref.setRingtoneType(ringtoneType);
+			mAlertSoundPref.setRingtoneType(alertTypePref.getValue());
+			mAlertSoundPref.setDefaultValue();
+		} else if(key.equals(PREF_KEY_DEFAULT_ALERT_SOUND)) {
+			// Nothing to do.
 		} else if(key.equals(PREF_KEY_THEME)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
@@ -161,6 +158,8 @@ public class SettingsFragment extends PreferenceFragment implements
 			Notifications.allowNoInternetNotification = show;
 			if(!show)
 				Notifications.clearNoInternetNotification(enclosingActivity);
+		} else {
+			Log.d("No behavior for " + key);
 		}
 	}
 
@@ -170,15 +169,5 @@ public class SettingsFragment extends PreferenceFragment implements
 		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 		enclosingActivity.finish();
 		enclosingActivity.startActivity(intent);
-	}
-
-	/*
-	 * Patch to overcome onSharedPreferenceChange not being called by RingtonePreference.
-	 * By Arad on Stack Overflow http://stackoverflow.com/a/8105349
-	 */
-	@Override
-	public boolean onPreferenceChange(Preference pref, Object newValue) {
-		pref.setSummary(Conversions.ringtoneUriToName((String) newValue, enclosingActivity));
-		return true;
 	}
 }
