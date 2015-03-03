@@ -4,6 +4,7 @@ import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmSettingsActivity;
 import mobi.boilr.boilr.activities.NotificationActivity;
 import mobi.boilr.boilr.activities.SettingsActivity;
+import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.Alarm.Direction;
@@ -15,31 +16,35 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.media.RingtoneManager;
 
 /* Based on Android DeskClock AlarmNotifications. */
 public final class Notifications {
 
-	private static final int noInternetNotificationID = 432191926;
-	private static Notification.Builder noInternetNotification = null;
-	public static boolean allowNoInternetNotification = true;
-	private static Bitmap smallUpArrowBitmap = null;
-	public static Bitmap bigUpArrowBitmap = null;
-	private static Bitmap smallDownArrowBitmap = null;
-	public static Bitmap bigDownArrowBitmap = null;
-	private static final int bigArrowSize = 250;
-	private static final int smallArrowSize = 100;
+	private static final int sNoNetNotifID = 432191926;
+	private static Notification.Builder sNoNetNotif = null;
+	public static boolean sAllowNoNetNotif = true;
+	private static Bitmap sSmallUpArrowBitmap = null;
+	public static Bitmap sBigUpArrowBitmap = null;
+	private static Bitmap sSmallDownArrowBitmap = null;
+	public static Bitmap sBigDownArrowBitmap = null;
+	private static final int sBigArrowSize = 250;
+	private static final int sSmallArrowSize = 100;
+	// Action used to turn off no internet notification.
+	public static final String ACTION_DISABLE_NET_NOTIF = "ACTION_DISABLE_NET_NOTIF";
 
 	private static Notification.Builder setCommonNotificationProps(Context context, Alarm alarm,
 			String firingReasonTitle, String firingReasonBody) {
-		if(smallUpArrowBitmap == null) {
+		if(sSmallUpArrowBitmap == null) {
 			int tickerGreen = context.getResources().getColor(R.color.tickergreen);
 			int tickerRed = context.getResources().getColor(R.color.tickerred);
-			smallUpArrowBitmap = textAsBitmap("▲", smallArrowSize, tickerGreen);
-			bigUpArrowBitmap = textAsBitmap("▲", bigArrowSize, tickerGreen);
-			smallDownArrowBitmap = textAsBitmap("▼", smallArrowSize, tickerRed);
-			bigDownArrowBitmap = textAsBitmap("▼", bigArrowSize, tickerRed);
+			sSmallUpArrowBitmap = textAsBitmap("▲", sSmallArrowSize, tickerGreen);
+			sBigUpArrowBitmap = textAsBitmap("▲", sBigArrowSize, tickerGreen);
+			sSmallDownArrowBitmap = textAsBitmap("▼", sSmallArrowSize, tickerRed);
+			sBigDownArrowBitmap = textAsBitmap("▼", sBigArrowSize, tickerRed);
 		}
 		Notification.Builder notification = new Notification.Builder(context)
 			.setContentTitle(firingReasonTitle)
@@ -49,9 +54,9 @@ public final class Notifications {
 			.setOngoing(false)
 			.setAutoCancel(true);
 		if(isDirectionUp(alarm)) {
-			notification.setLargeIcon(smallUpArrowBitmap);
+			notification.setLargeIcon(sSmallUpArrowBitmap);
 		} else {
-			notification.setLargeIcon(smallDownArrowBitmap);
+			notification.setLargeIcon(sSmallDownArrowBitmap);
 		}
 		Intent alarmSettingsIntent = new Intent(context, AlarmSettingsActivity.class);
 		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
@@ -134,22 +139,31 @@ public final class Notifications {
 	}
 
 	public static void showNoInternetNotification(Context context) {
-		if(allowNoInternetNotification) {
-			if(noInternetNotification == null) {
+		if(sAllowNoNetNotif) {
+			if(sNoNetNotif == null) {
 				Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
+				changeSettingsIntent.setAction(Notifications.ACTION_DISABLE_NET_NOTIF);
 				changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				noInternetNotification = new Notification.Builder(context)
+				Intent disableIntent = new Intent(context, StorageAndControlService.class);
+				disableIntent.setAction(Notifications.ACTION_DISABLE_NET_NOTIF);
+				Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_action_warning_dark);
+				sNoNetNotif = new Notification.Builder(context)
 						.setContentTitle(context.getString(R.string.no_internet))
 						.setContentText(context.getString(R.string.no_updates))
-						.setSmallIcon(R.drawable.ic_action_warning_dark)
+						.setSmallIcon(R.drawable.ic_notification)
+						.setLargeIcon(largeIcon)
 						.setOngoing(false)
 						.setAutoCancel(true)
 						//.setPriority(Notification.PRIORITY_DEFAULT) API 16 only
 						.setWhen(0)
-						.setContentIntent(PendingIntent.getActivity(context, noInternetNotificationID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+						.setContentIntent(PendingIntent.getActivity(context, sNoNetNotifID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT))
+						.setDeleteIntent(PendingIntent.getService(context, sNoNetNotifID, disableIntent, 0))
+						.setOnlyAlertOnce(true)
+						.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+						.setVibrate(NotificationKlaxon.sVibratePattern);
 			}
 			NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-			nm.notify(noInternetNotificationID, noInternetNotification.getNotification());
+			nm.notify(sNoNetNotifID, sNoNetNotif.getNotification());
 		}
 	}
 
@@ -183,10 +197,11 @@ public final class Notifications {
 
 	public static void clearNoInternetNotification(Context context) {
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		nm.cancel(noInternetNotificationID);
+		nm.cancel(sNoNetNotifID);
+		sAllowNoNetNotif = true;
 	}
 
 	public static void rebuildNoInternetNotification() {
-		noInternetNotification = null;
+		sNoNetNotif = null;
 	}
 }

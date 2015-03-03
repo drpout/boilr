@@ -10,6 +10,7 @@ import mobi.boilr.boilr.services.StorageAndControlService;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.boilr.utils.Languager;
 import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.utils.VersionTracker;
 import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
@@ -201,6 +202,7 @@ public class AlarmListActivity extends Activity {
 	public void onStart() {
 		super.onStart();
 		mView.start();
+		Notifications.sAllowNoNetNotif = true;
 	}
 
 	@Override

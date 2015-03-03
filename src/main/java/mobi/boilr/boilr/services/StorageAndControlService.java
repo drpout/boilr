@@ -51,7 +51,7 @@ public class StorageAndControlService extends Service {
 	private DBManager db;
 	private SharedPreferences sharedPrefs;
 	// Private action used to update last value from the Exchange.
-	private static final String RUN_ALARM = "RUN_ALARM";
+	private static final String ACTION_RUN_ALARM = "ACTION_RUN_ALARM";
 	private boolean offedAlarmsScheduled = false;
 
 	private BroadcastReceiver networkReceiver = new BroadcastReceiver() {
@@ -203,16 +203,18 @@ public class StorageAndControlService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		if(intent != null) {
 			String action = intent.getAction();
-			if(action != null && RUN_ALARM.equals(action)) {
+			if(ACTION_RUN_ALARM.equals(action)) {
 				int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
 				if(alarmID != Integer.MIN_VALUE) {
-					if(!runTaskAlarmList.contains(alarmID)){
+					if(!runTaskAlarmList.contains(alarmID)) {
 						runTaskAlarmList.add(alarmID);
 						Alarm alarm = getAlarm(alarmID);
 						AlarmAlertWakeLock.acquireCpuWakeLock(this);
 						new RunAlarmTask().execute(alarm);
 					}
 				}
+			} else if(Notifications.ACTION_DISABLE_NET_NOTIF.equals(action)) {
+				Notifications.sAllowNoNetNotif = false;
 			}
 		}
 		return START_STICKY;
@@ -348,7 +350,7 @@ public class StorageAndControlService extends Service {
 
 	private void addToAlarmManager(Alarm alarm, long firstDelay) {
 		Intent intent = new Intent(this, StorageAndControlService.class);
-		intent.setAction(RUN_ALARM);
+		intent.setAction(ACTION_RUN_ALARM);
 		intent.putExtra("alarmID", alarm.getId());
 		PendingIntent pendingIntent = PendingIntent.getService(this, alarm.getId(), intent, 0);
 		alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + firstDelay, alarm.getPeriod(), pendingIntent);
@@ -360,7 +362,7 @@ public class StorageAndControlService extends Service {
 
 	private void removeFromAlarmManager(int alarmID) {
 		Intent intent = new Intent(this, StorageAndControlService.class);
-		intent.setAction(RUN_ALARM);
+		intent.setAction(ACTION_RUN_ALARM);
 		PendingIntent pendingIntent = PendingIntent.getService(this, alarmID, intent, 0);
 		alarmManager.cancel(pendingIntent);
 	}

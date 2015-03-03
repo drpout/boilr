@@ -23,16 +23,16 @@ import android.preference.PreferenceManager;
  * Based on Android DeskClock AlarmKlaxon.
  */
 public class NotificationKlaxon {
-	private static final long[] sVibratePattern = new long[] { 500, 500 };
+	public static final long[] sVibratePattern = new long[] { 500, 500 };
 	private static MediaPlayer sMediaPlayer = null;
 	private static boolean sStarted = false;
-	private static final Map<Integer, Integer> alertToStreamType;
+	private static final Map<Integer, Integer> sAlertToStreamType;
 	static {
 		Map<Integer, Integer> aux = new HashMap<Integer, Integer>();
 		aux.put(RingtoneManager.TYPE_RINGTONE, AudioManager.STREAM_RING);
 		aux.put(RingtoneManager.TYPE_NOTIFICATION, AudioManager.STREAM_NOTIFICATION);
 		aux.put(RingtoneManager.TYPE_ALARM, AudioManager.STREAM_ALARM);
-		alertToStreamType = Collections.unmodifiableMap(aux);
+		sAlertToStreamType = Collections.unmodifiableMap(aux);
 	}
 
 	public static void stop(final Context context) {
@@ -119,7 +119,7 @@ public class NotificationKlaxon {
 	private static void startAlarm(final Context context, MediaPlayer player, int alertType)
 			throws IOException {
 		AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-		int streamType = alertToStreamType.get(alertType);
+		int streamType = sAlertToStreamType.get(alertType);
 		// do not play alarms if stream volume is 0 (typically because ringer mode is silent).
 		if(audioManager.getStreamVolume(streamType) != 0) {
 			player.setAudioStreamType(streamType);

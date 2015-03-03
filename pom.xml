@@ -31,7 +31,7 @@
 			\+ Added Chinese, German, Italian, Polish, Portuguese and Spanish translations.
 			\+ Last price on alarm list is now coloured according to price direction (up or down).
 			\+ Added arrow to the alarm triggered notifications showing which direction the price took.
-			\+ Added app settings to control volume and dismiss no internet notification.
+			\+ Added app setting to control volume.
 			\+ In alarms' list, clicking on alarm's limits or change value opens a dialog for quick editing.
 			\+ Alarms can now be reordered.
 			\+ Added undo toast when alarm is deleted.
@@ -40,6 +40,7 @@
 			\* Icon, alarms' list and alarm triggered notification completely redesigned.
 			\* Price Change Alarm now uses a rolling time frame.
 			\* Offed alarms are now continuously updated while alarm list is visible.
+			\* Dismissing a no internet notification now prevents showing it again until you get a new internet connection.
 			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange and OKCoin pairs.
 			\* Fixed bugs in Bitcoin.de, CCEX and Kraken exchanges' interaction.
 			\* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.

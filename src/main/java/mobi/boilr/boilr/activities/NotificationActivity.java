@@ -46,9 +46,9 @@ public class NotificationActivity extends Activity {
 		((TextView) view.findViewById(R.id.firing_reason)).setText(firingReason);
 		ImageView arrowView = (ImageView) view.findViewById(R.id.arrow);
 		if(isDirectionUp)
-			arrowView.setImageBitmap(Notifications.bigUpArrowBitmap);
+			arrowView.setImageBitmap(Notifications.sBigUpArrowBitmap);
 		else
-			arrowView.setImageBitmap(Notifications.bigDownArrowBitmap);
+			arrowView.setImageBitmap(Notifications.sBigDownArrowBitmap);
 		if(!canKeepMonitoring) {
 			view.findViewById(R.id.resume_wrapper).setVisibility(View.GONE);
 		}

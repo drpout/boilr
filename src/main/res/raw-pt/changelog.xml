@@ -5,7 +5,7 @@
 		<changelogtext>+ Adicionadas traduções para alemão, chinês, castelhano, italiano, polaco e português.</changelogtext>
 		<changelogtext>+ O último preço na lista de alarmes é agora colorido consoante a direção do preço (subida ou descida).</changelogtext>
 		<changelogtext>+ Adicionada seta que indica a direção do preço nas notificações mostradas quando um alarme dispara.</changelogtext>
-		<changelogtext>+ Adiconadas configurações para controlar o volume e esconder o aviso de falha de ligação à internet.</changelogtext>
+		<changelogtext>+ Adiconadas configuração para controlar o volume.</changelogtext>
 		<changelogtext>+ Na lista de alarmes, ao se clicar nos limites ou variação de um dado alarme abre-se uma janela para edição rápida do seu valor.</changelogtext>
 		<changelogtext>+ Os alarmes já podem ser reordenados.</changelogtext>
 		<changelogtext>+ Mostrada mensagem de aviso quando se apaga um alarme, permitindo voltar atrás.</changelogtext>
@@ -14,6 +14,7 @@
 		<changelogtext>* Ícone, lista de alarmes e notificação quando alarme dispara foram completamente redesenhados.</changelogtext>
 		<changelogtext>* O alarme de variação de preço usa agora uma janela temporal deslizante.</changelogtext>
 		<changelogtext>* Alarmes desligados são agora continuamente atualizados quando a lista de alarmes está visível.</changelogtext>
+		<changelogtext>* Apagar a notificação de falha de internet impede que esta seja mostrada até se obter uma nova ligação à internet.</changelogtext>
 		<changelogtext>* Atualização dos pares das bolsas ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange e OKCoin.</changelogtext>
 		<changelogtext>* Corrigidos erros na interação com as bolsas Bitcoin.de, CCEX e Kraken.</changelogtext>
 		<changelogtext>* Corrigida falha que disparava repetidamente alarmes cujo intervalo de atualização fosse curto.</changelogtext>

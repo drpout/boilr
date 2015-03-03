@@ -155,7 +155,7 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			StorageAndControlService.allowMobileData = sharedPrefs.getBoolean(key, false);
 		} else if(key.equals(PREF_KEY_SHOW_INTERNET_WARNING)) {
 			boolean show = sharedPrefs.getBoolean(key, true);
-			Notifications.allowNoInternetNotification = show;
+			Notifications.sAllowNoNetNotif = show;
 			if(!show)
 				Notifications.clearNoInternetNotification(enclosingActivity);
 		} else {

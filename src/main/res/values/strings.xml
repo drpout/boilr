@@ -39,7 +39,6 @@
     <string name="pref_entries_theme_1">Light</string>
 	<string name="pref_title_network_usage">Network usage</string>
 	<string name="pref_title_mobile_data">Mobile data</string>
-	<string name="pref_title_show_internet_warning">Show no internet warning</string>
 	<string name="pref_title_default_update_interval">Default update interval</string>
 	<string name="pref_summary_default_update_interval">In seconds. Defines how often alarms fetch data from the exchange. You can set another interval for a particular alarm on its settings.</string>
 	<string name="pref_title_default_time_frame">Default time frame</string>

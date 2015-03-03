@@ -39,7 +39,6 @@
 	<string name="pref_entries_theme_1">Claro</string>
 	<string name="pref_title_network_usage">Utilização de dados</string>
 	<string name="pref_title_mobile_data">Dados móveis</string>
-	<string name="pref_title_show_internet_warning">Aviso sem internet</string>
 	<string name="pref_title_default_update_interval">Intervalo de atualização por omissão</string>
 	<string name="pref_summary_default_update_interval">Em segundos. Define a frequência com que um alarme obtém dados da bolsa. Pode definir outro intervalo para um alarme em particular nas suas definições.</string>
 	<string name="pref_title_default_time_frame">Prazo por omissão</string>

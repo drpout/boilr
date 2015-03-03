@@ -2,6 +2,7 @@ package mobi.boilr.boilr.activities;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Languager;
+import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import android.app.Activity;
@@ -20,6 +21,9 @@ public class SettingsActivity extends Activity {
 		// Display the fragment as the main content.
 		settingsFragment = new SettingsFragment();
 		getFragmentManager().beginTransaction().replace(android.R.id.content, settingsFragment).commit();
+		if(Notifications.ACTION_DISABLE_NET_NOTIF.equals(getIntent().getAction())) {
+			Notifications.sAllowNoNetNotif = false;
+		}
 	}
 
 	@Override

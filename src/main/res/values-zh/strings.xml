@@ -40,7 +40,6 @@
     <string name="pref_entries_theme_1">Light</string>
     <string name="pref_title_network_usage">网络使用情况</string>
     <string name="pref_title_mobile_data">移动数据</string>
-    <string name="pref_title_show_internet_warning">忽略提醒</string>
     <!-- Review please --><string name="pref_title_default_update_interval">默认更新间隔</string>
     <!-- Review please, original has changed --><string name="pref_summary_default_update_interval">以秒为单位。设置触价提醒多久从交易所获取一次数据。您可以针对特定提醒单独设置此间隔。</string>
     <!-- Review please --><string name="pref_title_default_time_frame">提醒默认时间范围</string>
