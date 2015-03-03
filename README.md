@@ -1,5 +1,5 @@
 # Boilr
-[![Translation status](https://hosted.weblate.org/widgets/boilr/-/svg-badge.svg)](https://hosted.weblate.org/engage/boilr/?utm_source=widget)
+[![Get Boilr on F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=mobi.boilr.boilr)  [![Get Boilr on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=mobi.boilr.boilr)  [![Translation status](https://hosted.weblate.org/widgets/boilr/-/svg-badge.svg)](https://hosted.weblate.org/engage/boilr/?utm_source=widget)
 
 Android application which monitors Bitcoin, cryptocurrencies and bullion prices, and triggers alarms according to user settings.
 
@@ -14,9 +14,12 @@ Market data is retrieved directly from the exchanges using Wi-Fi or Mobile Data 
 
 To create alarms Boilr uses [libpricealarm](https://github.com/andrefbsantos/libpricealarm).
 
-Other libraries we use: [changeloglib](https://github.com/gabrielemariotti/changeloglib).
+Other libraries we use: [changeloglib](https://github.com/gabrielemariotti/changeloglib) and [UndoBar](https://github.com/soarcn/UndoBar).
 
 Check Boilr's website to see it in action: http://boilr.mobi The website source-code is available at [boilr-site](https://github.com/andrefbsantos/boilr-site).
+
+## Getting help
+Bug reports, feature requests and general help questions should be submitted on [Boilr's GitHub issues](https://github.com/andrefbsantos/boilr/issues). Please add the appropriate label.
 
 ## Troubleshooting
 

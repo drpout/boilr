@@ -15,7 +15,7 @@
     <string name="about_version">Wersja: </string>
     <string name="about_website">Strona WWW: </string>
     <string name="authors">Autorzy</string>
-    <!-- Review please --><string name="about_bugs">Błędy i propozycji: </string>
+    <!-- Review please --><string name="about_bugs">Pomoc, błędy i propozycji: </string>
     <string name="about_donations">Darowizny: </string>
     <string name="about_license">Licencji: </string>
     <string name="about_libraries">Bibliotek: </string>

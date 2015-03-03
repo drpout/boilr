@@ -15,7 +15,7 @@
 	<string name="about_version">Version: </string>
 	<string name="about_website">Webseite: </string>
 	<string name="authors">Autoren</string>
-	<!-- Review please --><string name="about_bugs">Bugs und Feature Requests: </string>
+	<!-- Review please --><string name="about_bugs">Hilfe, Bugs und Anträge: </string>
 	<string name="about_donations">Spenden: </string>
 	<string name="about_license">Lizenz: </string>
 	<string name="about_libraries">Bibliotheken: </string>
