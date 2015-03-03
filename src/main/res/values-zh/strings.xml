@@ -23,7 +23,6 @@
     <string name="changelog_header_version">"版本 "</string>
     <string name="pref_title_alerts">提醒</string>
     <string name="pref_title_default_alert_type">默认类型</string>
-    <!-- pref_entries_alert_type -->
     <string name="pref_entries_alert_type_0">闹钟</string>
     <string name="pref_entries_alert_type_1">通知</string>
     <string name="pref_entries_alert_type_2">铃声</string>
@@ -35,7 +34,6 @@
     <string name="pref_title_vibrate_default">默认震动</string>
     <string name="pref_title_appearance">外观</string>
     <string name="pref_title_theme">主题</string>
-    <!-- pref_entries_theme -->
     <string name="pref_entries_theme_0">Dark</string>
     <string name="pref_entries_theme_1">Light</string>
     <string name="pref_title_network_usage">网络使用情况</string>
@@ -45,7 +43,6 @@
     <!-- Review please --><string name="pref_title_default_time_frame">提醒默认时间范围</string>
     <!-- Review please, original has changed --><string name="pref_summary_default_time_frame">以分钟为单位。设置波动提醒的默认时间范围。您可以针对特定价格变动窗口设置此范围	。</string>
     <string name="pref_title_check_pairs_interval">新交易对检查间隔</string>
-    <!-- pref_entries_check_pairs_interval -->
     <string name="pref_entries_check_pairs_interval_0">每小时</string>
     <string name="pref_entries_check_pairs_interval_1">每天两次</string>
     <string name="pref_entries_check_pairs_interval_2">每天</string>
@@ -53,7 +50,6 @@
     <string name="pref_entries_check_pairs_interval_4">每周</string>
     <string name="pref_entries_check_pairs_interval_5">隔周</string>
     <string name="pref_type_title">提醒类型</string>
-    <!-- pref_type_entries -->
     <string name="pref_type_entries_0">价格触及</string>
     <string name="pref_type_entries_1">价格波动</string>
     <string name="pref_exchange_title">交易所</string>
@@ -76,7 +72,7 @@
     <string name="boilr_alarm">Boilr提醒</string>
     <string name="off">关闭</string>
     <!-- Review please, original has changed --><string name="resume">保持监控</string>
-    <string name="no_internet">没有网络连接。</string>
+    <string name="no_internet">没有网络连接</string>
     <string name="no_updates">无法获取最新数据。</string>
     <string name="couldnt_retrieve_pairs">无法获取%1$s的交易对。</string>
     <string name="couldnt_retrieve_last_value">无法获取%1$s %2$s的最新价格。</string>

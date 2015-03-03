@@ -22,7 +22,6 @@
     <string name="changelog_header_version">"Wersja "</string>
     <string name="pref_title_alerts">Powiadomienia</string>
     <string name="pref_title_default_alert_type">Domyślny rodzaj</string>
-    <!-- pref_entries_alert_type -->
     <string name="pref_entries_alert_type_0">Alarm</string>
     <string name="pref_entries_alert_type_1">Powiadomienie</string>
     <string name="pref_entries_alert_type_2">Dźwięk</string>
@@ -34,7 +33,6 @@
     <string name="system_volumes">Dźwięki systemowe</string>
     <string name="pref_title_appearance">Wygląd</string>
     <string name="pref_title_theme">Motyw</string>
-    <!-- pref_entries_theme -->
     <string name="pref_entries_theme_0">Ciemny</string>
     <string name="pref_entries_theme_1">Jasny</string>
     <string name="pref_title_network_usage">Wykorzystanie sieci</string>
@@ -42,9 +40,8 @@
     <!-- Review please --><string name="pref_title_default_update_interval">Odstęp pomiędzy sprawdzeniami ceny</string>
     <!-- Review please --><string name="pref_summary_default_update_interval">W sekundach. Opisuje jak często sprawdzana jest cena na giełdzie. Możesz zdefiniować inny odstęp dla konkretnego powiadomienia w jego ustawieniach.</string>
     <!-- Review please --><string name="pref_title_default_time_frame">Długość powiadomienia</string>
-    <!-- Review please --><string name="pref_summary_default_time_frame">W minutach. Używane przez powiadomienia o zmianie cen. Opisuje jak cena porównać z obecnym, na przykład cena od 15 minuty temu. Możesz zdefiniować inny czas dla konkretnego powiadomienia w jego ustawieniach.</string>
+    <!-- Review please --><string name="pref_summary_default_time_frame">W minutach. Używane przez powiadomienia o Zmianie cen. Opisuje jak cena porównać z obecnym, na przykład cena od 15 minuty temu. Możesz zdefiniować inny czas dla konkretnego powiadomienia w jego ustawieniach.</string>
     <string name="pref_title_check_pairs_interval">Sprawdź nowe pary</string>
-    <!-- pref_entries_check_pairs_interval -->
     <string name="pref_entries_check_pairs_interval_0">Co godzinę</string>
     <string name="pref_entries_check_pairs_interval_1">Dwa razy dziennie</string>
     <string name="pref_entries_check_pairs_interval_2">Raz dziennie</string>
@@ -52,7 +49,6 @@
     <string name="pref_entries_check_pairs_interval_4">Raz na tydzień</string>
     <string name="pref_entries_check_pairs_interval_5">Raz na dwa tygodnie</string>
     <string name="pref_type_title">Rodzaj powiadomienia</string>
-    <!-- pref_type_entries -->
     <string name="pref_type_entries_0">Osiągnięcie ceny</string>
     <string name="pref_type_entries_1">Zmiana ceny</string>
     <string name="pref_exchange_title">Giełda</string>
@@ -75,7 +71,7 @@
     <string name="boilr_alarm">Powiadomienie Boilr</string>
     <string name="off">Wyłącz</string>
     <!-- Review please --><string name="resume">Kontynuować</string>
-    <string name="no_internet">Boilr nie może połączyć się z internetem.</string>
+    <string name="no_internet">Boilr nie może połączyć się z internetem</string>
     <string name="no_updates">Ustawienia powiadomień nie mogą być zaktualizowane.</string>
     <string name="couldnt_retrieve_pairs">Nie można pobrać par dla %1$s.</string>
     <string name="couldnt_retrieve_last_value">Nie można pobać ostatniej wartości %1$s dla pary %2$s.</string>

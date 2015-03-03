@@ -23,7 +23,6 @@
 	<string name="changelog_header_version">"Versione "</string>
 	<string name="pref_title_alerts">Avvisi</string>
 	<string name="pref_title_default_alert_type">Tipo default</string>
-	<!-- pref_entries_alert_type -->
 	<string name="pref_entries_alert_type_0">Avviso</string>
 	<string name="pref_entries_alert_type_1">Notifiche</string>
 	<string name="pref_entries_alert_type_2">Suonerie</string>
@@ -35,7 +34,6 @@
 	<string name="pref_title_vibrate_default">Vibrazione default</string>
 	<string name="pref_title_appearance">Aspetto</string>
 	<string name="pref_title_theme">Tema</string>
-	<!-- pref_entries_theme -->
 	<string name="pref_entries_theme_0">Scuro</string>
 	<string name="pref_entries_theme_1">Chiaro</string>
 	<string name="pref_default_theme">scuro</string>
@@ -44,9 +42,8 @@
 	<string name="pref_title_default_update_interval">Intervallo di aggiornamento predefinito</string>
 	<!-- Review please --><string name="pref_summary_default_update_interval">In pochi secondi. Definisce quante volte un allarme riceve i dati dallo scambio. È possibile impostare un intervallo per un particolare allarme sulla sua configurazione.</string>
 	<string name="pref_title_default_time_frame">Lasso di tempo predefinito</string>
-	<!-- Review please --><string name="pref_summary_default_time_frame">In pochi minuti. Usato per l\'allarme cambiamento di prezzo. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa. È possibile impostare un intervallo di tempo di un particolare allarme sulla sua configurazione.</string>
+	<!-- Review please --><string name="pref_summary_default_time_frame">In pochi minuti. Usato per l\'allarme Cambiamento. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa. È possibile impostare un intervallo di tempo di un particolare allarme sulla sua configurazione.</string>
 	<string name="pref_title_check_pairs_interval">Verificare la presenza di nuove coppie</string>
-	<!-- pref_entries_check_pairs_interval -->
 	<string name="pref_entries_check_pairs_interval_0">Ogni ora</string>
 	<string name="pref_entries_check_pairs_interval_1">Due volte al giorno</string>
 	<string name="pref_entries_check_pairs_interval_2">Giornalmente</string>
@@ -54,7 +51,6 @@
 	<string name="pref_entries_check_pairs_interval_4">Settimanalmente</string>
 	<string name="pref_entries_check_pairs_interval_5">Due volte al mese</string>
 	<string name="pref_type_title">Tipo di allarme</string>
-	<!-- pref_type_entries -->
 	<string name="pref_type_entries_0">Limite prezzo</string>
 	<string name="pref_type_entries_1">Cambio prezzo</string>
 	<string name="pref_exchange_title">cambio</string>
@@ -77,7 +73,7 @@
 	<string name="boilr_alarm">Boilr Allarme</string>
 	<string name="off">Spegni</string>
 	<!-- Review please --><string name="resume">Riprendere</string>
-	<string name="no_internet">Boilr non è connesso.</string>
+	<string name="no_internet">Boilr non è connesso</string>
 	<string name="no_updates">Il tuo allarme non può essere aggiornato.</string>
 	<string name="couldnt_retrieve_pairs">Impossibile recuperare coppie %1$s.</string>
 	<string name="couldnt_retrieve_last_value">Impossibile recuperate l\'ultimo valore %1$s con coppie %2$s.</string>

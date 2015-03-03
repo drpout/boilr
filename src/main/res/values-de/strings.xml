@@ -22,7 +22,6 @@
 	<string name="changelog_header_version">"Version "</string>
 	<string name="pref_title_alerts">Benachrichtigungen</string>
 	<string name="pref_title_default_alert_type">Standardeinstellungen</string>
-	<!-- pref_entries_alert_type -->
 	<string name="pref_entries_alert_type_0">Alarm</string>
 	<string name="pref_entries_alert_type_1">Benachrichtigung</string>
 	<string name="pref_entries_alert_type_2">Klingelton</string>
@@ -34,7 +33,6 @@
 	<string name="pref_title_vibrate_default">Vibrieren</string>
 	<string name="pref_title_appearance">Erscheinung</string>
 	<string name="pref_title_theme">Motiv</string>
-	<!-- pref_entries_theme -->
 	<string name="pref_entries_theme_0">Dunkel</string>
 	<string name="pref_entries_theme_1">Hell</string>
 	<string name="pref_title_network_usage">Netznutzung</string>
@@ -44,7 +42,6 @@
 	<string name="pref_title_default_time_frame">Standardzeitrahmen</string>
 	<!-- Review please, original has changed --><string name="pref_summary_default_time_frame">In Minuten. Wird von Alarme zu Preisänderungen. Bestimmt welcher Preis, mit dem aktuellen vergleichen, z.B. der Pries von vor 15 Minuten. Sie können einen anderen Zeitrahmen für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
 	<string name="pref_title_check_pairs_interval">Suche nach neuen Paaren</string>
-	<!-- pref_entries_check_pairs_interval -->
 	<string name="pref_entries_check_pairs_interval_0">Stündlich</string>
 	<string name="pref_entries_check_pairs_interval_1">Zweimal am Tag</string>
 	<string name="pref_entries_check_pairs_interval_2">Täglich</string>
@@ -52,7 +49,6 @@
 	<string name="pref_entries_check_pairs_interval_4">Wöchentlich</string>
 	<string name="pref_entries_check_pairs_interval_5">Alle 2 Wochen</string>
 	<string name="pref_type_title">Alarmtyp</string>
-	<!-- pref_type_entries -->
 	<string name="pref_type_entries_0">Preistreffer</string>
 	<string name="pref_type_entries_1">Preisveränderung</string>
 	<string name="pref_exchange_title">Börse</string>
@@ -75,7 +71,7 @@
 	<string name="boilr_alarm">Boilr Alarm</string>
 	<string name="off">Ausschalten</string>
 	<string name="resume">Fortsetzen</string>
-	<string name="no_internet">Boilr hat keine Internetverbindung.</string>
+	<string name="no_internet">Boilr hat keine Internetverbindung</string>
 	<string name="no_updates">Ihre Alarme können nicht aktualisiert werden.</string>
 	<string name="couldnt_retrieve_pairs">Keine Paarergebnisse für %1$s.</string>
 	<string name="couldnt_retrieve_last_value">Keine Ergebnisse für den letzten Wert von %1$s in Verbindung mit %2$s.</string>

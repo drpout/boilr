@@ -22,7 +22,6 @@
 	<string name="changelog_header_version">"Versão "</string>
 	<string name="pref_title_alerts">Alertas</string>
 	<string name="pref_title_default_alert_type">Tipo por omissão</string>
-	<!-- pref_entries_alert_type -->
 	<string name="pref_entries_alert_type_0">Alarme</string>
 	<string name="pref_entries_alert_type_1">Notificação</string>
 	<string name="pref_entries_alert_type_2">Toque</string>
@@ -34,7 +33,6 @@
 	<string name="pref_title_vibrate_default">Vibrar por omissão</string>
 	<string name="pref_title_appearance">Aparência</string>
 	<string name="pref_title_theme">Tema</string>
-	<!-- pref_entries_theme -->
 	<string name="pref_entries_theme_0">Escuro</string>
 	<string name="pref_entries_theme_1">Claro</string>
 	<string name="pref_title_network_usage">Utilização de dados</string>
@@ -42,9 +40,8 @@
 	<string name="pref_title_default_update_interval">Intervalo de atualização por omissão</string>
 	<string name="pref_summary_default_update_interval">Em segundos. Define a frequência com que um alarme obtém dados da bolsa. Pode definir outro intervalo para um alarme em particular nas suas definições.</string>
 	<string name="pref_title_default_time_frame">Prazo por omissão</string>
-	<string name="pref_summary_default_time_frame">Em minutos. Usado pelos alarmes de variação. Define qual preço comparar com o atual, por exemplo, o precço de há 15 minutos atrás. Pode definir outro prazo para um alarme em particular nas suas definições.</string>
+	<string name="pref_summary_default_time_frame">Em minutos. Usado pelos alarmes de Variação. Define qual preço comparar com o atual, por exemplo, o precço de há 15 minutos atrás. Pode definir outro prazo para um alarme em particular nas suas definições.</string>
 	<string name="pref_title_check_pairs_interval">Procurar novos pares</string>
-	<!-- pref_entries_check_pairs_interval -->
 	<string name="pref_entries_check_pairs_interval_0">De hora a hora</string>
 	<string name="pref_entries_check_pairs_interval_1">Duas vezes por dia</string>
 	<string name="pref_entries_check_pairs_interval_2">Diáriamente</string>
@@ -52,7 +49,6 @@
 	<string name="pref_entries_check_pairs_interval_4">Semanalmente</string>
 	<string name="pref_entries_check_pairs_interval_5">Quinzenalmente</string>
 	<string name="pref_type_title">Tipo de alarme</string>
-	<!-- pref_type_entries -->
 	<string name="pref_type_entries_0">Preço limite</string>
 	<string name="pref_type_entries_1">Variação de preço</string>
 	<string name="pref_exchange_title">Bolsa</string>
@@ -75,7 +71,7 @@
 	<string name="boilr_alarm">Alarme Boilr</string>
 	<string name="off">Desligar</string>
 	<string name="resume">Retomar</string>
-	<string name="no_internet">Boilr não tem internet.</string>
+	<string name="no_internet">Boilr não tem internet</string>
 	<string name="no_updates">Os alarmes não podem ser atualizados.</string>
 	<string name="couldnt_retrieve_pairs">Impossível obter pares para %1$s.</string>
 	<string name="couldnt_retrieve_last_value">Impossível obter o último preço para %1$s com o par %2$s.</string>

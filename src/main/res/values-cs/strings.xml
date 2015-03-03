@@ -22,7 +22,6 @@
     <string name="changelog_header_version">"Verze "</string>
     <string name="pref_title_alerts">Upozornění</string>
     <string name="pref_title_default_alert_type">Výchozí typ</string>
-	<!-- pref_entries_alert_type -->
 	<string name="pref_entries_alert_type_0">Alarm</string>
 	<string name="pref_entries_alert_type_1">Upozornění</string>
 	<string name="pref_entries_alert_type_2">Vyzvánění</string>
@@ -34,7 +33,6 @@
     <string name="pref_title_vibrate_default">Vibrovat</string>
     <string name="pref_title_appearance">Vzhled</string>
     <string name="pref_title_theme">Motiv</string>
-	<!-- pref_entries_theme -->
 	<string name="pref_entries_theme_0">Tmavý</string>
 	<string name="pref_entries_theme_1">Světlý</string>
     <string name="pref_title_network_usage">Využití sítě</string>
@@ -42,9 +40,8 @@
     <string name="pref_title_default_time_frame">Výchozí časový interval</string>
     <string name="pref_title_default_update_interval">Výchozí interval aktualizace</string>
     <!-- Review please, original has changed --><string name="pref_summary_default_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>
-    <!-- Review please, original has changed --><string name="pref_summary_default_time_frame">V minutách. Určuje časový interval pro upozornění na změnu ceny. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>
+    <!-- Review please, original has changed --><string name="pref_summary_default_time_frame">V minutách. Určuje časový interval pro upozornění na Změnu ceny. Můžete nastavit vlastní interval pro určitý alarm v jeho nastavení.</string>
     <string name="pref_title_check_pairs_interval">Hledat nové páry</string>
-	<!-- pref_entries_check_pairs_interval -->
 	<string name="pref_entries_check_pairs_interval_0">Každou hodinu</string>
 	<string name="pref_entries_check_pairs_interval_1">Dvakrát denně</string>
 	<string name="pref_entries_check_pairs_interval_2">Jednou denně</string>
@@ -52,7 +49,6 @@
 	<string name="pref_entries_check_pairs_interval_4">Jednou týdně</string>
 	<string name="pref_entries_check_pairs_interval_5">Každé dva týdny</string>
     <string name="pref_type_title">Typ upozornění</string>
-	<!-- pref_type_entries -->
 	<string name="pref_type_entries_0">Dosažení ceny</string>
 	<string name="pref_type_entries_1">Změna ceny</string>
     <string name="pref_exchange_title">Burza</string>
@@ -75,7 +71,7 @@
     <string name="boilr_alarm">Upozornění aplikace Boilr</string>
     <string name="off">Vypnout</string>
     <string name="resume">Pokračovat</string>
-    <string name="no_internet">Boilr není připojen.</string>
+    <string name="no_internet">Boilr není připojen</string>
     <string name="no_updates">Vaše upozornění nemohou být aktualizována.</string>
     <string name="couldnt_retrieve_pairs">Nelze získat páry pro %1$s.</string>
     <string name="couldnt_retrieve_last_value">Nelze získat poslední hodnotu pro %1$s pro pár %2$s.</string>
