@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <color name="text_dark">#F3F3F3</color>
+    <color name="text_light">#323232</color>
     <color name="dkgray">#444444</color>
     <color name="ltgray">#CCCCCC</color>
     <color name="highlightblue">#33B5E5</color>

@@ -28,7 +28,8 @@
 			android:textSize="22dp"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:gravity="center"/>
+			android:gravity="center"
+			android:textColor="?attr/text_color"/>
 	</LinearLayout>
 	
     <LinearLayout
@@ -52,7 +53,8 @@
 				android:text="@string/resume"
 				android:drawableTop="?attr/ic_lock_reboot"
 				android:background="@drawable/normal"
-				android:onClick="onResumeClicked">
+				android:onClick="onResumeClicked"
+				android:textColor="?attr/text_color">
 			</Button>
 		</LinearLayout>
 		
@@ -70,7 +72,8 @@
 				android:text="@string/off"
 				android:drawableTop="?attr/ic_lock_power_off"
 				android:background="@drawable/normal"
-				android:onClick="onOffClicked">
+				android:onClick="onOffClicked"
+				android:textColor="?attr/text_color">
 			</Button>
 		</LinearLayout>
 	</LinearLayout>

@@ -14,6 +14,7 @@
         <item name="progress_circle_color_on">@color/highlightblue</item>
         <item name="progress_circle_color_off">@color/ltgray</item>
         <item name="row_color">@drawable/dkrow</item>
+        <item name="text_color">@color/text_dark</item>
         <item name="off_bar">@drawable/dkoffbar</item>
 		<item name="android:windowBackground">@drawable/backrepeat_dark</item>
 		<item name="undoBarStyle">@style/DarkUndoBarStyle</item>
@@ -34,6 +35,7 @@
         <item name="progress_circle_color_on">@color/highlightblue</item>
         <item name="progress_circle_color_off">@color/dkgray</item>
         <item name="row_color">@drawable/ltrow</item>
+        <item name="text_color">@color/text_light</item>
         <item name="off_bar">@drawable/ltoffbar</item>
         <item name="android:windowBackground">@drawable/backrepeat_light</item>
         <item name="android:actionBarStyle">@android:style/Widget.Holo.Light.ActionBar</item>
@@ -49,10 +51,20 @@
     
     <style name="DarkUndoBarStyle" parent="BoilrUndoBarStyle">
         <item name="containerStyle">@style/DarkUndoBarContainer</item>
+        <item name="messageStyle">@style/DarkUndoBarMessage</item>
+        <item name="buttonStyle">@style/DarkUndoBarButton</item>
     </style>
     
 	<style name="DarkUndoBarContainer" parent="UndoBarClassic">
         <item name="android:background">@drawable/toast_background_dark</item>
+    </style>
+    
+	<style name="DarkUndoBarMessage" parent="UndoBarMessageClassic">
+        <item name="android:textColor">@color/text_dark</item>
+    </style>
+    
+	<style name="DarkUndoBarButton" parent="UndoBarButtonClassic">
+        <item name="android:textColor">@color/text_dark</item>
     </style>
     
 	<style name="LightUndoBarStyle" parent="BoilrUndoBarStyle">
@@ -67,11 +79,11 @@
     </style>
     
 	<style name="LightUndoBarMessage" parent="UndoBarMessageClassic">
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/text_light</item>
     </style>
     
 	<style name="LightUndoBarButton" parent="UndoBarButtonClassic">
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/text_light</item>
     </style>
     
 	<style name="LightUndoBarDivider" parent="UndoBarDividerClassic">
@@ -83,7 +95,7 @@
     </style>
     
 	<style name="LightToastTextStyle">
-        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColor">@color/text_light</item>
     </style>
     
 	<style name="DarkToastContainerStyle">
@@ -91,6 +103,6 @@
     </style>
     
 	<style name="DarkToastTextStyle">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/text_dark</item>
     </style>
 </resources>
