@@ -65,7 +65,7 @@ Boilr follows [Semantic Versioning](http://semver.org) with the API being the us
 ## License and authorship
 Boilr code licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to [André Filipe Santos](https://github.com/andrefbsantos), [David Ludovino](https://github.com/dllud) and other [contributors listed on GitHub](https://github.com/andrefbsantos/boilr/graphs/contributors), unless otherwise stated.
 
-Concept, design, [icon](src/main/img/icon.ai) and [artwork](src/main/img) by [Ricardo Duarte](http://vimeo.com/ricardoduarte). Icon dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE).
+Concept, design, [icon](src/main/img/ic_boilr.ai) and [artwork](src/main/img) by [Ricardo Duarte](http://cargocollective.com/algazarra/index). Icon dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE).
 
 Translators:
 

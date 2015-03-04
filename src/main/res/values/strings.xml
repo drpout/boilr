@@ -71,15 +71,14 @@
 	<string name="boilr_alarm">Boilr Alarm</string>
 	<string name="off">Off</string>
 	<string name="resume">Resume</string>
-	<string name="no_internet">Boilr has no internet</string>
-	<string name="no_updates">Your alarms cannot be updated.</string>
+	<string name="check_connection">Check your connection</string>
+	<string name="alarms_not_updating">Alarms not updating.</string>
 	<string name="couldnt_retrieve_pairs">Couldn\'t retrieve pairs for <xliff:g id="exchange" example="Bitstamp">%1$s</xliff:g>.</string>
 	<string name="couldnt_retrieve_last_value">Couldn\'t retrieve last value for <xliff:g id="exchange" example="Bitstamp">%1$s</xliff:g> with pair <xliff:g id="pair" example="BTC/USD">%2$s</xliff:g>.</string>
 	<string name="failed_create_alarm">Failed to create alarm.</string>
 	<string name="failed_save_alarm">Failed to save alarm.</string>
 	<string name="upper_must_larger_lower">Upper limit must be larger than lower limit.</string>
 	<string name="frame_must_longer_interval">Time frame must be longer than update interval.</string>
-	<string name="check_connection">Please check your internet connection.</string>
 	<string name="not_bound"><xliff:g id="class_name" example="AlarmListActivity">%1$s</xliff:g> not bound to StorageAndControlService.</string>
 	<string name="pair_search_description">Pair search</string>
 	<string name="silent">Silent</string>

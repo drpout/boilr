@@ -71,15 +71,14 @@
     <string name="boilr_alarm">Upozornění aplikace Boilr</string>
     <string name="off">Vypnout</string>
     <string name="resume">Pokračovat</string>
-    <string name="no_internet">Boilr není připojen</string>
-    <string name="no_updates">Vaše upozornění nemohou být aktualizována.</string>
+    <!-- Review please--><string name="check_connection">Ověřte své připojení</string>
+    <!-- Review please--><string name="alarms_not_updating">Upozornění neaktualizují.</string>
     <string name="couldnt_retrieve_pairs">Nelze získat páry pro %1$s.</string>
     <string name="couldnt_retrieve_last_value">Nelze získat poslední hodnotu pro %1$s pro pár %2$s.</string>
     <string name="failed_create_alarm">Chyba při vytváření upozornění.</string>
     <string name="failed_save_alarm">Nepodařilo se uložit upozornění.</string>
     <!-- Missing translation <string name="upper_must_larger_lower"></string>
     <string name="frame_must_longer_interval"></string>-->
-    <string name="check_connection">Ověřte prosím své internetové připojení.</string>
     <string name="not_bound">%1$s nepřipojen k službě StorageAndControlService.</string>
     <string name="pair_search_description">Hledat pár</string>
     <string name="silent">Tichý</string>

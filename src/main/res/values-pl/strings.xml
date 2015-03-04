@@ -71,15 +71,14 @@
     <string name="boilr_alarm">Powiadomienie Boilr</string>
     <string name="off">Wyłącz</string>
     <!-- Review please --><string name="resume">Kontynuować</string>
-    <string name="no_internet">Boilr nie może połączyć się z internetem</string>
-    <string name="no_updates">Ustawienia powiadomień nie mogą być zaktualizowane.</string>
+    <!-- Review please --><string name="check_connection">Sprawdź połączenie</string>
+    <!-- Review please --><string name="alarms_not_updating">Powiadomień nie aktualizowanie.</string>
     <string name="couldnt_retrieve_pairs">Nie można pobrać par dla %1$s.</string>
     <string name="couldnt_retrieve_last_value">Nie można pobać ostatniej wartości %1$s dla pary %2$s.</string>
     <string name="failed_create_alarm">Nie można utworzyć powiadomienia.</string>
     <!-- Missing translation <string name="failed_save_alarm">Failed to save alarm.</string>
     <string name="upper_must_larger_lower">Upper limit must be larger than lower limit.</string>
     <string name="frame_must_longer_interval">Time frame must be longer than update interval.</string>-->
-    <string name="check_connection">Sprawdź połączenie internetowe.</string>
     <string name="not_bound">%1$s nie połączony z usługą StorageAndControlService.</string>
     <string name="pair_search_description">Szukaj par</string>
     <string name="silent">Wyciszenie</string>

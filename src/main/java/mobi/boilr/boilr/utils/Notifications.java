@@ -148,8 +148,8 @@ public final class Notifications {
 				disableIntent.setAction(Notifications.ACTION_DISABLE_NET_NOTIF);
 				Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_no_wifi_dark);
 				sNoNetNotif = new Notification.Builder(context)
-						.setContentTitle(context.getString(R.string.no_internet))
-						.setContentText(context.getString(R.string.no_updates))
+						.setContentTitle(context.getString(R.string.check_connection))
+						.setContentText(context.getString(R.string.alarms_not_updating))
 						.setSmallIcon(R.drawable.ic_notification)
 						.setLargeIcon(largeIcon)
 						.setOngoing(false)

@@ -71,15 +71,14 @@
 	<string name="boilr_alarm">Alarme Boilr</string>
 	<string name="off">Desligar</string>
 	<string name="resume">Retomar</string>
-	<string name="no_internet">Boilr não tem internet</string>
-	<string name="no_updates">Os alarmes não podem ser atualizados.</string>
+	<string name="check_connection">Verifique a ligação</string>
+	<string name="alarms_not_updating">Alarmes não atualizados.</string>
 	<string name="couldnt_retrieve_pairs">Impossível obter pares para %1$s.</string>
 	<string name="couldnt_retrieve_last_value">Impossível obter o último preço para %1$s com o par %2$s.</string>
 	<string name="failed_create_alarm">Falha ao criar alarme.</string>
 	<string name="failed_save_alarm">Falha ao gravar alarme.</string>
 	<string name="upper_must_larger_lower">Limite superior deve ser maior que limite inferior.</string>
 	<string name="frame_must_longer_interval">Prazo deve ser mais longo que intervalo de atualização.</string>
-	<string name="check_connection">Verifique a sua ligação à internet.</string>
 	<string name="not_bound">%1$s não está ligado ao StorageAndControlService.</string>
 	<string name="pair_search_description">Pesquisa de pares</string>
 	<string name="silent">Silencioso</string>

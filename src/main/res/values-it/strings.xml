@@ -73,15 +73,14 @@
 	<string name="boilr_alarm">Boilr Allarme</string>
 	<string name="off">Spegni</string>
 	<!-- Review please --><string name="resume">Riprendere</string>
-	<string name="no_internet">Boilr non è connesso</string>
-	<string name="no_updates">Il tuo allarme non può essere aggiornato.</string>
+	<string name="check_connection">Controlla la connessione</string>
+	<string name="alarms_not_updating">Allarmi non aggiornate.</string>
 	<string name="couldnt_retrieve_pairs">Impossibile recuperare coppie %1$s.</string>
 	<string name="couldnt_retrieve_last_value">Impossibile recuperate l\'ultimo valore %1$s con coppie %2$s.</string>
 	<string name="failed_create_alarm">Impossibile creare allarme.</string>
 	<string name="failed_save_alarm">Impossibile salvare allarme.</string>
 	<!-- Review please --><string name="upper_must_larger_lower">Limite massimo deve essere maggiore al limite minimo.</string>
 	<string name="frame_must_longer_interval">Periodo deve essere più lungo al intervallo di aggiornamento.</string>
-	<string name="check_connection">Prego controlla la connessione a internet.</string>
 	<string name="not_bound">%1$s non legato a StorageAndControlService.</string>
 	<string name="pair_search_description">Cerca coppie</string>
 	<string name="silent">Silenzioso</string>
