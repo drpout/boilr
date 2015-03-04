@@ -30,13 +30,13 @@
 			\+ Added Bitspark, Coinbase, Mulcoin, OneWorldCoin and Yunbi exchanges.
 			\+ Added Chinese, German, Italian, Polish, Portuguese and Spanish translations.
 			\+ Last price on alarm list is now coloured according to price direction (up or down).
-			\+ Added arrow to the alarm triggered notifications showing which direction the price took.
+			\+ Added arrow to the alarm triggered notifications showing price direction.
 			\+ Added app setting to control volume.
 			\+ In alarms' list, clicking on alarm's limits or change value opens a dialog for quick editing.
 			\+ Alarms can now be reordered.
 			\+ Added undo toast when alarm is deleted.
 			\+ Added pinstripe background.
-			\+ Alert type, sound and vibrate can now be switched between an alarm specific value and the app default.
+			\+ Alert type, sound and vibrate can now be switched between an alarm specific value and the app's default.
 			\* Icon, alarms' list and alarm triggered notification completely redesigned.
 			\* Price Change Alarm now uses a rolling time frame.
 			\* Offed alarms are now continuously updated while alarm list is visible.

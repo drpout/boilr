@@ -3,7 +3,7 @@
 ## Adding a translation
 
 ### Via Weblate
-1. Just go to [Boilr @ Hosted Weblate](https://hosted.weblate.org/projects/boilr/application/) and start editing. Tip: use Zen mode for a quicker string browsing.
+1. Just go to [Boilr @ Hosted Weblate](https://hosted.weblate.org/projects/boilr/application/) and start editing. Tip: use Zen mode for quicker string browsing.
 
 ### Via git (for coders)
 0. Fork Boilr's repository.

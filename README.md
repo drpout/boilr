@@ -19,7 +19,7 @@ Other libraries we use: [changeloglib](https://github.com/gabrielemariotti/chang
 Check Boilr's website to see it in action: http://boilr.mobi The website source-code is available at [boilr-site](https://github.com/andrefbsantos/boilr-site).
 
 ## Getting help
-Bug reports, feature requests and general help questions should be submitted on [Boilr's GitHub issues](https://github.com/andrefbsantos/boilr/issues). Please add the appropriate label.
+Bug reports, feature requests and general help questions should be submitted on [Boilr's GitHub issues](https://github.com/andrefbsantos/boilr/issues). Try being specific when choosing the right title and label for your issue.
 
 ## Troubleshooting
 
