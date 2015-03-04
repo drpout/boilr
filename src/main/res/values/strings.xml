@@ -73,8 +73,8 @@
 	<string name="resume">Resume</string>
 	<string name="no_internet">Boilr has no internet</string>
 	<string name="no_updates">Your alarms cannot be updated.</string>
-	<string name="couldnt_retrieve_pairs">Couldn't retrieve pairs for <xliff:g id="exchange" example="Bitstamp">%1$s</xliff:g>.</string>
-	<string name="couldnt_retrieve_last_value">Couldn't retrieve last value for <xliff:g id="exchange" example="Bitstamp">%1$s</xliff:g> with pair <xliff:g id="pair" example="BTC/USD">%2$s</xliff:g>.</string>
+	<string name="couldnt_retrieve_pairs">Couldn\'t retrieve pairs for <xliff:g id="exchange" example="Bitstamp">%1$s</xliff:g>.</string>
+	<string name="couldnt_retrieve_last_value">Couldn\'t retrieve last value for <xliff:g id="exchange" example="Bitstamp">%1$s</xliff:g> with pair <xliff:g id="pair" example="BTC/USD">%2$s</xliff:g>.</string>
 	<string name="failed_create_alarm">Failed to create alarm.</string>
 	<string name="failed_save_alarm">Failed to save alarm.</string>
 	<string name="upper_must_larger_lower">Upper limit must be larger than lower limit.</string>

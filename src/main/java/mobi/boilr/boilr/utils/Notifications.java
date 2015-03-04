@@ -146,7 +146,7 @@ public final class Notifications {
 				changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				Intent disableIntent = new Intent(context, StorageAndControlService.class);
 				disableIntent.setAction(Notifications.ACTION_DISABLE_NET_NOTIF);
-				Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_action_warning_dark);
+				Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_no_wifi_dark);
 				sNoNetNotif = new Notification.Builder(context)
 						.setContentTitle(context.getString(R.string.no_internet))
 						.setContentText(context.getString(R.string.no_updates))
