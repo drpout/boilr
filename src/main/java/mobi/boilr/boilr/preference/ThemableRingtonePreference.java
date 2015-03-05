@@ -3,6 +3,8 @@ package mobi.boilr.boilr.preference;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.utils.Conversions;
@@ -21,6 +23,7 @@ import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.preference.ListPreference;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.util.AttributeSet;
 
 /**
@@ -39,6 +42,10 @@ public class ThemableRingtonePreference extends ListPreference {
 	private boolean mCurrentShowDefault, mShowDefault;
 	private String mAppRingtone;
 	private SharedPreferences mSharedPrefs;
+	/* Pattern to match something like:
+	 * content://media/internal/audio/media/38
+	 */
+	private Pattern p = Pattern.compile("[a-z:/]+\\d+");
 
 	/**
 	 * After the constructor call setRingtoneType(int) to fill ringtone's list.
@@ -142,9 +149,18 @@ public class ThemableRingtonePreference extends ListPreference {
 		// Silent
 		entries.add(getContext().getString(R.string.silent));
 		entryValues.add("");
+		String value;
+		int id;
+		Matcher m;
 		for(ringtones.moveToFirst(); !ringtones.isAfterLast(); ringtones.moveToNext()) {
 			entries.add(ringtones.getString(RingtoneManager.TITLE_COLUMN_INDEX));
-			entryValues.add(ringtones.getString(RingtoneManager.URI_COLUMN_INDEX));
+			value = ringtones.getString(RingtoneManager.URI_COLUMN_INDEX);
+			m = p.matcher(value);
+			if(!m.matches()) {
+				id = ringtones.getInt(ringtones.getColumnIndex(MediaStore.MediaColumns._ID));
+				value += "/" + id;
+			}
+			entryValues.add(value);
 		}
 		setEntryValues(entryValues.toArray(new CharSequence[entryValues.size()]));
 		setEntries(entries.toArray(new CharSequence[entries.size()]));
