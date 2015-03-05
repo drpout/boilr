@@ -140,14 +140,14 @@ public class NotificationService extends Service {
 			 * keep the alarm on so it can fire again later.
 			 */
 			Log.d("Showing in call notification for alarm " + alarmID + ".");
-			Notifications.showLowPriorityNotification(this, alarm);
+			Notifications.showStatusBarNotification(this, alarm);
 			NotificationKlaxon.ringSingleNotification(this);
 			stopSelf();
 		} else if(!mInFullScreen){
 			mInFullScreen = true;
 			Log.d("Showing fullscreen notification for alarm " + alarmID + ".");
 			mService.stopAlarm(alarmID);
-			Notifications.showAlarmNotification(this, alarm);
+			Notifications.showFullscreenNotification(this, alarm);
 			NotificationKlaxon.start(this, alarm);
 		} else {
 			/*
@@ -156,7 +156,7 @@ public class NotificationService extends Service {
 			 * keep the alarm on so it can fire again later.
 			 */
 			Log.d("Showing low priority notification for alarm " + alarmID + ".");
-			Notifications.showLowPriorityNotification(this, alarm);
+			Notifications.showStatusBarNotification(this, alarm);
 			AlarmAlertWakeLock.releaseCpuLock();
 		}
 	}

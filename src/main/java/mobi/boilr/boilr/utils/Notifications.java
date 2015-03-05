@@ -36,8 +36,7 @@ public final class Notifications {
 	// Action used to turn off no internet notification.
 	public static final String ACTION_DISABLE_NET_NOTIF = "ACTION_DISABLE_NET_NOTIF";
 
-	private static Notification.Builder setCommonNotificationProps(Context context, Alarm alarm,
-			String firingReasonTitle, String firingReasonBody) {
+	private static void statusBarNotifAux(Context context, Alarm alarm, String firingReasonTitle, String firingReasonBody) {
 		if(sSmallUpArrowBitmap == null) {
 			int tickerGreen = context.getResources().getColor(R.color.tickergreen);
 			int tickerRed = context.getResources().getColor(R.color.tickerred);
@@ -63,40 +62,34 @@ public final class Notifications {
 		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());
 		alarmSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		notification.setContentIntent(PendingIntent.getActivity(context, alarm.getId(), alarmSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-		return notification;
-	}
-
-	public static void showLowPriorityNotification(Context context, Alarm alarm) {
-		String firingReasonTitle = getFiringReasonTitle(alarm);
-		String firingReasonBody = getFiringReasonBody(context, alarm);
-		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReasonTitle, firingReasonBody);
 		//notification.setPriority(Notification.PRIORITY_DEFAULT); API 16 only
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE); 
 		nm.cancel(alarm.hashCode());
 		nm.notify(alarm.hashCode(), notification.getNotification());
-	} 
+	}
 
-	public static void showAlarmNotification(Context context, Alarm alarm) {
-		int alarmID = alarm.getId();
-		// Close dialogs and window shade, so this will display
-		context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+	public static void showStatusBarNotification(Context context, Alarm alarm) {
 		String firingReasonTitle = getFiringReasonTitle(alarm);
 		String firingReasonBody = getFiringReasonBody(context, alarm);
-		Notification.Builder notification = setCommonNotificationProps(context, alarm, firingReasonTitle, firingReasonBody);
-		//notification.setPriority(Notification.PRIORITY_MAX); API 16 only
+		statusBarNotifAux(context, alarm, firingReasonTitle, firingReasonBody);
+	}
 
+	public static void showFullscreenNotification(Context context, Alarm alarm) {
+		String firingReasonTitle = getFiringReasonTitle(alarm);
+		String firingReasonBody = getFiringReasonBody(context, alarm);
+		statusBarNotifAux(context, alarm, firingReasonTitle, firingReasonBody);
+
+		// Close dialogs and window shade, so this will display
+		context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
 		// Setup fullscreen intent
+		int alarmID = alarm.getId();
 		Intent fullScreenIntent = new Intent(context, NotificationActivity.class);
 		fullScreenIntent.putExtra("alarmID", alarmID);
 		fullScreenIntent.putExtra("firingReason", firingReasonTitle + "\n" + firingReasonBody);
 		fullScreenIntent.putExtra("canKeepMonitoring", canKeepMonitoring(alarm));
 		fullScreenIntent.putExtra("isDirectionUp", isDirectionUp(alarm));
 		fullScreenIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_USER_ACTION);
-		notification.setFullScreenIntent(PendingIntent.getActivity(context, alarmID, fullScreenIntent, PendingIntent.FLAG_UPDATE_CURRENT), true);
-
-		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		nm.cancel(alarm.hashCode());
-		nm.notify(alarm.hashCode(), notification.getNotification());
+		context.startActivity(fullScreenIntent);
 	}
 
 	private static boolean isDirectionUp(Alarm alarm) {
