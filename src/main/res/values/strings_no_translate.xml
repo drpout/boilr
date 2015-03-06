@@ -60,7 +60,7 @@
 		<item>BTC Markets</item>
 		<item>BTC-E</item>
 		<item>BtcTrade</item>
-		<item>BTER</item>
+<!-- 		<item>BTER</item> -->
 		<item>BullionVault</item>
 		<item>CampBX</item>
 		<item>Cavirtex</item>
@@ -110,7 +110,7 @@
 		<item>mobi.boilr.libdynticker.exchanges.BTCMarketsExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BTCEExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BtcTradeExchange</item>
-		<item>mobi.boilr.libdynticker.exchanges.BTERExchange</item>
+<!-- 		<item>mobi.boilr.libdynticker.exchanges.BTERExchange</item> -->
 		<item>mobi.boilr.libdynticker.exchanges.BullionVaultExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CampBXExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CavirtexExchange</item>
