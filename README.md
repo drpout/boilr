@@ -50,10 +50,9 @@ If you are no vi or emacs ninja you can use Eclipse to ease your work in Boilr.
 
 1. Install and configure the [ADT plugin](https://developer.android.com/sdk/installing/installing-adt.html).
 2. Install [m2e-android](https://rgladwell.github.io/m2e-android).
-3. Install Android API 11 SDK and keep it alongside API 21. Eclipse uses API 11 for compatibility checks as it is our minSdkVersion.
-4. Clone [changeloglib](https://github.com/gabrielemariotti/changeloglib/). Go to `File->Import->Existing Android Code Into Workspace`, import just what's in the `ChangeLogLibrary` directory and name the new project as `ChangeLogLibrary`.
-5. Clone [UndoBar](https://github.com/soarcn/UndoBar). Go to `File->Import->Existing Android Code Into Workspace`, import just what's in the `library` directory and name the new project as `UndoBar`.   
-6. Go to `File->Import->Existing Projects into Workspace` and select Boilr's git root directory.
+3. Clone [changeloglib](https://github.com/gabrielemariotti/changeloglib/). Go to `File->Import->Existing Android Code Into Workspace`, import just what's in the `ChangeLogLibrary` directory and name the new project as `ChangeLogLibrary`.
+4. Clone [UndoBar](https://github.com/soarcn/UndoBar). Go to `File->Import->Existing Android Code Into Workspace`, import just what's in the `library` directory and name the new project as `UndoBar`.   
+5. Go to `File->Import->Existing Projects into Workspace` and select Boilr's git root directory.
 
 Use Eclipse only for writing code. Always compile in the shell using Maven.
 

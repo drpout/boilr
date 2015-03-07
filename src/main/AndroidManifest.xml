@@ -5,7 +5,7 @@
     android:versionName="0.5.0">
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="15"
         android:targetSdkVersion="21" />
     
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -50,15 +50,18 @@
         
         <activity
             android:name=".activities.AlarmSettingsActivity"
-            android:label="@string/alarm_settings" />
+            android:label="@string/alarm_settings"
+            android:parentActivityName=".activities.AlarmListActivity" />
         
         <activity
             android:name=".activities.AlarmCreationActivity"
-            android:label="@string/add_alarm" />
+            android:label="@string/add_alarm"
+            android:parentActivityName=".activities.AlarmListActivity" />
         
         <activity
             android:name=".activities.SettingsActivity"
-            android:label="@string/boilr_settings" >
+            android:label="@string/boilr_settings"
+            android:parentActivityName=".activities.AlarmListActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MANAGE_NETWORK_USAGE"/>
                 <category android:name="android.intent.category.DEFAULT" />

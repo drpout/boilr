@@ -13,6 +13,7 @@ import mobi.boilr.libpricealarm.PriceHitAlarm;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -62,7 +63,15 @@ public final class Notifications {
 		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
 		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());
 		alarmSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		notification.setContentIntent(PendingIntent.getActivity(context, alarm.getId(), alarmSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+		PendingIntent pendingIntent;
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+			pendingIntent = TaskStackBuilder.create(context)
+								.addNextIntentWithParentStack(alarmSettingsIntent)
+								.getPendingIntent(alarm.getId(), PendingIntent.FLAG_UPDATE_CURRENT);
+		} else {
+			pendingIntent = PendingIntent.getActivity(context, alarm.getId(), alarmSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+		}
+		notification.setContentIntent(pendingIntent);
 		//notification.setPriority(Notification.PRIORITY_DEFAULT); API 16 only
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE); 
 		nm.cancel(alarm.hashCode());
@@ -138,6 +147,14 @@ public final class Notifications {
 				Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
 				changeSettingsIntent.setAction(Notifications.ACTION_DISABLE_NET_NOTIF);
 				changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				PendingIntent pendingIntent;
+				if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+					pendingIntent = TaskStackBuilder.create(context)
+										.addNextIntentWithParentStack(changeSettingsIntent)
+										.getPendingIntent(sNoNetNotifID, PendingIntent.FLAG_UPDATE_CURRENT);
+				} else {
+					pendingIntent = PendingIntent.getActivity(context, sNoNetNotifID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+				}
 				Intent disableIntent = new Intent(context, StorageAndControlService.class);
 				disableIntent.setAction(Notifications.ACTION_DISABLE_NET_NOTIF);
 				int icNoWifi;
@@ -155,7 +172,7 @@ public final class Notifications {
 						.setAutoCancel(true)
 						//.setPriority(Notification.PRIORITY_DEFAULT) API 16 only
 						.setWhen(0)
-						.setContentIntent(PendingIntent.getActivity(context, sNoNetNotifID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT))
+						.setContentIntent(pendingIntent)
 						.setDeleteIntent(PendingIntent.getService(context, sNoNetNotifID, disableIntent, 0))
 						.setOnlyAlertOnce(true)
 						.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
