@@ -27,6 +27,16 @@ Trouble | Solution
 ------- | --------
 Alarm not updating when phone is sleeping. | Set `Settings > Wi-Fi > Advanced > Keep Wi-Fi on during sleep` to `Always`
 
+## Reasons for permissions
+* Read phone status and identity - Avoids sounding an alarm when you are in the middle of a call.
+* Read the contens of your SD card - Used to fetch your costum ringtones.
+* Disable your screen lock - So you can turn off a ringing alarm without unlocking your device.
+* Full network access - To fetch data from the exchanges.
+* View network connections - To know whether you're using Wi-Fi or Mobile Data, allowing Mobile Data restriction. 
+* Run at startup - To grab your active alarms and start updating them. 
+* Control vibration - Allows vibration when an alarm is triggered. 
+* Prevent phone from sleeping - Used to keep showing the alarm triggered activity until you press the turn off button.
+
 ## Building
 1. Fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted#Prerequisites).
 2. Install Android API 21 SDK and Android Support Library. 
