@@ -11,15 +11,16 @@
 		<changelogtext>+ Mostrada mensagem de aviso quando se apaga um alarme, permitindo voltar atrás.</changelogtext>
 		<changelogtext>+ Adicionado fundo com padrão baço tipo camisa.</changelogtext>
 		<changelogtext>+ Tipo de alerta, som e vibração podem agora ser mudados entre um valor específico para o alarme e o valor por omissão da aplicação.</changelogtext>
+		<changelogtext>+ Adicionada navegação para cima. Adicionada navegação para trás quado se entra diretamente numa atividade de nível profundo.</changelogtext>
 		<changelogtext>* Ícone, lista de alarmes e notificação quando alarme dispara foram completamente redesenhados.</changelogtext>
 		<changelogtext>* O alarme de variação de preço usa agora uma janela temporal deslizante.</changelogtext>
 		<changelogtext>* Alarmes desligados são agora continuamente atualizados quando a lista de alarmes está visível.</changelogtext>
 		<changelogtext>* Apagar a notificação de falha de internet impede que esta seja mostrada até se obter uma nova ligação à internet.</changelogtext>
 		<changelogtext>* Atualização dos pares das bolsas ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange e OKCoin.</changelogtext>
-		<changelogtext>* Corrigidos erros na interação com as bolsas Bitcoin.de, CCEX e Kraken.</changelogtext>
+		<changelogtext>* Corrigidos erros na interação com as bolsas Allcoin, Bitcoin.de, BTC100, CCEX, Huobi e Kraken.</changelogtext>
 		<changelogtext>* Corrigida falha que disparava repetidamente alarmes cujo intervalo de atualização fosse curto.</changelogtext>
 		<changelogtext>* Corrigido o carregamento de dados das bolsas em ligações de má qualidade.</changelogtext>
-		<changelogtext>- Removidas as bolsas: Crypto-Trade, Justcoin, MintPal e Vault of Satoshi.</changelogtext>
+		<changelogtext>- Removidas as bolsas: Atomic Trade, BTER, CoinMkt, Crypto-Trade, Justcoin, MintPal e Vault of Satoshi.</changelogtext>
 	</changelogversion>
 	
 	<changelogversion versionName="0.4.0" changeDate="17 Out 2014">

@@ -11,15 +11,16 @@
 		<changelogtext>+ Added undo toast when alarm is deleted.</changelogtext>
 		<changelogtext>+ Added pinstripe background.</changelogtext>
 		<changelogtext>+ Alert type, sound and vibrate can now be switched between an alarm specific value and the app's default.</changelogtext>
+		<changelogtext>+ Added up navigation. Added back navigation when directly entering a deep-level activity.</changelogtext>
 		<changelogtext>* Icon, alarms' list and alarm triggered notification completely redesigned.</changelogtext>
 		<changelogtext>* Price Change Alarm now uses a rolling time frame.</changelogtext>
 		<changelogtext>* Offed alarms are now continuously updated while alarm list is visible.</changelogtext>
 		<changelogtext>* Dismissing a no internet notification now prevents showing it again until you get a new internet connection.</changelogtext>
 		<changelogtext>* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange and OKCoin pairs.</changelogtext>
-		<changelogtext>* Fixed bugs in Bitcoin.de, CCEX and Kraken exchanges' interaction.</changelogtext>
+		<changelogtext>* Fixed bugs in Allcoin, Bitcoin.de, BTC100, CCEX, Huobi and Kraken exchanges' interaction.</changelogtext>
 		<changelogtext>* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.</changelogtext>
 		<changelogtext>* Fixed exchange data fetching on low quality internet connections.</changelogtext>
-		<changelogtext>- Removed Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.</changelogtext>
+		<changelogtext>- Removed Atomic Trade, BTER, CoinMkt, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.</changelogtext>
 	</changelogversion>
 	
 	<changelogversion versionName="0.4.0" changeDate="17 Oct 2014">
