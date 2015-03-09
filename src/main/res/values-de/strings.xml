@@ -93,6 +93,6 @@
 	<string name="limit_explanation">%1$s = %2$s (Basiswert, von vor %3$s) %4$s %5$s (Veränderung)</string>
 	<string name="alarm_deleted">Alarm gelöscht</string>
 	<string name="undo">Rückgängig</string>
-	<!-- Missing translation <string name="short_description"></string>
-	<!-- Missing translation <string name="full_description"></string>
+	<!-- Missing translation <string name="short_description"></string>-->
+	<!-- Missing translation <string name="full_description"></string>-->
 </resources>

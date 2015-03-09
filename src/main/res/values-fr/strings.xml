@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="action_search">Recherche</string>
+<resources>
+    <string name="action_search">Recherche</string>
 	<string name="action_settings">Préférences</string>
 	<string name="action_about">À propos</string>
 	<string name="alarm_settings">Paramètres d\'alarme</string>
@@ -11,13 +12,13 @@
 	<string name="no">Non</string>
 	<string name="ok">Valider</string>
 	<string name="cancel">Annuler</string>
-	<string name="about_version">"Version: "</string>
-	<string name="about_website">"Site Web: "</string>
-	<string name="about_bugs">"Aide, rapport de bugs et demandes de nouvelles fonctionnalités: "</string>
+	<string name="about_version">Version: </string>
+	<string name="about_website">Site Web: </string>
+	<string name="about_bugs">Aide, erreurs et améliorations: </string>
 	<string name="authors">Auteurs</string>
-	<string name="about_donations">"Dons: "</string>
-	<string name="about_license">"Licence: "</string>
-	<string name="about_libraries">"Bibliothèques: "</string>
+	<string name="about_donations">Dons: </string>
+	<string name="about_license">Licence: </string>
+	<string name="about_libraries">Bibliothèques: </string>
 	<string name="changelog_header_version">"Version "</string>
 	<string name="pref_title_alerts">Alertes</string>
 	<string name="pref_title_default_alert_type">Type par défaut</string>
@@ -37,7 +38,7 @@
 	<string name="pref_title_mobile_data">Données mobiles</string>
 	<string name="pref_title_default_update_interval">Valeur par défaut de la fréquence des mises à jour</string>
 	<string name="undo">Annuler</string>
-<string name="pref_title_default_time_frame">Laps de temps par défaut</string>
+	<string name="pref_title_default_time_frame">Laps de temps par défaut</string>
 	<string name="pref_title_check_pairs_interval">Recherchez de nouvelles paires</string>
     <string name="pref_entries_check_pairs_interval_0">Horaire</string>
     <string name="pref_entries_check_pairs_interval_1">Deux fois par jour</string>
@@ -78,14 +79,14 @@
 	<string name="pref_title_language">Langage</string>
 	<string name="alarm_deleted">Alarme supprimé</string>
 	<string name="pref_summary_default_update_interval">En quelques secondes, Vous pouvez définir la fréquence des alarmes liées à l\'échange de données. Vous pouvez aussi affiner les réglages d\'une alarme particulière.</string>
-	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="default_value">Défaut (%1$s)<xliff:g id="value" example="Hassium">(%1$s)</xliff:g></string>
-	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="price_change_firing_reason">%1$s en %2$s<xliff:g id="change_value" example="+10%">%1$s</xliff:g> in <xliff:g id="timespan" example="10m">%2$s</xliff:g></string>
-	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="seconds_abbreviation">%1$ss<xliff:g id="number_seconds" example="10">%1$s</xliff:g>s</string>
-	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="minutes_abbreviation">%1$sm<xliff:g id="number_minutes" example="10">%1$s</xliff:g>m</string>
-	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="hours_abbreviation">%1$sh<xliff:g id="number_hours" example="10">%1$s</xliff:g>h</string>
-	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="days_abbreviation">%1$sj<xliff:g id="number_days" example="10">%1$s</xliff:g>d</string>
-	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="limit_explanation">%1$s = %2$s (valeur base, d\'il ya %3$s) %4$s %5$s (changement)<xliff:g id="limit_value" example="100">%1$s</xliff:g> = <xliff:g id="base_value" example="80">%2$s</xliff:g> (base value, from <xliff:g id="timespan" example="10m">%3$s</xliff:g> ago) <xliff:g id="operation" example="+">%4$s</xliff:g> <xliff:g id="change_value" example="20">%5$s</xliff:g> (change)</string>
+	<string name="default_value">Défaut (%1$s)</string>
+	<string name="price_change_firing_reason">%1$s en %2$s</string>
+	<string name="seconds_abbreviation">%1$ss</string>
+	<string name="minutes_abbreviation">%1$sm</string>
+	<string name="hours_abbreviation">%1$sh</string>
+	<string name="days_abbreviation">%1$sj</string>
+	<string name="limit_explanation">%1$s = %2$s (valeur base, d\'il ya %3$s) %4$s %5$s (changement)</string>
 	<string name="pref_summary_default_time_frame">En minutes. Utilisé par Modifier Alarmes. Définit quel prix comparer avec le prix courant, p. ex. le prix d\'il y a 15 minutes. Vous pouvez définir une autre fenêtre temporelle pour une alarme particulière dans ses propriétés.</string>
 	<string name="pref_summary_update_interval">En secondes. Définit la périodicité de récupération de données de l\'échange.</string>
 	<string name="pref_summary_time_frame">En minutes. Définit le prix à comparer avec le prix courant, p. ex. le prix d\'il y a 15 minutes.</string>
-	</resources>
+</resources>

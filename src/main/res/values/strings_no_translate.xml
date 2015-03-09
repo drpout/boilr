@@ -137,6 +137,7 @@
 		<string-array name="pref_entries_language">
 		<item>English</item>
 		<item>Español</item>
+		<item>Français</item>
 		<item>Čeština</item>
 		<item>Deutsch</item>
 		<item>Italiano</item>
@@ -147,6 +148,7 @@
 	<string-array name="pref_values_language">
 		<item>en</item>
 		<item>es</item>
+		<item>fr</item>
 		<item>cs</item>
 		<item>de</item>
 		<item>it</item>

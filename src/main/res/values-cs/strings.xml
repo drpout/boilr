@@ -93,6 +93,6 @@
     <string name="limit_explanation">%1$s = %2$s (základní hodnoty, z doby před %3$s) %4$s %5$s (změna)</string>
     <string name="alarm_deleted">Upozornění vypouští</string>
 	<string name="undo">Zrušit</string>
-	<!-- Missing translation <string name="short_description"></string>
-	<!-- Missing translation <string name="full_description"></string>
+	<!-- Missing translation <string name="short_description"></string>-->
+	<!-- Missing translation <string name="full_description"></string>-->
 </resources>
