@@ -26,7 +26,7 @@
 	<string name="pref_entries_alert_type_1">Notificação</string>
 	<string name="pref_entries_alert_type_2">Toque</string>
 	<string name="pref_title_default_alert_sound">Som por omissão</string>
-	<!-- Review please --><string name="default_value">Omissão (%1$s)</string>
+	<string name="default_value">Omissão (%1$s)</string>
 	<string name="pref_title_sound_volume">Volume do som</string>
 	<string name="pref_summary_sound_volume">O Boilr usa o volume do sistema para o tipo de alerta selecionado. Na maioria dos dispositivos o tipo Alarme permanece no volume máximo mesmo quando o dispositivo está em silêncio.</string>
 	<string name="system_volumes">Volumes do sistema</string>
@@ -97,46 +97,46 @@
 	<string name="full_description">Monitoriza o preço de criptomoedas e metais preciosos e dispara alarmes consoante parâmetros do utilizador. Suporta todas as principais bolsas e pares.
 
 
-Suporta 2 tipos de alarmes:
-* Preço limite - Dispara quando o preço ultrapassa um limite superior ou inferior definidos no alarme.
-* Variação de preço - Dispara quando o preço varia mais que uma quantidade X (em moeda ou percentagem) durante um dado prazo (e.g. 15 min). Usa uma janela temporal deslizante: o preço é atualizado com um dado intervalo (e.g. 30s) e comparado com o preço existente há um prazo atrás (e.g. 15 min antes).
-
-
-Som e vibração podem ser configurados globalmente e individualmente para cada alarme. As listas de bolsas, pares e alarmes são pesquisáveis, permitindo uma rápida criação e configuração dos alarmes. Os alarmes podem ser reordenados. Alarmes desligados continuam a atualizar o preço enquanto (e só enquanto) a lista de alarmes está visível, funcionando como tickers. Os dados são obtidos diretamente das bolsas usando Wi-Fi ou Dados Móveis (se permitido).
-
-
-O Boilr suporta todas as bolsas disponíveis na libdynticker, bem como todos os seus pares: https://github.com/andrefbsantos/libdynticker/#supported-exchanges
-
-
-O Boilr é software livre, licenciado sob GPLv3+. Todo o código-fonte está disponível em https://github.com/andrefbsantos/boilr
-Se achar o Boilr útil considere fazer uma doação ou enviar uma gorjeta: http://boilr.mobi/#donate
-Para ajuda, submissão de erros  e pedidos de melhorias por favor use os issues do GitHub.
-
-
-Razões para a permissões:
-* Ler o estado e a identidade do telemóvel - Evita soar alarmes enquanto está a decorrer uma chamada.
-* Ler os conteúdos do cartão SD - Permite usar os seus toques personalizados.
-* Desativar o bloqueio do ecrã - Para se desligar um alarme que está a tocar sem ter que desbloquear.
-* Acesso total à rede - Para obter os dados das bolsas.
-* Ver ligações de rede - Para saber se está a usar Wi-Fi ou Dados Móveis, permitindo restringir os Dados Móveis. 
-* Executar no arranque - Para começar prontamente a atualizar os alarmes que deixou ligados. 
-* Controlar vibração - Permite vibração enquanto um alarme dispara. 
-* Impedir modo de inatividade do telefone - Usado para mostrar continuamente a atividade de alarme a tocar até carregar no botão de desligar.
-
-
-Pode consultar um histórico de versões em: https://github.com/andrefbsantos/boilr/releases
-
-
-Bolsas suportadas atualmente:
-
-Bitcoin e outras criptomoedas para moeda fiduciária
-[...]
-
-Apenas criptomoedas
-[...]
-
-Futuros e ações
-[...]
+		Suporta 2 tipos de alarmes:
+		* Preço limite - Dispara quando o preço ultrapassa um limite superior ou inferior definidos no alarme.
+		* Variação de preço - Dispara quando o preço varia mais que uma quantidade X (em moeda ou percentagem) durante um dado prazo (e.g. 15 min). Usa uma janela temporal deslizante: o preço é atualizado com um dado intervalo (e.g. 30s) e comparado com o preço existente há um prazo atrás (e.g. 15 min antes).
+		
+		
+		Som e vibração podem ser configurados globalmente e individualmente para cada alarme. As listas de bolsas, pares e alarmes são pesquisáveis, permitindo uma rápida criação e configuração dos alarmes. Os alarmes podem ser reordenados. Alarmes desligados continuam a atualizar o preço enquanto (e só enquanto) a lista de alarmes está visível, funcionando como tickers. Os dados são obtidos diretamente das bolsas usando Wi-Fi ou Dados Móveis (se permitido).
+		
+		
+		O Boilr suporta todas as bolsas disponíveis na libdynticker, bem como todos os seus pares: https://github.com/andrefbsantos/libdynticker/#supported-exchanges
+		
+		
+		O Boilr é software livre, licenciado sob GPLv3+. Todo o código-fonte está disponível em https://github.com/andrefbsantos/boilr
+		Se achar o Boilr útil considere fazer uma doação ou enviar uma gorjeta: http://boilr.mobi/#donate
+		Para ajuda, submissão de erros  e pedidos de melhorias por favor use os issues do GitHub.
+		
+		
+		Razões para a permissões:
+		* Ler o estado e a identidade do telemóvel - Evita soar alarmes enquanto está a decorrer uma chamada.
+		* Ler os conteúdos do cartão SD - Permite usar os seus toques personalizados.
+		* Desativar o bloqueio do ecrã - Para se desligar um alarme que está a tocar sem ter que desbloquear.
+		* Acesso total à rede - Para obter os dados das bolsas.
+		* Ver ligações de rede - Para saber se está a usar Wi-Fi ou Dados Móveis, permitindo restringir os Dados Móveis. 
+		* Executar no arranque - Para começar prontamente a atualizar os alarmes que deixou ligados. 
+		* Controlar vibração - Permite vibração enquanto um alarme dispara. 
+		* Impedir modo de inatividade do telefone - Usado para mostrar continuamente a atividade de alarme a tocar até carregar no botão de desligar.
+		
+		
+		Pode consultar um histórico de versões em: https://github.com/andrefbsantos/boilr/releases
+		
+		
+		Bolsas suportadas atualmente:
+		
+		Bitcoin e outras criptomoedas para moeda fiduciária
+		[...]
+		
+		Apenas criptomoedas
+		[...]
+		
+		Futuros e ações
+		[...]
 	</string>
 	
 </resources>

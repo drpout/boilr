@@ -93,4 +93,6 @@
     <!-- Missing translation <string name="limit_explanation">%1$s = %2$s (base value, from %3$s ago) %4$s %5$s (change)</string> -->
     <!-- Review please --><string name="alarm_deleted">删除提醒</string>
 	<string name="undo">撤销</string>
+	<!-- Missing translation <string name="short_description"></string>
+	<!-- Missing translation <string name="full_description"></string>
 </resources>
