@@ -12,5 +12,9 @@
 3. Translate the strings inside strings.xml. You should use the original English strings from [values/strings.xml](/src/main/res/values/strings.xml) as reference. Note: values/strings.xml has more entries than all other values-xx/strings.xml since some strings should not be translated.
 4. Commit, push, open a pull request and profit.
 
-### Notes
-- Do not use the `<xliff:g>` tag on translated strings. This tag is used only in source language (English) to wrap descriptions and examples for format arguments (e.g. `<xliff:g id="exchange" example="Bitstamp">%1$s</xliff:g>`). 
+### xliff:g tag
+Do not put the `<xliff:g>` tag on translated strings. This tag should only appear in source language (English). It is used to help translators by wrapping descriptions and examples for format arguments. In translated strings put just the format argument that is inside the `<xliff:g>` tag. Example:
+
+Source string: `Couldn\'t retrieve pairs for <xliff:g id="exchange" example="Bitstamp">%1$s</xliff:g>.`
+
+Translated string: `Imposible obtener pares para %1$s.`
