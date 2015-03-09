@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="action_search">Buscar</string>
 	<string name="action_settings">Ajustes</string>
@@ -15,7 +15,7 @@
 	<string name="about_version">Versión: </string>
 	<string name="about_website">Website: </string>
 	<string name="authors">Autores</string>
-	<!-- Review please --><string name="about_bugs">Ayuda, errores y mejoras: </string>
+	<!-- Review please --><string name="about_bugs">"Ayuda, errores y mejoras: "</string>
 	<string name="about_donations">Donaciones: </string>
 	<string name="about_license">Licencia: </string>
 	<string name="about_libraries">Bibliotecas: </string>
