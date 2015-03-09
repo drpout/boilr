@@ -2,7 +2,7 @@
 <changelog bulletedList="false">
 	<changelogversion versionName="0.5.0" changeDate="?? Mar 2015">
 		<changelogtext>+ Added Bitspark, Coinbase, Mulcoin, OneWorldCoin and Yunbi exchanges.</changelogtext>
-		<changelogtext>+ Added Chinese, German, Italian, Polish, Portuguese and Spanish translations.</changelogtext>
+		<changelogtext>+ Added Chinese, French, German, Italian, Polish, Portuguese and Spanish translations.</changelogtext>
 		<changelogtext>+ Last price on alarm list is now coloured according to price direction (up or down).</changelogtext>
 		<changelogtext>+ Added arrow to the alarm triggered notifications showing price direction.</changelogtext>
 		<changelogtext>+ Added app setting to control volume.</changelogtext>
