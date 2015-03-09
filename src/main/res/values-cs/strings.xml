@@ -15,7 +15,7 @@
     <string name="about_version">Verze: </string>
     <string name="about_website">Webová stránka: </string>
     <string name="authors">Autoři</string>
-    <!-- Review please --><string name="about_bugs">Nápověda, chyby a žádosti: </string>
+    <!-- Review please --><string name="about_bugs">"Nápověda, chyby a žádosti: "</string>
     <string name="about_donations">Přispěvatelé: </string>
     <string name="about_license">Licencí: </string>
     <string name="about_libraries">Knihovny: </string>
