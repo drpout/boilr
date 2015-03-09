@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="action_search">搜索</string>
     <string name="action_settings">设置</string>
@@ -14,12 +14,12 @@
     <string name="ok">OK</string>
     <string name="cancel">取消</string>
     <string name="about_version">版本 </string>
-    <string name="about_website"></string>
+    <string name="about_website"/>
     <!-- Review please --><string name="authors">作者</string>
-    <!-- Review please --><string name="about_bugs">帮助，错误和请求: </string>
+    <!-- Review please --><string name="about_bugs">"帮助，错误和请求: "</string>
     <string name="about_donations">捐赠 </string>
     <string name="about_license">许可证 </string>
-    <!-- Review please --><string name="about_libraries">库 </string>
+    <!-- Review please --><string name="about_libraries">"库 "</string>
     <string name="changelog_header_version">"版本 "</string>
     <string name="pref_title_alerts">提醒</string>
     <string name="pref_title_default_alert_type">默认类型</string>
