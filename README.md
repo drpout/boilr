@@ -83,7 +83,7 @@ Translators:
 
 * Chinese: [Jan Xie](https://github.com/janx) and Song
 * Czech: [Jaroslav Lichtblau](https://github.com/svetlemodry) and [Michal Čihař](https://github.com/nijel)
-* French: [Tuux](https://hosted.weblate.org/user/Tuux) and [M for Momo](https://hosted.weblate.org/user/Mo)
+* French: [Tuux](http://www.rtnp.org) and [M for Momo](https://hosted.weblate.org/user/Mo)
 * German: Luca Rui
 * Italian: Francesca Mautone
 * Polish: [Michal Pleban](https://pl.linkedin.com/in/michalpleban)
