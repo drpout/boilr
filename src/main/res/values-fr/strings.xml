@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="action_search">Recherche</string>
+	<string name="action_settings">Préférences</string>
+	<string name="action_about">À propos</string>
+	<string name="alarm_settings">Paramètres d\'alarme</string>
+	<string name="add_alarm">Ajouter une alarme</string>
+	<string name="boilr_settings">Préférences de Boilr</string>
+	<string name="about_title">A propos de Boilr</string>
+	<string name="release_notes">Notes de publication</string>
+	<string name="yes">Oui</string>
+	<string name="no">Non</string>
+	<string name="ok">Valider</string>
+	<string name="cancel">Annuler</string>
+	<string name="about_version">"Version: "</string>
+	<string name="about_website">"Site Web: "</string>
+	<string name="about_bugs">"Aide, rapport de bugs et demandes de nouvelles fonctionnalités: "</string>
+	<string name="authors">Auteurs</string>
+	<string name="about_donations">"Dons: "</string>
+	<string name="about_license">"Licence: "</string>
+	<string name="about_libraries">"Bibliothèques: "</string>
+	<string name="changelog_header_version">"Version "</string>
+	<string name="pref_title_alerts">Alertes</string>
+	<string name="pref_title_default_alert_type">Type par défaut</string>
+    <string name="pref_entries_alert_type_0">Alarme</string>
+    <string name="pref_entries_alert_type_1">Notification</string>
+    <string name="pref_entries_alert_type_2">Sonnerie</string>
+	<string name="pref_title_default_alert_sound">Son par défaut</string>
+	<string name="pref_title_vibrate_default">Vibreur par défaut</string>
+	<string name="pref_title_sound_volume">Volume sonore</string>
+	<string name="pref_summary_sound_volume">Boilr utilise le volume du système pour le type d\'alerte sélectionné. Sur la plupart des dispositifs, le type Alarme est défini à plein volume, même lorsque le dispositif est réglé en mode silencieux.</string>
+	<string name="system_volumes">Volumes du système</string>
+	<string name="pref_title_appearance">Apparence</string>
+	<string name="pref_title_theme">Thème</string>
+    <string name="pref_entries_theme_0">Sombre</string>
+    <string name="pref_entries_theme_1">Claire</string>
+	<string name="pref_title_network_usage">Utilisation du réseau</string>
+	<string name="pref_title_mobile_data">Données mobiles</string>
+	<string name="pref_title_default_update_interval">Valeur par défaut de la fréquence des mises à jour</string>
+	<string name="undo">Annuler</string>
+<string name="pref_title_default_time_frame">Laps de temps par défaut</string>
+	<string name="pref_title_check_pairs_interval">Recherchez de nouvelles paires</string>
+    <string name="pref_entries_check_pairs_interval_0">Horaire</string>
+    <string name="pref_entries_check_pairs_interval_1">Deux fois par jour</string>
+    <string name="pref_entries_check_pairs_interval_2">Tous les jours</string>
+    <string name="pref_entries_check_pairs_interval_3">Tous les autres jours</string>
+    <string name="pref_entries_check_pairs_interval_4">Hebdomadaire</string>
+    <string name="pref_entries_check_pairs_interval_5">Tous les quinze jours</string>
+	<string name="pref_type_title">Type d\'alarme</string>
+    <string name="pref_type_entries_0">Prix hit</string>
+    <string name="pref_type_entries_1">Changement de prix</string>
+	<string name="pref_exchange_title">Échange</string>
+	<string name="pref_pair_title">Paire</string>
+	<string name="action_send_now">Enregistrer</string>
+	<string name="pref_title_alarm_alert_type">Type d\'alerte</string>
+	<string name="pref_title_alarm_alert_sound">Son</string>
+	<string name="pref_title_alarm_vibrate">Vibreur</string>
+	<string name="pref_title_generic">Général</string>
+	<string name="pref_title_specific">Spécifique</string>
+	<string name="pref_title_upper_limit">Limite supérieure</string>
+	<string name="pref_title_lower_limit">Limite inférieure</string>
+	<string name="pref_title_change_in_percentage">Changement en pourcentage</string>
+	<string name="pref_title_change_value">Changement</string>
+	<string name="pref_title_update_interval">Intervalle de mise à jour</string>
+	<string name="pref_title_time_frame">Laps de temps</string>
+	<string name="pref_title_last_value">Dernier prix</string>
+	<string name="boilr_alarm">Alarme de Boilr</string>
+	<string name="off">Arrêt</string>
+	<string name="resume">Reprendre</string>
+	<string name="check_connection">Vérifiez votre connexion</string>
+	<string name="alarms_not_updating">Les alarmes ne ce sont pas mise à jour.</string>
+	<string name="failed_create_alarm">Impossible de créer l\'alarme.</string>
+	<string name="failed_save_alarm">Impossible d\'enregistrer l\'alarme.</string>
+	<string name="upper_must_larger_lower">Limite supérieure doit être supérieure à la limite inférieure.</string>
+	<string name="frame_must_longer_interval">Le délai doit être plus long que l\'intervalle de mise à jour.</string>
+	<string name="pair_search_description">Recherche de paire</string>
+	<string name="silent">Silencieux</string>
+	<string name="unknown_ringtone">Sonnerie inconnu</string>
+	<string name="pref_title_language">Langage</string>
+	<string name="alarm_deleted">Alarme supprimé</string>
+	<string name="pref_summary_default_update_interval">En quelques secondes, Vous pouvez définir la fréquence des alarmes liées à l\'échange de données. Vous pouvez aussi affiner les réglages d\'une alarme particulière.</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="default_value">Défaut (%1$s)<xliff:g id="value" example="Hassium">(%1$s)</xliff:g></string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="price_change_firing_reason">%1$s en %2$s<xliff:g id="change_value" example="+10%">%1$s</xliff:g> in <xliff:g id="timespan" example="10m">%2$s</xliff:g></string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="seconds_abbreviation">%1$ss<xliff:g id="number_seconds" example="10">%1$s</xliff:g>s</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="minutes_abbreviation">%1$sm<xliff:g id="number_minutes" example="10">%1$s</xliff:g>m</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="hours_abbreviation">%1$sh<xliff:g id="number_hours" example="10">%1$s</xliff:g>h</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="days_abbreviation">%1$sj<xliff:g id="number_days" example="10">%1$s</xliff:g>d</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="limit_explanation">%1$s = %2$s (valeur base, d\'il ya %3$s) %4$s %5$s (changement)<xliff:g id="limit_value" example="100">%1$s</xliff:g> = <xliff:g id="base_value" example="80">%2$s</xliff:g> (base value, from <xliff:g id="timespan" example="10m">%3$s</xliff:g> ago) <xliff:g id="operation" example="+">%4$s</xliff:g> <xliff:g id="change_value" example="20">%5$s</xliff:g> (change)</string>
+	<string name="pref_summary_default_time_frame">En minutes. Utilisé par Modifier Alarmes. Définit quel prix comparer avec le prix courant, p. ex. le prix d\'il y a 15 minutes. Vous pouvez définir une autre fenêtre temporelle pour une alarme particulière dans ses propriétés.</string>
+	<string name="pref_summary_update_interval">En secondes. Définit la périodicité de récupération de données de l\'échange.</string>
+	<string name="pref_summary_time_frame">En minutes. Définit le prix à comparer avec le prix courant, p. ex. le prix d\'il y a 15 minutes.</string>
+	</resources>
