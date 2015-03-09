@@ -27,7 +27,7 @@
 	<string name="pref_title_default_alert_sound">Son par défaut</string>
 	<string name="pref_title_vibrate_default">Vibreur par défaut</string>
 	<string name="pref_title_sound_volume">Volume sonore</string>
-	<string name="pref_summary_sound_volume">Boilr utilise le volume du système pour ce type d\'alerte. Sur la plupart des périphériques, ce type d\'alarme est défini à plein volume, même lorsque le téléphone est réglé en mode silencieux.</string>
+	<string name="pref_summary_sound_volume">Boilr utilise le volume du système pour le type d\'alerte sélectionné. Sur la plupart des dispositifs, le type Alarme est défini à plein volume, même lorsque le dispositif est réglé en mode silencieux.</string>
 	<string name="system_volumes">Volumes du système</string>
 	<string name="pref_title_appearance">Apparence</string>
 	<string name="pref_title_theme">Thème</string>
@@ -59,7 +59,7 @@
 	<string name="pref_title_upper_limit">Limite supérieure</string>
 	<string name="pref_title_lower_limit">Limite inférieure</string>
 	<string name="pref_title_change_in_percentage">Changement en pourcentage</string>
-	<string name="pref_title_change_value">Modifier</string>
+	<string name="pref_title_change_value">Changement</string>
 	<string name="pref_title_update_interval">Intervalle de mise à jour</string>
 	<string name="pref_title_time_frame">Laps de temps</string>
 	<string name="pref_title_last_value">Dernier prix</string>
@@ -78,4 +78,11 @@
 	<string name="pref_title_language">Langage</string>
 	<string name="alarm_deleted">Alarme supprimé</string>
 	<string name="pref_summary_default_update_interval">En quelques secondes, Vous pouvez définir la fréquence des alarmes liées à l\'échange de données. Vous pouvez aussi affiner les réglages d\'une alarme particulière.</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="default_value">Défaut (%1$s)<xliff:g id="value" example="Hassium">(%1$s)</xliff:g></string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="price_change_firing_reason">%1$s en %2$s<xliff:g id="change_value" example="+10%">%1$s</xliff:g> in <xliff:g id="timespan" example="10m">%2$s</xliff:g></string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="seconds_abbreviation">%1$ss<xliff:g id="number_seconds" example="10">%1$s</xliff:g>s</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="minutes_abbreviation">%1$sm<xliff:g id="number_minutes" example="10">%1$s</xliff:g>m</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="hours_abbreviation">%1$sh<xliff:g id="number_hours" example="10">%1$s</xliff:g>h</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="days_abbreviation">%1$sj<xliff:g id="number_days" example="10">%1$s</xliff:g>d</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="limit_explanation">%1$s = %2$s (valeur base, d\'il ya %3$s) %4$s %5$s (changement)<xliff:g id="limit_value" example="100">%1$s</xliff:g> = <xliff:g id="base_value" example="80">%2$s</xliff:g> (base value, from <xliff:g id="timespan" example="10m">%3$s</xliff:g> ago) <xliff:g id="operation" example="+">%4$s</xliff:g> <xliff:g id="change_value" example="20">%5$s</xliff:g> (change)</string>
 	</resources>
