@@ -36,18 +36,18 @@
     <string name="pref_entries_theme_1">Claire</string>
 	<string name="pref_title_network_usage">Utilisation du réseau</string>
 	<string name="pref_title_mobile_data">Données mobiles</string>
-	<string name="pref_title_default_update_interval">Valeur par défaut de la fréquence des mises à jour</string>
+	<string name="pref_title_default_update_interval">Intervalle de mise à jour par défaut</string>
 	<string name="undo">Annuler</string>
-	<string name="pref_title_default_time_frame">Laps de temps par défaut</string>
+	<string name="pref_title_default_time_frame">Fenêtre temporelle par défaut</string>
 	<string name="pref_title_check_pairs_interval">Recherchez de nouvelles paires</string>
     <string name="pref_entries_check_pairs_interval_0">Horaire</string>
     <string name="pref_entries_check_pairs_interval_1">Deux fois par jour</string>
     <string name="pref_entries_check_pairs_interval_2">Tous les jours</string>
-    <string name="pref_entries_check_pairs_interval_3">Tous les autres jours</string>
+    <string name="pref_entries_check_pairs_interval_3">Tous les deux jours</string>
     <string name="pref_entries_check_pairs_interval_4">Hebdomadaire</string>
     <string name="pref_entries_check_pairs_interval_5">Tous les quinze jours</string>
 	<string name="pref_type_title">Type d\'alarme</string>
-    <string name="pref_type_entries_0">Prix hit</string>
+    <string name="pref_type_entries_0">Prix limite</string>
     <string name="pref_type_entries_1">Changement de prix</string>
 	<string name="pref_exchange_title">Échange</string>
 	<string name="pref_pair_title">Paire</string>
@@ -62,7 +62,7 @@
 	<string name="pref_title_change_in_percentage">Changement en pourcentage</string>
 	<string name="pref_title_change_value">Changement</string>
 	<string name="pref_title_update_interval">Intervalle de mise à jour</string>
-	<string name="pref_title_time_frame">Laps de temps</string>
+	<string name="pref_title_time_frame">Fenêtre temporelle</string>
 	<string name="pref_title_last_value">Dernier prix</string>
 	<string name="boilr_alarm">Alarme de Boilr</string>
 	<string name="off">Arrêt</string>
@@ -72,13 +72,13 @@
 	<string name="failed_create_alarm">Impossible de créer l\'alarme.</string>
 	<string name="failed_save_alarm">Impossible d\'enregistrer l\'alarme.</string>
 	<string name="upper_must_larger_lower">Limite supérieure doit être supérieure à la limite inférieure.</string>
-	<string name="frame_must_longer_interval">Le délai doit être plus long que l\'intervalle de mise à jour.</string>
+	<string name="frame_must_longer_interval">Le fenêtre temporelle doit être plus long que l\'intervalle de mise à jour.</string>
 	<string name="pair_search_description">Recherche de paire</string>
 	<string name="silent">Silencieux</string>
 	<string name="unknown_ringtone">Sonnerie inconnu</string>
 	<string name="pref_title_language">Langage</string>
 	<string name="alarm_deleted">Alarme supprimé</string>
-	<string name="pref_summary_default_update_interval">En quelques secondes, Vous pouvez définir la fréquence des alarmes liées à l\'échange de données. Vous pouvez aussi affiner les réglages d\'une alarme particulière.</string>
+	<string name="pref_summary_default_update_interval">En quelques secondes. Définit à quelle fréquence l\'alarme va chercher les données de l\'échange. Vous pouvez aussi affiner les réglages d\'une alarme particulière.</string>
 	<string name="default_value">Défaut (%1$s)</string>
 	<string name="price_change_firing_reason">%1$s en %2$s</string>
 	<string name="seconds_abbreviation">%1$ss</string>
@@ -86,7 +86,12 @@
 	<string name="hours_abbreviation">%1$sh</string>
 	<string name="days_abbreviation">%1$sj</string>
 	<string name="limit_explanation">%1$s = %2$s (valeur base, d\'il ya %3$s) %4$s %5$s (changement)</string>
-	<string name="pref_summary_default_time_frame">En minutes. Utilisé par Modifier Alarmes. Définit quel prix comparer avec le prix courant, p. ex. le prix d\'il y a 15 minutes. Vous pouvez définir une autre fenêtre temporelle pour une alarme particulière dans ses propriétés.</string>
+	<string name="pref_summary_default_time_frame">En minutes. Utilisé par Alarmes de Changement. Définit quel prix comparer avec le prix courant, p. ex. le prix d\'il y a 15 minutes. Vous pouvez définir une autre fenêtre temporelle pour une alarme particulière dans ses propriétés.</string>
 	<string name="pref_summary_update_interval">En secondes. Définit la périodicité de récupération de données de l\'échange.</string>
 	<string name="pref_summary_time_frame">En minutes. Définit le prix à comparer avec le prix courant, p. ex. le prix d\'il y a 15 minutes.</string>
+	<string name="couldnt_retrieve_pairs">N\'a pas pu récupérer les paires de %1$s.</string>
+	<string name="couldnt_retrieve_last_value">N\'a pas pu récupérer la dernière valeur de %1$s avec paire %2$s.</string>
+	<string name="not_bound">%1$s ne pas lié à StorageAndControlService.</string>
+	<string name="short_description">Prix alarmes pour Bitcoin, cryptodevises et métaux précieux.</string>
+	<!-- Missing translation <string name="full_description"></string>-->
 </resources>
