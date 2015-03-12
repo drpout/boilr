@@ -1,7 +1,9 @@
 # Boilr
-[![Get Boilr on F-Droid](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Get_it_on_F-Droid.svg/200px-Get_it_on_F-Droid.svg.png)](https://f-droid.org/repository/browse/?fdid=mobi.boilr.boilr)  [![Get Boilr on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=mobi.boilr.boilr)  [![Translation status](https://hosted.weblate.org/widgets/boilr/-/svg-badge.svg)](https://hosted.weblate.org/engage/boilr/?utm_source=widget)
+[![Get Boilr on F-Droid](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/get_it_on_f-droid.png)](https://f-droid.org/repository/browse/?fdid=mobi.boilr.boilr)  [![Get Boilr on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=mobi.boilr.boilr)  [![Translation status](https://hosted.weblate.org/widgets/boilr/-/svg-badge.svg)](https://hosted.weblate.org/engage/boilr/?utm_source=widget)
 
 Android application which monitors Bitcoin, cryptocurrencies and bullion prices, and triggers alarms according to user settings.
+
+![hit alarm creation](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/screenshots/hit_creation.png) ![alarm list](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/screenshots/alarm_list.png) ![hit alarm firing](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/screenshots/hit_firing.png)
 
 Supports 2 types of alarms:
 
@@ -83,7 +85,7 @@ Translators:
 
 * Chinese: [Jan Xie](https://github.com/janx) and Song
 * Czech: [Jaroslav Lichtblau](https://github.com/svetlemodry) and [Michal Čihař](https://github.com/nijel)
-* French: [Tuux](http://www.rtnp.org) and [M for Momo](https://hosted.weblate.org/user/Mo)
+* French: [Tuux](http://www.rtnp.org) and [M for Momo](http://www.rtnp.org)
 * German: Luca Rui
 * Italian: Francesca Mautone
 * Polish: [Michal Pleban](https://pl.linkedin.com/in/michalpleban)
