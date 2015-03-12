@@ -15,7 +15,7 @@
     <string name="about_version">Verze: </string>
     <string name="about_website">Webová stránka: </string>
     <string name="authors">Autoři</string>
-    <!-- Review please --><string name="about_bugs">"Nápověda, chyby a žádosti: "</string>
+    <string name="about_bugs">"Nápověda, chyby a žádosti: "</string>
     <string name="about_donations">Přispěvatelé: </string>
     <string name="about_license">Licencí: </string>
     <string name="about_libraries">Knihovny: </string>
@@ -26,9 +26,9 @@
 	<string name="pref_entries_alert_type_1">Upozornění</string>
 	<string name="pref_entries_alert_type_2">Vyzvánění</string>
     <string name="pref_title_default_alert_sound">Výchozí zvuk</string>
-    <!-- Review please --><string name="default_value">Výchozí (%1$s)</string>
+    <string name="default_value">Výchozí (%1$s)</string>
     <string name="pref_title_sound_volume">Hlasitost zvuk</string>
-    <!-- Missing translation <string name="pref_summary_sound_volume"></string>-->
+    <string name="pref_summary_sound_volume">Boilr používá systémové nastavení hlasitosti pro vybraný typ upozornění. Na většině přístrojů je upozornění nastaveno na nejvyšší hlasitost i když je telefon přepnut do tichého režimu.</string>
     <string name="system_volumes">Hlasitost systém</string>
     <string name="pref_title_vibrate_default">Vibrovat</string>
     <string name="pref_title_appearance">Vzhled</string>
@@ -39,8 +39,8 @@
     <string name="pref_title_mobile_data">Mobilní připojení</string>
     <string name="pref_title_default_time_frame">Výchozí časový interval</string>
     <string name="pref_title_default_update_interval">Výchozí interval aktualizace</string>
-    <!-- Review please, original has changed --><string name="pref_summary_default_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy. Můžete nastavit jiný interval pro určitý alarm v jeho nastavení.</string>
-    <!-- Review please, original has changed --><string name="pref_summary_default_time_frame">V minutách. Použité v Změnit upozornění. Určuje jakou cenu porovnat s aktuální, tzn. cenou před 15 minutami. Můžete nastavit jiný interval pro určitý alarm v jeho nastavení.</string>
+    <string name="pref_summary_default_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy. Můžete nastavit jiný interval pro určitý alarm v jeho nastavení.</string>
+    <string name="pref_summary_default_time_frame">V minutách. Použité v Změnit upozornění. Určuje jakou cenu porovnat s aktuální, tzn. cenou před 15 minutami. Můžete nastavit jiný interval pro určitý alarm v jeho nastavení.</string>
     <string name="pref_title_check_pairs_interval">Hledat nové páry</string>
 	<string name="pref_entries_check_pairs_interval_0">Každou hodinu</string>
 	<string name="pref_entries_check_pairs_interval_1">Dvakrát denně</string>
@@ -66,25 +66,24 @@
     <string name="pref_title_update_interval">Interval aktualizace</string>
     <string name="pref_title_time_frame">Časové období</string>
     <string name="pref_title_last_value">Poslední cena</string>
-    <!-- Review please, original has changed --><string name="pref_summary_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy.</string>
-    <!-- Review please, original has changed --><string name="pref_summary_time_frame">V minutách. Určuje jakou cenu porovnat s aktuální, tzn. cenou před 15 minutami.</string>
+    <string name="pref_summary_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy.</string>
+    <string name="pref_summary_time_frame">V minutách. Určuje jakou cenu porovnat s aktuální, tzn. cenou před 15 minutami.</string>
     <string name="boilr_alarm">Upozornění aplikace Boilr</string>
     <string name="off">Vypnout</string>
     <string name="resume">Pokračovat</string>
-    <!-- Review please--><string name="check_connection">Ověřte své připojení</string>
-    <!-- Review please--><string name="alarms_not_updating">Upozornění nejsou aktualizována.</string>
+    <string name="check_connection">Ověřte své připojení</string>
+    <string name="alarms_not_updating">Upozornění nejsou aktualizována.</string>
     <string name="couldnt_retrieve_pairs">Nelze získat páry pro %1$s.</string>
     <string name="couldnt_retrieve_last_value">Nelze získat poslední hodnotu pro %1$s pro pár %2$s.</string>
     <string name="failed_create_alarm">Chyba při vytváření upozornění.</string>
     <string name="failed_save_alarm">Nepodařilo se uložit upozornění.</string>
-    <!-- Missing translation <string name="upper_must_larger_lower"></string>
-    <string name="frame_must_longer_interval"></string>-->
+    <string name="upper_must_larger_lower">Horní limit musí být vyšší než spodní limit.</string>
+	<string name="frame_must_longer_interval">Časové období musí být delší než interval aktualizace.</string>
     <string name="not_bound">%1$s nenapojen k službě StorageAndControlService.</string>
     <string name="pair_search_description">Hledat pár</string>
     <string name="silent">Tichý</string>
     <string name="unknown_ringtone">Neznámý vyzvánění</string>
     <string name="pref_title_language">Jazyk</string>
-    <!-- Review everything below please -->
     <string name="price_change_firing_reason">%3$s v %5$s</string>
     <string name="seconds_abbreviation">%1$ss</string>
     <string name="minutes_abbreviation">%1$sm</string>
@@ -93,11 +92,6 @@
     <string name="limit_explanation">%1$s = %2$s (základní hodnota, z doby před %3$s) %4$s %5$s (změna)</string>
     <string name="alarm_deleted">Upozornění vypouští</string>
 	<string name="undo">Zrušit</string>
-	<!-- Missing translation <string name="short_description"></string>-->
-	<!-- Missing translation <string name="full_description"></string>-->
-<string name="pref_summary_sound_volume">Boilr používá systémové nastavení hlasitosti pro vybraný typ upozornění. Na většině přístrojů je upozornění nastaveno na nejvyšší hlasitost i když je telefon přepnut do tichého režimu.</string>
-	<string name="upper_must_larger_lower">Horní limit musí být vyšší než spodní limit.</string>
-	<string name="frame_must_longer_interval">Časové období musí být delší než interval aktualizace.</string>
 	<string name="short_description">Upozornění na cenu Bitcoinu, kryptoměn a bullionu.</string>
 	<string name="full_description">"Hlídá ceny kryptoměn a bullionu, upozorňuje uživatele na základě jeho nastavení. Plná podpora pro všechny hlavní burzy a směnné páry. Podporuje dva typy upozornění: * Dosažení ceny - upozorní na překročení horní a spodní hranice alarmu. * Změna ceny - upozorní při změně ceny o hodnotu X (v měně nebo procentech) v zadaném časovém období (např. 15 min.). Používá pohyblivé časové období: cena je načítána v určeném intervalu (např. 30 s) a porovnána s cenou načtenou při minulém období (např. před 15 min). Zvuky a vibrování je možné konfigurovat globálně a individuálně pro každé upozornění. Seznamy burz, cenových párů a upozornění lze prohledávat, což umožňuje rychlou konfiguraci a nastavení upozornění. Alarmy lze přerovnávat. Vypnuté alarmy jsou aktualizovány (pouze) při zobrazení seznamu upozornění, funguje jako ticker. Tržní data jsou získávána přímo z burz za pomocí Wi-Fi nebo mobilního přenosu dat (pokud povoleno). Boilr podporuje všechny burzy dostupné v libdynticker, a všechny jejich cenové páry: https://github.com/andrefbsantos/libdynticker/#supported-exchanges Boilr je svobodný (ve smyslu svoboda) software uvolněn pod GPLv3+. KOMPLETNí zdrojový kód je dostupný na https://github.com/andrefbsantos/boilr Pokud vám přijde jako použitelný, zvažte jeho podporu zasláním příspěvku: http://boilr.mobi/#donate Pro pomoc, hlášení chyb a návrhů vylepšení použijte portál GitHub. Důvody vyžadovaných oprávnění: * Číst stav telefonu  a identity - Zamezit upozorňování během telefonních hovorů. * Číst data z paměťové karty - Načtení osobních vyzvánění. * Vypnutí uzamčení obrazovky - Aby bylo možno vypnout zvonící alarm bez nutnosti odemknout přístroj. * Přístup k síti - Načtení dat z burz. * Zobrazit síťová připojení - Ověření jestli používáte Wi-Fi nebo mobilní data, pro omezení mobilních dat. * Spuštění po startu - Pro načtení alarmů a aktualizování dat z burz. * Kontrola vibrování - Vibrace při spuštění alarmu. * Zamezit režimu spánku telefonu - Použité pro běh alarmu až do stiknutí tlačítka vypnutí. Historie verzí lze nalézt na: https://github.com/andrefbsantos/boilr/releases Aktuálně podporované burzy: Bitcoin and altcoins to FIAT [...] Altcoins [...] Futures, stocks and securities [...] "</string>
 </resources>
