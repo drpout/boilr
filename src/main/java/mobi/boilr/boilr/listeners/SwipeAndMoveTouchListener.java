@@ -133,7 +133,7 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 
 		if(mSwipeSlop < 0) {
 			mSwipeSlop = ViewConfiguration.get(mActivity).getScaledTouchSlop();
-			mSwipeSlopX = mSwipeSlop * 5;
+			mSwipeSlopX = mSwipeSlop * 7;
 		}
 
 		switch(event.getAction()) {

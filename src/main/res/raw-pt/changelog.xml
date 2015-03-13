@@ -20,7 +20,7 @@
 		<changelogtext>* Corrigidos erros na interação com as bolsas Allcoin, Bitcoin.de, BTC100, CCEX, Huobi e Kraken.</changelogtext>
 		<changelogtext>* Corrigida falha que disparava repetidamente alarmes cujo intervalo de atualização fosse curto.</changelogtext>
 		<changelogtext>* Corrigido o carregamento de dados das bolsas em ligações de má qualidade.</changelogtext>
-		<changelogtext>- Removidas as bolsas: Atomic Trade, BTER, CoinMkt, Crypto-Trade, Justcoin, MintPal e Vault of Satoshi.</changelogtext>
+		<changelogtext>- Removidas as bolsas: Atomic Trade, CoinMkt, Crypto-Trade, Justcoin, MintPal e Vault of Satoshi.</changelogtext>
 	</changelogversion>
 	
 	<changelogversion versionName="0.4.0" changeDate="17 Out 2014">

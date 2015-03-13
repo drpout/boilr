@@ -20,7 +20,7 @@
 		<changelogtext>* Fixed bugs in Allcoin, Bitcoin.de, BTC100, CCEX, Huobi and Kraken exchanges' interaction.</changelogtext>
 		<changelogtext>* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.</changelogtext>
 		<changelogtext>* Fixed exchange data fetching on low quality internet connections.</changelogtext>
-		<changelogtext>- Removed Atomic Trade, BTER, CoinMkt, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.</changelogtext>
+		<changelogtext>- Removed Atomic Trade, CoinMkt, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.</changelogtext>
 	</changelogversion>
 	
 	<changelogversion versionName="0.4.0" changeDate="17 Oct 2014">

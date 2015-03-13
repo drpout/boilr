@@ -6,7 +6,7 @@
 	<artifactId>boilr</artifactId>
 	<version>0.5.0</version>
 	<packaging>apk</packaging>
-	<description>Android application which triggers an alarm when price of a cryptocurrency or bullion changes or reaches target value on a given exchange.</description>
+	<description>Android application which monitors Bitcoin, cryptocurrencies, cryptoassets and derivatives, triggering alarms according to user settings.</description>
 	<inceptionYear>2014</inceptionYear>
 
 	<scm>
@@ -25,7 +25,7 @@
 		<libpricealarm.version>0.2.0</libpricealarm.version>
 		<android.maven.plugin.groupid>com.simpligility.maven.plugins</android.maven.plugin.groupid>
 		<android.maven.plugin.version>4.1.0</android.maven.plugin.version>
-		<android.sdk.version>21</android.sdk.version>
+		<android.sdk.version>22</android.sdk.version>
 		<release.description>
 			\+ Added Bitspark, Coinbase, Mulcoin, OneWorldCoin and Yunbi exchanges.
 			\+ Added Chinese, French, German, Italian, Polish, Portuguese and Spanish translations.
@@ -46,7 +46,7 @@
 			\* Fixed bugs in Allcoin, Bitcoin.de, BTC100, CCEX, Huobi and Kraken exchanges' interaction.
 			\* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.
 			\* Fixed exchange data fetching on low quality internet connections.
-			\- Removed Atomic Trade, BTER, CoinMkt, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
+			\- Removed Atomic Trade, CoinMkt, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
 		</release.description>
 	</properties>
 
@@ -86,7 +86,7 @@
 		<dependency>
 			<groupId>android</groupId>
 			<artifactId>android</artifactId>
-			<version>5.0_r2</version>
+			<version>5.1_r1</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>

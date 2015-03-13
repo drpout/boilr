@@ -1,24 +1,24 @@
 # Boilr
 [![Get Boilr on F-Droid](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/get_it_on_f-droid.png)](https://f-droid.org/repository/browse/?fdid=mobi.boilr.boilr)  [![Get Boilr on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=mobi.boilr.boilr)  [![Translation status](https://hosted.weblate.org/widgets/boilr/-/svg-badge.svg)](https://hosted.weblate.org/engage/boilr/?utm_source=widget)
 
-Android application which monitors Bitcoin, cryptocurrencies and bullion prices, and triggers alarms according to user settings.
+Android application which monitors Bitcoin, cryptocurrencies, cryptoassets and derivatives, triggering alarms according to user settings.
 
 ![hit alarm creation](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/screenshots/hit_creation.png) ![alarm list](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/screenshots/alarm_list.png) ![hit alarm firing](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/screenshots/hit_firing.png)
 
-Supports 2 types of alarms:
+Supports 2 alarm types:
 
 * Price Hit - Triggered when price crosses the alarm's upper or lower limit.
 * Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 15 min). It uses a rolling time frame: price is fetched with a given update interval (e.g. 30 s) and compared with the price fetched one time frame ago (e.g. 15 min ago).
 
-Sound and vibration are configurable globally and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing a quick alarm setup and configuration. Alarms can be reordered. Disabled alarms keep updating while (and only while) the alarm list is visible, acting as tickers.
+Sound and vibration are configurable globally, and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing quick setup and configuration. The alarm list behaves as your ticker, where you can reorder your alarms and directly change their limits. Triggered alarms ring, displaying their status, until you turn them off. Just like an alarm clock.
 
-Market data is retrieved directly from the exchanges using Wi-Fi or Mobile Data (if allowed). [libdynticker](https://github.com/andrefbsantos/libdynticker) is used to interface with the exchanges. Therefore, Boilr supports all [exchanges available on libdynticker](https://github.com/andrefbsantos/libdynticker/#supported-exchanges), as all their pairs.
+Market data is retrieved directly from the exchanges via Wi-Fi or Mobile Data (if allowed). [libdynticker](https://github.com/andrefbsantos/libdynticker) is used to interface with the exchanges. Thus, Boilr supports all [exchanges available on libdynticker](https://github.com/andrefbsantos/libdynticker/#supported-exchanges), as all their pairs.
 
 To create alarms Boilr uses [libpricealarm](https://github.com/andrefbsantos/libpricealarm).
 
 Other libraries we use: [changeloglib](https://github.com/gabrielemariotti/changeloglib) and [UndoBar](https://github.com/soarcn/UndoBar).
 
-Check Boilr's website to see it in action: http://boilr.mobi The website source-code is available at [boilr-site](https://github.com/andrefbsantos/boilr-site).
+Check Boilr's website to see it in action: http://boilr.mobi Website source-code is available at [boilr-site](https://github.com/andrefbsantos/boilr-site).
 
 ## Getting help
 Bug reports, feature requests and general help questions should be submitted on [Boilr's GitHub issues](https://github.com/andrefbsantos/boilr/issues). Try being specific when choosing the right title and label for your issue.
@@ -45,7 +45,7 @@ Prevent phone from sleeping | Used to keep showing the alarm triggered activity 
 ## Building
 1. Fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted#Prerequisites).
 2. Install Android API 21 SDK and Android Support Library. 
-3. `mvn install:install-file -DgroupId=android -DartifactId=android -Dversion=5.0_r2 -Dpackaging=jar -Dfile=$ANDROID_HOME/platforms/android-21/android.jar`
+3. `mvn install:install-file -DgroupId=android -DartifactId=android -Dversion=5.1_r1 -Dpackaging=jar -Dfile=$ANDROID_HOME/platforms/android-22/android.jar`
 4. `mvn install:install-file -DgroupId=com.android.support -DartifactId=support-annotations -Dversion=21.0.0 -Dpackaging=jar -Dfile=$ANDROID_HOME/extras/android/support/annotations/android-support-annotations.jar`
 5. Run `mvn validate` to make Maven aware of the plugins used to download and install dependencies which are not in Maven repositories.
 

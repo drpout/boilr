@@ -40,7 +40,7 @@
 	<string name="pref_title_default_update_interval">Default update interval</string>
 	<string name="pref_summary_default_update_interval">In seconds. Defines how often alarms fetch data from the exchange. You can set another interval for a particular alarm on its settings.</string>
 	<string name="pref_title_default_time_frame">Default time frame</string>
-	<string name="pref_summary_default_time_frame">In minutes. Used by Change alarms. Defines which price to compare with the current one, e.g., the price from 15 min ago. You can set another time frame for a particular alarm on its settings.</string>
+	<string name="pref_summary_default_time_frame">In minutes. Used by Change alarms. Sets the price to be compared with the current one, e.g., the price from 15 min ago. You can set another time frame for a particular alarm on its settings.</string>
 	<string name="pref_title_check_pairs_interval">Check for new pairs</string>
     <string name="pref_entries_check_pairs_interval_0">Hourly</string>
     <string name="pref_entries_check_pairs_interval_1">Twice a day</string>
@@ -67,7 +67,7 @@
 	<string name="pref_title_time_frame">Time frame</string>
 	<string name="pref_title_last_value">Last price</string>
 	<string name="pref_summary_update_interval">In seconds. Defines how often the alarm fetches data from the exchange.</string>
-	<string name="pref_summary_time_frame">In minutes. Defines the price to compare with the current one, e.g., the price from 15 min ago.</string>
+	<string name="pref_summary_time_frame">In minutes. Sets the price to be compared with the current one, e.g., the price from 15 min ago.</string>
 	<string name="boilr_alarm">Boilr Alarm</string>
 	<string name="off">Off</string>
 	<string name="resume">Resume</string>
@@ -93,16 +93,16 @@
 	<string name="alarm_deleted">Alarm deleted</string>
 	<string name="undo">Undo</string>
 	
-	<string name="short_description">Price alarms for Bitcoin, cryptocurrencies and bullion.</string>
-	<string name="full_description">Monitor cryptocurrencies and bullion prices, and trigger alarms according to user settings. Full support for all major exchanges and pairs.
+	<string name="short_description">Price alarms for Bitcoin, cryptocurrencies, cryptoassets and derivatives.</string>
+	<string name="full_description">Monitor Bitcoin, cryptocurrencies, cryptoassets and derivatives, and trigger alarms according to user settings. 57+ exchanges and counting.
 
 
-		Supports 2 types of alarms:
+		Supports 2 alarm types:
 		* Price Hit - Triggered when price crosses the alarm\'s upper or lower limit.
 		* Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 15 min). It uses a rolling time frame: price is fetched with a given update interval (e.g. 30 s) and compared with the price fetched one time frame ago (e.g. 15 min ago).
 		
 		
-		Sound and vibration are configurable globally and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing a quick alarm setup and configuration. Alarms can be reordered. Disabled alarms keep updating while (and only while) the alarm list is visible, acting as tickers. Market data is retrieved directly from the exchanges using Wi-Fi or Mobile Data (if allowed).
+		Sound and vibration are configurable globally, and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing quick setup and configuration. The alarm list behaves as your ticker, where you can reorder your alarms and directly change their limits. Triggered alarms ring, displaying their status, until you turn them off. Just like an alarm clock. Market data is retrieved directly from the exchanges via Wi-Fi or Mobile Data (if allowed).
 		
 		
 		Boilr supports all exchanges available on libdynticker, as all their pairs: https://github.com/andrefbsantos/libdynticker/#supported-exchanges
