@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
 	<changelogversion versionName="0.5.0" changeDate="?? Mar 2015">
-		<changelogtext>+ Adicionadas as bolsas: Bitspark, Coinbase, Mulcoin, OneWorldCoin e Yunbi.</changelogtext>
+		<changelogtext>+ Adicionadas as bolsas: Banx.io, Bitspark, Bitso, Coinbase, CoinMate, Coinsetter, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mulcoin, OneWorldCoin, Quadriga CS, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yuanbaohui e Yunbi.</changelogtext>
 		<changelogtext>+ Adicionadas traduções para alemão, chinês, castelhano, francês, italiano, polaco e português.</changelogtext>
 		<changelogtext>+ O último preço na lista de alarmes é agora colorido consoante a direção do preço (subida ou descida).</changelogtext>
 		<changelogtext>+ Adicionada seta que indica a direção do preço nas notificações mostradas quando um alarme dispara.</changelogtext>
@@ -20,7 +20,7 @@
 		<changelogtext>* Corrigidos erros na interação com as bolsas Allcoin, Bitcoin.de, BTC100, CCEX, Huobi e Kraken.</changelogtext>
 		<changelogtext>* Corrigida falha que disparava repetidamente alarmes cujo intervalo de atualização fosse curto.</changelogtext>
 		<changelogtext>* Corrigido o carregamento de dados das bolsas em ligações de má qualidade.</changelogtext>
-		<changelogtext>- Removidas as bolsas: Atomic Trade, CoinMkt, Crypto-Trade, Justcoin, MintPal e Vault of Satoshi.</changelogtext>
+		<changelogtext>- Removidas as bolsas: 1BSE, Atomic Trade, CoinMkt, Crypto-Trade, Justcoin, MintPal e Vault of Satoshi exchanges.</changelogtext>
 	</changelogversion>
 	
 	<changelogversion versionName="0.4.0" changeDate="17 Out 2014">
