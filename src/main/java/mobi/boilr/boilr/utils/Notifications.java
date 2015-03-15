@@ -148,7 +148,7 @@ public final class Notifications {
 				changeSettingsIntent.setAction(Notifications.ACTION_DISABLE_NET_NOTIF);
 				changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				PendingIntent pendingIntent;
-				if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+				if(Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
 					pendingIntent = TaskStackBuilder.create(context)
 										.addNextIntentWithParentStack(changeSettingsIntent)
 										.getPendingIntent(sNoNetNotifID, PendingIntent.FLAG_UPDATE_CURRENT);
