@@ -104,6 +104,7 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 	private int mSwipeSlopX = -1;
 	private boolean mItemPressed = false;
 	private boolean mSwiping = false;
+	private boolean mVerticalSwipe = false;
 	private GridView mView;
 	private Handler mHandler = new Handler();
 	private final LongClickTask mLongClickTask = new LongClickTask();
@@ -150,7 +151,6 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 			return false;
 
 		case MotionEvent.ACTION_CANCEL:
-			childView.setAlpha(1);
 			childView.setTranslationX(0);
 			mHandler.removeCallbacks(mLongClickTask);
 			mPointToPosition = -1;
@@ -166,12 +166,13 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 			float deltaXAbs = Math.abs(deltaX);
 			float deltaYAbs = Math.abs(deltaY);
 			if(!mSwiping) {
-				if(deltaXAbs > mSwipeSlopX) {
+				if(!mVerticalSwipe && deltaXAbs > mSwipeSlopX) {
 					mSwiping = true;
 					mView.requestDisallowInterceptTouchEvent(true);
 					mHandler.removeCallbacks(mLongClickTask);
 				} else if(deltaYAbs > mSwipeSlop) {
 					// It's not an horizontal swipe, it most something else, let another listener handle it
+					mVerticalSwipe = true;
 					mPointToPosition = -1;
 					mSwiping = false;
 					mItemPressed = false;
@@ -182,7 +183,6 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 			if(mSwiping) {
 				childView.setTranslationX((x - mDownX));
 				// Set fade to be almost invisible when when threshold to remove is achieved.
-				childView.setAlpha(1 - deltaXAbs / view.getWidth());
 			}
 		}
 			break;
@@ -207,7 +207,6 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 					mUndoBar.message(R.string.alarm_deleted).token(b).show();
 				} else {
 					// back into place
-					childView.setAlpha(1);
 					childView.setTranslationX(0);
 				}
 				mView.setEnabled(true);
@@ -216,6 +215,7 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 				// It's not an horizontal swipe, let another listener handle it.
 				mPointToPosition = -1;
 				mItemPressed = false;
+				mVerticalSwipe = false;
 				mHandler.removeCallbacks(mLongClickTask);
 				return false;
 			}
