@@ -128,7 +128,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected void updatePairsList(String exchangeCode, String exchangeName, String pairString) {
 		mPairListPref.setEntries(null);
 		mPairListPref.setEntryValues(null);
-		mPairListPref.setSummary(null);
+		mPairListPref.setSummary(mEnclosingActivity.getString(R.string.loading_pairs));
 		mPairListPref.setEnabled(false);
 		disableDependentOnPairAux();
 		try {

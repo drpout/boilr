@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
 	<changelogversion versionName="0.5.0" changeDate="?? Mar 2015">
-		<changelogtext>+ Added Banx.io, Bitspark, Bitso, Coinbase, CoinMate, Coinsetter, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mulcoin, OneWorldCoin, Quadriga CS, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yuanbaohui and Yunbi exchange</changelogtext>
+		<changelogtext>+ Added Banx.io, Bitspark, Bitso, Coinbase, CoinMate, Coinsetter, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mulcoin, OneWorldCoin, Quadriga CX, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yuanbaohui and Yunbi exchange</changelogtext>
 		<changelogtext>+ Added Chinese, French, German, Italian, Polish, Portuguese and Spanish translations.</changelogtext>
 		<changelogtext>+ Last price on alarm list is now coloured according to price direction (up or down).</changelogtext>
 		<changelogtext>+ Added arrow to the alarm triggered notifications showing price direction.</changelogtext>

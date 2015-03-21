@@ -95,6 +95,7 @@
 	<string name="limit_explanation">%1$s = %2$s (valore base, da %3$s fa) %4$s %5$s (cambio)</string>
 	<string name="alarm_deleted">Allarme eliminato</string>
 	<string name="undo">Annulla</string>
+	<string name="loading_pairs">Caricamento coppie…</string>
 	<!-- Missing translation <string name="short_description"></string>-->
 	<!-- Missing translation <string name="full_description"></string>-->
 </resources>

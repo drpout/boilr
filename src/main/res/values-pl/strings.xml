@@ -93,6 +93,7 @@
     <string name="limit_explanation">%1$s = %2$s (wartość bazowa, od %3$s temu) %4$s %5$s (zmiana)</string>
     <string name="alarm_deleted">Powiadomienie usunięty</string>
 	<string name="undo">Rozwiązać</string>
+	<string name="loading_pairs">Pary ładowania…</string>
 	<!-- Missing translation <string name="short_description"></string>-->
 	<!-- Missing translation <string name="full_description"></string>-->
 </resources>

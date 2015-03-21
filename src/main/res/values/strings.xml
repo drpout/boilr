@@ -92,9 +92,10 @@
 	<string name="limit_explanation"><xliff:g id="limit_value" example="100">%1$s</xliff:g> = <xliff:g id="base_value" example="80">%2$s</xliff:g> (base value, from <xliff:g id="timespan" example="10m">%3$s</xliff:g> ago) <xliff:g id="operation" example="+">%4$s</xliff:g> <xliff:g id="change_value" example="20">%5$s</xliff:g> (change)</string>
 	<string name="alarm_deleted">Alarm deleted</string>
 	<string name="undo">Undo</string>
+	<string name="loading_pairs">Loading pairs…</string>
 	
 	<string name="short_description">Price alarms for Bitcoin, cryptocurrencies, cryptoassets and derivatives.</string>
-	<string name="full_description">Monitor Bitcoin, cryptocurrencies, cryptoassets and derivatives, and trigger alarms according to user settings. 57+ exchanges and counting.
+	<string name="full_description">Monitor Bitcoin, cryptocurrencies, cryptoassets and derivatives, and trigger alarms according to user settings. 70+ exchanges and counting.
 
 
 		Supports 2 alarm types:

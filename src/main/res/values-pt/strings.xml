@@ -92,6 +92,7 @@
 	<string name="limit_explanation">%1$s = %2$s (valor base, de há %3$s atrás) %4$s %5$s (variação)</string>
 	<string name="alarm_deleted">Alarme eliminado</string>
 	<string name="undo">Desfazer</string>
+	<string name="loading_pairs">A carregar pares…</string>
 	
 	<string name="short_description">Alarmes de preço para Bitcoin, criptomoedas e metais preciosos.</string>
 	<string name="full_description">Monitoriza o preço de criptomoedas e metais preciosos e dispara alarmes consoante parâmetros do utilizador. Suporta todas as principais bolsas e pares.
