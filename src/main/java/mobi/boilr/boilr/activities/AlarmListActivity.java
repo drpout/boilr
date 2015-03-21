@@ -44,10 +44,11 @@ public class AlarmListActivity extends Activity {
 	private static int REQUEST_SETTINGS = 0, REQUEST_CREATE = 1;
 	private AlarmGridView mView;
 	private AlarmListAdapter mAdapter;
-	private SearchView searchView;
+	private SearchView mSearchView;
 	private StorageAndControlService mStorageAndControlService;
 	private boolean mBound;
 	private boolean unscheduleOffedAlarms = true;
+	private SwipeAndMoveTouchListener mTouchListener;
 	private ServiceConnection mStorageAndControlServiceConnection = new ServiceConnection() {
 
 		@SuppressWarnings("unchecked")
@@ -98,7 +99,8 @@ public class AlarmListActivity extends Activity {
 		mAdapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<Alarm>());
 		mView.setAdapter(mAdapter);
 		mView.start();
-		mView.setOnTouchListener(new SwipeAndMoveTouchListener(this));
+		mTouchListener = new SwipeAndMoveTouchListener(this);
+		mView.setOnTouchListener(mTouchListener);
 		OnItemClickListener listener = new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
@@ -119,15 +121,15 @@ public class AlarmListActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.alarm_list, menu);
-		searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-		searchView.setOnQueryTextListener(queryListener);
+		mSearchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+		mSearchView.setOnQueryTextListener(queryListener);
 		/*
 		 * Hack to keep the search icon consistent between themes. Without this
 		 * the icon for the light theme is smaller than the one on the dark
 		 * theme. By just_user on Stack Overflow http://stackoverflow.com/questions/10445760/how-to-change-the-default-icon-on-the-searchview-to-be-use-in-the-action-bar-on/18360563#18360563
 		 */
 		int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
-		ImageView view = (ImageView) searchView.findViewById(searchImgId);
+		ImageView view = (ImageView) mSearchView.findViewById(searchImgId);
 		TypedArray ta = obtainStyledAttributes(attrs);
 		view.setImageResource(ta.getResourceId(0, R.drawable.ic_action_remove_light));
 		return super.onCreateOptionsMenu(menu);
@@ -195,6 +197,7 @@ public class AlarmListActivity extends Activity {
 		} else {
 			Log.e(getString(R.string.not_bound, "AlarmListActivity"));
 		}
+		mTouchListener.clearUndoBar();
 		super.onDestroy();
 	}
 

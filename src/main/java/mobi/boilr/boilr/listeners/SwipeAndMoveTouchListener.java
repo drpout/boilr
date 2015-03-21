@@ -231,4 +231,8 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 
 		return true;
 	}
+
+	public void clearUndoBar() {
+		mUndoBar.clear();
+	}
 }
