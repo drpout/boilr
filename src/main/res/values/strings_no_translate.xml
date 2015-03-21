@@ -44,11 +44,16 @@
 		<item>Allcoin</item>
 		<item>ANX</item>
 		<item>Banx Capital</item>
+		<item>Basebit</item>
+		<item>Bit2C</item>
 		<item>BitBay</item>
 		<item>Bitcoin.de</item>
 		<item>Bitcurex</item>
+		<item>Bitex</item>
 		<item>Bitfinex</item>
+		<item>BitKonan</item>
 		<item>BitMarket.pl</item>
+		<item>BitMaszyna</item>
 		<item>Bitso</item>
 		<item>Bitspark</item>
 		<item>Bitstamp</item>
@@ -56,6 +61,9 @@
 		<item>BleuTrade</item>
 		<item>BTC100</item>
 		<item>BTC38</item>
+		<item>BTCExchange</item>
+		<item>BTCGreece</item>
+		<item>BTCTurk</item>
 		<item>BTC China</item>
 		<item>BTC Markets</item>
 		<item>BTC-E</item>
@@ -71,6 +79,8 @@
 		<item>Coinbase</item>
 		<item>CoinMate</item>
 		<item>Coinsetter</item>
+		<item>Cointradder</item>
+		<item>CoinTree</item>
 		<item>Coinut</item>
 		<item>Crypto Facilities</item>
 		<item>Cryptonit</item>
@@ -86,6 +96,7 @@
 		<item>LakeBTC</item>
 		<item>LocalBitcoins</item>
 		<item>Melotic</item>
+		<item>Mercado Bitcoin</item>
 		<item>Mulcoin</item>
 		<item>NXT Asset Exchange</item>
 		<item>OKCoin</item>
@@ -97,6 +108,7 @@
 		<item>The Rock Trading</item>
 		<item>Vircurex</item>
 		<item>VirWox</item>
+		<item>Yobit</item>
 		<item>Yuanbaohui</item>
 		<item>Yunbi</item>
 	</string-array>
@@ -105,11 +117,16 @@
 		<item>mobi.boilr.libdynticker.exchanges.AllcoinExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.ANXExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BanxExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BasebitExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.Bit2CExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BitBayExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BitcoindeExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BitcurexExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BitexExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BitfinexExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BitKonanExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BitMarketPlExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BitMaszynaExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BitsoExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BitsparkExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BitstampExchange</item>
@@ -117,6 +134,9 @@
 		<item>mobi.boilr.libdynticker.exchanges.BleuTradeExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BTC100Exchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BTC38Exchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BTCExchangePHExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BTCGreeceExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.BTCTurkExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BTCChinaExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BTCMarketsExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BTCEExchange</item>
@@ -132,6 +152,8 @@
 		<item>mobi.boilr.libdynticker.exchanges.CoinbaseExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CoinMateExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CoinsetterExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CointraderExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CoinTreeExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CoinutExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CryptoFacilitiesExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CryptonitExchange</item>
@@ -147,6 +169,7 @@
 		<item>mobi.boilr.libdynticker.exchanges.LakeBTCExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.LocalBitcoinsExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.MeloticExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.MercadoBitcoinExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.MulcoinExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.NXTAssetExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.OKCoinExchange</item>
@@ -158,6 +181,7 @@
 		<item>mobi.boilr.libdynticker.exchanges.TheRockTradingExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.VircurexExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.VirWoxExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.YobitExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.YuanbaohuiExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.YunbiExchange</item>
 	</string-array>

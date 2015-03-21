@@ -27,7 +27,7 @@
 		<android.maven.plugin.version>4.1.0</android.maven.plugin.version>
 		<android.sdk.version>22</android.sdk.version>
 		<release.description>
-			\+ Added Banx.io, Bitspark, Bitso, Coinbase, CoinMate, Coinsetter, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mulcoin, OneWorldCoin, Quadriga CX, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yuanbaohui and Yunbi exchange
+			\+ Added Banx.io, Basebit, Bit2c, Bitex.la, BitKonan, BitMaszyna, Bitspark, Bitso, BTCExchange, BTCGreece, BTCTurk, Coinbase, CoinMate, Coinsetter, CoinTree, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mercado Bitcoin, Mulcoin, OneWorldCoin, Quadriga CX, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yobit, Yuanbaohui and Yunbi exchange
 			\+ Added Chinese, French, German, Italian, Polish, Portuguese and Spanish translations.
 			\+ Last price on alarm list is now coloured according to price direction (up or down).
 			\+ Added arrow to the alarm triggered notifications showing price direction.
