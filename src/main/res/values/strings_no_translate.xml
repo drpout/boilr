@@ -85,7 +85,6 @@
 		<item>Crypto Facilities</item>
 		<item>Cryptonit</item>
 		<item>Cryptsy</item>		
-		<item>Coin-Swap</item>
 		<item>Coins-E</item>
 		<item>Digital Securities Exchange</item>
 		<item>HitBTC</item>
@@ -158,7 +157,6 @@
 		<item>mobi.boilr.libdynticker.exchanges.CryptoFacilitiesExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CryptonitExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CryptsyExchange</item>
-		<item>mobi.boilr.libdynticker.exchanges.CoinswapExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CoinsEExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.DSXExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.HitBTCExchange</item>

@@ -46,7 +46,7 @@
 			\* Fixed bugs in Allcoin, Bitcoin.de, BTC100, CCEX, Huobi and Kraken exchanges' interaction.
 			\* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.
 			\* Fixed exchange data fetching on low quality internet connections.
-			\- Removed 1BSE, Atomic Trade, CoinMkt, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
+			\- Removed 1BSE, Atomic Trade, CoinMkt, Coin-Swap, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
 		</release.description>
 	</properties>
 

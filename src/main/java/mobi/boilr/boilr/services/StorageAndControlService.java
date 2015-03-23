@@ -2,6 +2,7 @@ package mobi.boilr.boilr.services;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -74,12 +75,15 @@ public class StorageAndControlService extends Service {
 						alarm.run();
 						// Log.d("Last value for alarm " + alarm.getId() + " " +
 						// Conversions.formatMaxDecimalPlaces(alarm.getLastValue()));
+						Notifications.clearNoInternetNotification(StorageAndControlService.this);
 					} catch(NumberFormatException e) {
 						Log.e("Could format last value for alarm " + alarm.getId(), e);
+					} catch(SocketTimeoutException e) {
+						Log.e("Couldn't retrieve last value for alarm " + alarm.getId(), e);
+						Notifications.showNoInternetNotification(StorageAndControlService.this);
 					} catch(IOException e) {
-						Log.e("Could not retrieve last value for alarm " + alarm.getId(), e);
+						Log.e("Couldn't retrieve last value for alarm " + alarm.getId(), e);
 					}
-					Notifications.clearNoInternetNotification(StorageAndControlService.this);
 				} else {
 					Notifications.showNoInternetNotification(StorageAndControlService.this);
 				}
