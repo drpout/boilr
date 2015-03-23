@@ -70,7 +70,8 @@
         
         <activity
             android:name=".activities.NotificationActivity"
-            android:label="@string/boilr_alarm" />
+            android:label="@string/boilr_alarm"
+            android:noHistory="true" />
         
     </application>
 </manifest>

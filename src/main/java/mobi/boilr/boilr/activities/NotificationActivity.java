@@ -23,6 +23,7 @@ import android.widget.TextView;
 public class NotificationActivity extends Activity {
 
 	private int mAlarmID;
+	private boolean mButtonClicked = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +67,24 @@ public class NotificationActivity extends Activity {
 		// Don't allow back to dismiss.
 	}
 
+	@Override
+	public void onStop() {
+		super.onStop();
+		if(!mButtonClicked) {
+			// User clicked Home or Power button.
+			NotificationService.stopNotify(this, mAlarmID, false);
+			finish();
+		}
+	}
+
 	public void onOffClicked(View v) {
+		mButtonClicked = true;
 		NotificationService.stopNotify(this, mAlarmID, false);
 		finish();
 	}
 
 	public void onResumeClicked(View v) {
+		mButtonClicked = true;
 		NotificationService.stopNotify(this, mAlarmID, true);
 		finish();
 	}

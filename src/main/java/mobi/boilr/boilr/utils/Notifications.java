@@ -64,7 +64,7 @@ public final class Notifications {
 		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());
 		alarmSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		PendingIntent pendingIntent;
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
+		if(Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
 			pendingIntent = TaskStackBuilder.create(context)
 								.addNextIntentWithParentStack(alarmSettingsIntent)
 								.getPendingIntent(alarm.getId(), PendingIntent.FLAG_UPDATE_CURRENT);
@@ -206,7 +206,7 @@ public final class Notifications {
 	}
 
 	public static void clearNotification(Context context, int alarmID) {
-		Log.d("Clearing notifications for alarm instance: " + alarmID);
+		// Log.d("Clearing notifications for alarm instance: " + alarmID);
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(alarmID);
 	}

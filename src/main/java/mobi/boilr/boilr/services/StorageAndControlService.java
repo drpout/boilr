@@ -2,7 +2,6 @@ package mobi.boilr.boilr.services;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -78,10 +77,8 @@ public class StorageAndControlService extends Service {
 						Notifications.clearNoInternetNotification(StorageAndControlService.this);
 					} catch(NumberFormatException e) {
 						Log.e("Could format last value for alarm " + alarm.getId(), e);
-					} catch(SocketTimeoutException e) {
-						Log.e("Couldn't retrieve last value for alarm " + alarm.getId(), e);
-						Notifications.showNoInternetNotification(StorageAndControlService.this);
 					} catch(IOException e) {
+						Notifications.showNoInternetNotification(StorageAndControlService.this);
 						Log.e("Couldn't retrieve last value for alarm " + alarm.getId(), e);
 					}
 				} else {
@@ -231,7 +228,7 @@ public class StorageAndControlService extends Service {
 
 	@Override
 	public void onDestroy() {
-		Log.d("StorageAndControlService destroyed.");
+		// Log.d("StorageAndControlService destroyed.");
 		unregisterReceiver(networkReceiver);
 		super.onDestroy();
 	}

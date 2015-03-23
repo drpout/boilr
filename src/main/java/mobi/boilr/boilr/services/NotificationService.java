@@ -98,10 +98,8 @@ public class NotificationService extends Service {
 			if(START_NOTIFY_ACTION.equals(action)) {
 				if(mBound)
 					startNotify(alarmID);
-				else {
+				else
 					mPendingAlarms.add(alarmID);
-					Log.e(getString(R.string.not_bound, "NotificationService"));
-				}
 			} else if(STOP_NOTIFY_ACTION.equals(action)) {
 				mInFullScreen = false; //It might be redundant
 				boolean keepMonitoring = intent.getBooleanExtra("keepMonitoring", false);
@@ -139,13 +137,13 @@ public class NotificationService extends Service {
 			 * Place a notification for this alarm in the drawer and
 			 * keep the alarm on so it can fire again later.
 			 */
-			Log.d("Showing in call notification for alarm " + alarmID + ".");
+			//Log.d("Showing in call notification for alarm " + alarmID + ".");
 			Notifications.showStatusBarNotification(this, alarm);
 			NotificationKlaxon.ringSingleNotification(this);
 			stopSelf();
 		} else if(!mInFullScreen){
 			mInFullScreen = true;
-			Log.d("Showing fullscreen notification for alarm " + alarmID + ".");
+			//Log.d("Showing fullscreen notification for alarm " + alarmID + ".");
 			mService.stopAlarm(alarmID);
 			Notifications.showFullscreenNotification(this, alarm);
 			NotificationKlaxon.start(this, alarm);
@@ -155,7 +153,7 @@ public class NotificationService extends Service {
 			 * Place a notification for this alarm in the drawer and
 			 * keep the alarm on so it can fire again later.
 			 */
-			Log.d("Showing low priority notification for alarm " + alarmID + ".");
+			//Log.d("Showing low priority notification for alarm " + alarmID + ".");
 			Notifications.showStatusBarNotification(this, alarm);
 			AlarmAlertWakeLock.releaseCpuLock();
 		}
