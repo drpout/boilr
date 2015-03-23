@@ -33,7 +33,7 @@ public final class Notifications {
 	public static Bitmap sBigUpArrowBitmap = null;
 	private static Bitmap sSmallDownArrowBitmap = null;
 	public static Bitmap sBigDownArrowBitmap = null;
-	private static final int sBigArrowSize = 250;
+	private static final int sBigArrowSize = 200;
 	private static final int sSmallArrowSize = 100;
 	// Action used to turn off no internet notification.
 	public static final String ACTION_DISABLE_NET_NOTIF = "ACTION_DISABLE_NET_NOTIF";
