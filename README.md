@@ -32,7 +32,7 @@ Alarm not updating when phone is sleeping. | Set `Settings > Wi-Fi > Advanced > 
 ## Reasons for permissions
 
 Permission | Reason
----------- | --------
+---------- | ------
 Read phone status and identity | Avoids sounding an alarm when you are in the middle of a call.
 Read the contens of your SD card | Used to fetch your costum ringtones.
 Disable your screen lock | So you can turn off a ringing alarm without unlocking your device.
@@ -41,6 +41,16 @@ View network connections | To know whether you're using Wi-Fi or Mobile Data, al
 Run at startup | To grab your active alarms and start updating them. 
 Control vibration | Allows vibration when an alarm is triggered. 
 Prevent phone from sleeping | Used to keep showing the alarm triggered activity until you press the turn off button.
+
+## Contributing
+
+### Translating
+New translations and reviews are much appreciated. If you have 10 minutes to spare just open [Boilr @ Hosted Weblate](https://hosted.weblate.org/projects/boilr/) and start editing. More info at [CONTRIBUTING.md](/CONTRIBUTING.md).
+
+### Coding
+If you know how to program take a look at the [open issues](https://github.com/andrefbsantos/boilr/issues). Check for bugs or features you find interesting and feel free to take them into your hands. If you have any doubt just post your questions on the issue's comments. When done, open a pull request. We promise to review it quickly.
+
+If you would like to add more exchanges to Boilr check [libdynticker's contributing guide](https://github.com/andrefbsantos/libdynticker/blob/master/CONTRIBUTING.md).
 
 ## Building
 1. Fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted#Prerequisites).
