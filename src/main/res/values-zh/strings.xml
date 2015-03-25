@@ -19,7 +19,7 @@
     <!-- Review please --><string name="about_bugs">"帮助，错误和请求: "</string>
     <string name="about_donations">捐赠 </string>
     <string name="about_license">许可证 </string>
-    <!-- Review please --><string name="about_libraries">"库 "</string>
+    <!-- Review please --><string name="about_libraries">"运行库: "</string>
     <string name="changelog_header_version">"版本 "</string>
     <string name="pref_title_alerts">提醒</string>
     <string name="pref_title_default_alert_type">默认类型</string>
@@ -106,5 +106,5 @@
 	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="not_bound">%1$s没有绑定StorageAndControlService。<xliff:g id="class_name" example="AlarmListActivity">%1$s</xliff:g> not bound to StorageAndControlService.</string>
 	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="price_change_firing_reason">%2$s变动: %1$s<xliff:g id="change_value" example="+10%">%1$s</xliff:g> in <xliff:g id="timespan" example="10m">%2$s</xliff:g></string>
 	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="limit_explanation">%1$s = %2$s (以%3$s之前为准的基础值) %4$s %5$s (变动)<xliff:g id="limit_value" example="100">%1$s</xliff:g> = <xliff:g id="base_value" example="80">%2$s</xliff:g> (base value, from <xliff:g id="timespan" example="10m">%3$s</xliff:g> ago) <xliff:g id="operation" example="+">%4$s</xliff:g> <xliff:g id="change_value" example="20">%5$s</xliff:g> (change)</string>
-	<string name="full_description"></string>
+	<string name="full_description">"实时比特币，数字货币，数字资产及衍生品价格，根据用户设置触发提醒。已支持70多家交易所。支持两种提醒类型：* 触价提醒 - 当价格越过设置好的上限或者下限时触发。 * 波动提醒 - 当价格波动在某一时间段内(例如15分钟)超过一定程度时(绝对值或者百分比)触发。声音和震动可全局设置，也可针对每个提醒单独设置。交易所列表，交易对和自定义提醒均可搜索，帮您快速掌握行情。您可以在提醒列表上方便的进行排序或者更改提醒的设置。提醒和闹钟一样，被触发时响铃，显示最新信息，直到您将其关闭。通过Wi-Fi或者移动网络(如果用户允许)直接从交易所获取数据。Boilr支持所有在libdynticker中可用的交易所，以及其中的交易对：https://github.com/andrefbsantos/libdynticker/#supported-exchanges 。Boilr是在GPLv3+许可证下发布的自由软件，您可以从https://github.com/andrefbsantos/boilr获取全部源代码。如果Boilr对您有用，请考虑捐赠或者打赏：http://boilr.mobi/#donate 。如果您需要帮助，或者要报告bug和需求，请使用我们的GitHub issues。以下为Boilr用到的权限和对应的原因：* 获取电话状态和识别码 - 避免在通话中产生提醒响铃。 * 读取SD卡数据 - 用于读取自定义铃声。* 关闭锁屏 - 让您可以在锁屏状态下关闭闹铃。* 网络权限 - 获取交易所行情数据。* 查看网络连接 - 识别您使用的数据网络类型，避免产生不必要得流量 * 系统启动时自启 - 保持自定义提醒运行 * 震动控制 - 提醒触发时产生震动 * 防止手机进入睡眠 - 提醒被触发时保持显示直到您关闭。详细版本历史：https://github.com/andrefbsantos/boilr/releases 当前支持的交易：比特币/竞争币对法币 [...] 竞争币 [...] 期货，股票及有价证券 [...] "</string>
 </resources>
