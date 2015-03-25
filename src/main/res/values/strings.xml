@@ -128,18 +128,14 @@
 		For a version history check: https://github.com/drpout/boilr/releases
 		
 		
-		Currently supported exchanges:
+		Currently supported exchanges
 		
-		Bitcoin and altcoins to FIAT
-		[...]
+		Bitcoin and altcoins to FIAT:
 		
-		Altcoins
-		[...]
+		Altcoins:
 		
-		Assets and Derivatives (Futures and Options)
-		[...]
+		Assets and Derivatives (Futures and Options):
 		
-		Bullion
-		[...]
+		Bullion:
 	</string>
 </resources>
