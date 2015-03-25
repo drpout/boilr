@@ -107,10 +107,10 @@
 	    	声音和震动可全局设置，也可针对每个提醒单独设置。交易所列表，交易对和自定义提醒均可搜索，帮您快速掌握行情。您可以在提醒列表上方便的进行排序或者更改提醒的设置。提醒和闹钟一样，被触发时响铃，显示最新信息，直到您将其关闭。通过Wi-Fi或者移动网络(如果用户允许)直接从交易所获取数据。
 	    	
 	    	
-	    	Boilr支持所有在libdynticker中可用的交易所，以及其中的交易对：https://github.com/andrefbsantos/libdynticker/#supported-exchanges 。
+	    	Boilr支持所有在libdynticker中可用的交易所，以及其中的交易对：https://github.com/drpout/libdynticker/#supported-exchanges 。
 	    	
 	    	
-	    	Boilr是在GPLv3+许可证下发布的自由软件，您可以从https://github.com/andrefbsantos/boilr获取全部源代码。
+	    	Boilr是在GPLv3+许可证下发布的自由软件，您可以从https://github.com/drpout/boilr获取全部源代码。
 	    	如果Boilr对您有用，请考虑捐赠或者打赏：http://boilr.mobi/#donate 。
 	    	如果您需要帮助，或者要报告bug和需求，请使用我们的GitHub issues。
 	    	
@@ -126,7 +126,7 @@
 	    	* 防止手机进入睡眠 - 提醒被触发时保持显示直到您关闭。
 	    	
 	    	
-	    	详细版本历史：https://github.com/andrefbsantos/boilr/releases
+	    	详细版本历史：https://github.com/drpout/boilr/releases
 	    	
 	    	
 	    	当前支持的交易：

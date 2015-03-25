@@ -106,10 +106,10 @@
 		Som e vibração podem ser configurados globalmente e individualmente para cada alarme. As listas de bolsas, pares e alarmes são pesquisáveis, permitindo uma rápida criação e configuração dos alarmes. Os alarmes podem ser reordenados. Alarmes desligados continuam a atualizar o preço enquanto (e só enquanto) a lista de alarmes está visível, funcionando como tickers. Os dados são obtidos diretamente das bolsas usando Wi-Fi ou Dados Móveis (se permitido).
 		
 		
-		O Boilr suporta todas as bolsas disponíveis na libdynticker, bem como todos os seus pares: https://github.com/andrefbsantos/libdynticker/#supported-exchanges
+		O Boilr suporta todas as bolsas disponíveis na libdynticker, bem como todos os seus pares: https://github.com/drpout/libdynticker/#supported-exchanges
 		
 		
-		O Boilr é software livre, licenciado sob GPLv3+. Todo o código-fonte está disponível em https://github.com/andrefbsantos/boilr
+		O Boilr é software livre, licenciado sob GPLv3+. Todo o código-fonte está disponível em https://github.com/drpout/boilr
 		Se achar o Boilr útil considere fazer uma doação ou enviar uma gorjeta: http://boilr.mobi/#donate
 		Para ajuda, submissão de erros  e pedidos de melhorias por favor use os issues do GitHub.
 		
@@ -125,7 +125,7 @@
 		* Impedir modo de inatividade do telefone - Usado para mostrar continuamente a atividade de alarme a tocar até carregar no botão de desligar.
 		
 		
-		Pode consultar um histórico de versões em: https://github.com/andrefbsantos/boilr/releases
+		Pode consultar um histórico de versões em: https://github.com/drpout/boilr/releases
 		
 		
 		Bolsas suportadas atualmente:

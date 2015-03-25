@@ -106,10 +106,10 @@
     	Zvuky a vibrování je možné konfigurovat globálně a individuálně pro každé upozornění. Seznamy burz, cenových párů a upozornění lze prohledávat, což umožňuje rychlou konfiguraci a nastavení upozornění. Alarmy lze přerovnávat. Vypnuté alarmy jsou aktualizovány (pouze) při zobrazení seznamu upozornění, funguje jako ticker. Tržní data jsou získávána přímo z burz za pomocí Wi-Fi nebo mobilního přenosu dat (pokud povoleno).
     	
     	
-    	Boilr podporuje všechny burzy dostupné v libdynticker, a všechny jejich cenové páry: https://github.com/andrefbsantos/libdynticker/#supported-exchanges
+    	Boilr podporuje všechny burzy dostupné v libdynticker, a všechny jejich cenové páry: https://github.com/drpout/libdynticker/#supported-exchanges
     	
     	
-    	Boilr je svobodný (ve smyslu svoboda) software uvolněn pod GPLv3+. KOMPLETNí zdrojový kód je dostupný na https://github.com/andrefbsantos/boilr
+    	Boilr je svobodný (ve smyslu svoboda) software uvolněn pod GPLv3+. KOMPLETNí zdrojový kód je dostupný na https://github.com/drpout/boilr
     	Pokud vám přijde jako použitelný, zvažte jeho podporu zasláním příspěvku: http://boilr.mobi/#donate
     	Pro pomoc, hlášení chyb a návrhů vylepšení použijte portál GitHub.
     	
@@ -125,7 +125,7 @@
     	* Zamezit režimu spánku telefonu - Použité pro běh alarmu až do stiknutí tlačítka vypnutí.
     	
     	
-    	Historie verzí lze nalézt na: https://github.com/andrefbsantos/boilr/releases
+    	Historie verzí lze nalézt na: https://github.com/drpout/boilr/releases
     	
     	
     	Aktuálně podporované burzy:
