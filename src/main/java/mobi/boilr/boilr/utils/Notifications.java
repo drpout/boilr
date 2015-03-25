@@ -69,7 +69,7 @@ public final class Notifications {
 								.addNextIntentWithParentStack(alarmSettingsIntent)
 								.getPendingIntent(alarm.getId(), PendingIntent.FLAG_UPDATE_CURRENT);
 		} else {
-			pendingIntent = PendingIntent.getActivity(context, alarm.getId(), alarmSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+			pendingIntent = PendingIntent.getActivity(context, alarm.hashCode(), alarmSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		}
 		notification.setContentIntent(pendingIntent);
 		//notification.setPriority(Notification.PRIORITY_DEFAULT); API 16 only
@@ -205,10 +205,10 @@ public final class Notifications {
 		return "Could not retrieve firing reason.";
 	}
 
-	public static void clearNotification(Context context, int alarmID) {
+	public static void clearNotification(Context context, Alarm alarm) {
 		// Log.d("Clearing notifications for alarm instance: " + alarmID);
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		nm.cancel(alarmID);
+		nm.cancel(alarm.hashCode());
 	}
 
 	public static void clearNoInternetNotification(Context context) {

@@ -340,6 +340,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void deleteAlarm(Alarm alarm) {
+		Notifications.clearNotification(this, alarm);
 		removeFromAlarmManager(alarm.getId());
 		db.deleteAlarm(alarm);
 		alarmsMap.remove(alarm.getId());
