@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
-	<changelogversion versionName="0.5.0" changeDate="?? Mar 2015">
+	<changelogversion versionName="0.5.0" changeDate="25 Mar 2015">
 		<changelogtext>+ Added Banx.io, Basebit, Bit2c, Bitex.la, BitKonan, BitMaszyna, Bitspark, Bitso, BTCExchange, BTCGreece, BTCTurk, Coinbase, CoinMate, Coinsetter, CoinTree, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mercado Bitcoin, Mulcoin, OneWorldCoin, Quadriga CX, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yobit, Yuanbaohui and Yunbi exchange</changelogtext>
 		<changelogtext>+ Added Chinese, French, German, Italian, Polish, Portuguese and Spanish translations.</changelogtext>
 		<changelogtext>+ Last price on alarm list is now coloured according to price direction (up or down).</changelogtext>

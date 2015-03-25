@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
-	<changelogversion versionName="0.5.0" changeDate="?? Mar 2015">
+	<changelogversion versionName="0.5.0" changeDate="25 Mar 2015">
 		<changelogtext>+ Adicionadas as bolsas: Banx.io, Bitspark, Bitso, Coinbase, CoinMate, Coinsetter, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mulcoin, OneWorldCoin, Quadriga CX, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yuanbaohui e Yunbi.</changelogtext>
 		<changelogtext>+ Adicionadas traduções para alemão, chinês, castelhano, francês, italiano, polaco e português.</changelogtext>
 		<changelogtext>+ O último preço na lista de alarmes é agora colorido consoante a direção do preço (subida ou descida).</changelogtext>
