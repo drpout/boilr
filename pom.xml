@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mobi.boilr.boilr</groupId>
 	<artifactId>boilr</artifactId>
-	<version>0.5.0</version>
+	<version>0.6.0</version>
 	<packaging>apk</packaging>
 	<description>Android application which monitors Bitcoin, cryptocurrencies, cryptoassets and derivatives, triggering alarms according to user settings.</description>
 	<inceptionYear>2014</inceptionYear>
@@ -27,26 +27,7 @@
 		<android.maven.plugin.version>4.1.0</android.maven.plugin.version>
 		<android.sdk.version>22</android.sdk.version>
 		<release.description>
-			\+ Added Banx.io, Basebit, Bit2c, Bitex.la, BitKonan, BitMaszyna, Bitspark, Bitso, BTCExchange, BTCGreece, BTCTurk, Coinbase, CoinMate, Coinsetter, CoinTree, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mercado Bitcoin, Mulcoin, OneWorldCoin, Quadriga CX, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yobit, Yuanbaohui and Yunbi exchange
-			\+ Added Chinese, French, German, Italian, Polish, Portuguese and Spanish translations.
-			\+ Last price on alarm list is now coloured according to price direction (up or down).
-			\+ Added arrow to the alarm triggered notifications showing price direction.
-			\+ Added app setting to control volume.
-			\+ In alarms' list, clicking on alarm's limits or change value opens a dialog for quick editing.
-			\+ Alarms can now be reordered.
-			\+ Added undo toast when alarm is deleted.
-			\+ Added pinstripe background.
-			\+ Alert type, sound and vibrate can now be switched between an alarm specific value and the app's default.
-			\+ Added up navigation. Added back navigation when directly entering a deep-level activity.
-			\* Icon, alarms' list and alarm triggered notification completely redesigned.
-			\* Price Change Alarm now uses a rolling time frame.
-			\* Offed alarms are now continuously updated while alarm list is visible.
-			\* Dismissing a no internet notification now prevents showing it again until you get a new internet connection.
-			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange and OKCoin pairs.
-			\* Fixed bugs in Allcoin, Bitcoin.de, BTC100, CCEX, Huobi and Kraken exchanges' interaction.
-			\* Fixed bug which triggered alarms with small update intervals repeatedly even after turning them off.
-			\* Fixed exchange data fetching on low quality internet connections.
-			\- Removed 1BSE, Atomic Trade, CoinMkt, Coin-Swap, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
+			\* Fixed bug that allowed re-usage of a previous alarm ID.
 		</release.description>
 	</properties>
 

@@ -190,6 +190,7 @@ public class AlarmListActivity extends Activity {
 
 	@Override
 	protected void onDestroy() {
+		mTouchListener.clearUndoBar();
 		if(mBound) {
 			if(unscheduleOffedAlarms)
 				mStorageAndControlService.unscheduleOffedAlarms();
@@ -197,7 +198,6 @@ public class AlarmListActivity extends Activity {
 		} else {
 			Log.e(getString(R.string.not_bound, "AlarmListActivity"));
 		}
-		mTouchListener.clearUndoBar();
 		super.onDestroy();
 	}
 

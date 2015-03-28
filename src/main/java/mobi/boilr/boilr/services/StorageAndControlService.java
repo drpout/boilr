@@ -182,7 +182,7 @@ public class StorageAndControlService extends Service {
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 		try {
 			db = new DBManager(this);
-			nextAlarmID = db.getMaxID();
+			nextAlarmID = db.getMaxID() + 1;
 			alarmsMap = db.getAlarms();
 			if(alarmsMap.isEmpty()) {
 				// new PopupalteDBTask().execute();
