@@ -288,6 +288,12 @@ public class StorageAndControlService extends Service {
 		offedAlarmsScheduled = false;
 	}
 
+	public void refreshAlarms() {
+		for(Alarm alarm : alarmsMap.values()) {
+			resetAlarmPeriod(alarm);
+		}
+	}
+
 	public void toggleAlarm(int alarmID) {
 		Alarm alarm = alarmsMap.get(alarmID);
 		alarm.toggle();

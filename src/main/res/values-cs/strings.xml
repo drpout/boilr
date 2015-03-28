@@ -5,6 +5,7 @@
     <string name="action_about">O aplikaci</string>
     <string name="alarm_settings">Nastavení upozornění</string>
     <string name="add_alarm">Přidat upozornění</string>
+    <!-- Review please --><string name="refresh_alarms">Aktualizovat upozornění</string>
     <string name="boilr_settings">Boilr nastavení</string>
     <string name="about_title">O aplikaci Boilr</string>
 	<string name="release_notes">Poznámky k verzi</string>

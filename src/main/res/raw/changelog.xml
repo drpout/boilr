@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
     <changelogversion versionName="0.6.0" changeDate="?? Apr 2015">
+        <changelogtext>+ Added button to refresh all alarms.</changelogtext>
         <changelogtext>* Fixed bug that allowed re-usage of a previous alarm ID.</changelogtext>
     </changelogversion>
 	<changelogversion versionName="0.5.0" changeDate="25 Mar 2015">

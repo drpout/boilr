@@ -27,6 +27,7 @@
 		<android.maven.plugin.version>4.1.0</android.maven.plugin.version>
 		<android.sdk.version>22</android.sdk.version>
 		<release.description>
+			\+ Added button to refresh all alarms.
 			\* Fixed bug that allowed re-usage of a previous alarm ID.
 		</release.description>
 	</properties>

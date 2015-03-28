@@ -5,7 +5,8 @@
 	<string name="action_settings">Impostazioni</string>
 	<string name="action_about">Circa</string>
 	<string name="alarm_settings">Impostazioni avvisi</string>
-	<string name="add_alarm">aggiungi avviso</string>
+	<string name="add_alarm">Aggiungi avviso</string>
+	<!-- Review please --><string name="refresh_alarms">Aggiornare allarmi</string>
 	<string name="boilr_settings">Boilr impostazioni</string>
 	<string name="about_title">Circa Boilr</string>
 	<string name="release_notes">Modifiche tra versioni</string>

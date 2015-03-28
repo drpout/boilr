@@ -150,6 +150,13 @@ public class AlarmListActivity extends Activity {
 			case R.id.action_about:
 				(new AboutDialogFragment()).show(getFragmentManager(), "about");
 				return true;
+			case R.id.action_refresh_alarms:
+				if(mBound) {
+					mStorageAndControlService.refreshAlarms();
+				} else {
+					Log.e(getString(R.string.not_bound, "AlarmListActivity"));
+				}
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}

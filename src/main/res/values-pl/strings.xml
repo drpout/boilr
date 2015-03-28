@@ -5,6 +5,7 @@
     <string name="action_about">O aplikacji</string>
     <string name="alarm_settings">Ustawienia powiadomień</string>
     <string name="add_alarm">Dodaj powiadomienie</string>
+    <!-- Review please --><string name="refresh_alarms">Odświeżyć powiadomień</string>
     <string name="boilr_settings">Ustawienia Boilr</string>
     <string name="about_title">O aplikacji Boilr</string>
     <!-- Review please --><string name="release_notes">Zmiany pomiędzy wersją</string>

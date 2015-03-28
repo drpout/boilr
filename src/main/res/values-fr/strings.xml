@@ -5,6 +5,7 @@
 	<string name="action_about">À propos</string>
 	<string name="alarm_settings">Paramètres d\'alarme</string>
 	<string name="add_alarm">Ajouter une alarme</string>
+	<string name="refresh_alarms">Actualiser les alarmes</string>
 	<string name="boilr_settings">Préférences de Boilr</string>
 	<string name="about_title">A propos de Boilr</string>
 	<string name="release_notes">Notes de publication</string>
