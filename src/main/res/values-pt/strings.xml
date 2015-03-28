@@ -94,8 +94,8 @@
 	<string name="undo">Desfazer</string>
 	<string name="loading_pairs">A carregar pares…</string>
 	
-	<string name="short_description">Alarmes de preço para Bitcoin, criptomoedas, cripto-ativos e derivados.</string>
-	<string name="full_description">Monitoriza o preço de Bitcoin, criptomoedas, cripto-ativos e derivados e dispara alarmes consoante parâmetros do utilizador. Suporta mais de 70 bolsas.
+	<string name="short_description">Alarmes de preço para Bitcoin, criptomoedas, criptoativos e futuros.</string>
+	<string name="full_description">Monitoriza o preço de Bitcoin, criptomoedas, criptoativos e futuros e dispara alarmes consoante parâmetros do utilizador. Suporta mais de 70 bolsas.
 
 
 		Suporta 2 tipos de alarmes:

@@ -94,8 +94,8 @@
 	<string name="undo">Undo</string>
 	<string name="loading_pairs">Loading pairs…</string>
 	
-	<string name="short_description">Price alarms for Bitcoin, cryptocurrencies, cryptoassets and derivatives.</string>
-	<string name="full_description">Monitor Bitcoin, cryptocurrencies, cryptoassets and derivatives, and trigger alarms according to user settings. 70+ exchanges and counting.
+	<string name="short_description">Price alarms for Bitcoin, cryptocurrencies, cryptoassets and futures.</string>
+	<string name="full_description">Monitor Bitcoin, cryptocurrencies, cryptoassets and futures, and trigger alarms according to your settings. 70+ exchanges and counting.
 
 
 		Supports 2 alarm types:

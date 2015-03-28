@@ -94,8 +94,8 @@
 	<string name="undo">Zrušit</string>
 	<string name="loading_pairs">Načítání páry…</string>
 	
-	<string name="short_description">Upozornění na cenu Bitcoinu, kryptoměn, kryptoaktiva a deriváty.</string>
-	<string name="full_description">Hlídá ceny kryptoměn, kryptoaktiva a deriváty, upozorňuje uživatele na základě jeho nastavení. Plná podpora pro všechny hlavní burzy a směnné páry.
+	<string name="short_description">Upozornění na cenu Bitcoinu, kryptoměn, kryptoaktiva a futures.</string>
+	<string name="full_description">Hlídá ceny kryptoměn, kryptoaktiva a futures, upozorňuje uživatele na základě jeho nastavení. Plná podpora pro všechny hlavní burzy a směnné páry.
 	    
 	    
 		Podporuje dva typy upozornění:
@@ -134,7 +134,7 @@
 		
 		Altcoins:
 		
-		Aktiva a Deriváty (Budoucnost a Možnosti):
+		Aktiva a Deriváty (Futures a Možnosti):
 		
 		Neražený kov:
 	</string>

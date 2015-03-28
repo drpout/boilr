@@ -95,8 +95,8 @@
 	<string name="undo">撤销</string>
 	<string name="loading_pairs">正在载入…</string>
 	
-	<string name="short_description">比特币，数字货币，数字资产以及衍生品的价格提醒。</string>
-	<string name="full_description">实时比特币，数字货币，数字资产及衍生品价格，根据用户设置触发提醒。已支持70多家交易所。
+	<string name="short_description">比特币，数字货币，数字资产以及期货的价格提醒。</string>
+	<string name="full_description">实时比特币，数字货币，数字资产及期货价格，根据用户设置触发提醒。已支持70多家交易所。
 	    
 	    
 	    	支持两种提醒类型：
