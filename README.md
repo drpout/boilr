@@ -33,8 +33,7 @@ Alarm not updating when phone is sleeping. | Set `Settings > Wi-Fi > Advanced > 
 
 Permission | Reason
 ---------- | ------
-Read phone status and identity | Avoids sounding an alarm when you are in the middle of a call.
-Read the contens of your SD card | Used to fetch your costum ringtones.
+Read the contents of your SD card | Used to fetch your custom ringtones.
 Disable your screen lock | So you can turn off a ringing alarm without unlocking your device.
 Full network access | To fetch data from the exchanges.
 View network connections | To know whether you're using Wi-Fi or Mobile Data, allowing Mobile Data restriction. 

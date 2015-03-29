@@ -100,8 +100,8 @@
 	    
 	    
 		Podporuje dva typy upozornění:
-    	* Dosažení ceny - upozorní na překročení horní a spodní hranice alarmu.
-    	* Změna ceny - upozorní při změně ceny o hodnotu X (v měně nebo procentech) v zadaném časovém období (např. 15 min.). Používá pohyblivé časové období: cena je načítána v určeném intervalu (např. 30 s) a porovnána s cenou načtenou při minulém období (např. před 15 min).
+    	* Dosažení ceny - Upozorní na překročení horní a spodní hranice alarmu.
+    	* Změna ceny - Upozorní při změně ceny o hodnotu X (v měně nebo procentech) v zadaném časovém období (např. 15 min.). Používá pohyblivé časové období: cena je načítána v určeném intervalu (např. 30 s) a porovnána s cenou načtenou při minulém období (např. před 15 min).
     	
     	
     	Zvuky a vibrování je možné konfigurovat globálně a individuálně pro každé upozornění. Seznamy burz, cenových párů a upozornění lze prohledávat, což umožňuje rychlou konfiguraci a nastavení upozornění. Alarmy lze přerovnávat. Vypnuté alarmy jsou aktualizovány (pouze) při zobrazení seznamu upozornění, funguje jako ticker. Tržní data jsou získávána přímo z burz za pomocí Wi-Fi nebo mobilního přenosu dat (pokud povoleno).
@@ -116,7 +116,6 @@
     	
     	
     	Důvody vyžadovaných oprávnění:
-    	* Číst stav telefonu  a identity - Zamezit upozorňování během telefonních hovorů.
     	* Číst data z paměťové karty - Načtení osobních vyzvánění.
     	* Vypnutí uzamčení obrazovky - Aby bylo možno vypnout zvonící alarm bez nutnosti odemknout přístroj.
     	* Přístup k síti - Načtení dat z burz.

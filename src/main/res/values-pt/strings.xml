@@ -116,7 +116,6 @@
 		
 		
 		Razões para a permissões:
-		* Ler o estado e a identidade do telemóvel - Evita soar alarmes enquanto está a decorrer uma chamada.
 		* Ler os conteúdos do cartão SD - Permite usar os seus toques personalizados.
 		* Desativar o bloqueio do ecrã - Para se desligar um alarme que está a tocar sem ter que desbloquear.
 		* Acesso total à rede - Para obter os dados das bolsas.
