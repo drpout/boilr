@@ -29,6 +29,7 @@
 		<release.description>
 			\+ Added button to refresh all alarms.
 			\* Fixed bug that allowed re-usage of a previous alarm ID.
+			\- Removed unnecessary READ_PHONE_STATE permission.  
 		</release.description>
 	</properties>
 

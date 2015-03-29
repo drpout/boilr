@@ -3,6 +3,7 @@
     <changelogversion versionName="0.6.0" changeDate="?? Apr 2015">
         <changelogtext>+ Added button to refresh all alarms.</changelogtext>
         <changelogtext>* Fixed bug that allowed re-usage of a previous alarm ID.</changelogtext>
+        <changelogtext>- Removed unnecessary READ_PHONE_STATE permission.</changelogtext>
     </changelogversion>
 	<changelogversion versionName="0.5.0" changeDate="25 Mar 2015">
 		<changelogtext>+ Added Banx.io, Basebit, Bit2c, Bitex.la, BitKonan, BitMaszyna, Bitspark, Bitso, BTCExchange, BTCGreece, BTCTurk, Coinbase, CoinMate, Coinsetter, CoinTree, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mercado Bitcoin, Mulcoin, OneWorldCoin, Quadriga CX, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yobit, Yuanbaohui and Yunbi exchange</changelogtext>

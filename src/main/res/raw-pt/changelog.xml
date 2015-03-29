@@ -3,6 +3,7 @@
     <changelogversion versionName="0.6.0" changeDate="?? Abr 2015">
         <changelogtext>+ Adicinado botão para atualizar todos os alarmes.</changelogtext>
         <changelogtext>* Corrigido erro que permitia reutilizar o ID de um alarme anterior.</changelogtext>
+        <changelogtext>- Removida permissão desnecessária READ_PHONE_STATE.</changelogtext>
     </changelogversion>
 	<changelogversion versionName="0.5.0" changeDate="25 Mar 2015">
 		<changelogtext>+ Adicionadas as bolsas: Banx.io, Bitspark, Bitso, Coinbase, CoinMate, Coinsetter, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mulcoin, OneWorldCoin, Quadriga CX, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yuanbaohui e Yunbi.</changelogtext>
