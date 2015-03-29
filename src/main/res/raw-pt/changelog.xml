@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
-    <changelogversion versionName="0.6.0" changeDate="?? Abr 2015">
+    <changelogversion versionName="0.6.0" changeDate="29 Mar 2015">
         <changelogtext>+ Adicinado botão para atualizar todos os alarmes.</changelogtext>
         <changelogtext>* Corrigido erro que permitia reutilizar o ID de um alarme anterior.</changelogtext>
         <changelogtext>- Removida permissão desnecessária READ_PHONE_STATE.</changelogtext>
