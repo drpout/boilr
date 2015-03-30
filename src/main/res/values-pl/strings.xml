@@ -38,6 +38,7 @@
     <string name="pref_entries_theme_1">Jasny</string>
     <string name="pref_title_network_usage">Wykorzystanie sieci</string>
     <string name="pref_title_mobile_data">Dane mobilne</string>
+    <string name="pref_title_show_internet_warning">Nie pokazuj ostrzeżenia o połączeniu</string>
     <!-- Review please --><string name="pref_title_default_update_interval">Odstęp pomiędzy sprawdzeniami ceny</string>
     <!-- Review please --><string name="pref_summary_default_update_interval">W sekundach. Opisuje jak często sprawdzana jest cena na giełdzie. Możesz zdefiniować inny odstęp dla konkretnego powiadomienia w jego ustawieniach.</string>
     <!-- Review please --><string name="pref_title_default_time_frame">Długość powiadomienia</string>

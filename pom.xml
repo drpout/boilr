@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mobi.boilr.boilr</groupId>
 	<artifactId>boilr</artifactId>
-	<version>0.6.0</version>
+	<version>0.7.0</version>
 	<packaging>apk</packaging>
 	<description>Android application which monitors Bitcoin, cryptocurrencies, cryptoassets and derivatives, triggering alarms according to user settings.</description>
 	<inceptionYear>2014</inceptionYear>
@@ -27,9 +27,7 @@
 		<android.maven.plugin.version>4.1.0</android.maven.plugin.version>
 		<android.sdk.version>22</android.sdk.version>
 		<release.description>
-			\+ Added button to refresh all alarms.
-			\* Fixed bug that allowed re-usage of a previous alarm ID.
-			\- Removed unnecessary READ_PHONE_STATE permission.  
+			\+ Added app setting to dismiss no internet notification.
 		</release.description>
 	</properties>
 

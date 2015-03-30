@@ -212,7 +212,7 @@ public class AlarmListActivity extends Activity {
 	public void onStart() {
 		super.onStart();
 		mView.start();
-		Notifications.sAllowNoNetNotif = true;
+		Notifications.sClearedNoNetNotif = false;
 	}
 
 	@Override

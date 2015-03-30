@@ -38,6 +38,7 @@
 	<string name="pref_entries_theme_1">Světlý</string>
     <string name="pref_title_network_usage">Využití sítě</string>
     <string name="pref_title_mobile_data">Mobilní připojení</string>
+    <!-- Review please --><string name="pref_title_show_internet_warning">Varovat ne internet</string>
     <string name="pref_title_default_time_frame">Výchozí časový interval</string>
     <string name="pref_title_default_update_interval">Výchozí interval aktualizace</string>
     <string name="pref_summary_default_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy. Můžete nastavit jiný interval pro určitý alarm v jeho nastavení.</string>

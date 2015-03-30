@@ -37,6 +37,7 @@
     <string name="pref_entries_theme_1">Claire</string>
 	<string name="pref_title_network_usage">Utilisation du réseau</string>
 	<string name="pref_title_mobile_data">Données mobiles</string>
+	<string name="pref_title_show_internet_warning">Avertir pas d\'internet</string>
 	<string name="pref_title_default_update_interval">Intervalle de mise à jour par défaut</string>
 	<string name="undo">Annuler</string>
 	<string name="pref_title_default_time_frame">Fenêtre temporelle par défaut</string>

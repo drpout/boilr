@@ -29,14 +29,15 @@ public final class Notifications {
 	private static final int sNoNetNotifID = 432191926;
 	private static Notification.Builder sNoNetNotif = null;
 	public static boolean sAllowNoNetNotif = true;
+	public static boolean sClearedNoNetNotif = false;
 	private static Bitmap sSmallUpArrowBitmap = null;
 	public static Bitmap sBigUpArrowBitmap = null;
 	private static Bitmap sSmallDownArrowBitmap = null;
 	public static Bitmap sBigDownArrowBitmap = null;
 	private static final int sBigArrowSize = 200;
 	private static final int sSmallArrowSize = 100;
-	// Action used to turn off no internet notification.
-	public static final String ACTION_DISABLE_NET_NOTIF = "ACTION_DISABLE_NET_NOTIF";
+	// Action fired when no internet notification is cleared from the notification drawer.
+	public static final String ACTION_CLEAR_NET_NOTIF = "ACTION_CLEAR_NET_NOTIF";
 
 	private static void statusBarNotifAux(Context context, Alarm alarm, String firingReasonTitle, String firingReasonBody) {
 		if(sSmallUpArrowBitmap == null) {
@@ -142,10 +143,10 @@ public final class Notifications {
 	}
 
 	public static void showNoInternetNotification(Context context) {
-		if(sAllowNoNetNotif) {
+		if(sAllowNoNetNotif && !sClearedNoNetNotif) {
 			if(sNoNetNotif == null) {
 				Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
-				changeSettingsIntent.setAction(Notifications.ACTION_DISABLE_NET_NOTIF);
+				changeSettingsIntent.setAction(Notifications.ACTION_CLEAR_NET_NOTIF);
 				changeSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				PendingIntent pendingIntent;
 				if(Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
@@ -156,7 +157,7 @@ public final class Notifications {
 					pendingIntent = PendingIntent.getActivity(context, sNoNetNotifID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 				}
 				Intent disableIntent = new Intent(context, StorageAndControlService.class);
-				disableIntent.setAction(Notifications.ACTION_DISABLE_NET_NOTIF);
+				disableIntent.setAction(Notifications.ACTION_CLEAR_NET_NOTIF);
 				int icNoWifi;
 				if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
 					icNoWifi = R.drawable.ic_no_wifi_light;
@@ -214,7 +215,7 @@ public final class Notifications {
 	public static void clearNoInternetNotification(Context context) {
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(sNoNetNotifID);
-		sAllowNoNetNotif = true;
+		sClearedNoNetNotif = true;
 	}
 
 	public static void rebuildNoInternetNotification() {

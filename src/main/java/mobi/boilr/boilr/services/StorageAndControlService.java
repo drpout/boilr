@@ -214,8 +214,8 @@ public class StorageAndControlService extends Service {
 						new RunAlarmTask().execute(alarm);
 					}
 				}
-			} else if(Notifications.ACTION_DISABLE_NET_NOTIF.equals(action)) {
-				Notifications.sAllowNoNetNotif = false;
+			} else if(Notifications.ACTION_CLEAR_NET_NOTIF.equals(action)) {
+				Notifications.sClearedNoNetNotif = true;
 			}
 		}
 		return START_STICKY;

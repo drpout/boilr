@@ -40,6 +40,7 @@
 	<string name="pref_default_theme">scuro</string>
 	<string name="pref_title_network_usage">Uso Network</string>
 	<string name="pref_title_mobile_data">Dati Mobile</string>
+	<!-- Review please --><string name="pref_title_show_internet_warning">Avvertire senza internet</string>
 	<string name="pref_title_default_update_interval">Intervallo di aggiornamento predefinito</string>
 	<!-- Review please --><string name="pref_summary_default_update_interval">In pochi secondi. Definisce quante volte un allarme riceve i dati dallo scambio. È possibile impostare un intervallo per un particolare allarme sulla sua configurazione.</string>
 	<string name="pref_title_default_time_frame">Lasso di tempo predefinito</string>

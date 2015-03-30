@@ -21,8 +21,8 @@ public class SettingsActivity extends Activity {
 		// Display the fragment as the main content.
 		settingsFragment = new SettingsFragment();
 		getFragmentManager().beginTransaction().replace(android.R.id.content, settingsFragment).commit();
-		if(Notifications.ACTION_DISABLE_NET_NOTIF.equals(getIntent().getAction())) {
-			Notifications.sAllowNoNetNotif = false;
+		if(Notifications.ACTION_CLEAR_NET_NOTIF.equals(getIntent().getAction())) {
+			Notifications.sClearedNoNetNotif = true;
 		}
 	}
 
