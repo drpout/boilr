@@ -101,7 +101,7 @@
 
 
 		Suporta 2 tipos de alarmes:
-		* Preço limite - Dispara quando o preço ultrapassa um limite superior ou inferior definidos no alarme.
+		* Preço limite - Dispara quando o preço ultrapassa um limite superior ou inferior. Pode-se deixar um dos limites vazio para criar um alarme com apenas uma condição de disparo.
 		* Variação de preço - Dispara quando o preço varia mais que uma quantidade X (em moeda ou percentagem) durante um dado prazo (e.g. 15 min). Usa uma janela temporal deslizante: o preço é atualizado com um dado intervalo (e.g. 30s) e comparado com o preço existente há um prazo atrás (e.g. 15 min antes).
 		
 		

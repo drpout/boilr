@@ -7,7 +7,7 @@ Android application which monitors Bitcoin, cryptocurrencies, cryptoassets and d
 
 Supports 2 alarm types:
 
-* Price Hit - Triggered when price crosses the alarm's upper or lower limit.
+* Price Hit - Triggered when price crosses the alarm's upper or lower limit. One limit may be left empty to create an alarm with a single trigger.
 * Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 15 min). It uses a rolling time frame: price is fetched with a given update interval (e.g. 30 s) and compared with the price fetched one time frame ago (e.g. 15 min ago).
 
 Sound and vibration are configurable globally, and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing quick setup and configuration. The alarm list behaves as your ticker, where you can reorder your alarms and directly change their limits. Triggered alarms ring, displaying their status, until you turn them off. Just like an alarm clock.
@@ -22,6 +22,8 @@ Check Boilr's website to see it in action: http://boilr.mobi Website source-code
 
 ## Getting help
 Bug reports, feature requests and general help questions should be submitted on [Boilr's GitHub issues](https://github.com/drpout/boilr/issues). Try being specific when choosing the right title and label for your issue.
+
+You can browse through a FAQ by checking all [issues labeled as questions](https://github.com/drpout/boilr/issues?q=label%3Aquestion).
 
 ## Troubleshooting
 

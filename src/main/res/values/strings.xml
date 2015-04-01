@@ -101,7 +101,7 @@
 
 
 		Supports 2 alarm types:
-		* Price Hit - Triggered when price crosses the alarm\'s upper or lower limit.
+		* Price Hit - Triggered when price crosses the alarm\'s upper or lower limit. One limit may be left empty to create an alarm with a single trigger.
 		* Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 15 min). It uses a rolling time frame: price is fetched with a given update interval (e.g. 30 s) and compared with the price fetched one time frame ago (e.g. 15 min ago).
 		
 		
