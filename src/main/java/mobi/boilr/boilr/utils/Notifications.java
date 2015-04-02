@@ -5,6 +5,7 @@ import mobi.boilr.boilr.activities.AlarmSettingsActivity;
 import mobi.boilr.boilr.activities.NotificationActivity;
 import mobi.boilr.boilr.activities.SettingsActivity;
 import mobi.boilr.boilr.services.StorageAndControlService;
+import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.Alarm.Direction;
@@ -16,19 +17,20 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.media.RingtoneManager;
 import android.os.Build;
+import android.preference.PreferenceManager;
 
 /* Based on Android DeskClock AlarmNotifications. */
 public final class Notifications {
 
 	private static final int sNoNetNotifID = 432191926;
 	private static Notification.Builder sNoNetNotif = null;
-	public static boolean sAllowNoNetNotif = true;
 	public static boolean sClearedNoNetNotif = false;
 	private static Bitmap sSmallUpArrowBitmap = null;
 	public static Bitmap sBigUpArrowBitmap = null;
@@ -38,6 +40,7 @@ public final class Notifications {
 	private static final int sSmallArrowSize = 100;
 	// Action fired when no internet notification is cleared from the notification drawer.
 	public static final String ACTION_CLEAR_NET_NOTIF = "ACTION_CLEAR_NET_NOTIF";
+	private static SharedPreferences sSharedPrefs = null;
 
 	private static void statusBarNotifAux(Context context, Alarm alarm, String firingReasonTitle, String firingReasonBody) {
 		if(sSmallUpArrowBitmap == null) {
@@ -143,7 +146,10 @@ public final class Notifications {
 	}
 
 	public static void showNoInternetNotification(Context context) {
-		if(sAllowNoNetNotif && !sClearedNoNetNotif) {
+		if(sSharedPrefs == null)
+			sSharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+		boolean allowNoNetNotif = sSharedPrefs.getBoolean(SettingsFragment.PREF_KEY_SHOW_INTERNET_WARNING, true);
+		if(allowNoNetNotif && !sClearedNoNetNotif) {
 			if(sNoNetNotif == null) {
 				Intent changeSettingsIntent = new Intent(context, SettingsActivity.class);
 				changeSettingsIntent.setAction(Notifications.ACTION_CLEAR_NET_NOTIF);

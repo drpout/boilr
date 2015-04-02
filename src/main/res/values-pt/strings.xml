@@ -112,21 +112,21 @@
 		
 		
 		O Boilr é software livre, licenciado sob GPLv3+. Todo o código-fonte está disponível em https://github.com/drpout/boilr
-		Se achar o Boilr útil considere fazer uma doação ou enviar uma gorjeta: http://boilr.mobi/#donate
-		Para ajuda, submissão de erros  e pedidos de melhorias por favor use os issues do GitHub.
+		Se achas o Boilr útil considera fazer uma doação ou enviar uma gorjeta: http://boilr.mobi/#donate
+		Para ajuda, submissão de erros e pedidos de melhorias por favor usa os issues no GitHub.
 		
 		
 		Razões para a permissões:
-		* Ler os conteúdos do cartão SD - Permite usar os seus toques personalizados.
+		* Ler os conteúdos do cartão SD - Permite usar o teus toques personalizados.
 		* Desativar o bloqueio do ecrã - Para se desligar um alarme que está a tocar sem ter que desbloquear.
 		* Acesso total à rede - Para obter os dados das bolsas.
-		* Ver ligações de rede - Para saber se está a usar Wi-Fi ou Dados Móveis, permitindo restringir os Dados Móveis. 
-		* Executar no arranque - Para começar prontamente a atualizar os alarmes que deixou ligados. 
+		* Ver ligações de rede - Para saber se estás a usar Wi-Fi ou Dados Móveis, permitindo restringir os Dados Móveis. 
+		* Executar no arranque - Para começar prontamente a atualizar os alarmes que deixas-te ligados. 
 		* Controlar vibração - Permite vibração enquanto um alarme dispara. 
-		* Impedir modo de inatividade do telefone - Usado para mostrar continuamente a atividade de alarme a tocar até carregar no botão de desligar.
+		* Impedir modo de inatividade do telefone - Usado para mostrar continuamente a atividade de alarme a tocar até carregares no botão de desligar.
 		
 		
-		Pode consultar um histórico de versões em: https://github.com/drpout/boilr/releases
+		Podes consultar um histórico de versões em: https://github.com/drpout/boilr/releases
 		
 		
 		Bolsas suportadas atualmente
