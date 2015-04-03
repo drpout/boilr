@@ -5,6 +5,7 @@
 	<string name="action_about">Sobre</string>
 	<string name="alarm_settings">Definições do alarme</string>
 	<string name="add_alarm">Adicionar alarme</string>
+	<string name="refresh_alarms">Atualizar alarmes</string>
 	<string name="boilr_settings">Definições do Boilr</string>
 	<string name="about_title">Sobre o Boilr</string>
 	<string name="release_notes">Mudanças entre versões</string>
@@ -37,6 +38,7 @@
 	<string name="pref_entries_theme_1">Claro</string>
 	<string name="pref_title_network_usage">Utilização de dados</string>
 	<string name="pref_title_mobile_data">Dados móveis</string>
+	<string name="pref_title_show_internet_warning">Aviso sem internet</string>
 	<string name="pref_title_default_update_interval">Intervalo de atualização por omissão</string>
 	<string name="pref_summary_default_update_interval">Em segundos. Define a frequência com que um alarme obtém dados da bolsa. Pode definir outro intervalo para um alarme em particular nas suas definições.</string>
 	<string name="pref_title_default_time_frame">Prazo por omissão</string>
@@ -94,52 +96,47 @@
 	<string name="undo">Desfazer</string>
 	<string name="loading_pairs">A carregar pares…</string>
 	
-	<string name="short_description">Alarmes de preço para Bitcoin, criptomoedas, cripto-ativos e derivados.</string>
-	<string name="full_description">Monitoriza o preço de Bitcoin, criptomoedas, cripto-ativos e derivados e dispara alarmes consoante parâmetros do utilizador. Suporta mais de 70 bolsas.
+	<string name="short_description">Alarmes de preço para Bitcoin, criptomoedas, criptoativos, futuros e opções.</string>
+	<string name="full_description">Monitoriza o preço de Bitcoin, criptomoedas, criptoativos, futuros e opções e dispara alarmes consoante parâmetros do utilizador. Suporta mais de 70 bolsas.
 
 
 		Suporta 2 tipos de alarmes:
-		* Preço limite - Dispara quando o preço ultrapassa um limite superior ou inferior definidos no alarme.
+		* Preço limite - Dispara quando o preço ultrapassa um limite superior ou inferior. Pode-se deixar um dos limites vazio para criar um alarme com apenas uma condição de disparo.
 		* Variação de preço - Dispara quando o preço varia mais que uma quantidade X (em moeda ou percentagem) durante um dado prazo (e.g. 15 min). Usa uma janela temporal deslizante: o preço é atualizado com um dado intervalo (e.g. 30s) e comparado com o preço existente há um prazo atrás (e.g. 15 min antes).
 		
 		
 		Som e vibração podem ser configurados globalmente e individualmente para cada alarme. As listas de bolsas, pares e alarmes são pesquisáveis, permitindo uma rápida criação e configuração dos alarmes. Os alarmes podem ser reordenados. Alarmes desligados continuam a atualizar o preço enquanto (e só enquanto) a lista de alarmes está visível, funcionando como tickers. Os dados são obtidos diretamente das bolsas usando Wi-Fi ou Dados Móveis (se permitido).
 		
 		
-		O Boilr suporta todas as bolsas disponíveis na libdynticker, bem como todos os seus pares: https://github.com/andrefbsantos/libdynticker/#supported-exchanges
+		O Boilr suporta todas as bolsas disponíveis na libdynticker, bem como todos os seus pares: https://github.com/drpout/libdynticker/#supported-exchanges
 		
 		
-		O Boilr é software livre, licenciado sob GPLv3+. Todo o código-fonte está disponível em https://github.com/andrefbsantos/boilr
-		Se achar o Boilr útil considere fazer uma doação ou enviar uma gorjeta: http://boilr.mobi/#donate
-		Para ajuda, submissão de erros  e pedidos de melhorias por favor use os issues do GitHub.
+		O Boilr é software livre, licenciado sob GPLv3+. Todo o código-fonte está disponível em https://github.com/drpout/boilr
+		Se achas o Boilr útil considera fazer uma doação ou enviar uma gorjeta: http://boilr.mobi/#donate
+		Para ajuda, submissão de erros e pedidos de melhorias por favor usa os issues no GitHub.
 		
 		
 		Razões para a permissões:
-		* Ler o estado e a identidade do telemóvel - Evita soar alarmes enquanto está a decorrer uma chamada.
-		* Ler os conteúdos do cartão SD - Permite usar os seus toques personalizados.
+		* Ler os conteúdos do cartão SD - Permite usar o teus toques personalizados.
 		* Desativar o bloqueio do ecrã - Para se desligar um alarme que está a tocar sem ter que desbloquear.
 		* Acesso total à rede - Para obter os dados das bolsas.
-		* Ver ligações de rede - Para saber se está a usar Wi-Fi ou Dados Móveis, permitindo restringir os Dados Móveis. 
-		* Executar no arranque - Para começar prontamente a atualizar os alarmes que deixou ligados. 
+		* Ver ligações de rede - Para saber se estás a usar Wi-Fi ou Dados Móveis, permitindo restringir os Dados Móveis. 
+		* Executar no arranque - Para começar prontamente a atualizar os alarmes que deixas-te ligados. 
 		* Controlar vibração - Permite vibração enquanto um alarme dispara. 
-		* Impedir modo de inatividade do telefone - Usado para mostrar continuamente a atividade de alarme a tocar até carregar no botão de desligar.
+		* Impedir modo de inatividade do telefone - Usado para mostrar continuamente a atividade de alarme a tocar até carregares no botão de desligar.
 		
 		
-		Pode consultar um histórico de versões em: https://github.com/andrefbsantos/boilr/releases
+		Podes consultar um histórico de versões em: https://github.com/drpout/boilr/releases
 		
 		
-		Bolsas suportadas atualmente:
+		Bolsas suportadas atualmente
 		
-		Bitcoin e outras criptomoedas para moeda fiduciária
-		[...]
+		Bitcoin e outras criptomoedas para moeda fiduciária:
 		
-		Apenas criptomoedas
-		[...]
+		Apenas criptomoedas:
 		
-		Ativos/Ações e Derivados (Futuros e Opções)
-		[...]
+		Ativos/Ações e Derivados (Futuros e Opções):
 		
-		Metais preciosos
-		[...]
+		Metais preciosos:
 	</string>
 </resources>

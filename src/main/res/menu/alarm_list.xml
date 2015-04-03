@@ -7,8 +7,14 @@
 		android:id="@+id/action_search"
 		android:actionViewClass="android.widget.SearchView"
 		android:icon="?attr/ic_action_search"
-		android:showAsAction="ifRoom"
+		android:showAsAction="always"
 		android:title="@string/action_search"/>
+	
+	<item
+	    android:id="@+id/action_refresh_alarms"
+	    android:icon="?attr/ic_action_refresh"
+		android:title="@string/refresh_alarms"
+		android:showAsAction="always" />
 	
 	<item
 	    android:id="@+id/action_add_alarm"

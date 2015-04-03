@@ -3,6 +3,7 @@ package mobi.boilr.boilr.listeners;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.widget.AlarmListAdapter;
 import mobi.boilr.libpricealarm.Alarm;
 import android.content.ClipData;
@@ -203,6 +204,7 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 					b.putInt("filteredPos", mPointToPosition);
 					b.putInt("originalPos", adapter.originalIndexOf(alarm));
 					adapter.remove(alarm);
+					Notifications.clearNotification(mActivity, alarm);
 					mUndoBar.clear();
 					mUndoBar.message(R.string.alarm_deleted).token(b).show();
 				} else {

@@ -1,27 +1,29 @@
 # Boilr
-[![Get Boilr on F-Droid](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/get_it_on_f-droid.png)](https://f-droid.org/repository/browse/?fdid=mobi.boilr.boilr)  [![Get Boilr on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=mobi.boilr.boilr)  [![Translation status](https://hosted.weblate.org/widgets/boilr/-/svg-badge.svg)](https://hosted.weblate.org/engage/boilr/?utm_source=widget)
+[![Get Boilr on F-Droid](https://github.com/drpout/boilr/raw/master/src/main/img/get_it_on_f-droid.png)](https://f-droid.org/repository/browse/?fdid=mobi.boilr.boilr)  [![Get Boilr on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=mobi.boilr.boilr)  [![Translation status](https://hosted.weblate.org/widgets/boilr/-/svg-badge.svg)](https://hosted.weblate.org/engage/boilr/?utm_source=widget)
 
 Android application which monitors Bitcoin, cryptocurrencies, cryptoassets and derivatives, triggering alarms according to user settings.
 
-![hit alarm creation](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/screenshots/hit_creation.png) ![alarm list](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/screenshots/alarm_list.png) ![hit alarm firing](https://github.com/andrefbsantos/boilr/raw/master/src/main/img/screenshots/hit_firing.png)
+![hit alarm creation](https://github.com/drpout/boilr/raw/master/src/main/img/screenshots/hit_creation.png) ![alarm list](https://github.com/drpout/boilr/raw/master/src/main/img/screenshots/alarm_list.png) ![hit alarm firing](https://github.com/drpout/boilr/raw/master/src/main/img/screenshots/hit_firing.png)
 
 Supports 2 alarm types:
 
-* Price Hit - Triggered when price crosses the alarm's upper or lower limit.
+* Price Hit - Triggered when price crosses the alarm's upper or lower limit. One limit may be left empty to create an alarm with a single trigger.
 * Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 15 min). It uses a rolling time frame: price is fetched with a given update interval (e.g. 30 s) and compared with the price fetched one time frame ago (e.g. 15 min ago).
 
 Sound and vibration are configurable globally, and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing quick setup and configuration. The alarm list behaves as your ticker, where you can reorder your alarms and directly change their limits. Triggered alarms ring, displaying their status, until you turn them off. Just like an alarm clock.
 
-Market data is retrieved directly from the exchanges via Wi-Fi or Mobile Data (if allowed). [libdynticker](https://github.com/andrefbsantos/libdynticker) is used to interface with the exchanges. Thus, Boilr supports all [exchanges available on libdynticker](https://github.com/andrefbsantos/libdynticker/#supported-exchanges), as all their pairs.
+Market data is retrieved directly from the exchanges via Wi-Fi or Mobile Data (if allowed). [libdynticker](https://github.com/drpout/libdynticker) is used to interface with the exchanges. Thus, Boilr supports all [exchanges available on libdynticker](https://github.com/drpout/libdynticker/#supported-exchanges), as all their pairs.
 
-To create alarms Boilr uses [libpricealarm](https://github.com/andrefbsantos/libpricealarm).
+To create alarms Boilr uses [libpricealarm](https://github.com/drpout/libpricealarm).
 
 Other libraries we use: [changeloglib](https://github.com/gabrielemariotti/changeloglib) and [UndoBar](https://github.com/soarcn/UndoBar).
 
-Check Boilr's website to see it in action: http://boilr.mobi Website source-code is available at [boilr-site](https://github.com/andrefbsantos/boilr-site).
+Check Boilr's website to see it in action: http://boilr.mobi Website source-code is available at [boilr-site](https://github.com/drpout/boilr-site).
 
 ## Getting help
-Bug reports, feature requests and general help questions should be submitted on [Boilr's GitHub issues](https://github.com/andrefbsantos/boilr/issues). Try being specific when choosing the right title and label for your issue.
+Bug reports, feature requests and general help questions should be submitted on [Boilr's GitHub issues](https://github.com/drpout/boilr/issues). Try being specific when choosing the right title and label for your issue.
+
+You can browse through a FAQ by checking all [issues labeled as questions](https://github.com/drpout/boilr/issues?q=label%3Aquestion).
 
 ## Troubleshooting
 
@@ -33,8 +35,7 @@ Alarm not updating when phone is sleeping. | Set `Settings > Wi-Fi > Advanced > 
 
 Permission | Reason
 ---------- | ------
-Read phone status and identity | Avoids sounding an alarm when you are in the middle of a call.
-Read the contens of your SD card | Used to fetch your costum ringtones.
+Read the contents of your SD card | Used to fetch your custom ringtones.
 Disable your screen lock | So you can turn off a ringing alarm without unlocking your device.
 Full network access | To fetch data from the exchanges.
 View network connections | To know whether you're using Wi-Fi or Mobile Data, allowing Mobile Data restriction. 
@@ -48,9 +49,9 @@ Prevent phone from sleeping | Used to keep showing the alarm triggered activity 
 New translations and reviews are much appreciated. If you have 10 minutes to spare just open [Boilr @ Hosted Weblate](https://hosted.weblate.org/projects/boilr/) and start editing. More info at [CONTRIBUTING.md](/CONTRIBUTING.md).
 
 ### Coding
-If you know how to program take a look at the [open issues](https://github.com/andrefbsantos/boilr/issues). Check for bugs or features you find interesting and feel free to take them into your hands. If you have any doubt just post your questions on the issue's comments. When done, open a pull request. We promise to review it quickly.
+If you know how to program take a look at the [open issues](https://github.com/drpout/boilr/issues). Check for bugs or features you find interesting and feel free to take them into your hands. If you have any doubt just post your questions on the issue's comments. When done, open a pull request. We promise to review it quickly.
 
-If you would like to add more exchanges to Boilr check [libdynticker's contributing guide](https://github.com/andrefbsantos/libdynticker/blob/master/CONTRIBUTING.md).
+If you would like to add more exchanges to Boilr check [libdynticker's contributing guide](https://github.com/drpout/libdynticker/blob/master/CONTRIBUTING.md).
 
 ## Building
 1. Fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted#Prerequisites).
@@ -87,9 +88,9 @@ Note: we do plan to migrate to a Gradle build system and Android Studio IDE in t
 Boilr follows [Semantic Versioning](http://semver.org) with the API being the user-interface.
 
 ## License and authorship
-Boilr code licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to [André Filipe Santos](https://github.com/andrefbsantos), [David Ludovino](https://github.com/dllud) and other [contributors listed on GitHub](https://github.com/andrefbsantos/boilr/graphs/contributors), unless otherwise stated.
+Boilr code licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to [André Filipe Santos](https://github.com/andrefbsantos), [David Ludovino](https://github.com/dllud) and other [contributors listed on GitHub](https://github.com/drpout/boilr/graphs/contributors), unless otherwise stated.
 
-Concept, design, [icon](src/main/img/icons/ic_boilr.ai) and [artwork](src/main/img) by [Ricardo Duarte](http://cargocollective.com/algazarra/index). Icon and artwork dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE). Third-party graphics' authorship and license information in [AUTHORS.md](src/main/img/AUTHORS.md).
+Concept, design, [icon](src/main/img/icons/ic_boilr.ai) and [artwork](src/main/img) by [Algazarra](http://cargocollective.com/algazarra/index). Icon and artwork dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE). Third-party graphics' authorship and license information in [AUTHORS.md](src/main/img/AUTHORS.md).
 
 Translators:
 

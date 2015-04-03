@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">Boilr</string>
-	<string name="authors_link">&lt;a href="https://github.com/andrefbsantos/boilr/blob/master/README.md#license-and-authorship">%1$s&lt;/a></string>
+	<string name="authors_link">&lt;a href="https://github.com/drpout/boilr/blob/master/README.md#license-and-authorship">%1$s&lt;/a></string>
 	<string name="boilr_website">http://boilr.mobi</string>
-	<string name="github_issues"><a href="https://github.com/andrefbsantos/boilr/issues">GitHub issues</a></string>
+	<string name="github_issues"><a href="https://github.com/drpout/boilr/issues">GitHub issues</a></string>
 	<string name="btc_addr"><a href="bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx">1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</a> (BTC)</string>
 	<string name="btc_link">bitcoin:1PHuSWfuAwR6oz9qV93rTdMVozfM85Qqxx</string>
 	<string name="gplv3">GNU GPLv3+</string>
-	<string name="lib_list"><a href="https://github.com/andrefbsantos/libdynticker">libdynticker</a> <a href="https://github.com/andrefbsantos/libpricealarm">libpricealarm</a> <a href="https://github.com/gabrielemariotti/changeloglib">changeloglib</a> <a href="https://github.com/soarcn/UndoBar">UndoBar</a></string>
+	<string name="lib_list"><a href="https://github.com/drpout/libdynticker">libdynticker</a> <a href="https://github.com/drpout/libpricealarm">libpricealarm</a> <a href="https://github.com/gabrielemariotti/changeloglib">changeloglib</a> <a href="https://github.com/soarcn/UndoBar">UndoBar</a></string>
 	<string-array name="pref_values_alert_type">
 		<item>4</item>
 		<item>2</item>

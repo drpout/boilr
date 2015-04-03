@@ -5,6 +5,7 @@
     <string name="action_about">关于</string>
     <string name="alarm_settings">提醒设置</string>
     <string name="add_alarm">添加提醒</string>
+    <!-- Review please --><string name="refresh_alarms">更新提醒</string>
     <string name="boilr_settings">Boilr设置</string>
     <string name="about_title">关于Boilr</string>
 	<string name="yes">是</string>
@@ -38,6 +39,7 @@
     <string name="pref_entries_theme_1">Light</string>
     <string name="pref_title_network_usage">网络使用情况</string>
     <string name="pref_title_mobile_data">移动数据</string>
+    <string name="pref_title_show_internet_warning">忽略提醒</string>
     <string name="pref_title_default_update_interval">默认更新间隔</string>
     <string name="pref_summary_default_update_interval">以秒为单位。设置触价提醒多久从交易所获取一次数据。您可以针对特定提醒单独设置此间隔。</string>
     <string name="pref_title_default_time_frame">提醒默认时间范围</string>
@@ -95,8 +97,8 @@
 	<string name="undo">撤销</string>
 	<string name="loading_pairs">正在载入…</string>
 	
-	<string name="short_description">比特币，数字货币，数字资产以及衍生品的价格提醒。</string>
-	<string name="full_description">实时比特币，数字货币，数字资产及衍生品价格，根据用户设置触发提醒。已支持70多家交易所。
+	<string name="short_description">比特币，数字货币，数字资产以，期货及期权的价格提醒。</string>
+	<string name="full_description">实时比特币，数字货币，数字资产，期货及期权价格，根据用户设置触发提醒。已支持70多家交易所。
 	    
 	    
 	    	支持两种提醒类型：
@@ -107,16 +109,15 @@
 	    	声音和震动可全局设置，也可针对每个提醒单独设置。交易所列表，交易对和自定义提醒均可搜索，帮您快速掌握行情。您可以在提醒列表上方便的进行排序或者更改提醒的设置。提醒和闹钟一样，被触发时响铃，显示最新信息，直到您将其关闭。通过Wi-Fi或者移动网络(如果用户允许)直接从交易所获取数据。
 	    	
 	    	
-	    	Boilr支持所有在libdynticker中可用的交易所，以及其中的交易对：https://github.com/andrefbsantos/libdynticker/#supported-exchanges 。
+	    	Boilr支持所有在libdynticker中可用的交易所，以及其中的交易对：https://github.com/drpout/libdynticker/#supported-exchanges 。
 	    	
 	    	
-	    	Boilr是在GPLv3+许可证下发布的自由软件，您可以从https://github.com/andrefbsantos/boilr获取全部源代码。
+	    	Boilr是在GPLv3+许可证下发布的自由软件，您可以从https://github.com/drpout/boilr获取全部源代码。
 	    	如果Boilr对您有用，请考虑捐赠或者打赏：http://boilr.mobi/#donate 。
 	    	如果您需要帮助，或者要报告bug和需求，请使用我们的GitHub issues。
 	    	
 	    	
 	    	以下为Boilr用到的权限和对应的原因：
-	    	* 获取电话状态和识别码 - 避免在通话中产生提醒响铃。
 	    	* 读取SD卡数据 - 用于读取自定义铃声。
 	    	* 关闭锁屏 - 让您可以在锁屏状态下关闭闹铃。
 	    	* 网络权限 - 获取交易所行情数据。
@@ -126,21 +127,17 @@
 	    	* 防止手机进入睡眠 - 提醒被触发时保持显示直到您关闭。
 	    	
 	    	
-	    	详细版本历史：https://github.com/andrefbsantos/boilr/releases
+	    	详细版本历史：https://github.com/drpout/boilr/releases
 	    	
 	    	
-	    	当前支持的交易：
+	    	当前支持的交易
 	    	
-	    	比特币/竞争币对法币
-	    	[...]
+	    	比特币/竞争币对法币：
 	    	
-	    	竞争币
-	    	[...]
+	    	竞争币：
 	    	
-	    	数字资产及衍生品 (期货及期权)
-	    	[...]
+	    	数字资产及衍生品 (期货及期权)：
 	    	
-	    	金条
-			[...]
+	    	金条：
 	</string>
 </resources>

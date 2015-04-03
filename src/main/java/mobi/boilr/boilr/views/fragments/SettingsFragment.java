@@ -34,7 +34,7 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 	public static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL = "pref_key_default_update_interval";
 	public static final String PREF_KEY_DEFAULT_TIME_FRAME = "pref_key_default_time_frame";
 	public static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
-	private static final String PREF_KEY_SHOW_INTERNET_WARNING = "pref_key_show_internet_warning";
+	public static final String PREF_KEY_SHOW_INTERNET_WARNING = "pref_key_show_internet_warning";
 	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
 	public static final String PREF_KEY_MOBILE_DATA = "pref_key_mobile_data";
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,
@@ -155,7 +155,6 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			StorageAndControlService.allowMobileData = sharedPrefs.getBoolean(key, false);
 		} else if(key.equals(PREF_KEY_SHOW_INTERNET_WARNING)) {
 			boolean show = sharedPrefs.getBoolean(key, true);
-			Notifications.sAllowNoNetNotif = show;
 			if(!show)
 				Notifications.clearNoInternetNotification(enclosingActivity);
 		} else {

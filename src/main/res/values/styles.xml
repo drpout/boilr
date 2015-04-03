@@ -9,6 +9,7 @@
         <item name="ic_action_remove">@drawable/ic_action_remove_dark</item>
         <item name="ic_action_new">@drawable/ic_action_new_dark</item>
         <item name="ic_action_warning">@drawable/ic_action_warning_dark</item>
+        <item name="ic_action_refresh">@drawable/ic_action_refresh_dark</item>
         <item name="ic_lock_power_off">@drawable/ic_lock_power_off_dark</item>
         <item name="ic_lock_reboot">@drawable/ic_lock_reboot_dark</item>
         <item name="progress_circle_color_on">@color/highlightblue</item>
@@ -30,6 +31,7 @@
         <item name="ic_action_remove">@drawable/ic_action_remove_light</item>
         <item name="ic_action_new">@drawable/ic_action_new_light</item>
         <item name="ic_action_warning">@drawable/ic_action_warning_light</item>
+        <item name="ic_action_refresh">@drawable/ic_action_refresh_light</item>
         <item name="ic_lock_power_off">@drawable/ic_lock_power_off_light</item>
         <item name="ic_lock_reboot">@drawable/ic_lock_reboot_light</item>
         <item name="progress_circle_color_on">@color/highlightblue</item>

@@ -5,7 +5,8 @@
 	<string name="action_settings">Impostazioni</string>
 	<string name="action_about">Circa</string>
 	<string name="alarm_settings">Impostazioni avvisi</string>
-	<string name="add_alarm">aggiungi avviso</string>
+	<string name="add_alarm">Aggiungi avviso</string>
+	<!-- Review please --><string name="refresh_alarms">Aggiornare allarmi</string>
 	<string name="boilr_settings">Boilr impostazioni</string>
 	<string name="about_title">Circa Boilr</string>
 	<string name="release_notes">Modifiche tra versioni</string>
@@ -39,6 +40,7 @@
 	<string name="pref_default_theme">scuro</string>
 	<string name="pref_title_network_usage">Uso Network</string>
 	<string name="pref_title_mobile_data">Dati Mobile</string>
+	<!-- Review please --><string name="pref_title_show_internet_warning">Avvertire senza internet</string>
 	<string name="pref_title_default_update_interval">Intervallo di aggiornamento predefinito</string>
 	<!-- Review please --><string name="pref_summary_default_update_interval">In pochi secondi. Definisce quante volte un allarme riceve i dati dallo scambio. È possibile impostare un intervallo per un particolare allarme sulla sua configurazione.</string>
 	<string name="pref_title_default_time_frame">Lasso di tempo predefinito</string>

@@ -5,6 +5,7 @@
 	<string name="action_about">About</string>
 	<string name="alarm_settings">Alarm Settings</string>
 	<string name="add_alarm">Add alarm</string>
+	<string name="refresh_alarms">Refersh alarms</string>
 	<string name="boilr_settings">Boilr Settings</string>
 	<string name="about_title">About Boilr</string>
 	<string name="release_notes">Release notes</string>
@@ -37,6 +38,7 @@
     <string name="pref_entries_theme_1">Light</string>
 	<string name="pref_title_network_usage">Network usage</string>
 	<string name="pref_title_mobile_data">Mobile data</string>
+	<string name="pref_title_show_internet_warning">Show no internet warning</string>
 	<string name="pref_title_default_update_interval">Default update interval</string>
 	<string name="pref_summary_default_update_interval">In seconds. Defines how often alarms fetch data from the exchange. You can set another interval for a particular alarm on its settings.</string>
 	<string name="pref_title_default_time_frame">Default time frame</string>
@@ -94,52 +96,47 @@
 	<string name="undo">Undo</string>
 	<string name="loading_pairs">Loading pairs…</string>
 	
-	<string name="short_description">Price alarms for Bitcoin, cryptocurrencies, cryptoassets and derivatives.</string>
-	<string name="full_description">Monitor Bitcoin, cryptocurrencies, cryptoassets and derivatives, and trigger alarms according to user settings. 70+ exchanges and counting.
+	<string name="short_description">Price alarms for Bitcoin, cryptocurrencies, cryptoassets, futures and options.</string>
+	<string name="full_description">Monitor Bitcoin, cryptocurrencies, cryptoassets, futures and options, and trigger alarms according to your settings. 70+ exchanges and counting.
 
 
 		Supports 2 alarm types:
-		* Price Hit - Triggered when price crosses the alarm\'s upper or lower limit.
+		* Price Hit - Triggered when price crosses the alarm\'s upper or lower limit. One limit may be left empty to create an alarm with a single trigger.
 		* Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 15 min). It uses a rolling time frame: price is fetched with a given update interval (e.g. 30 s) and compared with the price fetched one time frame ago (e.g. 15 min ago).
 		
 		
 		Sound and vibration are configurable globally, and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing quick setup and configuration. The alarm list behaves as your ticker, where you can reorder your alarms and directly change their limits. Triggered alarms ring, displaying their status, until you turn them off. Just like an alarm clock. Market data is retrieved directly from the exchanges via Wi-Fi or Mobile Data (if allowed).
 		
 		
-		Boilr supports all exchanges available on libdynticker, as all their pairs: https://github.com/andrefbsantos/libdynticker/#supported-exchanges
+		Boilr supports all exchanges available on libdynticker, as all their pairs: https://github.com/drpout/libdynticker/#supported-exchanges
 		
 		
-		Boilr is free (as in freedom) software released under GPLv3+. ALL source-code is available at https://github.com/andrefbsantos/boilr
+		Boilr is free (as in freedom) software released under GPLv3+. ALL source-code is available at https://github.com/drpout/boilr
 		If useful, consider making a donation or sending a tip: http://boilr.mobi/#donate
 		For help, bug reports and feature requests please use our GitHub issues.
 		
 		
 		Reasons for permissions:
-		* Read phone status and identity - Avoids sounding an alarm when you are in the middle of a call.
-		* Read the contens of your SD card - Used to fetch your costum ringtones.
+		* Read the contents of your SD card - Used to fetch your custom ringtones.
 		* Disable your screen lock - So you can turn off a ringing alarm without unlocking your device.
 		* Full network access - To fetch data from the exchanges.
 		* View network connections - To know whether you\'re using Wi-Fi or Mobile Data, allowing Mobile Data restriction. 
-		* Run at startup - To grab your active alarms and start updating them. 
-		* Control vibration - Allows vibration when an alarm is triggered. 
+		* Run at startup - To grab your active alarms and start updating them.
+		* Control vibration - Allows vibration when an alarm is triggered.
 		* Prevent phone from sleeping - Used to keep showing the alarm triggered activity until you press the turn off button.
 		
 		
-		For a version history check: https://github.com/andrefbsantos/boilr/releases
+		For a version history check: https://github.com/drpout/boilr/releases
 		
 		
-		Currently supported exchanges:
+		Currently supported exchanges
 		
-		Bitcoin and altcoins to FIAT
-		[...]
+		Bitcoin and altcoins to FIAT:
 		
-		Altcoins
-		[...]
+		Altcoins:
 		
-		Assets and Derivatives (Futures and Options)
-		[...]
+		Assets and Derivatives (Futures and Options):
 		
-		Bullion
-		[...]
+		Bullion:
 	</string>
 </resources>

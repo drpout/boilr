@@ -5,6 +5,7 @@
     <string name="action_about">O aplikaci</string>
     <string name="alarm_settings">Nastavení upozornění</string>
     <string name="add_alarm">Přidat upozornění</string>
+    <!-- Review please --><string name="refresh_alarms">Aktualizovat upozornění</string>
     <string name="boilr_settings">Boilr nastavení</string>
     <string name="about_title">O aplikaci Boilr</string>
 	<string name="release_notes">Poznámky k verzi</string>
@@ -37,6 +38,7 @@
 	<string name="pref_entries_theme_1">Světlý</string>
     <string name="pref_title_network_usage">Využití sítě</string>
     <string name="pref_title_mobile_data">Mobilní připojení</string>
+    <!-- Review please --><string name="pref_title_show_internet_warning">Varovat ne internet</string>
     <string name="pref_title_default_time_frame">Výchozí časový interval</string>
     <string name="pref_title_default_update_interval">Výchozí interval aktualizace</string>
     <string name="pref_summary_default_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy. Můžete nastavit jiný interval pro určitý alarm v jeho nastavení.</string>
@@ -94,28 +96,27 @@
 	<string name="undo">Zrušit</string>
 	<string name="loading_pairs">Načítání páry…</string>
 	
-	<string name="short_description">Upozornění na cenu Bitcoinu, kryptoměn, kryptoaktiva a deriváty.</string>
-	<string name="full_description">Hlídá ceny kryptoměn, kryptoaktiva a deriváty, upozorňuje uživatele na základě jeho nastavení. Plná podpora pro všechny hlavní burzy a směnné páry.
+	<string name="short_description">Upozornění na cenu Bitcoinu, kryptoměn, kryptoaktiva, futures a opce.</string>
+	<string name="full_description">Hlídá ceny kryptoměn, kryptoaktiva, futures a opce, upozorňuje uživatele na základě jeho nastavení. Plná podpora pro všechny hlavní burzy a směnné páry.
 	    
 	    
 		Podporuje dva typy upozornění:
-    	* Dosažení ceny - upozorní na překročení horní a spodní hranice alarmu.
-    	* Změna ceny - upozorní při změně ceny o hodnotu X (v měně nebo procentech) v zadaném časovém období (např. 15 min.). Používá pohyblivé časové období: cena je načítána v určeném intervalu (např. 30 s) a porovnána s cenou načtenou při minulém období (např. před 15 min).
+    	* Dosažení ceny - Upozorní na překročení horní a spodní hranice alarmu.
+    	* Změna ceny - Upozorní při změně ceny o hodnotu X (v měně nebo procentech) v zadaném časovém období (např. 15 min.). Používá pohyblivé časové období: cena je načítána v určeném intervalu (např. 30 s) a porovnána s cenou načtenou při minulém období (např. před 15 min).
     	
     	
     	Zvuky a vibrování je možné konfigurovat globálně a individuálně pro každé upozornění. Seznamy burz, cenových párů a upozornění lze prohledávat, což umožňuje rychlou konfiguraci a nastavení upozornění. Alarmy lze přerovnávat. Vypnuté alarmy jsou aktualizovány (pouze) při zobrazení seznamu upozornění, funguje jako ticker. Tržní data jsou získávána přímo z burz za pomocí Wi-Fi nebo mobilního přenosu dat (pokud povoleno).
     	
     	
-    	Boilr podporuje všechny burzy dostupné v libdynticker, a všechny jejich cenové páry: https://github.com/andrefbsantos/libdynticker/#supported-exchanges
+    	Boilr podporuje všechny burzy dostupné v libdynticker, a všechny jejich cenové páry: https://github.com/drpout/libdynticker/#supported-exchanges
     	
     	
-    	Boilr je svobodný (ve smyslu svoboda) software uvolněn pod GPLv3+. KOMPLETNí zdrojový kód je dostupný na https://github.com/andrefbsantos/boilr
+    	Boilr je svobodný (ve smyslu svoboda) software uvolněn pod GPLv3+. KOMPLETNí zdrojový kód je dostupný na https://github.com/drpout/boilr
     	Pokud vám přijde jako použitelný, zvažte jeho podporu zasláním příspěvku: http://boilr.mobi/#donate
     	Pro pomoc, hlášení chyb a návrhů vylepšení použijte portál GitHub.
     	
     	
     	Důvody vyžadovaných oprávnění:
-    	* Číst stav telefonu  a identity - Zamezit upozorňování během telefonních hovorů.
     	* Číst data z paměťové karty - Načtení osobních vyzvánění.
     	* Vypnutí uzamčení obrazovky - Aby bylo možno vypnout zvonící alarm bez nutnosti odemknout přístroj.
     	* Přístup k síti - Načtení dat z burz.
@@ -125,21 +126,17 @@
     	* Zamezit režimu spánku telefonu - Použité pro běh alarmu až do stiknutí tlačítka vypnutí.
     	
     	
-    	Historie verzí lze nalézt na: https://github.com/andrefbsantos/boilr/releases
+    	Historie verzí lze nalézt na: https://github.com/drpout/boilr/releases
     	
     	
-    	Aktuálně podporované burzy:
+    	Aktuálně podporované burzy
     	
-    	Bitcoin a altcoins na FIAT
-		[...]
+    	Bitcoin a altcoins na FIAT:
 		
-		Altcoins
-		[...]
+		Altcoins:
 		
-		Aktiva a Deriváty (Budoucnost a Možnosti)
-		[...]
+		Aktiva a Deriváty (Futures a Opce):
 		
-		Neražený kov
-		[...]
+		Neražený kov:
 	</string>
 </resources>

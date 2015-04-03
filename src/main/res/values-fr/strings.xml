@@ -5,6 +5,7 @@
 	<string name="action_about">À propos</string>
 	<string name="alarm_settings">Paramètres d\'alarme</string>
 	<string name="add_alarm">Ajouter une alarme</string>
+	<string name="refresh_alarms">Actualiser les alarmes</string>
 	<string name="boilr_settings">Préférences de Boilr</string>
 	<string name="about_title">A propos de Boilr</string>
 	<string name="release_notes">Notes de publication</string>
@@ -36,6 +37,7 @@
     <string name="pref_entries_theme_1">Claire</string>
 	<string name="pref_title_network_usage">Utilisation du réseau</string>
 	<string name="pref_title_mobile_data">Données mobiles</string>
+	<string name="pref_title_show_internet_warning">Avertir pas d\'internet</string>
 	<string name="pref_title_default_update_interval">Intervalle de mise à jour par défaut</string>
 	<string name="undo">Annuler</string>
 	<string name="pref_title_default_time_frame">Fenêtre temporelle par défaut</string>
@@ -93,6 +95,6 @@
 	<string name="couldnt_retrieve_last_value">N\'a pas pu récupérer la dernière valeur de %1$s avec paire %2$s.</string>
 	<string name="not_bound">%1$s ne pas lié à StorageAndControlService.</string>
 	<!-- Review please --><string name="loading_pairs">Paires en chargement…</string>
-	<string name="short_description">Prix alarmes pour Bitcoin, cryptodevises, crypto-actif et dérivés.</string>
+	<string name="short_description">Prix alarmes pour Bitcoin, cryptodevises, cryptoactif, contrats à terme et options.</string>
 	<!-- Missing translation <string name="full_description"></string>-->
 </resources>

@@ -182,7 +182,7 @@ public class StorageAndControlService extends Service {
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 		try {
 			db = new DBManager(this);
-			nextAlarmID = db.getMaxID();
+			nextAlarmID = db.getMaxID() + 1;
 			alarmsMap = db.getAlarms();
 			if(alarmsMap.isEmpty()) {
 				// new PopupalteDBTask().execute();
@@ -214,8 +214,8 @@ public class StorageAndControlService extends Service {
 						new RunAlarmTask().execute(alarm);
 					}
 				}
-			} else if(Notifications.ACTION_DISABLE_NET_NOTIF.equals(action)) {
-				Notifications.sAllowNoNetNotif = false;
+			} else if(Notifications.ACTION_CLEAR_NET_NOTIF.equals(action)) {
+				Notifications.sClearedNoNetNotif = true;
 			}
 		}
 		return START_STICKY;
@@ -288,6 +288,12 @@ public class StorageAndControlService extends Service {
 		offedAlarmsScheduled = false;
 	}
 
+	public void refreshAlarms() {
+		for(Alarm alarm : alarmsMap.values()) {
+			resetAlarmPeriod(alarm);
+		}
+	}
+
 	public void toggleAlarm(int alarmID) {
 		Alarm alarm = alarmsMap.get(alarmID);
 		alarm.toggle();
@@ -340,6 +346,7 @@ public class StorageAndControlService extends Service {
 	}
 
 	public void deleteAlarm(Alarm alarm) {
+		Notifications.clearNotification(this, alarm);
 		removeFromAlarmManager(alarm.getId());
 		db.deleteAlarm(alarm);
 		alarmsMap.remove(alarm.getId());
