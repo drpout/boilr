@@ -71,7 +71,7 @@
 	<string name="pref_title_time_frame">Periodo</string>
 	<string name="pref_title_last_value">Ultimo prezzo</string>
 	<!-- Review please --><string name="pref_summary_update_interval">In pochi secondi. Definisce la frequenza con cui l\'allarme riceve i dati dal cambio.</string>
-	<!-- Review please --><string name="pref_summary_time_frame">In pochi minuti. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa.</string>
+	<!-- Review please --><string name="pref_summary_time_frame">In pochi minuti. Definisce qual prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa.</string>
 	<string name="boilr_alarm">Boilr Allarme</string>
 	<string name="off">Spegni</string>
 	<!-- Review please --><string name="resume">Riprendere</string>
