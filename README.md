@@ -98,7 +98,7 @@ Translators:
 * Czech: [Jaroslav Lichtblau](https://github.com/svetlemodry) and [Michal Čihař](https://github.com/nijel)
 * French: [Tuux](http://www.rtnp.org) and [M for Momo](http://www.rtnp.org)
 * German: Luca Rui
-* Italian: Francesca Mautone
+* Italian: Francesca Mautone and [Mario Frasca](https://hosted.weblate.org/user/mfrasca)
 * Polish: [Michal Pleban](https://pl.linkedin.com/in/michalpleban)
 * Spanish: Mariona Martinez
 
