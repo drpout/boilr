@@ -105,7 +105,7 @@
 		* Variação de preço - Dispara quando o preço varia mais que uma quantidade X (em moeda ou percentagem) durante um dado prazo (e.g. 15 min). Usa uma janela temporal deslizante: o preço é atualizado com um dado intervalo (e.g. 30s) e comparado com o preço existente há um prazo atrás (e.g. 15 min antes).
 		
 		
-		Som e vibração podem ser configurados globalmente e individualmente para cada alarme. As listas de bolsas, pares e alarmes são pesquisáveis, permitindo uma rápida criação e configuração dos alarmes. Os alarmes podem ser reordenados. Alarmes desligados continuam a atualizar o preço enquanto (e só enquanto) a lista de alarmes está visível, funcionando como tickers. Os dados são obtidos diretamente das bolsas usando Wi-Fi ou Dados Móveis (se permitido).
+		Som e vibração podem ser configurados globalmente e individualmente para cada alarme. As listas de bolsas, pares e alarmes são pesquisáveis, permitindo uma rápida criação e configuração dos alarmes. A lista de alarmes comporta-se como um ticker, lá podes reordenar os teus alarmes e mudar diretamente os seus limites. Quando um alarme dispara fica continuamente a tocar até o desligares e, enquanto isso, mostra o seu estado: tal e qual um despertador. Os dados são obtidos diretamente das bolsas usando Wi-Fi ou Dados Móveis (se permitido).
 		
 		
 		O Boilr suporta todas as bolsas disponíveis na libdynticker, bem como todos os seus pares: https://github.com/drpout/libdynticker/#supported-exchanges
