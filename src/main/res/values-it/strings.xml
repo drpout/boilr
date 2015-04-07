@@ -44,7 +44,7 @@
 	<string name="pref_title_default_update_interval">Intervallo di aggiornamento predefinito</string>
 	<!-- Review please --><string name="pref_summary_default_update_interval">In pochi secondi. Definisce quante volte un allarme riceve i dati dallo scambio. È possibile impostare un intervallo per un particolare allarme sulla sua configurazione.</string>
 	<string name="pref_title_default_time_frame">Lasso di tempo predefinito</string>
-	<!-- Review please --><string name="pref_summary_default_time_frame">In pochi minuti. Usato per l\'allarme Cambiamento. Definisce cui prezzo confrontare con quella attuale, e.g. il prezzo da 15 minuti fa. È possibile impostare un intervallo di tempo di un particolare allarme sulla sua configurazione.</string>
+	<!-- Review please --><string name="pref_summary_default_time_frame">In pochi minuti. Usato per l\'allarme Cambiamento. Definisce qual prezzo confrontare con quello attuale, e.g. il prezzo da 15 minuti fa. È possibile impostare un intervallo di tempo di un particolare allarme al momento della sua configurazione.</string>
 	<string name="pref_title_check_pairs_interval">Verificare la presenza di nuove coppie</string>
 	<string name="pref_entries_check_pairs_interval_0">Ogni ora</string>
 	<string name="pref_entries_check_pairs_interval_1">Due volte al giorno</string>
@@ -100,4 +100,5 @@
 	<string name="loading_pairs">Caricamento coppie…</string>
 	<!-- Missing translation <string name="short_description"></string>-->
 	<!-- Missing translation <string name="full_description"></string>-->
-</resources>
+<string name="pref_summary_sound_volume">Boilr utilizza il volume di sistema per il tipo Alert selezionato. In generale, il tipo Alert è configurato a pieno volume anche se il telefono è in modo muto.</string>
+	</resources>
