@@ -100,5 +100,5 @@
 	<string name="loading_pairs">Caricamento coppie…</string>
 	<!-- Missing translation <string name="short_description"></string>-->
 	<!-- Missing translation <string name="full_description"></string>-->
-<string name="pref_summary_sound_volume">Boilr utilizza il volume di sistema per il tipo Alert selezionato. In generale, il tipo Alert è configurato a pieno volume anche se il telefono è in modo muto.</string>
+<string name="pref_summary_sound_volume">Boilr utilizza il volume di sistema per il tipo Alert selezionato. In generale, il tipo Allarme è configurato a pieno volume anche se il telefono è in modo muto.</string>
 	</resources>
