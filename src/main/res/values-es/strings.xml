@@ -42,7 +42,7 @@
 	<string name="pref_title_show_internet_warning">Avisar sin internet</string>
 	<!-- Review please --><string name="pref_summary_default_update_interval">En segundos. Define la frecuencia con que una alarma obtiene datos de bolsa. Puede definir otro intervalo para una alarma en particular en sus ajustes.</string>
 	<string name="pref_title_default_time_frame">Plazo por omisión</string>
-	<!-- Review please --><string name="pref_summary_default_time_frame">En minutos. Utilizado por las alarmas de Variación. Define qué precio comparar con el actual, por ejemplo el precio de hace 15 minutos. Puede definir otro plazo de alarma en particular en sus ajustes.</string>
+	<!-- Review please --><string name="pref_summary_default_time_frame">En minutos. Utilizado por las alarmas de variación. Define qué precio comparar con el actual, por ejemplo el precio de hace 15 minutos. Puede definir otro plazo de alarma en particular en sus ajustes.</string>
 	<string name="pref_title_check_pairs_interval">Buscar nuevos pares</string>
 	<string name="pref_entries_check_pairs_interval_0">De hora a hora</string>
 	<string name="pref_entries_check_pairs_interval_1">Dos veces al día</string>
@@ -51,7 +51,7 @@
 	<string name="pref_entries_check_pairs_interval_4">Semanalmente</string>
 	<string name="pref_entries_check_pairs_interval_5">Quincenalmente</string>
 	<string name="pref_type_title">Tipo de alarma</string>
-	<string name="pref_type_entries_0">Precio límite</string>
+	<string name="pref_type_entries_0">Límite de precio</string>
 	<string name="pref_type_entries_1">Variación de precio</string>
 	<string name="pref_exchange_title">Bolsa</string>
 	<string name="pref_pair_title">Par</string>
@@ -98,4 +98,5 @@
 	<string name="loading_pairs">Cargando pares…</string>
 	<!-- Missing translation <string name="short_description"></string>-->
 	<!-- Missing translation <string name="full_description"></string>-->
-</resources>
+<string name="short_description">Alarmas de precio para bitcoin, cryptocurrencies, cryptoassets, futuros y opciones.</string>
+	</resources>
