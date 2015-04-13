@@ -97,46 +97,46 @@
 	<string name="loading_pairs">Načítání páry…</string>
 	
 	<string name="short_description">Upozornění na cenu Bitcoinu, kryptoměn, kryptoaktiva, futures a opce.</string>
-	<string name="full_description">Hlídá ceny kryptoměn, kryptoaktiva, futures a opce, upozorňuje uživatele na základě jeho nastavení. Plná podpora pro všechny hlavní burzy a směnné páry.
-	    
-	    
-		Podporuje dva typy upozornění:
-    	* Dosažení ceny - Upozorní na překročení horní a spodní hranice alarmu.
-    	* Změna ceny - Upozorní při změně ceny o hodnotu X (v měně nebo procentech) v zadaném časovém období (např. 15 min.). Používá pohyblivé časové období: cena je načítána v určeném intervalu (např. 30 s) a porovnána s cenou načtenou při minulém období (např. před 15 min).
-    	
-    	
-    	Zvuky a vibrování je možné konfigurovat globálně a individuálně pro každé upozornění. Seznamy burz, cenových párů a upozornění lze prohledávat, což umožňuje rychlou konfiguraci a nastavení upozornění. Alarmy lze přerovnávat. Vypnuté alarmy jsou aktualizovány (pouze) při zobrazení seznamu upozornění, funguje jako ticker. Tržní data jsou získávána přímo z burz za pomocí Wi-Fi nebo mobilního přenosu dat (pokud povoleno).
-    	
-    	
-    	Boilr podporuje všechny burzy dostupné v libdynticker, a všechny jejich cenové páry: https://github.com/drpout/libdynticker/#supported-exchanges
-    	
-    	
-    	Boilr je svobodný (ve smyslu svoboda) software uvolněn pod GPLv3+. KOMPLETNí zdrojový kód je dostupný na https://github.com/drpout/boilr
-    	Pokud vám přijde jako použitelný, zvažte jeho podporu zasláním příspěvku: http://boilr.mobi/#donate
-    	Pro pomoc, hlášení chyb a návrhů vylepšení použijte portál GitHub.
-    	
-    	
-    	Důvody vyžadovaných oprávnění:
-    	* Číst data z paměťové karty - Načtení osobních vyzvánění.
-    	* Vypnutí uzamčení obrazovky - Aby bylo možno vypnout zvonící alarm bez nutnosti odemknout přístroj.
-    	* Přístup k síti - Načtení dat z burz.
-    	* Zobrazit síťová připojení - Ověření jestli používáte Wi-Fi nebo mobilní data, pro omezení mobilních dat.
-    	* Spuštění po startu - Pro načtení alarmů a aktualizování dat z burz.
-    	* Kontrola vibrování - Vibrace při spuštění alarmu.
-    	* Zamezit režimu spánku telefonu - Použité pro běh alarmu až do stiknutí tlačítka vypnutí.
-    	
-    	
-    	Historie verzí lze nalézt na: https://github.com/drpout/boilr/releases
-    	
-    	
-    	Aktuálně podporované burzy
-    	
-    	Bitcoin a altcoins na FIAT:
-		
-		Altcoins:
-		
-		Aktiva a Deriváty (Futures a Opce):
-		
+	<string name="full_description">Hlídá ceny kryptoměn, kryptoaktiva, futures a opce, upozorňuje uživatele na základě jeho nastavení. Plná podpora pro všechny hlavní burzy a směnné páry.\n
+	    \n
+	    \n
+		Podporuje dva typy upozornění:\n
+    	* Dosažení ceny - Upozorní na překročení horní a spodní hranice alarmu.\n
+    	* Změna ceny - Upozorní při změně ceny o hodnotu X (v měně nebo procentech) v zadaném časovém období (např. 15 min.). Používá pohyblivé časové období: cena je načítána v určeném intervalu (např. 30 s) a porovnána s cenou načtenou při minulém období (např. před 15 min).\n
+    	\n
+    	\n
+    	Zvuky a vibrování je možné konfigurovat globálně a individuálně pro každé upozornění. Seznamy burz, cenových párů a upozornění lze prohledávat, což umožňuje rychlou konfiguraci a nastavení upozornění. Alarmy lze přerovnávat. Vypnuté alarmy jsou aktualizovány (pouze) při zobrazení seznamu upozornění, funguje jako ticker. Tržní data jsou získávána přímo z burz za pomocí Wi-Fi nebo mobilního přenosu dat (pokud povoleno).\n
+    	\n
+    	\n
+    	Boilr podporuje všechny burzy dostupné v libdynticker, a všechny jejich cenové páry: https://github.com/drpout/libdynticker/#supported-exchanges\n
+    	\n
+    	\n
+    	Boilr je svobodný (ve smyslu svoboda) software uvolněn pod GPLv3+. KOMPLETNí zdrojový kód je dostupný na https://github.com/drpout/boilr\n
+    	Pokud vám přijde jako použitelný, zvažte jeho podporu zasláním příspěvku: http://boilr.mobi/#donate\n
+    	Pro pomoc, hlášení chyb a návrhů vylepšení použijte portál GitHub.\n
+    	\n
+    	\n
+    	Důvody vyžadovaných oprávnění:\n
+    	* Číst data z paměťové karty - Načtení osobních vyzvánění.\n
+    	* Vypnutí uzamčení obrazovky - Aby bylo možno vypnout zvonící alarm bez nutnosti odemknout přístroj.\n
+    	* Přístup k síti - Načtení dat z burz.\n
+    	* Zobrazit síťová připojení - Ověření jestli používáte Wi-Fi nebo mobilní data, pro omezení mobilních dat.\n
+    	* Spuštění po startu - Pro načtení alarmů a aktualizování dat z burz.\n
+    	* Kontrola vibrování - Vibrace při spuštění alarmu.\n
+    	* Zamezit režimu spánku telefonu - Použité pro běh alarmu až do stiknutí tlačítka vypnutí.\n
+    	\n
+    	\n
+    	Historie verzí lze nalézt na: https://github.com/drpout/boilr/releases\n
+    	\n
+    	\n
+    	Aktuálně podporované burzy\n
+    	\n
+    	Bitcoin a altcoins na FIAT:\n
+		\n
+		Altcoins:\n
+		\n
+		Aktiva a Deriváty (Futures a Opce):\n
+		\n
 		Neražený kov:
 	</string>
 </resources>

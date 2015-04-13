@@ -97,46 +97,46 @@
 	<string name="loading_pairs">A carregar pares…</string>
 	
 	<string name="short_description">Alarmes de preço para Bitcoin, criptomoedas, criptoativos, futuros e opções.</string>
-	<string name="full_description">Monitoriza o preço de Bitcoin, criptomoedas, criptoativos, futuros e opções e dispara alarmes consoante parâmetros do utilizador. Suporta mais de 70 bolsas.
-
-
-		Suporta 2 tipos de alarmes:
-		* Preço limite - Dispara quando o preço ultrapassa um limite superior ou inferior. Pode-se deixar um dos limites vazio para criar um alarme com apenas uma condição de disparo.
-		* Variação de preço - Dispara quando o preço varia mais que uma quantidade X (em moeda ou percentagem) durante um dado prazo (e.g. 15 min). Usa uma janela temporal deslizante: o preço é atualizado com um dado intervalo (e.g. 30s) e comparado com o preço existente há um prazo atrás (e.g. 15 min antes).
-		
-		
-		Som e vibração podem ser configurados globalmente e individualmente para cada alarme. As listas de bolsas, pares e alarmes são pesquisáveis, permitindo uma rápida criação e configuração dos alarmes. A lista de alarmes comporta-se como um ticker, lá podes reordenar os teus alarmes e mudar diretamente os seus limites. Quando um alarme dispara fica continuamente a tocar até o desligares e, enquanto isso, mostra o seu estado: tal e qual um despertador. Os dados são obtidos diretamente das bolsas usando Wi-Fi ou Dados Móveis (se permitido).
-		
-		
-		O Boilr suporta todas as bolsas disponíveis na libdynticker, bem como todos os seus pares: https://github.com/drpout/libdynticker/#supported-exchanges
-		
-		
-		O Boilr é software livre, licenciado sob GPLv3+. Todo o código-fonte está disponível em https://github.com/drpout/boilr
-		Se achas o Boilr útil considera fazer uma doação ou enviar uma gorjeta: http://boilr.mobi/#donate
-		Para ajuda, submissão de erros e pedidos de melhorias por favor usa os issues no GitHub.
-		
-		
-		Razões para a permissões:
-		* Ler os conteúdos do cartão SD - Permite usar o teus toques personalizados.
-		* Desativar o bloqueio do ecrã - Para se desligar um alarme que está a tocar sem ter que desbloquear.
-		* Acesso total à rede - Para obter os dados das bolsas.
-		* Ver ligações de rede - Para saber se estás a usar Wi-Fi ou Dados Móveis, permitindo restringir os Dados Móveis. 
-		* Executar no arranque - Para começar prontamente a atualizar os alarmes que deixas-te ligados. 
-		* Controlar vibração - Permite vibração enquanto um alarme dispara. 
-		* Impedir modo de inatividade do telefone - Usado para mostrar continuamente a atividade de alarme a tocar até carregares no botão de desligar.
-		
-		
-		Podes consultar um histórico de versões em: https://github.com/drpout/boilr/releases
-		
-		
-		Bolsas suportadas atualmente
-		
-		Bitcoin e outras criptomoedas para moeda fiduciária:
-		
-		Apenas criptomoedas:
-		
-		Ativos/Ações e Derivados (Futuros e Opções):
-		
+	<string name="full_description">Monitoriza o preço de Bitcoin, criptomoedas, criptoativos, futuros e opções e dispara alarmes consoante parâmetros do utilizador. Suporta mais de 70 bolsas.\n
+		\n
+		\n
+		Suporta 2 tipos de alarmes:\n
+		* Preço limite - Dispara quando o preço ultrapassa um limite superior ou inferior. Pode-se deixar um dos limites vazio para criar um alarme com apenas uma condição de disparo.\n
+		* Variação de preço - Dispara quando o preço varia mais que uma quantidade X (em moeda ou percentagem) durante um dado prazo (e.g. 15 min). Usa uma janela temporal deslizante: o preço é atualizado com um dado intervalo (e.g. 30s) e comparado com o preço existente há um prazo atrás (e.g. 15 min antes).\n
+		\n
+		\n
+		Som e vibração podem ser configurados globalmente e individualmente para cada alarme. As listas de bolsas, pares e alarmes são pesquisáveis, permitindo uma rápida criação e configuração dos alarmes. A lista de alarmes comporta-se como um ticker, lá podes reordenar os teus alarmes e mudar diretamente os seus limites. Quando um alarme dispara fica continuamente a tocar até o desligares e, enquanto isso, mostra o seu estado: tal e qual um despertador. Os dados são obtidos diretamente das bolsas usando Wi-Fi ou Dados Móveis (se permitido).\n
+		\n
+		\n
+		O Boilr suporta todas as bolsas disponíveis na libdynticker, bem como todos os seus pares: https://github.com/drpout/libdynticker/#supported-exchanges\n
+		\n
+		\n
+		O Boilr é software livre, licenciado sob GPLv3+. Todo o código-fonte está disponível em https://github.com/drpout/boilr\n
+		Se achas o Boilr útil considera fazer uma doação ou enviar uma gorjeta: http://boilr.mobi/#donate\n
+		Para ajuda, submissão de erros e pedidos de melhorias por favor usa os issues no GitHub.\n
+		\n
+		\n
+		Razões para a permissões:\n
+		* Ler os conteúdos do cartão SD - Permite usar o teus toques personalizados.\n
+		* Desativar o bloqueio do ecrã - Para se desligar um alarme que está a tocar sem ter que desbloquear.\n
+		* Acesso total à rede - Para obter os dados das bolsas.\n
+		* Ver ligações de rede - Para saber se estás a usar Wi-Fi ou Dados Móveis, permitindo restringir os Dados Móveis.\n 
+		* Executar no arranque - Para começar prontamente a atualizar os alarmes que deixas-te ligados.\n
+		* Controlar vibração - Permite vibração enquanto um alarme dispara.\n
+		* Impedir modo de inatividade do telefone - Usado para mostrar continuamente a atividade de alarme a tocar até carregares no botão de desligar.\n
+		\n
+		\n
+		Podes consultar um histórico de versões em: https://github.com/drpout/boilr/releases\n
+		\n
+		\n
+		Bolsas suportadas atualmente\n
+		\n
+		Bitcoin e outras criptomoedas para moeda fiduciária:\n
+		\n
+		Apenas criptomoedas:\n
+		\n
+		Ativos/Ações e Derivados (Futuros e Opções):\n
+		\n
 		Metais preciosos:
 	</string>
 </resources>
