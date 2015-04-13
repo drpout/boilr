@@ -97,46 +97,46 @@
 	<string name="loading_pairs">Loading pairs…</string>
 	
 	<string name="short_description">Price alarms for Bitcoin, cryptocurrencies, cryptoassets, futures and options.</string>
-	<string name="full_description">Monitor Bitcoin, cryptocurrencies, cryptoassets, futures and options, and trigger alarms according to your settings. 70+ exchanges and counting.
-
-
-		Supports 2 alarm types:
-		* Price Hit - Triggered when price crosses the alarm\'s upper or lower limit. One limit may be left empty to create an alarm with a single trigger.
-		* Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 15 min). It uses a rolling time frame: price is fetched with a given update interval (e.g. 30 s) and compared with the price fetched one time frame ago (e.g. 15 min ago).
-		
-		
-		Sound and vibration are configurable globally, and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing quick setup and configuration. The alarm list behaves as your ticker, where you can reorder your alarms and directly change their limits. Triggered alarms ring, displaying their status, until you turn them off. Just like an alarm clock. Market data is retrieved directly from the exchanges via Wi-Fi or Mobile Data (if allowed).
-		
-		
-		Boilr supports all exchanges available on libdynticker, as all their pairs: https://github.com/drpout/libdynticker/#supported-exchanges
-		
-		
-		Boilr is free (as in freedom) software released under GPLv3+. ALL source-code is available at https://github.com/drpout/boilr
-		If useful, consider making a donation or sending a tip: http://boilr.mobi/#donate
-		For help, bug reports and feature requests please use our GitHub issues.
-		
-		
-		Reasons for permissions:
-		* Read the contents of your SD card - Used to fetch your custom ringtones.
-		* Disable your screen lock - So you can turn off a ringing alarm without unlocking your device.
-		* Full network access - To fetch data from the exchanges.
-		* View network connections - To know whether you\'re using Wi-Fi or Mobile Data, allowing Mobile Data restriction. 
-		* Run at startup - To grab your active alarms and start updating them.
-		* Control vibration - Allows vibration when an alarm is triggered.
-		* Prevent phone from sleeping - Used to keep showing the alarm triggered activity until you press the turn off button.
-		
-		
-		For a version history check: https://github.com/drpout/boilr/releases
-		
-		
-		Currently supported exchanges
-		
-		Bitcoin and altcoins to FIAT:
-		
-		Altcoins:
-		
-		Assets and Derivatives (Futures and Options):
-		
+	<string name="full_description">Monitor Bitcoin, cryptocurrencies, cryptoassets, futures and options, and trigger alarms according to your settings. 70+ exchanges and counting.\n
+		\n
+		\n
+		Supports 2 alarm types:\n
+		* Price Hit - Triggered when price crosses the alarm\'s upper or lower limit. One limit may be left empty to create an alarm with a single trigger.\n
+		* Price Change - Triggered when price changes more than X amount (in currency or percentage) in a specified time frame (e.g. 15 min). It uses a rolling time frame: price is fetched with a given update interval (e.g. 30 s) and compared with the price fetched one time frame ago (e.g. 15 min ago).\n
+		\n
+		\n
+		Sound and vibration are configurable globally, and individually for each alarm. Lists of exchanges, pairs and alarms are fully searchable, allowing quick setup and configuration. The alarm list behaves as your ticker, where you can reorder your alarms and directly change their limits. Triggered alarms ring, displaying their status, until you turn them off. Just like an alarm clock. Market data is retrieved directly from the exchanges via Wi-Fi or Mobile Data (if allowed).\n
+		\n
+		\n
+		Boilr supports all exchanges available on libdynticker, as all their pairs: https://github.com/drpout/libdynticker/#supported-exchanges\n
+		\n
+		\n
+		Boilr is free (as in freedom) software released under GPLv3+. ALL source-code is available at https://github.com/drpout/boilr\n
+		If useful, consider making a donation or sending a tip: http://boilr.mobi/#donate\n
+		For help, bug reports and feature requests please use our GitHub issues.\n
+		\n
+		\n
+		Reasons for permissions:\n
+		* Read the contents of your SD card - Used to fetch your custom ringtones.\n
+		* Disable your screen lock - So you can turn off a ringing alarm without unlocking your device.\n
+		* Full network access - To fetch data from the exchanges.\n
+		* View network connections - To know whether you\'re using Wi-Fi or Mobile Data, allowing Mobile Data restriction.\n 
+		* Run at startup - To grab your active alarms and start updating them.\n
+		* Control vibration - Allows vibration when an alarm is triggered.\n
+		* Prevent phone from sleeping - Used to keep showing the alarm triggered activity until you press the turn off button.\n
+		\n
+		\n
+		For a version history check: https://github.com/drpout/boilr/releases\n
+		\n
+		\n
+		Currently supported exchanges\n
+		\n
+		Bitcoin and altcoins to FIAT:\n
+		\n
+		Altcoins:\n
+		\n
+		Assets and Derivatives (Futures and Options):\n
+		\n
 		Bullion:
 	</string>
 </resources>
