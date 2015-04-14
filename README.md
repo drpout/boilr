@@ -1,5 +1,5 @@
 # Boilr
-[![Get Boilr on F-Droid](https://github.com/drpout/boilr/raw/master/src/main/img/get_it_on_f-droid.png)](https://f-droid.org/repository/browse/?fdid=mobi.boilr.boilr)  [![Get Boilr on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=mobi.boilr.boilr)  [![Translation status](https://hosted.weblate.org/widgets/boilr/-/svg-badge.svg)](https://hosted.weblate.org/engage/boilr/?utm_source=widget)
+[![Get Boilr on F-Droid](https://github.com/drpout/boilr/raw/master/src/main/img/get_it_on_f-droid.png)](https://f-droid.org/repository/browse/?fdid=mobi.boilr.boilr)  [![Get Boilr on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=mobi.boilr.boilr)  [![Translation status](https://hosted.weblate.org/widgets/boilr/-/svg-badge.svg)](https://hosted.weblate.org/engage/boilr/?utm_source=widget)  [![Bountysource](https://api.bountysource.com/badge/tracker?tracker_id=6817098)](https://www.bountysource.com/teams/drpout/issues?tracker_ids=6817098)
 
 Android application which monitors Bitcoin, cryptocurrencies, cryptoassets and derivatives, triggering alarms according to user settings.
 
