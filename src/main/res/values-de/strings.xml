@@ -40,9 +40,9 @@
 	<string name="pref_title_mobile_data">Mobile Daten</string>
 	<string name="pref_title_show_internet_warning">Warnung bei fehlender Internetverbindung</string>
 	<string name="pref_title_default_update_interval">Standardaktualisierung</string>
-	<!-- Review please, original has changed --><string name="pref_summary_default_update_interval">In Sekunden. Bestimmt wie oft ein Alarm seine Daten von der Börse erhält. Sie können einen anderen Aktualisierungsintervall für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
+	<!-- Review please, original has changed --><string name="pref_summary_default_update_interval">In Sekunden. Bestimmt wie oft ein Alarm seine Daten von der Börse erhält.</string>
 	<string name="pref_title_default_time_frame">Standardzeitrahmen</string>
-	<!-- Review please, original has changed --><string name="pref_summary_default_time_frame">In Minuten. Wird von Alarme zu Preisänderungen. Bestimmt welcher Preis, mit dem aktuellen vergleichen, z.B. der Pries von vor 15 Minuten. Sie können einen anderen Zeitrahmen für einen bestimmten Alarm in dessen Einstellungen festlegen.</string>
+	<!-- Review please, original has changed --><string name="pref_summary_default_time_frame">In Minuten. Wird von Alarme zu Preisänderungen. Bestimmt welcher Preis, mit dem aktuellen vergleichen, z.B. der Pries von vor 15 Minuten.</string>
 	<string name="pref_title_check_pairs_interval">Suche nach neuen Paaren</string>
 	<string name="pref_entries_check_pairs_interval_0">Stündlich</string>
 	<string name="pref_entries_check_pairs_interval_1">Zweimal am Tag</string>

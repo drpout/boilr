@@ -41,8 +41,8 @@
     <!-- Review please --><string name="pref_title_show_internet_warning">Varovat ne internet</string>
     <string name="pref_title_default_time_frame">Výchozí časový interval</string>
     <string name="pref_title_default_update_interval">Výchozí interval aktualizace</string>
-    <string name="pref_summary_default_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy. Můžete nastavit jiný interval pro určitý alarm v jeho nastavení.</string>
-    <string name="pref_summary_default_time_frame">V minutách. Použité v Změnit upozornění. Určuje jakou cenu porovnat s aktuální, tzn. cenou před 15 minutami. Můžete nastavit jiný interval pro určitý alarm v jeho nastavení.</string>
+    <string name="pref_summary_default_update_interval">V sekundách. Určuje jak často jsou získávána data z burzy.</string>
+    <string name="pref_summary_default_time_frame">V minutách. Použité v Změnit upozornění. Určuje jakou cenu porovnat s aktuální, tzn. cenou před 15 minutami.</string>
     <string name="pref_title_check_pairs_interval">Hledat nové páry</string>
 	<string name="pref_entries_check_pairs_interval_0">Každou hodinu</string>
 	<string name="pref_entries_check_pairs_interval_1">Dvakrát denně</string>

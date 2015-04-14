@@ -40,9 +40,9 @@
 	<string name="pref_title_mobile_data">Mobile data</string>
 	<string name="pref_title_show_internet_warning">Show no internet warning</string>
 	<string name="pref_title_default_update_interval">Default update interval</string>
-	<string name="pref_summary_default_update_interval">In seconds. Defines how often alarms fetch data from the exchange. You can set another interval for a particular alarm on its settings.</string>
+	<string name="pref_summary_default_update_interval">In seconds. Defines how often alarms fetch data from the exchange.</string>
 	<string name="pref_title_default_time_frame">Default time frame</string>
-	<string name="pref_summary_default_time_frame">In minutes. Used by Change alarms. Sets the price to be compared with the current one, e.g., the price from 15 min ago. You can set another time frame for a particular alarm on its settings.</string>
+	<string name="pref_summary_default_time_frame">In minutes. Used by Change alarms. Sets the price to be compared with the current one, e.g., the price from 15 min ago.</string>
 	<string name="pref_title_check_pairs_interval">Check for new pairs</string>
     <string name="pref_entries_check_pairs_interval_0">Hourly</string>
     <string name="pref_entries_check_pairs_interval_1">Twice a day</string>

@@ -40,9 +40,9 @@
 	<string name="pref_title_mobile_data">Dados móveis</string>
 	<string name="pref_title_show_internet_warning">Aviso sem internet</string>
 	<string name="pref_title_default_update_interval">Intervalo de atualização por omissão</string>
-	<string name="pref_summary_default_update_interval">Em segundos. Define a frequência com que um alarme obtém dados da bolsa. Pode definir outro intervalo para um alarme em particular nas suas definições.</string>
+	<string name="pref_summary_default_update_interval">Em segundos. Define a frequência com que um alarme obtém dados da bolsa.</string>
 	<string name="pref_title_default_time_frame">Prazo por omissão</string>
-	<string name="pref_summary_default_time_frame">Em minutos. Usado pelos alarmes de Variação. Define qual preço comparar com o atual, por exemplo, o preço de há 15 minutos atrás. Pode definir outro prazo para um alarme em particular nas suas definições.</string>
+	<string name="pref_summary_default_time_frame">Em minutos. Usado pelos alarmes de Variação. Define qual preço comparar com o atual, por exemplo, o preço de há 15 minutos atrás.</string>
 	<string name="pref_title_check_pairs_interval">Procurar novos pares</string>
 	<string name="pref_entries_check_pairs_interval_0">De hora a hora</string>
 	<string name="pref_entries_check_pairs_interval_1">Duas vezes por dia</string>
