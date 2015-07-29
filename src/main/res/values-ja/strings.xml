@@ -1,4 +1,102 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     
+<string name="action_search">検索</string>
+	<string name="action_settings">設定</string>
+	<string name="action_about">バージョン情報</string>
+	<string name="alarm_settings">アラーム設定</string>
+	<string name="add_alarm">アラームを追加</string>
+	<string name="refresh_alarms">アラームを更新</string>
+	<string name="boilr_settings">Boilr の設定</string>
+	<string name="about_title">Boilr について</string>
+	<string name="release_notes">リリース ノート</string>
+	<string name="yes">はい</string>
+	<string name="no">いいえ</string>
+	<string name="ok">OK</string>
+	<string name="cancel">キャンセル</string>
+	<string name="about_version">"バージョン: "</string>
+	<string name="about_website">"Webサイト: "</string>
+	<string name="about_bugs">"ヘルプ、バグ、リクエスト: "</string>
+	<string name="authors">作者</string>
+	<string name="about_donations">"寄付: "</string>
+	<string name="about_license">"ライセンス: "</string>
+	<string name="about_libraries">"ライブラリー: "</string>
+	<string name="changelog_header_version">"バージョン "</string>
+	<string name="pref_title_alerts">アラート</string>
+	<string name="pref_title_default_alert_type">デフォルトの種類</string>
+    <string name="pref_entries_alert_type_0">アラーム</string>
+    <string name="pref_entries_alert_type_1">通知</string>
+    <string name="pref_entries_alert_type_2">着信音</string>
+	<string name="pref_title_default_alert_sound">デフォルトのサウンド</string>
+	<string name="pref_title_vibrate_default">デフォルトでは振動します</string>
+	<string name="pref_title_default_update_interval">デフォルトの更新間隔</string>
+	<string name="pref_summary_default_update_interval">秒数で。エクスチェンジからデータを取得するアラームの頻度を定義します。</string>
+	<string name="pref_title_default_time_frame">デフォルトのタイムフレーム</string>
+	<string name="pref_summary_default_time_frame">分で。アラームの変更で使用します。現在のものと比較する価格を設定します。例、15 分前からの価格。</string>
+	<string name="pref_title_sound_volume">音量</string>
+	<string name="pref_summary_sound_volume">Boilr は、選択したアラートの種類にシステムの音量を使用します。ほとんどのデバイスで、携帯電話がサイレントに設定されている場合でも、アラームの種類は最大音量に設定されます。</string>
+	<string name="system_volumes">システム音量</string>
+	<string name="pref_title_appearance">外観</string>
+	<string name="pref_title_theme">テーマ</string>
+    <string name="pref_entries_theme_0">ダーク</string>
+    <string name="pref_entries_theme_1">ライト</string>
+	<string name="pref_title_network_usage">ネットワーク使用状況</string>
+	<string name="pref_title_mobile_data">モバイル データ</string>
+	<string name="pref_title_show_internet_warning">インターネットの警告を表示しない</string>
+	<string name="pref_title_check_pairs_interval">新しいペアのチェック</string>
+    <string name="pref_entries_check_pairs_interval_0">1 時間ごと</string>
+    <string name="pref_entries_check_pairs_interval_1">1 日 2 回</string>
+    <string name="pref_entries_check_pairs_interval_2">毎日</string>
+    <string name="pref_entries_check_pairs_interval_3">1 日おき</string>
+    <string name="pref_entries_check_pairs_interval_4">毎週</string>
+    <string name="pref_entries_check_pairs_interval_5">隔週</string>
+	<string name="pref_type_title">アラームの種類</string>
+    <string name="pref_type_entries_0">価格ヒット</string>
+    <string name="pref_type_entries_1">価格変更</string>
+	<string name="pref_exchange_title">エクスチェンジ</string>
+	<string name="pref_pair_title">ペア</string>
+	<string name="action_send_now">保存</string>
+	<string name="pref_title_alarm_alert_type">アラートの種類</string>
+	<string name="pref_title_alarm_alert_sound">サウンド</string>
+	<string name="pref_title_alarm_vibrate">振動</string>
+	<string name="pref_title_generic">全般</string>
+	<string name="pref_title_specific">指定</string>
+	<string name="pref_title_upper_limit">上限</string>
+	<string name="pref_title_lower_limit">下限</string>
+	<string name="pref_title_change_in_percentage">パーセントで変更</string>
+	<string name="pref_title_change_value">変更</string>
+	<string name="pref_title_update_interval">更新間隔</string>
+	<string name="pref_title_time_frame">タイムフレーム</string>
+	<string name="pref_title_last_value">最終価格</string>
+	<string name="pref_summary_update_interval">秒数で。エクスチェンジからデータを取得するアラームの頻度を定義します。</string>
+	<string name="pref_summary_time_frame">分で。現在のものと比較する価格を設定します。例、15 分前からの価格。</string>
+	<string name="boilr_alarm">Boilr アラーム</string>
+	<string name="off">オフ</string>
+	<string name="resume">再開</string>
+	<string name="check_connection">接続を確認してください</string>
+	<string name="alarms_not_updating">アラームを更新していません。</string>
+	<string name="failed_create_alarm">アラームの作成に失敗しました。</string>
+	<string name="failed_save_alarm">アラームを保存できませんでした。</string>
+	<string name="upper_must_larger_lower">上限は下限よりも大きくする必要があります。</string>
+	<string name="frame_must_longer_interval">タイムフレームは更新間隔よりも長くする必要があります。</string>
+	<string name="pair_search_description">ペアの検索</string>
+	<string name="silent">サイレント</string>
+	<string name="unknown_ringtone">不明な着信音</string>
+	<string name="pref_title_language">言語</string>
+	<string name="alarm_deleted">アラームを削除しました</string>
+	<string name="undo">元に戻す</string>
+	<string name="loading_pairs">ペアのロード中…</string>
+	
+	<string name="short_description">Bitcoin、 cryptocurrencies、 cryptoassets、 将来、とオプションの価格アラーム。</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="default_value">デフォルト (%1$s)<xliff:g id="value" example="Hassium">(%1$s)</xliff:g></string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="couldnt_retrieve_pairs">%1$s のペアを取得できませんでした。<xliff:g id="exchange" example="Bitstamp">%1$s</xliff:g>.</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="couldnt_retrieve_last_value">%2$s のペアで %1$s の最後の値を取得できませんでした。<xliff:g id="exchange" example="Bitstamp">%1$s</xliff:g> with pair <xliff:g id="pair" example="BTC/USD">%2$s</xliff:g>.</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="not_bound">%1$s が StorageAndControlService にバインドされていません。<xliff:g id="class_name" example="AlarmListActivity">%1$s</xliff:g> not bound to StorageAndControlService.</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="price_change_firing_reason">%2$s に %1$s<xliff:g id="change_value" example="+10%">%1$s</xliff:g> in <xliff:g id="timespan" example="10m">%2$s</xliff:g></string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="seconds_abbreviation">%1$s秒<xliff:g id="number_seconds" example="10">%1$s</xliff:g>s</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="minutes_abbreviation">%1$s分<xliff:g id="number_minutes" example="10">%1$s</xliff:g>m</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="hours_abbreviation">%1$s時間<xliff:g id="number_hours" example="10">%1$s</xliff:g>h</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="days_abbreviation">%1$s日<xliff:g id="number_days" example="10">%1$s</xliff:g>d</string>
+	<string xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" name="limit_explanation">%1$s = %2$s (ベース値、%3$s 前から) %4$s %5$s (変更)<xliff:g id="limit_value" example="100">%1$s</xliff:g> = <xliff:g id="base_value" example="80">%2$s</xliff:g> (base value, from <xliff:g id="timespan" example="10m">%3$s</xliff:g> ago) <xliff:g id="operation" example="+">%4$s</xliff:g> <xliff:g id="change_value" example="20">%5$s</xliff:g> (change)</string>
+	<string name="full_description">"Bitcoin、cryptocurrencies、cryptoassets、先物、オプションを監視して、設定に従ってアラームをトリガーします。70以上の取引所と勘定。\n\n\n2種類のアラームをサポート:\n* 価格ヒット - 価格アラームの上限または下限を超えたときにトリガーされます。1つのトリガーでアラームを作成するために、1つの限度を空のままにすることができます。\n* 価格変動 - 指定したタイムフレーム (15分など) で X (通貨やパーセンソなど) よりも大きい価格の変動でトリガーされます。ローリングのタイムフレームを使用: 価格は指定した更新間隔で取得します (例えば30秒) そして1つ前のタイムフレーム (例えば15分前) に取得した価格と比較します。\n\n\n音と振動は、全般または各アラーム個別に設定することができます。取引、ペア、およびアラームのリストは、完全に検索可能で、迅速なセットアップと構成をすることができます。アラームのリストはティッカーとして動作し、アラームの順序を変更し、その限度を直接変更することができます。トリガーされたアラームは、オフにするまで、着信音を鳴らして、ステータスを表示します。目覚まし時計と同様です。市場データは、Wi-fi またはモバイル データ (可能な場合) で、取引所から直接取得されます。\n\n\nBoilr は libdynticker で利用可能なすべての取引所、とすべてのペアをサポートしています: https://github.com/drpout/libdynticker/#supported-exchanges\n\n\nBoilr は GPLv3+ の下でリリースされるフリー (自由) ソフトウェアです。すべてのソース コードが https://github.com/drpout/boilr で利用可能です。\n役に立った場合は、寄付をしたり、チップを送ることを検討してください: http://boilr.mobi/#donate\nヘルプ、バグ報告、機能リクエストは、GitHub のイシューを使用してください。\n\n\nアクセス許可の理由:\n* SD カードの内容の読み取り - カスタムの着信音を取得するために使用します。\n* 画面ロックの無効化 - お使いのデバイスのロックを解除しなくても鳴っているアラームをオフにできるように。\n* 完全なネットワークアクセス - 取引所からデータを取得します。\n* ネットワーク接続を表示 - Wi-fi またはモバイル データを使用しているかどうかを知り、モバイル データの制限を可能にします。\n* 起動時に開始 - アクティブなアラームを取得し、その更新を開始します。\n* 振動の制御 - アラームがトリガーされたときに振動することができます。\n* 電話のスリープを防止 - オフにするボタンを押すまで、トリガーされたアラームが表示し続けるために使用します。\n\n\nバージョン履歴のチェック用: https://github.com/drpout/boilr/releases\n\n\n現在サポートされている交換所\nBitcoin および altcoins to FIAT:\n\nAltcoins:\n\n資産およびデリバティブ (先物およびオプション):\n\n地金: "</string>
 </resources>
