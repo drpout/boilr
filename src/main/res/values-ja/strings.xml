@@ -30,7 +30,7 @@
 	<string name="pref_title_default_alert_sound">デフォルトのサウンド</string>
 	<string name="pref_title_vibrate_default">デフォルトでは振動します</string>
 	<string name="pref_title_default_update_interval">デフォルトの更新間隔</string>
-	<string name="pref_summary_default_update_interval">秒数で。エクスチェンジからデータを取得するアラームの頻度を定義します。</string>
+	<string name="pref_summary_default_update_interval">秒で。取引所からデータを取得するアラームの頻度を定義します。</string>
 	<string name="pref_title_default_time_frame">デフォルトのタイムフレーム</string>
 	<string name="pref_summary_default_time_frame">分で。アラームの変更で使用します。現在のものと比較する価格を設定します。例、15 分前からの価格。</string>
 	<string name="pref_title_sound_volume">音量</string>
@@ -53,7 +53,7 @@
 	<string name="pref_type_title">アラームの種類</string>
     <string name="pref_type_entries_0">価格ヒット</string>
     <string name="pref_type_entries_1">価格変更</string>
-	<string name="pref_exchange_title">エクスチェンジ</string>
+	<string name="pref_exchange_title">取引所</string>
 	<string name="pref_pair_title">ペア</string>
 	<string name="action_send_now">保存</string>
 	<string name="pref_title_alarm_alert_type">アラートの種類</string>
@@ -68,7 +68,7 @@
 	<string name="pref_title_update_interval">更新間隔</string>
 	<string name="pref_title_time_frame">タイムフレーム</string>
 	<string name="pref_title_last_value">最終価格</string>
-	<string name="pref_summary_update_interval">秒数で。エクスチェンジからデータを取得するアラームの頻度を定義します。</string>
+	<string name="pref_summary_update_interval">秒で。取引所からデータを取得するアラームの頻度を定義します。</string>
 	<string name="pref_summary_time_frame">分で。現在のものと比較する価格を設定します。例、15 分前からの価格。</string>
 	<string name="boilr_alarm">Boilr アラーム</string>
 	<string name="off">オフ</string>
