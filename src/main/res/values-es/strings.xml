@@ -91,10 +91,29 @@
 	<string name="minutes_abbreviation">%1$sm</string>
 	<string name="hours_abbreviation">%1$sh</string>
 	<string name="days_abbreviation">%1$sd</string>
-	<!-- Review please --><string name="limit_explanation">%1$s = %2$s (valor base, de hace %3$s) %4$s %5$s (variación)</string>
+	<!-- Review please --><string name="limit_explanation">"%1$s = %2$s  (valor base, de hace %3$s ) %4$s %5$s (cambio)"</string>
 	<string name="alarm_deleted">Alarma borrada</string>
 	<string name="undo">Deshacer</string>
 	<string name="loading_pairs">Cargando pares…</string>
 	<string name="short_description">Alarmas de precio para bitcoin, cryptocurrencies, cryptoassets, futuros y opciones.</string>
 	<!-- Missing translation <string name="full_description"></string>-->
-	</resources>
+	<string name="full_description">"Monitorice Bitcoin, cryptomonedas, cryptobienes, futuros and opciones and lance alarmas conforme su confguración. Más de 70 bolsas y monedas.\n
+\n
+\n Admite dos tipos de alarma:\n * Precio alcanzado - Lanzada cuando el precio super el límite inferior o superior de la alarma. Se puede dejar en blanco uno de los límites para crear una alarma con un solo disparador.\n * Cambio de precio - Lanzada cuando el precio cambia más de x unidades (en moneda o porcentaje) en un periodo de tiempo determinado (p.e. 30 s) y comparado con el precio obtenido una franja temporal anterior (p.e. hace 15 m).\n
+\n
+\n El sonido y la vibración son configurables de modo general, e individual por cada alarma. Se pueden realizar búsquedas en la lista de bolsas, pares y alarmas, permitiendo una rápida configuración. La lista de alarmas se comoporta como su ticker, donde puede reordenar sus alarmas y modificar directamente sus límites. Las alarmas lanzadas suenan, mostrando su estado, hasta que las apague. Como una alarma usual. Los datos de mercado se obtienen directamente de las bolsas via WI-FI o datos móviles (si se permite).\n
+\n
+\n Boilr soporta todos los cambios disponibles en libdynticker, así como sus variantes: https://github.com/drpout/libdynticker/#supported-exchanges\n
+\n
+\n Boilr es software libre (como en libertad), liberado bajo licencia GPLv3+. TODO el código fuente está disponible en https://github.com/drpout/boilr\nSi le es útil, considere realizar una donación o envíe una gratificación: http://boilr.mobi/#donate\nPara obtener ayuda, reportar un problema o solicitar una característica, por favor, use nuestras issues GitHub.\n
+\n
+\nRazón de los permisos:\n * Lectura de los contenidos de su tarjeta SD - Empleada para obtener su tonos personalizados.\n * Desactivar su ventan de bloqueo - De ese modo puede apagar una alarma sin desbloqueae el dispositivo.\n * Acceso completo a la red - Para obtener los datos de los mercados.\n * Ver las conexiones de red - Para saber si está usando Wi-Fi o datos móviles, permitiendo restricciones de datos móviles.\n * Ejecutarse al inicio - Para obtener sus alarmas activas y empezar a actualizarlas.\n * Control de la vibración - Permite la vibración cuando se lanza la alarma.\n * Prevenir que el teléfono pase a modo ahorro - Empleado para permitirle mostrar la actividad de una alarma que se lance aunque haya pulsado el botón de apagado.\n
+\n
+\n Para ver el histórico de las versiones: https://github.com/drpout/boilr/releases\n
+\n
+\nCambios soportados actualmente:\n
+\n Bitcoin y variantes to FIAT:\n
+\n Variantes:\n
+\n Bienes y derivados (Futuros y Opciones):\n
+\n Bullion: "</string>
+</resources>
