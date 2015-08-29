@@ -16,7 +16,7 @@
 	<string name="about_version">Versión: </string>
 	<string name="about_website">Website: </string>
 	<string name="authors">Autores</string>
-	<!-- Review please --><string name="about_bugs">"Ayuda, errores y mejoras: "</string>
+	<!-- Review please --><string name="about_bugs">"Ayuda, errores y peticiones: "</string>
 	<string name="about_donations">Donaciones: </string>
 	<string name="about_license">Licencia: </string>
 	<string name="about_libraries">Bibliotecas: </string>
@@ -27,7 +27,7 @@
 	<string name="pref_entries_alert_type_1">Notificación</string>
 	<string name="pref_entries_alert_type_2">Toque</string>
 	<string name="pref_title_default_alert_sound">Sonido por omisión</string>
-	<!-- Review please --><string name="default_value">Omisión (%1$s)</string>
+	<!-- Review please --><string name="default_value">Por defecto (%1$s)</string>
 	<string name="pref_title_sound_volume">Volumen de sonido</string>
 	<string name="pref_summary_sound_volume">Boilr utiliza el volumen del sistema para el tipo de alarma seleccionada. En la mayoría de los dispositivos el tipo de alarma permanece con el volumen máximo incluso cuando el dispositivo está en silencio.</string>
 	<string name="system_volumes">Volúmenes del sistema</string>
@@ -68,7 +68,7 @@
 	<string name="pref_title_update_interval">Intervalo de actualización</string>
 	<string name="pref_title_time_frame">Plazo</string>
 	<string name="pref_title_last_value">Último precio</string>
-	<!-- Review please --><string name="pref_summary_update_interval">En segundos. Define la frecuencia con la que la obtiene datos de bolsa.</string>
+	<!-- Review please --><string name="pref_summary_update_interval">En segundos. Define la frecuencia con la que se obtienen datos de la bolsa.</string>
 	<string name="pref_summary_time_frame">En minutos. Define qué precio comparar con el actual, por ejemplo el precio de hace 15 minutos.</string>
 	<string name="boilr_alarm">Alarma Boilr</string>
 	<string name="off">Apagar</string>
