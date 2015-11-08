@@ -8,7 +8,7 @@
     <!-- Review please --><string name="refresh_alarms">Odświeżyć powiadomień</string>
     <string name="boilr_settings">Ustawienia Boilr</string>
     <string name="about_title">O aplikacji Boilr</string>
-    <!-- Review please --><string name="release_notes">Zmiany pomiędzy wersją</string>
+    <!-- Review please --><string name="release_notes">Zmiany w wersji</string>
     <string name="yes">Tak</string>
 	<string name="no">Nie</string>
     <string name="ok">OK</string>
@@ -16,7 +16,7 @@
     <string name="about_version">Wersja: </string>
     <string name="about_website">Strona WWW: </string>
     <string name="authors">Autorzy</string>
-    <!-- Review please --><string name="about_bugs">"Pomoc, błędy i propozycji: "</string>
+    <!-- Review please --><string name="about_bugs">"Pomoc, błędy i propozycje: "</string>
     <string name="about_donations">Darowizny: </string>
     <string name="about_license">Licencji: </string>
     <string name="about_libraries">Bibliotek: </string>
@@ -27,7 +27,7 @@
     <string name="pref_entries_alert_type_1">Powiadomienie</string>
     <string name="pref_entries_alert_type_2">Dźwięk</string>
     <string name="pref_title_default_alert_sound">Domyślny dźwięk</string>
-    <!-- Review please --><string name="default_value">Domyślny (%1$s)</string>
+    <!-- Review please --><string name="default_value">Domyślny <xliff:g xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" id="value" example="Hassium">(%1$s)</xliff:g></string>
     <string name="pref_title_vibrate_default">Domyślna wibracja</string>
     <string name="pref_title_sound_volume">Głośność dźwięku</string>
     <string name="pref_summary_sound_volume">Boilr korzysta z ustawień systemowych poziomu głośności dla tego powiadomienia. Na większości urządzeń powiadomienia są ustawione na pełną głośność nawet jeśli telefon jest wyciszony.</string>
@@ -39,9 +39,9 @@
     <string name="pref_title_network_usage">Wykorzystanie sieci</string>
     <string name="pref_title_mobile_data">Dane mobilne</string>
     <string name="pref_title_show_internet_warning">Nie pokazuj ostrzeżenia o połączeniu</string>
-    <!-- Review please --><string name="pref_title_default_update_interval">Odstęp pomiędzy sprawdzeniami ceny</string>
+    <!-- Review please --><string name="pref_title_default_update_interval">Odstęp pomiędzy aktualizacjami cen</string>
     <!-- Review please --><string name="pref_summary_default_update_interval">W sekundach. Opisuje jak często sprawdzana jest cena na giełdzie.</string>
-    <!-- Review please --><string name="pref_title_default_time_frame">Długość powiadomienia</string>
+    <!-- Review please --><string name="pref_title_default_time_frame">Długość ramy czasowej</string>
     <!-- Review please --><string name="pref_summary_default_time_frame">W minutach. Używane przez powiadomienia o Zmianie cen. Opisuje jak cena porównać z obecnym, na przykład cena od 15 minuty temu.</string>
     <string name="pref_title_check_pairs_interval">Sprawdź nowe pary</string>
     <string name="pref_entries_check_pairs_interval_0">Co godzinę</string>
@@ -69,12 +69,12 @@
     <string name="pref_title_time_frame">Okres czasu</string>
     <string name="pref_title_last_value">Ostatnia cena</string>
     <!-- Review please --><string name="pref_summary_update_interval">W sekundach. Opisuje jak często sprawdzana jest cena na giełdzie.</string>
-    <!-- Review please --><string name="pref_summary_time_frame">W minutach. Opisuje jak cena porównać z obecnym, na przykład cena od 15 minuty temu.</string>
+    <!-- Review please --><string name="pref_summary_time_frame">W minutach. Ustaw jak cena ma być porównana z obecną, na przykład cena od 15 minuty temu.</string>
     <string name="boilr_alarm">Powiadomienie Boilr</string>
     <string name="off">Wyłącz</string>
-    <!-- Review please --><string name="resume">Kontynuować</string>
+    <!-- Review please --><string name="resume">Kontynuuj</string>
     <!-- Review please --><string name="check_connection">Sprawdź połączenie</string>
-    <!-- Review please --><string name="alarms_not_updating">Powiadomień nie aktualizowanie.</string>
+    <!-- Review please --><string name="alarms_not_updating">Powiadomień nie aktualizowane.</string>
     <string name="couldnt_retrieve_pairs">Nie można pobrać par dla %1$s.</string>
     <string name="couldnt_retrieve_last_value">Nie można pobać ostatniej wartości %1$s dla pary %2$s.</string>
     <string name="failed_create_alarm">Nie można utworzyć powiadomienia.</string>
@@ -92,10 +92,15 @@
     <string name="minutes_abbreviation">%1$sm</string>
     <string name="hours_abbreviation">%1$sg</string>
     <string name="days_abbreviation">%1$sd</string>
-    <string name="limit_explanation">%1$s = %2$s (wartość bazowa, od %3$s temu) %4$s %5$s (zmiana)</string>
-    <string name="alarm_deleted">Powiadomienie usunięty</string>
-	<string name="undo">Rozwiązać</string>
-	<string name="loading_pairs">Pary ładowania…</string>
+    <string name="limit_explanation"><xliff:g xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" id="limit_value" example="100">%1$s = </xliff:g> = <xliff:g xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" id="base_value" example="80">%2$s</xliff:g> (wartość bazowa z <xliff:g xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" id="timespan" example="10m">%3$s</xliff:g> od) <xliff:g xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" id="operation" example="+">%4$s </xliff:g> <xliff:g xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" id="change_value" example="20">%5$s</xliff:g> (zmiana)</string>
+    <string name="alarm_deleted">Powiadomienie usunięte</string>
+	<string name="undo">Cofnij</string>
+	<string name="loading_pairs">Ładowanie par…</string>
 	<!-- Missing translation <string name="short_description"></string>-->
 	<!-- Missing translation <string name="full_description"></string>-->
+<string name="failed_save_alarm">Nie udało się ustawić alarmu.</string>
+	<string name="upper_must_larger_lower">Górny limit musi być większy niż dolny.</string>
+	<string name="frame_must_longer_interval">Rama czasowa mus być dłuższa niż odstęp pomiędzy aktualizacjami.</string>
+	<string name="short_description">Alarmy cenowe dla Bitcon, kryptowalut, kryptoaktyw.</string>
+	<string name="full_description"/>
 </resources>
