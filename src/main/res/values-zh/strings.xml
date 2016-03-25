@@ -140,4 +140,6 @@
 		\n
 		金条：
 	</string>
-</resources>
+<string name="loading_price">正在加载价格…</string>
+	
+	</resources>
