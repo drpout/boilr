@@ -1,5 +1,71 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="action_search">поиск</string>
 	<string name="action_settings">настройки</string>
-</resources>
+<string name="action_about">О нас</string>
+	<string name="alarm_settings">Установка будильника</string>
+	<string name="add_alarm">Добавить будильник</string>
+	<string name="boilr_settings">Настройки Boilr</string>
+	<string name="about_title">О Boilr</string>
+	<string name="yes">Да</string>
+	<string name="no">Нет</string>
+	<string name="ok">Хорошо</string>
+	<string name="cancel">Отменить</string>
+	<string name="about_version">"Версия: "</string>
+	<string name="about_website">"Вебсайт: "</string>
+	<string name="about_bugs">"Помощь, ошибки и запросы: "</string>
+	<string name="authors">Авторы</string>
+	<string name="about_donations">"Пожертвования: "</string>
+	<string name="about_license">"Лицензия: "</string>
+	<string name="about_libraries">"Библиотеки: "</string>
+	<string name="changelog_header_version">"Версия "</string>
+	<string name="pref_title_alerts">Предупреждения</string>
+	<string name="pref_title_default_alert_sound">Звук по умолчанию</string>
+	<string name="pref_entries_alert_type_0">Тревога</string>
+    <string name="pref_entries_alert_type_1">Уведомление</string>
+    <string name="pref_entries_alert_type_2">Мелодия звонка</string>
+	<string name="pref_title_vibrate_default">Вибрировать по умолчанию</string>
+	<string name="pref_title_sound_volume">Уровень звука</string>
+	<string name="pref_title_appearance">Внешний вид</string>
+	<string name="pref_title_theme">Тематика</string>
+    <string name="pref_entries_theme_0">Темный</string>
+    <string name="pref_entries_theme_1">Светлый</string>
+	<string name="pref_title_network_usage">Использование сети</string>
+	<string name="pref_title_mobile_data">Мобильная передача данных</string>
+	<string name="pref_title_default_update_interval">Интервал обновления по умолчанию</string>
+	<string name="pref_entries_check_pairs_interval_0">Каждый час</string>
+    <string name="pref_entries_check_pairs_interval_1">Два раза в день</string>
+    <string name="pref_entries_check_pairs_interval_2">Ежедневно</string>
+    <string name="pref_entries_check_pairs_interval_3">Через день</string>
+    <string name="pref_entries_check_pairs_interval_4">Раз в неделю</string>
+    <string name="pref_entries_check_pairs_interval_5">Раз в две недели</string>
+	<string name="pref_type_title">Тип аварийного сигнала</string>
+    <string name="pref_type_entries_1">Изменение цены</string>
+	<string name="pref_pair_title">Пара</string>
+	<string name="action_send_now">Сохранить</string>
+	<string name="pref_title_alarm_alert_type">Тип предупреждения</string>
+	<string name="pref_title_alarm_alert_sound">Звук</string>
+	<string name="pref_title_alarm_vibrate">Вибрировать</string>
+	<string name="pref_title_generic">Общий</string>
+	<string name="pref_title_specific">Особый</string>
+	<string name="pref_title_upper_limit">Верхний предел</string>
+	<string name="pref_title_lower_limit">Нижний предел</string>
+	<string name="pref_title_change_in_percentage">Изменение в процентах</string>
+	<string name="pref_title_change_value">Изменение</string>
+	<string name="pref_title_update_interval">Интервал обновления</string>
+	<string name="pref_title_time_frame">Временные рамки</string>
+	<string name="pref_title_last_value">Последняя цена</string>
+	<string name="resume">Возобновить</string>
+	<string name="check_connection">Проверьте вашу связь</string>
+	<string name="failed_create_alarm">Не удалось создать сигнал тревоги.</string>
+	<string name="failed_save_alarm">Не удалось сохранить сигнал тревоги.</string>
+	<string name="upper_must_larger_lower">Верхний предел должен быть больше чем нижний предел.</string>
+	<string name="frame_must_longer_interval">Временная рамка должна быть дольше чем интервал обновления.</string>
+	<string name="silent">Беззвучный</string>
+	<string name="unknown_ringtone">Неизвестная мелодия звонка</string>
+	<string name="pref_title_language">Язык</string>
+	<string name="alarm_deleted">Сигнал тревоги удален</string>
+	<string name="undo">Отменить действие</string>
+	<string name="loading_pairs">Загружаются пары…</string>
+	
+	</resources>
