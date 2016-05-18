@@ -162,7 +162,7 @@ public class Conversions {
 
 	private static final Map<Integer, String> prefixes;
 	static {
-		Map<Integer, String> tempPrefixes = new HashMap<Integer, String>();
+		Map<Integer, String> tempPrefixes = new HashMap<>();
 		tempPrefixes.put(12, "T");
 		tempPrefixes.put(9, "G");
 		tempPrefixes.put(6, "M");

@@ -28,7 +28,7 @@ public class NotificationKlaxon {
 	private static boolean sStarted = false;
 	private static final Map<Integer, Integer> sAlertToStreamType;
 	static {
-		Map<Integer, Integer> aux = new HashMap<Integer, Integer>();
+		Map<Integer, Integer> aux = new HashMap<>();
 		aux.put(RingtoneManager.TYPE_RINGTONE, AudioManager.STREAM_RING);
 		aux.put(RingtoneManager.TYPE_NOTIFICATION, AudioManager.STREAM_NOTIFICATION);
 		aux.put(RingtoneManager.TYPE_ALARM, AudioManager.STREAM_ALARM);

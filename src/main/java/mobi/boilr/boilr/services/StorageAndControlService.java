@@ -45,7 +45,7 @@ public class StorageAndControlService extends Service {
 	public static boolean allowMobileData = true;
 	private Map<Integer, Alarm> alarmsMap;
 	private Map<String, Exchange> exchangesMap;
-	private List<Alarm> scheduledOffedAlarms = new ArrayList<Alarm>();
+	private List<Alarm> scheduledOffedAlarms = new ArrayList<>();
 	private int nextAlarmID = 0;
 	private AlarmManager alarmManager;
 	private DBManager db;
@@ -61,7 +61,7 @@ public class StorageAndControlService extends Service {
 		}
 	};
 
-	private HashSet<Integer> runTaskAlarmList = new HashSet<Integer>();
+	private HashSet<Integer> runTaskAlarmList = new HashSet<>();
 
 	private class RunAlarmTask extends AsyncTask<Alarm, Void, Void> {
 
@@ -177,8 +177,8 @@ public class StorageAndControlService extends Service {
 		updateConnectedFlags();
 		sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 		allowMobileData = sharedPrefs.getBoolean(SettingsFragment.PREF_KEY_MOBILE_DATA, true);
-		alarmsMap = new HashMap<Integer, Alarm>();
-		exchangesMap = new HashMap<String, Exchange>();
+		alarmsMap = new HashMap<>();
+		exchangesMap = new HashMap<>();
 		alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 		try {
 			db = new DBManager(this);
@@ -249,11 +249,11 @@ public class StorageAndControlService extends Service {
 	}
 
 	public List<Exchange> getLoadedExchanges() {
-		return new ArrayList<Exchange>(exchangesMap.values());
+		return new ArrayList<>(exchangesMap.values());
 	}
 
 	public List<Alarm> getAlarms() {
-		List<Alarm> alarms = new ArrayList<Alarm>(alarmsMap.values());
+		List<Alarm> alarms = new ArrayList<>(alarmsMap.values());
 		Collections.sort(alarms, new AlarmPositionComparator());
 		return alarms;
 	}

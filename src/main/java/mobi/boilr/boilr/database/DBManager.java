@@ -33,7 +33,7 @@ public class DBManager {
 		SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
 		String sql = "SELECT " + _ID + "," + BYTES + " FROM " + DBManager.TABLE_NAME + ";";
 		Cursor cursor = db.rawQuery(sql, null);
-		Map<Integer, Alarm> alarmsMap = new HashMap<Integer, Alarm>();
+		Map<Integer, Alarm> alarmsMap = new HashMap<>();
 		if(cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
 			do {
 				int id = cursor.getInt(cursor.getColumnIndex(_ID));

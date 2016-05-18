@@ -96,7 +96,7 @@ public class AlarmListActivity extends Activity {
 		}
 		setContentView(R.layout.alarm_list);
 		mView = ((AlarmGridView) findViewById(R.id.list));
-		mAdapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<Alarm>());
+		mAdapter = new AlarmListAdapter(AlarmListActivity.this, new ArrayList<>());
 		mView.setAdapter(mAdapter);
 		mView.start();
 		mTouchListener = new SwipeAndMoveTouchListener(this);
