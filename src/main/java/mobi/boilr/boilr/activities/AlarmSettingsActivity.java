@@ -10,8 +10,8 @@ import android.app.Fragment;
 import android.os.Bundle;
 
 public class AlarmSettingsActivity extends Activity {
-	public static final String alarmID = "alarmID";
-	public static final String alarmType = "alarmType";
+	public static final String ALARM_ID = "ALARM_ID";
+	public static final String ALARM_TYPE = "ALARM_TYPE";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +22,8 @@ public class AlarmSettingsActivity extends Activity {
 		if(savedInstanceState == null) {
 			Bundle extras = getIntent().getExtras();
 			Bundle args = new Bundle();
-			args.putInt(alarmID, extras.getInt(alarmID));
-			String type = extras.getString(alarmType);
+			args.putInt(ALARM_ID, extras.getInt(ALARM_ID));
+			String type = extras.getString(ALARM_TYPE);
 			Fragment settingsFrag;
 			if(type.equals("PriceHitAlarm")) {
 				settingsFrag = new PriceHitAlarmSettingsFragment();

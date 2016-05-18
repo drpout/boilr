@@ -58,7 +58,7 @@ public class NotificationService extends Service {
 			currentAlarmID = alarmID;
 			Intent serviceIntent = new Intent(context, NotificationService.class);
 			serviceIntent.setAction(START_NOTIFY_ACTION);
-			serviceIntent.putExtra("alarmID", alarmID);
+			serviceIntent.putExtra("ALARM_ID", alarmID);
 			// Maintain a cpu wake lock until the service can get it
 			AlarmAlertWakeLock.acquireCpuWakeLock(context);
 			context.startService(serviceIntent);
@@ -73,7 +73,7 @@ public class NotificationService extends Service {
 	public static void stopNotify(Context context, int alarmID, boolean keepMonitoring) {
 		Intent serviceIntent = new Intent(context, NotificationService.class);
 		serviceIntent.setAction(STOP_NOTIFY_ACTION);
-		serviceIntent.putExtra("alarmID", alarmID);
+		serviceIntent.putExtra("ALARM_ID", alarmID);
 		serviceIntent.putExtra("keepMonitoring", keepMonitoring);
 		// We don't need a wake lock here, since we are trying to kill an alarm
 		context.startService(serviceIntent);
@@ -91,7 +91,7 @@ public class NotificationService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		String action = intent.getAction();
-		int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
+		int alarmID = intent.getIntExtra("ALARM_ID", Integer.MIN_VALUE);
 		if(alarmID == Integer.MIN_VALUE)
 			stopSelf();
 		else {
@@ -137,13 +137,13 @@ public class NotificationService extends Service {
 			 * Place a notification for this alarm in the drawer and
 			 * keep the alarm on so it can fire again later.
 			 */
-			//Log.d("Showing in call notification for alarm " + alarmID + ".");
+			//Log.d("Showing in call notification for alarm " + ALARM_ID + ".");
 			Notifications.showStatusBarNotification(this, alarm);
 			NotificationKlaxon.ringSingleNotification(this);
 			stopSelf();
 		} else if(!mInFullScreen){
 			mInFullScreen = true;
-			//Log.d("Showing fullscreen notification for alarm " + alarmID + ".");
+			//Log.d("Showing fullscreen notification for alarm " + ALARM_ID + ".");
 			mService.stopAlarm(alarmID);
 			Notifications.showFullscreenNotification(this, alarm);
 			NotificationKlaxon.start(this, alarm);
@@ -153,7 +153,7 @@ public class NotificationService extends Service {
 			 * Place a notification for this alarm in the drawer and
 			 * keep the alarm on so it can fire again later.
 			 */
-			//Log.d("Showing low priority notification for alarm " + alarmID + ".");
+			//Log.d("Showing low priority notification for alarm " + ALARM_ID + ".");
 			Notifications.showStatusBarNotification(this, alarm);
 			AlarmAlertWakeLock.releaseCpuLock();
 		}

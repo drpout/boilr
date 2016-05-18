@@ -66,7 +66,7 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 		public void onUndo(Parcelable token) {
 			if(mActivity.ismBound()) {
 				Bundle b = (Bundle) token;
-				int alarmID = b.getInt("alarmID");
+				int alarmID = b.getInt("ALARM_ID");
 				int filteredPos = b.getInt("filteredPos");
 				int originalPos = b.getInt("originalPos");
 				Alarm alarm = mActivity.getStorageAndControlService().getAlarm(alarmID);
@@ -80,7 +80,7 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 		@Override
 		public void onHide(Parcelable token) {
 			Bundle b = (Bundle) token;
-			int alarmID = b.getInt("alarmID");
+			int alarmID = b.getInt("ALARM_ID");
 			if(mActivity.ismBound()) {
 				mActivity.getStorageAndControlService().deleteAlarm(alarmID);
 			} else {
@@ -200,7 +200,7 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 					AlarmListAdapter adapter = mActivity.getAdapter();
 					Alarm alarm = adapter.getItem(mPointToPosition);
 					Bundle b = new Bundle(3);
-					b.putInt("alarmID", alarm.getId());
+					b.putInt("ALARM_ID", alarm.getId());
 					b.putInt("filteredPos", mPointToPosition);
 					b.putInt("originalPos", adapter.originalIndexOf(alarm));
 					adapter.remove(alarm);

@@ -30,7 +30,7 @@ public class NotificationActivity extends Activity {
 		Themer.applyTheme(this);
 		Languager.setLanguage(this);
 		setTitle(getResources().getString(R.string.boilr_alarm));
-		mAlarmID = getIntent().getIntExtra("alarmID", Integer.MIN_VALUE);
+		mAlarmID = getIntent().getIntExtra("ALARM_ID", Integer.MIN_VALUE);
 		String firingReason = getIntent().getStringExtra("firingReason");
 		boolean canKeepMonitoring = getIntent().getBooleanExtra("canKeepMonitoring", false);
 		boolean isDirectionUp = getIntent().getBooleanExtra("isDirectionUp", true);

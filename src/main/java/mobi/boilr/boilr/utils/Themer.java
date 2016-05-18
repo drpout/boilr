@@ -12,7 +12,7 @@ import android.preference.PreferenceManager;
  */
 public class Themer {
 	public static enum Theme {
-		dark, light
+		DARK, LIGHT
 	}
 
 	private static Theme curTheme = null;
@@ -24,13 +24,13 @@ public class Themer {
 	public static void applyTheme(Activity activity) {
 		if(curTheme == null) {
 			SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());
-			curTheme = Theme.valueOf(sharedPreferences.getString(SettingsFragment.PREF_KEY_THEME, "dark"));
+			curTheme = Theme.valueOf(sharedPreferences.getString(SettingsFragment.PREF_KEY_THEME, "DARK"));
 		}
 		switch(curTheme) {
-			case dark:
+			case DARK:
 				activity.setTheme(R.style.Theme_Boilr_Dark);
 				break;
-			case light:
+			case LIGHT:
 				activity.setTheme(R.style.Theme_Boilr_Light);
 				break;
 		}
