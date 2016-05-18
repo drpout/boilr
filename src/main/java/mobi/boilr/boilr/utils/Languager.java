@@ -10,6 +10,9 @@ import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 
 public class Languager {
+	private Languager() {
+	}
+
 	public static void setLanguage(Context context){
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
 		String language = sharedPreferences.getString(SettingsFragment.PREF_KEY_LANGUAGE, "");

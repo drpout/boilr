@@ -42,6 +42,9 @@ public final class Notifications {
 	public static final String ACTION_CLEAR_NET_NOTIF = "ACTION_CLEAR_NET_NOTIF";
 	private static SharedPreferences sSharedPrefs = null;
 
+	private Notifications() {
+	}
+
 	private static void statusBarNotifAux(Context context, Alarm alarm, String firingReasonTitle, String firingReasonBody) {
 		if(sSmallUpArrowBitmap == null) {
 			int tickerGreen = context.getResources().getColor(R.color.tickergreen);
