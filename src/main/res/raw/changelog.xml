@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
-    <changelogversion versionName="0.7.0" changeDate="?? Apr 2015">
+    <changelogversion versionName="0.7.0" changeDate="?? Oct 2016">
         <changelogtext>+ Added app setting to dismiss no internet notification.</changelogtext>
+        <changelogtext>+ New exchanges: 1BTCXE, 1Ex.Trade, BitcoinToYou, Bitcoins Norway, bitFlyer, BitMEX, Bitt, BitVC, BitX, BL3P, BTCBOX, BTCXIndia, ChileBit, Coinage, Coincheck, Coinfloor, Coinplug, CoinsBank, Coinsecure, Coinsquare, CRXzone, EmpoEX, FOXBIT, FYB-SE, FYB-SG, Gatecoin, GDAX, Ice3x, Indacoin, Independent Reserve, Korbit, Loyalbit, Quoine, SurBitcoin, SURBTC, Urdubit, Vaultoro, VBTC, Zaif and Zyado.</changelogtext>
+		<changelogtext>* Fixed exchanges: AllCoin, CampBX, CryptoFacilities, Huobi and NXT Asset Exchange.</changelogtext>
+		<changelogtext>- Removed exchanges: 796 Exchange, Banx Capital, Basebit, Bitspark, Carvitrex, CleverCoin, Coinsetter, Cointrader, Coins-E, Cryptsy, Jubi, OneWorldCoin and Yunbi.</changelogtext>
 	</changelogversion>
     <changelogversion versionName="0.6.0" changeDate="29 Mar 2015">
         <changelogtext>+ Added button to refresh all alarms.</changelogtext>
@@ -9,7 +12,7 @@
         <changelogtext>- Removed unnecessary READ_PHONE_STATE permission.</changelogtext>
     </changelogversion>
 	<changelogversion versionName="0.5.0" changeDate="25 Mar 2015">
-		<changelogtext>+ Added Banx.io, Basebit, Bit2c, Bitex.la, BitKonan, BitMaszyna, Bitspark, Bitso, BTCExchange, BTCGreece, BTCTurk, Coinbase, CoinMate, Coinsetter, CoinTree, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mercado Bitcoin, Mulcoin, OneWorldCoin, Quadriga CX, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yobit, Yuanbaohui and Yunbi exchange</changelogtext>
+		<changelogtext>+ Added Banx.io, Basebit, Bit2c, Bitex.la, BitKonan, BitMaszyna, Bitspark, Bitso, BTCExchange, BTCGreece, BTCTurk, Coinbase, CoinMate, Coinsetter, CoinTree, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mercado Bitcoin, Mulcoin, OneWorldCoin, Quadriga CX, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yobit, Yuanbaohui and Yunbi exchanges.</changelogtext>
 		<changelogtext>+ Added Chinese, French, German, Italian, Polish, Portuguese and Spanish translations.</changelogtext>
 		<changelogtext>+ Last price on alarm list is now coloured according to price direction (up or down).</changelogtext>
 		<changelogtext>+ Added arrow to the alarm triggered notifications showing price direction.</changelogtext>
