@@ -21,6 +21,9 @@ public class Conversions {
 	private static final long MILIS_IN_HOUR = 3600000; // 60 * 60 * 1000
 	private static final long MILIS_IN_DAY = 86400000; // 24 * 60 * 60 * 1000
 
+	private Conversions() {
+	}
+
 	public static String formatMilis(long milis, Context context) {
 		String formated;
 		if(milis < MILIS_IN_MINUTE) {

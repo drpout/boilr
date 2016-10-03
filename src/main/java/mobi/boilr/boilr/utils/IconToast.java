@@ -13,7 +13,10 @@ public class IconToast {
 	
 	private static final int[] warningAttrs = new int[] { R.attr.ic_action_warning /*index 0*/};
 	private static final int[] infoAttrs = new int[] { R.attr.ic_action_about /*index 0*/};
-	
+
+	private IconToast() {
+	}
+
 	public static void warning(Context context, CharSequence text) {
 		show(context, text, warningAttrs);
 	}

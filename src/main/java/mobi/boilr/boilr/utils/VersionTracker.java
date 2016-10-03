@@ -42,7 +42,10 @@ public class VersionTracker {
 	private static int currentVersionCode;
 	public static boolean isFirstRun;
 	private static Context context;
-    
+
+	private VersionTracker() {
+	}
+
 	public static void showChangeLog(Activity activity) {
 		context = activity;
 		SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity.getApplicationContext());

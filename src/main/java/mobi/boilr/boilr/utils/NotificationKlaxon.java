@@ -27,6 +27,10 @@ public class NotificationKlaxon {
 	private static MediaPlayer sMediaPlayer = null;
 	private static boolean sStarted = false;
 	private static final Map<Integer, Integer> sAlertToStreamType;
+
+	private NotificationKlaxon() {
+	}
+
 	static {
 		Map<Integer, Integer> aux = new HashMap<Integer, Integer>();
 		aux.put(RingtoneManager.TYPE_RINGTONE, AudioManager.STREAM_RING);
