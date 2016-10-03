@@ -17,6 +17,9 @@ public class Themer {
 
 	private static Theme curTheme = null;
 
+	private Themer() {
+	}
+
 	public static void changeTheme(String newTheme) {
 		curTheme = Theme.valueOf(newTheme);
 	}
