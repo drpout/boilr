@@ -47,14 +47,14 @@
     </style>
     
     <style name="BoilrUndoBarStyle" parent="UndoBarClassicStyle">
-        <item name="inAnimation">@anim/undobar_material_in_anim</item>
-        <item name="outAnimation">@anim/undobar_material_out_anim</item>
+        <item name="android:inAnimation">@anim/undobar_material_in_anim</item>
+        <item name="android:outAnimation">@anim/undobar_material_out_anim</item>
     </style>
     
     <style name="DarkUndoBarStyle" parent="BoilrUndoBarStyle">
-        <item name="containerStyle">@style/DarkUndoBarContainer</item>
-        <item name="messageStyle">@style/DarkUndoBarMessage</item>
-        <item name="buttonStyle">@style/DarkUndoBarButton</item>
+        <item name="ub_containerStyle">@style/DarkUndoBarContainer</item>
+        <item name="ub_messageStyle">@style/DarkUndoBarMessage</item>
+        <item name="ub_buttonStyle">@style/DarkUndoBarButton</item>
     </style>
     
 	<style name="DarkUndoBarContainer" parent="UndoBarClassic">
@@ -70,10 +70,10 @@
     </style>
     
 	<style name="LightUndoBarStyle" parent="BoilrUndoBarStyle">
-        <item name="containerStyle">@style/LightUndoBarContainer</item>
-        <item name="messageStyle">@style/LightUndoBarMessage</item>
-        <item name="buttonStyle">@style/LightUndoBarButton</item>
-        <item name="dividerStyle">@style/LightUndoBarDivider</item>
+        <item name="ub_containerStyle">@style/LightUndoBarContainer</item>
+        <item name="ub_messageStyle">@style/LightUndoBarMessage</item>
+        <item name="ub_buttonStyle">@style/LightUndoBarButton</item>
+        <item name="ub_dividerStyle">@style/LightUndoBarDivider</item>
     </style>
     
 	<style name="LightUndoBarContainer" parent="UndoBarClassic">

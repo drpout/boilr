@@ -56,11 +56,10 @@ If you know how to program take a look at the [open issues](https://github.com/d
 If you would like to add more exchanges to Boilr check [libdynticker's contributing guide](https://github.com/drpout/libdynticker/blob/master/CONTRIBUTING.md).
 
 ## Building
-1. Fill out the [prerequisites for Android Maven Plugin](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted#Prerequisites).
-2. Install Android API 21 SDK and Android Support Library. 
-3. `mvn install:install-file -DgroupId=android -DartifactId=android -Dversion=5.1_r1 -Dpackaging=jar -Dfile=$ANDROID_HOME/platforms/android-22/android.jar`
-4. `mvn install:install-file -DgroupId=com.android.support -DartifactId=support-annotations -Dversion=21.0.0 -Dpackaging=jar -Dfile=$ANDROID_HOME/extras/android/support/annotations/android-support-annotations.jar`
-5. Run `mvn validate` to make Maven aware of the plugins used to download and install dependencies which are not in Maven repositories.
+1. Fill out the [prerequisites for Android Maven Plugin](http://simpligility.github.io/android-maven-plugin/index.html#required_setup).
+2. Install Android API 24 SDK and Android Support Library. 
+3. `mvn install:install-file -DgroupId=android -DartifactId=android -Dversion=7.0_r2 -Dpackaging=jar -Dfile=$ANDROID_HOME/platforms/android-24/android.jar`
+4. `mvn install:install-file -DgroupId=com.android.support -DartifactId=support-annotations -Dversion=22.1.1 -Dpackaging=jar -Dfile=$ANDROID_HOME/extras/android/support/annotations/android-support-annotations.jar`
 
 For now on you can use:
 
@@ -76,7 +75,7 @@ On your shell you can use `export ANDROID_LOG_TAGS="ActivityManager:I Boilr:D *:
 ## Importing into Eclipse
 If you are no vi or emacs ninja you can use Eclipse to ease your work in Boilr.
 
-1. Install and configure the [ADT plugin](https://developer.android.com/sdk/installing/installing-adt.html).
+1. Install and configure the [ADT plugin](http://android.magicer.xyz/sdk/installing/installing-adt.html).
 2. Install [m2e-android](https://rgladwell.github.io/m2e-android).
 3. Clone [changeloglib](https://github.com/gabrielemariotti/changeloglib/). Go to `File->Import->Existing Android Code Into Workspace`, import just what's in the `ChangeLogLibrary` directory and name the new project as `ChangeLogLibrary`.
 4. Clone [UndoBar](https://github.com/soarcn/UndoBar). Go to `File->Import->Existing Android Code Into Workspace`, import just what's in the `library` directory and name the new project as `UndoBar`.   
@@ -92,7 +91,7 @@ Boilr follows [Semantic Versioning](http://semver.org) with the API being the us
 ## License and authorship
 Boilr code licensed under [GNU GPL v3](/LICENSE) or later. Copyright belongs to [André Filipe Santos](https://github.com/andrefbsantos), [David Ludovino](https://github.com/dllud) and other [contributors listed on GitHub](https://github.com/drpout/boilr/graphs/contributors), unless otherwise stated.
 
-Concept, design, [icon](src/main/img/icons/ic_boilr.ai) and [artwork](src/main/img) by [Algazarra](http://cargocollective.com/algazarra/index). Icon and artwork dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE). Third-party graphics' authorship and license information in [AUTHORS.md](src/main/img/AUTHORS.md).
+Concept, design, [icon](src/main/img/icons/ic_boilr.ai) and [artwork](src/main/img) by [Algazarra](https://www.behance.net/algazarra). Icon and artwork dual licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0) or [GPLv3+](/LICENSE). Third-party graphics' authorship and license information in [AUTHORS.md](src/main/img/AUTHORS.md).
 
 Translators:
 
