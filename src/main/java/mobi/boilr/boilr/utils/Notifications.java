@@ -29,15 +29,15 @@ import android.preference.PreferenceManager;
 /* Based on Android DeskClock AlarmNotifications. */
 public final class Notifications {
 
-	private static final int sNoNetNotifID = 432191926;
+	private static final int S_NO_NET_NOTIF_ID = 432191926;
 	private static Notification.Builder sNoNetNotif = null;
 	public static boolean sClearedNoNetNotif = false;
 	private static Bitmap sSmallUpArrowBitmap = null;
 	public static Bitmap sBigUpArrowBitmap = null;
 	private static Bitmap sSmallDownArrowBitmap = null;
 	public static Bitmap sBigDownArrowBitmap = null;
-	private static final int sBigArrowSize = 200;
-	private static final int sSmallArrowSize = 100;
+	private static final int S_BIG_ARROW_SIZE = 200;
+	private static final int S_SMALL_ARROW_SIZE = 100;
 	// Action fired when no internet notification is cleared from the notification drawer.
 	public static final String ACTION_CLEAR_NET_NOTIF = "ACTION_CLEAR_NET_NOTIF";
 	private static SharedPreferences sSharedPrefs = null;
@@ -49,10 +49,10 @@ public final class Notifications {
 		if(sSmallUpArrowBitmap == null) {
 			int tickerGreen = context.getResources().getColor(R.color.tickergreen);
 			int tickerRed = context.getResources().getColor(R.color.tickerred);
-			sSmallUpArrowBitmap = textAsBitmap("▲", sSmallArrowSize, tickerGreen);
-			sBigUpArrowBitmap = textAsBitmap("▲", sBigArrowSize, tickerGreen);
-			sSmallDownArrowBitmap = textAsBitmap("▼", sSmallArrowSize, tickerRed);
-			sBigDownArrowBitmap = textAsBitmap("▼", sBigArrowSize, tickerRed);
+			sSmallUpArrowBitmap = textAsBitmap("▲", S_SMALL_ARROW_SIZE, tickerGreen);
+			sBigUpArrowBitmap = textAsBitmap("▲", S_BIG_ARROW_SIZE, tickerGreen);
+			sSmallDownArrowBitmap = textAsBitmap("▼", S_SMALL_ARROW_SIZE, tickerRed);
+			sBigDownArrowBitmap = textAsBitmap("▼", S_BIG_ARROW_SIZE, tickerRed);
 		}
 		Notification.Builder notification = new Notification.Builder(context)
 			.setContentTitle(firingReasonTitle)
@@ -67,8 +67,8 @@ public final class Notifications {
 			notification.setLargeIcon(sSmallDownArrowBitmap);
 		}
 		Intent alarmSettingsIntent = new Intent(context, AlarmSettingsActivity.class);
-		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
-		alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());
+		alarmSettingsIntent.putExtra(AlarmSettingsActivity.ALARM_ID, alarm.getId());
+		alarmSettingsIntent.putExtra(AlarmSettingsActivity.ALARM_TYPE, alarm.getClass().getSimpleName());
 		alarmSettingsIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		PendingIntent pendingIntent;
 		if(Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
@@ -101,7 +101,7 @@ public final class Notifications {
 		// Setup fullscreen intent
 		int alarmID = alarm.getId();
 		Intent fullScreenIntent = new Intent(context, NotificationActivity.class);
-		fullScreenIntent.putExtra("alarmID", alarmID);
+		fullScreenIntent.putExtra("ALARM_ID", alarmID);
 		fullScreenIntent.putExtra("firingReason", firingReasonTitle + "\n" + firingReasonBody);
 		fullScreenIntent.putExtra("canKeepMonitoring", canKeepMonitoring(alarm));
 		fullScreenIntent.putExtra("isDirectionUp", isDirectionUp(alarm));
@@ -161,9 +161,9 @@ public final class Notifications {
 				if(Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
 					pendingIntent = TaskStackBuilder.create(context)
 										.addNextIntentWithParentStack(changeSettingsIntent)
-										.getPendingIntent(sNoNetNotifID, PendingIntent.FLAG_UPDATE_CURRENT);
+										.getPendingIntent(S_NO_NET_NOTIF_ID, PendingIntent.FLAG_UPDATE_CURRENT);
 				} else {
-					pendingIntent = PendingIntent.getActivity(context, sNoNetNotifID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+					pendingIntent = PendingIntent.getActivity(context, S_NO_NET_NOTIF_ID, changeSettingsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 				}
 				Intent disableIntent = new Intent(context, StorageAndControlService.class);
 				disableIntent.setAction(Notifications.ACTION_CLEAR_NET_NOTIF);
@@ -183,13 +183,13 @@ public final class Notifications {
 						//.setPriority(Notification.PRIORITY_DEFAULT) API 16 only
 						.setWhen(0)
 						.setContentIntent(pendingIntent)
-						.setDeleteIntent(PendingIntent.getService(context, sNoNetNotifID, disableIntent, 0))
+						.setDeleteIntent(PendingIntent.getService(context, S_NO_NET_NOTIF_ID, disableIntent, 0))
 						.setOnlyAlertOnce(true)
 						.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
 						.setVibrate(NotificationKlaxon.sVibratePattern);
 			}
 			NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-			nm.notify(sNoNetNotifID, sNoNetNotif.getNotification());
+			nm.notify(S_NO_NET_NOTIF_ID, sNoNetNotif.getNotification());
 		}
 	}
 
@@ -216,14 +216,14 @@ public final class Notifications {
 	}
 
 	public static void clearNotification(Context context, Alarm alarm) {
-		// Log.d("Clearing notifications for alarm instance: " + alarmID);
+		// Log.d("Clearing notifications for alarm instance: " + ALARM_ID);
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		nm.cancel(alarm.hashCode());
 	}
 
 	public static void clearNoInternetNotification(Context context) {
 		NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-		nm.cancel(sNoNetNotifID);
+		nm.cancel(S_NO_NET_NOTIF_ID);
 		sClearedNoNetNotif = true;
 	}
 

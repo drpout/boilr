@@ -176,10 +176,10 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 		if(savedInstanceState == null) {
 			Bundle args = getArguments();
 			if(args != null) {
-				alarmID = args.getInt(AlarmSettingsActivity.alarmID);
+				alarmID = args.getInt(AlarmSettingsActivity.ALARM_ID);
 			}
 		} else {
-			alarmID = savedInstanceState.getInt(AlarmSettingsActivity.alarmID);
+			alarmID = savedInstanceState.getInt(AlarmSettingsActivity.ALARM_ID);
 		}
 		mAlarmTypePref.setEnabled(false);
 
@@ -190,6 +190,6 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 		super.onSaveInstanceState(savedInstanceState);
-		savedInstanceState.putInt(AlarmSettingsActivity.alarmID, alarm.getId());
+		savedInstanceState.putInt(AlarmSettingsActivity.ALARM_ID, alarm.getId());
 	}
 }

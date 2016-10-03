@@ -92,7 +92,7 @@ public class AlarmLayout extends LinearLayout implements Runnable {
 			mBar.setImageDrawable(getResources().getDrawable(R.drawable.onbar));
 		} else {
 			mLastUpdateProgress.setColor(mColorsArray.getColor(COLOROFF, Color.LTGRAY));
-			if(Themer.getCurTheme().equals(Themer.Theme.light)) {
+			if(Themer.getCurTheme().equals(Themer.Theme.LIGHT)) {
 				mBar.setImageDrawable(getResources().getDrawable(R.drawable.ltoffbar));
 			} else {
 				mBar.setImageDrawable(getResources().getDrawable(R.drawable.dkoffbar));

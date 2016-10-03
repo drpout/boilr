@@ -197,7 +197,7 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 			Alarm alarm = makeAlarm(id, exchange, pair, notifier);
 			mStorageAndControlService.addAlarm(alarm);
 			Intent alarmIdIntent = new Intent();
-			alarmIdIntent.putExtra("alarmID", id);
+			alarmIdIntent.putExtra("ALARM_ID", id);
 			mEnclosingActivity.setResult(Activity.RESULT_OK, alarmIdIntent);
 			mEnclosingActivity.finish();
 		} catch(UpperLimitSmallerOrEqualLowerLimitException e) {

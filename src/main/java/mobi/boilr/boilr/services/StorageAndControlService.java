@@ -205,7 +205,7 @@ public class StorageAndControlService extends Service {
 		if(intent != null) {
 			String action = intent.getAction();
 			if(ACTION_RUN_ALARM.equals(action)) {
-				int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
+				int alarmID = intent.getIntExtra("ALARM_ID", Integer.MIN_VALUE);
 				if(alarmID != Integer.MIN_VALUE) {
 					if(!runTaskAlarmList.contains(alarmID)) {
 						runTaskAlarmList.add(alarmID);
@@ -359,7 +359,7 @@ public class StorageAndControlService extends Service {
 	private void addToAlarmManager(Alarm alarm, long firstDelay) {
 		Intent intent = new Intent(this, StorageAndControlService.class);
 		intent.setAction(ACTION_RUN_ALARM);
-		intent.putExtra("alarmID", alarm.getId());
+		intent.putExtra("ALARM_ID", alarm.getId());
 		PendingIntent pendingIntent = PendingIntent.getService(this, alarm.getId(), intent, 0);
 		alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + firstDelay, alarm.getPeriod(), pendingIntent);
 	}

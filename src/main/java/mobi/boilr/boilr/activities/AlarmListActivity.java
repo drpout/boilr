@@ -106,8 +106,8 @@ public class AlarmListActivity extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View view, int arg2, long arg3) {
 				Alarm alarm = ((AlarmLayout) view).getAlarm();
 				Intent alarmSettingsIntent = new Intent(AlarmListActivity.this, AlarmSettingsActivity.class);
-				alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmID, alarm.getId());
-				alarmSettingsIntent.putExtra(AlarmSettingsActivity.alarmType, alarm.getClass().getSimpleName());
+				alarmSettingsIntent.putExtra(AlarmSettingsActivity.ALARM_ID, alarm.getId());
+				alarmSettingsIntent.putExtra(AlarmSettingsActivity.ALARM_TYPE, alarm.getClass().getSimpleName());
 				AlarmListActivity.this.startActivity(alarmSettingsIntent);
 			}
 		};
@@ -125,7 +125,7 @@ public class AlarmListActivity extends Activity {
 		mSearchView.setOnQueryTextListener(queryListener);
 		/*
 		 * Hack to keep the search icon consistent between themes. Without this
-		 * the icon for the light theme is smaller than the one on the dark
+		 * the icon for the LIGHT theme is smaller than the one on the DARK
 		 * theme. By just_user on Stack Overflow http://stackoverflow.com/questions/10445760/how-to-change-the-default-icon-on-the-searchview-to-be-use-in-the-action-bar-on/18360563#18360563
 		 */
 		int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
@@ -184,7 +184,7 @@ public class AlarmListActivity extends Activity {
 			finish();
 			startActivity(getIntent());
 		} else if(requestCode == REQUEST_CREATE && resultCode == Activity.RESULT_OK) {
-			int alarmID = data.getIntExtra("alarmID", Integer.MIN_VALUE);
+			int alarmID = data.getIntExtra("ALARM_ID", Integer.MIN_VALUE);
 			if(alarmID != Integer.MIN_VALUE) {
 				if(mBound) {
 					mAdapter.add(mStorageAndControlService.getAlarm(alarmID));
