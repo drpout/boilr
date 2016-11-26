@@ -8,4 +8,5 @@
 	<classpathentry kind="con" path="me.gladwell.eclipse.m2e.android.classpath.NONRUNTIME_DEPENDENCIES"/>
 	<classpathentry kind="src" path="/ChangeLogLibrary"/>
 	<classpathentry kind="src" path="/UndoBar"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 </classpath>
