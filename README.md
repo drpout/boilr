@@ -76,9 +76,15 @@ On your shell you can use `export ANDROID_LOG_TAGS="ActivityManager:I Boilr:D *:
 If you are no vi or emacs ninja you can use Eclipse to ease your work in Boilr.
 
 1. Install and configure the [ADT plugin](http://android.magicer.xyz/sdk/installing/installing-adt.html).
-2. Install [m2e-android](https://rgladwell.github.io/m2e-android).
-3. Clone [changeloglib](https://github.com/gabrielemariotti/changeloglib/). Go to `File->Import->Existing Android Code Into Workspace`, import just what's in the `ChangeLogLibrary` directory and name the new project as `ChangeLogLibrary`.
-4. Clone [UndoBar](https://github.com/soarcn/UndoBar). Go to `File->Import->Existing Android Code Into Workspace`, import just what's in the `library` directory and name the new project as `UndoBar`.   
+2. ~~Install [m2e-android](https://rgladwell.github.io/m2e-android).~~ (Eclipse Mars already ships with Maven.)
+3. Clone [changeloglib](https://github.com/gabrielemariotti/changeloglib/).  
+3.1 Checkout tag `v.1.5.2` with `git checkout v.1.5.2`.  
+3.2 Go to `File->Import->Existing Android Code Into Workspace`, import just what's in the `ChangeLogLibrary` directory and name the new project as `ChangeLogLibrary`.  
+3.3  In the project's Java Build Path remove source folder `src` and add `java`.
+4. Clone [UndoBar](https://github.com/soarcn/UndoBar).  
+4.1  `git checkout fcb99913808ee47a3803d3f800cbee6b7678ba21`  
+4.2 Go to `File->Import->Existing Android Code Into Workspace`, import just what's in the `library` directory and name the new project as `UndoBar`.  
+4.3 Right click in the project, go to `Android Tools` and run `Add Support Library...`
 5. Go to `File->Import->Existing Projects into Workspace` and select Boilr's git root directory.
 
 Use Eclipse only for writing code. Always compile in the shell using Maven.
