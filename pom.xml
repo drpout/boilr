@@ -26,9 +26,9 @@
 		<android.sdk.version>24</android.sdk.version>
 		<release.description>
 			\+ Added app setting to dismiss no internet notification.
-			\+ Added 1BTCXE, 1Ex.Trade, BitcoinToYou, Bitcoins Norway, bitFlyer, BitMEX, Bitt, BitVC, BitX, BL3P, BTCBOX, BTCXIndia, ChileBit, Coinage, Coincheck, Coinfloor, Coinplug, CoinsBank, Coinsecure, Coinsquare, CRXzone, EmpoEX, FOXBIT, FYB-SE, FYB-SG, Gatecoin, GDAX, Ice3x, Indacoin, Independent Reserve, Korbit, Loyalbit, Quoine, SurBitcoin, SURBTC, Urdubit, Vaultoro, VBTC, Zaif and Zyado.
-			\* Fixed AllCoin, CampBX, CryptoFacilities, Huobi and NXT Asset Exchange.
-			\- Removed 796 Exchange, Banx Capital, Basebit, Bitspark, Carvitrex, CleverCoin, Coinsetter, Cointrader, Coins-E, Cryptsy, Jubi, OneWorldCoin and Yunbi.
+			\+ Added 1BTCXE, 1Ex.Trade, BitcoinToYou, Bitcoins Norway, bitFlyer, BitMEX, Bitt, BitVC, BitX, BL3P, BTCBOX, BTCXIndia, ChileBit, Coinage, Coincheck, Coinfloor, Coinplug, CoinsBank, Coinsecure, Coinsquare, CRXzone, Cryptopia, EmpoEX, FOXBIT, FYB-SE, FYB-SG, Gatecoin, GDAX, Ice3x, Indacoin, Independent Reserve, Korbit, Livecoin, Loyalbit, Quoine, SurBitcoin, SURBTC, Urdubit, Vaultoro, VBTC, Zaif and Zyado.
+			\* Fixed AllCoin, CampBX, CryptoFacilities, Huobi, NXT Asset Exchange and Yuanbao.
+			\- Removed 796 Exchange, Banx Capital, Basebit, Bitspark, BTCGreece, Carvitrex, CleverCoin, Coinbase, Coinsetter, Cointrader, Coins-E, Cryptsy, Jubi, OneWorldCoin, Vircurex and Yunbi.
 		</release.description>
 	</properties>
 
@@ -74,12 +74,12 @@
 		<dependency>
 			<groupId>mobi.boilr</groupId>
 			<artifactId>libdynticker</artifactId>
-			<version>0.6.0</version>
+			<version>0.7.0</version>
 		</dependency>
 		<dependency>
 			<groupId>mobi.boilr</groupId>
 			<artifactId>libpricealarm</artifactId>
-			<version>0.2.0</version>
+			<version>0.2.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.gabrielemariotti.changeloglib</groupId>

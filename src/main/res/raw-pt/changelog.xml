@@ -2,9 +2,9 @@
 <changelog bulletedList="false">
     <changelogversion versionName="0.7.0" changeDate="?? Out 2016">
         <changelogtext>+ Adiconada configuração para esconder o aviso de falha de ligação à internet.</changelogtext>
-        <changelogtext>+ Novas bolsas: 1BTCXE, 1Ex.Trade, BitcoinToYou, Bitcoins Norway, bitFlyer, BitMEX, Bitt, BitVC, BitX, BL3P, BTCBOX, BTCXIndia, ChileBit, Coinage, Coincheck, Coinfloor, Coinplug, CoinsBank, Coinsecure, Coinsquare, CRXzone, EmpoEX, FOXBIT, FYB-SE, FYB-SG, Gatecoin, GDAX, Ice3x, Indacoin, Independent Reserve, Korbit, Loyalbit, Quoine, SurBitcoin, SURBTC, Urdubit, Vaultoro, VBTC, Zaif e Zyado.</changelogtext>
-		<changelogtext>* Bolsas consertadas: AllCoin, CampBX, CryptoFacilities, Huobi e NXT Asset Exchange.</changelogtext>
-		<changelogtext>- Bolsas removidas: 796 Exchange, Banx Capital, Basebit, Bitspark, Carvitrex, CleverCoin, Coinsetter, Cointrader, Coins-E, Cryptsy, Jubi, OneWorldCoin e Yunbi.</changelogtext>
+        <changelogtext>+ Novas bolsas: 1BTCXE, 1Ex.Trade, BitcoinToYou, Bitcoins Norway, bitFlyer, BitMEX, Bitt, BitVC, BitX, BL3P, BTCBOX, BTCXIndia, ChileBit, Coinage, Coincheck, Coinfloor, Coinplug, CoinsBank, Coinsecure, Coinsquare, CRXzone, Cryptopia, EmpoEX, FOXBIT, FYB-SE, FYB-SG, Gatecoin, GDAX, Ice3x, Indacoin, Independent Reserve, Korbit, Livecoin, Loyalbit, Quoine, SurBitcoin, SURBTC, Urdubit, Vaultoro, VBTC, Zaif e Zyado.</changelogtext>
+		<changelogtext>* Bolsas consertadas: AllCoin, CampBX, CryptoFacilities, Huobi, NXT Asset Exchange e Yuanbao.</changelogtext>
+		<changelogtext>- Bolsas removidas: 796 Exchange, Banx Capital, Basebit, Bitspark, BTCGreece, Carvitrex, CleverCoin, Coinbase, Coinsetter, Cointrader, Coins-E, Cryptsy, Jubi, OneWorldCoin, Vircurex e Yunbi.</changelogtext>
 	</changelogversion>
     <changelogversion versionName="0.6.0" changeDate="29 Mar 2015">
         <changelogtext>+ Adicinado botão para atualizar todos os alarmes.</changelogtext>
