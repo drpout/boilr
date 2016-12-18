@@ -72,7 +72,6 @@
 		<item>BTCBOX</item>
 		<item>BTCChina</item>
 		<item>BTCExchange</item>
-		<item>BTCGreece</item>
 		<item>BtcTrade</item>
 		<item>BTCTurk</item>
 		<item>BTCXIndia</item>
@@ -84,7 +83,6 @@
 		<item>CHBTC</item>
 		<item>ChileBit</item>
 		<item>Coinage</item>
-		<item>Coinbase</item>
 		<item>Coincheck</item>
 		<item>Coinfloor</item>
 		<item>CoinMate</item>
@@ -97,6 +95,7 @@
 		<item>CRXzone</item>
 		<item>Crypto Facilities</item>
 		<item>Cryptonit</item>
+		<item>Cryptopia</item>
 		<item>Digital Securities Exchange</item>
 		<item>EmpoEX</item>
 		<item>FOXBIT</item>
@@ -113,6 +112,7 @@
 		<item>Korbit</item>
 		<item>Kraken</item>
 		<item>LakeBTC</item>
+		<item>Livecoin</item>
 		<item>LocalBitcoins</item>
 		<item>Loyalbit</item>
 		<item>Mercado Bitcoin</item>
@@ -130,10 +130,9 @@
 		<item>Urdubit</item>
 		<item>Vaultoro</item>
 		<item>VBTC</item>
-		<item>Vircurex</item>
 		<item>VirWox</item>
 		<item>Yobit</item>
-		<item>Yuanbaohui</item>
+		<item>Yuanbao</item>
 		<item>Zaif</item>
 		<item>Zyado</item>
 	</string-array>
@@ -170,7 +169,6 @@
 		<item>mobi.boilr.libdynticker.exchanges.BtcboxExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BTCChinaExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BTCExchangePHExchange</item>
-		<item>mobi.boilr.libdynticker.exchanges.BTCGreeceExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BtcTradeExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BTCTurkExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.BTCXIndiaExchange</item>
@@ -182,7 +180,6 @@
 		<item>mobi.boilr.libdynticker.exchanges.ChbtcExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.blinktrade.ChileBitExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CoinageExchange</item>
-		<item>mobi.boilr.libdynticker.exchanges.CoinbaseExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CoincheckExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CoinfloorExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CoinMateExchange</item>
@@ -195,6 +192,7 @@
 		<item>mobi.boilr.libdynticker.exchanges.CRXzoneExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CryptoFacilitiesExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.CryptonitExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.CryptopiaExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.DSXExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.EmpoExExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.blinktrade.FOXBITExchange</item>
@@ -211,6 +209,7 @@
 		<item>mobi.boilr.libdynticker.exchanges.KorbitExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.KrakenExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.LakeBTCExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.LivecoinExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.LocalBitcoinsExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.LoyalbitExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.MercadoBitcoinExchange</item>
@@ -228,10 +227,9 @@
 		<item>mobi.boilr.libdynticker.exchanges.blinktrade.UrdubitExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.VaultoroExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.blinktrade.VBTCExchange</item>
-		<item>mobi.boilr.libdynticker.exchanges.VircurexExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.VirWoxExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.YobitExchange</item>
-		<item>mobi.boilr.libdynticker.exchanges.YuanbaohuiExchange</item>
+		<item>mobi.boilr.libdynticker.exchanges.YuanbaoExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.ZaifExchange</item>
 		<item>mobi.boilr.libdynticker.exchanges.ZyadoExchange</item>
 	</string-array>
