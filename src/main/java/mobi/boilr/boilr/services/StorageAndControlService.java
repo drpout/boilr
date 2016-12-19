@@ -77,6 +77,7 @@ public class StorageAndControlService extends Service {
 						// Log.d("Last value for alarm " + alarm.getId() + " " +
 						// Conversions.formatMaxDecimalPlaces(alarm.getLastValue()));
 						Notifications.clearNoInternetNotification(StorageAndControlService.this);
+						replaceAlarmDB(alarm);
 					} catch(NumberFormatException e) {
 						Log.e("Could format last value for alarm " + alarm.getId(), e);
 					} catch(IOException e) {
