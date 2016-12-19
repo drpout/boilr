@@ -9,20 +9,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import mobi.boilr.boilr.database.DBManager;
-import mobi.boilr.boilr.domain.AndroidNotifier;
-import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
-import mobi.boilr.boilr.utils.Languager;
-import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.boilr.utils.Notifications;
-import mobi.boilr.boilr.views.fragments.AlarmPreferencesFragment;
-import mobi.boilr.boilr.views.fragments.SettingsFragment;
-import mobi.boilr.libdynticker.core.Exchange;
-import mobi.boilr.libdynticker.core.Pair;
-import mobi.boilr.libdynticker.exchanges.BitstampExchange;
-import mobi.boilr.libpricealarm.Alarm;
-import mobi.boilr.libpricealarm.AlarmPositionComparator;
-import mobi.boilr.libpricealarm.PriceHitAlarm;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -37,6 +23,20 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import mobi.boilr.boilr.database.DBManager;
+import mobi.boilr.boilr.domain.AndroidNotifier;
+import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
+import mobi.boilr.boilr.utils.Languager;
+import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.Notifications;
+import mobi.boilr.boilr.views.fragments.AlarmPreferencesFragment;
+import mobi.boilr.boilr.views.fragments.SettingsFragment;
+import mobi.boilr.libdynticker.core.Exchange;
+import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.exchanges.BitstampExchange;
+import mobi.boilr.libpricealarm.Alarm;
+import mobi.boilr.libpricealarm.AlarmPositionComparator;
+import mobi.boilr.libpricealarm.PriceHitAlarm;
 
 public class StorageAndControlService extends Service {
 
@@ -53,6 +53,8 @@ public class StorageAndControlService extends Service {
 	// Private action used to update last value from the Exchange.
 	private static final String ACTION_RUN_ALARM = "ACTION_RUN_ALARM";
 	private boolean offedAlarmsScheduled = false;
+	// Preferred bind flags to use with this service.
+	public static final int BIND_FLAGS = Context.BIND_ABOVE_CLIENT | Context.BIND_AUTO_CREATE;
 
 	private BroadcastReceiver networkReceiver = new BroadcastReceiver() {
 		@Override

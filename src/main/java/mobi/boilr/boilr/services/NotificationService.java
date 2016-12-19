@@ -84,7 +84,7 @@ public class NotificationService extends Service {
 		super.onCreate();
 		Languager.setLanguage(this);
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
-		bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE);
+		bindService(serviceIntent, mConnection, StorageAndControlService.BIND_FLAGS);
 		mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 	}
 

@@ -184,7 +184,7 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 		mAlarmTypePref.setEnabled(false);
 
 		mStorageAndControlServiceConnection = new InitializePreferencesConnection(alarmID);
-		mEnclosingActivity.bindService(mServiceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
+		mEnclosingActivity.bindService(mServiceIntent, mStorageAndControlServiceConnection, StorageAndControlService.BIND_FLAGS);
 	}
 
 	@Override

@@ -3,25 +3,8 @@ package mobi.boilr.boilr.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.listeners.SwipeAndMoveTouchListener;
-import mobi.boilr.boilr.services.LocalBinder;
-import mobi.boilr.boilr.services.StorageAndControlService;
-import mobi.boilr.boilr.utils.Conversions;
-import mobi.boilr.boilr.utils.Languager;
-import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.boilr.utils.Notifications;
-import mobi.boilr.boilr.utils.Themer;
-import mobi.boilr.boilr.utils.VersionTracker;
-import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
-import mobi.boilr.boilr.views.fragments.SettingsFragment;
-import mobi.boilr.boilr.widget.AlarmGridView;
-import mobi.boilr.boilr.widget.AlarmLayout;
-import mobi.boilr.boilr.widget.AlarmListAdapter;
-import mobi.boilr.libpricealarm.Alarm;
 import android.app.Activity;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.TypedArray;
@@ -38,6 +21,22 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
+import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.listeners.SwipeAndMoveTouchListener;
+import mobi.boilr.boilr.services.LocalBinder;
+import mobi.boilr.boilr.services.StorageAndControlService;
+import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.Languager;
+import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.Notifications;
+import mobi.boilr.boilr.utils.Themer;
+import mobi.boilr.boilr.utils.VersionTracker;
+import mobi.boilr.boilr.views.fragments.AboutDialogFragment;
+import mobi.boilr.boilr.views.fragments.SettingsFragment;
+import mobi.boilr.boilr.widget.AlarmGridView;
+import mobi.boilr.boilr.widget.AlarmLayout;
+import mobi.boilr.boilr.widget.AlarmListAdapter;
+import mobi.boilr.libpricealarm.Alarm;
 
 public class AlarmListActivity extends Activity {
 	private static final int[] attrs = new int[] { R.attr.ic_action_search /*index 0*/};
@@ -114,7 +113,7 @@ public class AlarmListActivity extends Activity {
 		mView.setOnItemClickListener(listener);
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 		startService(serviceIntent);
-		bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
+		bindService(serviceIntent, mStorageAndControlServiceConnection, StorageAndControlService.BIND_FLAGS);
 	}
 
 	@Override
