@@ -157,7 +157,7 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 		mExchangeListPref.setValueIndex(mExchangeIndex);
 
 		mStorageAndControlServiceConnection = new UpdatePairsConnection(exchangeCode.toString(), exchangeName.toString(), null);
-		mEnclosingActivity.bindService(mServiceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
+		mEnclosingActivity.bindService(mServiceIntent, mStorageAndControlServiceConnection, StorageAndControlService.BIND_FLAGS);
 
 		setHasOptionsMenu(true);
 	}

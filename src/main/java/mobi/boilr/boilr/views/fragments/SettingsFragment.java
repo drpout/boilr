@@ -64,7 +64,7 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		super.onCreate(savedInstanceState);
 		enclosingActivity = getActivity();
 		Intent serviceIntent = new Intent(enclosingActivity, StorageAndControlService.class);
-		enclosingActivity.bindService(serviceIntent, mStorageAndControlServiceConnection, Context.BIND_AUTO_CREATE);
+		enclosingActivity.bindService(serviceIntent, mStorageAndControlServiceConnection, StorageAndControlService.BIND_FLAGS);
 
 		// Load the preferences from an XML resource
 		addPreferencesFromResource(R.xml.app_settings);
