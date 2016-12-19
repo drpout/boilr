@@ -2,6 +2,16 @@ package mobi.boilr.boilr.widget;
 
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.text.InputType;
+import android.view.DragEvent;
+import android.view.View;
+import android.view.View.OnDragListener;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.EditText;
+import android.widget.TextView;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmListActivity;
 import mobi.boilr.boilr.listeners.SwipeAndMoveTouchListener.Reference;
@@ -13,17 +23,6 @@ import mobi.boilr.libpricealarm.PriceChangeAlarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
 import mobi.boilr.libpricealarm.RollingPriceChangeAlarm;
 import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.text.InputType;
-import android.view.DragEvent;
-import android.view.View;
-import android.view.View.OnDragListener;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class AlarmListAdapter extends ListAdapter<Alarm> {
 	private boolean mStarted = false;
@@ -145,6 +144,7 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					try {
 						priceHitAlarm.setUpperLimit(Double.parseDouble(mTextInput.getText().toString()));
+						alarmListActivity.getStorageAndControlService().replaceAlarmDB(priceHitAlarm);
 					} catch(UpperLimitSmallerOrEqualLowerLimitException e) {
 						PriceHitAlarmSettingsFragment.handleLimitsExceptions(e, getContext());
 					}
@@ -168,6 +168,7 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					try {
 						priceHitAlarm.setLowerLimit(Double.parseDouble(mTextInput.getText().toString()));
+						alarmListActivity.getStorageAndControlService().replaceAlarmDB(priceHitAlarm);
 					} catch(UpperLimitSmallerOrEqualLowerLimitException e) {
 						PriceHitAlarmSettingsFragment.handleLimitsExceptions(e, getContext());
 					}
@@ -195,6 +196,7 @@ public class AlarmListAdapter extends ListAdapter<Alarm> {
 					changeAlarm.setPercent((float) newValue);
 				else
 					changeAlarm.setChange(newValue);
+				alarmListActivity.getStorageAndControlService().replaceAlarmDB(changeAlarm);
 			}
 		});
 		showDialog();
