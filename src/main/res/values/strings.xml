@@ -95,6 +95,7 @@
 	<string name="alarm_deleted">Alarm deleted</string>
 	<string name="undo">Undo</string>
 	<string name="loading_pairs">Loading pairs…</string>
+	<string name="loading_price">Loading price…</string>
 	
 	<string name="short_description">Price alarms for Bitcoin, cryptocurrencies, cryptoassets, futures and options.</string>
 	<string name="full_description">Monitor Bitcoin, cryptocurrencies, cryptoassets, futures and options, and trigger alarms according to your settings. 70+ exchanges and counting.\n

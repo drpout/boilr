@@ -5,16 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.preference.ThemableRingtonePreference;
-import mobi.boilr.boilr.services.StorageAndControlService;
-import mobi.boilr.boilr.utils.Conversions;
-import mobi.boilr.boilr.utils.IconToast;
-import mobi.boilr.boilr.utils.Languager;
-import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.boilr.utils.Themer;
-import mobi.boilr.libdynticker.core.Exchange;
-import mobi.boilr.libdynticker.core.Pair;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,6 +19,16 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.preference.ThemableRingtonePreference;
+import mobi.boilr.boilr.services.StorageAndControlService;
+import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.IconToast;
+import mobi.boilr.boilr.utils.Languager;
+import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.Themer;
+import mobi.boilr.libdynticker.core.Exchange;
+import mobi.boilr.libdynticker.core.Pair;
 
 public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected static final String PREF_KEY_GENERIC = "pref_key_generic";
@@ -181,7 +181,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 			mLastValue = Double.POSITIVE_INFINITY;
 			mLastValuePref.setEnabled(false);
 			mLastValuePref.setText(null);
-			mLastValuePref.setSummary(null);
+			mLastValuePref.setSummary(mEnclosingActivity.getString(R.string.loading_price));
 			try {
 				if(!mBound) {
 					throw new IOException(mEnclosingActivity.getString(R.string.not_bound, "AlarmPreferencesFragment"));
