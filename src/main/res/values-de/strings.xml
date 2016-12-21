@@ -96,6 +96,7 @@
 	<string name="alarm_deleted">Alarm gelöscht</string>
 	<string name="undo">Rückgängig</string>
 	<string name="loading_pairs">Paareladen…</string>
+	<string name="loading_price">Preisladen…</string>
 	<!-- Missing translation <string name="short_description"></string>-->
 	<!-- Missing translation <string name="full_description"></string>-->
 </resources>

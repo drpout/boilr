@@ -96,6 +96,7 @@
     <string name="alarm_deleted">删除提醒</string>
 	<string name="undo">撤销</string>
 	<string name="loading_pairs">正在载入…</string>
+	<string name="loading_price">正在载入…</string>
 	
 	<string name="short_description">比特币，数字货币，数字资产以，期货及期权的价格提醒。</string>
 	<string name="full_description">实时比特币，数字货币，数字资产，期货及期权价格，根据用户设置触发提醒。已支持70多家交易所。\n

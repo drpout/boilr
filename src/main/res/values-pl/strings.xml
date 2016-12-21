@@ -96,6 +96,7 @@
     <string name="alarm_deleted">Powiadomienie usunięty</string>
 	<string name="undo">Rozwiązać</string>
 	<string name="loading_pairs">Pary ładowania…</string>
+	<string name="loading_price">Ceny ładowania…</string>
 	<!-- Missing translation <string name="short_description"></string>-->
 	<!-- Missing translation <string name="full_description"></string>-->
 </resources>

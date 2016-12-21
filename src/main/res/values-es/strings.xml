@@ -95,6 +95,7 @@
 	<string name="alarm_deleted">Alarma borrada</string>
 	<string name="undo">Deshacer</string>
 	<string name="loading_pairs">Cargando pares…</string>
+	<string name="loading_pairs">Cargando precio…</string>
 	<string name="short_description">Alarmas de precio para bitcoin, cryptocurrencies, cryptoassets, futuros y opciones.</string>
 	<!-- Missing translation <string name="full_description"></string>-->
 	</resources>
