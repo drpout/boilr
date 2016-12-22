@@ -233,6 +233,7 @@ public class StorageAndControlService extends Service {
 	public void onDestroy() {
 		// Log.d("StorageAndControlService destroyed.");
 		unregisterReceiver(networkReceiver);
+		db.close();
 		super.onDestroy();
 	}
 
