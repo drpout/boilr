@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="action_search">Recherche</string>
 	<string name="action_settings">Préférences</string>
@@ -94,8 +94,8 @@
 	<string name="couldnt_retrieve_pairs">N\'a pas pu récupérer les paires de %1$s.</string>
 	<string name="couldnt_retrieve_last_value">N\'a pas pu récupérer la dernière valeur de %1$s avec paire %2$s.</string>
 	<string name="not_bound">%1$s ne pas lié à StorageAndControlService.</string>
-	<!-- Review please --><string name="loading_pairs">Paires en chargement…</string>
-	<!-- Review please --><string name="loading_price">Prix en chargement…</string>
-	<string name="short_description">Prix alarmes pour Bitcoin, cryptodevises, cryptoactif, contrats à terme et options.</string>
+	<string name="loading_pairs">Chargement des pairs…</string>
+	<!-- Review please --><string name="loading_price">Chargement du prix…</string>
+	<string name="short_description">Alarmes pour les prix des Bitcoin, cryptodevises, cryptoactif, contrats à terme et options.</string>
 	<!-- Missing translation <string name="full_description"></string>-->
 </resources>

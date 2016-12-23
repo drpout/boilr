@@ -234,26 +234,30 @@
 		<item>mobi.boilr.libdynticker.exchanges.ZyadoExchange</item>
 	</string-array>
 	<string name="pref_exchange_default">mobi.boilr.libdynticker.exchanges.OneBTCXEExchange</string>
-		<string-array name="pref_entries_language">
+	<string-array name="pref_entries_language">
+		<item>Čeština</item>
+		<item>Deutsch</item>
 		<item>English</item>
 		<item>Español</item>
 		<item>Français</item>
-		<item>Čeština</item>
-		<item>Deutsch</item>
 		<item>Italiano</item>
+		<item>日本語</item>
 		<item>Polski</item>
 		<item>Português</item>
+		<item>Русский</item>
 		<item>中文</item>
 	</string-array>
 	<string-array name="pref_values_language">
+		<item>cs</item>
+		<item>de</item>
 		<item>en</item>
 		<item>es</item>
 		<item>fr</item>
-		<item>cs</item>
-		<item>de</item>
 		<item>it</item>
+		<item>ja</item>
 		<item>pl</item>
 		<item>pt</item>
+		<item>ru</item>
 		<item>zh</item>
 	</string-array>
 	<string name="pref_default_language">English</string>

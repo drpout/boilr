@@ -101,13 +101,15 @@ Concept, design, [icon](src/main/img/icons/ic_boilr.ai) and [artwork](src/main/i
 
 Translators:
 
-* Chinese: [Jan Xie](https://github.com/janx) and Song
-* Czech: [Jaroslav Lichtblau](https://github.com/svetlemodry) and [Michal Čihař](https://github.com/nijel)
-* French: [Tuux](http://www.rtnp.org) and [M for Momo](http://www.rtnp.org)
+* Chinese: [Jan Xie](https://github.com/janx), Song and [YFdyh000](https://hosted.weblate.org/user/yfdyh000)
+* Czech: [Jaroslav Lichtblau](https://github.com/svetlemodry), [Michal Čihař](https://github.com/nijel) and [Jirka Daněk](https://hosted.weblate.org/user/jirkadanek)
+* French: [Tuux](http://www.rtnp.org), [M for Momo](http://www.rtnp.org) and [therealmarco](https://hosted.weblate.org/user/therealmarco)
 * German: Luca Rui
 * Italian: Francesca Mautone and [Mario Frasca](https://hosted.weblate.org/user/mfrasca)
-* Polish: [Michal Pleban](https://pl.linkedin.com/in/michalpleban)
-* Spanish: Mariona Martinez
+* Japanese: [naofum](https://hosted.weblate.org/user/naofum)
+* Polish: [Michal Pleban](https://pl.linkedin.com/in/michalpleban) and agilob
+* Russian: [ryna Pruitt](https://hosted.weblate.org/user/irynapruitt)
+* Spanish: Mariona Martinez and [Luis Garcia](https://hosted.weblate.org/user/luigars)
 
 ## Donations and tips
 In case you wanna pay us a beer ;)

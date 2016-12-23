@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
     <string name="action_search">搜索</string>
     <string name="action_settings">设置</string>
@@ -35,8 +35,8 @@
     <string name="pref_title_vibrate_default">默认震动</string>
     <string name="pref_title_appearance">外观</string>
     <string name="pref_title_theme">主题</string>
-    <string name="pref_entries_theme_0">Dark</string>
-    <string name="pref_entries_theme_1">Light</string>
+    <string name="pref_entries_theme_0">暗</string>
+    <string name="pref_entries_theme_1">亮</string>
     <string name="pref_title_network_usage">网络使用情况</string>
     <string name="pref_title_mobile_data">移动数据</string>
     <string name="pref_title_show_internet_warning">忽略提醒</string>
@@ -96,7 +96,7 @@
     <string name="alarm_deleted">删除提醒</string>
 	<string name="undo">撤销</string>
 	<string name="loading_pairs">正在载入…</string>
-	<string name="loading_price">正在载入…</string>
+	<string name="loading_price">正在加载价格…</string>
 	
 	<string name="short_description">比特币，数字货币，数字资产以，期货及期权的价格提醒。</string>
 	<string name="full_description">实时比特币，数字货币，数字资产，期货及期权价格，根据用户设置触发提醒。已支持70多家交易所。\n

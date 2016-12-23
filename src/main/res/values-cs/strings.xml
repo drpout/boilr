@@ -94,10 +94,10 @@
     <string name="limit_explanation">%1$s = %2$s (základní hodnota, z doby před %3$s) %4$s %5$s (změna)</string>
     <string name="alarm_deleted">Upozornění vypouští</string>
 	<string name="undo">Zrušit</string>
-	<string name="loading_pairs">Načítání páry…</string>
+	<string name="loading_pairs">Načítání dvojic…</string>
 	<string name="loading_price">Načítání ceny…</string>
 	
-	<string name="short_description">Upozornění na cenu Bitcoinu, kryptoměn, kryptoaktiva, futures a opce.</string>
+	<string name="short_description">Upozornění na cenu Bitcoinu, kryptoměn, kryptoaktiva, futures a opcí.</string>
 	<string name="full_description">Hlídá ceny kryptoměn, kryptoaktiva, futures a opce, upozorňuje uživatele na základě jeho nastavení. Plná podpora pro všechny hlavní burzy a směnné páry.\n
 	    \n
 	    \n
