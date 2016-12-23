@@ -1,10 +1,5 @@
 package mobi.boilr.boilr.activities;
 
-import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.services.NotificationService;
-import mobi.boilr.boilr.utils.Languager;
-import mobi.boilr.boilr.utils.Notifications;
-import mobi.boilr.boilr.utils.Themer;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -16,9 +11,14 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.services.NotificationService;
+import mobi.boilr.boilr.utils.Languager;
+import mobi.boilr.boilr.utils.Notifications;
+import mobi.boilr.boilr.utils.Themer;
 
 /**
- * Alarm activity that pops up a visible indicator when the alarm goes off.
+ * Alarm activity that pops up a visible indicator when an alarm goes off.
  */
 public class NotificationActivity extends Activity {
 
@@ -62,25 +62,21 @@ public class NotificationActivity extends Activity {
 	}
 
 	@Override
+	public void onPause() {
+		super.onPause();
+		NotificationService.stopNotify(this, mAlarmID, false);
+	}
+
+	@Override
 	public void onBackPressed() {
 		// Don't allow back to dismiss.
 	}
 
-	@Override
-	public void onUserLeaveHint() {
-		super.onUserLeaveHint();
-		// User clicked Home or Power button.
-		NotificationService.stopNotify(this, mAlarmID, false);
-		finish();
-	}
-
 	public void onOffClicked(View v) {
-		NotificationService.stopNotify(this, mAlarmID, false);
 		finish();
 	}
 
 	public void onResumeClicked(View v) {
-		NotificationService.stopNotify(this, mAlarmID, true);
 		finish();
 	}
 }
