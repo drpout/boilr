@@ -2,6 +2,7 @@
 <changelog bulletedList="false">
     <changelogversion versionName="0.7.0" changeDate="?? Dec 2016">
         <changelogtext>+ Added app setting to dismiss no internet notification.</changelogtext>
+        <changelogtext>+ Added alarm auto snoozing after a configurable time period.</changelogtext>
         <changelogtext>+ New exchanges: 1BTCXE, 1Ex.Trade, BitcoinToYou, Bitcoins Norway, bitFlyer, BitMEX, Bitt, BitVC, BitX, BL3P, BTCBOX, BTCXIndia, ChileBit, Coinage, Coincheck, Coinfloor, Coinplug, CoinsBank, Coinsecure, Coinsquare, CRXzone, Cryptopia, EmpoEX, FOXBIT, FYB-SE, FYB-SG, Gatecoin, GDAX, Ice3x, Indacoin, Independent Reserve, Korbit, Livecoin, Loyalbit, Quoine, SurBitcoin, SURBTC, Urdubit, Vaultoro, VBTC, Zaif and Zyado.</changelogtext>
         <changelogtext>+ Added Japanese and Russian translations.</changelogtext>
 		<changelogtext>* Fixed exchanges: AllCoin, CampBX, CryptoFacilities, Huobi, NXT Asset Exchange and Yuanbao.</changelogtext>

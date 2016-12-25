@@ -2,6 +2,17 @@ package mobi.boilr.boilr.views.fragments;
 
 import java.util.Locale;
 
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.SettingsActivity;
 import mobi.boilr.boilr.preference.ThemableRingtonePreference;
@@ -13,30 +24,19 @@ import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.boilr.utils.Notifications;
 import mobi.boilr.boilr.utils.Themer;
 import mobi.boilr.libdynticker.core.Exchange;
-import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
 
 public class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener {
 	public static final String PREF_KEY_DEFAULT_ALERT_TYPE = "pref_key_default_alert_type";
 	public static final String PREF_KEY_DEFAULT_ALERT_SOUND = "pref_key_default_alert_sound";
+	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
+	public static final String PREF_KEY_AUTO_SNOOZE_TIME = "pref_key_auto_snooze_time";
 	public static final String PREF_KEY_THEME = "pref_key_theme";
 	public static final String PREF_KEY_LANGUAGE = "pref_key_language";
+	public static final String PREF_KEY_MOBILE_DATA = "pref_key_mobile_data";
+	public static final String PREF_KEY_SHOW_INTERNET_WARNING = "pref_key_show_internet_warning";
 	public static final String PREF_KEY_DEFAULT_UPDATE_INTERVAL = "pref_key_default_update_interval";
 	public static final String PREF_KEY_DEFAULT_TIME_FRAME = "pref_key_default_time_frame";
 	public static final String PREF_KEY_CHECK_PAIRS_INTERVAL = "pref_key_check_pairs_interval";
-	public static final String PREF_KEY_SHOW_INTERNET_WARNING = "pref_key_show_internet_warning";
-	public static final String PREF_KEY_VIBRATE_DEFAULT = "pref_key_vibrate_default";
-	public static final String PREF_KEY_MOBILE_DATA = "pref_key_mobile_data";
 	private static final String[] listPrefs = { PREF_KEY_DEFAULT_ALERT_TYPE, PREF_KEY_THEME,
 			PREF_KEY_CHECK_PAIRS_INTERVAL, PREF_KEY_LANGUAGE };
 	private Activity enclosingActivity;
@@ -82,6 +82,9 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 		mAlertSoundPref.setSummary(mAlertSoundPref.getEntry());
 
 		Preference pref;
+		pref = findPreference(PREF_KEY_AUTO_SNOOZE_TIME);
+		pref.setSummary(enclosingActivity.getString(R.string.minutes_abbreviation,
+				sharedPreferences.getString(PREF_KEY_AUTO_SNOOZE_TIME, "")));
 		pref = findPreference(PREF_KEY_DEFAULT_UPDATE_INTERVAL);
 		pref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation,
 				sharedPreferences.getString(PREF_KEY_DEFAULT_UPDATE_INTERVAL, "")));
@@ -125,6 +128,10 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			mAlertSoundPref.setDefaultValue();
 		} else if(key.equals(PREF_KEY_DEFAULT_ALERT_SOUND)) {
 			// Nothing to do.
+		} else if(key.equals(PREF_KEY_VIBRATE_DEFAULT)) {
+			// Nothing to do.
+		} else if(key.equals(PREF_KEY_AUTO_SNOOZE_TIME)) {
+			pref.setSummary(enclosingActivity.getString(R.string.minutes_abbreviation, sharedPrefs.getString(key, "")));
 		} else if(key.equals(PREF_KEY_THEME)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
@@ -136,6 +143,16 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			Languager.setLanguage(enclosingActivity.getBaseContext());
 			restartActivity();
 			Notifications.rebuildNoInternetNotification();
+		} else if(key.equals(PREF_KEY_MOBILE_DATA)) {
+			StorageAndControlService.allowMobileData = sharedPrefs.getBoolean(key, false);
+		} else if(key.equals(PREF_KEY_SHOW_INTERNET_WARNING)) {
+			boolean show = sharedPrefs.getBoolean(key, true);
+			if(!show)
+				Notifications.clearNoInternetNotification(enclosingActivity);
+		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL)) {
+			pref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, sharedPrefs.getString(key, "")));
+		} else if(key.equals(PREF_KEY_DEFAULT_TIME_FRAME)) {
+			pref.setSummary(Conversions.buildMinToHoursSummary(sharedPrefs.getString(key, ""), enclosingActivity));
 		} else if(key.equals(PREF_KEY_CHECK_PAIRS_INTERVAL)) {
 			ListPreference listPref = (ListPreference) pref;
 			listPref.setSummary(listPref.getEntry());
@@ -147,16 +164,6 @@ public class SettingsFragment extends PreferenceFragment implements OnSharedPref
 			} else {
 				Log.e(enclosingActivity.getString(R.string.not_bound, "PreferenceFragment"));
 			}
-		} else if(key.equals(PREF_KEY_DEFAULT_UPDATE_INTERVAL)) {
-			pref.setSummary(enclosingActivity.getString(R.string.seconds_abbreviation, sharedPrefs.getString(key, "")));
-		} else if(key.equals(PREF_KEY_DEFAULT_TIME_FRAME)) {
-			pref.setSummary(Conversions.buildMinToHoursSummary(sharedPrefs.getString(key, ""), enclosingActivity));
-		} else if(key.equals(PREF_KEY_MOBILE_DATA)) {
-			StorageAndControlService.allowMobileData = sharedPrefs.getBoolean(key, false);
-		} else if(key.equals(PREF_KEY_SHOW_INTERNET_WARNING)) {
-			boolean show = sharedPrefs.getBoolean(key, true);
-			if(!show)
-				Notifications.clearNoInternetNotification(enclosingActivity);
 		} else {
 			Log.d("No behavior for " + key);
 		}

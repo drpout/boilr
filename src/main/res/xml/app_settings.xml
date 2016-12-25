@@ -24,6 +24,12 @@
 		    android:key="pref_key_vibrate_default"
 			android:title="@string/pref_title_vibrate_default"
 			android:defaultValue="true" />
+		<EditTextPreference
+		    android:key="pref_key_auto_snooze_time"
+			android:title="@string/pref_title_auto_snooze_time"
+			android:dialogMessage="@string/pref_summary_auto_snooze_time"
+			android:inputType="number"
+			android:defaultValue="2" />
 	</PreferenceCategory>
  	<PreferenceCategory
  	    android:key="pref_key_appearance"

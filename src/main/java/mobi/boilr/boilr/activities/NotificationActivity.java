@@ -1,6 +1,10 @@
 package mobi.boilr.boilr.activities;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -23,12 +27,21 @@ import mobi.boilr.boilr.utils.Themer;
 public class NotificationActivity extends Activity {
 
 	private int mAlarmID;
+	private boolean stopNotify = true, keepMonitoring = false;
+	public static final String FINISH_ACTION = "mobi.boilr.boilr.action.finish";
+	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			finish();
+		}
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Themer.applyTheme(this);
 		Languager.setLanguage(this);
+		registerReceiver(mBroadcastReceiver, new IntentFilter(FINISH_ACTION));
 		setTitle(getResources().getString(R.string.boilr_alarm));
 		mAlarmID = getIntent().getIntExtra("alarmID", Integer.MIN_VALUE);
 		String firingReason = getIntent().getStringExtra("firingReason");
@@ -64,7 +77,9 @@ public class NotificationActivity extends Activity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		NotificationService.stopNotify(this, mAlarmID, false);
+		unregisterReceiver(mBroadcastReceiver);
+		if(stopNotify)
+			NotificationService.stopNotify(this, mAlarmID, keepMonitoring);
 	}
 
 	@Override
@@ -79,11 +94,23 @@ public class NotificationActivity extends Activity {
 		finish();
 	}
 
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		/*
+		 * This boolean detects that the Activity will be re-created soon. This
+		 * happens when screen orientation changes. We must keep the alarm
+		 * ringing on such cases.
+		 */
+		stopNotify = false;
+	}
+
 	public void onOffClicked(View v) {
 		finish();
 	}
 
 	public void onResumeClicked(View v) {
+		keepMonitoring = true;
 		finish();
 	}
 }

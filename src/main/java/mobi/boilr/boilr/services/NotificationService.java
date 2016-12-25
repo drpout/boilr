@@ -3,20 +3,27 @@ package mobi.boilr.boilr.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
-import mobi.boilr.boilr.utils.Languager;
-import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.boilr.utils.NotificationKlaxon;
-import mobi.boilr.boilr.utils.Notifications;
-import mobi.boilr.libpricealarm.Alarm;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
+import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.activities.NotificationActivity;
+import mobi.boilr.boilr.utils.AlarmAlertWakeLock;
+import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.Languager;
+import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.NotificationKlaxon;
+import mobi.boilr.boilr.utils.Notifications;
+import mobi.boilr.boilr.views.fragments.SettingsFragment;
+import mobi.boilr.libpricealarm.Alarm;
 
 public class NotificationService extends Service {
 
@@ -48,6 +55,8 @@ public class NotificationService extends Service {
 		}
 	};
 	private boolean mInFullScreen = false;
+	private AlarmManager mAlarmManager;
+	private SharedPreferences mSharedPrefs;
 
 	/**
 	 * Utility method to help start a notification properly.
@@ -86,6 +95,8 @@ public class NotificationService extends Service {
 		Intent serviceIntent = new Intent(this, StorageAndControlService.class);
 		bindService(serviceIntent, mConnection, StorageAndControlService.BIND_FLAGS);
 		mTelephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		mAlarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+		mSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 	}
 
 	@Override
@@ -147,6 +158,12 @@ public class NotificationService extends Service {
 			mService.stopAlarm(alarmID);
 			Notifications.showFullscreenNotification(this, alarm);
 			NotificationKlaxon.start(this, alarm);
+			PendingIntent pendingIntent = PendingIntent.getBroadcast(this, alarmID,
+					new Intent(NotificationActivity.FINISH_ACTION), 0);
+			// Time is in minutes, convert to milliseconds
+			long snoozeTime = Conversions.MILIS_IN_MINUTE
+					* Long.parseLong(mSharedPrefs.getString(SettingsFragment.PREF_KEY_AUTO_SNOOZE_TIME, "2"));
+			mAlarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + snoozeTime, pendingIntent);
 		} else {
 			/*
 			 * A full screen notification is already being displayed.
