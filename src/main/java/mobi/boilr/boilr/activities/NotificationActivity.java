@@ -62,14 +62,21 @@ public class NotificationActivity extends Activity {
 	}
 
 	@Override
-	public void onPause() {
-		super.onPause();
+	public void onDestroy() {
+		super.onDestroy();
 		NotificationService.stopNotify(this, mAlarmID, false);
 	}
 
 	@Override
 	public void onBackPressed() {
 		// Don't allow back to dismiss.
+	}
+
+	@Override
+	public void onUserLeaveHint() {
+		super.onUserLeaveHint();
+		// User clicked Home or Power button.
+		finish();
 	}
 
 	public void onOffClicked(View v) {
