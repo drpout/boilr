@@ -32,6 +32,8 @@
 	<string name="pref_summary_sound_volume">O Boilr usa o volume do sistema para o tipo de alerta selecionado. Na maioria dos dispositivos o tipo Alarme permanece no volume máximo mesmo quando o dispositivo está em silêncio.</string>
 	<string name="system_volumes">Volumes do sistema</string>
 	<string name="pref_title_vibrate_default">Vibrar por omissão</string>
+	<string name="pref_title_auto_snooze_time">Tempo até silenciar</string>
+	<string name="pref_summary_auto_snooze_time">Em minutos. Define por quanto tempo os alarmes devem tocar até serem automaticamente silenciados.</string>
 	<string name="pref_title_appearance">Aparência</string>
 	<string name="pref_title_theme">Tema</string>
 	<string name="pref_entries_theme_0">Escuro</string>
