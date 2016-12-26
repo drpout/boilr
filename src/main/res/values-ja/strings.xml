@@ -140,4 +140,6 @@
 	    \n
 	    地金: "
 	</string>
-</resources>
+<string name="pref_title_auto_snooze_time">自動スヌーズ時間</string>
+	<string name="pref_summary_auto_snooze_time">分単位。アラームが自動的にオフになるまでの鳴り続ける時間を設定します。</string>
+	</resources>
