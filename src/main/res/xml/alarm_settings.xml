@@ -91,5 +91,10 @@
             android:key="pref_key_alarm_vibrate"
             android:title="@string/pref_title_alarm_vibrate"
             android:persistent="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pref_key_snooze_on_retrace"
+            android:title="@string/pref_title_snooze_on_retrace"
+            android:persistent="false" />
     </PreferenceCategory>
 </PreferenceScreen>

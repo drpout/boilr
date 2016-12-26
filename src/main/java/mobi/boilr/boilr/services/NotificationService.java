@@ -155,11 +155,13 @@ public class NotificationService extends Service {
 		} else if(!mInFullScreen){
 			mInFullScreen = true;
 			//Log.d("Showing fullscreen notification for alarm " + alarmID + ".");
-			mService.stopAlarm(alarmID);
+			if(!alarm.isDefusable())
+				mService.stopAlarm(alarmID);
 			Notifications.showFullscreenNotification(this, alarm);
 			NotificationKlaxon.start(this, alarm);
 			Intent intent = new Intent(NotificationActivity.FINISH_ACTION);
 			intent.putExtra("alarmID", alarmID);
+			intent.putExtra("keepMonitoring", alarm.isDefusable());
 			PendingIntent pendingIntent = PendingIntent.getBroadcast(this, alarmID, intent, 0);
 			// Time is in minutes, convert to milliseconds
 			long snoozeTime = Conversions.MILIS_IN_MINUTE

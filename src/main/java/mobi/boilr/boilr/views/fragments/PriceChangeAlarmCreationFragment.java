@@ -2,6 +2,11 @@ package mobi.boilr.boilr.views.fragments;
 
 import java.io.IOException;
 
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.EditTextPreference;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
@@ -9,11 +14,6 @@ import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.RollingPriceChangeAlarm;
 import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
 
 public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 	private class OnPriceChangeSettingsPreferenceChangeListener extends
@@ -105,9 +105,11 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		Alarm ret;
 		if(mIsPercentage) {
 			float percent = (float) change;
-			ret = new RollingPriceChangeAlarm(id, exchange, pair, updateInterval, notifier, percent, timeFrame);
+			ret = new RollingPriceChangeAlarm(id, exchange, pair, updateInterval, notifier,
+					mSnoozeOnRetracePref.isChecked(), percent, timeFrame);
 		} else {
-			ret = new RollingPriceChangeAlarm(id, exchange, pair, updateInterval, notifier, change, timeFrame);
+			ret = new RollingPriceChangeAlarm(id, exchange, pair, updateInterval, notifier,
+					mSnoozeOnRetracePref.isChecked(), change, timeFrame);
 		}
 		return ret;
 	}

@@ -33,6 +33,7 @@ public class NotificationActivity extends Activity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
+			keepMonitoring = intent.getBooleanExtra("keepMonitoring", false);
 			if(alarmID == mAlarmID)
 				finish();
 		}

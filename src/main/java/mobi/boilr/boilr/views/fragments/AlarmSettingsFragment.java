@@ -2,6 +2,13 @@ package mobi.boilr.boilr.views.fragments;
 
 import java.io.IOException;
 
+import android.content.ComponentName;
+import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.activities.AlarmSettingsActivity;
 import mobi.boilr.boilr.domain.AndroidNotifier;
@@ -12,14 +19,6 @@ import mobi.boilr.boilr.utils.Log;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.ServiceConnection;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 
 public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 	protected Alarm alarm;
@@ -68,6 +67,8 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 				Boolean vibrate = notifier.isVibrate();
 				mVibratePref.setValue(vibrate == null ? DEFAULT : vibrate.toString());
 				mVibratePref.setSummary(mVibratePref.getEntry());
+
+				mSnoozeOnRetracePref.setChecked(alarm.isDefusable());
 			}
 			initializePreferences();
 			updatePairsList(exchangeCode, exchangeName, alarm.getPair().toString());
@@ -147,6 +148,8 @@ public abstract class AlarmSettingsFragment extends AlarmPreferencesFragment {
 					notifier.setVibrate(null);
 				else
 					notifier.setVibrate(Boolean.parseBoolean(vibrate));
+			} else if(key.equals(PREF_KEY_SNOOZE_ON_RETRACE)) {
+				alarm.setDefusable((Boolean) newValue);
 			} else {
 				Log.d("No behavior for " + key);
 				return true;

@@ -1,8 +1,10 @@
 package mobi.boilr.boilr.domain;
 
+import android.content.Context;
+import android.content.Intent;
+import mobi.boilr.boilr.activities.NotificationActivity;
 import mobi.boilr.boilr.services.NotificationService;
 import mobi.boilr.libpricealarm.Notifier;
-import android.content.Context;
 
 public class AndroidNotifier extends Notifier {
 
@@ -31,6 +33,15 @@ public class AndroidNotifier extends Notifier {
 	protected boolean notify(int alarmID) {
 		NotificationService.startNotify(context, alarmID);
 		return false;
+	}
+
+	@Override
+	protected void suppress(int alarmID) {
+		// Log.d("Suppressing alarm " + alarmID);
+		Intent intent = new Intent(NotificationActivity.FINISH_ACTION);
+		intent.putExtra("alarmID", alarmID);
+		intent.putExtra("keepMonitoring", true);
+		context.sendBroadcast(intent);
 	}
 
 	public Integer getAlertType() {
