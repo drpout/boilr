@@ -32,7 +32,9 @@ public class NotificationActivity extends Activity {
 	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			finish();
+			int alarmID = intent.getIntExtra("alarmID", Integer.MIN_VALUE);
+			if(alarmID == mAlarmID)
+				finish();
 		}
 	};
 
@@ -41,9 +43,9 @@ public class NotificationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		Themer.applyTheme(this);
 		Languager.setLanguage(this);
-		registerReceiver(mBroadcastReceiver, new IntentFilter(FINISH_ACTION));
 		setTitle(getResources().getString(R.string.boilr_alarm));
 		mAlarmID = getIntent().getIntExtra("alarmID", Integer.MIN_VALUE);
+		registerReceiver(mBroadcastReceiver, new IntentFilter(FINISH_ACTION));
 		String firingReason = getIntent().getStringExtra("firingReason");
 		boolean canKeepMonitoring = getIntent().getBooleanExtra("canKeepMonitoring", false);
 		boolean isDirectionUp = getIntent().getBooleanExtra("isDirectionUp", true);

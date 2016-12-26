@@ -158,8 +158,9 @@ public class NotificationService extends Service {
 			mService.stopAlarm(alarmID);
 			Notifications.showFullscreenNotification(this, alarm);
 			NotificationKlaxon.start(this, alarm);
-			PendingIntent pendingIntent = PendingIntent.getBroadcast(this, alarmID,
-					new Intent(NotificationActivity.FINISH_ACTION), 0);
+			Intent intent = new Intent(NotificationActivity.FINISH_ACTION);
+			intent.putExtra("alarmID", alarmID);
+			PendingIntent pendingIntent = PendingIntent.getBroadcast(this, alarmID, intent, 0);
 			// Time is in minutes, convert to milliseconds
 			long snoozeTime = Conversions.MILIS_IN_MINUTE
 					* Long.parseLong(mSharedPrefs.getString(SettingsFragment.PREF_KEY_AUTO_SNOOZE_TIME, "2"));
