@@ -72,6 +72,7 @@
 	<string name="pref_title_last_value">Último preço</string>
 	<string name="pref_summary_update_interval">Em segundos. Define a frequência com que o alarme obtém dados da bolsa.</string>
 	<string name="pref_summary_time_frame">Em minutos. Define qual preço comparar com o atual, por exemplo, o preço de há 15 minutos atrás.</string>
+	<string name="pref_title_snooze_on_retrace">Silenciar quando preço recua</string>
 	<string name="boilr_alarm">Alarme Boilr</string>
 	<string name="off">Desligar</string>
 	<string name="resume">Retomar</string>
