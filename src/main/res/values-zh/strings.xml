@@ -141,4 +141,6 @@
 		\n
 		金条：
 	</string>
-</resources>
+<string name="pref_title_auto_snooze_time">自动打盹时间</string>
+	<string name="pref_summary_auto_snooze_time">分钟。设置闹钟应该在多久后自动关闭。</string>
+	</resources>
