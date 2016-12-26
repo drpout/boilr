@@ -70,7 +70,7 @@ For now on you can use:
 Note: `mvn package` with no profile associated builds an unsigned release mode apk, unsuitable for deploy. It is meant for further processing by downstream projects like F-Droid.
 
 ## Debuging
-On your shell you can use `export ANDROID_LOG_TAGS="ActivityManager:I Boilr:D *:S"` to filter logcat, then run `adb logcat` as usual.
+`adb logcat "ActivityManager:I AndroidRuntime:E Boilr:D *:S"` runs logcat with a nice filter to debug Boilr.
 
 ## Importing into Eclipse
 If you are no vi or emacs ninja you can use Eclipse to ease your work in Boilr.
