@@ -23,10 +23,9 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		public boolean onPreferenceChange(Preference preference, Object newValue) {
 			String key = preference.getKey();
 			if(key.equals(PREF_KEY_CHANGE_IN_PERCENTAGE)) {
-				mIsPercentage = (Boolean) newValue;
-				updateChangeValueSummary();
+				updateChangeValueSummary((Boolean) newValue);
 			} else if(key.equals(PREF_KEY_CHANGE_VALUE)) {
-				preference.setSummary(getChangeValueSummary((String) newValue));
+				preference.setSummary(getChangeValueSummary((String) newValue, mIsPercentPref.isChecked()));
 			} else if(key.equals(PREF_KEY_TIME_FRAME)) {
 				preference.setSummary(Conversions.buildMinToHoursSummary((String) newValue, mEnclosingActivity));
 			} else {
@@ -52,7 +51,6 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		super.onCreate(savedInstanceState);
 
 		removePrefs(changeAlarmPrefsToKeep);
-		mIsPercentage = mIsPercentPref.isChecked();
 		if(savedInstanceState == null) {
 			mChangePref.setText(null);
 			setTimeFramePref();
@@ -103,7 +101,7 @@ public class PriceChangeAlarmCreationFragment extends AlarmCreationFragment {
 		updateInterval = 1000 * Long.parseLong(updateIntervalString != null ? updateIntervalString : mSharedPrefs.getString(
 				SettingsFragment.PREF_KEY_DEFAULT_UPDATE_INTERVAL, ""));
 		Alarm ret;
-		if(mIsPercentage) {
+		if(mIsPercentPref.isChecked()) {
 			float percent = (float) change;
 			ret = new RollingPriceChangeAlarm(id, exchange, pair, updateInterval, notifier,
 					mSnoozeOnRetracePref.isChecked(), percent, timeFrame);

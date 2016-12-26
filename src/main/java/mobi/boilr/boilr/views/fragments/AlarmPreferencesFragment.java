@@ -58,7 +58,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected int mExchangeIndex = 0, mPairIndex = 0;
 	protected List<Pair> mPairs = new ArrayList<Pair>();
 	protected double mLastValue = Double.POSITIVE_INFINITY;
-	protected boolean mIsPercentage = false, mRecoverSavedInstance = false;
+	protected boolean mRecoverSavedInstance = false;
 	protected SharedPreferences mSharedPrefs;
 	protected PreferenceCategory mSpecificCat;
 	protected ListPreference mExchangeListPref, mPairListPref, mAlarmTypePref, mAlarmAlertTypePref, mVibratePref;
@@ -221,7 +221,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 
 	protected void updateDependentOnPairChangeAlarm() {
 		mChangePref.setEnabled(true);
-		updateChangeValueSummary();
+		updateChangeValueSummary(mIsPercentPref.isChecked());
 	}
 
 	protected void disableDependentOnPairAux() {
@@ -258,15 +258,15 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 		}
 	}
 
-	protected void updateChangeValueSummary() {
+	protected void updateChangeValueSummary(boolean isPercent) {
 		String text = mChangePref.getText();
 		if(text != null && !text.equals("")) {
-			mChangePref.setSummary(getChangeValueSummary(text));
+			mChangePref.setSummary(getChangeValueSummary(text, isPercent));
 		}
 	}
 
-	protected String getChangeValueSummary(String value) {
-		if(mIsPercentage)
+	protected String getChangeValueSummary(String value, boolean isPercent) {
+		if(isPercent)
 			return value + "%";
 		else
 			return value + " " + mPairs.get(mPairIndex).getExchange();
