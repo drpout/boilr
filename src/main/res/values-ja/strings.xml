@@ -142,4 +142,5 @@
 	    \n
 	    地金: "
 	</string>
-</resources>
+<string name="pref_title_snooze_on_retrace">戻り時スヌーズ</string>
+	</resources>
