@@ -25,8 +25,9 @@
 		<android.maven.plugin.version>4.4.3</android.maven.plugin.version>
 		<android.sdk.version>24</android.sdk.version>
 		<release.description>
-			\+ Added app setting to dismiss no internet notification.
-			\+ Added alarm auto snoozing after a configurable time period.
+			\+ Setting to dismiss no internet notification.
+			\+ Alarm auto snoozing after a configurable time period.
+			\+ Snooze on retrace.
 			\+ Added 1BTCXE, 1Ex.Trade, BitcoinToYou, Bitcoins Norway, bitFlyer, BitMEX, Bitt, BitVC, BitX, BL3P, BTCBOX, BTCXIndia, ChileBit, Coinage, Coincheck, Coinfloor, Coinplug, CoinsBank, Coinsecure, Coinsquare, CRXzone, Cryptopia, EmpoEX, FOXBIT, FYB-SE, FYB-SG, Gatecoin, GDAX, Ice3x, Indacoin, Independent Reserve, Korbit, Livecoin, Loyalbit, Quoine, SurBitcoin, SURBTC, Urdubit, Vaultoro, VBTC, Zaif and Zyado.
 			\+ Added Japanese and Russian translations.
 			\* Fixed AllCoin, CampBX, CryptoFacilities, Huobi, NXT Asset Exchange and Yuanbao.
@@ -82,7 +83,7 @@
 		<dependency>
 			<groupId>mobi.boilr</groupId>
 			<artifactId>libpricealarm</artifactId>
-			<version>0.2.1</version>
+			<version>0.3.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.gabrielemariotti.changeloglib</groupId>

@@ -49,6 +49,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected static final String PREF_KEY_LOWER_VALUE = "pref_key_lower_value";
 	protected static final String PREF_KEY_CHANGE_IN_PERCENTAGE = "pref_key_change_in_percentage";
 	protected static final String PREF_KEY_CHANGE_VALUE = "pref_key_change_value";
+	protected static final String PREF_KEY_SNOOZE_ON_RETRACE = "pref_key_snooze_on_retrace";
 	protected static final List<String> hitAlarmPrefsToKeep = Arrays.asList(PREF_KEY_UPPER_VALUE, PREF_KEY_LOWER_VALUE,
 			PREF_KEY_UPDATE_INTERVAL);
 	protected static final List<String> changeAlarmPrefsToKeep = Arrays.asList(PREF_KEY_CHANGE_IN_PERCENTAGE,
@@ -62,7 +63,7 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 	protected PreferenceCategory mSpecificCat;
 	protected ListPreference mExchangeListPref, mPairListPref, mAlarmTypePref, mAlarmAlertTypePref, mVibratePref;
 	protected ThemableRingtonePreference mAlertSoundPref;
-	protected CheckBoxPreference mIsPercentPref;
+	protected CheckBoxPreference mIsPercentPref, mSnoozeOnRetracePref;
 	protected EditTextPreference mLastValuePref, mUpperLimitPref, mLowerLimitPref, mTimeFramePref, mUpdateIntervalPref,
 			mChangePref;
 	protected OnPreferenceChangeListener mListener;
@@ -97,11 +98,11 @@ public abstract class AlarmPreferencesFragment extends PreferenceFragment {
 		mChangePref = (EditTextPreference) findPreference(PREF_KEY_CHANGE_VALUE);
 		mTimeFramePref = (EditTextPreference) findPreference(PREF_KEY_TIME_FRAME);
 		mUpdateIntervalPref = (EditTextPreference) findPreference(PREF_KEY_UPDATE_INTERVAL);
+		mSnoozeOnRetracePref = (CheckBoxPreference) findPreference(PREF_KEY_SNOOZE_ON_RETRACE);
 
-		Preference[] prefs = { mExchangeListPref, mPairListPref, mLastValuePref,
-				mAlarmTypePref, mUpperLimitPref, mLowerLimitPref, mIsPercentPref,
-				mChangePref, mTimeFramePref, mUpdateIntervalPref,
-				mAlarmAlertTypePref, mAlertSoundPref, mVibratePref };
+		Preference[] prefs = { mExchangeListPref, mPairListPref, mLastValuePref, mAlarmTypePref, mUpperLimitPref,
+				mLowerLimitPref, mIsPercentPref, mChangePref, mTimeFramePref, mUpdateIntervalPref, mAlarmAlertTypePref,
+				mAlertSoundPref, mVibratePref, mSnoozeOnRetracePref };
 		for (Preference pref : prefs) {
 			pref.setOnPreferenceChangeListener(mListener);
 		}

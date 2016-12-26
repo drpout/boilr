@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
     <changelogversion versionName="0.7.0" changeDate="?? Dez 2016">
-        <changelogtext>+ Adicionada configuração para esconder o aviso de falha de ligação à internet.</changelogtext>
+        <changelogtext>+ Configuração para esconder o aviso de falha de ligação à internet.</changelogtext>
         <changelogtext>+ Alarmes param de tocar após tempo configurável.</changelogtext>
+        <changelogtext>+ Alarmes param de tocar quando o preço volta atrás.</changelogtext>
         <changelogtext>+ Novas bolsas: 1BTCXE, 1Ex.Trade, BitcoinToYou, Bitcoins Norway, bitFlyer, BitMEX, Bitt, BitVC, BitX, BL3P, BTCBOX, BTCXIndia, ChileBit, Coinage, Coincheck, Coinfloor, Coinplug, CoinsBank, Coinsecure, Coinsquare, CRXzone, Cryptopia, EmpoEX, FOXBIT, FYB-SE, FYB-SG, Gatecoin, GDAX, Ice3x, Indacoin, Independent Reserve, Korbit, Livecoin, Loyalbit, Quoine, SurBitcoin, SURBTC, Urdubit, Vaultoro, VBTC, Zaif e Zyado.</changelogtext>
         <changelogtext>+ Adicionadas traduções para japonês e russo.</changelogtext>
 		<changelogtext>* Bolsas consertadas: AllCoin, CampBX, CryptoFacilities, Huobi, NXT Asset Exchange e Yuanbao.</changelogtext>

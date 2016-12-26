@@ -2,6 +2,9 @@ package mobi.boilr.boilr.views.fragments;
 
 import java.io.IOException;
 
+import android.os.Bundle;
+import android.preference.EditTextPreference;
+import android.preference.Preference;
 import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.utils.Conversions;
 import mobi.boilr.libdynticker.core.Exchange;
@@ -9,9 +12,6 @@ import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.PriceHitAlarm;
 import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
-import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.Preference;
 
 public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 
@@ -90,6 +90,7 @@ public class PriceHitAlarmCreationFragment extends AlarmCreationFragment {
 			lowerLimit = Double.NEGATIVE_INFINITY;
 		else
 			lowerLimit = Double.parseDouble(lowerLimitString);
-		return new PriceHitAlarm(id, exchange, pair, period, notifier, upperLimit, lowerLimit);
+		return new PriceHitAlarm(id, exchange, pair, period, notifier, mSnoozeOnRetracePref.isChecked(), upperLimit,
+				lowerLimit);
 	}
 }

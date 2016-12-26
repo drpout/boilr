@@ -72,6 +72,7 @@
 	<string name="pref_title_last_value">Last price</string>
 	<string name="pref_summary_update_interval">In seconds. Defines how often the alarm fetches data from the exchange.</string>
 	<string name="pref_summary_time_frame">In minutes. Sets the price to be compared with the current one, e.g., the price from 15 min ago.</string>
+	<string name="pref_title_snooze_on_retrace">Snooze on retrace</string>
 	<string name="boilr_alarm">Boilr Alarm</string>
 	<string name="off">Off</string>
 	<string name="resume">Resume</string>

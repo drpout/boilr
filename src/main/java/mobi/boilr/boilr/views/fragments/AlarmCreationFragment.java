@@ -3,6 +3,17 @@ package mobi.boilr.boilr.views.fragments;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.view.MenuItem;
 import mobi.boilr.boilr.R;
 import mobi.boilr.boilr.domain.AndroidNotifier;
 import mobi.boilr.boilr.services.LocalBinder;
@@ -14,18 +25,6 @@ import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libpricealarm.Alarm;
 import mobi.boilr.libpricealarm.TimeFrameSmallerOrEqualUpdateIntervalException;
 import mobi.boilr.libpricealarm.UpperLimitSmallerOrEqualLowerLimitException;
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.view.MenuItem;
 
 public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 
@@ -100,6 +99,8 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 			} else if(key.equals(PREF_KEY_ALARM_VIBRATE)) {
 				ListPreference vibratePref = (ListPreference) preference;
 				vibratePref.setSummary(vibratePref.getEntries()[vibratePref.findIndexOfValue((String) newValue)]);
+			} else if(key.equals(PREF_KEY_SNOOZE_ON_RETRACE)) {
+				// Nothing to do.
 			} else {
 				Log.d("No behavior for " + key);
 			}

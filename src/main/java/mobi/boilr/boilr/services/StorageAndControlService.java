@@ -154,9 +154,9 @@ public class StorageAndControlService extends Service {
 			Log.d("Populating DB.");
 			try {
 				for(int i = 1; i < 10; i++) {
-					Alarm alarm = new PriceHitAlarm(generateAlarmID(), new BitstampExchange(10900000), new Pair("BTC", "USD"), i * 10000,
-							new AndroidNotifier(
-							StorageAndControlService.this), 1 * 1000, i);
+					Alarm alarm = new PriceHitAlarm(generateAlarmID(), new BitstampExchange(10900000),
+							new Pair("BTC", "USD"), i * 10000, new AndroidNotifier(StorageAndControlService.this),
+							false, 1 * 1000, i);
 					addAlarm(alarm);
 					startAlarm(alarm.getId());
 				}
