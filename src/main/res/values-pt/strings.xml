@@ -101,7 +101,7 @@
 	<string name="loading_price">A carregar preço…</string>
 	
 	<string name="short_description">Alarmes de preço para Bitcoin, criptomoedas, criptoativos, futuros e opções.</string>
-	<string name="full_description">Monitoriza o preço de Bitcoin, criptomoedas, criptoativos, futuros e opções e dispara alarmes consoante parâmetros do utilizador. Suporta mais de 70 bolsas.\n
+	<string name="full_description">Monitoriza o preço de Bitcoin, criptomoedas, criptoativos, futuros e opções e dispara alarmes consoante parâmetros do utilizador. Suporta mais de 90 bolsas.\n
 		\n
 		\n
 		Suporta 2 tipos de alarmes:\n
@@ -109,7 +109,7 @@
 		* Variação de preço - Dispara quando o preço varia mais que uma quantidade X (em moeda ou percentagem) durante um dado prazo (e.g. 15 min). Usa uma janela temporal deslizante: o preço é atualizado com um dado intervalo (e.g. 30s) e comparado com o preço existente há um prazo atrás (e.g. 15 min antes).\n
 		\n
 		\n
-		Som e vibração podem ser configurados globalmente e individualmente para cada alarme. As listas de bolsas, pares e alarmes são pesquisáveis, permitindo uma rápida criação e configuração dos alarmes. A lista de alarmes comporta-se como um ticker, lá podes reordenar os teus alarmes e mudar diretamente os seus limites. Quando um alarme dispara fica continuamente a tocar até o desligares e, enquanto isso, mostra o seu estado: tal e qual um despertador. Os dados são obtidos diretamente das bolsas usando Wi-Fi ou Dados Móveis (se permitido).\n
+		Som e vibração podem ser configurados globalmente e individualmente para cada alarme. As listas de bolsas, pares e alarmes são pesquisáveis, permitindo uma rápida criação e configuração dos alarmes. A lista de alarmes comporta-se como um ticker, lá podes reordenar os teus alarmes e mudar diretamente os seus limites. Quando um alarme dispara fica continuamente a tocar até o desligares e, enquanto isso, mostra o seu estado: tal e qual um despertador. Os alarmes também podem ser configurados para se silenciarem automaticamente quando o preço recua. Os dados são obtidos diretamente das bolsas usando Wi-Fi ou Dados Móveis (se permitido).\n
 		\n
 		\n
 		O Boilr suporta todas as bolsas disponíveis na libdynticker, bem como todos os seus pares: https://github.com/drpout/libdynticker/#supported-exchanges\n
