@@ -27,7 +27,7 @@ import mobi.boilr.boilr.utils.Themer;
 public class NotificationActivity extends Activity {
 
 	private int mAlarmID;
-	private boolean stopNotify = true, keepMonitoring = false;
+	private boolean keepMonitoring = false;
 	public static final String FINISH_ACTION = "mobi.boilr.boilr.action.finish";
 	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
 		@Override
@@ -47,15 +47,19 @@ public class NotificationActivity extends Activity {
 		setTitle(getResources().getString(R.string.boilr_alarm));
 		mAlarmID = getIntent().getIntExtra("alarmID", Integer.MIN_VALUE);
 		registerReceiver(mBroadcastReceiver, new IntentFilter(FINISH_ACTION));
-		String firingReason = getIntent().getStringExtra("firingReason");
-		boolean canKeepMonitoring = getIntent().getBooleanExtra("canKeepMonitoring", false);
-		boolean isDirectionUp = getIntent().getBooleanExtra("isDirectionUp", true);
 		final Window win = getWindow();
 		win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
 				WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
 				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
 				WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
 				WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON);
+		buildAndSetView();
+	}
+
+	private void buildAndSetView() {
+		String firingReason = getIntent().getStringExtra("firingReason");
+		boolean canKeepMonitoring = getIntent().getBooleanExtra("canKeepMonitoring", false);
+		boolean isDirectionUp = getIntent().getBooleanExtra("isDirectionUp", true);
 		final LayoutInflater inflater = LayoutInflater.from(this);
 		View view = inflater.inflate(R.layout.alarm_alert, null);
 		view.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
@@ -79,10 +83,9 @@ public class NotificationActivity extends Activity {
 
 	@Override
 	public void onDestroy() {
-		super.onDestroy();
 		unregisterReceiver(mBroadcastReceiver);
-		if(stopNotify)
-			NotificationService.stopNotify(this, mAlarmID, keepMonitoring);
+		NotificationService.stopNotify(this, mAlarmID, keepMonitoring);
+		super.onDestroy();
 	}
 
 	@Override
@@ -97,15 +100,16 @@ public class NotificationActivity extends Activity {
 		finish();
 	}
 
+	/*
+	 * Handles all configurations changes that may happen while this activity is
+	 * on foreground, for instance screen orientation changes. This avoids
+	 * Activity restarts, which would call onDestroy() and prematurely stop the
+	 * klaxon.
+	 */
 	@Override
-	public void onSaveInstanceState(Bundle savedInstanceState) {
-		super.onSaveInstanceState(savedInstanceState);
-		/*
-		 * This boolean detects that the Activity will be re-created soon. This
-		 * happens when screen orientation changes. We must keep the alarm
-		 * ringing on such cases.
-		 */
-		stopNotify = false;
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		buildAndSetView();
 	}
 
 	public void onOffClicked(View v) {

@@ -70,7 +70,8 @@
         <activity
             android:name=".activities.NotificationActivity"
             android:label="@string/boilr_alarm"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:configChanges="orientation|screenSize|screenLayout|density|uiMode|keyboard|keyboardHidden" />
         
     </application>
 </manifest>
