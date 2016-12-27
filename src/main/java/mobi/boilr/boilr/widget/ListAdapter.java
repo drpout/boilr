@@ -24,6 +24,7 @@ public abstract class ListAdapter<T> extends BaseAdapter implements Filterable {
 		private CharSequence currentConstraint;
 		private String[] filterStrings;
 
+		@SuppressWarnings("unchecked")
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
 			this.currentConstraint = constraint;
