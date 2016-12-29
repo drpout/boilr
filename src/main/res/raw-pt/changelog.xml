@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
-    <changelogversion versionName="0.7.0" changeDate="?? Dez 2016">
+    <changelogversion versionName="0.7.0" changeDate="29 Dez 2016">
         <changelogtext>+ Configuração para esconder o aviso de falha de ligação à internet.</changelogtext>
         <changelogtext>+ Alarmes param de tocar após tempo configurável.</changelogtext>
         <changelogtext>+ Alarmes param de tocar quando o preço recua.</changelogtext>
