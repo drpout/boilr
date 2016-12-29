@@ -72,6 +72,7 @@
 	<string name="pref_title_last_value">最終価格</string>
 	<string name="pref_summary_update_interval">秒で。取引所からデータを取得するアラームの頻度を定義します。</string>
 	<string name="pref_summary_time_frame">分で。現在のものと比較する価格を設定します。例、15 分前からの価格。</string>
+	<string name="pref_title_snooze_on_retrace">戻り時スヌーズ</string>
 	<string name="boilr_alarm">Boilr アラーム</string>
 	<string name="off">オフ</string>
 	<string name="resume">再開</string>
@@ -142,5 +143,4 @@
 	    \n
 	    地金: "
 	</string>
-<string name="pref_title_snooze_on_retrace">戻り時スヌーズ</string>
-	</resources>
+</resources>

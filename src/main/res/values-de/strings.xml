@@ -32,6 +32,8 @@
 	<string name="pref_summary_sound_volume">Boiler nutzt die Gerätlautstärke für den ausgewählten Benachrichtigungstyp. Die meisten Geräte behalten, selbst bei Stummschaltung, die Lautstärke für Alarme bei.</string>
 	<string name="system_volumes">Gerätlautstärke</string>
 	<string name="pref_title_vibrate_default">Vibrieren</string>
+	<!-- Review please --><string name="pref_title_auto_snooze_time">Auto Schlummerzeit</string>
+	<!-- Review please --><string name="pref_summary_auto_snooze_time">In Minuten. Bestimmt wie lange Alarme sollten klingeln, bevor sie automatisch ausgeschaltet werden.</string>
 	<string name="pref_title_appearance">Erscheinung</string>
 	<string name="pref_title_theme">Motiv</string>
 	<string name="pref_entries_theme_0">Dunkel</string>
@@ -70,6 +72,7 @@
 	<string name="pref_title_last_value">Letzter Preis</string>
 	<!-- Review please, original has changed --><string name="pref_summary_update_interval">In Sekunden. Bestimmt wie oft der Alarm seine Daten von der Börse erhält.</string>
 	<!-- Review please, original has changed --><string name="pref_summary_time_frame">In Minuten. Bestimmt welcher Preis, mit dem aktuellen vergleichen, z.B. der Pries von vor 15 Minuten.</string>
+	<!-- Review please --><string name="pref_title_snooze_on_retrace">Schlummern auf Rücklauf</string>
 	<string name="boilr_alarm">Boilr Alarm</string>
 	<string name="off">Ausschalten</string>
 	<string name="resume">Fortsetzen</string>

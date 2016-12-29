@@ -32,6 +32,8 @@
 	<string name="pref_summary_sound_volume">Boilr utiliza el volumen del sistema para el tipo de alarma seleccionada. En la mayoría de los dispositivos el tipo de alarma permanece con el volumen máximo incluso cuando el dispositivo está en silencio.</string>
 	<string name="system_volumes">Volúmenes del sistema</string>
 	<string name="pref_title_vibrate_default">Vibrar por omisión</string>
+	<string name="pref_title_auto_snooze_time">Tiempo hasta silenciar</string>
+	<string name="pref_summary_auto_snooze_time">En minutos. Define cuánto tiempo deben sonar las alarmas antes de apagarse automáticamente.</string>
 	<string name="pref_title_appearance">Apariencia</string>
 	<string name="pref_title_theme">Tema</string>
 	<string name="pref_entries_theme_0">Oscuro</string>
@@ -70,6 +72,7 @@
 	<string name="pref_title_last_value">Último precio</string>
 	<string name="pref_summary_update_interval">En segundos. Define la frecuencia con la que se obtienen datos de la bolsa.</string>
 	<string name="pref_summary_time_frame">En minutos. Define qué precio comparar con el actual, por ejemplo el precio de hace 15 minutos.</string>
+	<string name="pref_title_snooze_on_retrace">Silenciar cuando precio retrocede</string>
 	<string name="boilr_alarm">Alarma Boilr</string>
 	<string name="off">Apagar</string>
 	<string name="resume">Reanudar</string>
@@ -95,7 +98,7 @@
 	<string name="alarm_deleted">Alarma borrada</string>
 	<string name="undo">Deshacer</string>
 	<string name="loading_pairs">Cargando pares…</string>
-	<string name="loading_pairs">Cargando precio…</string>
+	<string name="loading_price">Cargando precio…</string>
 	
 	<string name="short_description">Alarmas de precio para bitcoin, cryptocurrencies, cryptoassets, futuros y opciones.</string>
 	<string name="full_description">Monitorice Bitcoin, cryptomonedas, cryptobienes, futuros and opciones and lance alarmas conforme su confguración. Más de 90 bolsas y monedas.\n
@@ -106,7 +109,7 @@
 		* Cambio de precio - Lanzada cuando el precio cambia más de x unidades (en moneda o porcentaje) en un periodo de tiempo determinado (p.e. 30 s) y comparado con el precio obtenido una franja temporal anterior (p.e. hace 15 m).\n
 		\n
 		\n
-		El sonido y la vibración son configurables de modo general, e individual por cada alarma. Se pueden realizar búsquedas en la lista de bolsas, pares y alarmas, permitiendo una rápida configuración. La lista de alarmas se comoporta como su ticker, donde puede reordenar sus alarmas y modificar directamente sus límites. Las alarmas lanzadas suenan, mostrando su estado, hasta que las apague. Como una alarma usual. Los datos de mercado se obtienen directamente de las bolsas via WI-FI o datos móviles (si se permite).\n
+		El sonido y la vibración son configurables de modo general, e individual por cada alarma. Se pueden realizar búsquedas en la lista de bolsas, pares y alarmas, permitiendo una rápida configuración. La lista de alarmas se comoporta como su ticker, donde puede reordenar sus alarmas y modificar directamente sus límites. Las alarmas lanzadas suenan, mostrando su estado, hasta que las apague. Como una alarma usual. Las alarmas también se pueden configurar para ser automáticamente silenciadas cuando el precio retrocede. Los datos de mercado se obtienen directamente de las bolsas via WI-FI o datos móviles (si se permite).\n
 		\n
 		\n
 		Boilr soporta todos los cambios disponibles en libdynticker, así como sus variantes: https://github.com/drpout/libdynticker/#supported-exchanges\n
