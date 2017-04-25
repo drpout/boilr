@@ -138,8 +138,8 @@ public class ThemableRingtonePreference extends ListPreference {
 		mCurrentShowDefault = mShowDefault && alertType.equals(AlarmPreferencesFragment.DEFAULT) ? true : false;
 		ringtoneManager.setType(mRingtoneType);
 		final Cursor ringtones = ringtoneManager.getCursor();
-		List<String> entries = new ArrayList<String>();
-		List<String> entryValues = new ArrayList<String>();
+		List<String> entries = new ArrayList<>();
+		List<String> entryValues = new ArrayList<>();
 		if(mCurrentShowDefault) {
 			mAppRingtone = mSharedPrefs.getString(
 					SettingsFragment.PREF_KEY_DEFAULT_ALERT_SOUND, Conversions.getSystemRingtone(mRingtoneType, getContext()));
