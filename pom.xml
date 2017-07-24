@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>mobi.boilr</groupId>
 	<artifactId>boilr</artifactId>
-	<version>0.7.0</version>
+	<version>0.8.0</version>
 	<packaging>apk</packaging>
 	<description>Android application which monitors Bitcoin, cryptocurrencies, cryptoassets and derivatives, triggering alarms according to user settings.</description>
 	<inceptionYear>2014</inceptionYear>
@@ -25,14 +25,7 @@
 		<android.maven.plugin.version>4.4.3</android.maven.plugin.version>
 		<android.sdk.version>24</android.sdk.version>
 		<release.description>
-			\+ Setting to dismiss no internet notification.
-			\+ Alarm auto snoozing after a configurable time period.
-			\+ Snooze on retrace.
-			\+ Added 1BTCXE, 1Ex.Trade, BitcoinToYou, Bitcoins Norway, bitFlyer, BitMEX, Bitt, BitVC, BitX, BL3P, BTCBOX, BTCXIndia, ChileBit, Coinage, Coincheck, Coinfloor, Coinplug, CoinsBank, Coinsecure, Coinsquare, CRXzone, Cryptopia, EmpoEX, FOXBIT, FYB-SE, FYB-SG, Gatecoin, GDAX, Ice3x, Indacoin, Independent Reserve, Korbit, Livecoin, Loyalbit, Quoine, SurBitcoin, SURBTC, Urdubit, Vaultoro, VBTC, Zaif and Zyado.
-			\+ Added Japanese and Russian translations.
-			\* Fixed AllCoin, CampBX, CryptoFacilities, Huobi, NXT Asset Exchange and Yuanbao.
-			\* Stricter storage policy: alarms stored to DB on any change.
-			\- Removed 796 Exchange, Banx Capital, Basebit, Bitspark, BTCGreece, Carvitrex, CleverCoin, Coinbase, Coinsetter, Cointrader, Coins-E, Cryptsy, Jubi, OneWorldCoin, Vircurex and Yunbi.
+			\* Fixed BitMEX.
 		</release.description>
 	</properties>
 
@@ -78,7 +71,7 @@
 		<dependency>
 			<groupId>mobi.boilr</groupId>
 			<artifactId>libdynticker</artifactId>
-			<version>0.7.0</version>
+			<version>0.8.0</version>
 		</dependency>
 		<dependency>
 			<groupId>mobi.boilr</groupId>

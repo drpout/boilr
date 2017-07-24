@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
+    <changelogversion versionName="0.8.0" changeDate="xx Xxx 2017">
+        <changelogtext>* Bolsas consertadas: BitMEX.</changelogtext>
+    </changelogversion>
     <changelogversion versionName="0.7.0" changeDate="29 Dez 2016">
         <changelogtext>+ Configuração para esconder o aviso de falha de ligação à internet.</changelogtext>
         <changelogtext>+ Alarmes param de tocar após tempo configurável.</changelogtext>
