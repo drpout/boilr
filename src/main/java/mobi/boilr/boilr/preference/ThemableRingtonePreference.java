@@ -6,11 +6,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.utils.Conversions;
-import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.boilr.views.fragments.AlarmPreferencesFragment;
-import mobi.boilr.boilr.views.fragments.SettingsFragment;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -25,6 +20,11 @@ import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.AttributeSet;
+import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.utils.Conversions;
+import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.views.fragments.AlarmPreferencesFragment;
+import mobi.boilr.boilr.views.fragments.SettingsFragment;
 
 /**
  * RingtonePreference which adjusts to the current theme and has an app default
@@ -33,7 +33,7 @@ import android.util.AttributeSet;
  * Copyright (C) 2013 Trinitrotoluol (licensed under CC BY-SA 3.0)
  *           (C) 2014 Martin Pfeffer (licensed under CC BY-SA 3.0)
  *           https://stackoverflow.com/questions/16589467/ringtonepreference-theme/16702655
- *           (C) 2015 David Ludovino <david.ludovino@gmail.com>, Boilr (modifications licensed under GPLv3)
+ *           (C) 2015 David Ludovino <dllud@riseup.net>, Boilr (modifications licensed under GPLv3)
  */
 public class ThemableRingtonePreference extends ListPreference {
 

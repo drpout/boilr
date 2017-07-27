@@ -168,6 +168,7 @@ public abstract class AlarmCreationFragment extends AlarmPreferencesFragment {
 		switch(item.getItemId()) {
 			case R.id.action_send_now:
 				createAlarmAndReturn();
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
