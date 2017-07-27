@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog bulletedList="false">
     <changelogversion versionName="0.8.0" changeDate="xx Xxx 2017">
-        <changelogtext>* Fixed exchanges: BitMEX, SURBTC.</changelogtext>
+        <changelogtext>* Fixed exchanges: BitMEX, Bitstamp, SURBTC.</changelogtext>
     </changelogversion>
     <changelogversion versionName="0.7.0" changeDate="29 Dec 2016">
         <changelogtext>+ Setting to dismiss no internet notification.</changelogtext>
