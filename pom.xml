@@ -20,10 +20,10 @@
 		<!-- use UTF-8 for everything -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<jdk.version>7</jdk.version>
+		<jdk.version>8</jdk.version>
 		<android.maven.plugin.groupid>com.simpligility.maven.plugins</android.maven.plugin.groupid>
-		<android.maven.plugin.version>4.4.3</android.maven.plugin.version>
-		<android.sdk.version>24</android.sdk.version>
+		<android.maven.plugin.version>4.5.0</android.maven.plugin.version>
+		<android.sdk.version>26</android.sdk.version>
 		<release.description>
 			\* Fixed BitMEX, Bitstamp, SURBTC.
 		</release.description>
@@ -65,7 +65,7 @@
 		<dependency>
 			<groupId>android</groupId>
 			<artifactId>android</artifactId>
-			<version>7.0_r2</version>
+			<version>8.0.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -124,7 +124,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
+				<version>3.6.1</version>
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
@@ -156,7 +156,7 @@
 			<plugin>
 				<groupId>de.jutzig</groupId>
 				<artifactId>github-release-plugin</artifactId>
-				<version>1.1.1</version>
+				<version>1.2.0</version>
 				<configuration>
 					<releaseName>${project.version}</releaseName>
 					<tag>${project.version}</tag>

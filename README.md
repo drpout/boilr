@@ -57,8 +57,8 @@ If you would like to add more exchanges to Boilr check [libdynticker's contribut
 
 ## Building
 1. Fill out the [prerequisites for Android Maven Plugin](http://simpligility.github.io/android-maven-plugin/index.html#required_setup).
-2. Install Android API 24 SDK and Android Support Repository.
-3. `mvn install:install-file -DgroupId=android -DartifactId=android -Dversion=7.0_r2 -Dpackaging=jar -Dfile=$ANDROID_HOME/platforms/android-24/android.jar`
+2. Install Android API 26 SDK and Android Support Repository.
+3. `mvn install:install-file -DgroupId=android -DartifactId=android -Dversion=8.0.0 -Dpackaging=jar -Dfile=$ANDROID_HOME/platforms/android-26/android.jar`
 4. `mvn install:install-file install:install-file -Dfile=$ANDROID_HOME/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar -DpomFile=$ANDROID_HOME/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.pom`
 
 For now on you can use:
