@@ -1,11 +1,8 @@
 package mobi.boilr.boilr.listeners;
 
-import mobi.boilr.boilr.R;
-import mobi.boilr.boilr.activities.AlarmListActivity;
-import mobi.boilr.boilr.utils.Log;
-import mobi.boilr.boilr.utils.Notifications;
-import mobi.boilr.boilr.widget.AlarmListAdapter;
-import mobi.boilr.libpricealarm.Alarm;
+import com.cocosw.undobar.UndoBarController.AdvancedUndoListener;
+import com.cocosw.undobar.UndoBarController.UndoBar;
+
 import android.content.ClipData;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,9 +13,12 @@ import android.view.View.DragShadowBuilder;
 import android.view.View.OnTouchListener;
 import android.view.ViewConfiguration;
 import android.widget.GridView;
-
-import com.cocosw.undobar.UndoBarController.AdvancedUndoListener;
-import com.cocosw.undobar.UndoBarController.UndoBar;
+import mobi.boilr.boilr.R;
+import mobi.boilr.boilr.activities.AlarmListActivity;
+import mobi.boilr.boilr.utils.Log;
+import mobi.boilr.boilr.utils.Notifications;
+import mobi.boilr.boilr.widget.AlarmListAdapter;
+import mobi.boilr.libpricealarm.Alarm;
 
 public class SwipeAndMoveTouchListener implements OnTouchListener {
 
@@ -135,7 +135,7 @@ public class SwipeAndMoveTouchListener implements OnTouchListener {
 
 		if(mSwipeSlop < 0) {
 			mSwipeSlop = ViewConfiguration.get(mActivity).getScaledTouchSlop();
-			mSwipeSlopX = mSwipeSlop * 7;
+			mSwipeSlopX = mSwipeSlop * 15;
 		}
 
 		switch(event.getAction()) {
