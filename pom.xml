@@ -25,7 +25,7 @@
 		<android.maven.plugin.version>4.5.0</android.maven.plugin.version>
 		<android.sdk.version>26</android.sdk.version>
 		<release.description>
-			\* Fixed BitMEX, Bitstamp, SURBTC.
+			\* Fixed BitMEX, Bitstamp, Kraken, SURBTC.
 		</release.description>
 	</properties>
 
