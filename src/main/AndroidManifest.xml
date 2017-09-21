@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mobi.boilr.boilr"
     android:versionCode="10"
-    android:versionName="0.8.0-rc1">
+    android:versionName="0.8.0-rc2">
 
     <uses-sdk
         android:minSdkVersion="15"
