@@ -75,7 +75,14 @@ public class AboutDialogFragment extends DialogFragment {
 				List<ResolveInfo> activities = packageManager.queryIntentActivities(btcIntent, 0);
 				boolean isIntentSafe = activities.size() > 0;
 				if(isIntentSafe) {
-					startActivity(btcIntent);
+					// startActivity(btcIntent);
+					String title = "choose a browser";
+                    if (btcIntent.resolveActivity(getPackageManager()) != null) {
+                    
+                    Intent chooserIntent = Intent.createChooser(btcIntent, title);
+                 
+                    startActivity(chooserIntent);
+                 }
 				}
 			}
 		});
